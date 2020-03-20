@@ -250,8 +250,8 @@ void BgTreemouth_Update(BgTreemouth* this, GlobalContext* globalCtx)
     this->dyna.actor.posRot.pos.y = (this->unk_168 * D_808BDA4C) + 136.0f;
     this->dyna.actor.posRot.pos.z = (this->unk_168 * 92.0f) + D_808BDA50;
 }
-//#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Treemouth/BgTreemouth_Draw.s")
-extern char D_808BD9E0[];
+#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Treemouth/BgTreemouth_Draw.s")
+/*extern char D_808BD9E0[];
 void BgTreemouth_Draw(BgTreemouth* this, GlobalContext* globalCtx) {
 
     u32 uVar5;
@@ -286,3 +286,4 @@ void BgTreemouth_Draw(BgTreemouth* this, GlobalContext* globalCtx) {
     temp_v0_2->unk0 = 0xDE000000;
     func_800C6B54(&sp2C, *sp4C, &D_808BDA08, 0x3A9);
 }
+*/
