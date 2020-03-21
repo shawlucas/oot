@@ -396,7 +396,7 @@ glabel func_8083B040
 /* 093D0 8083B5E0 AE0C067C */  sw      $t4, 0x067C($s0)           ## 0000067C
 /* 093D4 8083B5E4 0C01E221 */  jal     func_80078884              
 /* 093D8 8083B5E8 24044813 */  addiu   $a0, $zero, 0x4813         ## $a0 = 00004813
-/* 093DC 8083B5EC 0C20C884 */  jal     func_80832210              
+/* 093DC 8083B5EC 0C20C884 */  jal     Player_SetSpeedToZero              
 /* 093E0 8083B5F0 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 093E4 8083B5F4 1000000E */  beq     $zero, $zero, .L8083B630   
 /* 093E8 8083B5F8 24020001 */  addiu   $v0, $zero, 0x0001         ## $v0 = 00000001

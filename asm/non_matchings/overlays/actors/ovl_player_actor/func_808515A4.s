@@ -54,7 +54,7 @@ glabel func_808515A4
 /* 1F454 80851664 0C028FC2 */  jal     func_800A3F08              
 /* 1F458 80851668 E7A40010 */  swc1    $f4, 0x0010($sp)           
 .L8085166C:
-/* 1F45C 8085166C 0C20C884 */  jal     func_80832210              
+/* 1F45C 8085166C 0C20C884 */  jal     Player_SetSpeedToZero              
 /* 1F460 80851670 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 1F464 80851674 8FBF002C */  lw      $ra, 0x002C($sp)           
 .L80851678:

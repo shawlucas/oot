@@ -1,26 +1,83 @@
 #include <ultra64.h>
 #include <global.h>
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_80832210.s")
+//#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/Player_SetSpeedToZero.s")
+void Player_SetSpeedToZero(Player* player) // Player_SetSpeedToZero
+{
+    player->actor.speedXZ = 0.0f;
+    player->speedXZ = 0.0f;
+}
+//#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_80832224.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_80832224.s")
+void func_80832224(Player* player)
+{
+    Player_SetSpeedToZero(player);
+    player->unk_6AD = 0;
+}
+//#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_8083224C.s")
+u32 func_8083224C(GlobalContext* globalCtx)
+{
+    Player* player = PLAYER;
+    return (player->actor.flags & 0x100) == 0x100;
+}
+//#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_80832264.s")
+void func_80832264(GlobalContext* globalCtx, Player* player)
+{
+    func_800A407C(globalCtx, player->unk_1B4);
+}
+//#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_80832284.s")
+void func_80832284(GlobalContext* globalCtx, Player* player)
+{
+    func_800A4140(globalCtx, player->unk_1B4);
+}
+//#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_808322A4.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_8083224C.s")
+void func_808322A4(Player* player, GlobalContext* globalCtx, u32 arg2)
+{
+  func_800A419C(player, globalCtx->view.unk_34 + 200, arg2, 0x3F2AAAAB);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_80832264.s")
+//#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_808322D0.s")
+void func_808322D0(GlobalContext* globalCtx, Player* player, u32 arg2)
+{
+    func_800A40DC(globalCtx, player->unk_1B4, arg2, 0x3F2AAAAB);
+}
+//#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_808322FC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_80832284.s")
+CollisionPoly* func_808322FC(Player* player)
+{
+    CollisionPoly* colPoly = player->colPoly;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_808322A4.s")
+    player->actor.shape.rot.y = player->actor.shape.rot.y + colPoly->norm.x;
+    colPoly->norm.x = 0;
+    return colPoly;
+}
+//#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_80832318.s")
+void func_80832318(Player* player)
+{
+    player->stateFlags2 = player->stateFlags2 & 0xFFFDFFFF;
+    player->swordState = 0;
+    *(UNK_TYPE *)(player->unk_8AC + 0x40) = 0;
+    *(UNK_TYPE *)(player->unk_8AC + 0x24) = 0;
+    *(UNK_TYPE *)(player->unk_8AC + 0x8)  = 0;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_808322D0.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_808322FC.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_80832318.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_80832340.s")
-
+}
+//#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_80832340.s")
+void func_80832340(GlobalContext* globalCtx, Player* player) {
+    s16 sVar1;
+    Camera *temp_t7;
+    sVar1 = *(s16*)player->unk_46C;
+    if (sVar1 != -1) {
+       // temp_t7 = globalCtx->cameraCtx.activeCameraPtrs[sVar1];
+        if (globalCtx->cameraCtx.activeCameraPtrs[sVar1] != 0) {
+            if (globalCtx->cameraCtx.activeCameraPtrs[sVar1]->unk_168 == 0x44C) {
+                func_800803F0(globalCtx, sVar1);
+                *(s16*)player->unk_46C = (u16)-1;
+            }
+        }
+    }
+    player->stateFlags2 = (s32) (player->stateFlags2 & -0xC01);
+}
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_808323B4.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_player_actor/func_80832440.s")

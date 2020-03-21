@@ -17,7 +17,7 @@ glabel func_80852C50
 /* 20A7C 80852C8C 0C00B7D5 */  jal     func_8002DF54              
 /* 20A80 80852C90 24060007 */  addiu   $a2, $zero, 0x0007         ## $a2 = 00000007
 /* 20A84 80852C94 A2200446 */  sb      $zero, 0x0446($s1)         ## 00000446
-/* 20A88 80852C98 0C20C884 */  jal     func_80832210              
+/* 20A88 80852C98 0C20C884 */  jal     Player_SetSpeedToZero              
 /* 20A8C 80852C9C 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 /* 20A90 80852CA0 10000058 */  beq     $zero, $zero, .L80852E04   
 /* 20A94 80852CA4 8FBF001C */  lw      $ra, 0x001C($sp)           

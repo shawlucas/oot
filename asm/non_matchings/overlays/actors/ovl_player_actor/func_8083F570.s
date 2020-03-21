@@ -105,7 +105,7 @@ glabel func_8083F570
 /* 0D4EC 8083F6FC 860E00B6 */  lh      $t6, 0x00B6($s0)           ## 000000B6
 .L8083F700:
 /* 0D4F0 8083F700 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
-/* 0D4F4 8083F704 0C20C884 */  jal     func_80832210              
+/* 0D4F4 8083F704 0C20C884 */  jal     Player_SetSpeedToZero              
 /* 0D4F8 8083F708 A60E083C */  sh      $t6, 0x083C($s0)           ## 0000083C
 /* 0D4FC 8083F70C 10000002 */  beq     $zero, $zero, .L8083F718   
 /* 0D500 8083F710 24020001 */  addiu   $v0, $zero, 0x0001         ## $v0 = 00000001

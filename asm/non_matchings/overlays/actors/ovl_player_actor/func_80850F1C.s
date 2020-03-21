@@ -26,7 +26,7 @@ glabel func_80850F1C
 /* 1ED68 80850F78 24A501B4 */  addiu   $a1, $a1, 0x01B4           ## $a1 = 000001B4
 /* 1ED6C 80850F7C 0C028FC2 */  jal     func_800A3F08              
 /* 1ED70 80850F80 E7A40010 */  swc1    $f4, 0x0010($sp)           
-/* 1ED74 80850F84 0C20C884 */  jal     func_80832210              
+/* 1ED74 80850F84 0C20C884 */  jal     Player_SetSpeedToZero              
 /* 1ED78 80850F88 8FA4002C */  lw      $a0, 0x002C($sp)           
 /* 1ED7C 80850F8C 8FBF0024 */  lw      $ra, 0x0024($sp)           
 /* 1ED80 80850F90 27BD0028 */  addiu   $sp, $sp, 0x0028           ## $sp = 00000000

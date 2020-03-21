@@ -161,7 +161,7 @@ glabel func_8084FCAC
 /* 1DCE0 8084FEF0 46083280 */  add.s   $f10, $f6, $f8             
 /* 1DCE4 8084FEF4 E60A002C */  swc1    $f10, 0x002C($s0)          ## 0000002C
 .L8084FEF8:
-/* 1DCE8 8084FEF8 0C20C884 */  jal     func_80832210              
+/* 1DCE8 8084FEF8 0C20C884 */  jal     Player_SetSpeedToZero              
 /* 1DCEC 8084FEFC 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 1DCF0 8084FF00 44800000 */  mtc1    $zero, $f0                 ## $f0 = 0.00
 /* 1DCF4 8084FF04 3C068086 */  lui     $a2, %hi(D_80858AB4)       ## $a2 = 80860000

@@ -10,7 +10,7 @@ glabel func_80850ED8
 /* 1ECE8 80850EF8 8FA5001C */  lw      $a1, 0x001C($sp)           
 /* 1ECEC 80850EFC 0C20CAC3 */  jal     func_80832B0C              
 /* 1ECF0 80850F00 8FA60020 */  lw      $a2, 0x0020($sp)           
-/* 1ECF4 80850F04 0C20C884 */  jal     func_80832210              
+/* 1ECF4 80850F04 0C20C884 */  jal     Player_SetSpeedToZero              
 /* 1ECF8 80850F08 8FA4001C */  lw      $a0, 0x001C($sp)           
 /* 1ECFC 80850F0C 8FBF0014 */  lw      $ra, 0x0014($sp)           
 /* 1ED00 80850F10 27BD0018 */  addiu   $sp, $sp, 0x0018           ## $sp = 00000000

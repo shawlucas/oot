@@ -37,7 +37,7 @@ glabel func_80832F54
 /* 00DC4 80832FD4 A4A901F0 */  sh      $t1, 0x01F0($a1)           ## 000001F0
 .L80832FD8:
 /* 00DC8 80832FD8 A0A601E9 */  sb      $a2, 0x01E9($a1)           ## 000001E9
-/* 00DCC 80832FDC 0C20C884 */  jal     func_80832210              
+/* 00DCC 80832FDC 0C20C884 */  jal     Player_SetSpeedToZero              
 /* 00DD0 80832FE0 00A02025 */  or      $a0, $a1, $zero            ## $a0 = 00000000
 /* 00DD4 80832FE4 0C028CC4 */  jal     func_800A3310              
 /* 00DD8 80832FE8 8FA40018 */  lw      $a0, 0x0018($sp)           

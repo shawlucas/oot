@@ -60,7 +60,7 @@ glabel func_8083AA10
 /* 088E0 8083AAF0 0C01DF90 */  jal     Math_Vec3f_Copy
               ## Vec3f_Copy
 /* 088E4 8083AAF4 26050100 */  addiu   $a1, $s0, 0x0100           ## $a1 = 00000100
-/* 088E8 8083AAF8 0C20C884 */  jal     func_80832210              
+/* 088E8 8083AAF8 0C20C884 */  jal     Player_SetSpeedToZero              
 /* 088EC 8083AAFC 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 088F0 8083AB00 1000008E */  beq     $zero, $zero, .L8083AD3C   
 /* 088F4 8083AB04 8FBF0024 */  lw      $ra, 0x0024($sp)           
