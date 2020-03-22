@@ -41,12 +41,22 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A2E70.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A32EC.s")
+void func_800A32EC(Actor* actor)
+{
+    actor->id = 0;
+}
+extern UNK_TYPE D_801600B0;
+extern UNK_TYPE D_8012A480;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A32F4.s")
+void func_800A32F4(GlobalContext* globalCtx)
+{
+    D_801600B0 = D_801600B0 * 2;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A3310.s")
-
+void func_800A3310(UNK_PTR arg0)
+{
+    D_8012A480 = D_8012A480 | D_801600B0;
+}
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A3334.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A336C.s")
@@ -89,8 +99,11 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A3E0C.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A3EE8.s")
-
+void func_800A3EE8(GlobalContext* globalCtx, SkelAnime* skelAnime, f32 arg2)
+{
+    skelAnime->unk_24.y = 1.0f;
+    skelAnime->unk_24.z = 1.0f / arg2;
+}
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A3F08.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A407C.s")
@@ -115,8 +128,11 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A43B8.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A4454.s")
-
+void func_800A4454(SkelAnime* skelAnime)
+{
+    skelAnime->unk_01[0] = 2;
+    func_800A3B8C();
+}
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A4478.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A4530.s")
@@ -129,8 +145,10 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A49B0.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/SkelAnime_FrameUpdateMatrix.s")
-
+s32 SkelAnime_FrameUpdateMatrix(SkelAnime* skelAnime)
+{
+    return skelAnime->funcUnk30();
+}
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A4A20.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A4AD8.s")
@@ -159,9 +177,26 @@
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A5384.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A53DC.s")
+void func_800A53DC(SkelAnime* skelAnime)
+{
+    skelAnime->unk_01[0] = 2;
+    skelAnime->animFrameCount = skelAnime->unk_14;
+    func_800A49B0();
+}
 
+#ifdef NON_MATCHING
+void func_800A5408(SkelAnime* skelAnime)
+{
+    f32 frameCount; 
+
+    frameCount = skelAnime->animFrameCount;
+    skelAnime->animFrameCount = skelAnime->unk_0C;
+    skelAnime->animPlaybackSpeed = -skelAnime->animPlaybackSpeed;
+    skelAnime->unk_0C = frameCount;
+}
+#else
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A5408.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_skelanime/func_800A5428.s")
 

@@ -1040,16 +1040,14 @@ typedef struct
     /* 0x03 */ char unk_03[0x01]; /* Probably Padding */
     /* 0x04 */ u32 limbIndex;
     /* 0x08 */ u32* animCurrent;
-    /* 0x0C */ char unk_0C[0x04];
+    /* 0x0C */ f32 unk_0C;
     /* 0x10 */ f32 animFrameCount;
     /* 0x14 */ f32 unk_14;
     /* 0x18 */ f32 animCurrentFrame;
     /* 0x1C */ f32 animPlaybackSpeed;
     /* 0x20 */ u32 actorDrawTbl;
-    /* 0x24 */ u32 unk_24;
-    /* 0x28 */ u32 unk_28;
-    /* 0x2C */ u32 unk_2C;
-    /* 0x30 */ void* funcUnk30; /* Some function pointer */
+    /* 0x24 */ Vec3f unk_24;
+    /* 0x30 */ s32 (*funcUnk30)(); /* Some function pointer */
     /* 0x34 */ s32 unk_34;
     /* 0x38 */ s32 unk_38;
     /* 0x3C */ u16 unk_3C;
