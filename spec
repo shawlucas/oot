@@ -3479,7 +3479,7 @@ beginseg
     name "ovl_En_Sa"
     include "build/src/overlays/actors/ovl_En_Sa/z_en_sa.o"
     include "build/data/overlays/actors/z_en_sa.data.o"
-    include "build/data/overlays/actors/z_en_sa.rodata.o"
+    //include "build/data/overlays/actors/z_en_sa.rodata.o"
     include "build/data/overlays/actors/z_en_sa.reloc.o"
 endseg
 

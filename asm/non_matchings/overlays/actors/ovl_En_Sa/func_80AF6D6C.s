@@ -1,3 +1,14 @@
+.late_rodata
+glabel D_80AF7510
+ .word 0x40490FDB
+ glabel D_80AF7514
+ .word 0x40490FDB
+ glabel D_80AF7518
+ .word 0x40490FDB
+ glabel D_80AF751C
+ .word 0x40490FDB
+
+.text
 glabel func_80AF6D6C
 /* 0180C 80AF6D6C 27BDFFD8 */  addiu   $sp, $sp, 0xFFD8           ## $sp = FFFFFFD8
 /* 01810 80AF6D70 24010010 */  addiu   $at, $zero, 0x0010         ## $at = 00000010

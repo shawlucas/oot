@@ -1,3 +1,13 @@
+.late_rodata
+glabel jtbl_80AF74F4
+.word L80AF637C
+.word L80AF62B4
+.word L80AF627C
+.word L80AF6350
+.word L80AF62DC
+.word L80AF6298
+
+.text
 glabel EnSa_Init
 /* 00C50 80AF61B0 27BDFFB0 */  addiu   $sp, $sp, 0xFFB0           ## $sp = FFFFFFB0
 /* 00C54 80AF61B4 AFB00034 */  sw      $s0, 0x0034($sp)
@@ -6,21 +16,21 @@ glabel EnSa_Init
 /* 00C60 80AF61C0 00A08825 */  or      $s1, $a1, $zero            ## $s1 = 00000000
 /* 00C64 80AF61C4 AFBF003C */  sw      $ra, 0x003C($sp)
 /* 00C68 80AF61C8 248400B4 */  addiu   $a0, $a0, 0x00B4           ## $a0 = 000000B4
-/* 00C6C 80AF61CC 3C068003 */  lui     $a2, 0x8003                ## $a2 = 80030000
-/* 00C70 80AF61D0 24C6B5EC */  addiu   $a2, $a2, 0xB5EC           ## $a2 = 8002B5EC
+/* 00C6C 80AF61CC 3C068003 */  lui     $a2, %hi(ActorShadow_DrawFunc_Circle)                ## $a2 = 80030000
+/* 00C70 80AF61D0 24C6B5EC */  addiu   $a2, $a2, %lo(ActorShadow_DrawFunc_Circle)           ## $a2 = 8002B5EC
 /* 00C74 80AF61D4 AFA40044 */  sw      $a0, 0x0044($sp)
 /* 00C78 80AF61D8 24050000 */  addiu   $a1, $zero, 0x0000         ## $a1 = 00000000
 /* 00C7C 80AF61DC 0C00AC78 */  jal     ActorShape_Init
 
 /* 00C80 80AF61E0 3C074140 */  lui     $a3, 0x4140                ## $a3 = 41400000
-/* 00C84 80AF61E4 3C060601 */  lui     $a2, 0x0601                ## $a2 = 06010000
+/* 00C84 80AF61E4 3C060601 */  lui     $a2, %hi(D_0600B1A0)                ## $a2 = 06010000
 /* 00C88 80AF61E8 260E0220 */  addiu   $t6, $s0, 0x0220           ## $t6 = 00000220
 /* 00C8C 80AF61EC 260F0286 */  addiu   $t7, $s0, 0x0286           ## $t7 = 00000286
 /* 00C90 80AF61F0 24180011 */  addiu   $t8, $zero, 0x0011         ## $t8 = 00000011
 /* 00C94 80AF61F4 AFB80018 */  sw      $t8, 0x0018($sp)
 /* 00C98 80AF61F8 AFAF0014 */  sw      $t7, 0x0014($sp)
 /* 00C9C 80AF61FC AFAE0010 */  sw      $t6, 0x0010($sp)
-/* 00CA0 80AF6200 24C6B1A0 */  addiu   $a2, $a2, 0xB1A0           ## $a2 = 0600B1A0
+/* 00CA0 80AF6200 24C6B1A0 */  addiu   $a2, $a2, %lo(D_0600B1A0)           ## $a2 = 0600B1A0
 /* 00CA4 80AF6204 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 /* 00CA8 80AF6208 2605014C */  addiu   $a1, $s0, 0x014C           ## $a1 = 0000014C
 /* 00CAC 80AF620C 0C0291BE */  jal     SkelAnime_InitSV
@@ -81,28 +91,28 @@ glabel L80AF62B4
 /* 00D74 80AF62D4 1000002D */  beq     $zero, $zero, .L80AF638C
 /* 00D78 80AF62D8 AE0A0190 */  sw      $t2, 0x0190($s0)           ## 00000190
 glabel L80AF62DC
-/* 00D7C 80AF62DC 3C020201 */  lui     $v0, 0x0201                ## $v0 = 02010000
+/* 00D7C 80AF62DC 3C020201 */  lui     $v0, %hi(D_02010E20)               ## $v0 = 02010000
 /* 00D80 80AF62E0 3C01BF80 */  lui     $at, 0xBF80                ## $at = BF800000
-/* 00D84 80AF62E4 24420E20 */  addiu   $v0, $v0, 0x0E20           ## $v0 = 02010E20
+/* 00D84 80AF62E4 24420E20 */  addiu   $v0, $v0, %lo(D_02010E20)           ## $v0 = 02010E20
 /* 00D88 80AF62E8 44813000 */  mtc1    $at, $f6                   ## $f6 = -1.00
 /* 00D8C 80AF62EC 00025900 */  sll     $t3, $v0,  4
 /* 00D90 80AF62F0 000B6702 */  srl     $t4, $t3, 28
 /* 00D94 80AF62F4 000C6880 */  sll     $t5, $t4,  2
-/* 00D98 80AF62F8 3C0E8016 */  lui     $t6, 0x8016                ## $t6 = 80160000
+/* 00D98 80AF62F8 3C0E8016 */  lui     $t6, %hi(gSegments)                ## $t6 = 80160000
 /* 00D9C 80AF62FC A6000210 */  sh      $zero, 0x0210($s0)         ## 00000210
 /* 00DA0 80AF6300 01CD7021 */  addu    $t6, $t6, $t5
 /* 00DA4 80AF6304 3C0100FF */  lui     $at, 0x00FF                ## $at = 00FF0000
 /* 00DA8 80AF6308 E606006C */  swc1    $f6, 0x006C($s0)           ## 0000006C
-/* 00DAC 80AF630C 8DCE6FA8 */  lw      $t6, 0x6FA8($t6)           ## 80166FA8
+/* 00DAC 80AF630C 8DCE6FA8 */  lw      $t6, %lo(gSegments)($t6)           ## 80166FA8
 /* 00DB0 80AF6310 3421FFFF */  ori     $at, $at, 0xFFFF           ## $at = 00FFFFFF
 /* 00DB4 80AF6314 00417824 */  and     $t7, $v0, $at
 /* 00DB8 80AF6318 3C018000 */  lui     $at, 0x8000                ## $at = 80000000
 /* 00DBC 80AF631C 01CFC021 */  addu    $t8, $t6, $t7
 /* 00DC0 80AF6320 0301C821 */  addu    $t9, $t8, $at
 /* 00DC4 80AF6324 AE391D68 */  sw      $t9, 0x1D68($s1)           ## 00001D68
-/* 00DC8 80AF6328 3C018016 */  lui     $at, 0x8016                ## $at = 80160000
+/* 00DC8 80AF6328 3C018016 */  lui     $at, %hi(gSaveContext+0x1414)             ## $at = 80160000
 /* 00DCC 80AF632C 24080001 */  addiu   $t0, $zero, 0x0001         ## $t0 = 00000001
-/* 00DD0 80AF6330 A028FA74 */  sb      $t0, -0x058C($at)          ## 8015FA74
+/* 00DD0 80AF6330 A028FA74 */  sb      $t0, %lo(gSaveContext+0x1414)($at)          ## 8015FA74
 /* 00DD4 80AF6334 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00DD8 80AF6338 0C2BD763 */  jal     func_80AF5D8C
 /* 00DDC 80AF633C 24050004 */  addiu   $a1, $zero, 0x0004         ## $a1 = 00000004
