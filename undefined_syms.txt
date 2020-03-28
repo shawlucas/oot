@@ -468,3 +468,4 @@ link_animetion_segment = 0x07000000;
 // z_en_sa
 D_0600B1A0 = 0x0600B1A0;
 D_02010E20 = 0x02010E20;
+D_0600C500 = 0x0600C500;

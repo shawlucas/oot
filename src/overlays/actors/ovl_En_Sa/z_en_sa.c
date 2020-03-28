@@ -126,15 +126,12 @@ s16 func_80AF56F4(GlobalContext* globalCtx, EnSa* this) {
 
 void func_80AF5894(EnSa* this)
 {
-  f32 fVar2;
-  
-  fVar2 = (this->skelAnime).unk_0C;
+  f32 fVar2 = this->skelAnime.unk_0C;
 
   this->skelAnime.unk_0C = this->skelAnime.animFrameCount;
   this->skelAnime.animCurrentFrame = this->skelAnime.animFrameCount;
   this->skelAnime.animFrameCount = fVar2;
   this->skelAnime.animPlaybackSpeed = -1.0f;
-
 }
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Sa/func_80AF58B8.s")
@@ -241,7 +238,16 @@ void EnSa_Destroy(EnSa* this, GlobalContext* globalCtx)
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Sa/func_80AF6448.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Sa/func_80AF67D0.s")
+extern AnimationHeader* D_0600C500;
+extern ActorFunc func_80AF6448;
+void func_80AF67D0(EnSa* this, GlobalContext* globalCtx)
+{
+    if (this->unk_1E0.unk_00 == 0)
+    {
+        SkelAnime_ChangeAnimation(&this->skelAnime, &D_0600C500, 0.0f, 10.0f, 0.0f, 2, -10.0f);
+        this->actionFunc = &func_80AF6448;
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Sa/func_80AF683C.s")
 
