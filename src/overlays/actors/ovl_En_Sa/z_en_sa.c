@@ -122,6 +122,7 @@ s16 func_80AF56F4(GlobalContext* globalCtx, EnSa* this) {
 #else
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Sa/func_80AF56F4.s")
 #endif
+
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Sa/func_80AF57D8.s")
 
 void func_80AF5894(EnSa* this)
@@ -134,7 +135,41 @@ void func_80AF5894(EnSa* this)
   this->skelAnime.animPlaybackSpeed = -1.0f;
 }
 
+#ifdef NON_MATCHING
+extern struct_80034EC0_Entry D_80AF7358;
+// very close to matching, small ordering issues
+void func_80AF58B8(EnSa *this)
+{
+  SkelAnime *skelAnime;
+  s32 sp20;
+  if (this->unk_20A != 0)
+  {
+    if (this->unk_20A != 1)
+    {
+      return;
+    }
+
+  }
+  else
+  {
+    func_80034EC0(&this->skelAnime, &D_80AF7358, 3);
+    this->unk_20A++;
+  }
+
+  sp20 = skelAnime;
+  if (func_800A56C8(skelAnime, (*skelAnime).animFrameCount) != 0)
+  {
+    skelAnime = &this->skelAnime;
+    func_80034EC0(skelAnime, &D_80AF7358, 2);
+    this->unk_20A++;
+  }
+
+  return;
+}
+#else
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Sa/func_80AF58B8.s")
+#endif
+
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Sa/func_80AF594C.s")
 
