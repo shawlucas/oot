@@ -22,7 +22,27 @@ const ActorInit Bg_Gnd_Firemeiro_InitVars = {
     (ActorFunc)BgGndFiremeiro_Draw,
 };
 */
+
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Gnd_Firemeiro/BgGndFiremeiro_Init.s")
+/*
+void BgGndFiremeiro_Init(BgGndFiremeiro* this, GlobalContext* globalCtx) 
+{
+    Actor* thisx = &this->dyna.actor;
+    s32 sp24;
+
+    sp24 = 0;
+    ActorShape_Init(&thisx->shape, 0.0f, NULL, 0.0f);
+    Actor_SetScale(thisx, 1.0000000e-1);
+    this->unk_164 = thisx->posRot.pos;
+
+    if (thisx->params == 0) {
+        DynaPolyInfo_SetActorMove(thisx, DPM_UNK);
+        DynaPolyInfo_Alloc(0x6010000 + 0xECD8, &sp24);
+        arg0->unk14C = DynaPolyInfo_RegisterActor(sp34, sp34 + 0x810, arg0, sp24);
+        arg0->unk174 = &func_80879808;
+    }
+}
+*/
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Gnd_Firemeiro/BgGndFiremeiro_Destroy.s")
 
