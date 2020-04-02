@@ -58,23 +58,20 @@ void ItemBHeart_Update(ItemBHeart* this, GlobalContext* globalCtx) {
     }
 }
 
-#ifdef NON_MATCHING
+
 // subtraction instruction needs to be generated
-void func_80B85264(ItemBHeart *this, GlobalContext *globalCtx)
+void func_80B85264(ItemBHeart* this, GlobalContext* globalCtx)
 {
   PosRot* posRot;
   this->unk_164 += 1;
-  posRot = &this->actor.initPosRot;
-  Math_SmoothScaleMaxF(&this->actor.posRot.pos.y, ((Math_Sins((this->unk_164 * 83) * 4) * 5.0f) + 20.0f) + (*posRot).pos.y, 1.0000000e-1, this->unk_158);
+  posRot = &this->actor.initPosRot;                                                                     // (*posRot) is required
+  Math_SmoothScaleMaxF(&this->actor.posRot.pos.y, ((Math_Sins(this->unk_164 * 0x60C) * 5.0f) + 20.0f) + (*posRot).pos.y, 1.0000000e-1, this->unk_158);
   Math_SmoothScaleMaxF(&this->unk_158, 2.0f, 1.0f, 1.0000000e-1);
   this->actor.shape.rot.y += 0x400;
   Math_SmoothScaleMaxF(&this->actor.scale, 4.0000001e-1, 1.0000000e-1, 9.9999998e-3);
   this->actor.scale.z = this->actor.scale.x;
   this->actor.scale.y = this->actor.scale.x;
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Item_B_Heart/func_80B85264.s")
-#endif
 
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Item_B_Heart/ItemBHeart_Draw.s")
