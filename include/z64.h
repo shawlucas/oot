@@ -677,7 +677,9 @@ typedef struct {
     /* 0x01E4 */ u16    unk_1E4;
     /* 0x01E6 */ char   unk_1E6[0x006];
     /* 0x01EC */ u16    unk_1EC;
-    /* 0x01EE */ char   unk_1EE[0x04A];
+    /* 0x01EE */ char   unk_1EE[0x02E];
+    /* 0x021C */ s16    statusCursorPos; // Quest status screen cursor position.
+    /* 0x021E */ char   unk_21E[0x1A];
     /* 0x0238 */ u16    unk_238;
     /* 0x023A */ char   unk_23A[0x004];
     /* 0x023E */ u16    unk_23E;

@@ -629,7 +629,11 @@ endseg
 
 beginseg
     name "ovl_kaleido_scope"
-    include "build/src/overlays/actors/ovl_kaleido_scope/z_kaleido_scope.o"
+    include "build/src/overlays/actors/ovl_kaleido_scope/z_kaleido_collect.o"
+    include "build/src/overlays/actors/ovl_kaleido_scope/z_kaleido_debug.o"
+    include "build/src/overlays/actors/ovl_kaleido_scope/z_kaleido_map_PAL.o"
+    include "build/src/overlays/actors/ovl_kaleido_scope/z_kaleido_scope_PAL.o"
+    include "build/src/overlays/actors/ovl_kaleido_scope/z_lmap_mark.o"
     include "build/data/overlays/actors/z_kaleido_scope.data.o"
     include "build/data/overlays/actors/z_kaleido_scope.rodata.o"
     include "build/data/overlays/actors/z_kaleido_scope.bss.o"

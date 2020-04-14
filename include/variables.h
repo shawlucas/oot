@@ -3490,6 +3490,7 @@ extern u8 D_801610DA;
 //extern ? D_801612F0;
 //extern ? D_80161358;
 //extern ? D_80161360;
+extern void* D_801613A0;
 //extern ? D_801613B0;
 //extern ? D_8016148C;
 extern s32 D_80161490;
