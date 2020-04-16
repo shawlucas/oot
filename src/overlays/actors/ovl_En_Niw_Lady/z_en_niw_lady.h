@@ -8,9 +8,12 @@
 typedef struct {
     /* 0x0000 */ Actor actor;
     /* 0x014C */ SkelAnime skelAnime;
-    /* 0x0190 */ char unk_190[0xC0];
+    /* 0x0190 */ Vec3s actorDrawTable[16];
+    /* 0x01F0 */ Vec3s transitionDrawTable[16];
     /* 0x0250 */ ActorFunc actionFunc;
-    /* 0x0254 */ char unk_254[0x24];
+    /* 0x0254 */ char unk_254[0xE];
+    /* 0x0262 */ u16 message_end_code;
+    /* 0x0264 */ char unk_264[0x14];
     /* 0x0278 */ s16 drawFlag;
     /* 0x027A */ char unk_27A[0x6];
     /* 0x0280 */ s8 objBankIndex_280;

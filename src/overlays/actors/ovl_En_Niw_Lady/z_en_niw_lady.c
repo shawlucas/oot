@@ -6,6 +6,8 @@ void EnNiwLady_Init(EnNiwLady* this, GlobalContext* globalCtx);
 void EnNiwLady_Destroy(EnNiwLady* this, GlobalContext* globalCtx);
 void EnNiwLady_Update(EnNiwLady* this, GlobalContext* globalCtx);
 void func_80AB9F24(EnNiwLady* this, GlobalContext* globalCtx);
+void func_80ABA244(EnNiwLady* this, GlobalContext* globalCtx);
+
 /*
 const ActorInit En_Niw_Lady_InitVars = {
     ACTOR_EN_NIW_LADY,
@@ -66,7 +68,19 @@ void EnNiwLady_Destroy(EnNiwLady* this, GlobalContext* globalCtx)
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Niw_Lady/func_80AB9F24.s")
 
+extern s16 D_80ABB3A0[];
+#ifdef NON_MATCHING
+// regalloc
+void func_80ABA21C(EnNiwLady* this, GlobalContext* globalCtx)
+{
+    u16 textId = D_80ABB3A0[0] & 0xFFFF;
+    this->unk_262 = 6;
+    this->actionFunc = func_80ABA244;
+    this->actor.textId = textId;
+}
+#else
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Niw_Lady/func_80ABA21C.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Niw_Lady/func_80ABA244.s")
 
