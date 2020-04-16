@@ -1350,7 +1350,7 @@ typedef struct ArenaNode {
     /* 0x1C */ Arena* arena;
     /* 0x20 */ OSTime time;
     /* 0x28 */ u8 unk_28[0x30-0x28]; // probably padding
-} ArenaNode; // size = 0x30
+} ArenaNode; // size = 0x30 
 
 typedef struct OverlayRelocationSection {
     /* 0x00 */ u32 textSize;
