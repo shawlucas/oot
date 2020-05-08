@@ -1,3 +1,20 @@
+#include <ultra64.h>
+#include <global.h>
+
+typedef struct
+{
+    /* 0x0000 */ GameState state;
+    /* 0x00A4 */ Gfx* gfx_A4;
+    /* 0x00A8 */ void* title_staticSegment;
+    /* 0x00AC */ void* parameter_staticSegment;
+    /* 0x00B0 */ SCmdAltHeaders* sceneHeader;
+    /* 0x00B4 */ char unk_B4[0x4]; // view->viewport.bottomY from previous context
+    /* 0x00B8 */ View view;
+    /* 0x01E0 */ Sram* sram;
+    /* 0x01E4 */ Camera camera_1E4;
+    /* 0x0350 */ Camera camer_350;
+} FileContext; // size = 0x1CAE0
+
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/gamestates/ovl_file_choose/func_80803D40.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/gamestates/ovl_file_choose/func_80803ED8.s")
