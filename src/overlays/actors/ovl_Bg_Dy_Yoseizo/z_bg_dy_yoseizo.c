@@ -51,6 +51,7 @@ const ActorInit Bg_Dy_Yoseizo_InitVars = {
     NULL,
 };
 */
+
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Dy_Yoseizo/BgDyYoseizo_Init.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Dy_Yoseizo/BgDyYoseizo_Destroy.s")

@@ -34,7 +34,7 @@ const ActorInit Bg_Gate_Shutter_InitVars = {
     (ActorFunc)BgGateShutter_Draw,
 };
 
-extern UNK_TYPE D_06001CD0;
+extern Gfx D_06001CD0[]; // Barred Gate
 extern UNK_TYPE D_06001DA8;
 
 void BgGateShutter_Init(Actor* thisx, GlobalContext* globalCtx) {

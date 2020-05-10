@@ -51,17 +51,17 @@ static ColliderCylinderInit D_8086CD70 = {
 };
 
 static InitChainEntry initChain[] = {
-    ICHAIN_VEC3F_DIV1000(scale, 0x64, ICHAIN_STOP),
+    ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_STOP),
 };
 
-static u32 D_8086CDA0[] = {
+static Gfx* D_8086CDA0[] = {
     0x06008618,
     0x06004BE8,
     0x060038E8,
     0x06005200,
 };
 
-extern UNK_TYPE D_060038E8;
+extern Gfx D_060038E8; // Water square (Rises when Switch Flag is set)
 extern UNK_TYPE D_06005048;
 extern UNK_TYPE D_06005580;
 extern UNK_TYPE D_06008CE0;

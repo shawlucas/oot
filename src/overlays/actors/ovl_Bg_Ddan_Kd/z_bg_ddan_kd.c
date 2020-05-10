@@ -49,7 +49,7 @@ static f32 D_80871904[] = { 0.0f };
 static f32 D_80871908[] = { 0.0f, -0.45f, 0.0f, 0.0f, 0.0f, 0.0f };
 
 extern UNK_TYPE D_06004F30;
-extern UNK_TYPE D_060048A8;
+extern Gfx* D_060048A8;
 
 void BgDdanKd_SetupAction(BgDdanKd* this, BgDdanKdActionFunc actionFunc) {
     this->actionFunc = actionFunc;
