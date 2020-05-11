@@ -26,7 +26,7 @@ const ActorInit En_Vase_InitVars = {
     (ActorFunc)EnVase_Draw,
 };
 
-extern u32 DL_VASE;
+extern Gfx DL_VASE[];
 
 void EnVase_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnVase* this = THIS;

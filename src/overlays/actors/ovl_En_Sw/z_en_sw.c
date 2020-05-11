@@ -1,3 +1,9 @@
+/*
+ * File: z_en_sw.c
+ * Overlay: ovl_En_Sw
+ * Description: Skullwalltula and Gold Skulltulas
+ */
+
 #include "z_en_sw.h"
 
 #define FLAGS 0x00000015

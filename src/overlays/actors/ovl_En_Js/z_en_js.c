@@ -1,3 +1,9 @@
+/*
+ * File: z_en_js.c
+ * Overlay: ovl_En_Js
+ * Description: Magic carpet man
+ */
+
 #include "z_en_js.h"
 
 #define FLAGS 0x00000009

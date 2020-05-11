@@ -1,3 +1,9 @@
+/*
+ * File: z_en_skj.c
+ * Overlay: ovl_En_Skj
+ * Description: Skullkid
+ */
+
 #include "z_en_skj.h"
 
 #define FLAGS 0x02000015

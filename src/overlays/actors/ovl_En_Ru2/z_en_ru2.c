@@ -1,6 +1,6 @@
 /*
  * File: z_en_ru2.c
- * Overlay: En_Ru2
+ * Overlay: ovl_En_Ru2
  * Description: Adult Ruto
  */
 
@@ -553,6 +553,7 @@ void func_80AF3564(EnRu2* this, GlobalContext* globalCtx) {
                     func_80AF34F0(this);
                     break;
                 default:
+                    // "En_Ru2_inEnding_Check_DemoMode: No such action !!!!!!!!"
                     osSyncPrintf("En_Ru2_inEnding_Check_DemoMode:そんな動作は無い!!!!!!!!\n");
                     break;
             }
@@ -665,10 +666,12 @@ void func_80AF39DC(EnRu2* this, GlobalContext* globalCtx) {
 
     if (dialogState == 3) {
         if (this->unk_2C3 != 3) {
+            // "I'm Komatsu!"
             osSyncPrintf("おれが小松だ！ \n");
             this->unk_2C2++;
             if (this->unk_2C2 % 6 == 3) {
                 player = PLAYER;
+                // "Uryaa!"
                 osSyncPrintf("うおりゃー！ \n");
                 func_8005B1A4(ACTIVE_CAM);
                 player->actor.posRot.pos.x = 820.0f;
@@ -752,10 +755,11 @@ void EnRu2_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnRu2* this = THIS;
 
     if (this->action < 0 || this->action >= 20 || D_80AF50BC[this->action] == 0) {
+        // "The main mode is strange !!!!!!!!!!!!!!!!!!!!!!!!!"
         osSyncPrintf(VT_FGCOL(RED) "メインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
-        return;
+    } else {
+        D_80AF50BC[this->action](this, globalCtx);
     }
-    D_80AF50BC[this->action](this, globalCtx);
 }
 
 void EnRu2_Init(Actor* thisx, GlobalContext* globalCtx) {
@@ -813,8 +817,9 @@ void EnRu2_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnRu2* this = THIS;
 
     if (this->drawConfig < 0 || this->drawConfig >= 3 || D_80AF510C[this->drawConfig] == 0) {
+        // "The drawing mode is wrong !!!!!!!!!!!!!!!!!!!!!!!!!"
         osSyncPrintf(VT_FGCOL(RED) "描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
-        return;
+    } else {
+        D_80AF510C[this->drawConfig](this, globalCtx);
     }
-    D_80AF510C[this->drawConfig](this, globalCtx);
 }

@@ -54,7 +54,7 @@ static s16 effectScales[] = {
     17, 14, 10, 8, 7, 5, 3, 2,
 };
 
-extern Gfx* D_060009E0; // dlist
+extern Gfx D_060009E0[]; // dlist for top of boulder
 
 void ObjBombiwa_InitCollision(Actor* thisx, GlobalContext* globalCtx) {
     ObjBombiwa* this = THIS;

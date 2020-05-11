@@ -1,3 +1,9 @@
+/*
+ * File: z_en_mb.c
+ * Overlay: ovl_En_Mb
+ * Description: Moblins
+ */
+
 #include "z_en_mb.h"
 
 #define FLAGS 0x00000015

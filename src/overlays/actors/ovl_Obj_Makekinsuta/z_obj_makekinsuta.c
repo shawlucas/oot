@@ -54,12 +54,13 @@ void func_80B98320(ObjMakekinsuta* this, GlobalContext* globalCtx) {
                         this->actor.posRot.pos.y, this->actor.posRot.pos.z, 0, this->actor.shape.rot.y, 0,
                         (this->actor.params | 0x8000));
             this->actionFunc = func_80B983D4;
-            return;
+
+        } else {
+            this->unk_150++;
         }
-        this->unk_150 = this->unk_150 + 1;
-        return;
+    } else {
+        this->unk_150 = 0;
     }
-    this->unk_150 = 0;
 }
 
 void func_80B983D4(ObjMakekinsuta* this, GlobalContext* globalCtx) {

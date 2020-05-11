@@ -1,3 +1,9 @@
+/*
+ * File: z_en_syateki_itm.c
+ * Overlay: ovl_En_Syateki_Itm
+ * Description: Shooting Gallery Game
+ */
+
 #include "z_en_syateki_itm.h"
 
 #define FLAGS 0x00000010

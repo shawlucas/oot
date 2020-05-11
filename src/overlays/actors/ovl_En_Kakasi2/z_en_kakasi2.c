@@ -1,3 +1,9 @@
+/*
+ * File: z_en_kakasi2.c
+ * Overlay: ovl_En_Kakasi2
+ * Description: Piere the Scarecrow Spawn Spot
+ */
+
 #include "z_en_kakasi2.h"
 
 #define FLAGS 0x0A000031

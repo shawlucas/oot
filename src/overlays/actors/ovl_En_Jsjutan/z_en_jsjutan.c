@@ -1,3 +1,9 @@
+/*
+ * File: z_en_jsjutan.c
+ * Overlay: ovl_En_Jsjutan
+ * Description: Displays GI objects / Lost Woods Slingshot Game?
+ */
+
 #include "z_en_jsjutan.h"
 
 #define FLAGS 0x00000009

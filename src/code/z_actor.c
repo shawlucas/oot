@@ -1303,7 +1303,7 @@ void func_8002E4B4(GlobalContext* globalCtx, Actor* actor, f32 arg2, f32 arg3, f
     }
 }
 
-s32 D_8015BBA8[16];
+Mtx D_8015BBA8;
 
 Gfx* func_8002E830(Vec3f* object, Vec3f* eye, Vec3f* lightDir, GraphicsContext* gfxCtx, Gfx* gfx, Hilite** hilite) {
     Gfx* lookAt;
@@ -1751,10 +1751,10 @@ void func_8002F994(Actor* actor, s32 sfxId) {
     }
 }
 
-s32 func_8002F9EC(GlobalContext* globalCtx, Actor* actor, UNK_TYPE arg2, UNK_TYPE arg3, UNK_TYPE arg4) {
+s32 func_8002F9EC(GlobalContext* globalCtx, Actor* actor, UNK_TYPE arg2, UNK_TYPE arg3, Vec3f* arg4) {
     if (func_80041D4C(&globalCtx->colCtx, arg2, arg3) == 8) {
         globalCtx->unk_11D30[0] = 1;
-        func_8005DFAC(globalCtx, 0, arg4);
+        func_8005DFAC(globalCtx, NULL, arg4);
         Audio_PlayActorSound2(actor, NA_SE_IT_WALL_HIT_BUYO);
         return 1;
     }
@@ -3548,7 +3548,7 @@ typedef struct {
     /* 0x08 */ f32 unk_08;
     /* 0x0C */ f32 unk_0C;
     /* 0x10 */ f32 unk_10;
-    /* 0x14 */ u32 unk_14;
+    /* 0x14 */ Gfx* unk_14;
     /* 0x18 */ u32 unk_18;
 } struct_801160DC; // size = 0x1C
 

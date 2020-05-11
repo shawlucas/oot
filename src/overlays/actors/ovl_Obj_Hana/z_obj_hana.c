@@ -1,6 +1,6 @@
 /*
  * File: z_obj_hana.c
- * Overlay: Obj_Hana
+ * Overlay: ovl_Obj_Hana
  * Description: Grave Flower
  */
 

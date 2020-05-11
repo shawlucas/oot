@@ -1,3 +1,9 @@
+/*
+ * File: z_en_nwc.c
+ * Overlay: ovl_En_Nwc
+ * Description: Cucco Chick
+ */
+
 #include "z_en_nwc.h"
 
 #define FLAGS 0x00000030

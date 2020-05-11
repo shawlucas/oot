@@ -1,3 +1,9 @@
+/*
+ * File: z_en_ice_hono.c
+ * Overlay: ovl_En_Ice_Hono
+ * Description: Blue Fire Flames
+ */
+
 #include "z_en_ice_hono.h"
 
 #define FLAGS 0x00000000

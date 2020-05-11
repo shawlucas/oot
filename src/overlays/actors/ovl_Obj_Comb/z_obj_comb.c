@@ -52,8 +52,8 @@ static InitChainEntry initChain[] = {
     ICHAIN_F32(unk_FC, 900, ICHAIN_STOP),
 };
 
-extern UNK_TYPE D_050095B0;
-extern UNK_TYPE D_05009940;
+extern Gfx D_050095B0[]; // dlist for beehive
+extern Gfx D_05009940[];
 
 void ObjComb_Break(ObjComb* this, GlobalContext* globalCtx) {
     Vec3f pos1;

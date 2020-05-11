@@ -1,3 +1,9 @@
+/*
+ * File: z_en_po_field.c
+ * Overlay: ovl_En_Po_Field
+ * Description: Big/Small Poe Spawn Point
+ */
+
 #include "z_en_po_field.h"
 
 #define FLAGS 0x00001035

@@ -1,3 +1,9 @@
+/*
+ * File: z_en_insect.c
+ * Overlay: ovl_En_Insect
+ * Description: Bugs
+ */
+
 #include "z_en_insect.h"
 
 #define FLAGS 0x00000000

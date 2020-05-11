@@ -1,3 +1,9 @@
+/*
+ * File: z_en_po_sisters.c
+ * Overlay: ovl_En_Po_Sisters
+ * Description: Poe Sisters
+ */
+
 #include "z_en_po_sisters.h"
 
 #define FLAGS 0x00005215

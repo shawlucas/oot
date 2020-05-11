@@ -34,7 +34,7 @@ extern AnimationHeader D_06002F84;
 extern UNK_TYPE D_06003B40;
 extern UNK_TYPE D_06004340;
 extern UNK_TYPE D_06004B40;
-extern Gfx D_0600ACE0[];
+extern Gfx D_0600ACE0[]; // dlist for dampe's shovel
 extern Gfx D_0600BC90[];
 extern Gfx D_0600BCA0[];
 extern SkeletonHeader D_0600BE40;

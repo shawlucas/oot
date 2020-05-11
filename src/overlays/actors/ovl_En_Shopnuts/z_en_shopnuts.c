@@ -1,3 +1,9 @@
+/*
+ * File: z_en_shopnuts.c
+ * Overlay: ovl_En_Shopnuts
+ * Description: Grounded Sales Scrub
+ */
+
 #include "z_en_shopnuts.h"
 
 #define FLAGS 0x00000005

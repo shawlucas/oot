@@ -1,3 +1,9 @@
+/*
+ * File: z_en_light.c
+ * Overlay: ovl_En_Light
+ * Description: Decorative Flames
+ */
+
 #include "z_en_light.h"
 
 #define FLAGS 0x00000000

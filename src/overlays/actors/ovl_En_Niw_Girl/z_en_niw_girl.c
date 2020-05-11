@@ -1,3 +1,9 @@
+/*
+ * File: z_en_niw_girl.c
+ * Overlay: ovl_En_Niw_Girl
+ * Description: Girl chasing cucco
+ */
+
 #include "z_en_niw_girl.h"
 
 #define FLAGS 0x00000019

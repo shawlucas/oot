@@ -1,3 +1,9 @@
+/*
+ * File: z_en_rl.c
+ * Overlay: ovl_En_Rl
+ * Description: Rauru
+ */
+
 #include "z_en_rl.h"
 
 #define FLAGS 0x00000010

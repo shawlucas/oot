@@ -92,7 +92,7 @@ u32 D_80AA38B0[] = {
     0x06003070,
 };
 
-extern u32 D_06005420;
+extern Gfx D_06005420[]; // dlist for water jug that she holds
 extern SkeletonHeader D_06008D90;
 extern AnimationHeader D_060093BC;
 extern AnimationHeader D_06009EE0;

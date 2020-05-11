@@ -1,3 +1,9 @@
+/*
+ * File: z_en_sth.c
+ * Overlay: ovl_En_Sth
+ * Description: Uncursed Skulltula people
+ */
+
 #include "z_en_sth.h"
 
 #define FLAGS 0x00000019

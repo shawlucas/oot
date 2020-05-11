@@ -1,3 +1,9 @@
+/*
+ * File: z_en_ossan.c
+ * Overlay: ovl_En_Ossan
+ * Description: Shopkeeper
+ */
+
 #include "z_en_ossan.h"
 
 #define FLAGS 0x00000019

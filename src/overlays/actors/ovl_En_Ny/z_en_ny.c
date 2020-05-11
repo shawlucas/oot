@@ -1,3 +1,9 @@
+/*
+ * File: z_en_ny.c
+ * Overlay: ovl_En_Ny
+ * Description: Spike Enemy (Water Temple)
+ */
+
 #include "z_en_ny.h"
 
 #define FLAGS 0x00000005

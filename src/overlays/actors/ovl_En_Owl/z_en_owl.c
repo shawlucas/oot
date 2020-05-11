@@ -1,3 +1,9 @@
+/*
+ * File: z_en_owl.c
+ * Overlay: ovl_En_Owl
+ * Description: Kaepora Gaebora
+ */
+
 #include "z_en_owl.h"
 
 #define FLAGS 0x00000019

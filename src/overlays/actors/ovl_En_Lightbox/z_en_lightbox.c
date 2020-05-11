@@ -1,7 +1,7 @@
 /*
  * File: z_en_lightbox.c
  * Overlay: ovl_En_Lightbox
- * Description:
+ * Description: Large noisy stone
  */
 
 #include "z_en_lightbox.h"
@@ -27,7 +27,7 @@ const ActorInit En_Lightbox_InitVars = {
     (ActorFunc)EnLightbox_Draw,
 };
 
-extern u32 D_06000B70;
+extern Gfx D_06000B70[]; // dlist for stone
 extern u32 D_06001F10;
 
 void EnLightbox_Init(Actor* thisx, GlobalContext* globalCtx) {

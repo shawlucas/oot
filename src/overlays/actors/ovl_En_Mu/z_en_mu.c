@@ -1,3 +1,9 @@
+/*
+ * File: z_en_mu.c
+ * Overlay: ovl_En_Mu
+ * Description: Haggling townspeople
+ */
+
 #include "z_en_mu.h"
 
 #define FLAGS 0x00000009

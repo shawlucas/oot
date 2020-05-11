@@ -53,8 +53,8 @@ extern u32 D_0403BCD8;
 extern u32 D_0403F070;
 extern u32 D_04042440;
 //extern ? D_04048160;
-extern u32 D_04048180;
-extern Gfx D_04049210[];
+extern Gfx D_04048180[]; // dlist for teardrop shadow
+extern Gfx D_04049210[]; // dlist for circular shadow
 extern u32 D_04049AD0;
 //extern ? D_0404D1C0;
 extern u32 D_0404D450;

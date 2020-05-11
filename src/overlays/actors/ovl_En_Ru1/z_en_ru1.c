@@ -1,7 +1,7 @@
 /*
  * File: z_en_ru1.c
- * Overlay: En_Ru1
- * Description:
+ * Overlay: ovl_En_Ru1
+ * Description: Child Princess Ruto
  */
 
 #include "z_en_ru1.h"
@@ -313,6 +313,7 @@ DynaPolyActor* func_80AEB088(GlobalContext* globalCtx) {
         }
         actorIt = actorIt->next;
     }
+    // "There is no stand !!!!!!!!!!!!!!!!!!!!!!!!!!!!"
     osSyncPrintf(VT_FGCOL(RED) "お立ち台が無い!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
     return NULL;
 }
@@ -2223,8 +2224,10 @@ void func_80AEFF94(EnRu1* this, GlobalContext* globalCtx) {
         this->roomNum1 = actorRoom;
         this->roomNum3 = actorRoom;
         this->roomNum2 = actorRoom;
+        // "Switched set !!!!!!!!!!!!!!!!!!!!!!"
         osSyncPrintf("スイッチルトセット!!!!!!!!!!!!!!!!!!!!!!\n");
     } else {
+        // "Don't set switch !!!!!!!!!!!!!!!!!!!!!!"
         osSyncPrintf("スイッチルトセットしない!!!!!!!!!!!!!!!!!!!!!!\n");
         Actor_Kill(thisx);
     }
@@ -2242,6 +2245,7 @@ void EnRu1_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnRu1* this = THIS;
 
     if (this->action < 0 || this->action >= 46 || D_80AF193C[this->action] == NULL) {
+        // "The main mode is strange !!!!!!!!!!!!!!!!!!!!!!!!!"
         osSyncPrintf(VT_FGCOL(RED) "メインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
         return;
     }
@@ -2283,6 +2287,7 @@ void EnRu1_Init(Actor* thisx, GlobalContext* globalCtx) {
             break;
         default:
             Actor_Kill(thisx);
+            // "Applicable arge_data = %d none"
             osSyncPrintf("該当 arge_data = %d 無し\n", func_80AEADF0(this));
             break;
     }
@@ -2309,6 +2314,7 @@ s32 EnRu1_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList,
     EnRu1* this = THIS;
 
     if ((this->unk_290 < 0) || (this->unk_290 > 0) || (*D_80AF19F4[this->unk_290] == NULL)) {
+        // "The turning mode is strange !!!!!!!!!!!!!!!!!!!!!!!!!"
         osSyncPrintf(VT_FGCOL(RED) "首回しモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
     } else {
         D_80AF19F4[this->unk_290](this, globalCtx, limbIndex, rot);
@@ -2390,6 +2396,7 @@ void EnRu1_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnRu1* this = THIS;
 
     if (this->drawConfig < 0 || this->drawConfig >= 3 || D_80AF1A04[this->drawConfig] == 0) {
+        // "The drawing mode is wrong !!!!!!!!!!!!!!!!!!!!!!!!!"
         osSyncPrintf(VT_FGCOL(RED) "描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
         return;
     }

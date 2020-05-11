@@ -37,7 +37,13 @@ static ColliderCylinderInit cylinderInitData = {
 };
 
 static s16 objectTbl[] = { OBJECT_DEKUNUTS, OBJECT_HINTNUTS, OBJECT_SHOPNUTS, OBJECT_DNS, OBJECT_DNK };
-static u32 dListTbl[] = { 0x06002028, 0x060012F0, 0x06004008, 0x06002410, 0x06001890 };
+static Gfx* dListTbl[] = { 
+    0x06002028, 
+    0x060012F0, 
+    0x06004008, 
+    0x06002410, 
+    0x06001890, 
+};
 
 void EnNutsball_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnNutsball* this = THIS;

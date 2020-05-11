@@ -1,3 +1,9 @@
+/*
+ * File: z_en_kz.c
+ * Overlay: ovl_En_Kz
+ * Description: King Zora
+ */
+
 #include "z_en_kz.h"
 
 #define FLAGS 0x00000009

@@ -1,3 +1,9 @@
+/*
+ * File: z_en_nb.c
+ * Overlay: ovl_En_Nb
+ * Description: Nabooru
+ */
+
 #include "z_en_nb.h"
 
 #define FLAGS 0x00000010

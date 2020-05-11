@@ -354,7 +354,7 @@ void func_8002F91C(Actor* actor, u16 sfxId);
 void func_8002F948(Actor* actor, u16 sfxId);
 void func_8002F974(Actor* actor, u16 sfxId);
 void func_8002F994(Actor* actor, s32 sfxId);
-s32 func_8002F9EC(GlobalContext* globalCtx, Actor* actor, UNK_TYPE arg2, UNK_TYPE arg3, UNK_TYPE arg4);
+s32 func_8002F9EC(GlobalContext* globalCtx, Actor* actor, UNK_TYPE arg2, UNK_TYPE arg3, Vec3f* arg4);
 void func_800304B0(GlobalContext* globalCtx);
 void func_800304DC(GlobalContext* globalCtx, ActorContext* actorCtx, ActorEntry* actorEntry);
 void Actor_UpdateAll(GlobalContext* globalCtx, ActorContext* actorCtx);

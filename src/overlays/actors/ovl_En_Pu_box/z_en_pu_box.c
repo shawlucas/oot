@@ -27,7 +27,7 @@ const ActorInit En_Pu_box_InitVars = {
     (ActorFunc)EnPubox_Draw,
 };
 
-extern u32 D_06000380;
+extern Gfx D_06000380[]; // dlist for the box
 extern u32 D_060006D0;
 
 void EnPubox_Init(Actor* thisx, GlobalContext* globalCtx) {

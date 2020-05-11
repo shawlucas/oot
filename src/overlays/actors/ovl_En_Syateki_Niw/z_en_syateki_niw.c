@@ -1,3 +1,9 @@
+/*
+ * File: z_en_syateki_niw
+ * Overlay: ovl_En_Syateki_Niw
+ * Description: Hopping Cucco, not solid
+ */
+
 #include "z_en_syateki_niw.h"
 
 #define FLAGS 0x00000010

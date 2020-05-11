@@ -1,3 +1,9 @@
+/*
+ * File: z_en_rd.c
+ * Overlay: ovl_En_Rd
+ * Description: Redead and Gibdo
+ */
+
 #include "z_en_rd.h"
 
 #define FLAGS 0x00000415

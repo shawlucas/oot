@@ -1,3 +1,9 @@
+/*
+ * File: z_en_ko.c
+ * Overlay: ovl_En_Ko
+ * Description: Kokiri Children
+ */
+
 #include "z_en_ko.h"
 
 #define FLAGS 0x00000019

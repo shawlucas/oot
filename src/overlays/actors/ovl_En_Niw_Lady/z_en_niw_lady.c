@@ -1,3 +1,9 @@
+/*
+ * File: z_en_niw_lady.c
+ * Overlay: ovl_En_Niw_Lady
+ * Description: Kakariko Cucco Lady
+ */
+
 #include "z_en_niw_lady.h"
 
 #define FLAGS 0x00000019

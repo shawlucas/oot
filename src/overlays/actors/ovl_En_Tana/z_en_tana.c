@@ -40,8 +40,8 @@ static const ActorFunc drawFuncs[] = {
 };
 
 static Gfx* dListTbl[] = {
-    0x06000B80,
-    0x060027E8,
+    0x06000B80, // dlist for shop shelves
+    0x060027E8, 
     0x060027E8,
 };
 

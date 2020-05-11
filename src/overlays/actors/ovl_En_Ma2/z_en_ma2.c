@@ -1,3 +1,9 @@
+/*
+ * File: z_en_ma2.c
+ * Overlay: ovl_En_Ma2
+ * Description: Adult Malon
+ */
+
 #include "z_en_ma2.h"
 
 #define FLAGS 0x02000039
@@ -89,7 +95,7 @@ u32 D_80AA28C0[] = {
     0x06003070,
 };
 
-extern u32 D_06005420;
+extern Gfx D_06005420[]; // dlist for water jug that she holds
 extern SkeletonHeader D_06008D90;
 extern AnimationHeader D_060093BC;
 extern AnimationHeader D_06009EE0;

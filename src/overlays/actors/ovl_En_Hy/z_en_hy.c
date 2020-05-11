@@ -1,3 +1,9 @@
+/*
+ * File: z_en_hy.c
+ * Overlay: ovl_En_Hy
+ * Description: Market NPCs
+ */
+
 #include "z_en_hy.h"
 
 #define FLAGS 0x00000019

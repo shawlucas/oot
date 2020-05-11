@@ -1,7 +1,7 @@
 /*
  * File: z_en_ma1.c
  * Overlay: En_Ma1
- * Description:
+ * Description: Child Malon
  */
 
 #include "z_en_ma1.h"
@@ -59,7 +59,7 @@ struct_D_80AA1678 D_80AA1678[] = {
 Vec3f D_80AA16B8 = { 800.0f, 0.0f, 0.0f };
 
 u32 D_80AA16C4[] = {
-    0x06001F18,
+    0x06001F18, // Mouth texture
     0x06002B18,
     0x06002F18,
 };
