@@ -1,3 +1,9 @@
+/*
+ * File: z_en_dnt_nomal.c
+ * Overlay: ovl_En_Dnt_Nomal
+ * Description: Deku Game
+ */
+
 #include "z_en_dnt_nomal.h"
 
 #define FLAGS 0x00000030

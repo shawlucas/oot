@@ -49,7 +49,7 @@ const ActorInit Bg_Zg_InitVars = {
     (ActorFunc)BgZg_Draw,
 };
 
-extern u32 D_06001080;
+extern Gfx D_06001080[]; // dlist for metal bars
 extern u32 D_060011D4;
 
 void BgZg_Destroy(Actor* thisx, GlobalContext* globalCtx) {

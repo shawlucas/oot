@@ -1,3 +1,9 @@
+/*
+ * File: z_en_bom.c
+ * Overlay: ovl_En_Bom
+ * Description: Bomb
+ */
+
 #include "z_en_bom.h"
 
 #define FLAGS 0x00000030

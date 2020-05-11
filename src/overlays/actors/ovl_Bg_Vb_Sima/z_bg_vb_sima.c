@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_vb_sima.c
+ * Overlay: ovl_Bg_Vb_Sima
+ * Description: Volvagia Objects
+ */
+
 #include "z_bg_vb_sima.h"
 
 #define FLAGS 0x00000000

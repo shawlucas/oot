@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_spot18_shutter.c
+ * Overlay: ovl_Bg_Spot18_Shutter
+ * Description: Goron room door
+ */
+
 #include "z_bg_spot18_shutter.h"
 
 #define FLAGS 0x00000030

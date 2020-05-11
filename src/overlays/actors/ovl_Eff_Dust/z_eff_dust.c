@@ -1,3 +1,9 @@
+/*
+ * File: z_eff_dust.c
+ * Overlay: ovl_Eff_Dust
+ * Description: Dust Effects
+ */
+
 #include "z_eff_dust.h"
 
 #define FLAGS 0x00000030

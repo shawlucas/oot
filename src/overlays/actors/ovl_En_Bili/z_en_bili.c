@@ -1,3 +1,9 @@
+/*
+ * File: z_en_bili.c
+ * Overlay: ovl_En_Bili
+ * Description: Biri
+ */
+
 #include "z_en_bili.h"
 
 #define FLAGS 0x00005005

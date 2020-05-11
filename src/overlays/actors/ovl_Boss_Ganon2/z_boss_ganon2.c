@@ -1,3 +1,9 @@
+/*
+ * File: z_boss_ganon2.c
+ * Overlay: ovl_Boss_Ganon2
+ * Description: Ganon
+ */
+
 #include "z_boss_ganon2.h"
 
 #define FLAGS 0x00000035

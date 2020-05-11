@@ -1,3 +1,9 @@
+/*
+ * File: z_demo_gj.c
+ * Overlay: ovl_Demo_Gj
+ * Description: Ganon Battle Rubble
+ */
+
 #include "z_demo_gj.h"
 
 #define FLAGS 0x00000030

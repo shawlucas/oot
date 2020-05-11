@@ -1,3 +1,9 @@
+/*
+ * File: z_en_ex_ruppy.c
+ * Overlay: ovl_En_Ex_Ruppy
+ * Description: Sparkling Rupee
+ */
+
 #include "z_en_ex_ruppy.h"
 
 #define FLAGS 0x00000010

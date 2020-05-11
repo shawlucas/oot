@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_treemouth.c
+ * Overlay: ovl_Bg_Treemouth
+ * Description: Great Deku Tree's Jaw
+ */
+
 #include "z_bg_treemouth.h"
 
 #define FLAGS 0x00000030

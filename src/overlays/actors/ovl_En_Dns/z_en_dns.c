@@ -1,3 +1,9 @@
+/*
+ * File: z_en_dns.c
+ * Overlay: ovl_En_Dns
+ * Description: Deku Salesman
+ */
+
 #include "z_en_dns.h"
 
 #define FLAGS 0x00000009

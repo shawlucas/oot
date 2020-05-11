@@ -1,3 +1,9 @@
+/*
+ * File: z_door_killer.c
+ * Overlay: ovl_Door_Killer
+ * Description: Fake door
+ */
+
 #include "z_door_killer.h"
 
 #define FLAGS 0x00000010

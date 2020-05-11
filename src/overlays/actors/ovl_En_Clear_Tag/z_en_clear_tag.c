@@ -1,3 +1,9 @@
+/*
+ * File: z_en_clear_tag.c
+ * Overlay: ovl_En_Clear_Tag
+ * Description: Arwing
+ */
+
 #include "z_en_clear_tag.h"
 
 #define FLAGS 0x00000035

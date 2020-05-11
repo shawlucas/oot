@@ -1,3 +1,9 @@
+/*
+ * File: z_boss_sst.c
+ * Overlay: ovl_Boss_Sst
+ * Description: Bongo Bongo's Hand
+ */
+
 #include "z_boss_sst.h"
 
 #define FLAGS 0x00000435

@@ -1,3 +1,9 @@
+/*
+ * File: z_en_dh.c
+ * Overlay: ovl_En_Dh
+ * Description: Dead Hand
+ */
+
 #include "z_en_dh.h"
 
 #define FLAGS 0x00000415

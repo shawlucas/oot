@@ -1,3 +1,9 @@
+/*
+ * File: z_en_daiku_kakariko.c
+ * Overlay: ovl_En_Daiku_Kakariko
+ * Description: Carpenters (Kakariko)
+ */
+
 #include "z_en_daiku_kakariko.h"
 
 #define FLAGS 0x00000019

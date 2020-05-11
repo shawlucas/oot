@@ -1,3 +1,9 @@
+/*
+ * File: z_en_heishi4.c
+ * Overlay: ovl_En_Heishi4
+ * Description: Hyrule Guard (Time teller)
+ */
+
 #include "z_en_heishi4.h"
 
 #define FLAGS 0x00000009

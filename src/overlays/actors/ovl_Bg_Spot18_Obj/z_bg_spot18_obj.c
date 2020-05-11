@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_spot18_obj.c
+ * Overlay: ovl_Bg_Spot18_Obj
+ * Description: Statue (Darunia's Room)
+ */
+
 #include "z_bg_spot18_obj.h"
 
 #define FLAGS 0x00000000

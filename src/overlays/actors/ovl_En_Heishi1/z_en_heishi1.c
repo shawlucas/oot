@@ -1,3 +1,9 @@
+/*
+ * File: z_en_heishi1.c
+ * Overlay: ovl_En_Heishi1
+ * Description: Castle Courtyard Guards
+ */
+
 #include "z_en_heishi1.h"
 
 #define FLAGS 0x00000010

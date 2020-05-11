@@ -19,7 +19,7 @@ void EnEg_Draw(Actor* thisx, GlobalContext* globalCtx);
 
 void func_809FFDC8(EnEg* this, GlobalContext* globalCtx);
 
-static bool hasVoidedOut = false;
+static bool sPlayerHasVoided = false;
 static const EnEgActionFunc actionFuncs[] = {
     func_809FFDC8,
 };
@@ -50,14 +50,14 @@ void EnEg_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void func_809FFDC8(EnEg* this, GlobalContext* globalCtx) {
-    if (!hasVoidedOut && (gSaveContext.timer2Value < 1) && Flags_GetSwitch(globalCtx, 0x36) && (kREG(0) == 0)) {
+    if (!sPlayerHasVoided && (gSaveContext.timer2Value < 1) && Flags_GetSwitch(globalCtx, 0x36) && (kREG(0) == 0)) {
         // Void the player out
         Gameplay_TriggerRespawn(globalCtx);
         gSaveContext.respawnFlag = -2;
         Audio_SetBGM(NA_BGM_STOP);
         globalCtx->fadeTransition = 2;
         EnEg_PlayVoidOutSFX();
-        hasVoidedOut = true;
+        sPlayerHasVoided = true;
     }
 }
 

@@ -1,6 +1,6 @@
 /*
  * File: z_demo_go.c
- * Overlay: Demo_Go
+ * Overlay: ovl_Demo_Go
  * Description: Gorons (Cutscene)
  */
 

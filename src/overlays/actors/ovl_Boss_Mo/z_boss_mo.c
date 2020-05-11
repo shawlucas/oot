@@ -1,3 +1,9 @@
+/*
+ * File: z_boss_mo.c
+ * Overlay: ovl_Boss_Mo
+ * Description: Morpha
+ */
+
 #include "z_boss_mo.h"
 
 #define FLAGS 0x00000035

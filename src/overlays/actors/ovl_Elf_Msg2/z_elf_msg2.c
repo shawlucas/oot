@@ -1,3 +1,9 @@
+/*
+ * File: z_elf_msg2.c
+ * Overlay: ovl_Elf_Msg2
+ * Description: Navi Information Spot (Targetable, Green)
+ */
+
 #include "z_elf_msg2.h"
 
 #define FLAGS 0x00000010

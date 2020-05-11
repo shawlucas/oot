@@ -1,3 +1,9 @@
+/*
+ * File: z_en_dnt_demo.c
+ * Overlay: ovl_En_Dnt_Demo
+ * Description: Deku Mask Panel Trigger (forest stage)
+ */
+
 #include "z_en_dnt_demo.h"
 
 #define FLAGS 0x00000000

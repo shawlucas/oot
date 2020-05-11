@@ -1,3 +1,9 @@
+/*
+ * File: z_en_bom_bowl_pit.c
+ * Overlay: ovl_En_Bom_Bowl_Pit
+ * Description: Bombchu Bowling Alley Pit
+ */
+
 #include "z_en_bom_bowl_pit.h"
 
 #define FLAGS 0x00000010

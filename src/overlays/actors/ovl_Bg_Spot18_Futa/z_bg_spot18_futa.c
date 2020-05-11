@@ -35,7 +35,7 @@ static InitChainEntry initChain[] = {
 };
 
 extern u32 DL_SPOT18_FUTA;  // 0x6000368
-extern u32 DL_SPOT18_FUTA2; // 0x6000150
+extern Gfx DL_SPOT18_FUTA2[]; // 0x6000150
 
 void BgSpot18Futa_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgSpot18Futa* this = THIS;

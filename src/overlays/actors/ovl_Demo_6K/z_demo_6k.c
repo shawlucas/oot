@@ -1,3 +1,9 @@
+/*
+ * File: z_demo_6k.c
+ * Overlay: ovl_Demo_6k
+ * Description: Sage, Balls of Light (Cutscene)
+ */
+
 #include "z_demo_6k.h"
 
 #define FLAGS 0x00000010

@@ -1,3 +1,9 @@
+/*
+ * File: z_en_fd.c
+ * Overlay: ovl_En_Fd
+ * Description: Flare Dancer
+ */
+
 #include "z_en_fd.h"
 
 #define FLAGS 0x00000215

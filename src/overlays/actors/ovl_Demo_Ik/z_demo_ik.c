@@ -1,3 +1,9 @@
+/*
+ * File: z_demo_ik.c
+ * Overlay: ovl_Demo_Ik
+ * Description: Iron Knuckle Armour Pieces (Spirit Temple Nabooru Fight)
+ */
+
 #include "z_demo_ik.h"
 
 #define FLAGS 0x00000010

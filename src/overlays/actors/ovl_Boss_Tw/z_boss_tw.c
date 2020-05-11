@@ -1,3 +1,9 @@
+/*
+ * File: z_boss_tw.c
+ * Overlay: ovl_Boss_Tw
+ * Description: Twinrova
+ */
+
 #include "z_boss_tw.h"
 
 #define FLAGS 0x00000035

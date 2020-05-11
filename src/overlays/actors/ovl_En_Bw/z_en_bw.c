@@ -1,3 +1,9 @@
+/*
+ * File: z_en_bw.c
+ * Overlay: ovl_En_Bw
+ * Description: Torch Slug
+ */
+
 #include "z_en_bw.h"
 
 #define FLAGS 0x00000015

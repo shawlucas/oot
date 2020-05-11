@@ -1,3 +1,9 @@
+/*
+ * File: z_en_g_switch.c
+ * Overlay: ovl_En_G_Switch
+ * Description: Silver Rupee
+ */
+
 #include "z_en_g_switch.h"
 
 #define FLAGS 0x00000030

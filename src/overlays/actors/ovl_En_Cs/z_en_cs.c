@@ -1,3 +1,9 @@
+/*
+ * File: z_en_cs.c
+ * Overlay: ovl_En_Cs
+ * Description: Graveyard boy
+ */
+
 #include "z_en_cs.h"
 
 #define FLAGS 0x00000009

@@ -1,3 +1,9 @@
+/*
+ * File: z_elf_msg.c
+ * Overlay: ovl_Elf_Msg
+ * Description: Navi Message
+ */
+
 #include "z_elf_msg.h"
 
 #define FLAGS 0x00000010

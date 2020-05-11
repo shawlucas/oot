@@ -1,3 +1,9 @@
+/*
+ * File: z_en_daiku.c
+ * Overlay: ovl_En_Daiku
+ * Description: Carpenters
+ */
+
 #include "z_en_daiku.h"
 
 #define FLAGS 0x00000019

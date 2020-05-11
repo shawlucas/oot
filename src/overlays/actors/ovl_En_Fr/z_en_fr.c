@@ -1,3 +1,9 @@
+/*
+ * File: z_en_fr.c
+ * Overlay: ovl_En_Fr
+ * Description: Frog Song Spot and Frogs
+ */
+
 #include "z_en_fr.h"
 
 #define FLAGS 0x02000019

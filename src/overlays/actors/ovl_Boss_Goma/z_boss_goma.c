@@ -1,3 +1,9 @@
+/*
+ * File: z_boss_goma.c
+ * Overlay: ovl_Boss_Goma
+ * Description: Gohma
+ */
+
 #include "z_boss_goma.h"
 
 #define FLAGS 0x00000035

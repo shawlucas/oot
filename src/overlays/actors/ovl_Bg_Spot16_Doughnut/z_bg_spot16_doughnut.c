@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_spot16_doughnut.c
+ * Overlay: ovl_Bg_Spot16_Doughnut
+ * Description: Cloud Ring (Death Mountain)
+ */
+
 #include "z_bg_spot16_doughnut.h"
 
 #define FLAGS 0x00000000

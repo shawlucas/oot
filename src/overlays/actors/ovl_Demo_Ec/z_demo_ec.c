@@ -1,3 +1,9 @@
+/*
+ * File: z_demo_ec.c
+ * Overlay: ovl_Demo_Ec
+ * Description: Credits Revelers from Lon Lon
+ */
+
 #include "z_demo_ec.h"
 
 #define FLAGS 0x00000010

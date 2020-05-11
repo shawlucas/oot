@@ -19,7 +19,7 @@ void func_808BAF40(BgTokiSwd* this, GlobalContext* globalCtx);
 void func_808BB0AC(BgTokiSwd* this, GlobalContext* globalCtx);
 void func_808BB128(BgTokiSwd* this, GlobalContext* globalCtx);
 
-extern u32 D_06001BD0;
+extern Gfx D_06001BD0[];
 
 static u32 D_808BB2F0[] = {
     0x00000009, 0x000001A9, 0x0000000A, 0x00000001, 0x000C0000, 0x01000000, 0x00000000, 0x00000000, 0x00000036,
@@ -203,7 +203,7 @@ void BgTokiSwd_Init(Actor* thisx, GlobalContext* globalCtx) {
     Collider_InitCylinder(globalCtx, &this->collider);
     Collider_SetCylinder(globalCtx, &this->collider, thisx, &colliderInit);
     Collider_CylinderUpdate(thisx, &this->collider);
-    func_80061ED4(&thisx->colChkInfo, 0, &colChkInfoInit);
+    func_80061ED4(&thisx->colChkInfo, NULL, &colChkInfoInit);
 }
 
 void BgTokiSwd_Destroy(Actor* thisx, GlobalContext* globalCtx) {

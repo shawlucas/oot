@@ -1,3 +1,9 @@
+/*
+ * File: z_en_diving_game.c
+ * Overlay: ovl_En_Diving_Game
+ * Description: Zora Diving Game
+ */
+
 #include "z_en_diving_game.h"
 
 #define FLAGS 0x00000019

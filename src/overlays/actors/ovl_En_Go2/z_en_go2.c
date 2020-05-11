@@ -1,3 +1,9 @@
+/*
+ * File: z_en_go2.c
+ * Overlay: ovl_En_Go2
+ * Description: Gorons
+ */
+
 #include "z_en_go2.h"
 
 #define FLAGS 0x00000039

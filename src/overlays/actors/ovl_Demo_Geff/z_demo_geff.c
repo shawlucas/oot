@@ -1,7 +1,7 @@
 /*
  * File: z_demo_geff.c
- * Overlay: Demo_Geff
- * Description:
+ * Overlay: ovl_Demo_Geff
+ * Description: Chunk of Stone
  */
 
 #include "z_demo_geff.h"
@@ -25,21 +25,21 @@ void func_80978308(DemoGeff* this, GlobalContext* globalCtx);
 void func_809784D4(DemoGeff* this, GlobalContext* globalCtx);
 void func_80978344(DemoGeff* this, GlobalContext* globalCtx);
 
-s16 objectIds[] = {
+static s16 objectIds[] = {
     OBJECT_GEFF, OBJECT_GEFF, OBJECT_GEFF, OBJECT_GEFF, OBJECT_GEFF, OBJECT_GEFF, OBJECT_GEFF, OBJECT_GEFF, OBJECT_GEFF,
 };
 
-DemoGeffInitFunc initFuncs[] = {
+static DemoGeffInitFunc initFuncs[] = {
     func_80978030, func_80978030, func_80978030, func_80978030, func_80978030,
     func_80978030, func_80978030, func_80978030, func_80978030,
 };
 
-DemoGeffActionFunc actionFuncs[] = {
+static DemoGeffActionFunc actionFuncs[] = {
     func_809783D4,
     func_80978308,
 };
 
-DemoGeffDrawFunc drawFuncs[] = {
+static DemoGeffDrawFunc drawFuncs[] = {
     func_809784D4,
     func_80978344,
 };
@@ -56,7 +56,7 @@ const ActorInit Demo_Geff_InitVars = {
     (ActorFunc)DemoGeff_Draw,
 };
 
-extern UNK_TYPE D_06000EA0;
+extern Gfx D_06000EA0[];
 
 void DemoGeff_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
@@ -67,10 +67,10 @@ void DemoGeff_Init(Actor* thisx, GlobalContext* globalCtx) {
     if (this->actor.params < 0 || this->actor.params >= 9) {
         osSyncPrintf(VT_FGCOL(RED) "Demo_Geff_Actor_ct:arg_dataがおかしい!!!!!!!!!!!!\n" VT_RST);
         Actor_Kill(&this->actor);
-        return;
+    } else {
+        this->action = 0;
+        this->drawConfig = 0;
     }
-    this->action = 0;
-    this->drawConfig = 0;
 }
 
 void func_80977EA8(GlobalContext* globalCtx, u32 dlist) {
@@ -181,11 +181,12 @@ void func_80978370(DemoGeff* this, GlobalContext* globalCtx) {
     s16 params = this->actor.params;
     DemoGeffInitFunc initFunc = initFuncs[params];
     if (initFunc == NULL) {
+        // "Demo_Geff_main_init: Wrong initialization process arg_data = %d!"
         osSyncPrintf(VT_FGCOL(RED) " Demo_Geff_main_init:初期化処理がおかしいarg_data = %d!\n" VT_RST, params);
         Actor_Kill(&this->actor);
-        return;
+    } else {
+        initFunc(this, globalCtx);
     }
-    initFunc(this, globalCtx);
 }
 
 void func_809783D4(DemoGeff* this, GlobalContext* globalCtx) {
@@ -197,11 +198,11 @@ void func_809783D4(DemoGeff* this, GlobalContext* globalCtx) {
     s32 pad;
 
     if (objBankIndex < 0) {
+        // "Demo_Geff_main_bank: Unable to read bank arg_data = %d!"
         osSyncPrintf(VT_FGCOL(RED) "Demo_Geff_main_bank:バンクを読めない arg_data = %d!\n" VT_RST, params);
         Actor_Kill(thisx);
-        return;
     }
-    if (Object_IsLoaded(objCtx, objBankIndex)) {
+    else if (Object_IsLoaded(objCtx, objBankIndex)) {
         this->objBankIndex = objBankIndex;
         func_80978370(this, globalCtx);
     }
@@ -211,10 +212,12 @@ void DemoGeff_Update(Actor* thisx, GlobalContext* globalCtx) {
     DemoGeff* this = THIS;
 
     if (this->action < 0 || this->action >= 2 || actionFuncs[this->action] == NULL) {
+        // "The main mode is strange !!!!!!!!!!!!!!!!!!!!!!!!!"
         osSyncPrintf(VT_FGCOL(RED) "メインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
-        return;
+    } else {
+        actionFuncs[this->action](this, globalCtx);
     }
-    actionFuncs[this->action](this, globalCtx);
+    
 }
 
 void func_809784D4(DemoGeff* this, GlobalContext* globalCtx) {
@@ -225,10 +228,11 @@ void DemoGeff_Draw(Actor* thisx, GlobalContext* globalCtx) {
     s32 drawConfig = this->drawConfig;
 
     if (drawConfig < 0 || drawConfig >= 2 || drawFuncs[drawConfig] == NULL) {
+        // "The drawing mode is wrong !!!!!!!!!!!!!!!!!!!!!!!!!"
         osSyncPrintf(VT_FGCOL(RED) "描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
         return;
     }
-    if (drawConfig != 0) {
+    else if (drawConfig != 0) {
         func_80977F80(this, globalCtx);
     }
     drawFuncs[drawConfig](this, globalCtx);

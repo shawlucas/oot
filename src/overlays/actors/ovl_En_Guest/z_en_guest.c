@@ -1,3 +1,9 @@
+/*
+ * File: z_en_guest.c
+ * Overlay: ovl_En_Guest
+ * Description: Man in white top, purple pants
+ */
+
 #include "z_en_guest.h"
 
 #define FLAGS 0x00000019

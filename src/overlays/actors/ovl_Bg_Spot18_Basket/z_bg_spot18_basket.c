@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_spot18_basket.c
+ * Overlay: ovl_Bg_Spot18_Basket
+ * Description: Giant Goron Pot
+ */
+
 #include "z_bg_spot18_basket.h"
 
 #define FLAGS 0x00000010

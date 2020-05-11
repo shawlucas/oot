@@ -1,3 +1,9 @@
+/*
+ * File: z_en_du.c
+ * Overlay: ovl_En_Du
+ * Description: Darunia
+ */
+
 #include "z_en_du.h"
 
 #define FLAGS 0x02000009

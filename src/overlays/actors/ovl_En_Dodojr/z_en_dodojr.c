@@ -1,3 +1,9 @@
+/*
+ * File: z_en_dodojr.c
+ * Overlay: ovl_En_Dodojr
+ * Description: Baby Dodongo
+ */
+
 #include "z_en_dodojr.h"
 
 #define FLAGS 0x00000005

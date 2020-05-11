@@ -43,7 +43,7 @@ static InitChainEntry initChain[] = {
 static Vec3f mtxSrc1 = { -960.0f, 0.0f, 0.0f };
 static Vec3f mtxSrc2 = { 960.0f, 0.0f, 0.0f };
 
-extern D_0400C808;
+extern Gfx D_0400C808[];
 
 void EnBoom_SetupAction(EnBoom* this, EnBoomActionFunc actionFunc) {
     this->actionFunc = actionFunc;

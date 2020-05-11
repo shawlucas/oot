@@ -1,3 +1,10 @@
+/*
+ * File: z_boss_ganon.c
+ * Overlay: ovl_Boss_Ganon
+ * Description: Ganondorf Boss
+ */
+
+
 #include "z_boss_ganon.h"
 
 #define FLAGS 0x00000035

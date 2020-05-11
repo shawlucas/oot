@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_ydan_maruta.c
+ * Overlay: ovl_Bg_Ydan_Maruta
+ * Description: Rotating Spike Cylinder (Deku Tree)
+ */
+
 #include "z_bg_ydan_maruta.h"
 
 #define FLAGS 0x00000000

@@ -1,3 +1,9 @@
+/*
+ * File: z_en_fd_fire.c
+ * Overlay: ovl_En_Fd_Fire
+ * Description: Fireball
+ */
+
 #include "z_en_fd_fire.h"
 
 #define FLAGS 0x00000015

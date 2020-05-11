@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_ydan_hasi.c
+ * Overlay: ovl_Bg_Ydan_Hasi
+ * Description: Deku Tree Puzzle Elements
+ */
+
 #include "z_bg_ydan_hasi.h"
 
 #define FLAGS 0x00000030

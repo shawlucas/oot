@@ -1,3 +1,9 @@
+/*
+ * File: z_demo_gt.c
+ * Overlay: ovl_Demo_Gt
+ * Description: Ganon's Tower Collapsing (Cutscene set pieces)
+ */
+
 #include "z_demo_gt.h"
 
 #define FLAGS 0x00000030

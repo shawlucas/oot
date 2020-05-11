@@ -1,3 +1,9 @@
+/*
+ * File: z_en_fw.c
+ * Overlay: ovl_En_Fw
+ * Description: Core Flare Dancer Creature
+ */
+
 #include "z_en_fw.h"
 
 #define FLAGS 0x00000215

@@ -1,3 +1,9 @@
+/*
+ * File: z_en_dnt_jiji.c
+ * Overlay: ovl_En_Dnt_Jiji
+ * Description: Deku Mask Panel Head Judge
+ */
+
 #include "z_en_dnt_jiji.h"
 
 #define FLAGS 0x00000019

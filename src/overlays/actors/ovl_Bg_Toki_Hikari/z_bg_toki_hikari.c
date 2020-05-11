@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_toki_hikari.c
+ * Overlay: ovl_Bg_Toki_Hikari
+ * Description: Temple of Time Windows
+ */
+
 #include "z_bg_toki_hikari.h"
 
 #define FLAGS 0x00000020

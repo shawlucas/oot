@@ -1,3 +1,9 @@
+/*
+ * File: z_en_ganon_mant
+ * Overlay: ovl_En_Ganon_Mant
+ * Description: Ganon's Cape
+ */
+
 #include "z_en_ganon_mant.h"
 
 #define FLAGS 0x00000030

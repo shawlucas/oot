@@ -1,3 +1,9 @@
+/*
+ * File: z_en_eiyer.c
+ * Overlay: ovl_En_Eiyer
+ * Description: Stinger (Land)
+ */
+
 #include "z_en_eiyer.h"
 
 #define FLAGS 0x00000005

@@ -1,3 +1,9 @@
+/*
+ * File: z_demo_du.c
+ * Overlay: ovl_Demo_Du
+ * Description: Sage Darunia (Cutscene)
+ */
+
 #include "z_demo_du.h"
 
 #define FLAGS 0x00000010

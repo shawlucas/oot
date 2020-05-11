@@ -1,3 +1,9 @@
+/*
+ * File: z_en_changer.c
+ * Overlay: ovl_En_Changer
+ * Description: Treasure Box Shop Chest
+ */
+
 #include "z_en_changer.h"
 
 #define FLAGS 0x00000000

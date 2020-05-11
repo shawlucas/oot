@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_spot16_bombstone.c
+ * Overlay: ovl_Bg_Spot16_Bombstone
+ * Description: Dodongo's Cavern Entrance Rock
+ */
+
 #include "z_bg_spot16_bombstone.h"
 
 #define FLAGS 0x00000010

@@ -1,3 +1,9 @@
+/*
+ * File: z_boss_dodongo.c
+ * Overlay: ovl_Boss_Dodongo
+ * Description: King Dodongo
+ */
+
 #include "z_boss_dodongo.h"
 
 #define FLAGS 0x00000035

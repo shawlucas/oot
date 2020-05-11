@@ -1,3 +1,9 @@
+/*
+ * File: z_en_dodongo.c
+ * Overlay: ovl_En_Dodongo
+ * Description: Dodongo
+ */
+
 #include "z_en_dodongo.h"
 
 #define FLAGS 0x00000015

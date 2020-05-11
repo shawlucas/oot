@@ -1,3 +1,9 @@
+/*
+ * File: z_en_goma.c
+ * Overlay: ovl_En_Goma
+ * Description: Gohma Larva
+ */
+
 #include "z_en_goma.h"
 
 #define FLAGS 0x00000035

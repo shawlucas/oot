@@ -1,3 +1,9 @@
+/*
+ * File: z_en_ex_item.c
+ * Overlay: ovl_En_Ex_Item
+ * Description: Minigame Items
+ */
+
 #include "z_en_ex_item.h"
 
 #define FLAGS 0x00000030

@@ -1,3 +1,9 @@
+/*
+ * File: z_demo_kekkai.c
+ * Overlay: ovl_Demo_Kekkai 
+ * Description: Ganon's Tower Magic Barriers
+ */
+
 #include "z_demo_kekkai.h"
 
 #define FLAGS 0x00000030

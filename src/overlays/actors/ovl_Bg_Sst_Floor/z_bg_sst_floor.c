@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_sst_floor.c
+ * Overlay: ovl_Bg_Sst_Floor
+ * Description: Bongo Bongo's Drum
+ */
+
 #include "z_bg_sst_floor.h"
 
 #define FLAGS 0x00000030

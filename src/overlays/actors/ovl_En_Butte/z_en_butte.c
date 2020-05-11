@@ -1,3 +1,9 @@
+/*
+ * File: z_en_butte.c
+ * Overlay: ovl_En_Butte
+ * Description: Butterfly
+ */
+
 #include "z_en_butte.h"
 
 #define FLAGS 0x00000000

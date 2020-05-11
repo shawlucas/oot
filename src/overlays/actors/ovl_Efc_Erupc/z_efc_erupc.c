@@ -1,3 +1,9 @@
+/*
+ * File: z_efc_eurpc.c
+ * Overlay: ovl_Efc_Eurpc
+ * Description: Lava particle fountain (Death Mountain panorama)
+ */
+
 #include "z_efc_erupc.h"
 
 #define FLAGS 0x00000030

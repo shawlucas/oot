@@ -1,3 +1,9 @@
+/*
+ * File: z_en_bom_bowl_man.c
+ * Overlay: ovl_En_Bom_Bowl_Man
+ * Description: Bombchu Bowling Alley lady
+ */
+
 #include "z_en_bom_bowl_man.h"
 
 #define FLAGS 0x08000039

@@ -28,7 +28,7 @@ const ActorInit Bg_Umajump_InitVars = {
 };
 
 extern D_06001438; // segmented address: 0x06001438
-extern D_06001220; // segmented address: 0x06001220
+extern Gfx D_06001220[]; // Fence dlist
 
 static InitChainEntry initChain[] = {
     ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_STOP),

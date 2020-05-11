@@ -1,3 +1,9 @@
+/*
+ * File: z_en_bx.c
+ * Overlay: ovl_En_Bx
+ * Description: Jabu-Jabu electrified Tentacle
+ */
+
 #include "z_en_bx.h"
 
 #define FLAGS 0x00000010

@@ -1,3 +1,9 @@
+/*
+ * File: z_boss_va.c
+ * Overlay: ovl_Boss_Va
+ * Description: Barinade
+ */
+
 #include "z_boss_va.h"
 
 #define FLAGS 0x00000035

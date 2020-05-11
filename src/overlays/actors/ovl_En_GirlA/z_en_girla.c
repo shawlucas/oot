@@ -1,3 +1,9 @@
+/*
+ * File: z_en_girla.c
+ * Overlay: ovl_En_GirlA
+ * Description: Shop Items
+ */
+
 #include "z_en_girla.h"
 
 #define FLAGS 0x00000019
