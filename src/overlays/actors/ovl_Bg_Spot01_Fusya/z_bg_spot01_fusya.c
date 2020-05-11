@@ -36,7 +36,7 @@ static InitChainEntry initChain[] = {
     ICHAIN_F32(unk_FC, 1300, ICHAIN_STOP),
 };
 
-extern u32 D_06000100;
+extern Gfx D_06000100[]; // dlist for windmill sails
 
 void BgSpot01Fusya_SetupAction(BgSpot01Fusya* this, BgSpot01FusyaActionFunc actionFunc) {
     this->actionFunc = actionFunc;

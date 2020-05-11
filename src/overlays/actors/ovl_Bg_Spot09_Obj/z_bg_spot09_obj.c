@@ -1,7 +1,7 @@
 /*
  * File: z_bg_spot09_obj.c
  * Overlay: ovl_Bg_Spot09_Obj
- * Description:
+ * Description: Gerudo Valley Objects
  */
 
 #include "z_bg_spot09_obj.h"
@@ -51,9 +51,15 @@ static InitChainEntry initChain2[] = {
     ICHAIN_F32(unk_FC, 1500, ICHAIN_STOP),
 };
 
-static u32 dlists[] = { 0x06000100, 0x06003970, 0x06001120, 0x06007D40, 0x06006210 };
+static Gfx* dlists[] = { 
+    0x06000100, 
+    0x06003970, // dlist for broken gerudo valley bridge and connected area
+    0x06001120, // dlist for fixed gerudo valley bridge and connected area
+    0x06007D40, // dlist for carpenter tent
+    0x06006210, // another dlist for gerudo valley bridge, possibly for child 
+};
 
-extern UNK_TYPE D_06008010;
+extern Gfx D_06008010[]; // dlist for tent entrance
 
 s32 func_808B1AE0(BgSpot09Obj* this, GlobalContext* globalCtx) {
     s32 carpentersRescued;

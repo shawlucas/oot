@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_ice_shelter.c
+ * Overlay: ovl_Bg_Ice_Shelter
+ * Description: Red Ice
+ */
+
 #include "z_bg_ice_shelter.h"
 
 #define FLAGS 0x00000000

@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_hidan_sekizou.c
+ * Overlay: ovl_Bg_Hidan_Sekizou
+ * Description: Stationary flame thrower status (Fire Temple)
+ */
+
 #include "z_bg_hidan_sekizou.h"
 
 #define FLAGS 0x00000000

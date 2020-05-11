@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_mori_idomizu
+ * Overlay: ovl_Bg_Mori_Idomizu
+ * Description: Forest Temple Well Water
+ */
+
 #include "z_bg_mori_idomizu.h"
 
 #define FLAGS 0x00000030

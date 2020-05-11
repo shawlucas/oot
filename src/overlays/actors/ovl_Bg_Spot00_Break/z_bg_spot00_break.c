@@ -36,8 +36,8 @@ static InitChainEntry initChain[] = {
 
 extern D_06000AF0; // segmented address: 0x06000AF0
 extern D_06000908; // segmented address: 0x06000908
-extern D_06000980; // segmented address: 0x06000980
-extern D_06000440; // segmented address: 0x06000440
+extern Gfx D_06000980[]; // dlist for small fence
+extern Gfx D_06000440[]; // dlist for broken drawbridge
 
 void BgSpot00Break_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgSpot00Break* this = THIS;

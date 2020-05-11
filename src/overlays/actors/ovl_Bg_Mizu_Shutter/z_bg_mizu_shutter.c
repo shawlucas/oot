@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_mizu_shutter.c
+ * Overlay: ovl_Bg_Mizu_Shutter
+ * Description: Metal Gate (Water Temple)
+ */
+
 #include "z_bg_mizu_shutter.h"
 
 #define FLAGS 0x00000010

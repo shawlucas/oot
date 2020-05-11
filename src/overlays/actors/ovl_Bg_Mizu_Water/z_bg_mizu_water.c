@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_mizu_water.c
+ * Overlay: ovl_Bg_Mizu_Water
+ * Description: Large square of water (Water Temple)
+ */
+
 #include "z_bg_mizu_water.h"
 
 #define FLAGS 0x00000030

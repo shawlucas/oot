@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_mizu_movebg.c
+ * Overlay: ovl_Bg_Mizu_Movebg
+ * Description: Water Temple Background Actors
+ */
+
 #include "z_bg_mizu_movebg.h"
 
 #define FLAGS 0x00000010

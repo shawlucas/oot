@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_spot00_hanebasi.c
+ * Overlay: ovl_Bg_Spot00_Hanebasi
+ * Description: Drawbridge objects
+ */
+
 #include "z_bg_spot00_hanebasi.h"
 
 #define FLAGS 0x00000010

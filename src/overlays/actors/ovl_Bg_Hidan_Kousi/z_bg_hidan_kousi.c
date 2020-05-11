@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_hidan_kousi.c
+ * Overlay: ovl_Bg_Hidan_Kousi
+ * Description: Metal gate
+ */
+
 #include "z_bg_hidan_kousi.h"
 
 #define FLAGS 0x00000010

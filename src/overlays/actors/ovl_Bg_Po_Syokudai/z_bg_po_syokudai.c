@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_po_syokudai.c
+ * Overlay: ovl_Bg_Po_Syokudai
+ * Description: Golden Torch Stand (Poe Sisters)
+ */
+
 #include "z_bg_po_syokudai.h"
 
 #define FLAGS 0x00000000

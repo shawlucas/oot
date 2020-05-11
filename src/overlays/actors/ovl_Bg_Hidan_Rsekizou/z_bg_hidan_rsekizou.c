@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_hidan_rsekizou.c
+ * Overlay: ovl_Bg_Hidan_Rsekizou
+ * Description: Spinning Stone flamethrower (Fire Temple)
+ */
+
 #include "z_bg_hidan_rsekizou.h"
 
 #define FLAGS 0x00000000

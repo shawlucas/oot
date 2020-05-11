@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_jya_bigmirror.c
+ * Overlay: ovl_Bg_Jya_Bigmirror
+ * Description: Large Circular Mirror (Spirit Temple)
+ */
+
 #include "z_bg_jya_bigmirror.h"
 
 #define FLAGS 0x00000030

@@ -1,7 +1,7 @@
 /*
  * File: z_bg_spot12_gate.c
- * Overlay: Bg_Spot12_Gate
- * Description:
+ * Overlay: ovl_Bg_Spot12_Gate
+ * Description: Gerudo Fortress wooden gate
  */
 
 #include "z_bg_spot12_gate.h"

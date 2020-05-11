@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_mori_bigst.c
+ * Overlay: ovl_Bg_Mori_Bigst
+ * Description: Forest Temple, large, round platform
+ */
+
 #include "z_bg_mori_bigst.h"
 
 #define FLAGS 0x00000010

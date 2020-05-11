@@ -1,7 +1,7 @@
 /*
  * File: z_bg_hidan_fslift.c
- * Overlay: Bg_Hidan_Fslift
- * Description:
+ * Overlay: ovl_Bg_Hidan_Fslift
+ * Description: Rising Elevator Platform with Hookshot Target
  */
 
 #include "z_bg_hidan_fslift.h"
@@ -19,7 +19,7 @@ void func_80886FCC(BgHidanFslift* this, GlobalContext* globalCtx);
 void func_8088706C(BgHidanFslift* this, GlobalContext* globalCtx);
 void func_808870D8(BgHidanFslift* this, GlobalContext* globalCtx);
 
-extern u32 D_0600B630;
+extern Gfx* D_0600B630; // Rising hookshot platform in Fire Temple dlist
 extern u32 D_0600E1E8;
 
 const ActorInit Bg_Hidan_Fslift_InitVars = {

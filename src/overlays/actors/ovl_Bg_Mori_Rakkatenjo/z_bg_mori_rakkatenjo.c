@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_mori_rakkatenjo.c
+ * Overlay: ovl_Bg_Mori_Rakkatenjo
+ * Description: Forest Temple falling ceiling
+ */
+
 #include "z_bg_mori_rakkatenjo.h"
 
 #define FLAGS 0x00000030

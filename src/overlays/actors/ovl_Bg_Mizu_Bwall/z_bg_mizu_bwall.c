@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_mizu_bwall.c
+ * Overlay: ovl_Bg_Mizu_Bwall
+ * Description: Bombable Stone Wall
+ */
+
 #include "z_bg_mizu_bwall.h"
 
 #define FLAGS 0x00000010

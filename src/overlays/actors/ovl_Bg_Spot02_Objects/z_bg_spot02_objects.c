@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_spot02_objects.c
+ * Overlay: ovl_Bg_Spot02_Objects
+ * Description: Graveyard Actors
+ */
+
 #include "z_bg_spot02_objects.h"
 
 #define FLAGS 0x00000030

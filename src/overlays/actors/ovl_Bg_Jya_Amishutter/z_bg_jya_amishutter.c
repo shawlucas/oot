@@ -44,7 +44,7 @@ static InitChainEntry initChain[] = {
 };
 
 extern UNK_TYPE D_0600C4C8;
-extern UNK_TYPE D_0600C0A0;
+extern Gfx D_0600C0A0[]; // Circular metal gate dlist
 
 void func_808932C0(BgJyaAmishutter* this, GlobalContext* globalCtx, u32 collision, DynaPolyMoveFlag flag) {
     s16 pad1;

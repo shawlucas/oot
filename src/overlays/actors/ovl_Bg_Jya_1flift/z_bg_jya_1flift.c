@@ -1,3 +1,10 @@
+/*
+ * File: z_bg_jya_1flift.c
+ * Overlay: ovl_Bg_Jya_1flift
+ * Description: Stone Elevator (Spirit Temple)
+ */
+
+
 #include "z_bg_jya_1flift.h"
 
 #define FLAGS 0x00000010

@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_hidan_sima.c
+ * Overlay: ovl_Bg_Hidan_Sima
+ * Description: Stone Platform (Fire Temple)
+ */
+
 #include "z_bg_hidan_sima.h"
 
 #define FLAGS 0x00000000

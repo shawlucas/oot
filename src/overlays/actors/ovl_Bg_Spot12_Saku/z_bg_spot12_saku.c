@@ -1,7 +1,7 @@
 /*
  * File: z_bg_spot12_saku.c
- * Overlay: Bg_Spot12_Saku
- * Description:
+ * Overlay: ovl_Bg_Spot12_Saku
+ * Description: Gerudo Fortress training area gate
  */
 
 #include "z_bg_spot12_saku.h"
@@ -111,7 +111,7 @@ void func_808B3604(BgSpot12Saku* this, GlobalContext* globalCtx) {
         this->dyna.actor.initPosRot.pos.z - (Math_Coss(this->dyna.actor.shape.rot.y + 0x4000) * temp_f18);
     if (fabsf(temp_ret) < 0.0001f) {
         func_808B3714(this);
-        Audio_PlayActorSound2(&this->dyna.actor, 0x280E);
+        Audio_PlayActorSound2(&this->dyna.actor, NA_SE_EV_BRIDGE_OPEN_STOP);
     } else {
         func_8002F974(&this->dyna.actor, 0x2067);
     }

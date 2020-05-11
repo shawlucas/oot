@@ -40,7 +40,7 @@ static InitChainEntry initChain[] = {
     ICHAIN_F32(unk_FC, 1000, ICHAIN_STOP),
 };
 
-extern u32 D_0600F000;
+extern Gfx D_0600F000[];
 extern u32 D_0600F208;
 
 void func_80899740(BgJyaKanaami* this, GlobalContext* globalCtx, u32 collision, DynaPolyMoveFlag flag) {

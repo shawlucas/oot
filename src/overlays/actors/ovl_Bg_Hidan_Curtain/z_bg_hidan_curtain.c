@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_hidan_curtain.c
+ * Overlay: ovl_Bg_Hidan_Curtain
+ * Description: Flame Circle
+ */
+
 #include "z_bg_hidan_curtain.h"
 
 #define FLAGS 0x00000010

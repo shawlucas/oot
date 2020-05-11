@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_hidan_kowarerukabe.c
+ * Overlay: ovl_Bg_Hidan_Kowarerukabe
+ * Description: Bombable walls (Fire Temple)
+ */
+
 #include "z_bg_hidan_kowarerukabe.h"
 
 #define FLAGS 0x00000000

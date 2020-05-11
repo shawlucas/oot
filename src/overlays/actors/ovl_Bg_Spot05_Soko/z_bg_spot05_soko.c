@@ -38,8 +38,8 @@ static InitChainEntry initChain[] = {
 };
 
 static Gfx* dListTbl[] = {
-    0x06000840,
-    0x06001190,
+    0x06000840, 
+    0x06001190, // dlist for gate at beginning of SFM
 };
 
 void BgSpot05Soko_Init(Actor* thisx, GlobalContext* globalCtx) {

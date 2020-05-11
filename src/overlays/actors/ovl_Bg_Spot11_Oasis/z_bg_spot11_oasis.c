@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_spot11_oasis.c
+ * Overlay: ovl_Bg_Spot11_Oasis
+ * Description: Refilling Oasis (Desert Colossus)
+ */
+
 #include "z_bg_spot11_oasis.h"
 
 #define FLAGS 0x00000010

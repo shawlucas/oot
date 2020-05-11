@@ -1,7 +1,7 @@
 /*
  * File: z_bg_pushbox.c
  * Overlay: ovl_Bg_Pushbox
- * Description:
+ * Description: Cube Copy
  */
 
 #include "z_bg_pushbox.h"
@@ -29,7 +29,7 @@ const ActorInit Bg_Pushbox_InitVars = {
     (ActorFunc)BgPushbox_Draw,
 };
 
-extern u32 D_06000000;
+extern Gfx* D_06000000;
 extern u32 D_06000350;
 
 static InitChainEntry initChain[] = {

@@ -1,3 +1,10 @@
+/*
+ * File: z_bg_jya_bombiwa.c
+ * Overlay: ovl_Bg_Jya_Bombiwa
+ * Description: Bombable Rock Wall (Spirit Temple)
+ */
+
+
 #include "z_bg_jya_bombiwa.h"
 
 #define FLAGS 0x00000000

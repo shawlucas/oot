@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_mori_elevator.c
+ * Overlay: ovl_Bg_Mori_Elevator
+ * Description: Forest Temple elevator
+ */
+
 #include "z_bg_mori_elevator.h"
 
 #define FLAGS 0x00000010

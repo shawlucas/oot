@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_mori_kaitenkabe.c
+ * Overlay: ovl_Bg_Mori_Kaitenkabe
+ * Description: Forest Temple rotating walls from room before boss
+ */
+
 #include "z_bg_mori_kaitenkabe.h"
 
 #define FLAGS 0x00000000

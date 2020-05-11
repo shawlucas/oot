@@ -35,7 +35,7 @@ static InitChainEntry initChain[] = {
     ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_STOP),
 };
 
-extern UNK_PTR D_0600A7E0;
+extern Gfx D_0600A7E0[];
 extern UNK_PTR D_0600E568;
 
 void BgHidanSyoku_Init(Actor* thisx, GlobalContext* globalCtx) {
@@ -78,7 +78,7 @@ void func_8088F514(BgHidanSyoku* this, GlobalContext* globalCtx) {
     if (this->unk_16A == 0) {
         func_8088F47C(this);
     } else {
-        func_8002F974(&this->dyna.actor, 0x20b9);
+        func_8002F974(&this->dyna.actor, 0x20B9);
     }
 }
 
@@ -90,7 +90,7 @@ void func_8088F5A0(BgHidanSyoku* this, GlobalContext* globalCtx) {
     if (this->unk_16A == 0) {
         func_8088F47C(this);
     } else {
-        func_8002F974(&this->dyna.actor, 0x20b9);
+        func_8002F974(&this->dyna.actor, 0x20B9);
     }
 }
 

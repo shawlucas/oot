@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_hidan_dalm.c
+ * Overlay: ovl_Bg_Hidan_Dalm
+ * Description: Megaton Statue
+ */
+
 #include "z_bg_hidan_dalm.h"
 
 #define FLAGS 0x00000000

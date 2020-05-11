@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_spot08_iceblock.c
+ * Overlay: ovl_Bg_Spot08_Iceblock
+ * Description: Ice Platform (Zora's Fountain)
+ */
+
 #include "z_bg_spot08_iceblock.h"
 
 #define FLAGS 0x00000000

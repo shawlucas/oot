@@ -27,7 +27,10 @@ const ActorInit Bg_Menkuri_Nisekabe_InitVars = {
     (ActorFunc)BgMenkuriNisekabe_Draw,
 };
 
-static u32 segmentAddr[] = { 0x06002280, 0x06002BC0 };
+static Gfx* dListTbl[] = {
+    0x06002280, // Circular fake wall
+    0x06002BC0, // Square fake wall
+};
 
 void BgMenkuriNisekabe_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgMenkuriNisekabe* this = THIS;
@@ -53,8 +56,8 @@ void BgMenkuriNisekabe_Draw(Actor* thisx, GlobalContext* globalCtx) {
     u32 index = this->actor.params & 0xFF;
 
     if ((this->actor.flags & 0x80) == 0x80) {
-        Gfx_DrawDListXlu(globalCtx, segmentAddr[index]);
+        Gfx_DrawDListXlu(globalCtx, dListTbl[index]);
     } else {
-        Gfx_DrawDListOpa(globalCtx, segmentAddr[index]);
+        Gfx_DrawDListOpa(globalCtx, dListTbl[index]);
     }
 }

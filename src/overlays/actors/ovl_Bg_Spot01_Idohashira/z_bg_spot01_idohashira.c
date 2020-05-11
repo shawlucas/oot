@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_spot01_idohashira.c
+ * Overlay: ovl_Bg_Spot01_Idohashira
+ * Description: Kakariko Village Well Crossbeam
+ */
+
 #include "z_bg_spot01_idohashira.h"
 
 #define FLAGS 0x00000010

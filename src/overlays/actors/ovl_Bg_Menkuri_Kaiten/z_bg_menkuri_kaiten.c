@@ -1,6 +1,6 @@
 /*
  * File: z_bg_menkuri_kaiten.c
- * Overlay: Bg_Menkuri_Kaiten
+ * Overlay: ovl_Bg_Menkuri_Kaiten
  * Description: Large rotating stone ring used in Gerudo Training Grounds and Forest Temple.
  */
 
@@ -31,7 +31,7 @@ static InitChainEntry initChain[] = {
     ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_STOP),
 };
 
-extern u32 D_060038D0;
+extern Gfx D_060038D0[];
 extern u32 D_060042D8;
 
 void BgMenkuriKaiten_Init(Actor* thisx, GlobalContext* globalCtx) {

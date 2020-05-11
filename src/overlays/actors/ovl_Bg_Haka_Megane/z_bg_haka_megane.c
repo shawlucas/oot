@@ -40,12 +40,24 @@ static UNK_TYPE collisions[] = {
     0x06004940, 0x00000000, 0x06004B00, 0x00000000, 0x06004CC0, 0x00000000,
 };
 
-static UNK_TYPE dlists[] = {
-    0x06001060, 0x06001920, 0x060003F0, 0x060040F0, 0x060043B0, 0x06001120, 0x060045A0,
-    0x060047F0, 0x060018F0, 0x060049B0, 0x06003CF0, 0x06004B70, 0x06002ED0,
+static Gfx* dlists[] = 
+{
+    0x06001060, 
+    0x06001920, 
+    0x060003F0, 
+    0x060040F0, 
+    0x060043B0, 
+    0x06001120, 
+    0x060045A0,
+    0x060047F0, 
+    0x060018F0, 
+    0x060049B0, 
+    0x06003CF0, 
+    0x06004B70, 
+    0x06002ED0,
 };
 
-extern UNK_TYPE D_06001250;
+extern Gfx D_06001250[];
 
 void BgHakaMegane_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgHakaMegane* this = THIS;

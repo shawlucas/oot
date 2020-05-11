@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_hidan_fwbig.c
+ * Overlay: ovl_Bg_Hidan_Fwbig
+ * Description: Large flame wall
+ */
+
 #include "z_bg_hidan_fwbig.h"
 
 #define FLAGS 0x00000010

@@ -71,7 +71,7 @@ void BgSpot01Idosoko_Update(Actor* thisx, GlobalContext* globalCtx) {
     this->actionFunc(this, globalCtx);
 }
 
-extern u32 D_06003B20;
+extern Gfx D_06003B20[]; // dlist for the stone blocking entrance 
 
 void BgSpot01Idosoko_Draw(Actor* thisx, GlobalContext* globalCtx) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;

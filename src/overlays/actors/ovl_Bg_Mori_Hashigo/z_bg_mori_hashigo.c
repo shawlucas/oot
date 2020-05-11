@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_mori_hashigo.c
+ * Overlay: ovl_Bg_Mori_Hashigo
+ * Description: Ladder (Forest Temple)
+ */
+
 #include "z_bg_mori_hashigo.h"
 
 #define FLAGS 0x00000000

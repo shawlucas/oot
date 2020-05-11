@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_jya_ironobj.c
+ * Overlay: ovl_Bg_Jya_Ironobj
+ * Description: Iron Knuckles Room Stuff (Spirit Temple)
+ */
+
 #include "z_bg_jya_ironobj.h"
 
 #define FLAGS 0x00000000

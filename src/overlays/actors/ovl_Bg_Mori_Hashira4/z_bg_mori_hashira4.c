@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_mori_hashira4.c
+ * Overlay: ovl_Bg_Mori_Hashira4
+ * Description: Forest Temple Objects
+ */
+
 #include "z_bg_mori_hashira4.h"
 
 #define FLAGS 0x00000010

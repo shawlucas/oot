@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_hidan_rock.c
+ * Overlay: ovl_Bg_Hidan_Rock
+ * Description: Stone Blocks (Fire Temple)
+ */
+
 #include "z_bg_hidan_rock.h"
 
 #define FLAGS 0x00000000

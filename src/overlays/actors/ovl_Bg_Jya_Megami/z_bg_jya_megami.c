@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_jya_megami.c
+ * Overlay: ovl_Bg_Jya_Megami
+ * Description: Large stone face (Spirit Temple)
+ */
+
 #include "z_bg_jya_megami.h"
 
 #define FLAGS 0x00000000

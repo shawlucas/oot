@@ -1,3 +1,9 @@
+/*
+ * File: z_bg_jya_cobra.c
+ * Overlay: ovl_Bg_Jya_Cobra
+ * Description: Rotating Cobra Mirror
+ */
+
 #include "z_bg_jya_cobra.h"
 
 #define FLAGS 0x00000010

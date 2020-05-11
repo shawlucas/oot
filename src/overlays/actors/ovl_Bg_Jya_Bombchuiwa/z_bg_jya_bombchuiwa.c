@@ -1,3 +1,10 @@
+/*
+ * File: z_bg_jya_bombchuiwa.c
+ * Overlay: ovl_Bg_Jya_Bombchuiwa
+ * Description: Light blocking rock (Spirit Temple)
+ */
+
+
 #include "z_bg_jya_bombchuiwa.h"
 
 #define FLAGS 0x00000001
