@@ -1579,7 +1579,7 @@ void PadMgr_Init(PadMgr* padmgr, OSMesgQueue* siIntMsgQ, UNK_TYPE arg2, OSId id,
 // ? func_800C84E4(?);
 // ? func_800C8534(?);
 // ? func_800C87CC(?);
-// ? func_800C87F0(?);
+// ? __scAppendList(?);
 // ? func_800C8910(?);
 // ? func_800C89D4(?);
 // ? func_800C8A94(?);

@@ -29,7 +29,7 @@ glabel func_800C8EDC
 /* B400C0 800C8F20 10500009 */  beq   $v0, $s0, .L800C8F48
 /* B400C4 800C8F24 02602025 */   move  $a0, $s3
 .L800C8F28:
-/* B400C8 800C8F28 0C0321FC */  jal   func_800C87F0
+/* B400C8 800C8F28 0C0321FC */  jal   __scAppendList
 /* B400CC 800C8F2C 8FA50038 */   lw    $a1, 0x38($sp)
 /* B400D0 800C8F30 02202025 */  move  $a0, $s1
 /* B400D4 800C8F34 02402825 */  move  $a1, $s2

@@ -1420,22 +1420,30 @@ typedef struct {
     /* 0x12 */ s8       unk_12;
 } struct_800C8BC4;
 
+typedef struct IrqMgrClient {
+    /* 0x00 */ struct IrqMgrClient* prev;
+    /* 0x04 */ OSMesgQueue* queue;
+} IrqMgrClient;
+
 typedef struct {
     /* 0x0000 */ OSMesgQueue  interruptQ;
     /* 0x0018 */ OSMesg       intBuf[8];
     /* 0x0038 */ OSMesgQueue  cmdQ;
     /* 0x0050 */ OSMesg       cmdMsgBuf[8];
     /* 0x0070 */ OSThread     thread;
-    /* 0x0220 */ char         unk_220[0x10];
+    /* 0x0220 */ OSScTask*    audioListHead;
+    /* 0x0224 */ OSScTask*    gfxListHead;
+    /* 0x0228 */ OSScTask*    audioListTail;
+    /* 0x022C */ OSScTask*    gfxListTail;
     /* 0x0230 */ OSScTask*    curRSPTask;
     /* 0x0234 */ OSScTask*    curRDPTask;
-    /* 0x0238 */ char         unk_238[0x08];
+    /* 0x0238 */ char         unk_238[0x04];
+    /* 0x023C */ s32    doAudio;
     /* 0x0240 */ struct_800C8BC4* unk_240;
     /* 0x0244 */ UNK_TYPE     pendingSwapBuf1;
-    /* 0x0220 */ char         unk_248[0x04];
-    /* 0x0220 */ UNK_TYPE     unk_24C;
-    /* 0x0220 */ UNK_TYPE     unk_250;
-    /* 0x0220 */ char         unk_254[0x04];
+    /* 0x0248 */ char         unk_248[0x04];
+    /* 0x024C */ UNK_TYPE     unk_24C;
+    /* 0x0250 */ IrqMgrClient unk_250;
 } SchedContext; // size = 0x258
 
 // ========================
@@ -1449,11 +1457,6 @@ typedef struct {
     /* 0x00 */ s16 type;
     /* 0x02 */ char  misc[0x1E];
 } OSScMsg; // size = 0x20
-
-typedef struct IrqMgrClient {
-    /* 0x00 */ struct IrqMgrClient* prev;
-    /* 0x04 */ OSMesgQueue* queue;
-} IrqMgrClient;
 
 typedef struct {
     /* 0x000 */ OSScMsg retraceMsg; // this apparently got moved from OSSched

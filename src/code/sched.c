@@ -21,7 +21,45 @@ void func_800C87CC(SchedContext* sc) {
     ViConfig_UpdateVi(1);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/sched/func_800C87F0.s")
+void __scAppendList(SchedContext* sc, OSScTask* task) {
+    long type = task->list.t.type;
+
+    if ((type != M_AUDTASK) && (type != M_GFXTASK) && (type != M_NJPEGTASK) && (type != M_NULTASK)) {
+        __assert("(type == M_AUDTASK) || (type == M_GFXTASK) || (type == M_NJPEGTASK) || (type == M_NULTASK)",
+                 "../sched.c", 463);
+    }
+
+    if (type == M_AUDTASK) {
+        if (D_8012D290 != 0) {
+            // "Entry audio task"
+            osSyncPrintf("オーディオタスクをエントリしました\n");
+        }
+
+        if (sc->audioListTail) {
+            sc->audioListTail->next = task;
+        } else {
+            sc->audioListHead = task;
+        }
+
+        sc->audioListTail = task;
+        sc->doAudio = 1;
+    } else {
+        if (D_8012D290 != 0) {
+            // "Entry graph task"
+            osSyncPrintf("グラフタスクをエントリしました\n");
+        }
+        if (sc->gfxListTail) {
+            sc->gfxListTail->next = task;
+        } else {
+            sc->gfxListHead = task;
+        }
+
+        sc->gfxListTail = task;
+    }
+
+    task->next = NULL;
+    task->state = task->flags & OS_SC_RCP_MASK;
+}
 
 void func_800C8910(SchedContext* sc) {
     if (!(sc->curRSPTask->state & 0x10)) {
