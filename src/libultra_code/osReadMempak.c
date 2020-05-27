@@ -11,9 +11,9 @@ s32 osReadMempak(OSMesgQueue* ctrlrqueue, s32 ctrlridx, u16 addr, PIF_mempak_dat
 
     __osSiGetAccess();
     do {
-        if ((_osCont_lastPollType != 2) || (ctrlridx != D_80134D20)) {
+        if ((__osContLastPollType != 2) || (ctrlridx != D_80134D20)) {
             bufptr = &pifMempakBuf.bytes[0];
-            _osCont_lastPollType = 2;
+            __osContLastPollType = 2;
             D_80134D20 = ctrlridx;
             // clang-format off
             for (i = 0; i < ctrlridx; i++) { *bufptr++ = 0; }

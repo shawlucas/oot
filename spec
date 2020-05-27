@@ -517,7 +517,7 @@ beginseg
     include "build/src/libultra_code/cosf.o"
     include "build/src/libultra_code/coss.o"
     include "build/src/libultra_code/osViSetEvent.o"
-    include "build/asm/code_80104810.o"
+    include "build/src/libultra_code/osMempakIsPlug.o"
     include "build/src/libultra_code/guS2DInitBg.o"
     include "build/asm/code_80104C80.o"
     include "build/asm/code_80104D00.o"

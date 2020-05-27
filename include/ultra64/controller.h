@@ -30,6 +30,8 @@
 #define CONT_CMD_WRITE_EEPROM_RX 1
 #define CONT_CMD_RESET_RX 3
 
+#define CONT_CMD_ERR_MASK 0xC0
+
 #define CONT_CMD_NOP 0xFF
 #define CONT_CMD_END 0xFE // Indicates end of a command
 #define CONT_CMD_EXE 1    // Set pif ram status byte to this to do a command
@@ -119,6 +121,17 @@ typedef union {
     u8 bytes[0x68];
 } unk_controller_t; // size = 0x68
 
+typedef struct {
+	/* 0x00 */ u8 dummy;       
+	/* 0x01 */ u8 txsize;		
+	/* 0x02 */ u8 rxsize;			
+	/* 0x03 */ u8 poll;	
+	/* 0x04 */ u8 typeh;
+	/* 0x05 */ u8 typel;
+	/* 0x06 */ u8 status;
+	/* 0x07 */ u8 dummy1;               
+} __OSContRequestFormat; // size = 0x8 
+
 extern pif_data_buffer_t osPifBuffers[4];
 
 #define SIAccessQueueSize 2
@@ -126,15 +139,20 @@ extern OSMesg osSiMesgBuff[SIAccessQueueSize];
 extern OSMesgQueue gOsSiMessageQueue;
 extern u32 gOsSiAccessQueueCreated; // = 0
 
+
 extern pif_data_buffer_t _osPifInternalBuff;
-extern u8 _osCont_lastPollType;
-extern u8 _osCont_numControllers; //always 4
+extern u8 __osContLastPollType;
+extern u8 __osMaxControllers; //always 4
 extern u32 gOsContInitialized; // = 0
 extern OSMesgQueue _osContMesgQueue;
 extern OSMesg _osContMesgBuff[4];
 
 extern s32 osSetRumble(unk_controller_t *arg0, u32 vibrate);
 extern void osSetUpMempakWrite(s32 ctrlridx, pif_data_buffer_t* buf);
+s32 osMempakIsPlug(OSMesgQueue* queue, u8* bitPattern);
+void __osMempakRequestData(u8 pollType) ;
+void __osMempakGetInitData(u8* bitPattern, OSContStatus* data);
+
 extern s32 osProbeRumblePak(OSMesgQueue* ctrlrqueue, unk_controller_t *unk_controller, u32 ctrlridx);
 extern void __osSiCreateAccessQueue();
 extern void __osSiGetAccess();

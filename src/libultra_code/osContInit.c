@@ -4,8 +4,8 @@
 #include <ultra64/controller.h>
 
 pif_data_buffer_t _osPifInternalBuff;
-u8 _osCont_lastPollType;
-u8 _osCont_numControllers; // always 4
+u8 __osContLastPollType;
+u8 __osMaxControllers; // always 4
 
 // Not sure if the following is a struct together with the last two variables
 u16 unk_80175812;
@@ -34,14 +34,14 @@ s32 osContInit(OSMesgQueue* mq, u8* ctl_present_bitfield, OSContStatus* status) 
         osSetTimer(&timer, HALF_SECOND - currentTime, 0, &timerqueue, &mesg);
         osRecvMesg(&timerqueue, &mesg, OS_MESG_BLOCK);
     }
-    _osCont_numControllers = 4;
+    __osMaxControllers = 4;
     __osPackRequestData(0);
     ret = __osSiRawStartDma(OS_WRITE, &_osPifInternalBuff);
     osRecvMesg(mq, &mesg, OS_MESG_BLOCK);
     ret = __osSiRawStartDma(OS_READ, &_osPifInternalBuff);
     osRecvMesg(mq, &mesg, OS_MESG_BLOCK);
     __osContGetInitData(ctl_present_bitfield, status);
-    _osCont_lastPollType = 0;
+    __osContLastPollType = 0;
     __osSiCreateAccessQueue();
     osCreateMesgQueue(&_osContMesgQueue, _osContMesgBuff, 1);
     return ret;
@@ -54,7 +54,7 @@ void __osContGetInitData(u8* ctl_present_bitfield, OSContStatus* status) {
     u8 bitfield_temp;
     bitfield_temp = 0;
     slot_ptr = _osPifInternalBuff.slots;
-    for (i = 0; i < _osCont_numControllers; i++, slot_ptr++, status++) {
+    for (i = 0; i < __osMaxControllers; i++, slot_ptr++, status++) {
         slot = *slot_ptr;
         status->errno = (slot.hdr.status_hi_bytes_rec_lo & 0xc0) >> 4;
         if (status->errno == 0) {
@@ -83,7 +83,7 @@ void __osPackRequestData(u8 command) {
     slot.ctl_status = 0xFF;
     slot.dummy = 0xFF;
     slot_ptr = _osPifInternalBuff.slots;
-    for (i = 0; i < _osCont_numControllers; i++) {
+    for (i = 0; i < __osMaxControllers; i++) {
         *slot_ptr++ = slot;
     }
     slot_ptr->hdr.slot_type = 254;
