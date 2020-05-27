@@ -2473,7 +2473,7 @@ void osViSetEvent(OSMesgQueue* mq, OSMesg m, u32 retraceCount);
 // ? __osMempakGetInitData(?);
 void guS2DInitBg(uObjBg *bg);
 // ? func_80104C80(?);
-void func_80104D00(u8 a0);
+s32 osContSetCh(u8 ch);
 // ? func_80104D60(?);
 // ? func_80104F40(?);
 // ? func_80105148(?);

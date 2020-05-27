@@ -40,6 +40,8 @@
 #define DIR_STATUS_UNKNOWN 1
 #define DIR_STATUS_OCCUPIED 2
 
+#define MAXCONTROLLERS 4
+
 typedef struct
 {
     /* 0x00 */ union{

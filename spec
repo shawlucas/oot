@@ -520,7 +520,7 @@ beginseg
     include "build/src/libultra_code/osMempakIsPlug.o"
     include "build/src/libultra_code/guS2DInitBg.o"
     include "build/asm/code_80104C80.o"
-    include "build/asm/code_80104D00.o"
+    include "build/src/libultra_code/osContSetCh.o"
     include "build/asm/code_80104D60.o"
     include "build/asm/code_80104F40.o"
     include "build/asm/code_80105250.o"
