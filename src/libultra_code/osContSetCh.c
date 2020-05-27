@@ -1,14 +1,12 @@
 #include <ultra64.h>
 #include <global.h>
 
-s32 osContSetCh(u8 ch)
-{
+s32 osContSetCh(u8 ch) {
     s32 ret = 0;
 
     __osSiGetAccess();
 
-    if (ch > MAXCONTROLLERS)
-    {
+    if (ch > MAXCONTROLLERS) {
         __osMaxControllers = MAXCONTROLLERS;
     } else {
         __osMaxControllers = ch;
@@ -17,5 +15,3 @@ s32 osContSetCh(u8 ch)
     __osSiRelAccess();
     return ret;
 }
-
-    
