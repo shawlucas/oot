@@ -87,6 +87,7 @@ void func_80063828(GfxPrint* gfxPrint) {
     s32 i;
     Color_RGBA8* color;
     PrintTextBuffer* buffer;
+    GraphicsContext* gfxCtx;
     char* text;
 
     i = 0;
@@ -102,6 +103,7 @@ void func_80063828(GfxPrint* gfxPrint) {
             i += 1;
         } while (i < D_8011E0B0);
     }
+
 }
 
 // Edit REG
@@ -213,6 +215,7 @@ void func_80063C04(GfxPrint* gfxPrint) {
             GfxPrint_SetColor(gfxPrint, 0, 0x80, 0x80, 0x80);
         }
     }
+    Terminal_SetupTerminal(gfxPrint);
 }
 
 void func_80063D7C(GraphicsContext* gfxCtx) {

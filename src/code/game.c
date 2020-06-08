@@ -200,6 +200,10 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
 
     func_80063D7C(gfxCtx);
 
+    if ((gameState->input[1].cur.in.a) && (gameState->input[1].cur.in.b)){
+        Terminal_SetupTerminal(printChars);
+    }
+
     if (R_ENABLE_ARENA_DBG != 0) {
         SpeedMeter_DrawTimeEntries(&D_801664D0, gfxCtx);
         SpeedMeter_DrawAllocEntries(&D_801664D0, gfxCtx, gameState);
