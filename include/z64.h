@@ -836,7 +836,8 @@ typedef struct {
     /* 0x0216 */ s16    inputY;
     /* 0x0218 */ char   unk_21A[0x20];
     /* 0x0238 */ u16    unk_238;
-    /* 0x023A */ char   unk_23A[0x004];
+    /* 0x023A */ u16    unk_23A;
+    /* 0x023C */ char   unk_23C[0x2];
     /* 0x023E */ u16    unk_23E;
     /* 0x0240 */ char   unk_240[0x00E];
     /* 0x024E */ u16    unk_24E;

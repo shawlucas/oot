@@ -5,12 +5,10 @@ extern UNK_TYPE D_808321B0;
 
 void func_8081F1F0(GlobalContext* globalCtx)
 {
-   // Gfx* displayListHead;
     Gfx* displayList;
     Gfx* prevDisplayList;
     u16* curFrameBuffer;
-    Gfx* dispRefs[4];
-    s32 pad;
+    Gfx* dispRefs[5];
     
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
 
@@ -31,7 +29,13 @@ void func_8081F1F0(GlobalContext* globalCtx)
     Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", 509);
 
 }
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_kaleido_scope/func_8081F2FC.s")
+
+void func_8081F2FC(void)
+{
+    Sleep_Msec(50);
+    func_800C3770(&D_808321B0);
+    func_800C0F08(&D_808321B0);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_kaleido_scope/func_8081F334.s")
 
@@ -39,7 +43,18 @@ void func_8081F1F0(GlobalContext* globalCtx)
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_kaleido_scope/func_8081F6E4.s")
 
+#ifdef NON_MATCHING
+// Functionally equivalent. Minor reordering
+void func_8081F81C(GlobalContext* globalCtx, u16 arg1)
+{
+    PauseContext* pauseCtx = &globalCtx->pauseCtx;
+    pauseCtx->unk_23A = 0;
+    pauseCtx->unk_238 = arg1;
+    Audio_PlaySoundGeneral(NA_SE_SY_DECIDE, &D_801333D4, 4, &D_801333E0, &D_801333E0, &D_801333E8);
+}
+#else 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_kaleido_scope/func_8081F81C.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_kaleido_scope/func_8081F87C.s")
 
