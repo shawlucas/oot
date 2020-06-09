@@ -1,7 +1,36 @@
 #include <global.h>
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_kaleido_scope/func_8081F1F0.s")
+//#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_kaleido_scope/func_8081F1F0.s")
+extern UNK_TYPE D_808321B0;
 
+void func_8081F1F0(GlobalContext* globalCtx)
+{
+   // Gfx* displayListHead;
+    Gfx* displayList;
+    Gfx* prevDisplayList;
+    u16* curFrameBuffer;
+    Gfx* dispRefs[4];
+    s32 pad;
+    
+    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
+
+    curFrameBuffer = gfxCtx->curFrameBuffer;
+    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", 496);
+
+    prevDisplayList = gfxCtx->polyOpa.p;
+    displayList = Graph_GfxPlusOne(gfxCtx->polyOpa.p);
+    gSPDisplayList(gfxCtx->work.p++, displayList);
+
+    func_800C0ED8(&D_808321B0, 0x40, 0x70, curFrameBuffer, NULL);
+    func_800C1F20(&D_808321B0, &displayList);
+    func_800C20B4(&D_808321B0, &displayList);
+    gSPEndDisplayList(displayList++);
+    Graph_BranchDlist(prevDisplayList, displayList);
+    gfxCtx->polyOpa.p = displayList;
+    SREG(33) |= 1;
+    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", 509);
+
+}
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_kaleido_scope/func_8081F2FC.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_kaleido_scope/func_8081F334.s")
