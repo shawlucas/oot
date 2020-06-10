@@ -38,6 +38,9 @@ const ActorInit Bg_Bombwall_InitVars = {
 };
 */
 extern UNK_TYPE D_050041B0;
+extern Gfx* D_05003FC0;
+extern Gfx* D_05004088;
+extern InitChainEntry D_8086F004;
 
 void func_8086E7D0(BgBombwall* this, GlobalContext* globalCtx) {
     s32 pad[2];
@@ -53,26 +56,87 @@ void func_8086E7D0(BgBombwall* this, GlobalContext* globalCtx) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Bombwall/func_8086E850.s")
+void func_8086E850(Vec3f* arg0, Vec3f* arg1, f32 arg2, f32 arg3)
+{
+    arg0->x = (arg1->z * arg2) + (arg1->x * arg3);
+    arg0->y = arg1->y;
+    arg0->z = (arg1->z * arg3) - (arg1->x * arg2);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Bombwall/BgBombwall_Init.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Bombwall/func_8086EAC0.s")
+void func_8086EAC0(BgBombwall* this, GlobalContext* globalCtx) {
+    Actor* thisx = &this->dyna.actor;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Bombwall/BgBombwall_Destroy.s")
+    if ((this->unk_2A2 & 2) != 0) {
+        DynaPolyInfo_Free(globalCtx, &globalCtx->colCtx.dyna, this->dyna.dynaPolyId);
+        this->unk_2A2 &= 0xFFFD;
+    }
+    if ((this->unk_2A2 & 1) != 0) {
+        Collider_DestroyTris(globalCtx, &this->trisCollider);
+        this->unk_2A2 &= 0xFFFE;
+    }
+}
+
+void BgBombwall_Destroy(Actor* thisx, GlobalContext* globalCtx) {
+    BgBombwall* this = THIS;
+    func_8086EAC0(this, globalCtx);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Bombwall/func_8086EB5C.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Bombwall/func_8086ED50.s")
+void func_8086ED50(BgBombwall* this, GlobalContext* globalCtx) {
+    this->dlist = &D_05003FC0;
+    this->actionFunc = func_8086ED70;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Bombwall/func_8086ED70.s")
+void func_8086ED70(BgBombwall* this, GlobalContext* globalCtx) {
+    Actor* thisx = &this->dyna.actor;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Bombwall/func_8086EDFC.s")
+    if ((this->trisCollider.base.acFlags & 2) != 0) {
+        this->trisCollider.base.acFlags &= 0xFFFD;
+        func_8086EDFC(this, globalCtx);
+        Flags_SetSwitch(globalCtx, thisx->params & 0x3F);
+    } else if (this->dyna.actor.xzDistanceFromLink < 600.0f) {
+        CollisionCheck_SetAC(globalCtx, &globalCtx->colChkCtx, &this->trisCollider);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Bombwall/func_8086EE40.s")
+void func_8086EDFC(BgBombwall* this, GlobalContext* globalCtx) {
+    this->dlist = &D_05003FC0;
+    this->unk_2A0 = 1;
+    func_8086EB5C(this, globalCtx);
+    this->actionFunc = func_8086EE40;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Bombwall/func_8086EE94.s")
+void func_8086EE40(BgBombwall* this, GlobalContext* globalCtx) {
+    Actor* thisx = &this->dyna.actor;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Bombwall/BgBombwall_Update.s")
+    if (this->unk_2A0 > 0) {
+        this->unk_2A0 -= 1;
+    } else {
+        func_8086EE94(this, globalCtx);
+        if (((thisx->params >> 0xF) & 1) != 0) {
+            func_80078884(NA_SE_SY_CORRECT_CHIME);
+        }
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Bombwall/BgBombwall_Draw.s")
+void func_8086EE94(BgBombwall* this, GlobalContext* globalCtx) {
+    this->dlist = &D_05004088;
+    func_8086EAC0(this, globalCtx);
+    this->actionFunc = NULL;
+}
+
+void BgBombwall_Update(Actor* thisx, GlobalContext* globalCtx) {
+    BgBombwall* this = THIS;
+
+    if (this->actionFunc) {
+        this->actionFunc(this, globalCtx);
+    }
+}
+
+void BgBombwall_Draw(Actor* thisx, GlobalContext* globalCtx) {
+    BgBombwall* this = THIS;
+    Gfx_DrawDListOpa(globalCtx, this->dlist);
+}

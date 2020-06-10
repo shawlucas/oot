@@ -16,6 +16,8 @@ typedef struct BgBombwall {
     /* 0x0298 */ BgBombwallActionFunc actionFunc;
     /* 0x029C */ Gfx* dlist;
     /* 0x02A0 */ s16 unk_2A0;
+    /* 0x02A2 */ u8 unk_2A2;
+    /* 0x02A3 */ u8 unk_2A3;
 } BgBombwall; // size = 0x02A4
 
 extern const ActorInit Bg_Bombwall_InitVars;
