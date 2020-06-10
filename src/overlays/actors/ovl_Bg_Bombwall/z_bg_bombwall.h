@@ -10,9 +10,12 @@ typedef void (*BgBombwallActionFunc)(struct BgBombwall*, GlobalContext*);
 
 typedef struct BgBombwall {
     /* 0x0000 */ DynaPolyActor dyna;
-    /* 0x0164 */ char unk_164[0x134];
+    /* 0x0164 */ ColliderTris trisCollider;
+    /* 0x0184 */ ColliderTrisItem trisItem;
+    /* 0x01E0 */ char unk_1E0[0xB8];
     /* 0x0298 */ BgBombwallActionFunc actionFunc;
-    /* 0x029C */ char unk_29C[0x8];
+    /* 0x029C */ Gfx* dlist;
+    /* 0x02A0 */ s16 unk_2A0;
 } BgBombwall; // size = 0x02A4
 
 extern const ActorInit Bg_Bombwall_InitVars;
