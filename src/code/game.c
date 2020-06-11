@@ -159,11 +159,16 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
     Gfx* polyOpaP;
     Gfx* dispRefs[5];
     char pad[0x10];
-    GfxPrint printChars[2];
+    GfxPrint* printChars;
+    GfxPrint gfxPrint;
+    Gfx* testDList;
+    Gfx* testPoly;
 
     Graph_OpenDisps(dispRefs, gfxCtx, "../game.c", 746);
     newDList = Graph_GfxPlusOne(polyOpaP = gfxCtx->polyOpa.p);
     gSPDisplayList(gfxCtx->overlay.p++, newDList);
+    testDList = Graph_GfxPlusOne(testPoly = gfxCtx->polyOpa.p);
+    gSPDisplayList(gfxCtx->overlay.p++, testDList);
 
     if (R_ENABLE_FB_FILTER == 1) {
         GameState_SetFBFilter(&newDList);
@@ -201,8 +206,21 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
     func_80063D7C(gfxCtx);
 
     if ((gameState->input[1].cur.in.a) && (gameState->input[1].cur.in.b)){
-        Terminal_SetupTerminal(printChars);
+        GfxPrint_Ctor(&gfxPrint);
+        testPoly = gfxCtx->polyOpa.p;
+        testDList = Graph_GfxPlusOne(gfxCtx->polyOpa.p);
+        gSPDisplayList(gfxCtx->overlay.p++, testDList);
+        GfxPrint_Open(&gfxPrint, testDList);
+        Terminal_SetupTerminal(&gfxPrint);
+        testDList = GfxPrint_Close(&gfxPrint);
+        gSPEndDisplayList(testDList++);
+        Graph_BranchDlist(testPoly, testDList);
+        gfxCtx->polyOpa.p = testDList;
+        GfxPrint_Dtor(&gfxPrint);
     }
+
+    
+    
 
     if (R_ENABLE_ARENA_DBG != 0) {
         SpeedMeter_DrawTimeEntries(&D_801664D0, gfxCtx);
