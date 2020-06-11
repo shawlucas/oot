@@ -30,4 +30,16 @@ typedef struct
     s16 x;
 } Font;
 
+typedef struct 
+{
+    Texture* texture;
+    s16 textureTile;
+    f32 x;
+    f32 y;
+    f32 xScale;
+    f32 yScale;
+} Sprite;
+
+s32 Gfx_FontXHeight(const Font* font);
+
 #endif

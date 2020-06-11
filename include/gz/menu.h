@@ -100,6 +100,8 @@ typedef struct
     u8 alpha;
 } MenuDrawParams;
 
+typedef void (*Menu_ActionCallback)(struct MenuItem* item, void* data);
+typedef int (*Menu_PromptCallback)(s32 optionIndex, void* data);
 enum MenuWatchType
 {
   WATCH_TYPE_U8,
