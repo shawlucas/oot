@@ -1,4 +1,4 @@
-glabel func_80AAF9D8
+glabel EnMm2_OverrideLimbDraw
 /* 00B88 80AAF9D8 24010008 */  addiu   $at, $zero, 0x0008         ## $at = 00000008
 /* 00B8C 80AAF9DC AFA40000 */  sw      $a0, 0x0000($sp)           
 /* 00B90 80AAF9E0 AFA60008 */  sw      $a2, 0x0008($sp)           

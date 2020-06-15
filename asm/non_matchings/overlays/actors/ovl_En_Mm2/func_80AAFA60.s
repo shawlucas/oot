@@ -1,4 +1,4 @@
-glabel func_80AAFA60
+glabel EnMm2_PostLimbDraw
 /* 00C10 80AAFA60 27BDFFE8 */  addiu   $sp, $sp, 0xFFE8           ## $sp = FFFFFFE8
 /* 00C14 80AAFA64 2401000F */  addiu   $at, $zero, 0x000F         ## $at = 0000000F
 /* 00C18 80AAFA68 AFBF0014 */  sw      $ra, 0x0014($sp)           

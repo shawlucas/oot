@@ -39,8 +39,8 @@ glabel EnMm2_Draw
 /* 00AF4 80AAF944 00084880 */  sll     $t1, $t0,  2
 /* 00AF8 80AAF948 00892021 */  addu    $a0, $a0, $t1
 /* 00AFC 80AAF94C 8C84FB60 */  lw      $a0, %lo(D_80AAFB60)($a0)
-/* 00B00 80AAF950 3C0880AB */  lui     $t0, %hi(func_80AAFA60)    ## $t0 = 80AB0000
-/* 00B04 80AAF954 3C1980AB */  lui     $t9, %hi(func_80AAF9D8)    ## $t9 = 80AB0000
+/* 00B00 80AAF950 3C0880AB */  lui     $t0, %hi(EnMm2_PostLimbDraw)    ## $t0 = 80AB0000
+/* 00B04 80AAF954 3C1980AB */  lui     $t9, %hi(EnMm2_OverrideLimbDraw)    ## $t9 = 80AB0000
 /* 00B08 80AAF958 00045900 */  sll     $t3, $a0,  4
 /* 00B0C 80AAF95C 000B6702 */  srl     $t4, $t3, 28
 /* 00B10 80AAF960 000C6880 */  sll     $t5, $t4,  2
@@ -54,8 +54,8 @@ glabel EnMm2_Draw
 /* 00B30 80AAF980 9207014E */  lbu     $a3, 0x014E($s0)           ## 0000014E
 /* 00B34 80AAF984 8E06016C */  lw      $a2, 0x016C($s0)           ## 0000016C
 /* 00B38 80AAF988 8E050150 */  lw      $a1, 0x0150($s0)           ## 00000150
-/* 00B3C 80AAF98C 2739F9D8 */  addiu   $t9, $t9, %lo(func_80AAF9D8) ## $t9 = 80AAF9D8
-/* 00B40 80AAF990 2508FA60 */  addiu   $t0, $t0, %lo(func_80AAFA60) ## $t0 = 80AAFA60
+/* 00B3C 80AAF98C 2739F9D8 */  addiu   $t9, $t9, %lo(EnMm2_OverrideLimbDraw) ## $t9 = 80AAF9D8
+/* 00B40 80AAF990 2508FA60 */  addiu   $t0, $t0, %lo(EnMm2_PostLimbDraw) ## $t0 = 80AAFA60
 /* 00B44 80AAF994 AFA80014 */  sw      $t0, 0x0014($sp)
 /* 00B48 80AAF998 AFB90010 */  sw      $t9, 0x0010($sp)
 /* 00B4C 80AAF99C AFB00018 */  sw      $s0, 0x0018($sp)
