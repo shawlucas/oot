@@ -3,19 +3,23 @@ CFLAGS := -Wall -Wextra -pedantic -std=c99 -g -O2
 PROGRAMS := yaz0 makeromfs elf2rom mkldscript vtxdis
 ZAP2 := ZAP2/ZAP2.out
 
-all: $(PROGRAMS)
+all: $(PROGRAMS) mkangletable
 	cd ZAP2 && $(MAKE)
+
+mkangletable: mkangletable.c
+	$(CC) -g -O2 $^ -o $@ -lm
 
 clean:
 	$(RM) $(PROGRAMS)
 	$(RM) ZAP2/ZAP2.out
 # Need to clean the above line later...
 
-mkldscript_SOURCES := mkldscript.c util.c
-elf2rom_SOURCES    := elf2rom.c elf32.c n64chksum.c util.c
-yaz0_SOURCES       := yaz0tool.c yaz0.c util.c
-makeromfs_SOURCES  := makeromfs.c n64chksum.c util.c
-vtxdis_SOURCES	   := vtxdis.c
+mkldscript_SOURCES   := mkldscript.c util.c
+elf2rom_SOURCES      := elf2rom.c elf32.c n64chksum.c util.c
+yaz0_SOURCES       	 := yaz0tool.c yaz0.c util.c
+makeromfs_SOURCES 	 := makeromfs.c n64chksum.c util.c
+vtxdis_SOURCES	   	 := vtxdis.c
+mkangletable_SOURCES := mkangletable.c
 
 #$(ZAP2):
 #	cd ZAP2 && $(MAKE)
