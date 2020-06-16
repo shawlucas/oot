@@ -13,10 +13,13 @@ typedef struct EnMm2 {
     /* 0x014C */ SkelAnime skelAnime;
     /* 0x0190 */ EnMm2ActionFunc actionFunc;
     /* 0x0194 */ ColliderCylinder collider;
-    /* 0x01E0 */ char unk_1E0[0x8];
+    /* 0x01E0 */ s32 unk_1E0;
+    /* 0x01E4 */ char unk_1E4[0x4];
     /* 0x01E8 */ Vec3s unk_1E8;
     /* 0x01EE */ Vec3s unk_1EE;
-    /* 0x01F4 */ char unk_1F4[0x8];
+    /* 0x01F4 */ u16 unk_1F4;
+    /* 0x01F6 */ s16 unk_1F6;
+    /* 0x01F8 */ s32 unk_1F8;
     /* 0x01FC */ Vec3s limbDrawTable[16];
     /* 0x025C */ Vec3s transitionDrawTable[16];
 } EnMm2; // size = 0x02BC
