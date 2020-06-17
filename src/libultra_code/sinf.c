@@ -31,7 +31,7 @@ f32 sinf(f32 angle) {
     if (xpt < 0xFF) {
         dx = angle;
         if (xpt >= 0xE6) {
-            xSquared = dx * dx;
+            xSquared = SQ(dx);
             polyApprox = ((P[4].d * xSquared + P[3].d) * xSquared + P[2].d) * xSquared + P[1].d;
             result = dx + (dx * xSquared) * polyApprox;
             return (f32)result;
@@ -49,7 +49,7 @@ f32 sinf(f32 angle) {
         dx -= dn * pihi.d;
         dx -= dn * pilo.d;
 
-        xSquared = dx * dx;
+        xSquared = SQ(dx);
         polyApprox = ((P[4].d * xSquared + P[3].d) * xSquared + P[2].d) * xSquared + P[1].d;
         result = dx + (dx * xSquared) * polyApprox;
 

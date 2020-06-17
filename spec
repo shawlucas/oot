@@ -500,6 +500,7 @@ beginseg
     include "build/asm/code_801041E0.o"
     include "build/src/libultra_code/ortho.o"
     include "build/src/libultra_code/cosf.o"
+    include "build/data/__libm_qnan_f.o"
     include "build/src/libultra_code/coss.o"
     include "build/src/libultra_code/osViSetEvent.o"
     include "build/asm/code_80104810.o"
