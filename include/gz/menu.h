@@ -117,4 +117,8 @@ enum MenuWatchType
   WATCH_TYPE_MAX,
 };
 
+MenuItem* Menu_ItemAdd(Menu* menu, s32 x, s32 y, const char* text, Color_RGB8 color);
+s32 Menu_GetCellWidth(Menu* menu, u8 inherit);
+void Menu_SetCellWidth(Menu* menu, s32 cellWidth);
+
 #endif

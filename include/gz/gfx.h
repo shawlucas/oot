@@ -40,6 +40,8 @@ typedef struct
     f32 yScale;
 } Sprite;
 
+
+
 s32 Gfx_FontXHeight(const Font* font);
 
 #endif

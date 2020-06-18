@@ -82,7 +82,7 @@ void* Vector_Insert(Vector* vector, size_t position, size_t num, const void* dat
     vector->size += num;
     vector->end = (char*)vector->begin + vector->elementSize * vector->size;
     vector->rbegin = (char*)vector->end - vector->elementSize;
-    return (char*)vector->begin + vector->elementSize * position);   
+    return (char*)vector->begin + vector->elementSize * position;   
 }
 
 void* Vector_PushBack(Vector* vector, size_t num, const void* data)

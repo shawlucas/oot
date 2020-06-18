@@ -14,4 +14,12 @@ float cosf(float);
 double cos(double);
 float sqrtf(float f);
 
+#define guDefMtxF(xx,xy,xz,xw,  \
+                  yx,yy,yz,yw,  \
+                  zx,zy,zz,zw,  \
+                  wx,wy,wz,ww,  \
+                  ...)            {.f={xx,xy,xz,xw,                           \
+                                       yx,yy,yz,yw,                           \
+                                       zx,zy,zz,zw,                           \
+                                       wx,wy,wz,ww}}
 #endif
