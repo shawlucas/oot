@@ -859,9 +859,11 @@ typedef struct {
 
 typedef struct {
     /* 0x00 */ char     unk_00[0x02];
-    /* 0x02 */ u16      unk_02;
-    /* 0x04 */ Vec3f    unk_04;
-    /* 0x10 */ char     unk_10[0x03];
+    /* 0x02 */ u16      timeSpeed; // Speed at which day/night cycle passes, 0 if in an area where time does not pass
+    /* 0x04 */ Vec3f    sunMoonPos;
+    /* 0x10 */ u8       skyboxId;
+    /* 0x11 */ u8       skyboxId2; 
+    /* 0x12 */ char     unk_12;
     /* 0x13 */ u8       unk_13;
     /* 0x14 */ char     unk_14[0x01];
     /* 0x15 */ u8       skyDisabled;
@@ -877,11 +879,14 @@ typedef struct {
     /* 0x21 */ u8       unk_21;
     /* 0x22 */ u16      unk_22;
     /* 0x24 */ u16      unk_24;
-    /* 0x26 */ char     unk_26[0x04];
-    /* 0x2A */ s8       unk_2A;
-    /* 0x2B */ s8       unk_2B;
-    /* 0x2C */ s8       unk_2C;
-    /* 0x2D */ char     unk_2D[0x5E];
+    /* 0x26 */ char     unk_26[0x02];
+    /* 0x28 */ LightInfoDirectional lightInfo_28;
+    /* 0x36 */ LightInfoDirectional lightInfo_36;
+    /* 0x44 */ char     unk_44[0x4];
+    /* 0x48 */ DmaRequest req_48;
+    /* 0x68 */ OSMesgQueue mq_68;
+    /* 0x80 */ OSMesg   msg_80;
+    /* 0x84 */ char     unk_84[0x8];
     /* 0x8C */ s16      unk_8C[6];
     /* 0x98 */ char     unk_98[0x08];
     /* 0xA0 */ s16      unk_A0;

@@ -6,7 +6,7 @@ glabel func_8006F0FC
 /* AE62AC 8006F10C 3C058016 */  lui   $a1, %hi(D_8015FD80) # $a1, 0x8016
 /* AE62B0 8006F110 3C048016 */  lui   $a0, %hi(D_8015FD7E) # $a0, 0x8016
 /* AE62B4 8006F114 8484FD7E */  lh    $a0, %lo(D_8015FD7E)($a0)
-/* AE62B8 8006F118 0C01BC35 */  jal   func_8006F0D4
+/* AE62B8 8006F118 0C01BC35 */  jal   Kankyo_GetPixel
 /* AE62BC 8006F11C 84A5FD80 */   lh    $a1, %lo(D_8015FD80)($a1)
 /* AE62C0 8006F120 3C018012 */  lui   $at, %hi(D_8011FB44) # $at, 0x8012
 /* AE62C4 8006F124 A422FB44 */  sh    $v0, %lo(D_8011FB44)($at)

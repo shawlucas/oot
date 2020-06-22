@@ -900,7 +900,7 @@ void KaleidoSetup_Destroy(GlobalContext* globalCtx);
 // ? func_8006EEBC(?);
 // ? func_8006EF10(?);
 // ? func_8006F0A0(?);
-// ? func_8006F0D4(?);
+// ? Kankyo_GetPixel(?);
 // ? func_8006F0FC(?);
 u8 func_8006F140(GlobalContext*, EnvironmentContext*, UNK_TYPE);
 f32 func_8006F93C(u16, u16, u16);

@@ -1,4 +1,4 @@
-glabel func_8006F0D4
+glabel Kankyo_GetPixel
 /* AE6274 8006F0D4 00057080 */  sll   $t6, $a1, 2
 /* AE6278 8006F0D8 01C57021 */  addu  $t6, $t6, $a1
 /* AE627C 8006F0DC 000E71C0 */  sll   $t6, $t6, 7
