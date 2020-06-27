@@ -1,4 +1,5 @@
 #include "z_demo_sa.h"
+#include <vt.h>
 
 #define FLAGS 0x00000010
 
@@ -22,13 +23,30 @@ const ActorInit Demo_Sa_InitVars = {
     (ActorFunc)DemoSa_Draw,
 };
 */
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Demo_Sa/DemoSa_Destroy.s")
+
+extern SkeletonHeader* D_0600B1A0;
+extern AnimationHeader* D_060021D8;
+extern AnimationHeader* D_0600FFD4;
+extern DemoSaActionFunc D_80990D5C[];
+
+void DemoSa_Destroy(Actor* thisx, GlobalContext* globalCtx)
+{
+	DemoSa* this = THIS;
+
+	SkelAnime_Free(&this->skelAnime, globalCtx);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Demo_Sa/func_8098E480.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Demo_Sa/func_8098E508.s")
+void func_8098E508(DemoSa* this, s16 arg1)
+{
+	this->unk_190 = arg1;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Demo_Sa/func_8098E51C.s")
+void func_8098E51C(DemoSa* this, s16 arg1)
+{
+	this->unk_194 = arg1;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Demo_Sa/func_8098E530.s")
 
@@ -104,12 +122,21 @@ const ActorInit Demo_Sa_InitVars = {
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Demo_Sa/func_8098F1C0.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Demo_Sa/func_8098F390.s")
-
+void func_8098F390(DemoSa* this, GlobalContext* globalCtx)
+{
+	SkelAnime_InitSV(globalCtx, &this->skelAnime, &D_0600B1A0, &D_060021D8, NULL, NULL, 0);
+	this->action = 10;
+	this->drawConfig = 1;
+}
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Demo_Sa/func_8098F3F0.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Demo_Sa/func_8098F420.s")
-
+void func_8098F420(DemoSa* this, GlobalContext* globalCtx)
+{
+	SkelAnime_InitSV(globalCtx, &this->skelAnime, &D_0600B1A0, &D_0600FFD4, NULL, NULL, 0);
+	this->action = 11;
+	this->drawConfig = 0;
+	this->actor.shape.unk_14 = 0;
+}
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Demo_Sa/func_8098F480.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Demo_Sa/func_8098F50C.s")
@@ -162,9 +189,41 @@ const ActorInit Demo_Sa_InitVars = {
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Demo_Sa/func_8098FD0C.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Demo_Sa/DemoSa_Update.s")
+void DemoSa_Update(Actor* thisx, GlobalContext* globalCtx)
+{
+	DemoSa* this = THIS;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Demo_Sa/DemoSa_Init.s")
+	if ((this->action < 0) || (this->action > 20) || (D_80990D5C[this->action] == NULL))
+	{
+		osSyncPrintf(VT_FGCOL(RED) "メインモードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+	} else {
+		D_80990D5C[this->action](this, globalCtx);
+	}
+}
+
+void DemoSa_Init(Actor* thisx, GlobalContext* globalCtx)
+{
+	DemoSa* this = THIS;
+
+	ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawFunc_Circle, 30.0f);
+	switch (this->actor.params) {
+		case 2:
+			func_8098ECF4(this, globalCtx);
+			break;
+		case 3:
+			func_8098F390(this, globalCtx);
+			break;
+		case 4:
+			func_8098F420(this, globalCtx);
+			break;
+		case 5:
+			func_8098F83C(this, globalCtx);
+			break;
+		default:
+			func_8098E7FC(this, globalCtx);
+			break;
+	}
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Demo_Sa/func_8098FE74.s")
 
