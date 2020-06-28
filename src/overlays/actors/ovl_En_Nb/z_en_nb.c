@@ -1171,7 +1171,7 @@ void func_80AB359C(EnNb* this) {
     f32 f0;
     u16 temp_t1;
 
-    this->unk_2FE++;
+    this->unk_2FE += 1;
     temp_t1 = kREG(17) + 0x19;
     if (temp_t1 >= this->unk_2FE) {
         f0 = func_8006F9BC(temp_t1, 0, this->unk_2FE, 3, 3);
