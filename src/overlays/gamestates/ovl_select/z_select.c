@@ -380,7 +380,7 @@ void Select_PrintMenu(SelectContext* this, GfxPrint* printer) {
 
     GfxPrint_SetColor(printer, 255, 155, 150, 255);
     GfxPrint_SetPos(printer, 12, 2);
-    GfxPrint_Printf(printer, "ZELDA MAP SELECT");
+    GfxPrint_Printf(printer, "MODDED BUILD");
     GfxPrint_SetColor(printer, 255, 255, 255, 255);
 
     for (i = 0; i < 20; i++) {

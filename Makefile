@@ -113,6 +113,8 @@ build/src/libultra_code/osStopTimer.o: OPTFLAGS := -O1
 build/src/libultra_code/llcvt.o: OPTFLAGS := -O1
 build/src/libultra_code/llcvt.o: MIPS_VERSION := -mips3 -32
 
+build/src/overlays/actors/ovl_En_Nb/z_en_nb.o: CFLAGS += -DNON_MATCHING
+
 build/src/libultra_boot_O1/%.o: CC := $(CC_OLD)
 build/src/libultra_boot_O2/%.o: CC := $(CC_OLD)
 

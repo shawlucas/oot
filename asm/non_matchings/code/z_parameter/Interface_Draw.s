@@ -514,7 +514,7 @@ glabel L8008ABB0
 .L8008B064:
 /* B02204 8008B064 0C025148 */  jal   func_80094520
 /* B02208 8008B068 8EE40000 */   lw    $a0, ($s7)
-/* B0220C 8008B06C 0C02232F */  jal   Interface_DrawItemButtons
+/* B0220C 8008B06C 0C02232F */   nop
 /* B02210 8008B070 02E02025 */   move  $a0, $s7
 /* B02214 8008B074 8E8702B0 */  lw    $a3, 0x2b0($s4)
 /* B02218 8008B078 3C03E700 */  lui   $v1, 0xe700

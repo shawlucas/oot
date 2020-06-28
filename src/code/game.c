@@ -18,7 +18,7 @@ u16 sLastButtonPressed;
 char sBtnChars[] = {
     'A', 'B', 'Z', 'S', 'u', 'l', 'd', 'r', '*', '+', 'L', 'R', 'u', 'd', 'l', 'r', '\0',
 };
-
+s16 toggleDebug = 0;
 void GameState_FaultPrint(void) {
     s32 i;
 
@@ -156,6 +156,8 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
     Gfx* newDList;
     Gfx* polyOpaP;
     Gfx* dispRefs[5];
+    Input* input = &gameState->input;
+    DebugTable* table = &gameState->table;
     char pad[0x8];
     GfxPrint printChars;
 
@@ -202,6 +204,13 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
         SpeedMeter_DrawTimeEntries(&D_801664D0, gfxCtx);
         SpeedMeter_DrawAllocEntries(&D_801664D0, gfxCtx, gameState);
     }
+
+    if (CHECK_PAD(input[1].press, L_TRIG))
+    {
+        toggleDebug ^= 1;
+    }
+    
+    Actor_DrawDebugInfo(table, gameState);
 }
 
 void GameState_SetFrameBuffer(GraphicsContext* gfxCtx) {

@@ -2577,6 +2577,7 @@ void Interface_UpdateMagicBar(GlobalContext* globalCtx);
 #endif
 
 void Interface_DrawMagicBar(GlobalContext* globalCtx) {
+    #if 0
     InterfaceContext* interfaceCtx = &globalCtx->interfaceCtx;
     s16 magicBarY;
     GraphicsContext* gfxCtx;
@@ -2659,6 +2660,7 @@ void Interface_DrawMagicBar(GlobalContext* globalCtx) {
     }
 
     Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_parameter.c", 2731);
+    #endif
 }
 
 void func_80088AA0(s16 arg0) {
@@ -2698,6 +2700,7 @@ void func_80088B34(s16 arg0) {
 }
 
 void Interface_DrawActionLabel(GraphicsContext* gfxCtx, void* texture) {
+    #if 0
     Gfx* dispRefs[5];
 
     Graph_OpenDisps(dispRefs, gfxCtx, "../z_parameter.c", 2820);
@@ -2715,6 +2718,7 @@ void Interface_DrawActionLabel(GraphicsContext* gfxCtx, void* texture) {
     gSP1Quadrangle(gfxCtx->overlay.p++, 0, 2, 3, 1, 0);
 
     Graph_CloseDisps(dispRefs, gfxCtx, "../z_parameter.c", 2829);
+    #endif
 }
 
 u8* sCUpLabelTextures[] = { D_02002FC0, D_02002FC0, D_02002FC0 };
@@ -2885,6 +2889,7 @@ void Interface_DrawItemButtons(GlobalContext* globalCtx);
 #endif
 
 void Interface_DrawItemIconTexture(GlobalContext* globalCtx, void* texture, s16 button) {
+    #if 0
     GraphicsContext* gfxCtx;
     Gfx* dispRefs[4];
 
@@ -2900,9 +2905,11 @@ void Interface_DrawItemIconTexture(GlobalContext* globalCtx, void* texture, s16 
                         R_ITEM_ICON_DD(button) * 2, R_ITEM_ICON_DD(button) * 2);
 
     Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_parameter.c", 3094);
+    #endif
 }
 
 void Interface_DrawAmmoCount(GlobalContext* globalCtx, s16 button, s16 alpha) {
+    #if 0
     s16 item;
     s16 ammo;
     GraphicsContext* gfxCtx;
@@ -2961,9 +2968,11 @@ void Interface_DrawAmmoCount(GlobalContext* globalCtx, s16 button, s16 alpha) {
     }
 
     Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_parameter.c", 3158);
+    #endif
 }
 
 void Interface_DrawActionButton(GlobalContext* globalCtx) {
+    #if 0
     InterfaceContext* interfaceCtx = &globalCtx->interfaceCtx;
     GraphicsContext* gfxCtx;
     Gfx* dispRefs[4];
@@ -2988,6 +2997,7 @@ void Interface_DrawActionButton(GlobalContext* globalCtx) {
     gSP1Quadrangle(gfxCtx->overlay.p++, 0, 2, 3, 1, 0);
 
     Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_parameter.c", 3187);
+    #endif
 }
 
 void Interface_InitVertices(GlobalContext* globalCtx) {

@@ -420,7 +420,7 @@ void Gameplay_Init(GlobalContext* globalCtx) {
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_play/Gameplay_Init.s")
 #endif
 
-#ifdef NON_MATCHING
+//#ifdef NON_MATCHING
 // regalloc and stack usage differences
 // also missing an extra move instruction
 void Gameplay_Update(GlobalContext* globalCtx) {
@@ -1047,12 +1047,13 @@ void Gameplay_Update(GlobalContext* globalCtx) {
         LOG_NUM("1", 1, "../z_play.c", 3816);
     }
 
+    
     func_80070C24(globalCtx, &globalCtx->envCtx, &globalCtx->lightCtx, &globalCtx->pauseCtx, &globalCtx->msgCtx,
                   &globalCtx->unk_10A20, globalCtx->state.gfxCtx);
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_play/Gameplay_Update.s")
-#endif
+//#else
+//#pragma GLOBAL_ASM("asm/non_matchings/code/z_play/Gameplay_Update.s")
+//#endif
 
 void Gameplay_DrawOverlayElements(GlobalContext* globalCtx) {
     if ((globalCtx->pauseCtx.state != 0) || (globalCtx->pauseCtx.flag != 0)) {

@@ -1,5 +1,6 @@
 #include "z_en_nb.h"
 #include <vt.h>
+#include <alloca.h>
 
 #define FLAGS 0x00000010
 
@@ -76,6 +77,7 @@ void func_80AB34A8(EnNb* this, GlobalContext* globalCtx);
 void func_80AB359C(EnNb* this);
 void func_80AB3C74(EnNb* this, GlobalContext* globalCtx);
 void func_80AB3DB0(EnNb* this, GlobalContext* globalCtx);
+void EnNb_DrawDebugInfo(EnNb* this, GlobalContext* globalCtx);
 
 extern SkeletonHeader D_060181C8;
 extern AnimationHeader* D_06009694;
@@ -1439,6 +1441,8 @@ void EnNb_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnNb* this = THIS;
     SkelAnime* skelAnime = &this->skelAnime;
 
+    this->actor.printDebugInfo = 1;
+
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawFunc_Circle, 30.0f);
     func_80AB0F04(this, globalCtx);
     SkelAnime_InitSV(globalCtx, skelAnime, &D_060181C8, NULL, &this->limbDrawTable, &this->transitionDrawTable, 19);
@@ -1463,6 +1467,9 @@ void EnNb_Init(Actor* thisx, GlobalContext* globalCtx) {
             func_80AB1530(this, globalCtx);
             break;
     }
+
+    
+    
 }
 
 s32 func_80AB3FE8(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor* thisx) {
@@ -1537,3 +1544,4 @@ void EnNb_Draw(Actor* thisx, GlobalContext* globalCtx) {
         D_80AB4F54[this->drawConfig](this, globalCtx);
     }
 }
+
