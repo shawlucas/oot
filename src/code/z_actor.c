@@ -6,10 +6,6 @@
 
 #include "overlays/actors/ovl_En_Part/z_en_part.h"
 
-extern s16 toggleDebug;
-
-void Actor_DrawDebugTable(DebugTable* this, GlobalContext* globalCtx);
-
 void ActorShape_Init(ActorShape* shape, f32 arg1, void* shadowDrawFunc, f32 arg3) {
     shape->unk_08 = arg1;
     shape->shadowDrawFunc = shadowDrawFunc;
@@ -2193,11 +2189,6 @@ void Actor_FaultPrint(Actor* actor, char* command) {
     FaultDrawer_Printf("ACTOR NAME %08x:%s", actor, name);
 }
 
-void Actor_DrawDebugInfo(DebugTable* this, GlobalContext* globalCtx) {
-    if (toggleDebug == 1) {
-        Actor_DrawDebugTable(this, globalCtx);
-    }
-}
 void Actor_Draw(GlobalContext* globalCtx, Actor* actor) {
     FaultClient faultClient;
     LightMapper* lightMapper;
@@ -5588,38 +5579,4 @@ s32 func_80038290(GlobalContext* globalCtx, Actor* actor, Vec3s* arg2, Vec3s* ar
     return 1;
 }
 
-char* debugNames[] = {
-    "Debug", "Item2",
-};
 
-void DebugTable_Init(DebugTable* this, GlobalContext* globalCtx)
-{
-    this->selectedOption = 0;
-    this->cursorPos = 0;
-}
-void Actor_DrawDebugTable(DebugTable* this, GlobalContext* globalCtx) {
-    s32 i;
-
-    GfxPrint* printer = alloca(sizeof(GfxPrint));
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    
-
-    GfxPrint_Init(printer);
-    GfxPrint_Open(printer, gfxCtx->polyOpa.p);
-    GfxPrint_SetColor(printer, 255, 255, 255, 255);
-    GfxPrint_SetPos(printer, 1, 1);
-    GfxPrint_Printf(printer, "Debug");
-    GfxPrint_SetPos(printer, 1, 3);
-    GfxPrint_Printf(printer, "Item2");
-
-    GfxPrint_Printf(printer, debugNames[this->cursorPos]);
-    
-    for (i = 0; i < ARRAY_COUNT(sActorTypes); i++)
-    {
-        GfxPrint_SetPos(printer, 1, i + 2);
-        GfxPrint_Printf(printer, "%s: %d", sActorTypes[i], globalCtx->actorCtx.actorList[i].length);
-    }
-
-    gfxCtx->polyOpa.p = GfxPrint_Close(printer);
-    GfxPrint_Destroy(printer);
-}

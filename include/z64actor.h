@@ -842,7 +842,8 @@ typedef enum {
     /* 0x01D4 */ ACTOR_EN_MM2,
     /* 0x01D5 */ ACTOR_BG_JYA_BLOCK,
     /* 0x01D6 */ ACTOR_OBJ_WARP2BLOCK,
-    /* 0x01D7 */ ACTOR_ID_MAX // originally "ACTOR_DLF_MAX"
+    /* 0x01D7 */ ACTOR_DEBUG_TABLE,
+    /* 0x01D8 */ ACTOR_ID_MAX // originally "ACTOR_DLF_MAX"
 } ActorID;
 
 #endif

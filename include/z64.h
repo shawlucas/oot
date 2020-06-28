@@ -47,6 +47,21 @@ typedef struct {
     /* 0x14 */ s16  data[REG_GROUPS * REG_PER_GROUP]; // 0xAE0 entries
 } GameInfo; // size = 0x15D4
 
+/*
+typedef struct {
+    s32 x;
+    s32 y;
+    s32 itemNum;
+    char* name;
+} MenuItem;
+
+typedef struct {
+    MenuItem items[2];
+    s32 cursorPos;
+    s32 selectedOption;
+} DebugTable;
+*/
+
 typedef struct {
     /* 0x00 */ u8    buttonItems[4];
     /* 0x04 */ u8    cButtonSlots[3];
@@ -1128,7 +1143,6 @@ typedef struct GameState {
     /* 0x98 */ u32 running;
     /* 0x9C */ u32 frames;
     /* 0xA0 */ u32 unk_A0;
-    /* 0xA4 */ DebugTable* table;
 } GameState; // size = 0xA4
 
 typedef struct {
@@ -2005,14 +2019,4 @@ typedef struct {
     /* 0x04 */ const char* name;
 } FlagSetEntry; // size = 0x08
 
-typedef struct {
-    s32 x;
-    s32 y;
-    s32 itemNum;
-} MenuItem;
-
-typedef struct {
-    MenuItem items[2];
-    s32 cursorPos;
-} DebugTable;
 #endif
