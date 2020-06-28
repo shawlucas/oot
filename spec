@@ -3835,11 +3835,11 @@ beginseg
     include "build/data/overlays/actors/z_shot_sun.reloc.o"
 endseg
 
-//beginseg
-//    name "ovl_Debug_Table"
-//    include "build/src/overlays/actors/ovl_Debug_Table/z_debug_table.o"
-//    include "build/src/overlays/actors/ovl_Debug_Table/ovl_Debug_Table_reloc.o"
-//endseg
+beginseg
+    name "ovl_Debug_Table"
+    include "build/src/overlays/actors/ovl_Debug_Table/z_debug_table.o"
+    include "build/src/overlays/actors/ovl_Debug_Table/ovl_Debug_Table_reloc.o"
+endseg
 
 beginseg
     name "gameplay_keep"

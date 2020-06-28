@@ -156,7 +156,7 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
     Gfx* polyOpaP;
     Gfx* dispRefs[5];
     Input* input = &gameState->input;
-    DebugTable* table = &gameState->table;
+   // DebugTable* table = &gameState->table;
     char pad[0x8];
     GfxPrint printChars;
 
