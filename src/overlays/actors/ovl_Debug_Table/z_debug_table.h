@@ -5,8 +5,15 @@
 #include <global.h>
 
 #define NUM_OF_ITEMS 2
-#define NUM_OF_WARP_CATEGORIES 1
+#define NUM_OF_WARP_CATEGORIES 2
 #define NUM_OF_DUNGEONS 9
+#define NUM_OF_BOSSES 10
+
+#define PLAYER_WARP(entrance) \
+    globalCtx->nextEntranceIndex = entrance; \
+    globalCtx->sceneLoadFlag = 0x14; \
+    globalCtx->fadeTransition = 5; \
+    gSaveContext.nextTransition = 5; \
 
 struct DebugTable;
 struct MenuItem;
@@ -24,6 +31,19 @@ typedef enum {
 } Dungeons;
 
 typedef enum {
+    BOSS_GOMA,
+    BOSS_DODONGO,
+    BOSS_BARINADE,
+    BOSS_PHANTOM_GANON,
+    BOSS_VOLVAGIA,
+    BOSS_MORPHA,
+    BOSS_BONGO,
+    BOSS_TWINROVA,
+    BOSS_GANONDORF,
+    BOSS_GANON,
+} Bosses;
+
+typedef enum {
     MENU_DEBUG,
     MENU_WARPS,
     ITEM_2,
@@ -35,10 +55,12 @@ typedef enum {
     WARP_CATEGORY_MENU,
     WARP_DUNGEON_MENU,
     DEBUG_MENU,
+    WARP_BOSSES_MENU,
 } ActiveMenus;
 
 typedef enum {
     WARPS_DUNGEONS,
+    WARPS_BOSSES,
 } WarpNames;
 
 typedef struct MenuItem {
@@ -58,6 +80,7 @@ typedef struct DebugTable {
     MenuItem mainMenu[NUM_OF_ITEMS];
     MenuItem warpMenu[NUM_OF_WARP_CATEGORIES];
     MenuItem dungeonMenu[NUM_OF_DUNGEONS];
+    MenuItem bossMenu[NUM_OF_BOSSES];
 } DebugTable; // size =
 
 extern const ActorInit Debug_Table_InitVars;

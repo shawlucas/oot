@@ -17,10 +17,19 @@ void DebugTable_DrawWarpList(DebugTable* this, GlobalContext* globalCtx);
 void DebugTable_WarpListUpdate(DebugTable* this, GlobalContext* globalCtx);
 void DebugTable_DrawDungeonList(DebugTable* this, GlobalContext* globalCtx);
 void DebugTable_DungeonListUpdate(DebugTable* this, GlobalContext* globalCtx);
+void DebugTable_BossesListUpdate(DebugTable* this, GlobalContext* globalCtx);
+void DebugTable_DrawBossesList(DebugTable* this, GlobalContext* globalCtx);
+s32 DebugTable_CheckPad(DebugTable* this, Input* input, u8 button, u8 activeMenu, u8 numOf);
 
 static char* sDungeonList[] = {
-    "Deku Tree",    "Dodongo's Cavern", "Jabu Jabu's Belly", "Forest Temple",         "Fire Temple",
+    "Deku Tree",    "Dodongo's Cavern", "Jabu Jabu's Belly", "Forest Temple", "Fire Temple",
     "Water Temple", "Shadow Temple",    "Spirit Temple",     "Inside Ganon's Castle",
+};
+
+static char* sBossList[] = {
+    "Gohma", "King Dodongo", "Barinade", "Phantom Ganon",
+    "Volvagia", "Morpha", "Bongo Bongo", "Twinrova", "Ganondorf",
+    "Ganon",
 };
 
 const ActorInit Debug_Table_InitVars = {
@@ -55,11 +64,21 @@ void DebugTable_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->warpMenu[WARPS_DUNGEONS].pos.y = 4;
     this->warpMenu[WARPS_DUNGEONS].name = "Dungeons";
 
-    for (i = 0; i < NUM_OF_DUNGEONS; i++)
-    {
+    this->warpMenu[WARPS_BOSSES].pos.x = 2;
+    this->warpMenu[WARPS_BOSSES].pos.y = 6;
+    this->warpMenu[WARPS_BOSSES].name = "Bosses";
+
+    for (i = 0; i < NUM_OF_DUNGEONS; i++) {
         this->dungeonMenu[i].pos.x = 2;
-        this->dungeonMenu[i].pos.y = i + 4  ;
+        this->dungeonMenu[i].pos.y = i + 4;
         this->dungeonMenu[i].name = sDungeonList[i];
+    }
+
+    for (i = 0; i < NUM_OF_BOSSES; i++)
+    {
+        this->bossMenu[i].pos.x = 2;
+        this->bossMenu[i].pos.y = i + 4;
+        this->bossMenu[i].name = sBossList[i];
     }
 }
 
@@ -72,29 +91,25 @@ void DebugTable_Update(Actor* thisx, GlobalContext* globalCtx) {
     DebugTable* this = THIS;
     Input* input = &globalCtx->state.input;
 
-    if ((CHECK_PAD(input[0].press, D_JPAD) && (this->cursorPos < NUM_OF_ITEMS))) {
-        this->cursorPos++;
-    }
+    this->pressed = DebugTable_CheckPad(this, input, L_TRIG, MAIN_MENU, NUM_OF_ITEMS);
 
-    if (CHECK_PAD(input[0].press, U_JPAD) && (this->cursorPos > RETURN)) {
-        this->cursorPos--;
-    }
-
-    if (CHECK_PAD(globalCtx->state.input[0].press, L_TRIG)) {
+    if (this->pressed == 1) {
         switch (this->cursorPos) {
             case MENU_DEBUG:
                 this->cursorPos = 0;
+                this->pressed = 0;
                 this->activeMenu = DEBUG_MENU;
                 this->actor.draw = DebugTable_DrawDebug;
                 break;
             case MENU_WARPS:
                 this->cursorPos = 0;
+                this->pressed = 0;
                 this->activeMenu = WARP_CATEGORY_MENU;
                 this->actor.update = DebugTable_WarpListUpdate;
                 this->actor.draw = DebugTable_DrawWarpList;
                 break;
-
         }
+        this->actionTimer = 10;
     }
 }
 
@@ -124,111 +139,69 @@ void DebugTable_Draw(Actor* thisx, GlobalContext* globalCtx) {
 void DebugTable_WarpListUpdate(DebugTable* this, GlobalContext* globalCtx) {
     Input* input = &globalCtx->state.input;
 
-    if (this->actionTimer != 0) {
-        this->actionTimer--;
-    }
+    this->pressed = DebugTable_CheckPad(this, input, L_TRIG, WARP_CATEGORY_MENU, NUM_OF_WARP_CATEGORIES);
 
-    if ((CHECK_PAD(input[0].press, D_JPAD) && (this->cursorPos < NUM_OF_WARP_CATEGORIES))) {
-        this->cursorPos++;
-    }
-
-    if (CHECK_PAD(input[0].press, U_JPAD) && (this->cursorPos > RETURN)) {
-        this->cursorPos--;
-    }
-
-    if ((CHECK_PAD(globalCtx->state.input[0].press, L_TRIG)) && (this->activeMenu == WARP_CATEGORY_MENU) &&
-        (this->actionTimer == 0)) {
+    if (this->pressed == 1) {
         switch (this->cursorPos) {
             case WARPS_DUNGEONS:
                 this->activeMenu = WARP_DUNGEON_MENU;
                 this->cursorPos = 0;
+                this->pressed = 0;
                 this->actor.update = DebugTable_DungeonListUpdate;
                 this->actor.draw = DebugTable_DrawDungeonList;
+                break;
+            case WARPS_BOSSES:
+                this->activeMenu = WARP_BOSSES_MENU;
+                this->cursorPos = 0;
+                this->pressed = 0;
+                this->actor.update = DebugTable_BossesListUpdate;
+                this->actor.draw = DebugTable_DrawBossesList;
                 break;
             case RETURN:
                 this->activeMenu = MAIN_MENU;
                 this->cursorPos = 0;
+                this->pressed = 0;
                 this->actor.update = DebugTable_Update;
                 this->actor.draw = DebugTable_Draw;
                 break;
         }
+        this->actionTimer = 10;
     }
 }
 
 void DebugTable_DungeonListUpdate(DebugTable* this, GlobalContext* globalCtx) {
     Input* input = &globalCtx->state.input;
 
-    SceneSelectEntry* selectedScene;
+    this->pressed = DebugTable_CheckPad(this, input, L_TRIG, WARP_DUNGEON_MENU, NUM_OF_DUNGEONS);
 
-    if (this->actionTimer != 0) {
-        this->actionTimer--;
-    }
-
-    if ((CHECK_PAD(input[0].press, D_JPAD) && (this->cursorPos < NUM_OF_DUNGEONS)))
-    {
-        this->cursorPos++;
-    }
-
-    if (CHECK_PAD(input[0].press, U_JPAD) && (this->cursorPos > RETURN)) {
-        this->cursorPos--;
-    }
-
-    if ((CHECK_PAD(globalCtx->state.input[0].press, L_TRIG)) && (this->activeMenu == WARP_DUNGEON_MENU) &&
-        (this->actionTimer == 0)) {
+    if (this->pressed == 1) {
         switch (this->cursorPos) {
             case DUNGEON_DEKU:
-                globalCtx->nextEntranceIndex = 0x00;
-                globalCtx->sceneLoadFlag = 0x14;
-                globalCtx->fadeTransition = 5;
-                gSaveContext.nextTransition = 5;
+                PLAYER_WARP(0x00);
                 break;
             case DUNGEON_DODONGO:
-                globalCtx->nextEntranceIndex = 0x04;
-                globalCtx->sceneLoadFlag = 0x14;
-                globalCtx->fadeTransition = 5;
-                gSaveContext.nextTransition = 5;
+                PLAYER_WARP(0x04);
                 break;
             case DUNGEON_JABU:
-                globalCtx->nextEntranceIndex = 0x28;
-                globalCtx->sceneLoadFlag = 0x14;
-                globalCtx->fadeTransition = 5;
-                gSaveContext.nextTransition = 5;
+                PLAYER_WARP(0x28);
                 break;
             case DUNGEON_FOREST:
-                globalCtx->nextEntranceIndex = 0x169;
-                globalCtx->sceneLoadFlag = 0x14;
-                globalCtx->fadeTransition = 5;
-                gSaveContext.nextTransition = 5;
+                PLAYER_WARP(0x169);
                 break;
             case DUNGEON_FIRE:
-                globalCtx->nextEntranceIndex = 0x165;
-                globalCtx->sceneLoadFlag = 0x14;
-                globalCtx->fadeTransition = 5;
-                gSaveContext.nextTransition = 5;
+                PLAYER_WARP(0x165);
                 break;
             case DUNGEON_WATER:
-                globalCtx->nextEntranceIndex = 0x10;
-                globalCtx->sceneLoadFlag = 0x14;
-                globalCtx->fadeTransition = 5;
-                gSaveContext.nextTransition = 5;
+                PLAYER_WARP(0x10);
                 break;
             case DUNGEON_SHADOW:
-                globalCtx->nextEntranceIndex = 0x37;
-                globalCtx->sceneLoadFlag = 0x14;
-                globalCtx->fadeTransition = 5;
-                gSaveContext.nextTransition = 5;
+                PLAYER_WARP(0x37);
                 break;
             case DUNGEON_SPIRIT:
-                globalCtx->nextEntranceIndex = 0x82;
-                globalCtx->sceneLoadFlag = 0x14;
-                globalCtx->fadeTransition = 5;
-                gSaveContext.nextTransition = 5;
+                PLAYER_WARP(0x82);
                 break;
             case DUNGEON_GANON:
-                globalCtx->nextEntranceIndex = 0x467;
-                globalCtx->sceneLoadFlag = 0x14;
-                globalCtx->fadeTransition = 5;
-                gSaveContext.nextTransition = 5;
+                PLAYER_WARP(0x467);
                 break;
             case RETURN:
                 this->activeMenu = WARP_CATEGORY_MENU;
@@ -237,10 +210,10 @@ void DebugTable_DungeonListUpdate(DebugTable* this, GlobalContext* globalCtx) {
                 this->actor.draw = DebugTable_DrawWarpList;
                 break;
             default:
-                break;  
+                break;
         }
-
-        
+        this->pressed = 0;
+        this->actionTimer = 10;
     }
 }
 
@@ -267,8 +240,7 @@ void DebugTable_DrawWarpList(DebugTable* this, GlobalContext* globalCtx) {
     GfxPrint_Open(printer, gfxCtx->polyOpa.p);
 
     GfxPrint_SetPos(printer, 2, 2);
-    if (this->cursorPos == -1)
-    {
+    if (this->cursorPos == -1) {
         GfxPrint_SetColor(printer, 255, 20, 20, 255);
     } else {
         GfxPrint_SetColor(printer, 255, 255, 255, 255);
@@ -298,14 +270,11 @@ void DebugTable_DrawDungeonList(DebugTable* this, GlobalContext* globalCtx) {
     GfxPrint* printer = alloca(sizeof(GfxPrint));
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
 
-
-
     GfxPrint_Init(printer);
     GfxPrint_Open(printer, gfxCtx->polyOpa.p);
 
     GfxPrint_SetPos(printer, 2, 2);
-    if (this->cursorPos == -1)
-    {
+    if (this->cursorPos == -1) {
         GfxPrint_SetColor(printer, 255, 20, 20, 255);
     } else {
         GfxPrint_SetColor(printer, 255, 255, 255, 255);
@@ -322,7 +291,104 @@ void DebugTable_DrawDungeonList(DebugTable* this, GlobalContext* globalCtx) {
         }
         GfxPrint_Printf(printer, this->dungeonMenu[i].name);
     }
-
     gfxCtx->polyOpa.p = GfxPrint_Close(printer);
     GfxPrint_Destroy(printer);
+}
+
+void DebugTable_BossesListUpdate(DebugTable* this, GlobalContext* globalCtx)
+{
+    Input* input = &globalCtx->state.input;
+
+    this->pressed = DebugTable_CheckPad(this, input, L_TRIG, WARP_BOSSES_MENU, NUM_OF_BOSSES);
+
+    if (this->pressed == 1) {
+        switch (this->cursorPos) {
+            case BOSS_GOMA:
+                PLAYER_WARP(0x40F);
+                break;
+            case BOSS_DODONGO:
+                PLAYER_WARP(0x40B);
+                break;
+            case BOSS_BARINADE:
+                PLAYER_WARP(0x301);
+                break;
+            case BOSS_PHANTOM_GANON:
+                PLAYER_WARP(0xC);
+                break;
+            case BOSS_VOLVAGIA:
+                PLAYER_WARP(0x305);
+                break;
+            case BOSS_MORPHA:
+                PLAYER_WARP(0x417);
+                break;
+            case BOSS_BONGO:
+                PLAYER_WARP(0x413);
+                break;
+            case BOSS_TWINROVA:
+                PLAYER_WARP(0x5EC);
+                break;
+            case BOSS_GANONDORF:
+                PLAYER_WARP(0x41F);
+                break;
+            case BOSS_GANON:
+                PLAYER_WARP(0x517);
+                break;
+            default:
+                break;
+        }
+
+        this->pressed = 0;
+        this->actionTimer = 10;
+    }
+}
+
+void DebugTable_DrawBossesList(DebugTable* this, GlobalContext* globalCtx)
+{
+    s32 i;
+
+    GfxPrint* printer = alloca(sizeof(GfxPrint));
+    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
+
+    GfxPrint_Init(printer);
+    GfxPrint_Open(printer, gfxCtx->polyOpa.p);
+
+    GfxPrint_SetPos(printer, 2, 2);
+    if (this->cursorPos == -1) {
+        GfxPrint_SetColor(printer, 255, 20, 20, 255);
+    } else {
+        GfxPrint_SetColor(printer, 255, 255, 255, 255);
+    }
+
+    GfxPrint_Printf(printer, "return");
+
+    for (i = 0; i < NUM_OF_BOSSES; i++) {
+        GfxPrint_SetPos(printer, this->bossMenu[i].pos.x, this->bossMenu[i].pos.y);
+        if (this->cursorPos == i) {
+            GfxPrint_SetColor(printer, 255, 20, 20, 255);
+        } else {
+            GfxPrint_SetColor(printer, 255, 255, 255, 255);
+        }
+        GfxPrint_Printf(printer, this->bossMenu[i].name);
+    }
+    gfxCtx->polyOpa.p = GfxPrint_Close(printer);
+    GfxPrint_Destroy(printer);
+}
+s32 DebugTable_CheckPad(DebugTable* this, Input* input, u8 button, u8 activeMenu, u8 numOf) {
+
+    s16 timer;
+
+    if ((CHECK_PAD(input->press, D_JPAD) && (this->cursorPos < numOf))) {
+        this->cursorPos++;
+    }
+
+    if (CHECK_PAD(input->press, U_JPAD) && (this->cursorPos > RETURN)) {
+        this->cursorPos--;
+    }
+
+    if (this->actionTimer > 0) {
+        this->actionTimer--;
+    } 
+
+    return (CHECK_PAD(input->press, button)) && (this->activeMenu == activeMenu) && !(CHECK_PAD(input->cur, R_TRIG) && (this->actionTimer == 0));
+
 }
