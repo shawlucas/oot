@@ -48,7 +48,7 @@ typedef struct MenuItem {
 
 typedef struct DebugTable {
     Actor actor;
-    u32 cursorPos;
+    s32 cursorPos;
     u32 menuDepth;
     u8 activeMenu;
     u8 pressed;

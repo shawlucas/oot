@@ -3,6 +3,8 @@
 
 #define FLAGS 0x00000030
 
+#define RETURN -1
+
 #define THIS ((DebugTable*)thisx)
 
 void DebugTable_Init(Actor* thisx, GlobalContext* globalCtx);
@@ -42,21 +44,21 @@ void DebugTable_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->actionTimer = 10;
 
     this->mainMenu[MENU_DEBUG].pos.x = 2;
-    this->mainMenu[MENU_DEBUG].pos.y = 2;
+    this->mainMenu[MENU_DEBUG].pos.y = 4;
     this->mainMenu[MENU_DEBUG].name = "Debug";
 
     this->mainMenu[MENU_WARPS].pos.x = 2;
-    this->mainMenu[MENU_WARPS].pos.y = 4;
+    this->mainMenu[MENU_WARPS].pos.y = 6;
     this->mainMenu[MENU_WARPS].name = "Warps";
 
     this->warpMenu[WARPS_DUNGEONS].pos.x = 2;
-    this->warpMenu[WARPS_DUNGEONS].pos.y = 2;
+    this->warpMenu[WARPS_DUNGEONS].pos.y = 4;
     this->warpMenu[WARPS_DUNGEONS].name = "Dungeons";
 
     for (i = 0; i < NUM_OF_DUNGEONS; i++)
     {
         this->dungeonMenu[i].pos.x = 2;
-        this->dungeonMenu[i].pos.y = i + 2;
+        this->dungeonMenu[i].pos.y = i + 4  ;
         this->dungeonMenu[i].name = sDungeonList[i];
     }
 }
@@ -74,7 +76,7 @@ void DebugTable_Update(Actor* thisx, GlobalContext* globalCtx) {
         this->cursorPos++;
     }
 
-    if (CHECK_PAD(input[0].press, U_JPAD) && (this->cursorPos > 0)) {
+    if (CHECK_PAD(input[0].press, U_JPAD) && (this->cursorPos > RETURN)) {
         this->cursorPos--;
     }
 
@@ -91,6 +93,7 @@ void DebugTable_Update(Actor* thisx, GlobalContext* globalCtx) {
                 this->actor.update = DebugTable_WarpListUpdate;
                 this->actor.draw = DebugTable_DrawWarpList;
                 break;
+
         }
     }
 }
@@ -106,7 +109,6 @@ void DebugTable_Draw(Actor* thisx, GlobalContext* globalCtx) {
     GfxPrint_SetColor(printer, 255, 255, 255, 255);
     for (i = 0; i < NUM_OF_ITEMS; i++) {
         GfxPrint_SetPos(printer, this->mainMenu[i].pos.x, this->mainMenu[i].pos.y);
-
         if (this->cursorPos == i) {
             GfxPrint_SetColor(printer, 255, 20, 20, 255);
         } else {
@@ -130,7 +132,7 @@ void DebugTable_WarpListUpdate(DebugTable* this, GlobalContext* globalCtx) {
         this->cursorPos++;
     }
 
-    if (CHECK_PAD(input[0].press, U_JPAD) && (this->cursorPos > 0)) {
+    if (CHECK_PAD(input[0].press, U_JPAD) && (this->cursorPos > RETURN)) {
         this->cursorPos--;
     }
 
@@ -142,6 +144,12 @@ void DebugTable_WarpListUpdate(DebugTable* this, GlobalContext* globalCtx) {
                 this->cursorPos = 0;
                 this->actor.update = DebugTable_DungeonListUpdate;
                 this->actor.draw = DebugTable_DrawDungeonList;
+                break;
+            case RETURN:
+                this->activeMenu = MAIN_MENU;
+                this->cursorPos = 0;
+                this->actor.update = DebugTable_Update;
+                this->actor.draw = DebugTable_Draw;
                 break;
         }
     }
@@ -161,7 +169,7 @@ void DebugTable_DungeonListUpdate(DebugTable* this, GlobalContext* globalCtx) {
         this->cursorPos++;
     }
 
-    if (CHECK_PAD(input[0].press, U_JPAD) && (this->cursorPos > 0)) {
+    if (CHECK_PAD(input[0].press, U_JPAD) && (this->cursorPos > RETURN)) {
         this->cursorPos--;
     }
 
@@ -169,39 +177,70 @@ void DebugTable_DungeonListUpdate(DebugTable* this, GlobalContext* globalCtx) {
         (this->actionTimer == 0)) {
         switch (this->cursorPos) {
             case DUNGEON_DEKU:
-                globalCtx->nextEntranceIndex = 0x00; // Hyrule Castle from Guard Capture (outside)
+                globalCtx->nextEntranceIndex = 0x00;
+                globalCtx->sceneLoadFlag = 0x14;
+                globalCtx->fadeTransition = 5;
+                gSaveContext.nextTransition = 5;
                 break;
             case DUNGEON_DODONGO:
                 globalCtx->nextEntranceIndex = 0x04;
+                globalCtx->sceneLoadFlag = 0x14;
+                globalCtx->fadeTransition = 5;
+                gSaveContext.nextTransition = 5;
                 break;
             case DUNGEON_JABU:
                 globalCtx->nextEntranceIndex = 0x28;
+                globalCtx->sceneLoadFlag = 0x14;
+                globalCtx->fadeTransition = 5;
+                gSaveContext.nextTransition = 5;
                 break;
             case DUNGEON_FOREST:
                 globalCtx->nextEntranceIndex = 0x169;
+                globalCtx->sceneLoadFlag = 0x14;
+                globalCtx->fadeTransition = 5;
+                gSaveContext.nextTransition = 5;
                 break;
             case DUNGEON_FIRE:
                 globalCtx->nextEntranceIndex = 0x165;
+                globalCtx->sceneLoadFlag = 0x14;
+                globalCtx->fadeTransition = 5;
+                gSaveContext.nextTransition = 5;
                 break;
             case DUNGEON_WATER:
                 globalCtx->nextEntranceIndex = 0x10;
+                globalCtx->sceneLoadFlag = 0x14;
+                globalCtx->fadeTransition = 5;
+                gSaveContext.nextTransition = 5;
                 break;
             case DUNGEON_SHADOW:
                 globalCtx->nextEntranceIndex = 0x37;
+                globalCtx->sceneLoadFlag = 0x14;
+                globalCtx->fadeTransition = 5;
+                gSaveContext.nextTransition = 5;
                 break;
             case DUNGEON_SPIRIT:
                 globalCtx->nextEntranceIndex = 0x82;
+                globalCtx->sceneLoadFlag = 0x14;
+                globalCtx->fadeTransition = 5;
+                gSaveContext.nextTransition = 5;
                 break;
             case DUNGEON_GANON:
                 globalCtx->nextEntranceIndex = 0x467;
+                globalCtx->sceneLoadFlag = 0x14;
+                globalCtx->fadeTransition = 5;
+                gSaveContext.nextTransition = 5;
+                break;
+            case RETURN:
+                this->activeMenu = WARP_CATEGORY_MENU;
+                this->cursorPos = 0;
+                this->actor.update = DebugTable_WarpListUpdate;
+                this->actor.draw = DebugTable_DrawWarpList;
                 break;
             default:
                 break;  
         }
 
-        globalCtx->sceneLoadFlag = 0x14;
-        globalCtx->fadeTransition = 5;
-        gSaveContext.nextTransition = 5;
+        
     }
 }
 
@@ -227,6 +266,16 @@ void DebugTable_DrawWarpList(DebugTable* this, GlobalContext* globalCtx) {
     GfxPrint_Init(printer);
     GfxPrint_Open(printer, gfxCtx->polyOpa.p);
 
+    GfxPrint_SetPos(printer, 2, 2);
+    if (this->cursorPos == -1)
+    {
+        GfxPrint_SetColor(printer, 255, 20, 20, 255);
+    } else {
+        GfxPrint_SetColor(printer, 255, 255, 255, 255);
+    }
+
+    GfxPrint_Printf(printer, "return");
+
     for (i = 0; i < NUM_OF_WARP_CATEGORIES; i++) {
         GfxPrint_SetPos(printer, this->warpMenu[i].pos.x, this->warpMenu[i].pos.y);
 
@@ -249,8 +298,21 @@ void DebugTable_DrawDungeonList(DebugTable* this, GlobalContext* globalCtx) {
     GfxPrint* printer = alloca(sizeof(GfxPrint));
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
 
+
+
     GfxPrint_Init(printer);
     GfxPrint_Open(printer, gfxCtx->polyOpa.p);
+
+    GfxPrint_SetPos(printer, 2, 2);
+    if (this->cursorPos == -1)
+    {
+        GfxPrint_SetColor(printer, 255, 20, 20, 255);
+    } else {
+        GfxPrint_SetColor(printer, 255, 255, 255, 255);
+    }
+
+    GfxPrint_Printf(printer, "return");
+
     for (i = 0; i < NUM_OF_DUNGEONS; i++) {
         GfxPrint_SetPos(printer, this->dungeonMenu[i].pos.x, this->dungeonMenu[i].pos.y);
         if (this->cursorPos == i) {
