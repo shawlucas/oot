@@ -2564,4 +2564,6 @@ void func_80821C10(GlobalContext*);
 void func_80825C14(GlobalContext*);
 void func_808161AC(GlobalContext*);
 
+void Gameplay_SpawnDebugTable(GlobalContext* globalCtx);
+
 #endif

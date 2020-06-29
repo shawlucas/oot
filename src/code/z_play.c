@@ -1047,6 +1047,11 @@ void Gameplay_Update(GlobalContext* globalCtx) {
         LOG_NUM("1", 1, "../z_play.c", 3816);
     }
 
+    if ((CHECK_PAD(input[0].press, L_TRIG) && (CHECK_PAD(input[0].cur, R_TRIG))))
+    {
+        Gameplay_SpawnDebugTable(globalCtx);
+    }
+
     
     func_80070C24(globalCtx, &globalCtx->envCtx, &globalCtx->lightCtx, &globalCtx->pauseCtx, &globalCtx->msgCtx,
                   &globalCtx->unk_10A20, globalCtx->state.gfxCtx);
@@ -1054,6 +1059,19 @@ void Gameplay_Update(GlobalContext* globalCtx) {
 //#else
 //#pragma GLOBAL_ASM("asm/non_matchings/code/z_play/Gameplay_Update.s")
 //#endif
+
+void Gameplay_SpawnDebugTable(GlobalContext* globalCtx)
+{
+    Actor* debugTable = Actor_Find(&globalCtx->actorCtx, ACTOR_DEBUG_TABLE, ACTORTYPE_MISC);
+
+    if (debugTable != NULL)
+    {
+        Actor_Kill(debugTable);
+    } else if (debugTable == NULL)
+    {
+        Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_DEBUG_TABLE, 0, 0, 0, 0, 0, 0, 0);
+    }
+}
 
 void Gameplay_DrawOverlayElements(GlobalContext* globalCtx) {
     if ((globalCtx->pauseCtx.state != 0) || (globalCtx->pauseCtx.flag != 0)) {

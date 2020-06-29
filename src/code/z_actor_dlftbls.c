@@ -486,7 +486,7 @@ ActorOverlay gActorOverlayTable[] = {
     ACTOR_OVERLAY(En_Mm2, ALLOCTYPE_NORMAL),
     ACTOR_OVERLAY(Bg_Jya_Block, ALLOCTYPE_NORMAL),
     ACTOR_OVERLAY(Obj_Warp2block, ALLOCTYPE_NORMAL),
-    //ACTOR_OVERLAY(Debug_Table, ALLOCTYPE_NORMAL),
+    ACTOR_OVERLAY(Debug_Table, ALLOCTYPE_PERMANENT),
 };
 
 s32 gMaxActorId = 0;
