@@ -76,7 +76,8 @@ typedef struct DebugTable {
     u8 pressed;
     s16 actionTimer;
     s32 currentScene;
-    SceneSelectEntry* scenes;
+    u8 submenuActive;
+    u8 activeSubmenu;
     MenuItem mainMenu[NUM_OF_ITEMS];
     MenuItem warpMenu[NUM_OF_WARP_CATEGORIES];
     MenuItem dungeonMenu[NUM_OF_DUNGEONS];
