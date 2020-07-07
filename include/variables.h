@@ -82,8 +82,8 @@ extern u32 osResetType;
 extern u32 osMemSize;
 extern u8 osAppNmiBuffer[];
 
-extern u8 D_80009320[];
-extern u8 D_800093F0[];
+extern u8 build_asm_rspbootTextStart[];
+extern u8 build_asm_rspbootTextEnd[];
 extern u8 D_80009430;
 extern u32 D_80009460;
 extern u32 gDmaMgrDmaBuffSize;

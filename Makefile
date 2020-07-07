@@ -163,6 +163,10 @@ build/baserom/%.o: baserom/%
 build/asm/%.o: asm/%.s
 	$(AS) $(ASFLAGS) $^ -o $@
 
+build/asm/rspboot.o: asm/rspboot.s
+	rspasm  -DPROTECT -I. -I/etc/n64/usr/include/PR -I/etc/n64/usr/include -F -l -o build/asm/rspboot $<
+	rsp2elf -p -r build/asm/rspboot
+
 build/data/%.o: data/%.s
 	iconv --from UTF-8 --to EUC-JP $^ | $(AS) $(ASFLAGS) -o $@
 

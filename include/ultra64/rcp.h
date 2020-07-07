@@ -11,4 +11,6 @@
 #define DEVICE_TYPE_SRAM	3	/* SRAM */
 #define DEVICE_TYPE_INIT	7	/* initial value */
 
+#define SP_DMEM_END 0x04000FFF
+
 #endif
