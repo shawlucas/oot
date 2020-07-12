@@ -10,28 +10,95 @@
 .balign 16
 
 glabel D_8011FAF0
-    .incbin "baserom.z64", 0xB96C90, 0x40
+    .word 0x00000006
+    .word 0x00000000
+    .word 0x00000005
+    .word 0x00020000
+    .word 0x00000004
+    .word 0x00030000
+    .word 0x00000003
+    .word 0x00038000
+    .word 0x00000002
+    .word 0x0003C000
+    .word 0x00000001
+    .word 0x0003E000
+    .word 0x00000000
+    .word 0x0003F000
+    .word 0x00000000
+    .word 0x0003F800
 
 glabel D_8011FB30
-    .incbin "baserom.z64", 0xB96CD0, 0x4
+    .word 0x00000000
 
 glabel D_8011FB34
-    .incbin "baserom.z64", 0xB96CD4, 0x4
+    .word 0x00000000
 
 glabel D_8011FB38
-    .incbin "baserom.z64", 0xB96CD8, 0x4
+    .word 0x00000000
 
 glabel D_8011FB3C
-    .incbin "baserom.z64", 0xB96CDC, 0x4
+    .word 0x00000000
 
 glabel D_8011FB40
-    .incbin "baserom.z64", 0xB96CE0, 0x4
+    .word 0x00000000
 
 glabel D_8011FB44
-    .incbin "baserom.z64", 0xB96CE4, 0x4
+    .word 0xFFFC0000
 
 glabel D_8011FB48
-    .incbin "baserom.z64", 0xB96CE8, 0xD4
+    .word 0x00002AAC 
+    .word 0x03032AAC 
+    .word 0x40000300 
+    .word 0x40005556 
+    .word 0x00015556 
+    .word 0xAAAB0101 
+    .word 0xAAABB556 
+    .word 0x0102B556 
+    .word 0xCAAC0203 
+    .word 0xCAACFFFF 
+    .word 0x03030000
+    .word 0x2AAC0707 
+    .word 0x2AAC4000
+    .word 0x07044000 
+    .word 0x55560405 
+    .word 0x5556AAAB 
+    .word 0x0505AAAB
+    .word 0xB5560506 
+    .word 0xB556CAAC 
+    .word 0x0607CAAC 
+    .word 0xFFFF0707 
+    .word 0x00002AAC 
+    .word 0x0B0B2AAC 
+    .word 0x40000B08 
+    .word 0x40005556 
+    .word 0x08095556 
+    .word 0xAAAB0909 
+    .word 0xAAABB556 
+    .word 0x090AB556 
+    .word 0xCAAC0A0B 
+    .word 0xCAACFFFF 
+    .word 0x0B0B0000 
+    .word 0x2AAC0F0F 
+    .word 0x2AAC4000 
+    .word 0x0F0C4000 
+    .word 0x55560C0D 
+    .word 0x5556AAAB
+    .word 0x0D0DAAAB 
+    .word 0xB5560D0E 
+    .word 0xB556CAAC 
+    .word 0x0E0FCAAC 
+    .word 0xFFFF0F0F 
+    .word 0x00002AAC 
+    .word 0x17172AAC 
+    .word 0x40001714 
+    .word 0x40005556 
+    .word 0x14155556 
+    .word 0xAAAB1515 
+    .word 0xAAABB556 
+    .word 0x1516B556 
+    .word 0xCAAC1617 
+    .word 0xCAACFFFF 
+    .word 0x17170000
 
 glabel D_8011FC1C
     .incbin "baserom.z64", 0xB96DBC, 0x120
