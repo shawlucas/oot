@@ -536,6 +536,7 @@ endseg
 
 beginseg
     name "buffers"
+    align 0x40
     include "build/src/buffers/zbuffer.o"
     include "build/src/buffers/gfxbuffers.o"
     include "build/src/buffers/heaps.o"
@@ -1418,6 +1419,9 @@ endseg
 
 beginseg
     name "ovl_Bg_Toki_Swd"
+    include "build/src/overlays/actors/ovl_Bg_Toki_Swd/z_bg_toki_swd_cutscene_data_1.o"
+    include "build/src/overlays/actors/ovl_Bg_Toki_Swd/z_bg_toki_swd_cutscene_data_2.o"
+    include "build/src/overlays/actors/ovl_Bg_Toki_Swd/z_bg_toki_swd_cutscene_data_3.o"
     include "build/src/overlays/actors/ovl_Bg_Toki_Swd/z_bg_toki_swd.o"
     include "build/src/overlays/actors/ovl_Bg_Toki_Swd/ovl_Bg_Toki_Swd_reloc.o"
 endseg
@@ -3826,8 +3830,7 @@ endseg
 beginseg
     name "ovl_Shot_Sun"
     include "build/src/overlays/actors/ovl_Shot_Sun/z_shot_sun.o"
-    include "build/data/overlays/actors/z_shot_sun.data.o"
-    include "build/data/overlays/actors/z_shot_sun.reloc.o"
+    include "build/src/overlays/actors/ovl_Shot_Sun/ovl_Shot_Sun_reloc.o"
 endseg
 
 beginseg
