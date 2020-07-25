@@ -22,6 +22,10 @@ ExtractFile("assets/textures/xml/icon_item_gameover_static.xml", "assets/texture
 ExtractFile("assets/textures/xml/icon_item_nes_static.xml", "assets/textures/icon_item_nes_static")
 ExtractFile("assets/textures/xml/icon_item_static.xml", "assets/textures/icon_item_static")
 
+# Objects
+ExtractFile("assets/objects/xml/object_vase.xml", "assets/objects/object_vase")
+ExtractFile("assets/objects/xml/object_umajump.xml", "assets/objects/object_umajump")
+
 # Scenes and Rooms
 ExtractFile("scenes/xml/test_levels/test01.xml", "scenes/test_levels/test01")
 ExtractFile("scenes/xml/test_levels/testroom.xml", "scenes/test_levels/testroom")

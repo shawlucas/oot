@@ -1,0 +1,7 @@
+<Root>
+    <File Name="object_umajump">
+        <Texture Name="Horse_Fence_Wall" Format="rgb5a1" Width="16" Height="64"/> 
+        <DList Name="gate" Address="0x00001220"/>
+        <Blob Name="dynaPolyinfo" Address="0x1438" Size="0x35"/>
+    </File>
+</Root>
