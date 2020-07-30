@@ -31,7 +31,7 @@ glabel func_809C990C
 /* 00BB0 809C9970 82050003 */  lb      $a1, 0x0003($s0)           ## 00000003
 /* 00BB4 809C9974 3C05809D */  lui     $a1, %hi(func_809C99C4)    ## $a1 = 809D0000
 /* 00BB8 809C9978 24A599C4 */  addiu   $a1, $a1, %lo(func_809C99C4) ## $a1 = 809C99C4
-/* 00BBC 809C997C 0C272370 */  jal     func_809C8DC0              
+/* 00BBC 809C997C 0C272370 */  jal     EnBox_SetupAction              
 /* 00BC0 809C9980 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00BC4 809C9984 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 /* 00BC8 809C9988 0C020120 */  jal     func_80080480              

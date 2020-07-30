@@ -39,7 +39,7 @@ glabel func_809C9A7C
 /* 00D48 809C9B08 E4EA0028 */  swc1    $f10, 0x0028($a3)          ## 00000028
 .L809C9B0C:
 /* 00D4C 809C9B0C 3C05809D */  lui     $a1, %hi(func_809C9B28)    ## $a1 = 809D0000
-/* 00D50 809C9B10 0C272370 */  jal     func_809C8DC0              
+/* 00D50 809C9B10 0C272370 */  jal     EnBox_SetupAction              
 /* 00D54 809C9B14 24A59B28 */  addiu   $a1, $a1, %lo(func_809C9B28) ## $a1 = 809C9B28
 .L809C9B18:
 /* 00D58 809C9B18 8FBF0014 */  lw      $ra, 0x0014($sp)           

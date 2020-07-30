@@ -21,7 +21,7 @@ glabel func_809C9630
 /* 008B4 809C9674 3C05809D */  lui     $a1, %hi(func_809C94AC)    ## $a1 = 809D0000
 /* 008B8 809C9678 04400010 */  bltz    $v0, .L809C96BC            
 /* 008BC 809C967C 2841FFF5 */  slti    $at, $v0, 0xFFF5           
-/* 008C0 809C9680 0C272370 */  jal     func_809C8DC0              
+/* 008C0 809C9680 0C272370 */  jal     EnBox_SetupAction              
 /* 008C4 809C9684 24A594AC */  addiu   $a1, $a1, %lo(func_809C94AC) ## $a1 = 809C94AC
 /* 008C8 809C9688 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 /* 008CC 809C968C 24051194 */  addiu   $a1, $zero, 0x1194         ## $a1 = 00001194

@@ -14,7 +14,7 @@ glabel func_809C99C4
 /* 00C34 809C99F4 51E0001D */  beql    $t7, $zero, .L809C9A6C     
 /* 00C38 809C99F8 8FBF0034 */  lw      $ra, 0x0034($sp)           
 .L809C99FC:
-/* 00C3C 809C99FC 0C272370 */  jal     func_809C8DC0              
+/* 00C3C 809C99FC 0C272370 */  jal     EnBox_SetupAction              
 /* 00C40 809C9A00 24A59A7C */  addiu   $a1, $a1, %lo(func_809C9A7C) ## $a1 = 809C9A7C
 /* 00C44 809C9A04 C604000C */  lwc1    $f4, 0x000C($s0)           ## 0000000C
 /* 00C48 809C9A08 8FA5003C */  lw      $a1, 0x003C($sp)           

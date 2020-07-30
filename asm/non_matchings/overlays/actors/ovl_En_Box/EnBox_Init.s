@@ -73,7 +73,7 @@ glabel EnBox_Init
 /* 00198 809C8F58 A20901F7 */  sb      $t1, 0x01F7($s0)           ## 000001F7
 /* 0019C 809C8F5C A20A01FA */  sb      $t2, 0x01FA($s0)           ## 000001FA
 /* 001A0 809C8F60 24A59D70 */  addiu   $a1, $a1, %lo(func_809C9D70) ## $a1 = 809C9D70
-/* 001A4 809C8F64 0C272370 */  jal     func_809C8DC0
+/* 001A4 809C8F64 0C272370 */  jal     EnBox_SetupAction
 /* 001A8 809C8F68 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 001AC 809C8F6C 920B01F6 */  lbu     $t3, 0x01F6($s0)           ## 000001F6
 /* 001B0 809C8F70 356C0010 */  ori     $t4, $t3, 0x0010           ## $t4 = 00000010
@@ -114,7 +114,7 @@ glabel EnBox_Init
 /* 0022C 809C8FEC 35AE0004 */  ori     $t6, $t5, 0x0004           ## $t6 = 00000004
 /* 00230 809C8FF0 A20E01F6 */  sb      $t6, 0x01F6($s0)           ## 000001F6
 .L809C8FF4:
-/* 00234 809C8FF4 0C272370 */  jal     func_809C8DC0
+/* 00234 809C8FF4 0C272370 */  jal     EnBox_SetupAction
 /* 00238 809C8FF8 AE0F01A8 */  sw      $t7, 0x01A8($s0)           ## 000001A8
 /* 0023C 809C8FFC 921801F6 */  lbu     $t8, 0x01F6($s0)           ## 000001F6
 /* 00240 809C9000 8E080004 */  lw      $t0, 0x0004($s0)           ## 00000004
@@ -140,7 +140,7 @@ glabel EnBox_Init
 /* 00280 809C9040 14400015 */  bne     $v0, $zero, .L809C9098
 /* 00284 809C9044 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00288 809C9048 3C05809D */  lui     $a1, %hi(func_809C990C)    ## $a1 = 809D0000
-/* 0028C 809C904C 0C272370 */  jal     func_809C8DC0
+/* 0028C 809C904C 0C272370 */  jal     EnBox_SetupAction
 /* 00290 809C9050 24A5990C */  addiu   $a1, $a1, %lo(func_809C990C) ## $a1 = 809C990C
 /* 00294 809C9054 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 /* 00298 809C9058 8FA50030 */  lw      $a1, 0x0030($sp)
@@ -170,7 +170,7 @@ glabel EnBox_Init
 /* 002F0 809C90B0 54410019 */  bnel    $v0, $at, .L809C9118
 /* 002F4 809C90B4 2401000B */  addiu   $at, $zero, 0x000B         ## $at = 0000000B
 .L809C90B8:
-/* 002F8 809C90B8 0C272370 */  jal     func_809C8DC0
+/* 002F8 809C90B8 0C272370 */  jal     EnBox_SetupAction
 /* 002FC 809C90BC 24A59700 */  addiu   $a1, $a1, %lo(func_809C9700) ## $a1 = 809C9700
 /* 00300 809C90C0 8E0E0004 */  lw      $t6, 0x0004($s0)           ## 00000004
 /* 00304 809C90C4 3C010200 */  lui     $at, 0x0200                ## $at = 02000000
@@ -203,7 +203,7 @@ glabel EnBox_Init
 /* 00368 809C9128 14400015 */  bne     $v0, $zero, .L809C9180
 /* 0036C 809C912C 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00370 809C9130 3C05809D */  lui     $a1, %hi(func_809C988C)    ## $a1 = 809D0000
-/* 00374 809C9134 0C272370 */  jal     func_809C8DC0
+/* 00374 809C9134 0C272370 */  jal     EnBox_SetupAction
 /* 00378 809C9138 24A5988C */  addiu   $a1, $a1, %lo(func_809C988C) ## $a1 = 809C988C
 /* 0037C 809C913C 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 /* 00380 809C9140 8FA50030 */  lw      $a1, 0x0030($sp)
@@ -236,7 +236,7 @@ glabel EnBox_Init
 /* 003E4 809C91A4 35CF0080 */  ori     $t7, $t6, 0x0080           ## $t7 = 00000080
 /* 003E8 809C91A8 AE0F0004 */  sw      $t7, 0x0004($s0)           ## 00000004
 .L809C91AC:
-/* 003EC 809C91AC 0C272370 */  jal     func_809C8DC0
+/* 003EC 809C91AC 0C272370 */  jal     EnBox_SetupAction
 /* 003F0 809C91B0 24A59B28 */  addiu   $a1, $a1, %lo(func_809C9B28) ## $a1 = 809C9B28
 /* 003F4 809C91B4 921801F6 */  lbu     $t8, 0x01F6($s0)           ## 000001F6
 /* 003F8 809C91B8 37080001 */  ori     $t0, $t8, 0x0001           ## $t0 = 00000001

@@ -49,7 +49,7 @@ glabel func_809C9B28
 /* 00DFC 809C9BBC E7A80018 */  swc1    $f8, 0x0018($sp)
 /* 00E00 809C9BC0 3C05809D */  lui     $a1, %hi(func_809C9D70)    ## $a1 = 809D0000
 /* 00E04 809C9BC4 24A59D70 */  addiu   $a1, $a1, %lo(func_809C9D70) ## $a1 = 809C9D70
-/* 00E08 809C9BC8 0C272370 */  jal     func_809C8DC0
+/* 00E08 809C9BC8 0C272370 */  jal     EnBox_SetupAction
 /* 00E0C 809C9BCC 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00E10 809C9BD0 860B01F4 */  lh      $t3, 0x01F4($s0)           ## 000001F4
 /* 00E14 809C9BD4 59600021 */  blezl   $t3, .L809C9C5C
@@ -156,7 +156,7 @@ glabel func_809C9B28
 /* 00F88 809C9D48 10400004 */  beq     $v0, $zero, .L809C9D5C
 /* 00F8C 809C9D4C 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00F90 809C9D50 3C05809D */  lui     $a1, %hi(func_809C9D70)    ## $a1 = 809D0000
-/* 00F94 809C9D54 0C272370 */  jal     func_809C8DC0
+/* 00F94 809C9D54 0C272370 */  jal     EnBox_SetupAction
 /* 00F98 809C9D58 24A59D70 */  addiu   $a1, $a1, %lo(func_809C9D70) ## $a1 = 809C9D70
 .L809C9D5C:
 /* 00F9C 809C9D5C 8FBF003C */  lw      $ra, 0x003C($sp)
