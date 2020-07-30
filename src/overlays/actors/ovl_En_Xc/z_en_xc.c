@@ -14,8 +14,156 @@ void EnXc_Init(Actor* thisx, GlobalContext* globalCtx);
 void EnXc_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnXc_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnXc_Draw(Actor* thisx, GlobalContext* globalCtx);
+s32 func_80B3E8AC(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor* thisx);
 
-/*
+
+void func_80B3E224(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E25C(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E294(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E30C(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E368(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E3C4(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E420(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E464(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E4AC(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E4F8(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E53C(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E580(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E5C8(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E610(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E668(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E6D0(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E738(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E7A0(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E804(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E85C(EnXc* this, GlobalContext* globalCtx);
+void func_80B3ED48(EnXc* this, GlobalContext* globalCtx);
+void func_80B3ED68(EnXc* this, GlobalContext* globalCtx);
+void func_80B3ED88(EnXc* this, GlobalContext* globalCtx);
+void func_80B3EDCC(EnXc* this, GlobalContext* globalCtx);
+void func_80B3EE28(EnXc* this, GlobalContext* globalCtx);
+void func_80B3EE34(EnXc* this, GlobalContext* globalCtx);
+void func_80B3EE40(EnXc* this, GlobalContext* globalCtx);
+void func_80B3EE4C(EnXc* this, GlobalContext* globalCtx);
+void func_80B3EE58(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F124(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F144(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F16C(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F1A8(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F1D0(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F1F8(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F220(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F248(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F270(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F298(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F2C0(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F2E8(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F344(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F36C(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F394(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F3BC(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F7F8(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F820(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F848(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F8A0(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F8C8(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F928(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F988(EnXc* this, GlobalContext* globalCtx);
+void func_80B3F9E8(EnXc* this, GlobalContext* globalCtx);
+void func_80B400E4(EnXc* this, GlobalContext* globalCtx);
+void func_80B40104(EnXc* this, GlobalContext* globalCtx);
+void func_80B4015C(EnXc* this, GlobalContext* globalCtx);
+void func_80B401CC(EnXc* this, GlobalContext* globalCtx);
+void func_80B41000(EnXc* this, GlobalContext* globalCtx);
+void func_80B41020(EnXc* this, GlobalContext* globalCtx);
+void func_80B41068(EnXc* this, GlobalContext* globalCtx);
+void func_80B410AC(EnXc* this, GlobalContext* globalCtx);
+void func_80B41110(EnXc* this, GlobalContext* globalCtx);
+void func_80B41174(EnXc* this, GlobalContext* globalCtx);
+void func_80B411AC(EnXc* this, GlobalContext* globalCtx);
+void func_80B41204(EnXc* this, GlobalContext* globalCtx);
+void func_80B41248(EnXc* this, GlobalContext* globalCtx);
+void func_80B41284(EnXc* this, GlobalContext* globalCtx);
+void func_80B412AC(EnXc* this, GlobalContext* globalCtx);
+void func_80B412D4(EnXc* this, GlobalContext* globalCtx);
+void func_80B412FC(EnXc* this, GlobalContext* globalCtx);
+void func_80B41324(EnXc* this, GlobalContext* globalCtx);
+void func_80B4134C(EnXc* this, GlobalContext* globalCtx);
+void func_80B41374(EnXc* this, GlobalContext* globalCtx);
+void func_80B4139C(EnXc* this, GlobalContext* globalCtx);
+void func_80B413C4(EnXc* this, GlobalContext* globalCtx);
+void func_80B41414(EnXc* this, GlobalContext* globalCtx);
+void func_80B4143C(EnXc* this, GlobalContext* globalCtx);
+void func_80B41464(EnXc* this, GlobalContext* globalCtx);
+void func_80B4148C(EnXc* this, GlobalContext* globalCtx);
+void func_80B417E4(EnXc* this, GlobalContext* globalCtx);
+void func_80B41844(EnXc* this, GlobalContext* globalCtx);
+
+void func_80B41B98(EnXc* this, GlobalContext* globalCtx);
+void func_80B3E908(EnXc* this, GlobalContext* globalCtx);
+void func_80B41BA4(EnXc* this, GlobalContext* globalCtx);
+void func_80B3EA7C(EnXc* this, GlobalContext* globalCtx);
+void func_80B402C4(EnXc* this, GlobalContext* globalCtx);
+void func_80B414AC(EnXc* this, GlobalContext* globalCtx);
+
+ColliderCylinderInit_Set3 D_80B41D40 = {
+    { COLTYPE_UNK0, 0x00, 0x00, 0x09, COLSHAPE_CYLINDER },
+    { 0x00, { 0x00000000, 0x00, 0x00 }, { 0x00000000, 0x00, 0x00 }, 0x00, 0x00, 0x01 },
+    { 25, 80, 0, { 0, 0, 0 } },
+};
+
+UNK_PTR D_80B41D6C[] = {
+    0x06004CC0,
+    0x060050C0,
+    0x060054C0,
+};
+
+Vec3f D_80B41D78 = { -611.0f, 728.0f, -2.0f };
+
+Vec3f D_80B41D84 = { -1069.0f, 38.0f, 0.0f };
+
+s32 D_80B41D90 = 0x00000000;
+
+Vec3f D_80B41D94 = { 0.0f, 0.0f, 0.0f };
+
+f32 D_80B41DA0 = 0.0f;
+
+s32 D_80B41DA4 = 0x00000000;
+
+s32 D_80B41DA8 = 0x00000001;
+
+s32 D_80B41DAC = 0x00000001;
+
+Vec3f D_80B41DB0 = { 0.0f, 0.0f, 0.0f };
+
+Vec3f D_80B41DBC = { 0.0f, 0.0f, 0.0f };
+
+EnXcActionFunc D_80B41DC8[] = {
+    func_80B3E224, func_80B3E25C, func_80B3E294, func_80B3E30C, func_80B3E368, func_80B3E3C4, func_80B3E420,
+    func_80B3E464, func_80B3E4AC, func_80B3E4F8, func_80B3E53C, func_80B3E580, func_80B3E5C8, func_80B3E610,
+    func_80B3E668, func_80B3E6D0, func_80B3E738, func_80B3E7A0, func_80B3E804, func_80B3E85C, func_80B3ED48,
+    func_80B3ED68, func_80B3ED88, func_80B3EDCC, func_80B3EE28, func_80B3EE34, func_80B3EE40, func_80B3EE4C,
+    func_80B3EE58, func_80B3F124, func_80B3F144, func_80B3F16C, func_80B3F1A8, func_80B3F1D0, func_80B3F1F8,
+    func_80B3F220, func_80B3F248, func_80B3F270, func_80B3F298, func_80B3F2C0, func_80B3F2E8, func_80B3F344,
+    func_80B3F36C, func_80B3F394, func_80B3F3BC, func_80B3F7F8, func_80B3F820, func_80B3F848, func_80B3F8A0,
+    func_80B3F8C8, func_80B3F928, func_80B3F988, func_80B3F9E8, func_80B400E4, func_80B40104, func_80B4015C,
+    func_80B401CC, func_80B41000, func_80B41020, func_80B41068, func_80B410AC, func_80B41110, func_80B41174,
+    func_80B411AC, func_80B41204, func_80B41248, func_80B41284, func_80B412AC, func_80B412D4, func_80B412FC,
+    func_80B41324, func_80B4134C, func_80B41374, func_80B4139C, func_80B413C4, func_80B41414, func_80B4143C,
+    func_80B41464, func_80B4148C, func_80B417E4, func_80B41844,
+};
+
+Vec3f D_80B41F0C = { 0.0f, 10.0f, 0.0f };
+
+EnXcDrawFunc D_80B41F18[] = {
+    func_80B41B98,
+    func_80B41BA4,
+    func_80B3E908,
+    func_80B3EA7C,
+    func_80B402C4,
+    func_80B414AC,
+};
+
 const ActorInit En_Xc_InitVars = {
     ACTOR_EN_XC,
     ACTORTYPE_NPC,
@@ -27,7 +175,7 @@ const ActorInit En_Xc_InitVars = {
     (ActorFunc)EnXc_Update,
     (ActorFunc)EnXc_Draw,
 };
-*/
+
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B3C1E0.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B3C22C.s")
