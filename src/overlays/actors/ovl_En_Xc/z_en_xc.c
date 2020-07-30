@@ -176,6 +176,12 @@ const ActorInit En_Xc_InitVars = {
     (ActorFunc)EnXc_Draw,
 };
 
+Vec3f D_80B42D90;
+
+Vec3f D_80B42DA0;
+
+Vec3f D_80B42DB0;
+
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B3C1E0.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B3C22C.s")
