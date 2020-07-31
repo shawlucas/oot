@@ -2193,7 +2193,7 @@ void* Audio_AudioListPopBack(AudioListItem* list);
 // ? func_800F3F3C(?);
 // ? func_800F3F84(?);
 // ? func_800F4010(?);
-void func_800F436C(UNK_TYPE arg0, s16 arg1, f32 arg2);
+void func_800F436C(Vec3f* arg0, s16 arg1, f32 arg2);
 // ? func_800F4414(?);
 // ? func_800F4524(?);
 // ? func_800F4784(?);
