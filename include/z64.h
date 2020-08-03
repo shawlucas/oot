@@ -18,6 +18,7 @@
 #include <z64dma.h>
 #include <z64math.h>
 #include <z64transition.h>
+#include <z_kaleido_moji.h>
 #include <bgm.h>
 #include <sfx.h>
 #include <color.h>
@@ -1101,7 +1102,7 @@ typedef struct {
 } EntranceEntry;
 
 typedef struct {
-    /* 0x00 */ void* read_buff;
+    /* 0x00 */ unsigned char* read_buff;
 } Sram; // size = 0x4
 
 typedef struct GameAllocEntry {

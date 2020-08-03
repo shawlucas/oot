@@ -61,6 +61,28 @@
 #define LOG_NUM(exp, value, file, line) LOG(exp, value, "%d", file, line)
 #define LOG_HEX(exp, value, file, line) LOG(exp, value, "%x", file, line)
 
+typedef struct {
+    Gfx* tmp_poly_opa;
+    Gfx* tmp_poly_xlu;
+    Gfx* tmp_overlay;
+} __GraphCheck;
+
+#define OPEN_DISP(graph, file, line)                                     \
+    {                                                                    \
+        GraphicsContext* gfxCtx = (graph);                               \
+        s32 __poly_gfx_opened = 0;                                       \
+        __GraphCheck __graphcheck;                                       \
+        Graph_OpenDisps(&__graphcheck, graph, file, line);               \
+        (void)0 /* rquire `;'  */
+
+#define CLOSE_DISP(graph, file, line)                                    \
+    do {                                                                 \
+        Graph_CloseDisps(&__graphcheck, graph, file, line);              \
+        (void)__poly_gfx_opened;                                         \
+    } while (0);                                                         \
+    }                                                                    \
+    (void)0 /* rquire `;'  */
+
 /*
  * `x` vertex x
  * `y` vertex y

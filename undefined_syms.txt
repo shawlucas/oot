@@ -796,3 +796,21 @@ D_060108B8 = 0x060108B8;
 D_0600FE40 = 0x0600FE40;
 D_0400CD80 = 0x0400CD80;
 D_040184B0 = 0x040184B0;
+
+// z_en_mag
+g_title_efc_1_txt = 0x06020000;
+g_title_efc_2_txt = 0x06020800;
+g_title_efc_3_txt = 0x06021000;
+g_title_efc_4_txt = 0x06021800;
+g_title_efc_5_txt = 0x06022000;
+g_title_efc_6_txt = 0x06022800;
+g_title_efc_7_txt = 0x06023000;
+g_title_efc_8_txt = 0x06023800;
+g_title_efc_9_txt = 0x06024000;
+g_title_mable_txt = 0x06024800;
+g_title_txt = 0x06000000;
+g_title_sub_1_txt = 0x06024C00;
+g_title_sub_2_txt = 0x06024E40;
+g_title_cpr_txt = 0x06019A00;
+D_0601A400 = 0x0601A400;
+

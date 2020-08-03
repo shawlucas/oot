@@ -478,6 +478,19 @@
 #define G_CC_HILITERGBPASSA2	ENVIRONMENT, COMBINED, TEXEL0, COMBINED, 0, 0, 0, COMBINED
 
 /*
+ * Custom F3DZEX Additions
+ */
+
+/* CC-color combiner newcolor=(A-B)XC+D */
+#define G_CC_INT2 1, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0
+#define G_CC_INT3 TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0
+#define G_CC_INT4 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0
+#define G_CC_INT5 0, 0, 0, PRIMITIVE, TEXEL1, TEXEL0, PRIM_LOD_FRAC, TEXEL0
+#define G_CC_INT6 PRIMITIVE, ENVIRONMENT, TEXEL0, PRIMITIVE, TEXEL1, TEXEL0, PRIM_LOD_FRAC, TEXEL0
+#define G_CC_INT9 PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0
+#define G_CC_MORPH TEXEL1, TEXEL0, PRIMITIVE_ALPHA, TEXEL0, TEXEL1, TEXEL0, PRIMITIVE, TEXEL0
+
+/*
  * G_SETOTHERMODE_L sft: shift count
  */
 #define	G_MDSFT_ALPHACOMPARE		0
@@ -4007,6 +4020,20 @@ _DW({									\
 			(ult)<<G_TEXTURE_IMAGE_FRAC,			\
 			(lrs)<<G_TEXTURE_IMAGE_FRAC,			\
 			(lrt)<<G_TEXTURE_IMAGE_FRAC)
+
+// Macro unique to F3DZEX
+#define gDPSetImageTile(pkt, fmt, siz, uls, ult, lrs, lrt, pal, cms, cmt, masks, maskt, shifts, shiftt)                \
+    do {                                                                                                               \
+        gDPPipeSync(pkt);                                                                                              \
+        gDPTileSync(pkt);                                                                                              \
+        gDPSetTile(pkt, fmt, siz, (((((lrs) - (uls) + 1) * siz##_TILE_BYTES) + 7) >> 3), 0, G_TX_LOADTILE, 0, cmt,     \
+                   maskt, shiftt, cms, masks, shifts);                                                                 \
+        gDPTileSync(pkt);                                                                                              \
+        gDPSetTile(pkt, fmt, siz, (((((lrs) - (uls) + 1) * siz##_LINE_BYTES) + 7) >> 3), 0, G_TX_RENDERTILE, pal, cmt, \
+                   maskt, shiftt, cms, masks, shifts);                                                                 \
+        gDPSetTileSize(pkt, G_TX_RENDERTILE, (uls) << G_TEXTURE_IMAGE_FRAC, (ult) << G_TEXTURE_IMAGE_FRAC,             \
+                       (lrs) << G_TEXTURE_IMAGE_FRAC, (lrt) << G_TEXTURE_IMAGE_FRAC);                                  \
+    } while (0)
 
 /*
  *  Load texture tile.  Allows tmem address and render tile to be specified.
