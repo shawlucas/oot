@@ -368,21 +368,21 @@ void EnMag_DrawSub(Actor* thisx, GameState* state, Gfx** glistp) {
 
     u16 i, j, k, xpos, ypos;
 
-    static s16 no_alpha = 0;      // no_alpha
-    static s16 no_alpha_mode = 0; // no_alpha_mode
-    static s16 no_alpha_ct = 0;   // no_alpha_ct
+    static s16 no_alpha = 0;      
+    static s16 no_alpha_mode = 0; 
+    static s16 no_alpha_ct = 0;   
     static u8 no_controller[] = {
         AAN, AAO, AAC, AAO, AAN, AAT, AAR, AAO, AAL, AAL, AAE, AAR,
-    }; // no_controller
+    };
 
     static u8 press_start[] = {
         AAP, AAR, AAE, AAS, AAS, AAS, AAT, AAA, AAR, AAT,
-    }; // press_start
+    };
 
     static u8* g_title_efc_txt_data[] = {
         g_title_efc_1_txt, g_title_efc_2_txt, g_title_efc_3_txt, g_title_efc_4_txt, g_title_efc_5_txt,
         g_title_efc_6_txt, g_title_efc_7_txt, g_title_efc_8_txt, g_title_efc_9_txt,
-    }; // g_title_efc_txt_data
+    }; 
 
     gSPSegment(gp++, 0x06, globalCtx->objectCtx.status[thisx->objBankIndex].segment);
 
