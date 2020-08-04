@@ -22,7 +22,7 @@ typedef struct EnXc {
     /* 0x026C */ char unk_26C[0x54];
     /* 0x02C0 */ ColliderCylinder collider;
     /* 0x030C */ s32 unk_30C;
-    /* 0x0310 */ char unk_310[0x4];
+    /* 0x0310 */ Actor* attached;
     /* 0x0314 */ struct_80034A14_arg1 struct_314;
 } EnXc; // size = 0x033C
 
