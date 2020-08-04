@@ -38,6 +38,13 @@
 // NOTE: Once we start supporting other builds, this can be changed with an ifdef
 #define REGION_NATIVE REGION_EU
 
+#define C_SEAL		6	
+#define C_MELODY	12	
+#define C_HOLY		3	
+#define C_ITEM		3	
+#define C_HEART		1	
+#define COLLECT_MAX	(C_SEAL+C_MELODY+C_HOLY+C_ITEM+C_HEART)
+
 // Game Info aka. Static Context (dbg ram start: 80210A10)
 // Data normally accessed through REG macros (see regs.h)
 typedef struct {
@@ -92,6 +99,53 @@ typedef enum {
     /* 0x00 */ BTN_ENABLED,
     /* 0xFF */ BTN_DISABLED = 0xFF
 } ButtonStatus;
+
+typedef struct {
+    u8	item_register[6*4];
+    s8	item_count[16];	
+    /*---------- ＥＱＵＩＰＭＥＮＴ ----------*/
+    u16	equip_register;		
+    long	non_equip_register;	
+    /*---------- ＣＯＬＬＥＣＴ ----------*/
+    long	collect_register;	
+    /*---------- ＭＡＰ ----------*/
+    u8	key_compass_map[20];
+    s8	key_register[20];
+    s16	n_coin_total;
+} Table_t;
+
+typedef struct {
+    u16 checkSum;
+} Save_t;
+
+
+typedef struct {
+    u8 newf[6]; // string "ZELDAZ"
+    u16 savect;
+    u8 playerName[8];
+    s16 n64ddFlag;
+    s16 healthCapacity;
+    s16 health;
+    s8 magicLevel;
+    s8 magic;
+    s16 rupees;
+    u16 bgsHitsLeft;
+    u16 naviTimer;
+    u8 magicAcquired;
+    u8 swordAbility;
+    u8 doubleMagic;
+    u8 doubleDefense;
+    u8 bgsFlag;
+    u8 ocarina_round;
+    ItemEquips childEquips;
+    ItemEquips adultEquips;
+    Vec3f position;
+    s16 angle_y;
+    s16 sceneNo;
+    u8 roomId;
+    u8 flag;
+    s16 sceneDataId;
+} PrivateF;
 
 // Save Context (dbg ram start: 8015E660)
 typedef struct {

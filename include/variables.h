@@ -472,7 +472,7 @@ extern RomFile gObjectTable[402];
 extern EntranceInfo gEntranceTable[1556];
 extern Scene gSceneTable[110];
 //extern ? D_8012A4A0;
-//extern ? D_8012A4E0;
+//extern ? sramSaveAddress;
 //extern ? D_8012A4EC;
 //extern ? D_8012A4F8;
 //extern ? D_8012A544;
