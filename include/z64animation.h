@@ -186,7 +186,7 @@ typedef void (*PostLimbDraw2)(struct GlobalContext* globalCtx, s32 limbIndex, Gf
 
 typedef void (*AnimationEntryCallback)(struct GlobalContext*, AnimationEntryType*);
 
-extern u32 link_animetion_segment;
+extern u8 link_animetion_segment[];
 
 // fcurve_skelanime structs
 typedef struct {

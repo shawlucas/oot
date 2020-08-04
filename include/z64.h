@@ -18,6 +18,7 @@
 #include <z64dma.h>
 #include <z64math.h>
 #include <z64transition.h>
+#include <z64kanfont.h>
 #include <z_kaleido_moji.h>
 #include <bgm.h>
 #include <sfx.h>

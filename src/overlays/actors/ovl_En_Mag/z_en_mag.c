@@ -25,16 +25,13 @@ void EnMag_Draw(Actor* thisx, GlobalContext* globalCtx);
 #define NO_CONTROLLER (gSaveContext.fileNum == 0xFEDC)
 
 Gfx* EnMag_DrawTexRecI8(Gfx** glistp, void* timg, s16 width, s16 height, s16 xpos, s16 ypos, s16 xsize, s16 ysize,
-                        u16 xscale, u16 yscale); // texture_rectangleI8
-Gfx* func_80AA46A0(Gfx** glistp, void* timg1, void* timg2, s16 width1, s16 height1, s16 width2, s16 height2, s16 xpos,
-                   s16 ypos, s16 xsize, s16 ysize, u16 xscale, u16 yscale, u16 xscale2, u16 yscale2, u16 flag,
-                   EnMag* this); // texture_multi_rectangle
-
-void EnMag_DisplayRGBA32B(Gfx** glistp, s16 cx, s16 cy, u8* addr, u32 sizex, u32 sizey); // EnMag_DisplayRGBA32B
-
-void EnMag_DisplayMoji(Gfx** glistp, u8* data, s32 xpos, s32 ypos); // moji_display
-
-void EnMag_DrawSub(Actor* thisx, GameState* state, Gfx** glistp); // EnMag_DrawSub
+                        u16 xscale, u16 yscale);
+Gfx* EnMag_DrawMultiTexRec(Gfx** glistp, void* timg1, void* timg2, s16 width1, s16 height1, s16 width2, s16 height2,
+                           s16 xpos, s16 ypos, s16 xsize, s16 ysize, u16 xscale, u16 yscale, u16 xscale2, u16 yscale2,
+                           u16 flag, EnMag* this);
+void EnMag_DisplayRGBA32B(Gfx** glistp, s16 cx, s16 cy, u8* addr, u32 sizex, u32 sizey);
+void EnMag_DisplayMoji(Gfx** glistp, u8* data, s32 xpos, s32 ypos);
+void EnMag_DrawSub(Actor* thisx, GameState* state, Gfx** glistp);
 
 extern u8 g_title_efc_1_txt[];
 extern u8 g_title_efc_2_txt[];
@@ -167,13 +164,12 @@ void EnMag_Update(Actor* thisx, GameState* state) {
             if (!check_time) {
                 if (CHECK_PAD(input->press, START_BUTTON) || CHECK_PAD(input->press, A_BUTTON) ||
                     CHECK_PAD(input->press, B_BUTTON)) {
-                    // globalCtx->sceneLoadFlag != globalCtx_FADE_OUT
                     if (globalCtx->sceneLoadFlag != 20) {
                         func_800F68BC(0);
                         Audio_PlaySoundGeneral(NA_SE_SY_PIECE_OF_HEART, &D_801333D4, 4, &D_801333E0, &D_801333E0,
                                                &D_801333E8);
-                        gSaveContext.gameMode = 2;     // GAME_INFO_OPENING_SELECT
-                        globalCtx->sceneLoadFlag = 20; // globalCtx_FADE_OUT
+                        gSaveContext.gameMode = 2;
+                        globalCtx->sceneLoadFlag = 20;
                         globalCtx->fadeTransition = 2;
                     }
                     this->alpha_fdin = 15;
@@ -275,9 +271,9 @@ Gfx* EnMag_DrawTexRecI8(Gfx** glistp, void* timg, s16 width, s16 height, s16 xpo
     *glistp = gp;
 }
 
-Gfx* func_80AA46A0(Gfx** glistp, void* timg1, void* timg2, s16 width1, s16 height1, s16 width2, s16 height2, s16 xpos,
-                   s16 ypos, s16 xsize, s16 ysize, u16 xscale, u16 yscale, u16 xscale2, u16 yscale2, u16 flag,
-                   EnMag* this) {
+Gfx* EnMag_DrawMultiTexRec(Gfx** glistp, void* timg1, void* timg2, s16 width1, s16 height1, s16 width2, s16 height2,
+                           s16 xpos, s16 ypos, s16 xsize, s16 ysize, u16 xscale, u16 yscale, u16 xscale2, u16 yscale2,
+                           u16 flag, EnMag* this) {
     Gfx* gp = *glistp;
 
     gDPLoadMultiBlock_4b(gp++, timg1, 0, G_TX_RENDERTILE, G_IM_FMT_I, width1, height1, 0, G_TX_WRAP | G_TX_NOMIRROR,
@@ -285,8 +281,8 @@ Gfx* func_80AA46A0(Gfx** glistp, void* timg1, void* timg2, s16 width1, s16 heigh
     if (!flag) {
         gDPLoadMultiBlock(gp++, timg2, 256, G_TX_RENDERTILE + 1, G_IM_FMT_I, G_IM_SIZ_8b, width2, height2, 0,
                           G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, 5, xscale2, yscale2);
-        gDPSetTileSize(gp++, G_TX_RENDERTILE + 1, 0, this->scroll_y & 0x7f, 31 << 2,
-                       (this->scroll_y & 0x7f) + (31 << 2));
+        gDPSetTileSize(gp++, G_TX_RENDERTILE + 1, 0, this->scroll_y & 0x7F, 31 << 2,
+                       (this->scroll_y & 0x7F) + (31 << 2));
     }
     gSPTextureRectangle(gp++, ((xpos)*0x4), ((ypos)*0x4), ((xpos + xsize) * 0x4), ((ypos + ysize) * 0x4),
                         G_TX_RENDERTILE, 0, 0, xscale, yscale);
@@ -368,9 +364,10 @@ void EnMag_DrawSub(Actor* thisx, GameState* state, Gfx** glistp) {
 
     u16 i, j, k, xpos, ypos;
 
-    static s16 no_alpha = 0;      
-    static s16 no_alpha_mode = 0; 
-    static s16 no_alpha_ct = 0;   
+    static s16 no_alpha = 0;
+    static s16 no_alpha_mode = 0;
+    static s16 no_alpha_ct = 0;
+
     static u8 no_controller[] = {
         AAN, AAO, AAC, AAO, AAN, AAT, AAR, AAO, AAL, AAL, AAE, AAR,
     };
@@ -382,7 +379,7 @@ void EnMag_DrawSub(Actor* thisx, GameState* state, Gfx** glistp) {
     static u8* g_title_efc_txt_data[] = {
         g_title_efc_1_txt, g_title_efc_2_txt, g_title_efc_3_txt, g_title_efc_4_txt, g_title_efc_5_txt,
         g_title_efc_6_txt, g_title_efc_7_txt, g_title_efc_8_txt, g_title_efc_9_txt,
-    }; 
+    };
 
     gSPSegment(gp++, 0x06, globalCtx->objectCtx.status[thisx->objBankIndex].segment);
 
@@ -400,8 +397,8 @@ void EnMag_DrawSub(Actor* thisx, GameState* state, Gfx** glistp) {
     if ((s16)this->effect_prim_f != 0) {
         for (i = k = 0, ypos; i < 3; i++) {
             for (j = 0, xpos = 56; j < 3; j++, k++, xpos += 64) {
-                func_80AA46A0(&gp, g_title_efc_txt_data[k], g_title_mable_txt, 64, 64, 32, 32, xpos, ypos, 64, 64,
-                              1 << 10, 1 << 10, 1, 1, k, this);
+                EnMag_DrawMultiTexRec(&gp, g_title_efc_txt_data[k], g_title_mable_txt, 64, 64, 32, 32, xpos, ypos, 64,
+                                      64, 1 << 10, 1 << 10, 1, 1, k, this);
             }
             ypos += 64;
         }
