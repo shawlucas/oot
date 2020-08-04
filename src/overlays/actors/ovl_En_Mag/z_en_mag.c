@@ -60,7 +60,8 @@ const ActorInit En_Mag_InitVars = {
     (ActorFunc)EnMag_Update,
     (ActorFunc)EnMag_Draw,
 };
-s16 check_time = 0;
+
+static s16 check_time = 0;
 
 void EnMag_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnMag* this = THIS;
@@ -121,7 +122,7 @@ void EnMag_Init(Actor* thisx, GlobalContext* globalCtx) {
         gSaveContext.fadeDuration = 1;
         gSaveContext.unk_1419 = 255;
     }
-    func_8006EF10(kanfont);
+    Kscope_KanfontGet(kanfont);
     this->key_point = 0;
     this->key_frame = 0;
     this->old_key = 0;

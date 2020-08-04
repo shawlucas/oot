@@ -5,15 +5,15 @@ extern u8 D_070380D4[];
 extern u8 link_animetion_segment[];
 extern u8 D_0703811C[];
 
-void func_8006EE60(Kanfont* kanfont, u8 code, u16 addr) {
+void Kanfont_GetNES(Kanfont* kanfont, u8 code, u16 addr) {
     DmaMgr_SendRequest1(&kanfont->kbuffer[addr], (code << 7) + _nes_font_staticSegmentRomStart, 128, "../z_kanfont.c", 93);
 }
 
-void func_8006EEBC(Kanfont* kanfont, u16 code) {
+void Kanfont_Get2(Kanfont* kanfont, u16 code) {
     DmaMgr_SendRequest1(&kanfont->kbuffer2[0], (u32)_message_staticSegmentRomStart+(((128*64)/2)*4)+(((16*16)/2)*code), 128, "../z_kanfont.c", 100);
 }
 
-void func_8006EF10(Kanfont* kanfont) {
+void Kscope_KanfontGet(Kanfont* kanfont) {
     s32 i, j, jj, m;
     u8 *msg_data1, *msg_data2, *msg_data3;
     u16* mb;
