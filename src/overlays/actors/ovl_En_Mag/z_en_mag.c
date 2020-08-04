@@ -24,17 +24,17 @@ void EnMag_Draw(Actor* thisx, GlobalContext* globalCtx);
 
 #define NO_CONTROLLER (gSaveContext.fileNum == 0xFEDC)
 
-Gfx* func_80AA447C(Gfx** glistp, void* timg, s16 width, s16 height, s16 xpos, s16 ypos, s16 xsize, s16 ysize,
-                   u16 xscale, u16 yscale); // texture_rectangleI8
+Gfx* EnMag_DrawTexRecI8(Gfx** glistp, void* timg, s16 width, s16 height, s16 xpos, s16 ypos, s16 xsize, s16 ysize,
+                        u16 xscale, u16 yscale); // texture_rectangleI8
 Gfx* func_80AA46A0(Gfx** glistp, void* timg1, void* timg2, s16 width1, s16 height1, s16 width2, s16 height2, s16 xpos,
                    s16 ypos, s16 xsize, s16 ysize, u16 xscale, u16 yscale, u16 xscale2, u16 yscale2, u16 flag,
                    EnMag* this); // texture_multi_rectangle
 
-void func_80AA4AD4(Gfx** glistp, s16 cx, s16 cy, u8* addr, u32 sizex, u32 sizey); // display_rgba32b
+void EnMag_DisplayRGBA32B(Gfx** glistp, s16 cx, s16 cy, u8* addr, u32 sizex, u32 sizey); // EnMag_DisplayRGBA32B
 
-void func_80AA4EB8(Gfx** glistp, u8* data, s32 xpos, s32 ypos); // moji_display
+void EnMag_DisplayMoji(Gfx** glistp, u8* data, s32 xpos, s32 ypos); // moji_display
 
-void func_80AA507C(Actor* thisx, GameState* state, Gfx** glistp); // EnMag_DrawSub
+void EnMag_DrawSub(Actor* thisx, GameState* state, Gfx** glistp); // EnMag_DrawSub
 
 extern u8 g_title_efc_1_txt[];
 extern u8 g_title_efc_2_txt[];
@@ -63,26 +63,8 @@ const ActorInit En_Mag_InitVars = {
     (ActorFunc)EnMag_Update,
     (ActorFunc)EnMag_Draw,
 };
-s16 D_80AA5EC0 = 0; // check_time
-/*
+s16 check_time = 0;
 
-
-s16 no_alpha = 0; // no_alpha
-s16 no_alpha_mode = 0; // no_alpha_mode
-s16 no_alpha_ct = 0; // no_alpha_ct
-u8 no_controller[] = {
-    AAN, AAO, AAC, AAO, AAN, AAT, AAR, AAO, AAL, AAL, AAE, AAR,
-}; // no_controller
-
-u8 press_start[] = {
-    AAP, AAR, AAE, AAS, AAS, AAS, AAT, AAA, AAR, AAT,
-}; // press_start
-
-u8* g_title_efc_txt_data[] = {
-    g_title_efc_1_txt, g_title_efc_2_txt, g_title_efc_3_txt, g_title_efc_4_txt, g_title_efc_5_txt,
-    g_title_efc_6_txt, g_title_efc_7_txt, g_title_efc_8_txt, g_title_efc_9_txt,
-}; // g_title_efc_txt_data
-*/
 void EnMag_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnMag* this = THIS;
     Kanfont* kanfont = &this->kanfont;
@@ -138,7 +120,7 @@ void EnMag_Init(Actor* thisx, GlobalContext* globalCtx) {
 
         gSaveContext.unk_13E7 = 0;
         this->title_mode = 2;
-        D_80AA5EC0 = 20;
+        check_time = 20;
         gSaveContext.fadeDuration = 1;
         gSaveContext.unk_1419 = 255;
     }
@@ -177,12 +159,12 @@ void EnMag_Update(Actor* thisx, GameState* state) {
                 this->effect_env[2] = 0.0f;
 
                 this->title_mode = 2;
-                D_80AA5EC0 = 20;
+                check_time = 20;
                 gSaveContext.fadeDuration = 1;
                 gSaveContext.unk_1419 = 255;
             }
         } else if (this->title_mode >= 2) {
-            if (!D_80AA5EC0) {
+            if (!check_time) {
                 if (CHECK_PAD(input->press, START_BUTTON) || CHECK_PAD(input->press, A_BUTTON) ||
                     CHECK_PAD(input->press, B_BUTTON)) {
                     // globalCtx->sceneLoadFlag != globalCtx_FADE_OUT
@@ -199,7 +181,7 @@ void EnMag_Update(Actor* thisx, GameState* state) {
                     this->title_mode = 3;
                 }
             } else {
-                D_80AA5EC0--;
+                check_time--;
             }
         }
     }
@@ -220,7 +202,7 @@ void EnMag_Update(Actor* thisx, GameState* state) {
                 this->effect_prim[2] = 255.0f;
                 this->effect_env[0] = 255.0f;
                 this->effect_env[1] = 255.0f;
-                this->effect_rgb_ct = (short)EFFECT_CT;
+                this->effect_rgb_ct = (s16)EFFECT_CT;
                 this->effect_rgb_fg = 1;
             }
         } else if (this->effect_rgb_fg == 1) {
@@ -247,7 +229,7 @@ void EnMag_Update(Actor* thisx, GameState* state) {
                     if ((this->copy_alpha += this->alpha_fdin) >= 255.0f) {
                         this->copy_alpha = 255.0f;
                         this->title_mode = 2;
-                        D_80AA5EC0 = 20;
+                        check_time = 20;
                     }
                 }
             }
@@ -281,8 +263,8 @@ void EnMag_Update(Actor* thisx, GameState* state) {
     }
 }
 
-Gfx* func_80AA447C(Gfx** glistp, void* timg, s16 width, s16 height, s16 xpos, s16 ypos, s16 xsize, s16 ysize,
-                   u16 xscale, u16 yscale) {
+Gfx* EnMag_DrawTexRecI8(Gfx** glistp, void* timg, s16 width, s16 height, s16 xpos, s16 ypos, s16 xsize, s16 ysize,
+                        u16 xscale, u16 yscale) {
     Gfx* gp = *glistp;
 
     gDPLoadTextureBlock(gp++, timg, G_IM_FMT_I, G_IM_SIZ_8b, width, height, 0, G_TX_NOMIRROR, G_TX_NOMIRROR,
@@ -293,9 +275,26 @@ Gfx* func_80AA447C(Gfx** glistp, void* timg, s16 width, s16 height, s16 xpos, s1
     *glistp = gp;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Mag/func_80AA46A0.s")
+Gfx* func_80AA46A0(Gfx** glistp, void* timg1, void* timg2, s16 width1, s16 height1, s16 width2, s16 height2, s16 xpos,
+                   s16 ypos, s16 xsize, s16 ysize, u16 xscale, u16 yscale, u16 xscale2, u16 yscale2, u16 flag,
+                   EnMag* this) {
+    Gfx* gp = *glistp;
 
-void func_80AA4AD4(Gfx** glistp, s16 cx, s16 cy, u8* addr, u32 sizex, u32 sizey) {
+    gDPLoadMultiBlock_4b(gp++, timg1, 0, G_TX_RENDERTILE, G_IM_FMT_I, width1, height1, 0, G_TX_WRAP | G_TX_NOMIRROR,
+                         G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+    if (!flag) {
+        gDPLoadMultiBlock(gp++, timg2, 256, G_TX_RENDERTILE + 1, G_IM_FMT_I, G_IM_SIZ_8b, width2, height2, 0,
+                          G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, 5, xscale2, yscale2);
+        gDPSetTileSize(gp++, G_TX_RENDERTILE + 1, 0, this->scroll_y & 0x7f, 31 << 2,
+                       (this->scroll_y & 0x7f) + (31 << 2));
+    }
+    gSPTextureRectangle(gp++, ((xpos)*0x4), ((ypos)*0x4), ((xpos + xsize) * 0x4), ((ypos + ysize) * 0x4),
+                        G_TX_RENDERTILE, 0, 0, xscale, yscale);
+
+    *glistp = gp;
+}
+
+void EnMag_DisplayRGBA32B(Gfx** glistp, s16 cx, s16 cy, u8* addr, u32 sizex, u32 sizey) {
     Gfx* gp = *glistp;
 
     s32 i, cnt, sx, sy;
@@ -347,7 +346,7 @@ void func_80AA4AD4(Gfx** glistp, s16 cx, s16 cy, u8* addr, u32 sizex, u32 sizey)
     *glistp = gp;
 }
 
-void func_80AA4EB8(Gfx** glistp, u8* data, s32 xpos, s32 ypos) {
+void EnMag_DisplayMoji(Gfx** glistp, u8* data, s32 xpos, s32 ypos) {
     Gfx* gp = *glistp;
 
     YREG(0) = ((s32)(1024.0f / ((f32)YREG(1) / 100.0f)));
@@ -360,8 +359,7 @@ void func_80AA4EB8(Gfx** glistp, u8* data, s32 xpos, s32 ypos) {
     *glistp = gp;
 }
 
-#ifdef NON_MATCHING
-void func_80AA507C(Actor* thisx, GameState* state, Gfx** glistp) {
+void EnMag_DrawSub(Actor* thisx, GameState* state, Gfx** glistp) {
     EnMag* this = THIS;
     GlobalContext* globalCtx = (GlobalContext*)state;
     Kanfont* kanfont = (Kanfont*)&this->kanfont;
@@ -370,9 +368,9 @@ void func_80AA507C(Actor* thisx, GameState* state, Gfx** glistp) {
 
     u16 i, j, k, xpos, ypos;
 
-    static s16 no_alpha = 0; // no_alpha
+    static s16 no_alpha = 0;      // no_alpha
     static s16 no_alpha_mode = 0; // no_alpha_mode
-    static s16 no_alpha_ct = 0; // no_alpha_ct
+    static s16 no_alpha_ct = 0;   // no_alpha_ct
     static u8 no_controller[] = {
         AAN, AAO, AAC, AAO, AAN, AAT, AAR, AAO, AAL, AAL, AAE, AAR,
     }; // no_controller
@@ -387,88 +385,87 @@ void func_80AA507C(Actor* thisx, GameState* state, Gfx** glistp) {
     }; // g_title_efc_txt_data
 
     gSPSegment(gp++, 0x06, globalCtx->objectCtx.status[thisx->objBankIndex].segment);
-    /*
-     * タイトル表示
-     */
+
     func_8009457C(&gp);
-    /* ロゴ本体を覆う光のエフェクト */
-#define G_CC_INT550 TEXEL1, PRIMITIVE, PRIM_LOD_FRAC, TEXEL0, TEXEL1, 1, PRIM_LOD_FRAC, TEXEL0
-#define G_CC_INT551 PRIMITIVE, ENVIRONMENT, COMBINED, ENVIRONMENT, COMBINED, 0, PRIMITIVE, 0
     this->scroll_y -= 2;
     gDPSetCycleType(gp++, G_CYC_2CYCLE);
     gDPSetAlphaCompare(gp++, G_AC_THRESHOLD);
     gDPSetRenderMode(gp++, G_RM_PASS, G_RM_CLD_SURF2);
-    gDPSetCombineLERP(gp++, TEXEL1, PRIMITIVE, PRIM_LOD_FRAC, TEXEL0, TEXEL1, 1, PRIM_LOD_FRAC, TEXEL0, PRIMITIVE, ENVIRONMENT, COMBINED, ENVIRONMENT, COMBINED, 0, PRIMITIVE, 0);
-    gDPSetPrimColor(gp++, 0, (short)this->effect_prim_f, (short)this->effect_prim[0], (short)this->effect_prim[1],
-                    (short)this->effect_prim[2], (short)this->effect_alpha);
-    gDPSetEnvColor(gp++, (short)this->effect_env[0], (short)this->effect_env[1], (short)this->effect_env[2], 255);
-    if ((s16)this->effect_prim_f) {
-        for (i = k = 0, ypos = 0; i < 3; i++) {
+    gDPSetCombineLERP(gp++, TEXEL1, PRIMITIVE, PRIM_LOD_FRAC, TEXEL0, TEXEL1, 1, PRIM_LOD_FRAC, TEXEL0, PRIMITIVE,
+                      ENVIRONMENT, COMBINED, ENVIRONMENT, COMBINED, 0, PRIMITIVE, 0);
+    gDPSetPrimColor(gp++, 0, (s16)this->effect_prim_f, (s16)this->effect_prim[0], (s16)this->effect_prim[1],
+                    (s16)this->effect_prim[2], (s16)this->effect_alpha);
+    gDPSetEnvColor(gp++, (s16)this->effect_env[0], (s16)this->effect_env[1], (s16)this->effect_env[2], 255);
+    ypos = 0;
+    if ((s16)this->effect_prim_f != 0) {
+        for (i = k = 0, ypos; i < 3; i++) {
             for (j = 0, xpos = 56; j < 3; j++, k++, xpos += 64) {
-                func_80AA46A0(&gp, g_title_efc_txt_data[k], &g_title_mable_txt, 64, 64, 32, 32, xpos, ypos, 64, 64, 1 << 10,
-                              1 << 10, 1, 1, k, this);
+                func_80AA46A0(&gp, g_title_efc_txt_data[k], g_title_mable_txt, 64, 64, 32, 32, xpos, ypos, 64, 64,
+                              1 << 10, 1 << 10, 1, 1, k, this);
             }
             ypos += 64;
         }
     }
-
-    gDPSetPrimColor(gp++, 0, 0, 255, 255, 255, (short)this->title_alpha);
-    if ((short)this->title_alpha) {
-        func_80AA4AD4(&gp, 152, 100, g_title_txt, 160, 160);
+    gDPSetPrimColor(gp++, 0, 0, 255, 255, 255, (s16)this->title_alpha);
+    if ((s16)this->title_alpha) {
+        EnMag_DisplayRGBA32B(&gp, 152, 100, g_title_txt, 160, 160);
     }
 
     func_8009457C(&gp);
     gDPPipeSync(gp++);
     gDPSetAlphaCompare(gp++, G_AC_NONE);
-    gDPSetCombineLERP(gp++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
-    if ((short)this->title_alpha < 100) {
+    gDPSetCombineLERP(gp++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE,
+                      ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
+    if ((s16)this->title_alpha < 100) {
         gDPSetRenderMode(gp++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
     } else {
         gDPSetRenderMode(gp++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
     }
-    gDPSetPrimColor(gp++, 0, 0, 0, 0, 0, (short)this->title_alpha);
-    gDPSetEnvColor(gp++, 100, 0, 100, 255);
-    if ((short)this->title_alpha) {
-        func_80AA447C(&gp, g_title_sub_1_txt, 72, 8, 146, 73, 72, 8, 1 << 10, 1 << 10);
-        func_80AA447C(&gp, g_title_sub_2_txt, 96, 8, 144, 127, 96, 8, 1 << 10, 1 << 10);
+    gDPSetPrimColor(gp++, 0, 0, 0, 0, 0, (s16)this->title_alpha);
+    gDPSetEnvColor(gp++, 0, 0, 100, 255);
+    if ((s16)this->title_alpha) {
+        EnMag_DrawTexRecI8(&gp, g_title_sub_1_txt, 72, 8, 146, 73, 72, 8, 1 << 10, 1 << 10);
+        EnMag_DrawTexRecI8(&gp, g_title_sub_2_txt, 96, 8, 144, 127, 96, 8, 1 << 10, 1 << 10);
         gDPPipeSync(gp++);
-        gDPSetPrimColor(gp++, 0, 0, 200, 200, 150, (short)this->title_alpha);
-        gDPSetEnvColor(gp++, 100, 100, 50, 255);
-        func_80AA447C(&gp, g_title_sub_1_txt, 72, 8, 154 - 1, 73 - 1, 72, 8, 1 << 10, 1 << 10);
-        func_80AA447C(&gp, g_title_sub_2_txt, 96, 8, 152 - 1, 127 - 1, 96, 8, 1 << 10, 1 << 10);
+        gDPSetPrimColor(gp++, 0, 0, 100, 150, 255, (s16)this->title_alpha);
+        gDPSetEnvColor(gp++, 20, 80, 160, 255);
+        EnMag_DrawTexRecI8(&gp, g_title_sub_1_txt, 72, 8, 145, 73 - 1, 72, 8, 1 << 10, 1 << 10);
+        EnMag_DrawTexRecI8(&gp, g_title_sub_2_txt, 96, 8, 143, 127 - 1, 96, 8, 1 << 10, 1 << 10);
         gDPPipeSync(gp++);
-        gDPSetPrimColor(gp++, 0, 0, 255, 255, 255, (short)this->title_alpha);
-        func_80AA4AD4(&gp, 174, 145, D_0601A400, 128, 32);
+        gDPSetPrimColor(gp++, 0, 0, 255, 255, 255, (s16)this->sub_alpha);
+        EnMag_DisplayRGBA32B(&gp, 174, 145, D_0601A400, 128, 32);
     }
     func_8009457C(&gp);
     gDPSetAlphaCompare(gp++, G_AC_NONE);
-#define G_CC_INT444 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0
     gDPSetCombineMode(gp++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
-    ////////    gDPSetPrimColor( gp++, 0, 0, 255, 255, 255, (short)this->copy_alpha );
-    gDPSetPrimColor(gp++, 0, 0, (short)this->copy_alpha, (short)this->copy_alpha, (short)this->copy_alpha,
-                    (short)this->copy_alpha);
-    if ((short)this->copy_alpha) {
+    gDPSetPrimColor(gp++, 0, 0, (s16)this->copy_alpha, (s16)this->copy_alpha, (s16)this->copy_alpha,
+                    (s16)this->copy_alpha);
+    if ((s16)this->copy_alpha) {
         gDPSetTextureImage(gp++, G_IM_FMT_IA, G_IM_SIZ_16b, 1, g_title_cpr_txt);
-        gDPSetTile(gp++, G_IM_FMT_IA, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOLOD);
+        gDPSetTile(gp++, G_IM_FMT_IA, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP,
+                   G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOLOD);
         gDPLoadSync(gp++);
         gDPLoadBlock(gp++, G_TX_LOADTILE, 0, 0, 1279, 103);
         gDPPipeSync(gp++);
-        gDPSetTile(gp++, G_IM_FMT_IA, G_IM_SIZ_8b, 20, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOLOD);
+        gDPSetTile(gp++, G_IM_FMT_IA, G_IM_SIZ_8b, 20, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP,
+                   G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOLOD);
         gDPSetTileSize(gp++, G_TX_RENDERTILE, 0, 0, 0x027C, 0x003C);
-        gSPTextureRectangle(gp++, (78<<2), (198<<2), (238<<2), (214<<2), G_TX_RENDERTILE, 0, 0, (32<<5), (32<<5));
+        gSPTextureRectangle(gp++, (78 << 2), (198 << 2), (238 << 2), (214 << 2), G_TX_RENDERTILE, 0, 0, (32 << 5),
+                            (32 << 5));
     }
 
     if (NO_CONTROLLER) {
-        no_alpha = (260 / no_alpha) * no_alpha_ct;
+        no_alpha = (260 / NO_ALPHA) * no_alpha_ct;
         if (no_alpha >= 255) {
             no_alpha = 255;
         }
         gDPPipeSync(gp++);
-        gDPSetCombineLERP(gp++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+        gDPSetCombineLERP(gp++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE,
+                          0);
         gDPSetPrimColor(gp++, 0, 0, 0, 0, 0, no_alpha);
         xpos = VREG(19) + 1;
         for (i = 0; i < 12; i++) {
-            func_80AA4EB8(&gp, ((u8*)kanfont->kbuffer4) + (BUF_CT * no_controller[i]), xpos, YPOS + 1 + YREG(10));
+            EnMag_DisplayMoji(&gp, ((u8*)kanfont->kbuffer4) + (BUF_CT * no_controller[i]), xpos, YPOS + 1 + YREG(10));
             xpos += VREG(21);
             if (i == 1) {
                 xpos += VREG(23);
@@ -478,7 +475,7 @@ void func_80AA507C(Actor* thisx, GameState* state, Gfx** glistp) {
         gDPSetPrimColor(gp++, 0, 0, 100, 255, 255, no_alpha);
         xpos = VREG(19);
         for (i = 0; i < 12; i++) {
-            func_80AA4EB8(&gp, ((u8*)kanfont->kbuffer4) + (BUF_CT * no_controller[i]), xpos, YPOS + YREG(10));
+            EnMag_DisplayMoji(&gp, ((u8*)kanfont->kbuffer4) + (BUF_CT * no_controller[i]), xpos, YPOS + YREG(10));
             xpos += VREG(21);
             if (i == 1) {
                 xpos += VREG(23);
@@ -486,16 +483,17 @@ void func_80AA507C(Actor* thisx, GameState* state, Gfx** glistp) {
         }
     } else {
         if (this->copy_alpha >= 200) {
-            no_alpha = (260 / no_alpha) * no_alpha_ct;
+            no_alpha = (260 / NO_ALPHA) * no_alpha_ct;
             if (no_alpha >= 255) {
                 no_alpha = 255;
             }
             gDPPipeSync(gp++);
-            gDPSetCombineLERP(gp++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+            gDPSetCombineLERP(gp++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0,
+                              PRIMITIVE, 0);
             gDPSetPrimColor(gp++, 0, 0, 0, 0, 0, no_alpha);
             xpos = YREG(7) + 1;
             for (i = 0; i < 10; i++) {
-                func_80AA4EB8(&gp, ((u8*)kanfont->kbuffer4) + (BUF_CT * press_start[i]), xpos, YPOS + 1 + YREG(10));
+                EnMag_DisplayMoji(&gp, ((u8*)kanfont->kbuffer4) + (BUF_CT * press_start[i]), xpos, YPOS + 1 + YREG(10));
                 xpos += YREG(8);
                 if (i == 4) {
                     xpos += YREG(9);
@@ -505,7 +503,7 @@ void func_80AA507C(Actor* thisx, GameState* state, Gfx** glistp) {
             gDPSetPrimColor(gp++, 0, 0, YREG(4), YREG(5), YREG(6), no_alpha);
             xpos = YREG(7);
             for (i = 0; i < 10; i++) {
-                func_80AA4EB8(&gp, ((u8*)kanfont->kbuffer4) + (BUF_CT * press_start[i]), xpos, YPOS + YREG(10));
+                EnMag_DisplayMoji(&gp, ((u8*)kanfont->kbuffer4) + (BUF_CT * press_start[i]), xpos, YPOS + YREG(10));
                 xpos += YREG(8);
                 if (i == 4) {
                     xpos += YREG(9);
@@ -518,31 +516,13 @@ void func_80AA507C(Actor* thisx, GameState* state, Gfx** glistp) {
             no_alpha_mode = 0;
         }
     } else {
-        if ((++no_alpha_ct) >= no_alpha) {
+        if ((++no_alpha_ct) >= NO_ALPHA) {
             no_alpha_mode = 1;
         }
     }
 
     *glistp = gp;
 }
-#else
-s16 D_80AA5EC4 = 0; // no_alpha
-s16 D_80AA5EC8 = 0; // no_alpha_mode
-s16 D_80AA5ECC = 0; // no_alpha_ct
-u8 D_80AA5ED0[] = {
-        AAN, AAO, AAC, AAO, AAN, AAT, AAR, AAO, AAL, AAL, AAE, AAR,
-    }; // no_controller
-
-u8 D_80AA5EDC[] = {
-        AAP, AAR, AAE, AAS, AAS, AAS, AAT, AAA, AAR, AAT,
-    }; // press_start
-
-u8* D_80AA5EE8[] = {
-        g_title_efc_1_txt, g_title_efc_2_txt, g_title_efc_3_txt, g_title_efc_4_txt, g_title_efc_5_txt,
-        g_title_efc_6_txt, g_title_efc_7_txt, g_title_efc_8_txt, g_title_efc_9_txt,
-    }; // g_title_efc_txt_data
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Mag/func_80AA507C.s")
-#endif
 
 void EnMag_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnMag* this = THIS;
@@ -552,7 +532,7 @@ void EnMag_Draw(Actor* thisx, GlobalContext* globalCtx) {
 
     glistp = Graph_GfxPlusOne(glistp_save = gfxCtx->polyOpa.p);
     gSPDisplayList(gfxCtx->overlay.p++, glistp);
-    func_80AA507C(this, globalCtx, &glistp);
+    EnMag_DrawSub(this, globalCtx, &glistp);
 
     gSPEndDisplayList(glistp++);
     Graph_BranchDlist(glistp_save, glistp);

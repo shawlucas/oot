@@ -2830,7 +2830,11 @@ endseg
 beginseg
     name "ovl_En_Mag"
     include "build/src/overlays/actors/ovl_En_Mag/z_en_mag.o"
+#ifdef NON_MATCHING
+    include "build/src/overlays/actors/ovl_En_Mag/ovl_En_Mag_reloc.o"
+#else
     include "build/data/overlays/actors/z_en_mag.reloc.o"
+#endif
 endseg
 
 beginseg

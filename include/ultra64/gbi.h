@@ -3646,24 +3646,25 @@ _DW({									\
 /*
  *  4-bit load block.  Useful when loading multiple tiles
  */
-#define	gDPLoadMultiBlock_4b(pkt, timg, tmem, rtile, fmt, width, height,\
-		pal, cms, cmt, masks, maskt, shifts, shiftt)		\
-{									\
-	gDPSetTextureImage(pkt, fmt, G_IM_SIZ_16b, 1, timg);		\
-	gDPSetTile(pkt, fmt, G_IM_SIZ_16b, 0, tmem, G_TX_LOADTILE, 0,	\
-		cmt, maskt, shiftt, cms, masks, shifts);		\
-	gDPLoadSync(pkt);						\
-	gDPLoadBlock(pkt, G_TX_LOADTILE, 0, 0,				\
-		(((width)*(height)+3)>>2)-1,				\
-		CALC_DXT_4b(width));					\
-	gDPPipeSync(pkt);						\
-	gDPSetTile(pkt, fmt, G_IM_SIZ_4b, ((((width)>>1)+7)>>3), tmem,	\
-		rtile, pal, cmt, maskt, shiftt, cms, masks,		\
-		shifts);						\
-	gDPSetTileSize(pkt, rtile, 0, 0,				\
-		((width)-1) << G_TEXTURE_IMAGE_FRAC,			\
-		((height)-1) << G_TEXTURE_IMAGE_FRAC);			\
-}
+
+#define gDPLoadMultiBlock_4b(pkt, timg, tmem, rtile, fmt, width, height,\
+                pal, cms, cmt, masks, maskt, shifts, shiftt)            \
+do {                                                                    \
+        gDPSetTextureImage(pkt, fmt, G_IM_SIZ_16b, 1, timg);            \
+        gDPSetTile(pkt, fmt, G_IM_SIZ_16b, 0, tmem, G_TX_LOADTILE, 0,   \
+                cmt, maskt, shiftt, cms, masks, shifts);                \
+        gDPLoadSync(pkt);                                               \
+        gDPLoadBlock(pkt, G_TX_LOADTILE, 0, 0,                          \
+                (((width)*(height)+3)>>2)-1,                            \
+                CALC_DXT_4b(width));                                    \
+        gDPPipeSync(pkt);                                               \
+        gDPSetTile(pkt, fmt, G_IM_SIZ_4b, ((((width)>>1)+7)>>3), tmem,  \
+                rtile, pal, cmt, maskt, shiftt, cms, masks,             \
+                shifts);                                                \
+        gDPSetTileSize(pkt, rtile, 0, 0,                                \
+                ((width)-1) << G_TEXTURE_IMAGE_FRAC,                    \
+                ((height)-1) << G_TEXTURE_IMAGE_FRAC);                  \
+} while (0)
 
 /*
  *  4-bit load block.  Allows tmem and render tile to be specified.  Useful when

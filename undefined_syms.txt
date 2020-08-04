@@ -808,9 +808,9 @@ g_title_efc_7_txt = 0x06023000;
 g_title_efc_8_txt = 0x06023800;
 g_title_efc_9_txt = 0x06024000;
 g_title_mable_txt = 0x06024800;
-g_title_txt = 0x06000000;
+g_title_txt       = 0x06000000;
 g_title_sub_1_txt = 0x06024C00;
 g_title_sub_2_txt = 0x06024E40;
-g_title_cpr_txt = 0x06019A00;
-D_0601A400 = 0x0601A400;
+g_title_cpr_txt   = 0x06019A00;
+D_0601A400        = 0x0601A400;
 
