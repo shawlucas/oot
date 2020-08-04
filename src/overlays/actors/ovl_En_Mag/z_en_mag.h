@@ -7,15 +7,6 @@
 
 struct EnMag;
 
-#define __Pad__BitTest(button, bit) (~((button) | ~(bit)) == 0)
-#define pad_on_trigger(pad, bit)    __Pad__BitTest((pad)->press, bit)
-#define Pad_on_trigger(bit)         pad_on_trigger(pad, bit)
-#define ZCommonSet(member, value) (gSaveContext.member = (value))
-#define Na_ClearDemoSceneFlag()         func_800F68BC(0)
-#define Na_StartSystemSe(f) Audio_PlaySoundGeneral( f, &D_801333D4, 4, &D_801333E0, &D_801333E0, &D_801333E8)
-#define game_play_WIPE_SET(game_play, no) (void)(((game_play)->fadeTransition) = (no))
-#define WIPE_SET(no)         game_play_WIPE_SET(game_play, no)
-
 typedef struct EnMag {
     /* 0x0000 */ Actor actor;
     /* 0x014C */ Sram sram;         
