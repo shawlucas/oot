@@ -123,10 +123,12 @@ void func_80B3FA4C(EnXc* this, GlobalContext* globalCtx);
 void func_80B3FAE0(EnXc* this);
 void func_80B3FB24(EnXc* this, GlobalContext* globalCtx);
 void func_80B3FFB4(EnXc* this, GlobalContext* globalCtx);
+void func_80B400AC(EnXc* this, GlobalContext* globalCtx);
 void func_80B400E4(EnXc* this, GlobalContext* globalCtx);
 void func_80B40104(EnXc* this, GlobalContext* globalCtx);
 void func_80B4015C(EnXc* this, GlobalContext* globalCtx);
 void func_80B401CC(EnXc* this, GlobalContext* globalCtx);
+void func_80B40590(EnXc* this, GlobalContext* globalCtx);
 void func_80B41000(EnXc* this, GlobalContext* globalCtx);
 void func_80B41020(EnXc* this, GlobalContext* globalCtx);
 void func_80B41068(EnXc* this, GlobalContext* globalCtx);
@@ -967,13 +969,36 @@ void func_80B3FAE0(EnXc *this) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B400AC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B400E4.s")
+void func_80B400E4(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3FF0C(this, globalCtx);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B40104.s")
+void func_80B40104(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3C4B0(this);
+    func_80B3C468(this, globalCtx);
+    func_80B3C31C(this);
+    func_80B3FFB4(this, globalCtx);
+    func_80B3C888(this, globalCtx);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B4015C.s")
+void func_80B4015C(EnXc* this, GlobalContext* globalCtx) {
+    s32 unk = func_80B3C4B0(this);
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B401CC.s")
+    func_80B3C468(this, globalCtx);
+    func_80B3C31C(this);
+    func_80B3FB24(this, globalCtx);
+    func_80B3FAE0(this);
+    func_80B40040(this, unk);
+    func_80B3C888(this, globalCtx);
+}
+
+void func_80B401CC(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3C4B0(this);
+    func_80B3C468(this, globalCtx);
+    func_80B3C31C(this);
+    func_80B3FB24(this, globalCtx);
+    func_80B400AC(this, globalCtx);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B40224.s")
 
@@ -981,7 +1006,10 @@ void func_80B3FAE0(EnXc *this) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B402C4.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B40590.s")
+void func_80B40590(EnXc* this, GlobalContext* globalCtx) {
+    this->action = 57;
+    this->drawMode = 5;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B405A8.s")
 
@@ -1045,33 +1073,85 @@ void func_80B3FAE0(EnXc *this) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B41110.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B41174.s")
+void func_80B41174(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3C468(this, globalCtx);
+    func_80B3C31C(this);
+    func_80B40EAC(this, globalCtx);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B411AC.s")
+void func_80B411AC(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3C4B0(this);
+    func_80B4066C(this, globalCtx);
+    func_80B3C468(this, globalCtx);
+    func_80B3C31C(this);
+    func_80B40EAC(this, globalCtx);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B41204.s")
+void func_80B41204(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3C4B0(this);
+    func_80B3C468(this, globalCtx);
+    func_80B3C31C(this);
+    func_80B40EAC(this, globalCtx);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B41248.s")
+void func_80B41248(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3E420(this, globalCtx);
+    func_80B3C588(this, globalCtx, 4);
+    func_80B40C50(this);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B41284.s")
+void func_80B41284(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3E464(this, globalCtx);
+    func_80B40C74(this);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B412AC.s")
+void func_80B412AC(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3E4AC(this, globalCtx);
+    func_80B40C98(this);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B412D4.s")
+void func_80B412D4(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3E4F8(this, globalCtx);
+    func_80B40CBC(this);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B412FC.s")
+void func_80B412FC(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3E53C(this, globalCtx);
+    func_80B40CE0(this);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B41324.s")
+void func_80B41324(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3E580(this, globalCtx);
+    func_80B40D08(this);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B4134C.s")
+void func_80B4134C(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3E5C8(this, globalCtx);
+    func_80B40D2C(this);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B41374.s")
+void func_80B41374(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3E610(this, globalCtx);
+    func_80B40D50(this);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B4139C.s")
+void func_80B4139C(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3E668(this, globalCtx);
+    func_80B40D74(this);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B413C4.s")
+void func_80B413C4(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3D710(this);
+    func_80B3C4B0(this);
+    func_80B3C468(this, globalCtx);
+    func_80B3C31C(this);
+    func_80B40D98(this);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B41414.s")
+void func_80B41414(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3E738(this, globalCtx);
+    func_80B40E40(this);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B4143C.s")
 
