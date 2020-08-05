@@ -16,6 +16,8 @@ void EnXc_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnXc_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnXc_Draw(Actor* thisx, GlobalContext* globalCtx);
 s32 func_80B3E8AC(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor* thisx);
+s32 func_80B41A88(GlobalContext * globalCtx, s32 limbIndex, Gfx * * dList, Vec3f * pos, Vec3s * rot, Actor * thisx);
+void func_80B41B0C(GlobalContext * globalCtx, s32 limbIndex, Gfx * * dList, Vec3s * rot, Actor * thisx);
 
 void func_80B3C298(EnXc* this, GlobalContext* globalCtx);
 void func_80B3C31C(EnXc* this);
@@ -115,6 +117,12 @@ void func_80B3F8C8(EnXc* this, GlobalContext* globalCtx);
 void func_80B3F928(EnXc* this, GlobalContext* globalCtx);
 void func_80B3F988(EnXc* this, GlobalContext* globalCtx);
 void func_80B3F9E8(EnXc* this, GlobalContext* globalCtx);
+void func_80B3FA08(EnXc* this, GlobalContext* globalCtx);
+void func_80B3FA2C(void);
+void func_80B3FA4C(EnXc* this, GlobalContext* globalCtx);
+void func_80B3FAE0(EnXc* this);
+void func_80B3FB24(EnXc* this, GlobalContext* globalCtx);
+void func_80B3FFB4(EnXc* this, GlobalContext* globalCtx);
 void func_80B400E4(EnXc* this, GlobalContext* globalCtx);
 void func_80B40104(EnXc* this, GlobalContext* globalCtx);
 void func_80B4015C(EnXc* this, GlobalContext* globalCtx);
@@ -145,6 +153,7 @@ void func_80B417E4(EnXc* this, GlobalContext* globalCtx);
 void func_80B41844(EnXc* this, GlobalContext* globalCtx);
 
 void func_80B41B98(EnXc* this, GlobalContext* globalCtx);
+void func_80B41BA4(EnXc* this, GlobalContext* globalCtx);
 void func_80B3E908(EnXc* this, GlobalContext* globalCtx);
 void func_80B41BA4(EnXc* this, GlobalContext* globalCtx);
 void func_80B3EA7C(EnXc* this, GlobalContext* globalCtx);
@@ -270,7 +279,7 @@ void func_80B3C298(EnXc* this, GlobalContext* globalCtx) {
 void func_80B3C31C(EnXc* this) {
     s32 pad[3];
     s16* unk_25E = &this->unk_25E;
-    s16* unk_25C = &this->unk_25C;
+    s16* unk_25C = &this->eyeIdx;
 
     if (!DECR(*unk_25E)) {
         *unk_25E = Math_Rand_S16Offset(60, 60);
@@ -935,11 +944,18 @@ void func_80B3F3D8() {
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B3FA08.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B3FA2C.s")
+void func_80B3FA2C(void) {
+    func_800F3F3C(1);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B3FA4C.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B3FAE0.s")
+void func_80B3FAE0(EnXc *this) {
+    if (func_800A56C8(&this->skelAnime, 38.0f)) {
+        func_80078914(&this->actor.projectedPos, NA_SE_VO_SK_SHOUT);
+        func_80B3FA2C();
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B3FB24.s")
 
@@ -1133,8 +1149,20 @@ void EnXc_Init(Actor* thisx, GlobalContext* globalCtx) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B41B0C.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B41B98.s")
+// EnXc_DrawNothing
+void func_80B41B98(EnXc* this, GlobalContext* globalCtx) {
+
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B41BA4.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/EnXc_Draw.s")
+void EnXc_Draw(Actor* thisx, GlobalContext* globalCtx) {
+    EnXc* this = THIS;
+
+    if (this->drawMode < 0 || this->drawMode > 5 || D_80B41F18[this->drawMode] == NULL) {
+        // "DRAW MODE IS ABNORMAL!!!!!!!!!!!!!!!!!!!!!!!!!"
+        osSyncPrintf(VT_FGCOL(RED) "描画モードがおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+    } else {
+        D_80B41F18[this->drawMode](this, globalCtx);
+    }
+}

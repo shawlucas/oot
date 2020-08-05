@@ -14,7 +14,7 @@ typedef struct EnXc {
     /* 0x014C */ SkelAnime skelAnime;
     /* 0x0190 */ Vec3s limbDrawTable[17];
     /* 0x01F6 */ Vec3s transitionDrawTable[17];
-    /* 0x025C */ s16 unk_25C; // segment idx
+    /* 0x025C */ s16 eyeIdx; // segment idx
     /* 0x025E */ s16 unk_25E;
     /* 0x0260 */ s32 action;
     /* 0x0264 */ s32 drawMode;
