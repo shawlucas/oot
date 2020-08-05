@@ -176,7 +176,30 @@ extern CutsceneCmd D_020045D0[];
 extern CutsceneCmd D_02000330[];
 extern AnimationHeader D_0601C0E8;
 extern AnimationHeader D_06013AA4;
+extern UNK_TYPE D_060058C0;
 
+typedef struct {
+    Gfx* tmp_poly_opa;
+    Gfx* tmp_poly_xlu;
+    Gfx* tmp_overlay;
+} __GraphCheck;
+
+#define OPEN_DISP(graph, file, line)                                                 \
+    {                                                                    \
+        GraphicsContext* __graph = (graph);                                        \
+        int __poly_gfx_opened = 0;                                       \
+        __GraphCheck __graphcheck;                                       \
+        Graph_OpenDisps(&__graphcheck, graph, file, line);                \
+        (void)0 /* rquire `;'  */
+
+#define CLOSE_DISP(graph, file, line)                                                 \
+    do {                                                                  \
+        Graph_CloseDisps(&__graphcheck, graph, file, line); \
+        (void)__poly_gfx_opened;                                          \
+    } while (0);                                                          \
+    }                                                                     \
+    (void)0 /* rquire `;'  */
+    
 ColliderCylinderInit_Set3 D_80B41D40 = {
     { COLTYPE_UNK0, 0x00, 0x00, 0x09, COLSHAPE_CYLINDER },
     { 0x00, { 0x00000000, 0x00, 0x00 }, { 0x00000000, 0x00, 0x00 }, 0x00, 0x00, 0x01 },
@@ -1153,11 +1176,19 @@ void func_80B41414(EnXc* this, GlobalContext* globalCtx) {
     func_80B40E40(this);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B4143C.s")
+void func_80B4143C(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3E7A0(this, globalCtx);
+    func_80B40E64(this);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B41464.s")
+void func_80B41464(EnXc* this, GlobalContext* globalCtx) {
+    func_80B3E804(this, globalCtx);
+    func_80B40E88(this);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B4148C.s")
+void func_80B4148C(EnXc* this, GlobalContext* globalCtx) {
+    Actor_Kill(&this->actor);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B414AC.s")
 
