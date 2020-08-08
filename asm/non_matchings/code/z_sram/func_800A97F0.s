@@ -33,8 +33,8 @@ glabel func_800A97F0
 /* B209BC 800A981C 86274A5E */  lh    $a3, 0x4a5e($s1)
 /* B209C0 800A9820 00A09025 */  move  $s2, $a1
 /* B209C4 800A9824 86254A46 */  lh    $a1, 0x4a46($s1)
-/* B209C8 800A9828 3C148013 */  lui   $s4, %hi(D_8012A4E0) # $s4, 0x8013
-/* B209CC 800A982C 2694A4E0 */  addiu $s4, %lo(D_8012A4E0) # addiu $s4, $s4, -0x5b20
+/* B209C8 800A9828 3C148013 */  lui   $s4, %hi(sramSaveAddress) # $s4, 0x8013
+/* B209CC 800A982C 2694A4E0 */  addiu $s4, %lo(sramSaveAddress) # addiu $s4, $s4, -0x5b20
 /* B209D0 800A9830 0007C040 */  sll   $t8, $a3, 1
 /* B209D4 800A9834 0298C821 */  addu  $t9, $s4, $t8
 /* B209D8 800A9838 00057040 */  sll   $t6, $a1, 1
