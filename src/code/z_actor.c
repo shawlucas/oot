@@ -114,6 +114,7 @@ void shadow_foot_draw(GlobalContext* globalCtx, Light* light, MtxF* groundMatrix
     CLOSE_DISP(globalCtx->state.gfxCtx, "../z_actor.c", 1693);
 }
 
+#ifdef NON_MATCHING
 void ActorShadow_DrawFoot(Actor* actor, LightMapper* lightMapper, GlobalContext* globalCtx) {
     f32 to_ground_y = actor->posRot.pos.y - actor->groundY;
 
@@ -123,7 +124,7 @@ void ActorShadow_DrawFoot(Actor* actor, LightMapper* lightMapper, GlobalContext*
         f32 shadowAlphaRatio;
         actor->shape.shadowSize *= 0.3f;
         shadowAlphaRatio = (to_ground_y - 20.0f) * 0.02f;
-        actor->shape.shadowAlpha *= (f32)actor->shape.shadowAlpha * (shadowAlphaRatio > 1.0f ? 1.0f : shadowAlphaRatio);
+        actor->shape.shadowAlpha = (float)actor->shape.shadowAlpha * (shadowAlphaRatio > 1.0f ? 1.0f : shadowAlphaRatio);
         ActorShadow_DrawFunc_Circle(actor, lightMapper, globalCtx);
         actor->shape.shadowSize = saveShadowSize;
         actor->shape.shadowAlpha = saveShadowAlpha;
@@ -150,7 +151,7 @@ void ActorShadow_DrawFoot(Actor* actor, LightMapper* lightMapper, GlobalContext*
             *ground_yp = func_800BFCB8(globalCtx, &groundMatrix, footPosP);
             footPosP->y -= GROUND_BGCHECK_OFFSET_Y;
 
-            actor->shape.footHitFlag <<= 2;
+            actor->shape.footHitFlag <<= 1;
 
             to_ground_y = footPosP->y - *ground_yp;
 
@@ -160,7 +161,7 @@ void ActorShadow_DrawFoot(Actor* actor, LightMapper* lightMapper, GlobalContext*
 
                 if (to_ground_y > 30.0f) 
                     to_ground_y = 30.0f;
-                    shadowAlpha = (f32)actor->shape.shadowAlpha * (1.0f - (to_ground_y * (1.0f/30.0f)));
+                shadowAlpha = (f32)actor->shape.shadowAlpha * (1.0f - (to_ground_y * (1.0f/30.0f)));
                 if (to_ground_y > 30.0f) 
                     to_ground_y = 30.0f;
 
@@ -206,18 +207,21 @@ void ActorShadow_DrawFoot(Actor* actor, LightMapper* lightMapper, GlobalContext*
         CLOSE_DISP(globalCtx->state.gfxCtx, "../z_actor.c", 1831);
     }
 }
+#else
+#pragma GLOBAL_ASM("asm/non_matchings/code/z_actor/ActorShadow_DrawFoot.s")
+#endif
 
-void func_8002BDB0(Actor* actor, s32 arg1, s32 arg2, UNK_PTR arg3, s32 arg4, UNK_PTR arg5) {
-    if (arg1 == arg2) {
-        Matrix_MultVec3f(arg3, &actor->footPos[0]);
-    } else if (arg1 == arg4) {
-        Matrix_MultVec3f(arg5, &actor->footPos[1]);
+void ActorShadow_FootPosSet(Actor* actor, s32 jyoint_no, s32 L_foot_jyoint, Vec3f* L_foot_offset, s32 R_foot_jyoint, Vec3f* R_foot_offset) {
+    if (jyoint_no == L_foot_jyoint) {
+        Matrix_MultVec3f(L_foot_offset, &actor->footPos[0]);
+    } else if (jyoint_no == R_foot_jyoint) {
+        Matrix_MultVec3f(R_foot_offset, &actor->footPos[1]);
     }
 }
 
-void func_8002BE04(GlobalContext* globalCtx, Vec3f* arg1, Vec3f* arg2, f32* arg3) {
-    func_800A6E10(&globalCtx->mf_11D60, arg1, arg2, arg3);
-    *arg3 = (*arg3 < 1.0f) ? 1.0f : (1.0f / *arg3);
+void ProjectionPos_Set(GlobalContext* globalCtx, Vec3f* targetPos, Vec3f* displayPos, f32* w) {
+    func_800A6E10(&globalCtx->mf_11D60, targetPos, displayPos, w);
+    *w = (*w < 1.0f) ? 1.0f : (1.0f / *w);
 }
 
 typedef struct {
@@ -341,7 +345,7 @@ void func_8002C124(TargetContext* targetCtx, GlobalContext* globalCtx) {
             spCE = targetCtx->unk_48;
         }
 
-        func_8002BE04(globalCtx, &targetCtx->targetCenterPos, &spBC, &spB4);
+        ProjectionPos_Set(globalCtx, &targetCtx->targetCenterPos, &spBC, &spB4);
 
         temp1 = ((spBC.x * spB4) * 160) * var1;
         spBC.x = (temp1 < -320) ? -320 : ((temp1 > 320) ? 320 : temp1);
@@ -481,7 +485,7 @@ void func_8002C7BC(TargetContext* targetCtx, Player* player, Actor* actorArg, Gl
     }
 
     if ((actorArg != NULL) && (targetCtx->unk_4B == 0)) {
-        func_8002BE04(globalCtx, &actorArg->posRot2.pos, &sp50, &sp4C);
+        ProjectionPos_Set(globalCtx, &actorArg->posRot2.pos, &sp50, &sp4C);
         if (((sp50.z <= 0.0f) || (1.0f <= fabsf(sp50.x * sp4C))) || (1.0f <= fabsf(sp50.y * sp4C))) {
             actorArg = NULL;
         }
@@ -1522,7 +1526,7 @@ void func_8002F374(GlobalContext* globalCtx, Actor* actor, s16* arg2, s16* arg3)
     Vec3f sp1C;
     f32 sp18;
 
-    func_8002BE04(globalCtx, &actor->posRot2.pos, &sp1C, &sp18);
+    ProjectionPos_Set(globalCtx, &actor->posRot2.pos, &sp1C, &sp18);
     *arg2 = sp1C.x * sp18 * 160.0f + 160.0f;
     *arg3 = sp1C.y * sp18 * -120.0f + 120.0f;
 }

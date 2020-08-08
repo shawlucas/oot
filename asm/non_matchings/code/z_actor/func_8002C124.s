@@ -106,7 +106,7 @@ glabel func_8002C124
 /* AA33CC 8002C22C 8FA400F4 */  lw    $a0, 0xf4($sp)
 /* AA33D0 8002C230 02002825 */  move  $a1, $s0
 /* AA33D4 8002C234 27A600BC */  addiu $a2, $sp, 0xbc
-/* AA33D8 8002C238 0C00AF81 */  jal   func_8002BE04
+/* AA33D8 8002C238 0C00AF81 */  jal   ProjectionPos_Set
 /* AA33DC 8002C23C 27A700B4 */   addiu $a3, $sp, 0xb4
 /* AA33E0 8002C240 C7A000BC */  lwc1  $f0, 0xbc($sp)
 /* AA33E4 8002C244 C7AE00B4 */  lwc1  $f14, 0xb4($sp)
