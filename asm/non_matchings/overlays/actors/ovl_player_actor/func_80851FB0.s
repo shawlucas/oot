@@ -30,8 +30,8 @@ glabel func_80851FB0
 /* 1FE0C 8085201C 0C02914C */  jal     func_800A4530              
 /* 1FE10 80852020 3C054370 */  lui     $a1, 0x4370                ## $a1 = 43700000
 /* 1FE14 80852024 10400003 */  beq     $v0, $zero, .L80852034     
-/* 1FE18 80852028 3C188003 */  lui     $t8, %hi(ActorShadow_DrawFunc_Teardrop)
-/* 1FE1C 8085202C 2718B8C4 */  addiu   $t8, %lo(ActorShadow_DrawFunc_Teardrop)
+/* 1FE18 80852028 3C188003 */  lui     $t8, %hi(ActorShadow_DrawFoot)
+/* 1FE1C 8085202C 2718B8C4 */  addiu   $t8, %lo(ActorShadow_DrawFoot)
 /* 1FE20 80852030 AE1800C0 */  sw      $t8, 0x00C0($s0)           ## 000000C0
 .L80852034:
 /* 1FE24 80852034 8FBF001C */  lw      $ra, 0x001C($sp)           

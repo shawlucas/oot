@@ -89,7 +89,7 @@ void EnDha_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->actor.colChkInfo.damageTable = &sDamageTable;
     SkelAnime_InitSV(globalCtx, &this->skelAnime, &D_06000BD8, &D_060015B0, this->limbDrawTable,
                      this->transitionDrawTable, 4);
-    ActorShape_Init(&this->actor.shape, 0, ActorShadow_DrawFunc_Teardrop, 90.0f);
+    ActorShape_Init(&this->actor.shape, 0, ActorShadow_DrawFoot, 90.0f);
     this->actor.posRot2.pos = this->actor.posRot.pos;
     this->actor.posRot2.pos.y += 50.0f;
     this->actor.colChkInfo.mass = 0xFE;

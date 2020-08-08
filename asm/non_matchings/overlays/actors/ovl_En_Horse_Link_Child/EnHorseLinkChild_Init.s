@@ -15,8 +15,8 @@ glabel EnHorseLinkChild_Init
 /* 002C4 80A69694 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 002C8 80A69698 3C01C060 */  lui     $at, 0xC060                ## $at = C0600000
 /* 002CC 80A6969C 44812000 */  mtc1    $at, $f4                   ## $f4 = -3.50
-/* 002D0 80A696A0 3C068003 */  lui     $a2, %hi(ActorShadow_DrawFunc_Squiggly)
-/* 002D4 80A696A4 24C6B644 */  addiu   $a2, %lo(ActorShadow_DrawFunc_Squiggly)
+/* 002D0 80A696A0 3C068003 */  lui     $a2, %hi(ActorShadow_Horse)
+/* 002D4 80A696A4 24C6B644 */  addiu   $a2, %lo(ActorShadow_Horse)
 /* 002D8 80A696A8 260400B4 */  addiu   $a0, $s0, 0x00B4           ## $a0 = 000000B4
 /* 002DC 80A696AC 24050000 */  addiu   $a1, $zero, 0x0000         ## $a1 = 00000000
 /* 002E0 80A696B0 3C0741A0 */  lui     $a3, 0x41A0                ## $a3 = 41A00000

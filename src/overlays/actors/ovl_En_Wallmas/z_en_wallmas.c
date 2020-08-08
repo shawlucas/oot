@@ -579,7 +579,7 @@ void EnWallmas_DrawXlu(EnWallmas* this, GlobalContext* globalCtx) {
 
     Matrix_Scale(xzScale, 1.0f, xzScale, MTXMODE_APPLY);
     gSPMatrix(NEXT_POLY_XLU_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_wallmas.c", 1421), G_MTX_LOAD);
-    gSPDisplayList(NEXT_POLY_XLU_DISP, &D_04049210);
+    gSPDisplayList(NEXT_POLY_XLU_DISP, &shadow_model);
     CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_wallmas.c", 1426);
 }
 

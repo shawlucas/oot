@@ -8,6 +8,7 @@
 #define ACTOR_NUMBER_MAX 200
 #define INVISIBLE_ACTOR_MAX 20
 #define AM_FIELD_SIZE 0x27A0
+#define GROUND_BGCHECK_OFFSET_Y 50.0f
 
 // From z64.h
 struct Actor;
@@ -101,7 +102,7 @@ typedef struct {
     /* 0x0C */ void (*shadowDrawFunc)(struct Actor*, struct LightMapper*, struct GlobalContext*);
     /* 0x10 */ f32    shadowSize;
     /* 0x14 */ u8     shadowAlpha;
-    /* 0x15 */ u8     unk_15;
+    /* 0x15 */ u8     footHitFlag;
 } ActorShape; // size = 0x18
 
 typedef struct Actor {
@@ -136,7 +137,7 @@ typedef struct Actor {
     /* 0x094 */ f32     yDistFromLink;
     /* 0x098 */ CollisionCheckInfo colChkInfo;
     /* 0x0B4 */ ActorShape shape;
-    /* 0x0CC */ Vec3f   unk_CC[2];
+    /* 0x0CC */ Vec3f   footPos[2];
     /* 0x0E4 */ Vec3f   projectedPos; // actor position in projected space
     /* 0x0F0 */ f32     projectedW; // w component of the projected actor position vector
     /* 0x0F4 */ f32     uncullZoneForward; // amount to increase the uncull zone forward by (in projected space)
