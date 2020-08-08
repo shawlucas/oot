@@ -291,7 +291,7 @@ void ActorShadow_DrawFunc_WhiteCircle(Actor* actor, LightMapper* lightMapper, Gl
 void ActorShadow_Horse(Actor* actor, LightMapper* lightMapper, GlobalContext* globalCtx);
 void ActorShadow_DrawFoot(Actor* actor, LightMapper* lightMapper, GlobalContext* globalCtx);
 void ActorShadow_FootPosSet(Actor* actor, s32 jyoint_no, s32 L_foot_jyoint, Vec3f* L_foot_offset, s32 R_foot_jyoint, Vec3f* R_foot_offset);
-void func_8002C124(TargetContext* targetCtx, GlobalContext* globalCtx);
+void TargetContext_DrawTarget(TargetContext* targetCtx, GlobalContext* globalCtx);
 s32 Flags_GetSwitch(GlobalContext* globalCtx, s32 flag);
 void Flags_SetSwitch(GlobalContext* globalCtx, s32 flag);
 void Flags_UnsetSwitch(GlobalContext* globalCtx, s32 flag);

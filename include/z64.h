@@ -677,29 +677,34 @@ typedef struct {
 
 typedef struct {
     /* 0x00 */ Vec3f    pos;
-    /* 0x0C */ f32      unk_0C; // radius?
+    /* 0x0C */ f32      radius; // radius?
     /* 0x10 */ Color_RGB8 color;
-} TargetContextEntry; // size = 0x14
+} TargetContextEntry; // size = 0x14 // "Anchor_Target_Data"
+
+#define TARGET_BLURE_MAX 3
 
 typedef struct {
-    /* 0x00 */ Vec3f    naviRefPos; // possibly wrong
+    /* 0x00 */ s8 count;
+    /* 0x01 */ TargetContextEntry data[TARGET_BLURE_MAX];
+} Target; // size = 0x3D // "Anchor_Target"
+
+typedef struct {
+    /* 0x00 */ Vec3f    naviRefPos; 
     /* 0x0C */ Vec3f    targetCenterPos;
     /* 0x18 */ Color_RGBAf naviInner;
     /* 0x28 */ Color_RGBAf naviOuter;
     /* 0x38 */ Actor*   arrowPointedActor;
     /* 0x3C */ Actor*   targetedActor;
-    /* 0x40 */ f32      unk_40;
-    /* 0x44 */ f32      unk_44;
-    /* 0x48 */ s16      unk_48;
+    /* 0x40 */ f32      moveRatio;
+    /* 0x44 */ f32      targetRadius;
+    /* 0x48 */ s16      targetTimer;
     /* 0x4A */ u8       activeType;
-    /* 0x4B */ u8       unk_4B;
-    /* 0x4C */ s8       unk_4C;
-    /* 0x4D */ char     unk_4D[0x03];
-    /* 0x50 */ TargetContextEntry arr_50[3];
-    /* 0x8C */ Actor*   unk_8C;
-    /* 0x90 */ Actor*   unk_90;
-    /* 0x94 */ Actor*   unk_94;
-} TargetContext; // size = 0x98
+    /* 0x4B */ u8       rock_on;
+    /* 0x4C */ Target   target;
+    /* 0x8C */ Actor*   targetRequestActor;
+    /* 0x90 */ Actor*   enemyBGMActor;
+    /* 0x94 */ Actor*   secondaryActor;
+} TargetContext; // size = 0x98 // "Anchor_Marker"
 
 typedef struct {
     /* 0x00 */ u32      texture;
