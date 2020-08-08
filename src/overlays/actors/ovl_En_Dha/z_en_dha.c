@@ -281,8 +281,8 @@ void EnDha_Die(EnDha* this, GlobalContext* globalCtx) {
         vector = this->actor.posRot.pos;
 
         if (this->unk_1C8 != 0) {
-            if (-12000.0f < this->actor.shape.unk_08) {
-                this->actor.shape.unk_08 -= 1000.0f;
+            if (-12000.0f < this->actor.shape.offset_y) {
+                this->actor.shape.offset_y -= 1000.0f;
                 func_80033480(globalCtx, &vector, 7.0f, 1, 0x5A, 0x14, 1);
                 return;
             }
@@ -294,9 +294,9 @@ void EnDha_Die(EnDha* this, GlobalContext* globalCtx) {
                 }
             }
         } else {
-            this->actor.shape.unk_08 += 500.0f;
+            this->actor.shape.offset_y += 500.0f;
             func_80033480(globalCtx, &vector, 7.0f, 1, 0x5A, 0x14, 1);
-            if (this->actor.shape.unk_08 == 0.0f) {
+            if (this->actor.shape.offset_y == 0.0f) {
                 func_809EC9C8(this);
             }
         }

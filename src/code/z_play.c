@@ -151,8 +151,8 @@ void Gameplay_Destroy(GlobalContext* globalCtx) {
     s32 pad;
     Player* player = PLAYER;
 
-    globalCtx->state.gfxCtx->callback = NULL;
-    globalCtx->state.gfxCtx->callbackParam = 0;
+    globalCtx->state.gfxCtx->TaskEndCallBack = NULL;
+    globalCtx->state.gfxCtx->TaskEndClientData = 0;
     SREG(91) = 0;
     R_PAUSE_MENU_MODE = 0;
 
@@ -223,18 +223,18 @@ void Gameplay_Init(GlobalContext* globalCtx) {
         globalCtx->cameraPtrs[i] = NULL;
     }
 
-    func_80057C6C(&globalCtx->cameras[0], &globalCtx->view, &globalCtx->colCtx, globalCtx);
-    Camera_ChangeStatus(&globalCtx->cameras[0], 7);
+    func_80057C6C(&globalCtx->camera, &globalCtx->view, &globalCtx->colCtx, globalCtx);
+    Camera_ChangeStatus(&globalCtx->camera, 7);
 
     for (i = 0; i < 3; i++) {
-        func_80057C6C(&globalCtx->cameras[i + 1], &globalCtx->view, &globalCtx->colCtx, globalCtx);
-        Camera_ChangeStatus(&globalCtx->cameras[i + 1], 0x100);
+        func_80057C6C(&globalCtx->subCameras[i + 1], &globalCtx->view, &globalCtx->colCtx, globalCtx);
+        Camera_ChangeStatus(&globalCtx->subCameras[i + 1], 0x100);
     }
 
-    globalCtx->cameraPtrs[0] = &globalCtx->cameras[0];
+    globalCtx->cameraPtrs[0] = &globalCtx->camera;
     globalCtx->cameraPtrs[0]->uid = 0;
     globalCtx->activeCamera = 0;
-    func_8005AC48(&globalCtx->cameras[0], 0xFF);
+    func_8005AC48(&globalCtx->camera, 0xFF);
     func_800A9D28(globalCtx, &globalCtx->sub_1F74);
     func_80112098(globalCtx);
     func_80110F68(globalCtx);
@@ -385,13 +385,13 @@ void Gameplay_Init(GlobalContext* globalCtx) {
     }
 
     player = PLAYER;
-    func_80058148(&globalCtx->cameras[0], player);
-    func_8005A444(&globalCtx->cameras[0], 0);
+    func_80058148(&globalCtx->camera, player);
+    func_8005A444(&globalCtx->camera, 0);
 
     playerStartCamId = player->actor.params & 0xFF;
     if (playerStartCamId != 0xFF) {
         osSyncPrintf("player has start camera ID (" VT_FGCOL(BLUE) "%d" VT_RST ")\n", playerStartCamId);
-        func_8005A7A8(&globalCtx->cameras[0], playerStartCamId);
+        func_8005A7A8(&globalCtx->camera, playerStartCamId);
     }
 
     if (YREG(15) == 0x20) {
@@ -1067,36 +1067,35 @@ void Gameplay_DrawOverlayElements(GlobalContext* globalCtx) {
     }
 }
 
-#ifdef NON_MATCHING
+#if 0
 // regalloc, stack usage and minor ordering differences
 void Gameplay_Draw(GlobalContext* globalCtx) {
     LightMapper* sp228;
     Vec3f sp21C;
     GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4]; // 0x208
 
     gfxCtx = globalCtx->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, gfxCtx, "../z_play.c", 3907);
+    OPEN_DISP(gfxCtx, "../z_play.c", 3907);
 
     gSegments[4] = PHYSICAL_TO_VIRTUAL(globalCtx->objectCtx.status[globalCtx->objectCtx.mainKeepIndex].segment);
     gSegments[5] = PHYSICAL_TO_VIRTUAL(globalCtx->objectCtx.status[globalCtx->objectCtx.subKeepIndex].segment);
     gSegments[2] = PHYSICAL_TO_VIRTUAL(globalCtx->sceneSegment);
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0x00, NULL);
-    gSPSegment(gfxCtx->polyXlu.p++, 0x00, NULL);
-    gSPSegment(gfxCtx->overlay.p++, 0x00, NULL);
+    gSPSegment(NEXT_DISP, 0x00, NULL);
+    gSPSegment(NEXT_POLY_XLU_DISP, 0x00, NULL);
+    gSPSegment(NEXT_OVERLAY_DISP, 0x00, NULL);
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0x04, globalCtx->objectCtx.status[globalCtx->objectCtx.mainKeepIndex].segment);
-    gSPSegment(gfxCtx->polyXlu.p++, 0x04, globalCtx->objectCtx.status[globalCtx->objectCtx.mainKeepIndex].segment);
-    gSPSegment(gfxCtx->overlay.p++, 0x04, globalCtx->objectCtx.status[globalCtx->objectCtx.mainKeepIndex].segment);
+    gSPSegment(NEXT_DISP, 0x04, globalCtx->objectCtx.status[globalCtx->objectCtx.mainKeepIndex].segment);
+    gSPSegment(NEXT_POLY_XLU_DISP, 0x04, globalCtx->objectCtx.status[globalCtx->objectCtx.mainKeepIndex].segment);
+    gSPSegment(NEXT_OVERLAY_DISP, 0x04, globalCtx->objectCtx.status[globalCtx->objectCtx.mainKeepIndex].segment);
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0x05, globalCtx->objectCtx.status[globalCtx->objectCtx.subKeepIndex].segment);
-    gSPSegment(gfxCtx->polyXlu.p++, 0x05, globalCtx->objectCtx.status[globalCtx->objectCtx.subKeepIndex].segment);
-    gSPSegment(gfxCtx->overlay.p++, 0x05, globalCtx->objectCtx.status[globalCtx->objectCtx.subKeepIndex].segment);
+    gSPSegment(NEXT_DISP, 0x05, globalCtx->objectCtx.status[globalCtx->objectCtx.subKeepIndex].segment);
+    gSPSegment(NEXT_POLY_XLU_DISP, 0x05, globalCtx->objectCtx.status[globalCtx->objectCtx.subKeepIndex].segment);
+    gSPSegment(NEXT_OVERLAY_DISP, 0x05, globalCtx->objectCtx.status[globalCtx->objectCtx.subKeepIndex].segment);
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0x02, globalCtx->sceneSegment);
-    gSPSegment(gfxCtx->polyXlu.p++, 0x02, globalCtx->sceneSegment);
-    gSPSegment(gfxCtx->overlay.p++, 0x02, globalCtx->sceneSegment);
+    gSPSegment(NEXT_DISP, 0x02, globalCtx->sceneSegment);
+    gSPSegment(NEXT_POLY_XLU_DISP, 0x02, globalCtx->sceneSegment);
+    gSPSegment(NEXT_OVERLAY_DISP, 0x02, globalCtx->sceneSegment);
 
     func_80095248(gfxCtx, 0, 0, 0);
 
@@ -1122,12 +1121,12 @@ void Gameplay_Draw(GlobalContext* globalCtx) {
         globalCtx->unk_11DE0 = Matrix_MtxFToMtx(Matrix_CheckFloats(&globalCtx->mf_11DA0, "../z_play.c", 4005),
                                                 Graph_Alloc(gfxCtx, sizeof(Mtx)));
 
-        gSPSegment(gfxCtx->polyOpa.p++, 0x01, globalCtx->unk_11DE0);
+        gSPSegment(NEXT_DISP, 0x01, globalCtx->unk_11DE0);
 
         if ((HREG(80) != 10) || (HREG(92) != 0)) {
             Gfx* sp1CC = gfxCtx->polyOpa.p;
             Gfx* gfxP = Graph_GfxPlusOne(gfxCtx->polyOpa.p);
-            gSPDisplayList(gfxCtx->overlay.p++, gfxP);
+            gSPDisplayList(NEXT_OVERLAY_DISP, gfxP);
 
             if ((globalCtx->transitionMode == 3) || (globalCtx->transitionMode == 11) ||
                 (globalCtx->transitionCtx.transitionType >= 56)) {
@@ -1160,7 +1159,7 @@ void Gameplay_Draw(GlobalContext* globalCtx) {
             gfxCtx->polyOpa.p = sp88;
             goto Gameplay_Draw_DrawOverlayElements;
         } else {
-            func_800C0ED8(&globalCtx->preRenderCtx, 0x140, 0xF0, gfxCtx->curFrameBuffer, gZBuffer);
+            func_800C0ED8(&globalCtx->preRenderCtx, 0x140, 0xF0, gfxCtx->FrameBufferP, gZBuffer);
 
             if (R_PAUSE_MENU_MODE == 2) {
                 MsgEvent_SendNullTask();
@@ -1289,11 +1288,11 @@ void Gameplay_Draw(GlobalContext* globalCtx) {
 
                 if ((R_PAUSE_MENU_MODE == 1) || (gTrnsnUnkState == 1)) {
                     Gfx* sp70 = gfxCtx->overlay.p;
-                    globalCtx->preRenderCtx.unk_10 = gfxCtx->curFrameBuffer;
+                    globalCtx->preRenderCtx.unk_10 = gfxCtx->FrameBufferP;
                     globalCtx->preRenderCtx.unk_14 = gZBuffer;
                     func_800C1F20(&globalCtx->preRenderCtx, &sp70);
                     if (R_PAUSE_MENU_MODE == 1) {
-                        globalCtx->preRenderCtx.unk_18 = gfxCtx->curFrameBuffer;
+                        globalCtx->preRenderCtx.unk_18 = gfxCtx->FrameBufferP;
                         func_800C20B4(&globalCtx->preRenderCtx, &sp70);
                         R_PAUSE_MENU_MODE = 2;
                     } else {
@@ -1325,7 +1324,7 @@ void Gameplay_Draw(GlobalContext* globalCtx) {
 
     func_80059EC8(ACTIVE_CAM);
 
-    Graph_CloseDisps(dispRefs, gfxCtx, "../z_play.c", 4508);
+    CLOSE_DISP(gfxCtx, "../z_play.c", 4508);
 }
 #else
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_play/Gameplay_Draw.s")
@@ -1531,7 +1530,7 @@ s16 Gameplay_CreateSubCamera(GlobalContext* globalCtx) {
                      CYAN) " " VT_RST "\n",
                  i);
 
-    globalCtx->cameraPtrs[i] = &globalCtx->cameras[i];
+    globalCtx->cameraPtrs[i] = &globalCtx->camera + i;
     func_80057C6C(globalCtx->cameraPtrs[i], &globalCtx->view, &globalCtx->colCtx, globalCtx);
     globalCtx->cameraPtrs[i]->unk_164 = i;
 

@@ -218,18 +218,18 @@ void ArrowLight_Draw(Actor* thisx, GlobalContext* globalCtx) {
 
         // Draw yellow effect over the screen when arrow hits
         if (this->unk_164 > 0) {
-            gfxCtx->polyXlu.p = func_800937C0(gfxCtx->polyXlu.p);
-            gDPSetPrimColor(gfxCtx->polyXlu.p++, 0, 0, (s32)(30.0f * this->unk_164) & 0xFF,
+            gfxCtx->polyXlu.thaGfx.p = func_800937C0(gfxCtx->polyXlu.thaGfx.p);
+            gDPSetPrimColor(gfxCtx->polyXlu.thaGfx.p++, 0, 0, (s32)(30.0f * this->unk_164) & 0xFF,
                             (s32)(40.0f * this->unk_164) & 0xFF, 0, (s32)(150.0f * this->unk_164) & 0xFF);
-            gDPSetAlphaDither(gfxCtx->polyXlu.p++, G_AD_DISABLE);
-            gDPSetColorDither(gfxCtx->polyXlu.p++, G_CD_DISABLE);
-            gDPFillRectangle(gfxCtx->polyXlu.p++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
+            gDPSetAlphaDither(gfxCtx->polyXlu.thaGfx.p++, G_AD_DISABLE);
+            gDPSetColorDither(gfxCtx->polyXlu.thaGfx.p++, G_CD_DISABLE);
+            gDPFillRectangle(gfxCtx->polyXlu.thaGfx.p++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
         }
 
         // Draw light on the arrow
         func_80093D84(globalCtx->state.gfxCtx);
-        gDPSetPrimColor(gfxCtx->polyXlu.p++, 0x80, 0x80, 255, 255, 170, this->alpha);
-        gDPSetEnvColor(gfxCtx->polyXlu.p++, 255, 255, 0, 128);
+        gDPSetPrimColor(gfxCtx->polyXlu.thaGfx.p++, 0x80, 0x80, 255, 255, 170, this->alpha);
+        gDPSetEnvColor(gfxCtx->polyXlu.thaGfx.p++, 255, 255, 0, 128);
         Matrix_RotateRPY(0x4000, 0x0, 0x0, MTXMODE_APPLY);
         if (this->timer != 0) {
             Matrix_Translate(0.0f, 0.0f, 0.0f, MTXMODE_APPLY);
@@ -238,13 +238,13 @@ void ArrowLight_Draw(Actor* thisx, GlobalContext* globalCtx) {
         }
         Matrix_Scale(this->radius * 0.2f, this->unk_160 * 4.0f, this->radius * 0.2f, MTXMODE_APPLY);
         Matrix_Translate(0.0f, -700.0f, 0.0f, MTXMODE_APPLY);
-        gSPMatrix(gfxCtx->polyXlu.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_arrow_light.c", 648),
+        gSPMatrix(gfxCtx->polyXlu.thaGfx.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_arrow_light.c", 648),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gfxCtx->polyXlu.p++, sTextureDL);
-        gSPDisplayList(gfxCtx->polyXlu.p++,
+        gSPDisplayList(gfxCtx->polyXlu.thaGfx.p++, sTextureDL);
+        gSPDisplayList(gfxCtx->polyXlu.thaGfx.p++,
                        Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, 511 - (stateFrames * 5) % 512, 0, 4, 32, 1,
                                         511 - (stateFrames * 10) % 512, 511 - (stateFrames * 30) % 512, 8, 16));
-        gSPDisplayList(gfxCtx->polyXlu.p++, sVertexDL);
+        gSPDisplayList(gfxCtx->polyXlu.thaGfx.p++, sVertexDL);
         Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_arrow_light.c", 664);
     }
 }

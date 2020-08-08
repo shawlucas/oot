@@ -51,7 +51,7 @@ void EnSi_Init(Actor* thisx, GlobalContext* globalCtx) {
     Actor_SetScale(&this->actor, 0.025f);
     this->unk_19C = 0;
     this->actionFunc = func_80AFB768;
-    this->actor.shape.unk_08 = 42.0f;
+    this->actor.shape.offset_y = 42.0f;
 }
 
 void EnSi_Destroy(Actor* thisx, GlobalContext* globalCtx) {

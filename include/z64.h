@@ -2,11 +2,16 @@
 #define _Z64_H_
 
 #include <ultra64.h>
+#include <u64types.h>
 #include <ultra64/gbi.h>
 #include <ultra64/gs2dex.h>
 #include <ultra64/controller.h>
+#include <sched.h>
+#include <graph.h>
+#include <gfxprint.h>
 #include <z64light.h>
 #include <z64actor.h>
+#include <z_actor_dlftbls.h>
 #include <z64audio.h>
 #include <z64object.h>
 #include <z64cutscene.h>
@@ -26,7 +31,6 @@
 #include <ichain.h>
 #include <stdarg.h>
 #include <regs.h>
-
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240
 
@@ -37,6 +41,8 @@
 
 // NOTE: Once we start supporting other builds, this can be changed with an ifdef
 #define REGION_NATIVE REGION_EU
+
+// forward declarations
 
 // Game Info aka. Static Context (dbg ram start: 80210A10)
 // Data normally accessed through REG macros (see regs.h)
@@ -229,20 +235,6 @@ typedef struct {
 } GfxPool; // size = 0x12410
 
 typedef struct {
-    /* 0x0000 */ u32    size;
-    /* 0x0004 */ u8*    bufp;
-    /* 0x0008 */ u8*    head;
-    /* 0x000C */ u8*    tail;
-} TwoHeadArena; // size = 0x10
-
-typedef struct {
-    /* 0x0000 */ u32    size;
-    /* 0x0004 */ Gfx*   bufp;
-    /* 0x0008 */ Gfx*   p;
-    /* 0x000C */ Gfx*   d;
-} TwoHeadGfxArena; // size = 0x10
-
-typedef struct {
     /* 0x00 */ u16* fb1;
     /* 0x04 */ u16* swapBuffer;
     /* 0x08 */ OSViMode* viMode;
@@ -255,7 +247,7 @@ typedef struct {
     /* 0x18 */ f32 yScale;
 } CfbInfo; // size = 0x1C
 
-typedef struct OSScTask {
+typedef struct {
     /* 0x00 */ struct OSScTask* next;
     /* 0x04 */ u32            state;
     /* 0x08 */ u32            flags;
@@ -263,38 +255,88 @@ typedef struct OSScTask {
     /* 0x10 */ OSTask         list;
     /* 0x50 */ OSMesgQueue*   msgQ;
     /* 0x54 */ OSMesg         msg;
-} OSScTask;
+#ifndef _FINALROM
+               OSTime         startTime;
+               OSTime         totalTime;
+#endif
+} OSScTask; // size FINALROM = 0x58
+            // size DEBUG = 0x68
+
+typedef struct IrqMgrClient {
+    /* 0x00 */ struct IrqMgrClient* prev;
+    /* 0x04 */ OSMesgQueue* queue;
+} IrqMgrClient;
+
+typedef struct {
+    /* 0x0000 */ OSMesgQueue  interruptQ;
+    /* 0x0018 */ OSMesg       intBuf[8];
+    /* 0x0038 */ OSMesgQueue  cmdQ;
+    /* 0x0050 */ OSMesg       cmdMsgBuf[8];
+    /* 0x0070 */ OSThread     thread;
+    /* 0x0220 */ OSScTask*    audioListHead;
+    /* 0x0224 */ OSScTask*    gfxListHead;
+    /* 0x0228 */ OSScTask*    audioListTail;
+    /* 0x022C */ OSScTask*    gfxListTail;
+    /* 0x0230 */ OSScTask*    curRSPTask;
+    /* 0x0234 */ OSScTask*    curRDPTask;
+    /* 0x0238 */ s32          retraceCnt;
+    /* 0x023C */ s32          doAudio;
+    /* 0x0240 */ CfbInfo* curBuf;
+    /* 0x0244 */ CfbInfo*        pendingSwapBuf1;
+    /* 0x0220 */ CfbInfo* pendingSwapBuf2;
+    /* 0x0220 */ UNK_TYPE     unk_24C;
+    /* 0x0250 */ IrqMgrClient   irqClient;
+} SchedContext; // size = 0x258
+
+/* graph.h */
+#define MAX_MESGS 8
 
 typedef struct GraphicsContext {
-    /* 0x0000 */ Gfx* polyOpaBuffer; // Pointer to "Zelda 0"
-    /* 0x0004 */ Gfx* polyXluBuffer; // Pointer to "Zelda 1"
-    /* 0x0008 */ char unk_008[0x08]; // Unused, could this be pointers to "Zelda 2" / "Zelda 3"
-    /* 0x0010 */ Gfx* overlayBuffer; // Pointer to "Zelda 4"
-    /* 0x0014 */ u32 unk_014;
-    /* 0x0018 */ char unk_018[0x20];
-    /* 0x0038 */ OSMesg msgBuff[0x08];
-    /* 0x0058 */ OSMesgQueue* schedMsgQ;
-    /* 0x005C */ OSMesgQueue queue;
-    /* 0x0074 */ char unk_074[0x04];
-    /* 0x0078 */ OSScTask task; // size of OSScTask might be wrong
-    /* 0x00D0 */ char unk_0D0[0xE0];
-    /* 0x01B0 */ Gfx* workBuffer;
-    /* 0x01B4 */ TwoHeadGfxArena work;
-    /* 0x01C4 */ char unk_01C4[0xC0];
+    /* 0x0000 */ Gfx* Gfx_list00P_top; // Pointer to "Zelda 0"
+    /* 0x0004 */ Gfx* Gfx_list01P_top; // Pointer to "Zelda 1"
+#ifndef NOUSE_LINE_UCODE
+    /* 0x0008 */ Gfx* Gfx_list02P_top;
+    /* 0x000C */ Gfx* Gfx_list03P_top;
+#else
+    /* 0x0008 */ Gfx* _Gfx_list02P_top;
+    /* 0x000C */ Gfx* _Gfx_list03P_top;
+#endif /* NOUSE_LINE_UCODE */
+    /* 0x0010 */ Gfx* Gfx_list04P_top; // Pointer to "Zelda 4"
+    /* 0x0014 */ Gfx* gfxsave;
+    /* 0x0018 */ GraphMsg msg; /* completion message */
+    /* 0x0038 */ OSMesg graphReplyMsgBuf[MAX_MESGS];
+    /* 0x0058 */ OSMesgQueue* sched_cmdQ;
+    /* 0x005C */ OSMesgQueue graphReplyMsgQ;
+    /* 0x0078 */ OSScTask task;
+#if 01
+    /* 0x00E0 */ OSScTask ossctask01p;
+    /* 0x0148 */ OSScTask ossctask02p;
+    /* 0x01B0 */ Gfx* Gfx_list05P_top;
+    /* 0x01B4 */ THA_GA work;
+    /* 0x01C4 */ char _ossctask03p[0x54];
+    /* 0x0218 */ char _ossctask04p[4 + 4 + 4 + 4 + 64 + 4 + 4 + 8 + 8];
+#endif
+    /* 0x0280 */ SchedContext* sc;
     /* 0x0284 */ OSViMode* viMode;
-    /* 0x0288 */ char unk_0288[0x20]; // Unused, could this be Zelda 2/3 ?
-    /* 0x02A8 */ TwoHeadGfxArena    overlay; // "Zelda 4"
-    /* 0x02B8 */ TwoHeadGfxArena    polyOpa; // "Zelda 0"
-    /* 0x02C8 */ TwoHeadGfxArena    polyXlu; // "Zelda 1"
-    /* 0x02D8 */ u32 gfxPoolIdx;
-    /* 0x02DC */ u16* curFrameBuffer;
-    /* 0x02E0 */ char unk_2E0[0x04];
+#ifndef NOUSE_LINE_UCODE
+    /* 0x0288 */ THA_GA lineOpa;
+    /* 0x0298 */ THA_GA lineXlu;
+#else
+    /* 0x0288 */ THA_GA _line_opa_thaga;
+    /* 0x0298 */ THA_GA _line_xlu_thaga;
+#endif /* NOUSE_LINE_UCODE */
+    /* 0x02A8 */ THA_GA             overlay; // "Zelda 4"
+    /* 0x02B8 */ THA_GA             polyOpa; // "Zelda 0"
+    /* 0x02C8 */ THA_GA             polyXlu; // "Zelda 1"
+    /* 0x02D8 */ s32 frameCounter;
+    /* 0x02DC */ u16* FrameBufferP;
+    /* 0x02E0 */ u16* RenderBufferP;
     /* 0x02E4 */ u32 viFeatures;
     /* 0x02E8 */ s32 fbIdx;
-    /* 0x02EC */ void (*callback)(struct GraphicsContext*, u32);
-    /* 0x02F0 */ u32 callbackParam;
-    /* 0x02F4 */ f32 xScale;
-    /* 0x02F8 */ f32 yScale;
+    /* 0x02EC */ void (*TaskEndCallBack)(struct GraphicsContext*, u32);
+    /* 0x02F0 */ void* TaskEndClientData;
+    /* 0x02F4 */ f32 vixscale;
+    /* 0x02F8 */ f32 viyscale;
     /* 0x02FC */ char unk_2FC[0x04];
 } GraphicsContext; // size = 0x300
 
@@ -445,11 +487,11 @@ typedef struct {
 
 typedef struct {
     /* 0x0000 */ camera_unk_00 unk_00;
-    /* 0x0050 */ Vec3f at;
+    /* 0x0050 */ Vec3f at; // center
     /* 0x005C */ Vec3f eye;
-    /* 0x0068 */ Vec3f unk_68;
-    /* 0x0074 */ Vec3f eyeNext;
-    /* 0x0080 */ Vec3f unk_80;
+    /* 0x0068 */ Vec3f unk_68; // up
+    /* 0x0074 */ Vec3f eyeNext; // base_eye
+    /* 0x0080 */ Vec3f unk_80; // gap
     /* 0x008C */ struct GlobalContext* globalCtx;
     /* 0x0090 */ Player* player;
     /* 0x0094 */ PosRot playerPosRot;
@@ -1133,7 +1175,7 @@ typedef struct GameState {
     /* 0x84 */ GameAlloc alloc;
     /* 0x98 */ u32 running;
     /* 0x9C */ u32 frames;
-    /* 0xA0 */ u32 unk_A0;
+    /* 0xA0 */ u32 next_game_dlf_no;
 } GameState; // size = 0xA4
 
 typedef struct {
@@ -1210,7 +1252,8 @@ typedef struct GlobalContext {
     /* 0x000B0 */ void* sceneSegment;
     /* 0x000B4 */ char unk_B4[0x4];
     /* 0x000B8 */ View view;
-    /* 0x001E0 */ Camera cameras[4];
+    /* 0x001E0 */ Camera camera;
+                  Camera subCameras[3];
     /* 0x00790 */ Camera* cameraPtrs[4];
     /* 0x007A0 */ s16 activeCamera;
     /* 0x007A2 */ s16 nextCamera;
@@ -1232,7 +1275,7 @@ typedef struct GlobalContext {
     /* 0x10B20 */ AnimationContext animationCtx;
     /* 0x117A4 */ ObjectContext objectCtx;
     /* 0x11CBC */ RoomContext roomCtx;
-    /* 0x11D30 */ s16 unk_11D30[2];
+    /* 0x11D30 */ s16 unk_11D30[2]; // start of "Door_info"
     /* 0x11D34 */ u8 nbTransitionActors;
     /* 0x11D38 */ TransitionActorEntry* transitionActorList;
     /* 0x11D3C */ char unk_11D3C[0x10];
@@ -1243,7 +1286,7 @@ typedef struct GlobalContext {
     /* 0x11D60 */ MtxF mf_11D60;
     /* 0x11DA0 */ MtxF mf_11DA0;
     /* 0x11DE0 */ Mtx* unk_11DE0;
-    /* 0x11DE4 */ u32 gameplayFrames;
+    /* 0x11DE4 */ unsigned long gameplayFrames;
     /* 0x11DE8 */ u8 linkAgeOnLoad;
     /* 0x11DE9 */ u8 unk_11DE9;
     /* 0x11DEA */ u8 curSpawn;
@@ -1497,18 +1540,6 @@ typedef struct {
     /* 0x38 */ void(*inputCallback)();
 } FaultDrawer; // size = 0x3C
 
-typedef struct GfxPrint {
-    /* 0x00 */ struct GfxPrint*(*callback)(struct GfxPrint*, const char*, size_t);
-    /* 0x04 */ Gfx* dlist;
-    /* 0x08 */ u16 posX;
-    /* 0x0A */ u16 posY;
-    /* 0x0C */ u16 baseX;
-    /* 0x0E */ u8 baseY;
-    /* 0x0F */ u8 flag;
-    /* 0x10 */ Color_RGBA8 color;
-    /* 0x14 */ char unk_14[0x1C]; // unused
-} GfxPrint; // size = 0x30
-
 typedef enum {
     GFXPRINT_FLAG1 = 1,
     GFXPRINT_USE_RGBA16 = 2,
@@ -1563,16 +1594,6 @@ typedef struct {
     /* 0x0C */ u32 uncompDataOffset; // only used in mio0
     /* 0x10 */ u32 data[1];
 } Yaz0Header; // size = 0x10 ("data" is not part of the header)
-
-typedef struct {
-    /* 0x00 */ s16 type;
-    /* 0x02 */ char  misc[0x1E];
-} OSScMsg; // size = 0x20
-
-typedef struct IrqMgrClient {
-    /* 0x00 */ struct IrqMgrClient* prev;
-    /* 0x04 */ OSMesgQueue* queue;
-} IrqMgrClient;
 
 typedef struct {
     /* 0x000 */ OSScMsg retraceMsg; // this apparently got moved from OSSched
@@ -1631,27 +1652,6 @@ typedef struct {
     /* 0x0000 */ u16*   curBuffer;
     /* 0x0004 */ u16*   nextBuffer;
 } FrameBufferSwap;
-
-typedef struct {
-    /* 0x0000 */ OSMesgQueue  interruptQ;
-    /* 0x0018 */ OSMesg       intBuf[8];
-    /* 0x0038 */ OSMesgQueue  cmdQ;
-    /* 0x0050 */ OSMesg       cmdMsgBuf[8];
-    /* 0x0070 */ OSThread     thread;
-    /* 0x0220 */ OSScTask*    audioListHead;
-    /* 0x0224 */ OSScTask*    gfxListHead;
-    /* 0x0228 */ OSScTask*    audioListTail;
-    /* 0x022C */ OSScTask*    gfxListTail;
-    /* 0x0230 */ OSScTask*    curRSPTask;
-    /* 0x0234 */ OSScTask*    curRDPTask;
-    /* 0x0238 */ s32          retraceCnt;
-    /* 0x023C */ s32          doAudio;
-    /* 0x0240 */ CfbInfo* curBuf;
-    /* 0x0244 */ CfbInfo*        pendingSwapBuf1;
-    /* 0x0220 */ CfbInfo* pendingSwapBuf2;
-    /* 0x0220 */ UNK_TYPE     unk_24C;
-    /* 0x0250 */ IrqMgrClient   irqClient;
-} SchedContext; // size = 0x258
 
 // ========================
 
@@ -1887,7 +1887,6 @@ typedef struct {
     /* 0x28 */ u32 mode; // 0 if Y V0 is 1 and 2 if Y V0 is 2
     /* 0x2C */ char unk_2C[4];
     /* 0x30 */ OSScTask scTask;
-    /* 0x88 */ char unk_88[0x10];
     /* 0x98 */ OSMesgQueue mq;
     /* 0xB0 */ OSMesg msg;
     /* 0xB4 */ JpegWork* workBuf;

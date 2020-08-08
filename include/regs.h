@@ -38,6 +38,8 @@
 #define kREG(r) BASE_REG(27, r)
 #define bREG(r) BASE_REG(28, r)
 
+#define HREG2(n) (HREG(64) == 1 && (HREG(65) == -1 || HREG(65) == HREG(66)) && HREG(67+(n)))
+
 #define R_RUN_SPEED_LIMIT           REG(45)
 #define R_ENABLE_ARENA_DBG          SREG(0)
 #define R_UPDATE_RATE               SREG(30)

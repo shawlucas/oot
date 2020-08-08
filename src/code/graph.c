@@ -87,7 +87,7 @@ void Graph_UCodeFaultClient(void* arg0) {
 void* Graph_InitTHGA(GraphicsContext* gfxCtx) {
     GfxPool* pool;
 
-    pool = &gGfxPools[gfxCtx->gfxPoolIdx & 1];
+    pool = &gGfxPools[gfxCtx->frameCounter & 1];
 
     pool->headMagic = GFXPOOL_HEAD_MAGIC;
     pool->tailMagic = GFXPOOL_TAIL_MAGIC;
@@ -96,13 +96,13 @@ void* Graph_InitTHGA(GraphicsContext* gfxCtx) {
     THGA_Ct(&gfxCtx->overlay, pool->overlayBuffer, sizeof(pool->overlayBuffer));
     THGA_Ct(&gfxCtx->work, pool->workBuffer, sizeof(pool->workBuffer));
 
-    gfxCtx->polyOpaBuffer = pool->polyOpaBuffer;
-    gfxCtx->polyXluBuffer = pool->polyXluBuffer;
-    gfxCtx->overlayBuffer = pool->overlayBuffer;
-    gfxCtx->workBuffer = pool->workBuffer;
+    gfxCtx->Gfx_list00P_top = pool->polyOpaBuffer;
+    gfxCtx->Gfx_list01P_top = pool->polyXluBuffer;
+    gfxCtx->Gfx_list04P_top = pool->overlayBuffer;
+    gfxCtx->Gfx_list05P_top = pool->workBuffer;
 
-    gfxCtx->curFrameBuffer = (u16*)SysCfb_GetFbPtr(gfxCtx->fbIdx % 2);
-    gfxCtx->unk_014 = 0;
+    gfxCtx->FrameBufferP = (u16*)SysCfb_GetFbPtr(gfxCtx->fbIdx % 2);
+    gfxCtx->gfxsave = 0;
 }
 
 GameStateOverlay* Graph_GetNextGameState(GameState* gameState) {
@@ -134,13 +134,13 @@ GameStateOverlay* Graph_GetNextGameState(GameState* gameState) {
 
 void Graph_Init(GraphicsContext* gfxCtx) {
     bzero(gfxCtx, sizeof(GraphicsContext));
-    gfxCtx->gfxPoolIdx = 0;
+    gfxCtx->frameCounter = 0;
     gfxCtx->fbIdx = 0;
     gfxCtx->viMode = NULL;
     gfxCtx->viFeatures = gViConfigFeatures;
-    gfxCtx->xScale = gViConfigXScale;
-    gfxCtx->yScale = gViConfigYScale;
-    osCreateMesgQueue(&gfxCtx->queue, gfxCtx->msgBuff, ARRAY_COUNT(gfxCtx->msgBuff));
+    gfxCtx->vixscale = gViConfigXScale;
+    gfxCtx->viyscale = gViConfigYScale;
+    osCreateMesgQueue(&gfxCtx->graphReplyMsgQ, gfxCtx->graphReplyMsgBuf, ARRAY_COUNT(gfxCtx->graphReplyMsgBuf));
     func_800D31F0();
     Fault_AddClient(&sGraphFaultClient, Graph_FaultClient, 0, 0);
 }
@@ -151,7 +151,7 @@ void Graph_Destroy(GraphicsContext* gfxCtx) {
 }
 
 // Close to matching, reordering at the end
-#ifdef NON_MATCHING
+#if 0
 void Graph_TaskSet00(GraphicsContext* gfxCtx) {
     static u32 D_8012D260 = 0;
     static s32 sGraphCfbInfoIdx = 0;
@@ -166,7 +166,7 @@ void Graph_TaskSet00(GraphicsContext* gfxCtx) {
     OSScTask* scTask;
     CfbInfo* cfb;
 
-    mq = &gfxCtx->queue;
+    mq = &gfxCtx->graphReplyMsgQ;
     task = &gfxCtx->task.list.t;
     scTask = &gfxCtx->task;
 
@@ -196,9 +196,9 @@ void Graph_TaskSet00(GraphicsContext* gfxCtx) {
         Fault_AddHungupAndCrashImpl("RCP is HUNG UP!!", "Oh! MY GOD!!");
     }
     osRecvMesg(mq, &msg, OS_MESG_NOBLOCK);
-    D_8012D260 = gfxCtx->workBuffer;
-    if (gfxCtx->callback) {
-        gfxCtx->callback(gfxCtx, gfxCtx->callbackParam);
+    D_8012D260 = gfxCtx->Gfx_list05P_top;
+    if (gfxCtx->TaskEndCallBack) {
+        gfxCtx->TaskEndCallBack(gfxCtx, gfxCtx->TaskEndClientData);
     }
 
     time = osGetTime();
@@ -223,11 +223,11 @@ void Graph_TaskSet00(GraphicsContext* gfxCtx) {
     task->output_buff = gGfxSPTaskOutputBuffer;
     task->output_buff_size =
         gGfxSPTaskYieldBuffer; //! @bug (?) should be sizeof(gGfxSPTaskYieldBuffer), probably a typo
-    task->data_ptr = gfxCtx->workBuffer;
+    task->data_ptr = gfxCtx->Gfx_list05P_top;
 
-    Graph_OpenDisps(dispRefs, gfxCtx, "../graph.c", 828);
-    task->data_size = (u32)gfxCtx->work.p - (u32)gfxCtx->workBuffer;
-    Graph_CloseDisps(dispRefs, gfxCtx, "../graph.c", 830);
+    OPEN_DISP(gfxCtx, "../graph.c", 828);
+    task->data_size = (u32)gfxCtx->work.p - (u32)gfxCtx->Gfx_list05P_top;
+    CLOSE_DISP(gfxCtx, "../graph.c", 830);
 
     task->yield_data_ptr = gGfxSPTaskYieldBuffer;
     task->yield_data_size = sizeof(gGfxSPTaskYieldBuffer);
@@ -244,18 +244,18 @@ void Graph_TaskSet00(GraphicsContext* gfxCtx) {
     scTask->msgQ = mq;
 
     cfb = sGraphCfbInfos + sGraphCfbInfoIdx++;
-    cfb->fb1 = gfxCtx->curFrameBuffer;
-    cfb->swapBuffer = gfxCtx->curFrameBuffer;
+    cfb->fb1 = gfxCtx->FrameBufferP;
+    cfb->swapBuffer = gfxCtx->FrameBufferP;
     cfb->viMode = gfxCtx->viMode;
     cfb->features = gfxCtx->viFeatures;
-    cfb->xScale = gfxCtx->xScale;
-    cfb->yScale = gfxCtx->yScale;
+    cfb->xScale = gfxCtx->vixscale;
+    cfb->yScale = gfxCtx->viyscale;
     cfb->unk_10 = 0;
     cfb->updateRate = R_UPDATE_RATE;
 
     scTask->framebuffer = cfb;
     sGraphCfbInfoIdx = sGraphCfbInfoIdx % ARRAY_COUNT(sGraphCfbInfos);
-    gfxCtx->schedMsgQ = &gSchedContext.cmdQ;
+    gfxCtx->sched_cmdQ = &gSchedContext.cmdQ;
 
     osSendMesg(&gSchedContext.cmdQ, scTask, OS_MESG_BLOCK);
     Sched_SendEntryMsg(&gSchedContext); // osScKickEntryMsg
@@ -267,7 +267,7 @@ u32 sGraphCfbInfoIdx = 0;
 #endif
 
 // Very close to matching, stack usage
-#ifdef NON_MATCHING
+#if 0
 void Graph_Update(GraphicsContext* gfxCtx, GameState* gameState) {
     u32 problem;       // 0xC4 -> 0xD4
     Gfx* dispRefs[5];  // 0xB0 -> 0xC0
@@ -276,33 +276,33 @@ void Graph_Update(GraphicsContext* gfxCtx, GameState* gameState) {
     u64 time;
     GfxPool* pool; // 0x4C -> 0x6C
 
-    gameState->unk_A0 = 0;
+    gameState->next_game_dlf_no = 0;
     Graph_InitTHGA(gfxCtx);
 
-    Graph_OpenDisps(dispRefs, gfxCtx, "../graph.c", 966);
+    OPEN_DISP(gfxCtx, "../graph.c", 966);
     gDPNoOpString(gfxCtx->work.p++, "WORK_DISP 開始", 0);
-    gDPNoOpString(gfxCtx->polyOpa.p++, "POLY_OPA_DISP 開始", 0);
-    gDPNoOpString(gfxCtx->polyXlu.p++, "POLY_XLU_DISP 開始", 0);
-    gDPNoOpString(gfxCtx->overlay.p++, "OVERLAY_DISP 開始", 0);
-    Graph_CloseDisps(dispRefs, gfxCtx, "../graph.c", 975);
+    gDPNoOpString(NEXT_DISP, "POLY_OPA_DISP 開始", 0);
+    gDPNoOpString(NEXT_POLY_XLU_DISP, "POLY_XLU_DISP 開始", 0);
+    gDPNoOpString(NEXT_OVERLAY_DISP, "OVERLAY_DISP 開始", 0);
+    CLOSE_DISP(gfxCtx, "../graph.c", 975);
 
     GameState_ReqPadData(gameState);
     GameState_Update(gameState);
 
     Graph_OpenDisps(dispRefs2, gfxCtx, "../graph.c", 987);
     gDPNoOpString(gfxCtx->work.p++, "WORK_DISP 終了", 0);
-    gDPNoOpString(gfxCtx->polyOpa.p++, "POLY_OPA_DISP 終了", 0);
-    gDPNoOpString(gfxCtx->polyXlu.p++, "POLY_XLU_DISP 終了", 0);
-    gDPNoOpString(gfxCtx->overlay.p++, "OVERLAY_DISP 終了", 0);
+    gDPNoOpString(NEXT_DISP, "POLY_OPA_DISP 終了", 0);
+    gDPNoOpString(NEXT_POLY_XLU_DISP, "POLY_XLU_DISP 終了", 0);
+    gDPNoOpString(NEXT_OVERLAY_DISP, "OVERLAY_DISP 終了", 0);
     Graph_CloseDisps(dispRefs2, gfxCtx, "../graph.c", 996);
 
     Graph_OpenDisps(dispRefs3, gfxCtx, "../graph.c", 999);
-    gSPBranchList(gfxCtx->work.p++, gfxCtx->polyOpaBuffer);
-    gSPBranchList(gfxCtx->polyOpa.p++, gfxCtx->polyXluBuffer);
-    gSPBranchList(gfxCtx->polyXlu.p++, gfxCtx->overlayBuffer);
-    gDPPipeSync(gfxCtx->overlay.p++);
-    gDPFullSync(gfxCtx->overlay.p++);
-    gSPEndDisplayList(gfxCtx->overlay.p++);
+    gSPBranchList(gfxCtx->work.p++, gfxCtx->Gfx_list00P_top);
+    gSPBranchList(NEXT_DISP, gfxCtx->Gfx_list01P_top);
+    gSPBranchList(NEXT_POLY_XLU_DISP, gfxCtx->Gfx_list04P_top);
+    gDPPipeSync(NEXT_OVERLAY_DISP);
+    gDPFullSync(NEXT_OVERLAY_DISP);
+    gSPEndDisplayList(NEXT_OVERLAY_DISP);
     Graph_CloseDisps(dispRefs3, gfxCtx, "../graph.c", 1028);
 
     if (HREG(80) == 10 && HREG(93) == 2) {
@@ -312,10 +312,10 @@ void Graph_Update(GraphicsContext* gfxCtx, GameState* gameState) {
     }
     if (HREG(80) == 7 && HREG(81) != 0) {
         if (HREG(82) == 3) {
-            Fault_AddClient(&sGraphUcodeFaultClient, Graph_UCodeFaultClient, gfxCtx->workBuffer, "do_count_fault");
+            Fault_AddClient(&sGraphUcodeFaultClient, Graph_UCodeFaultClient, gfxCtx->Gfx_list05P_top, "do_count_fault");
         }
 
-        Graph_DisassembleUCode(gfxCtx->workBuffer);
+        Graph_DisassembleUCode(gfxCtx->Gfx_list05P_top);
 
         if (HREG(82) == 3) {
             Fault_RemoveClient(&sGraphUcodeFaultClient);
@@ -332,7 +332,7 @@ void Graph_Update(GraphicsContext* gfxCtx, GameState* gameState) {
     }
 
     problem = false;
-    pool = &gGfxPools[gfxCtx->gfxPoolIdx & 1];
+    pool = &gGfxPools[gfxCtx->frameCounter & 1];
     if (pool->headMagic != GFXPOOL_HEAD_MAGIC) {
         /*! @bug (?) : devs might've forgotten "problem = true;" */
         osSyncPrintf("%c", 7);
@@ -369,7 +369,7 @@ void Graph_Update(GraphicsContext* gfxCtx, GameState* gameState) {
 
     if (!problem) {
         Graph_TaskSet00(gfxCtx);
-        gfxCtx->gfxPoolIdx++;
+        gfxCtx->frameCounter++;
         gfxCtx->fbIdx++;
     }
 
@@ -394,7 +394,7 @@ void Graph_Update(GraphicsContext* gfxCtx, GameState* gameState) {
         gameState->running = false;
     }
 
-    if (D_8012DBC0 && PreNmiBuff_IsResetting(gAppNmiBufferPtr) && !gameState->unk_A0) {
+    if (D_8012DBC0 && PreNmiBuff_IsResetting(gAppNmiBufferPtr) && !gameState->next_game_dlf_no) {
         // To reset mode
         osSyncPrintf(VT_COL(YELLOW, BLACK) "PRE-NMIによりリセットモードに移行します\n" VT_RST);
         SET_NEXT_GAMESTATE(gameState, PreNMI_Init, PreNMIContext);
@@ -472,36 +472,36 @@ void* Graph_Alloc2(GraphicsContext* gfxCtx, size_t size) {
     return THGA_AllocEnd(&gfxCtx->polyOpa, ALIGN16(size));
 }
 
-void Graph_OpenDisps(Gfx** dispRefs, GraphicsContext* gfxCtx, const char* file, s32 line) {
+void Graph_OpenDisps(__GraphCheck* this, GraphicsContext* graph, char* file, s32 line) {
     if (HREG(80) == 7 && HREG(82) != 4) {
-        dispRefs[0] = gfxCtx->polyOpa.p;
-        dispRefs[1] = gfxCtx->polyXlu.p;
-        dispRefs[2] = gfxCtx->overlay.p;
+        this->tmp_poly_opa = (Gfx *)THA_GA_getHeadPtr(&graph->polyOpa);
+        this->tmp_poly_xlu = (Gfx *)THA_GA_getHeadPtr(&graph->polyXlu);
+        this->tmp_overlay =  (Gfx *)THA_GA_getHeadPtr(&graph->overlay);
 
-        gDPNoOpOpenDisp(gfxCtx->polyOpa.p++, file, line);
-        gDPNoOpOpenDisp(gfxCtx->polyXlu.p++, file, line);
-        gDPNoOpOpenDisp(gfxCtx->overlay.p++, file, line);
+        gDPNoOpOpenDisp(THA_GA_NEXT_DISP(&graph->polyOpa), file, line);
+        gDPNoOpOpenDisp(THA_GA_NEXT_DISP(&graph->polyXlu), file, line);
+        gDPNoOpOpenDisp(THA_GA_NEXT_DISP(&graph->overlay), file, line);
     }
 }
 
-void Graph_CloseDisps(Gfx** dispRefs, GraphicsContext* gfxCtx, const char* file, s32 line) {
+void Graph_CloseDisps(__GraphCheck* this, GraphicsContext* graph, char* file, s32 line) {
     if (HREG(80) == 7 && HREG(82) != 4) {
-        if (dispRefs[0] + 1 == gfxCtx->polyOpa.p) {
-            gfxCtx->polyOpa.p = dispRefs[0];
+        if (this->tmp_poly_opa + 1 == (Gfx *)THA_GA_getHeadPtr(&graph->polyOpa)) {
+            THA_GA_setHeadPtr(&graph->polyOpa, this->tmp_poly_opa);
         } else {
-            gDPNoOpCloseDisp(gfxCtx->polyOpa.p++, file, line);
+            gDPNoOpCloseDisp(THA_GA_NEXT_DISP(&graph->polyOpa), file, line);
         }
 
-        if (dispRefs[1] + 1 == gfxCtx->polyXlu.p) {
-            gfxCtx->polyXlu.p = dispRefs[1];
+        if (this->tmp_poly_xlu + 1 == (Gfx *)THA_GA_getHeadPtr(&graph->polyXlu)) {
+            THA_GA_setHeadPtr(&graph->polyXlu, this->tmp_poly_xlu);
         } else {
-            gDPNoOpCloseDisp(gfxCtx->polyXlu.p++, file, line);
+            gDPNoOpCloseDisp(THA_GA_NEXT_DISP(&graph->polyXlu), file, line);
         }
 
-        if (dispRefs[2] + 1 == gfxCtx->overlay.p) {
-            gfxCtx->overlay.p = dispRefs[2];
+        if (this->tmp_overlay + 1 == (Gfx *)THA_GA_getHeadPtr(&graph->overlay)) {
+            THA_GA_setHeadPtr(&graph->overlay, this->tmp_overlay);
         } else {
-            gDPNoOpCloseDisp(gfxCtx->overlay.p++, file, line);
+            gDPNoOpCloseDisp(THA_GA_NEXT_DISP(&graph->overlay), file, line);
         }
     }
 }

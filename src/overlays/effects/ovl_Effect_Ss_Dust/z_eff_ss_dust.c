@@ -101,34 +101,34 @@ void EffectSsDust_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     func_800A6FA0(&sp144, &globalCtx->mf_11DA0, &sp84);
     func_800A6FA0(&sp84, &sp104, &spC4);
 
-    gSPMatrix(gfxCtx->polyXlu.p++, &gMtxClear, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gfxCtx->polyXlu.thaGfx.p++, &gMtxClear, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     mtx = func_800A7E70(gfxCtx, &spC4);
 
     if (mtx != NULL) {
-        gSPMatrix(gfxCtx->polyXlu.p++, mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gDPPipeSync(gfxCtx->polyXlu.p++);
-        gSPSegment(gfxCtx->polyXlu.p++, 0x08, SEGMENTED_TO_VIRTUAL(D_809A2A50[this->regs[SS_DUST_TEX_IDX]]));
-        gfxCtx->polyXlu.p = Gfx_CallSetupDL(gfxCtx->polyXlu.p, 0);
-        gDPPipeSync(gfxCtx->polyXlu.p++);
+        gSPMatrix(gfxCtx->polyXlu.thaGfx.p++, mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gDPPipeSync(gfxCtx->polyXlu.thaGfx.p++);
+        gSPSegment(gfxCtx->polyXlu.thaGfx.p++, 0x08, SEGMENTED_TO_VIRTUAL(D_809A2A50[this->regs[SS_DUST_TEX_IDX]]));
+        gfxCtx->polyXlu.thaGfx.p = Gfx_CallSetupDL(gfxCtx->polyXlu.thaGfx.p, 0);
+        gDPPipeSync(gfxCtx->polyXlu.thaGfx.p++);
 
         if (this->regs[SS_DUST_DRAW_FLAGS] & 1) {
-            gDPSetCombineLERP(gfxCtx->polyXlu.p++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, PRIMITIVE, 0, TEXEL0, 0,
+            gDPSetCombineLERP(gfxCtx->polyXlu.thaGfx.p++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, PRIMITIVE, 0, TEXEL0, 0,
                               COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
-            gDPSetRenderMode(gfxCtx->polyXlu.p++, G_RM_FOG_SHADE_A, G_RM_ZB_CLD_SURF2);
-            gSPSetGeometryMode(gfxCtx->polyXlu.p++, G_FOG | G_LIGHTING);
+            gDPSetRenderMode(gfxCtx->polyXlu.thaGfx.p++, G_RM_FOG_SHADE_A, G_RM_ZB_CLD_SURF2);
+            gSPSetGeometryMode(gfxCtx->polyXlu.thaGfx.p++, G_FOG | G_LIGHTING);
         } else if (this->regs[SS_DUST_DRAW_FLAGS] & 2) {
-            gDPSetRenderMode(gfxCtx->polyXlu.p++, G_RM_PASS, G_RM_ZB_CLD_SURF2);
-            gSPClearGeometryMode(gfxCtx->polyXlu.p++, G_FOG | G_LIGHTING);
+            gDPSetRenderMode(gfxCtx->polyXlu.thaGfx.p++, G_RM_PASS, G_RM_ZB_CLD_SURF2);
+            gSPClearGeometryMode(gfxCtx->polyXlu.thaGfx.p++, G_FOG | G_LIGHTING);
         } else {
-            gSPClearGeometryMode(gfxCtx->polyXlu.p++, G_LIGHTING);
+            gSPClearGeometryMode(gfxCtx->polyXlu.thaGfx.p++, G_LIGHTING);
         }
 
-        gDPPipeSync(gfxCtx->polyXlu.p++);
-        gDPSetPrimColor(gfxCtx->polyXlu.p++, 0, 0, this->regs[SS_DUST_PRIM_R], this->regs[SS_DUST_PRIM_G],
+        gDPPipeSync(gfxCtx->polyXlu.thaGfx.p++);
+        gDPSetPrimColor(gfxCtx->polyXlu.thaGfx.p++, 0, 0, this->regs[SS_DUST_PRIM_R], this->regs[SS_DUST_PRIM_G],
                         this->regs[SS_DUST_PRIM_B], 255);
-        gDPSetEnvColor(gfxCtx->polyXlu.p++, this->regs[SS_DUST_ENV_R], this->regs[SS_DUST_ENV_G],
+        gDPSetEnvColor(gfxCtx->polyXlu.thaGfx.p++, this->regs[SS_DUST_ENV_R], this->regs[SS_DUST_ENV_G],
                        this->regs[SS_DUST_ENV_B], this->regs[SS_DUST_ENV_A]);
-        gSPDisplayList(gfxCtx->polyXlu.p++, this->displayList);
+        gSPDisplayList(gfxCtx->polyXlu.thaGfx.p++, this->displayList);
     }
 
     Graph_CloseDisps(dispRefs, gfxCtx, "../z_eff_ss_dust.c", 389);

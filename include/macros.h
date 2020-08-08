@@ -10,6 +10,8 @@
 
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 
+#define concat(a, b) a##b 
+
 #define SQ(x) ((x)*(x))
 #define ABS(x) ((x) >= 0 ? (x) : -(x))
 #define	ULTRA_ABS(x) ((x) > 0) ? (x) : -(x)
@@ -45,9 +47,38 @@
 
 #define CHECK_QUEST_ITEM(item) (gBitFlags[item] & gSaveContext.questItems)
 
-#define SET_NEXT_GAMESTATE(curState, newInit, newStruct) \
-    (curState)->init = newInit;                          \
-    (curState)->size = sizeof(newStruct);
+#define xSetSegment(segtbl, number, base) \
+        ((void)((segtbl)[number] = (u32)(base)))
+#define SetSegment(number, base) \
+        xSetSegment(gSegments, number, base)
+#define xSetSegmentK0(segtbl, number, base) \
+        xSetSegment(segtbl, number, OS_K0_TO_PHYSICAL(base))
+#define SetSegmentK0(number, base) \
+        SetSegment(number, OS_K0_TO_PHYSICAL(base))        
+
+#ifndef HAYAKAWA_TESTdx
+#define SET_NEXT_GAMESTATE(game, func, name) \
+if (1) { \
+    GameState* _g = game; \
+    (_g)->init = func;                          \
+    (_g)->size = sizeof(name); \
+} else
+#define SET_NEXT_GAMESTATE_NULL(game) \
+if (1) {  \
+    GameState* _g = game; \
+    (_g)->init = NULL; \
+    (_g)->size = 0; \
+} else
+#else
+#define game_set_next_game_name(game, name) \
+    ((game)->next_game_dlf_no = GAME_DLF_##name)
+#define game_set_next_game_null(game) \
+    ((game)->next_game_dlf_no = -1)
+#endif
+#define SET_NEXT_GAME_NAME(name) \
+    game_set_next_game_name(game, name)
+#define SET_NEXT_GAME_NULL() \
+    game_set_next_game_null(game)
 
 #define LOG(exp, value, format, file, line)         \
     do {                                            \
@@ -61,27 +92,7 @@
 #define LOG_NUM(exp, value, file, line) LOG(exp, value, "%d", file, line)
 #define LOG_HEX(exp, value, file, line) LOG(exp, value, "%x", file, line)
 
-typedef struct {
-    Gfx* tmp_poly_opa;
-    Gfx* tmp_poly_xlu;
-    Gfx* tmp_overlay;
-} __GraphCheck;
-
-#define OPEN_DISP(graph, file, line)                                     \
-    {                                                                    \
-        GraphicsContext* gfxCtx = (graph);                               \
-        s32 __poly_gfx_opened = 0;                                       \
-        __GraphCheck __graphcheck;                                       \
-        Graph_OpenDisps(&__graphcheck, graph, file, line);               \
-        (void)0 /* rquire `;'  */
-
-#define CLOSE_DISP(graph, file, line)                                    \
-    do {                                                                 \
-        Graph_CloseDisps(&__graphcheck, graph, file, line);              \
-        (void)__poly_gfx_opened;                                         \
-    } while (0);                                                         \
-    }                                                                    \
-    (void)0 /* rquire `;'  */
+#define GAME_PLAY (GlobalContext *)state
 
 /*
  * `x` vertex x

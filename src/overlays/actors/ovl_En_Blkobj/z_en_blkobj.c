@@ -135,10 +135,8 @@ void EnBlkobj_Update(Actor* thisx, GlobalContext* globalCtx) {
 
 void func_809C2324(GlobalContext* globalCtx, Gfx* dList, s32 alpha) {
     Gfx* segment;
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Gfx* dispRefs[4];
 
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_blkobj.c", 322);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_blkobj.c", 322);
 
     if (alpha == 255) {
         segment = D_809C2590;
@@ -146,11 +144,11 @@ void func_809C2324(GlobalContext* globalCtx, Gfx* dList, s32 alpha) {
         segment = D_809C25A0;
     }
 
-    gSPSegment(gfxCtx->polyXlu.p++, 0x08, segment);
-    gDPSetEnvColor(gfxCtx->polyXlu.p++, 0, 0, 0, alpha);
-    gSPDisplayList(gfxCtx->polyXlu.p++, dList);
+    gSPSegment(NEXT_POLY_XLU_DISP, 0x08, segment);
+    gDPSetEnvColor(NEXT_POLY_XLU_DISP, 0, 0, 0, alpha);
+    gSPDisplayList(NEXT_POLY_XLU_DISP, dList);
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_blkobj.c", 330);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_blkobj.c", 330);
 }
 
 void EnBlkobj_Draw(Actor* thisx, GlobalContext* globalCtx) {
@@ -158,16 +156,15 @@ void EnBlkobj_Draw(Actor* thisx, GlobalContext* globalCtx) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
     s32 temp_a3;
     u32 gameplayFrames;
-    Gfx* dispRefs[5];
 
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_blkobj.c", 349);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_blkobj.c", 349);
     func_80093D84(globalCtx->state.gfxCtx);
 
     gameplayFrames = globalCtx->gameplayFrames % 128;
 
-    gSPSegment(gfxCtx->polyXlu.p++, 0x0D,
+    gSPSegment(NEXT_POLY_XLU_DISP, 0x0D,
                Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, gameplayFrames, 0, 32, 32, 1, gameplayFrames, 0, 32, 32));
-    gSPMatrix(gfxCtx->polyXlu.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_blkobj.c", 363),
+    gSPMatrix(NEXT_POLY_XLU_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_blkobj.c", 363),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     if (this->unk_164 != 0) {
@@ -178,5 +175,5 @@ void EnBlkobj_Draw(Actor* thisx, GlobalContext* globalCtx) {
         func_809C2324(globalCtx, D_060053D0, temp_a3);
     }
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_blkobj.c", 375);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_blkobj.c", 375);
 }

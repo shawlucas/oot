@@ -314,7 +314,7 @@ void BgSpot01Idohashira_Init(Actor* thisx, GlobalContext* globalCtx) {
         }
     } else if (gSaveContext.sceneSetupIndex == 4) {
         this->action = 1;
-        this->dyna.actor.shape.unk_08 = -(kREG(10) + 1100.0f);
+        this->dyna.actor.shape.offset_y = -(kREG(10) + 1100.0f);
     } else if (gSaveContext.sceneSetupIndex == 6) {
         this->action = 0;
     } else {
@@ -322,21 +322,20 @@ void BgSpot01Idohashira_Init(Actor* thisx, GlobalContext* globalCtx) {
     }
 }
 
-#ifdef NON_MATCHING
+#if 0
 // regalloc differences
 void func_808AB700(BgSpot01Idohashira* this, GlobalContext* globalCtx) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Gfx* dispRefs[5];
 
-    Graph_OpenDisps(dispRefs, gfxCtx, "../z_bg_spot01_idohashira.c", 689);
+    OPEN_DISP(gfxCtx, "../z_bg_spot01_idohashira.c", 689);
     func_80093D18(gfxCtx);
 
-    gSPMatrix(gfxCtx->polyOpa.p++, Matrix_NewMtx(gfxCtx, "../z_bg_spot01_idohashira.c", 699),
+    gSPMatrix(NEXT_DISP, Matrix_NewMtx(gfxCtx, "../z_bg_spot01_idohashira.c", 699),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     func_808AAF34(this, globalCtx);
-    gSPDisplayList(gfxCtx->polyOpa.p++, D_06000420);
+    gSPDisplayList(NEXT_DISP, D_06000420);
 
-    Graph_CloseDisps(dispRefs, gfxCtx, "../z_bg_spot01_idohashira.c", 708);
+    CLOSE_DISP(gfxCtx, "../z_bg_spot01_idohashira.c", 708);
 }
 #else
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Bg_Spot01_Idohashira/func_808AB700.s")

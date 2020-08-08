@@ -963,8 +963,8 @@ void func_80A3BFE4(EnGirlA* this, GlobalContext* globalCtx) {
         osSyncPrintf("%s(%2d)\n", D_80A3C590[params], params);
         this->actor.flags &= ~1;
         Actor_SetScale(&this->actor, 0.25f);
-        this->actor.shape.unk_08 = 24.0f;
-        this->actor.shape.unk_10 = 4.0f;
+        this->actor.shape.offset_y = 24.0f;
+        this->actor.shape.shadowSize = 4.0f;
         this->actor.groundY = this->actor.initPosRot.pos.y;
         this->actor.gravity = 0.0f;
         func_80A3A750(this, func_80A3BD80);
@@ -978,8 +978,8 @@ void func_80A3BFE4(EnGirlA* this, GlobalContext* globalCtx) {
 
 void func_80A3C3BC(EnGirlA* this, GlobalContext* globalCtx) {
     Actor_SetScale(&this->actor, 0.25f);
-    this->actor.shape.unk_08 = 24.0f;
-    this->actor.shape.unk_10 = 4.0f;
+    this->actor.shape.offset_y = 24.0f;
+    this->actor.shape.shadowSize = 4.0f;
     func_80A3BF54(this, globalCtx);
     this->actionFunc(this, globalCtx);
     Actor_SetHeight(&this->actor, 5.0f);

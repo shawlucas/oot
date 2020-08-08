@@ -80,7 +80,7 @@ void func_809C1CAC(EnBird* this, s16 params) {
 void func_809C1D60(EnBird* this, GlobalContext* globalCtx) {
     f32 fVar2 = sinf(this->unk_1B4);
 
-    this->actor.shape.unk_08 = this->actor.shape.unk_08 + fVar2 * this->unk_1A0;
+    this->actor.shape.offset_y = this->actor.shape.offset_y + fVar2 * this->unk_1A0;
     Math_SmoothScaleMaxMinF(&this->actor.speedXZ, 0.0f, 0.1f, 0.5f, 0.0f);
 
     if (this->unk_19C != 0) {
@@ -102,7 +102,7 @@ void func_809C1E00(EnBird* this, s16 params) {
 
 void func_809C1E40(EnBird* this, GlobalContext* globalCtx) {
     f32 fVar4 = sinf(this->unk_1B4);
-    this->actor.shape.unk_08 += fVar4 * this->unk_1A0;
+    this->actor.shape.offset_y += fVar4 * this->unk_1A0;
     Math_SmoothScaleMaxMinF(&this->actor.speedXZ, this->unk_1A8, 0.1f, this->unk_1AC, 0.0f);
 
     if (this->unk_1B0 < Math_Vec3f_DistXZ(&this->actor.posRot.pos, &this->actor.initPosRot.pos) || this->unk_198 < 4) {

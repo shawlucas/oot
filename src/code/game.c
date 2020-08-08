@@ -148,13 +148,11 @@ void GameState_DrawInputDisplay(u16 input, Gfx** gfx) {
 void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
     Gfx* newDList;
     Gfx* polyOpaP;
-    Gfx* dispRefs[5];
-    char pad[0x8];
-    GfxPrint printChars;
-
-    Graph_OpenDisps(dispRefs, gfxCtx, "../game.c", 746);
-    newDList = Graph_GfxPlusOne(polyOpaP = gfxCtx->polyOpa.p);
-    gSPDisplayList(gfxCtx->overlay.p++, newDList);
+    
+    
+    OPEN_DISP(gfxCtx, "../game.c", 746);
+    newDList = Graph_GfxPlusOne(polyOpaP = NOW_DISP);
+    gSPDisplayList(NEXT_OVERLAY_DISP, newDList);
 
     if (R_ENABLE_FB_FILTER == 1) {
         GameState_SetFBFilter(&newDList);
@@ -166,6 +164,9 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
     }
 
     if (R_ENABLE_AUDIO_DBG & 1) {
+        s32 pad1;
+        GfxPrint printChars;
+        s32 pad2;
         GfxPrint_Init(&printChars);
         GfxPrint_Open(&printChars, newDList);
         func_800EEA50(&printChars);
@@ -184,10 +185,10 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
     if (1) {
         gSPEndDisplayList(newDList++);
         Graph_BranchDlist(polyOpaP, newDList);
-        gfxCtx->polyOpa.p = newDList;
+        SET_NOW_DISP(newDList);
     }
 
-    Graph_CloseDisps(dispRefs, gfxCtx, "../game.c", 800);
+    CLOSE_DISP(gfxCtx, "../game.c", 800);
 
     func_80063D7C(gfxCtx);
 
@@ -198,41 +199,39 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
 }
 
 void GameState_SetFrameBuffer(GraphicsContext* gfxCtx) {
-    Gfx* dispRef[5];
 
-    Graph_OpenDisps(dispRef, gfxCtx, "../game.c", 814);
+    OPEN_DISP(gfxCtx, "../game.c", 814);
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0, 0);
-    gSPSegment(gfxCtx->polyOpa.p++, 0xF, gfxCtx->curFrameBuffer);
-    gSPSegment(gfxCtx->polyOpa.p++, 0xE, gZBuffer);
-    gSPSegment(gfxCtx->polyXlu.p++, 0, 0);
-    gSPSegment(gfxCtx->polyXlu.p++, 0xF, gfxCtx->curFrameBuffer);
-    gSPSegment(gfxCtx->polyXlu.p++, 0xE, gZBuffer);
-    gSPSegment(gfxCtx->overlay.p++, 0, 0);
-    gSPSegment(gfxCtx->overlay.p++, 0xF, gfxCtx->curFrameBuffer);
-    gSPSegment(gfxCtx->overlay.p++, 0xE, gZBuffer);
+    gSPSegment(NEXT_DISP, 0, 0);
+    gSPSegment(NEXT_DISP, 0xF, gfxCtx->FrameBufferP);
+    gSPSegment(NEXT_DISP, 0xE, gZBuffer);
+    gSPSegment(NEXT_POLY_XLU_DISP, 0, 0);
+    gSPSegment(NEXT_POLY_XLU_DISP, 0xF, gfxCtx->FrameBufferP);
+    gSPSegment(NEXT_POLY_XLU_DISP, 0xE, gZBuffer);
+    gSPSegment(NEXT_OVERLAY_DISP, 0, 0);
+    gSPSegment(NEXT_OVERLAY_DISP, 0xF, gfxCtx->FrameBufferP);
+    gSPSegment(NEXT_OVERLAY_DISP, 0xE, gZBuffer);
 
-    Graph_CloseDisps(dispRef, gfxCtx, "../game.c", 838);
+    CLOSE_DISP(gfxCtx, "../game.c", 838);
 }
 
 void func_800C49F4(GraphicsContext* gfxCtx) {
     Gfx* newDlist;
     Gfx* polyOpaP;
-    Gfx* dispRefs[5];
 
-    Graph_OpenDisps(dispRefs, gfxCtx, "../game.c", 846);
+    OPEN_DISP(gfxCtx, "../game.c", 846);
 
-    newDlist = Graph_GfxPlusOne(polyOpaP = gfxCtx->polyOpa.p);
-    gSPDisplayList(gfxCtx->overlay.p++, newDlist);
+    newDlist = Graph_GfxPlusOne(polyOpaP = NOW_DISP);
+    gSPDisplayList(NEXT_OVERLAY_DISP, newDlist);
 
     // necessary to match
     if (1) {
         gSPEndDisplayList(newDlist++);
         Graph_BranchDlist(polyOpaP, newDlist);
-        gfxCtx->polyOpa.p = newDlist;
+        SET_NOW_DISP(newDlist);
     }
 
-    Graph_CloseDisps(dispRefs, gfxCtx, "../game.c", 865);
+    CLOSE_DISP(gfxCtx, "../game.c", 865);
 }
 
 void GameState_ReqPadData(GameState* gameState) {
@@ -253,38 +252,38 @@ void GameState_Update(GameState* gameState) {
             SREG(48) = 0;
             gfxCtx->viMode = &gViConfigMode;
             gfxCtx->viFeatures = gViConfigFeatures;
-            gfxCtx->xScale = gViConfigXScale;
-            gfxCtx->yScale = gViConfigYScale;
+            gfxCtx->vixscale = gViConfigXScale;
+            gfxCtx->viyscale = gViConfigYScale;
         } else if (SREG(48) > 0) {
             func_800ACAF8(&D_80166528, gameState->input, gfxCtx);
             gfxCtx->viMode = &D_80166528.viMode;
             gfxCtx->viFeatures = D_80166528.viFeatures;
-            gfxCtx->xScale = 1.0f;
-            gfxCtx->yScale = 1.0f;
+            gfxCtx->vixscale = 1.0f;
+            gfxCtx->viyscale = 1.0f;
         }
     } else if (SREG(63) >= 2) {
         gfxCtx->viMode = &gViConfigMode;
         gfxCtx->viFeatures = gViConfigFeatures;
-        gfxCtx->xScale = gViConfigXScale;
-        gfxCtx->yScale = gViConfigYScale;
+        gfxCtx->vixscale = gViConfigXScale;
+        gfxCtx->viyscale = gViConfigYScale;
         if (SREG(63) == 6 || (SREG(63) == 2u && osTvType == 1)) {
             gfxCtx->viMode = &osViModeNtscLan1;
-            gfxCtx->yScale = 1.0f;
+            gfxCtx->viyscale = 1.0f;
         }
 
         if (SREG(63) == 5 || (SREG(63) == 2u && osTvType == 2)) {
             gfxCtx->viMode = &osViModeMpalLan1;
-            gfxCtx->yScale = 1.0f;
+            gfxCtx->viyscale = 1.0f;
         }
 
         if (SREG(63) == 4 || (SREG(63) == 2u && osTvType == 0)) {
             gfxCtx->viMode = &osViModePalLan1;
-            gfxCtx->yScale = 1.0f;
+            gfxCtx->viyscale = 1.0f;
         }
 
         if (SREG(63) == 3 || (SREG(63) == 2u && osTvType == 0)) {
             gfxCtx->viMode = &osViModeFpalLan1;
-            gfxCtx->yScale = 0.833f;
+            gfxCtx->viyscale = 0.833f;
         }
     } else {
         gfxCtx->viMode = NULL;
@@ -426,7 +425,7 @@ void GameState_Init(GameState* gameState, GameStateFunc init, GraphicsContext* g
     }
     SpeedMeter_Init(&D_801664D0);
     func_800AA0B4();
-    osSendMesg(&gameState->gfxCtx->queue, NULL, OS_MESG_BLOCK);
+    osSendMesg(&gameState->gfxCtx->graphReplyMsgQ, NULL, OS_MESG_BLOCK);
 
     endTime = osGetTime();
     // Other initialization processing time% d us
@@ -443,7 +442,7 @@ void GameState_Destroy(GameState* gameState) {
     osSyncPrintf("game デストラクタ開始\n");
     func_800C3C20();
     func_800F3054();
-    osRecvMesg(&gameState->gfxCtx->queue, NULL, OS_MESG_BLOCK);
+    osRecvMesg(&gameState->gfxCtx->graphReplyMsgQ, NULL, OS_MESG_BLOCK);
     LogUtils_CheckNullPointer("this->cleanup", gameState->destroy, "../game.c", 1139);
     if (gameState->destroy != NULL) {
         gameState->destroy(gameState);

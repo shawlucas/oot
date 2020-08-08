@@ -182,7 +182,7 @@ void EnBx_Update(Actor* thisx, GlobalContext* globalCtx) {
     }
 }
 
-#ifdef NON_MATCHING
+#if 0
 // Issue with Gfx_TwoTexScroll I think
 void EnBx_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnBx* this = THIS;
@@ -191,20 +191,18 @@ void EnBx_Draw(Actor* thisx, GlobalContext* globalCtx) {
     f32 tmpf2;
 
     {
-        GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-        Gfx* dispRefs[4];
         Mtx* matrix = &matrices[0];
         s16 i;
 
-        Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_bx.c", 464);
+        OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_bx.c", 464);
         func_80093D18(globalCtx->state.gfxCtx);
 
-        gSPSegment(gfxCtx->polyOpa.p++, 0x0C, matrices);
-        gSPSegment(gfxCtx->polyOpa.p++, 0x08, SEGMENTED_TO_VIRTUAL(D_809D2560[this->actor.params & 0x7F]));
-        gSPSegment(gfxCtx->polyOpa.p++, 0x09,
+        gSPSegment(NEXT_DISP, 0x0C, matrices);
+        gSPSegment(NEXT_DISP, 0x08, SEGMENTED_TO_VIRTUAL(D_809D2560[this->actor.params & 0x7F]));
+        gSPSegment(NEXT_DISP, 0x09,
                    Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, 0, 0, 0x10, 0x10, 1, 0,
                                     (-globalCtx->gameplayFrames * 10) % 128, 0x20, 0x20));
-        gSPMatrix(gfxCtx->polyOpa.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_bx.c", 478),
+        gSPMatrix(NEXT_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_bx.c", 478),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         if (this->actor.params & 0x80) {
@@ -234,8 +232,8 @@ void EnBx_Draw(Actor* thisx, GlobalContext* globalCtx) {
             Matrix_ToMtx(matrix, "../z_en_bx.c", 507);
         }
 
-        gSPDisplayList(gfxCtx->polyOpa.p++, D_060022F0);
-        Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_bx.c", 511);
+        gSPDisplayList(NEXT_DISP, D_060022F0);
+        CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_bx.c", 511);
     }
 }
 #else

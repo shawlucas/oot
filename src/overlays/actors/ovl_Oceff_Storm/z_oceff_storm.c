@@ -127,59 +127,53 @@ void OceffStorm_Update(Actor* thisx, GlobalContext* globalCtx) {
 void OceffStorm_Draw2(Actor* thisx, GlobalContext* globalCtx) {
     u32 scroll;
     OceffStorm* this = THIS;
-    GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4];
 
     scroll = globalCtx->state.frames & 0xFFF;
-    gfxCtx = globalCtx->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_oceff_storm.c", 449);
-    gDPPipeSync(gfxCtx->polyXlu.p++);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_oceff_storm.c", 449);
+    gDPPipeSync(NEXT_POLY_XLU_DISP);
     if (1) {}
-    gfxCtx->polyXlu.p = func_80093F34(gfxCtx->polyXlu.p);
-    gDPSetAlphaDither(gfxCtx->polyXlu.p++, G_AD_NOISE);
-    gDPSetColorDither(gfxCtx->polyXlu.p++, G_CD_NOISE);
-    gDPSetPrimColor(gfxCtx->polyXlu.p++, 0x80, 0x80, 200, 200, 150, this->primColorAlpha);
-    gSPDisplayList(gfxCtx->polyXlu.p++, sTextureDL);
-    gSPDisplayList(gfxCtx->polyXlu.p++, Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, scroll * 8, scroll * 4, 64, 64, 1,
+    SET_NOW_POLY_XLU_DISP(func_80093F34(NOW_POLY_XLU_DISP));
+    gDPSetAlphaDither(NEXT_POLY_XLU_DISP, G_AD_NOISE);
+    gDPSetColorDither(NEXT_POLY_XLU_DISP, G_CD_NOISE);
+    gDPSetPrimColor(NEXT_POLY_XLU_DISP, 0x80, 0x80, 200, 200, 150, this->primColorAlpha);
+    gSPDisplayList(NEXT_POLY_XLU_DISP, sTextureDL);
+    gSPDisplayList(NEXT_POLY_XLU_DISP, Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, scroll * 8, scroll * 4, 64, 64, 1,
                                                          scroll * 4, scroll * 4, 64, 64));
-    gSPTextureRectangle(gfxCtx->polyXlu.p++, 0, 0, (SCREEN_WIDTH << 2), (SCREEN_HEIGHT << 2), G_TX_RENDERTILE, 0, 0,
+    gSPTextureRectangle(NEXT_POLY_XLU_DISP, 0, 0, (SCREEN_WIDTH << 2), (SCREEN_HEIGHT << 2), G_TX_RENDERTILE, 0, 0,
                         140, (1 << 15) | (31 << 10) | 884);
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_oceff_storm.c", 477);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_oceff_storm.c", 477);
 }
 
 void OceffStorm_Draw(Actor* thisx, GlobalContext* globalCtx) {
     u32 scroll;
     OceffStorm* this;
-    GraphicsContext* gfxCtx;
     Vtx* vtxPtr;
-    Gfx* dispRefs[4];
 
     this = THIS;
     vtxPtr = vertices;
     scroll = globalCtx->state.frames & 0xFFF;
-    gfxCtx = globalCtx->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_oceff_storm.c", 486);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_oceff_storm.c", 486);
 
     func_80093D84(globalCtx->state.gfxCtx);
 
-    gDPSetPrimColor(gfxCtx->polyXlu.p++, 0x80, 0x80, 255, 255, 200, 255);
-    gDPSetEnvColor(gfxCtx->polyXlu.p++, 150, 150, 0, 128);
-    gDPSetAlphaDither(gfxCtx->polyXlu.p++, G_AD_NOISE);
-    gDPSetColorDither(gfxCtx->polyXlu.p++, G_CD_NOISE);
+    gDPSetPrimColor(NEXT_POLY_XLU_DISP, 0x80, 0x80, 255, 255, 200, 255);
+    gDPSetEnvColor(NEXT_POLY_XLU_DISP, 150, 150, 0, 128);
+    gDPSetAlphaDither(NEXT_POLY_XLU_DISP, G_AD_NOISE);
+    gDPSetColorDither(NEXT_POLY_XLU_DISP, G_CD_NOISE);
 
     vtxPtr[0].v.cn[3] = vtxPtr[6].v.cn[3] = vtxPtr[16].v.cn[3] = vtxPtr[25].v.cn[3] = this->vtxAlpha >> 1;
     vtxPtr[10].v.cn[3] = vtxPtr[22].v.cn[3] = this->vtxAlpha;
 
-    gSPMatrix(gfxCtx->polyXlu.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_oceff_storm.c", 498),
+    gSPMatrix(NEXT_POLY_XLU_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_oceff_storm.c", 498),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    gSPDisplayList(gfxCtx->polyXlu.p++, sCylinderTexDl);
-    gSPDisplayList(gfxCtx->polyXlu.p++, Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, scroll * 4, (0 - scroll) * 8, 32,
+    gSPDisplayList(NEXT_POLY_XLU_DISP, sCylinderTexDl);
+    gSPDisplayList(NEXT_POLY_XLU_DISP, Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, scroll * 4, (0 - scroll) * 8, 32,
                                                          32, 1, scroll * 8, (0 - scroll) * 12, 32, 32));
-    gSPDisplayList(gfxCtx->polyXlu.p++, sCylinderDl);
+    gSPDisplayList(NEXT_POLY_XLU_DISP, sCylinderDl);
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_oceff_storm.c", 512);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_oceff_storm.c", 512);
 
     OceffStorm_Draw2(&this->actor, globalCtx);
 }

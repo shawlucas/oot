@@ -70,20 +70,20 @@ void EffectSsBomb_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     func_800A6FA0(&sp12C, &globalCtx->mf_11DA0, &sp6C);
     func_800A6FA0(&sp6C, &spEC, &spAC);
 
-    gSPMatrix(gfxCtx->polyXlu.p++, &gMtxClear, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gfxCtx->polyXlu.thaGfx.p++, &gMtxClear, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     mtx = func_800A7E70(gfxCtx, &spAC);
 
     if (mtx != NULL) {
-        gSPMatrix(gfxCtx->polyXlu.p++, mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPSegment(gfxCtx->polyXlu.p++, 0x08, SEGMENTED_TO_VIRTUAL(D_8099F588[this->regs[SS_BOMB_TEX_IDX]]));
-        gDPPipeSync(gfxCtx->polyXlu.p++);
+        gSPMatrix(gfxCtx->polyXlu.thaGfx.p++, mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPSegment(gfxCtx->polyXlu.thaGfx.p++, 0x08, SEGMENTED_TO_VIRTUAL(D_8099F588[this->regs[SS_BOMB_TEX_IDX]]));
+        gDPPipeSync(gfxCtx->polyXlu.thaGfx.p++);
         func_80094C50(gfxCtx);
         color = this->life * 12.75f;
-        gDPSetPrimColor(gfxCtx->polyXlu.p++, 0, 0, color, color, color, color);
-        gDPPipeSync(gfxCtx->polyXlu.p++);
-        gSPDisplayList(gfxCtx->polyXlu.p++, this->displayList);
-        gDPPipeSync(gfxCtx->polyXlu.p++);
+        gDPSetPrimColor(gfxCtx->polyXlu.thaGfx.p++, 0, 0, color, color, color, color);
+        gDPPipeSync(gfxCtx->polyXlu.thaGfx.p++);
+        gSPDisplayList(gfxCtx->polyXlu.thaGfx.p++, this->displayList);
+        gDPPipeSync(gfxCtx->polyXlu.thaGfx.p++);
     }
 
     Graph_CloseDisps(&dispRefs, gfxCtx, "../z_eff_ss_bomb.c", 214);

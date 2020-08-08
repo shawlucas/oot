@@ -121,7 +121,7 @@ void func_8086D0EC(BgBdanSwitch* this) {
             this->unk_1D0 = ((Math_Coss(this->unk_1CC) * 0.5f) + 20.5f) * (this->unk_1C8 * 0.0050000004f);
             this->actor.scale.y = this->unk_1C8 * 0.1f;
     }
-    this->actor.shape.unk_08 = 1.2f / this->unk_1D0;
+    this->actor.shape.offset_y = 1.2f / this->unk_1D0;
 }
 
 void BgBdanSwitch_Init(Actor* thisx, GlobalContext* globalCtx) {
@@ -491,7 +491,7 @@ void BgBdanSwitch_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void func_8086DF58(BgBdanSwitch* this, GlobalContext* globalCtx, Gfx* dlist) {
-    func_800D1694(this->actor.posRot.pos.x, this->actor.posRot.pos.y + (this->actor.shape.unk_08 * this->unk_1D0),
+    func_800D1694(this->actor.posRot.pos.x, this->actor.posRot.pos.y + (this->actor.shape.offset_y * this->unk_1D0),
                   this->actor.posRot.pos.z, &this->actor.shape.rot);
     Matrix_Scale(this->unk_1D4, this->unk_1D0, this->unk_1D4, MTXMODE_APPLY);
     Gfx_DrawDListOpa(globalCtx, dlist);

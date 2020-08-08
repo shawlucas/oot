@@ -37,41 +37,38 @@ void func_80095AB4(GlobalContext* globalCtx, Room* room, u32 flags) {
     s32 i;
     PolygonType0* polygon0;
     PolygonDlist* polygonDlist;
-    GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4];
 
-    gfxCtx = globalCtx->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_room.c", 193);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_room.c", 193);
 
     if (flags & 1) {
         func_800342EC(&D_801270A0, globalCtx);
-        gSPSegment(gfxCtx->polyOpa.p++, 0x03, room->segment);
+        gSPSegment(NEXT_DISP, 0x03, room->segment);
         func_80093C80(globalCtx);
-        gSPMatrix(gfxCtx->polyOpa.p++, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
+        gSPMatrix(NEXT_DISP, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
     }
 
     if (flags & 2) {
         func_8003435C(&D_801270A0, globalCtx);
-        gSPSegment(gfxCtx->polyXlu.p++, 0x03, room->segment);
+        gSPSegment(NEXT_POLY_XLU_DISP, 0x03, room->segment);
         func_80093D84(globalCtx->state.gfxCtx);
-        gSPMatrix(gfxCtx->polyXlu.p++, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
+        gSPMatrix(NEXT_POLY_XLU_DISP, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
     }
 
     polygon0 = &room->mesh->polygon0;
     polygonDlist = SEGMENTED_TO_VIRTUAL(polygon0->start);
     for (i = 0; i < polygon0->num; i++) {
         if ((flags & 1) && (polygonDlist->opa != NULL)) {
-            gSPDisplayList(gfxCtx->polyOpa.p++, polygonDlist->opa);
+            gSPDisplayList(NEXT_DISP, polygonDlist->opa);
         }
 
         if ((flags & 2) && (polygonDlist->xlu != NULL)) {
-            gSPDisplayList(gfxCtx->polyXlu.p++, polygonDlist->xlu);
+            gSPDisplayList(NEXT_POLY_XLU_DISP, polygonDlist->xlu);
         }
 
         polygonDlist++;
     }
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_room.c", 239);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_room.c", 239);
 }
 
 #define SHAPE_SORT_MAX 64
@@ -84,7 +81,7 @@ typedef struct struct_80095D04 {
 } struct_80095D04; // size = 0x10
 
 // Room Draw Polygon Type 2
-#ifdef NON_MATCHING
+#if 0
 // this function still needs some work but it should be functionally equivalent
 void func_80095D04(GlobalContext* globalCtx, Room* room, u32 flags) {
     PolygonType2* polygon2;
@@ -104,26 +101,23 @@ void func_80095D04(GlobalContext* globalCtx, Room* room, u32 flags) {
     PolygonDlist2* sp78;
     f32 temp_f0;
     f32 temp_f2;
-    GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4];
 
     spB0 = NULL;
     spB4 = NULL;
-    gfxCtx = globalCtx->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_room.c", 287);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_room.c", 287);
 
     if (flags & 1) {
         func_800342EC(&D_801270A0, globalCtx);
-        gSPSegment(gfxCtx->polyOpa.p++, 0x03, room->segment);
+        gSPSegment(NEXT_DISP, 0x03, room->segment);
         func_80093C80(globalCtx);
-        gSPMatrix(gfxCtx->polyOpa.p++, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
+        gSPMatrix(NEXT_DISP, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
     }
 
     if (flags & 2) {
         func_8003435C(&D_801270A0, globalCtx);
-        gSPSegment(gfxCtx->polyXlu.p++, 0x03, room->segment);
+        gSPSegment(NEXT_POLY_XLU_DISP, 0x03, room->segment);
         func_80093D84(globalCtx->state.gfxCtx);
-        gSPMatrix(gfxCtx->polyXlu.p++, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
+        gSPMatrix(NEXT_POLY_XLU_DISP, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
     }
 
     spA4 = &spB8[0];
@@ -199,20 +193,20 @@ void func_80095D04(GlobalContext* globalCtx, Room* room, u32 flags) {
 
             if (((iREG(86) == 1) && (iREG(89) > sp9C)) || ((iREG(86) == 2) && (iREG(89) == sp9C))) {
                 if ((flags & 1) && (phi_s0->opa != NULL)) {
-                    gSPDisplayList(gfxCtx->polyOpa.p++, phi_s0->opa);
+                    gSPDisplayList(NEXT_DISP, phi_s0->opa);
                 }
 
                 if ((flags & 2) && (phi_s0->xlu != NULL)) {
-                    gSPDisplayList(gfxCtx->polyXlu.p++, phi_s0->xlu);
+                    gSPDisplayList(NEXT_POLY_XLU_DISP, phi_s0->xlu);
                 }
             }
         } else {
             if ((flags & 1) && (phi_s0->opa != NULL)) {
-                gSPDisplayList(gfxCtx->polyOpa.p++, phi_s0->opa);
+                gSPDisplayList(NEXT_DISP, phi_s0->opa);
             }
 
             if ((flags & 2) && (phi_s0->xlu != NULL)) {
-                gSPDisplayList(gfxCtx->polyXlu.p++, phi_s0->xlu);
+                gSPDisplayList(NEXT_POLY_XLU_DISP, phi_s0->xlu);
             }
         }
 
@@ -222,7 +216,7 @@ void func_80095D04(GlobalContext* globalCtx, Room* room, u32 flags) {
 
     iREG(88) = sp9C - 1;
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_room.c", 430);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_room.c", 430);
 }
 #else
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_room/func_80095D04.s")
@@ -337,11 +331,8 @@ void func_80096680(GlobalContext* globalCtx, Room* room, u32 flags) {
     u32 sp98;
     u32 sp94;
     u32 sp90;
-    GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4];
 
-    gfxCtx = globalCtx->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_room.c", 628);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_room.c", 628);
 
     camera = ACTIVE_CAM;
     polygon1 = &room->mesh->polygon1;
@@ -352,42 +343,42 @@ void func_80096680(GlobalContext* globalCtx, Room* room, u32 flags) {
     sp90 = (flags & 2) && polygonDlist->xlu && !(SREG(25) & 4);
 
     if (sp94 || sp98) {
-        gSPSegment(gfxCtx->polyOpa.p++, 0x03, room->segment);
+        gSPSegment(NEXT_DISP, 0x03, room->segment);
 
         if (sp94) {
             func_80093D18(globalCtx->state.gfxCtx);
-            gSPMatrix(gfxCtx->polyOpa.p++, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
-            gSPDisplayList(gfxCtx->polyOpa.p++, polygonDlist->opa);
+            gSPMatrix(NEXT_DISP, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
+            gSPDisplayList(NEXT_DISP, polygonDlist->opa);
         }
 
         if (sp98) {
-            // gSPLoadUcodeL(gfxCtx->polyOpa.p++, rspS2DEX)?
-            gSPLoadUcodeEx(gfxCtx->polyOpa.p++, OS_K0_TO_PHYSICAL(D_80113070), OS_K0_TO_PHYSICAL(D_801579A0), 0x800);
+            // gSPLoadUcodeL(NEXT_DISP, rspS2DEX)?
 
-            if (1) {
+            gSPLoadUcodeEx(NEXT_DISP, OS_K0_TO_PHYSICAL(D_80113070), OS_K0_TO_PHYSICAL(D_801579A0), 0x800);
+            {
                 Vec3f sp60;
-                spA8 = gfxCtx->polyOpa.p;
+                spA8 = NOW_DISP;
                 func_8005AFB4(&sp60, camera);
                 func_8009638C(&spA8, polygon1->single.source, polygon1->single.tlut, polygon1->single.width,
                               polygon1->single.height, polygon1->single.fmt, polygon1->single.siz,
                               polygon1->single.mode0, polygon1->single.tlutCount,
                               (sp60.x + sp60.z) * 1.2f + sp60.y * 0.6f, sp60.y * 2.4f + (sp60.x + sp60.z) * 0.3f);
-                gfxCtx->polyOpa.p = spA8;
+                SET_NOW_DISP(spA8);
             }
 
-            // gSPLoadUcode(gfxCtx->polyOpa.p++, SysUcode_GetUCode(), SysUcode_GetUCodeData())?
-            gSPLoadUcodeEx(gfxCtx->polyOpa.p++, SysUcode_GetUCode(), SysUcode_GetUCodeData(), 0x800);
+            // gSPLoadUcode(NEXT_DISP, SysUcode_GetUCode(), SysUcode_GetUCodeData())?
+            gSPLoadUcodeEx(NEXT_DISP, SysUcode_GetUCode(), SysUcode_GetUCodeData(), 0x800);
         }
     }
 
     if (sp90) {
-        gSPSegment(gfxCtx->polyXlu.p++, 0x03, room->segment);
+        gSPSegment(NEXT_POLY_XLU_DISP, 0x03, room->segment);
         func_80093D84(globalCtx->state.gfxCtx);
-        gSPMatrix(gfxCtx->polyXlu.p++, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
-        gSPDisplayList(gfxCtx->polyXlu.p++, polygonDlist->xlu);
+        gSPMatrix(NEXT_POLY_XLU_DISP, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
+        gSPDisplayList(NEXT_POLY_XLU_DISP, polygonDlist->xlu);
     }
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_room.c", 691);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_room.c", 691);
 }
 
 BgImage* func_80096A74(PolygonType1* polygon1, GlobalContext* globalCtx) {
@@ -424,7 +415,7 @@ BgImage* func_80096A74(PolygonType1* polygon1, GlobalContext* globalCtx) {
 }
 
 // Room Draw Polygon Type 1 - Multi Format
-#ifdef NON_MATCHING
+#if 0
 // regalloc differences
 void func_80096B6C(GlobalContext* globalCtx, Room* room, u32 flags) {
     Camera* camera;
@@ -436,11 +427,8 @@ void func_80096B6C(GlobalContext* globalCtx, Room* room, u32 flags) {
     u32 sp94;
     u32 sp90;
     u32 sp8C;
-    GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4];
 
-    gfxCtx = globalCtx->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_room.c", 752);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_room.c", 752);
 
     camera = ACTIVE_CAM;
     sp98 = (camera->setting ^ 25) == 0;
@@ -452,17 +440,17 @@ void func_80096B6C(GlobalContext* globalCtx, Room* room, u32 flags) {
     sp8C = (flags & 2) && polygonDlist->xlu && !(SREG(25) & 4);
 
     if (sp90 || sp94) {
-        gSPSegment(gfxCtx->polyOpa.p++, 0x03, room->segment);
+        gSPSegment(NEXT_DISP, 0x03, room->segment);
 
         if (sp90) {
             func_80093D18(globalCtx->state.gfxCtx);
-            gSPMatrix(gfxCtx->polyOpa.p++, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
-            gSPDisplayList(gfxCtx->polyOpa.p++, polygonDlist->opa);
+            gSPMatrix(NEXT_DISP, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
+            gSPDisplayList(NEXT_DISP, polygonDlist->opa);
         }
 
         if (sp94) {
-            // gSPLoadUcodeL(gfxCtx->polyOpa.p++, rspS2DEX)?
-            gSPLoadUcodeEx(gfxCtx->polyOpa.p++, OS_K0_TO_PHYSICAL(D_80113070), OS_K0_TO_PHYSICAL(D_801579A0), 0x800);
+            // gSPLoadUcodeL(NEXT_DISP, rspS2DEX)?
+            gSPLoadUcodeEx(NEXT_DISP, OS_K0_TO_PHYSICAL(D_80113070), OS_K0_TO_PHYSICAL(D_801579A0), 0x800);
 
             if (1) {
                 Vec3f sp5C;
@@ -474,19 +462,19 @@ void func_80096B6C(GlobalContext* globalCtx, Room* room, u32 flags) {
                 gfxCtx->polyOpa.p = spA8;
             }
 
-            // gSPLoadUcode(gfxCtx->polyOpa.p++, SysUcode_GetUCode(), SysUcode_GetUCodeData())?
-            gSPLoadUcodeEx(gfxCtx->polyOpa.p++, SysUcode_GetUCode(), SysUcode_GetUCodeData(), 0x800);
+            // gSPLoadUcode(NEXT_DISP, SysUcode_GetUCode(), SysUcode_GetUCodeData())?
+            gSPLoadUcodeEx(NEXT_DISP, SysUcode_GetUCode(), SysUcode_GetUCodeData(), 0x800);
         }
     }
 
     if (sp8C) {
-        gSPSegment(gfxCtx->polyXlu.p++, 0x03, room->segment);
+        gSPSegment(NEXT_POLY_XLU_DISP, 0x03, room->segment);
         func_80093D84(globalCtx->state.gfxCtx);
-        gSPMatrix(gfxCtx->polyXlu.p++, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
-        gSPDisplayList(gfxCtx->polyXlu.p++, polygonDlist->xlu);
+        gSPMatrix(NEXT_POLY_XLU_DISP, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
+        gSPDisplayList(NEXT_POLY_XLU_DISP, polygonDlist->xlu);
     }
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_room.c", 819);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_room.c", 819);
 }
 #else
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_room/func_80096B6C.s")

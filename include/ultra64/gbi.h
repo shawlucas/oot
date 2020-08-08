@@ -4036,6 +4036,43 @@ do {                                                                    \
                        (lrs) << G_TEXTURE_IMAGE_FRAC, (lrt) << G_TEXTURE_IMAGE_FRAC);                                  \
     } while (0)
 
+#ifdef  F3DEX_GBI_2
+#define gDPSetOtherModeHL(pkt, high, low)                               \
+        gDPSetOtherMode(pkt, high, low)
+#define gsDPSetOtherModeHL(high, low)                                   \
+        gsDPSetOtherMode(high, low)
+#else  /* !F3DEX_GBI_2 */
+#define gsDPSetOtherModeHL(high, low)                                   \
+        gsSPSetOtherMode(G_SETOTHERMODE_H, 0, 24, high),                \
+        gsSPSetOtherMode(G_SETOTHERMODE_L, 0, 3, low),                  \
+        gsSPSetOtherMode(G_SETOTHERMODE_L, 3, 29, low)
+#define gDPSetOtherModeHL(pkt, high, low)                               \
+do {                                                                    \
+        gSPSetOtherMode(pkt, G_SETOTHERMODE_H, 0, 24, high);            \
+        gSPSetOtherMode(pkt, G_SETOTHERMODE_L, 0, 3, low);              \
+        gSPSetOtherMode(pkt, G_SETOTHERMODE_L, 3, 29, low);             \
+} while (0)
+#endif /* !F3DEX_GBI_2 */
+
+#define gCPSetModeLERP(gfx, pm,ct,tp,td, tl, tt, tf, tc, ck, cd, ad, ac, zs, gm, ton, \
+                        a0, b0, c0, d0, Aa0, Ab0, Ac0, Ad0, a1, b1, c1, d1, Aa1, Ab1, Ac1, Ad1, rd1, rd2)  \
+do {                                                            \
+    unsigned int        data_l, data_h;                         \
+                                                                \
+    data_l = ac | zs | rd1 | rd2;                               \
+    data_h = pm | ct | tp  | td | tl | tt | tf | tc | ck | cd | ad;     \
+                                                                \
+                                                                \
+    gSPTexture(gfx, 0xffff, 0xffff, 0, 0, ton);                 \
+                                                                \
+    gDPSetCombineLERP(gfx, a0, b0, c0, d0, Aa0, Ab0, Ac0, Ad0,  \
+                        a1, b1, c1, d1, Aa1, Ab1, Ac1, Ad1);    \
+                                                                \
+    gDPSetOtherModeHL(gfx, data_h, data_l);                     \
+    gSPLoadGeometryMode(gfx, gm);                               \
+                                                                \
+} while (0)
+
 /*
  *  Load texture tile.  Allows tmem address and render tile to be specified.
  *  Useful for loading multiple tiles.
@@ -4070,17 +4107,16 @@ do {                                                                    \
  */
 #ifndef _HW_VERSION_1
 
-#define gDPLoadTLUT_pal16(pkt, pal, dram)				\
-{									\
-	gDPSetTextureImage(pkt, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, dram);	\
-	gDPTileSync(pkt);						\
-	gDPSetTile(pkt, 0, 0, 0, (256+(((pal)&0xf)*16)),		\
-		G_TX_LOADTILE, 0 , 0, 0, 0, 0, 0, 0);			\
-	gDPLoadSync(pkt);						\
-	gDPLoadTLUTCmd(pkt, G_TX_LOADTILE, 15);				\
-	gDPPipeSync(pkt);						\
-}
-
+#define gDPLoadTLUT_pal16(pkt, pal, dram)                               \
+do {                                                                    \
+        gDPSetTextureImage(pkt, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, dram);  \
+        gDPTileSync(pkt);                                               \
+        gDPSetTile(pkt, 0, 0, 0, (256+(((pal)&0xf)*16)),                \
+                G_TX_LOADTILE, 0 , 0, 0, 0, 0, 0, 0);                   \
+        gDPLoadSync(pkt);                                               \
+        gDPLoadTLUTCmd(pkt, G_TX_LOADTILE, 15);                         \
+        gDPPipeSync(pkt);                                               \
+} while (0)
 #else /* **** WORKAROUND hardware 1 load_tlut bug ****** */
 
 #define gDPLoadTLUT_pal16(pkt, pal, dram)				\

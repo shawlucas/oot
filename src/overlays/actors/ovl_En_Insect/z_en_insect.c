@@ -405,7 +405,7 @@ void func_80A7CC3C(EnInsect* this, GlobalContext* globalCtx) {
 
     Actor_SetScale(&this->actor, CLAMP_MIN(this->actor.scale.x - 0.0002f, 0.001f));
 
-    this->actor.shape.unk_08 -= 0.8f;
+    this->actor.shape.offset_y -= 0.8f;
     this->actor.posRot.pos.x = Math_Rand_ZeroOne() + this->actor.initPosRot.pos.x - 0.5f;
     this->actor.posRot.pos.z = Math_Rand_ZeroOne() + this->actor.initPosRot.pos.z - 0.5f;
 

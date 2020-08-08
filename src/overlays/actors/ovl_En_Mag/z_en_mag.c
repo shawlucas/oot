@@ -528,12 +528,12 @@ void EnMag_Draw(Actor* thisx, GlobalContext* globalCtx) {
 
     OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_mag.c", 1151);
 
-    glistp = Graph_GfxPlusOne(glistp_save = gfxCtx->polyOpa.p);
-    gSPDisplayList(gfxCtx->overlay.p++, glistp);
+    glistp = Graph_GfxPlusOne(glistp_save = NOW_DISP);
+    gSPDisplayList(NEXT_OVERLAY_DISP, glistp);
     EnMag_DrawSub(this, globalCtx, &glistp);
 
     gSPEndDisplayList(glistp++);
     Graph_BranchDlist(glistp_save, glistp);
-    gfxCtx->polyOpa.p = glistp;
+    SET_NOW_DISP(glistp);
     CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_mag.c", 1161);
 }

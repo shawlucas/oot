@@ -13,7 +13,7 @@
 void EnNutsball_Init(Actor* thisx, GlobalContext* globalCtx);
 void EnNutsball_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnNutsball_Update(Actor* thisx, GlobalContext* globalCtx);
-void EnNutsball_Draw(Actor* thisx, GlobalContext* globalCtx);
+void EnNutsball_Draw(Actor* thisx, GameState* state);
 
 void func_80ABBB34(EnNutsball* this, GlobalContext* globalCtx);
 void func_80ABBBA8(EnNutsball* this, GlobalContext* globalCtx);
@@ -138,18 +138,17 @@ void EnNutsball_Update(Actor* thisx, GlobalContext* globalCtx) {
     }
 }
 
-void EnNutsball_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Gfx* dispRefs[5];
+void EnNutsball_Draw(Actor* thisx, GameState* state) {
+    GlobalContext* globalCtx = GAME_PLAY;
 
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_nutsball.c", 327);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_nutsball.c", 327);
 
     func_80093D18(globalCtx->state.gfxCtx);
     Matrix_Mult(&globalCtx->mf_11DA0, MTXMODE_APPLY);
     Matrix_RotateZ(thisx->initPosRot.rot.z * 9.58738e-05f, MTXMODE_APPLY);
-    gSPMatrix(gfxCtx->polyOpa.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_nutsball.c", 333),
+    gSPMatrix(NEXT_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_nutsball.c", 333),
               G_MTX_MODELVIEW | G_MTX_LOAD);
-    gSPDisplayList(gfxCtx->polyOpa.p++, sDLists[thisx->params]);
+    gSPDisplayList(NEXT_DISP, sDLists[thisx->params]);
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_nutsball.c", 337);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_nutsball.c", 337);
 }

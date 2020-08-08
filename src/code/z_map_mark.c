@@ -83,9 +83,6 @@ void MapMark_Draw(GlobalContext* globalCtx) {
     s32 i;
     s32 rectLeft;
     s32 rectTop;
-    GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4];
-
     dungeon = gSaveContext.mapIndex;
     interfaceCtx = &globalCtx->interfaceCtx;
 
@@ -98,32 +95,31 @@ void MapMark_Draw(GlobalContext* globalCtx) {
 
     mapMarkData = &sLoadedMarkDataTable[dungeon][interfaceCtx->mapRoomNum][0];
 
-    gfxCtx = globalCtx->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_map_mark.c", 303);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_map_mark.c", 303);
 
     while (1) {
         if (mapMarkData->markType == -1) {
             break;
         }
 
-        gDPPipeSync(gfxCtx->overlay.p++);
-        gDPSetTextureLUT(gfxCtx->overlay.p++, G_TT_NONE);
-        gDPSetPrimColor(gfxCtx->overlay.p++, 0, 0, 255, 255, 255, interfaceCtx->minimapAlpha);
-        gDPSetEnvColor(gfxCtx->overlay.p++, 0, 0, 0, interfaceCtx->minimapAlpha);
+        gDPPipeSync(NEXT_OVERLAY_DISP);
+        gDPSetTextureLUT(NEXT_OVERLAY_DISP, G_TT_NONE);
+        gDPSetPrimColor(NEXT_OVERLAY_DISP, 0, 0, 255, 255, 255, interfaceCtx->minimapAlpha);
+        gDPSetEnvColor(NEXT_OVERLAY_DISP, 0, 0, 0, interfaceCtx->minimapAlpha);
 
         markPoint = &mapMarkData->points[0];
         for (i = 0; i < mapMarkData->count; i++) {
             if ((mapMarkData->markType != 0) || !Flags_GetTreasure(globalCtx, markPoint->chestFlag)) {
                 markInfo = &sMapMarkInfoTable[mapMarkData->markType];
 
-                gDPPipeSync(gfxCtx->overlay.p++);
-                gDPLoadTextureBlock(gfxCtx->overlay.p++, markInfo->texture, markInfo->imageFormat, G_IM_SIZ_MARK,
+                gDPPipeSync(NEXT_OVERLAY_DISP);
+                gDPLoadTextureBlock(NEXT_OVERLAY_DISP, markInfo->texture, markInfo->imageFormat, G_IM_SIZ_MARK,
                                     markInfo->textureWidth, markInfo->textureHeight, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                     G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
                 rectLeft = (GREG(94) + markPoint->x + 204) << 2;
                 rectTop = (GREG(95) + markPoint->y + 140) << 2;
-                gSPTextureRectangle(gfxCtx->overlay.p++, rectLeft, rectTop, markInfo->rectWidth + rectLeft,
+                gSPTextureRectangle(NEXT_OVERLAY_DISP, rectLeft, rectTop, markInfo->rectWidth + rectLeft,
                                     rectTop + markInfo->rectHeight, G_TX_RENDERTILE, 0, 0, markInfo->dsdx,
                                     markInfo->dtdy);
             }
@@ -132,7 +128,7 @@ void MapMark_Draw(GlobalContext* globalCtx) {
         mapMarkData++;
     }
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_map_mark.c", 339);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_map_mark.c", 339);
 }
 
 void MapMark_DrawConditionally(GlobalContext* globalCtx) {

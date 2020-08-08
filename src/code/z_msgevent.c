@@ -2,11 +2,9 @@
 #include <global.h>
 
 void MsgEvent_SendNullTask() {
-    s32 pad[4];
     OSScTask task;
     OSMesgQueue queue;
     OSMesg msg;
-    u32 pad2[1];
 
     task.next = NULL;
     task.flags = OS_SC_RCP_MASK;

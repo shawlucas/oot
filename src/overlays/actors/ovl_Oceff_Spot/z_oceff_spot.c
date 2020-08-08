@@ -150,20 +150,17 @@ void OceffSpot_Update(Actor* thisx, GlobalContext* globalCtx) {
 void OceffSpot_Draw(Actor* thisx, GlobalContext* globalCtx) {
     OceffSpot* this = THIS;
     u32 scroll;
-    GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4];
 
     scroll = globalCtx->state.frames & 0xFFFF;
-    gfxCtx = globalCtx->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_oceff_spot.c", 466);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_oceff_spot.c", 466);
     func_80093D84(globalCtx->state.gfxCtx);
 
-    gSPMatrix(gfxCtx->polyXlu.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_oceff_spot.c", 469),
+    gSPMatrix(NEXT_POLY_XLU_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_oceff_spot.c", 469),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(gfxCtx->polyXlu.p++, sTextureDL);
-    gSPDisplayList(gfxCtx->polyXlu.p++, Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, scroll * 2, scroll * (-2), 32, 32,
+    gSPDisplayList(NEXT_POLY_XLU_DISP, sTextureDL);
+    gSPDisplayList(NEXT_POLY_XLU_DISP, Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, scroll * 2, scroll * (-2), 32, 32,
                                                          1, 0, scroll * (-8), 32, 32));
-    gSPDisplayList(gfxCtx->polyXlu.p++, sCylinderDl);
+    gSPDisplayList(NEXT_POLY_XLU_DISP, sCylinderDl);
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_oceff_spot.c", 485);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_oceff_spot.c", 485);
 }

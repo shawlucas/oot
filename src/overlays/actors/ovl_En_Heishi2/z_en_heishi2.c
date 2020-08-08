@@ -830,15 +830,12 @@ void EnHeishi2_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList
 }
 
 void func_80A54C6C(Actor* thisx, GlobalContext* globalCtx) {
-    GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4];
 
-    gfxCtx = globalCtx->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_heishi2.c", 1772);
-    gSPMatrix(gfxCtx->polyOpa.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_heishi2.c", 1774),
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_heishi2.c", 1772);
+    gSPMatrix(NEXT_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_heishi2.c", 1774),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(gfxCtx->polyOpa.p++, &D_06002C10);
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_heishi2.c", 1777);
+    gSPDisplayList(NEXT_DISP, &D_06002C10);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_heishi2.c", 1777);
 }
 
 void EnHeishi2_Draw(Actor* thisx, GlobalContext* globalCtx) {
@@ -862,10 +859,10 @@ void EnHeishi2_Draw(Actor* thisx, GlobalContext* globalCtx) {
             Matrix_RotateZ(DEGTORAD(70.0), MTXMODE_APPLY);
             mtx = Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_heishi2.c", 1820) - 7;
 
-            gSPSegment(gfxCtx->polyOpa.p++, 0x06, globalCtx->objectCtx.status[linkObjBankIndex].segment);
-            gSPSegment(gfxCtx->polyOpa.p++, 0x0D, mtx);
-            gSPDisplayList(gfxCtx->polyOpa.p++, &D_0602B060);
-            gSPSegment(gfxCtx->polyOpa.p++, 0x06, globalCtx->objectCtx.status[this->actor.objBankIndex].segment);
+            gSPSegment(gfxCtx->polyOpa.thaGfx.p++, 0x06, globalCtx->objectCtx.status[linkObjBankIndex].segment);
+            gSPSegment(gfxCtx->polyOpa.thaGfx.p++, 0x0D, mtx);
+            gSPDisplayList(gfxCtx->polyOpa.thaGfx.p++, &D_0602B060);
+            gSPSegment(gfxCtx->polyOpa.thaGfx.p++, 0x06, globalCtx->objectCtx.status[this->actor.objBankIndex].segment);
         }
     }
     Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_heishi2.c", 1834);

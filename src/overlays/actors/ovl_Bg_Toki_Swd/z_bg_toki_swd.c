@@ -13,7 +13,7 @@
 void BgTokiSwd_Init(Actor* thisx, GlobalContext* globalCtx);
 void BgTokiSwd_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void BgTokiSwd_Update(Actor* thisx, GlobalContext* globalCtx);
-void BgTokiSwd_Draw(Actor* thisx, GlobalContext* globalCtx);
+void BgTokiSwd_Draw(Actor* thisx, GameState* state);
 
 void func_808BAF40(BgTokiSwd* this, GlobalContext* globalCtx);
 void func_808BB0AC(BgTokiSwd* this, GlobalContext* globalCtx);
@@ -63,7 +63,7 @@ void BgTokiSwd_Init(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad;
 
     Actor_ProcessInitChain(thisx, sInitChain);
-    this->actor.shape.unk_08 = 800.0f;
+    this->actor.shape.offset_y = 800.0f;
     BgTokiSwd_SetupAction(thisx, func_808BAF40);
 
     if (LINK_IS_ADULT) {
@@ -152,26 +152,21 @@ void BgTokiSwd_Update(Actor* thisx, GlobalContext* globalCtx) {
     CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider);
 }
 
-void BgTokiSwd_Draw(Actor* thisx, GlobalContext* globalCtx) {
+void BgTokiSwd_Draw(Actor* thisx, GameState* state) {
+    Vec3f eyeset;
     BgTokiSwd* this = THIS;
-    s32 pad[3];
-    GameState* state;
-    GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4];
+    GlobalContext* globalCtx = GAME_PLAY;
 
-    state = &globalCtx->state;
-    gfxCtx = globalCtx->state.gfxCtx;
-
-    Graph_OpenDisps(dispRefs, state->gfxCtx, "../z_bg_toki_swd.c", 727);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_bg_toki_swd.c", 727);
     func_80093D18(globalCtx->state.gfxCtx);
 
     func_8002EBCC(&this->actor, globalCtx, 0);
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0x08,
+    gSPSegment(NEXT_DISP, 0x08,
                Gfx_TexScroll(globalCtx->state.gfxCtx, 0, -(globalCtx->gameplayFrames % 0x80), 32, 32));
-    gSPMatrix(gfxCtx->polyOpa.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_toki_swd.c", 742),
+    gSPMatrix(NEXT_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_toki_swd.c", 742),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(gfxCtx->polyOpa.p++, D_06001BD0);
+    gSPDisplayList(NEXT_DISP, D_06001BD0);
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_bg_toki_swd.c", 776);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_bg_toki_swd.c", 776);
 }
