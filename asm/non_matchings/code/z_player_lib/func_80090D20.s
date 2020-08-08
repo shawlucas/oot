@@ -736,7 +736,7 @@ glabel func_80090D20
 /* B088B0 80091710 AFA70014 */  sw    $a3, 0x14($sp)
 /* B088B4 80091714 02002025 */  move  $a0, $s0
 /* B088B8 80091718 8FA50194 */  lw    $a1, 0x194($sp)
-/* B088BC 8009171C 0C00AF6C */  jal   func_8002BDB0
+/* B088BC 8009171C 0C00AF6C */  jal   ActorShadow_FootPosSet
 /* B088C0 80091720 24060009 */   li    $a2, 9
 .L80091724:
 /* B088C4 80091724 8FBF0024 */  lw    $ra, 0x24($sp)
