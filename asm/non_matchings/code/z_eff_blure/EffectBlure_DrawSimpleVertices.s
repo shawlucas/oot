@@ -262,7 +262,7 @@ glabel EffectBlure_DrawSimpleVertices
 /* A99A3C 8002289C 02802025 */  move  $a0, $s4
 /* A99A40 800228A0 8FA501B0 */  lw    $a1, 0x1b0($sp)
 /* A99A44 800228A4 8FA601B4 */  lw    $a2, 0x1b4($sp)
-/* A99A48 800228A8 0C029E89 */  jal   func_800A7A24
+/* A99A48 800228A8 0C029E89 */  jal   SkinMatrix_SetTranslate
 /* A99A4C 800228AC 8FA701B8 */   lw    $a3, 0x1b8($sp)
 /* A99A50 800228B0 C7AC0198 */  lwc1  $f12, 0x198($sp)
 /* A99A54 800228B4 C7AE019C */  lwc1  $f14, 0x19c($sp)
@@ -275,7 +275,7 @@ glabel EffectBlure_DrawSimpleVertices
 /* A99A70 800228D0 E7B00010 */   swc1  $f16, 0x10($sp)
 /* A99A74 800228D4 02802025 */  move  $a0, $s4
 /* A99A78 800228D8 27A50114 */  addiu $a1, $sp, 0x114
-/* A99A7C 800228DC 0C029BE8 */  jal   func_800A6FA0
+/* A99A7C 800228DC 0C029BE8 */  jal   SkinMatrix_MtxFMtxFMult
 /* A99A80 800228E0 27A600D4 */   addiu $a2, $sp, 0xd4
 /* A99A84 800228E4 C7AA01B0 */  lwc1  $f10, 0x1b0($sp)
 /* A99A88 800228E8 C7A401B4 */  lwc1  $f4, 0x1b4($sp)
@@ -286,14 +286,14 @@ glabel EffectBlure_DrawSimpleVertices
 /* A99A9C 800228FC 44069000 */  mfc1  $a2, $f18
 /* A99AA0 80022900 44075000 */  mfc1  $a3, $f10
 /* A99AA4 80022904 44054000 */  mfc1  $a1, $f8
-/* A99AA8 80022908 0C029E89 */  jal   func_800A7A24
+/* A99AA8 80022908 0C029E89 */  jal   SkinMatrix_SetTranslate
 /* A99AAC 8002290C 02802025 */   move  $a0, $s4
 /* A99AB0 80022910 27A400D4 */  addiu $a0, $sp, 0xd4
 /* A99AB4 80022914 02802825 */  move  $a1, $s4
-/* A99AB8 80022918 0C029BE8 */  jal   func_800A6FA0
+/* A99AB8 80022918 0C029BE8 */  jal   SkinMatrix_MtxFMtxFMult
 /* A99ABC 8002291C 27A60094 */   addiu $a2, $sp, 0x94
 /* A99AC0 80022920 02002025 */  move  $a0, $s0
-/* A99AC4 80022924 0C029F9C */  jal   func_800A7E70
+/* A99AC4 80022924 0C029F9C */  jal   SkinMatrix_MtxFToNewMtx
 /* A99AC8 80022928 27A50094 */   addiu $a1, $sp, 0x94
 /* A99ACC 8002292C 14400005 */  bnez  $v0, .L80022944
 /* A99AD0 80022930 3C048013 */   lui   $a0, %hi(D_80135358) # $a0, 0x8013

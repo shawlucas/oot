@@ -220,7 +220,7 @@ void ActorShadow_FootPosSet(Actor* actor, s32 jyoint_no, s32 L_foot_jyoint, Vec3
 }
 
 void ProjectionPos_Set(GlobalContext* globalCtx, Vec3f* targetPos, Vec3f* displayPos, f32* w) {
-    func_800A6E10(&globalCtx->mf_11D60, targetPos, displayPos, w);
+    SkinMatrix_Vec3fMtxFMultXYZW(&globalCtx->mf_11D60, targetPos, displayPos, w);
     *w = (*w < 1.0f) ? 1.0f : (1.0f / *w);
 }
 
@@ -2387,7 +2387,7 @@ void func_800315AC(GlobalContext* globalCtx, ActorContext* actorCtx) {
             HREG(66) = i;
 
             if (!HREG2(1)) {
-                func_800A6E10(&globalCtx->mf_11D60, &actor->posRot.pos, &actor->projectedPos, &actor->projectedW);
+                SkinMatrix_Vec3fMtxFMultXYZW(&globalCtx->mf_11D60, &actor->posRot.pos, &actor->projectedPos, &actor->projectedW);
             }
 
             if (!HREG2(2)) {
