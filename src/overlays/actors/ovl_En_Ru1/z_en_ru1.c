@@ -1503,7 +1503,7 @@ void func_80AEE050(EnRu1* this) {
             }
             this->actor.velocity.x = Math_Sins(this->actor.posRot.rot.y) * this->actor.speedXZ;
             this->actor.velocity.z = Math_Coss(this->actor.posRot.rot.y) * this->actor.speedXZ;
-            func_8002D7EC(this);
+            ActorPosition_Move(this);
         }
     } else {
         if (this->unk_350 == 1) {

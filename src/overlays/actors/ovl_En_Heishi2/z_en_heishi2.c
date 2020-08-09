@@ -118,7 +118,7 @@ void EnHeishi2_Init(Actor* thisx, GlobalContext* globalCtx) {
         this->collider.dim.yShift = 0;
         this->collider.dim.radius = 0xF;
         this->collider.dim.height = 0x46;
-        this->actor.unk_1F = 6;
+        this->actor.naviRange = 6;
 
         switch (this->initParams) {
 

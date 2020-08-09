@@ -66,7 +66,7 @@ void func_80B9D054(ObjRoomtimer* this, GlobalContext* globalCtx) {
 }
 
 void func_80B9D0B0(ObjRoomtimer* this, GlobalContext* globalCtx) {
-    if (Flags_GetTempClear(globalCtx, this->actor.room)) {
+    if (Flags_NoEnemyCheck(globalCtx, this->actor.room)) {
         if (this->actor.params != 0x3FF) {
             gSaveContext.timer1State = 10;
         }

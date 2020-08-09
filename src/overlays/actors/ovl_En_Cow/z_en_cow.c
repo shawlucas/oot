@@ -125,7 +125,7 @@ void EnCow_Init(Actor* thisx, GlobalContext* globalCtx) {
                                 this->actor.posRot.pos.y, this->actor.posRot.pos.z, 0, this->actor.shape.rot.y, 0, 1);
             this->unk_278 = Math_Rand_ZeroFloat(1000.0f) + 40.0f;
             this->unk_27A = 0;
-            this->actor.unk_1F = 6;
+            this->actor.naviRange = 6;
             DREG(53) = 0;
             break;
         case 1:

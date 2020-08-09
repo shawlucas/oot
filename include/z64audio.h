@@ -12,6 +12,17 @@ struct NotePool;
 struct SequenceChannel;
 struct SequenceChannelLayer;
 
+typedef struct {
+    u8 button;
+    u8 status;
+    u8 locate;
+} NA_OCARINA_PLAY_INFO;
+
+typedef struct {
+    u8 max;
+    u8 key[8];
+} NA_OCARINA_MELODY_DATA;
+
 typedef struct AudioListItem {
     // A node in a circularly linked list. Each node is either a head or an item:
     // - Items can be either detached (prev = NULL), or attached to a list.

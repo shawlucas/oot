@@ -478,7 +478,7 @@ void EnFhgFire_Draw(Actor* thisx, GlobalContext* globalCtx) {
         gSPDisplayList(NEXT_POLY_XLU_DISP, SEGMENTED_TO_VIRTUAL(D_0600FCF8));
     } else if ((thisx->params == 0x26) || (thisx->params == 0x32)) {
         osSyncPrintf("yari hikari draw 1\n");
-        func_800D1FD4(&globalCtx->mf_11DA0);
+        func_800D1FD4(&globalCtx->softspriteMatrix);
         func_80093D84(globalCtx->state.gfxCtx);
         gDPSetPrimColor(NEXT_POLY_XLU_DISP, 0, 0, 255, 255, 255, (s8)this->unk_160);
     

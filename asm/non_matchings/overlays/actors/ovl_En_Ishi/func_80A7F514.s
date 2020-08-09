@@ -190,7 +190,7 @@ glabel func_80A7F514
 /* 0137C 80A7F7DC 00B92821 */  addu    $a1, $a1, $t9              
 /* 01380 80A7F7E0 0C29FB65 */  jal     func_80A7ED94              
 /* 01384 80A7F7E4 8CA5FA28 */  lw      $a1, %lo(D_80A7FA28)($a1)  
-/* 01388 80A7F7E8 0C00B5FB */  jal     func_8002D7EC              
+/* 01388 80A7F7E8 0C00B5FB */  jal     ActorPosition_Move              
 /* 0138C 80A7F7EC 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 01390 80A7F7F0 3C0D80A8 */  lui     $t5, %hi(D_80A7F9F0)       ## $t5 = 80A80000
 /* 01394 80A7F7F4 85ADF9F0 */  lh      $t5, %lo(D_80A7F9F0)($t5)  

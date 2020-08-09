@@ -23,7 +23,7 @@ glabel EnFdFire_Update
 .L80A0EB3C:
 /* 0068C 80A0EB3C AE08014C */  sw      $t0, 0x014C($s0)           ## 0000014C
 .L80A0EB40:
-/* 00690 80A0EB40 0C00B5FB */  jal     func_8002D7EC              
+/* 00690 80A0EB40 0C00B5FB */  jal     ActorPosition_Move              
 /* 00694 80A0EB44 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00698 80A0EB48 8E19014C */  lw      $t9, 0x014C($s0)           ## 0000014C
 /* 0069C 80A0EB4C 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000

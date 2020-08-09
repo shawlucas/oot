@@ -205,7 +205,7 @@ void func_8006969C(GameState* state, s16 drawId) {
                                 1 * -(globalCtx->state.frames * 8), 16, 32));
     Matrix_Push();
     Matrix_Translate(-8.0f, -2.0f, 0.0f, MTXMODE_APPLY);
-    func_800D1FD4(&globalCtx->mf_11DA0);
+    func_800D1FD4(&globalCtx->softspriteMatrix);
     gSPMatrix(NEXT_POLY_XLU_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_draw.c", 615),
               G_MTX_MODELVIEW | G_MTX_LOAD);
     gSPDisplayList(NEXT_POLY_XLU_DISP, sDrawItemTable[drawId].dlists[1]);
@@ -231,7 +231,7 @@ void func_80069880(GameState* state, s16 drawId) {
                                 0 * (globalCtx->state.frames * 0), 16, 32, 1, 1 * (globalCtx->state.frames * 1),
                                 1 * -(globalCtx->state.frames * 6), 16, 32));
     Matrix_Push();
-    func_800D1FD4(&globalCtx->mf_11DA0);
+    func_800D1FD4(&globalCtx->softspriteMatrix);
     gSPMatrix(NEXT_POLY_XLU_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_draw.c", 656),
               G_MTX_MODELVIEW | G_MTX_LOAD);
     gSPDisplayList(NEXT_POLY_XLU_DISP, sDrawItemTable[drawId].dlists[3]);
@@ -258,7 +258,7 @@ void func_80069AC8(GameState* state, s16 drawId) {
                                 0 * (globalCtx->state.frames * 0), 32, 32, 1, 1 * (globalCtx->state.frames * 1),
                                 1 * -(globalCtx->state.frames * 6), 32, 32));
     Matrix_Push();
-    func_800D1FD4(&globalCtx->mf_11DA0);
+    func_800D1FD4(&globalCtx->softspriteMatrix);
     gSPMatrix(NEXT_POLY_XLU_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_draw.c", 698),
               G_MTX_MODELVIEW | G_MTX_LOAD);
     gSPDisplayList(NEXT_POLY_XLU_DISP, sDrawItemTable[drawId].dlists[2]);

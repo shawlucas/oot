@@ -75,8 +75,8 @@ glabel func_8010B0C0
 /* B822E0 8010B140 A5000000 */  sh    $zero, ($t0)
 /* B822E4 8010B144 850A0000 */  lh    $t2, ($t0)
 /* B822E8 8010B148 3C048015 */  lui   $a0, %hi(D_8014B300) # $a0, 0x8015
-/* B822EC 8010B14C 3C068015 */  lui   $a2, %hi(D_8014B2F4) # $a2, 0x8015
-/* B822F0 8010B150 24C6B2F4 */  addiu $a2, %lo(D_8014B2F4) # addiu $a2, $a2, -0x4d0c
+/* B822EC 8010B14C 3C068015 */  lui   $a2, %hi(start_flag) # $a2, 0x8015
+/* B822F0 8010B150 24C6B2F4 */  addiu $a2, %lo(start_flag) # addiu $a2, $a2, -0x4d0c
 /* B822F4 8010B154 2484B300 */  addiu $a0, %lo(D_8014B300) # addiu $a0, $a0, -0x4d00
 /* B822F8 8010B158 3C018015 */  lui   $at, %hi(D_8014B318) # $at, 0x8015
 /* B822FC 8010B15C A08A0000 */  sb    $t2, ($a0)

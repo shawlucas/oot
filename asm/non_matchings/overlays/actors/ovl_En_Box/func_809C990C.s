@@ -17,7 +17,7 @@ glabel func_809C990C
 .L809C9948:
 /* 00B88 809C9948 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 .L809C994C:
-/* 00B8C 809C994C 0C00B349 */  jal     Flags_GetTempClear
+/* 00B8C 809C994C 0C00B349 */  jal     Flags_NoEnemyCheck
               
 /* 00B90 809C9950 82050003 */  lb      $a1, 0x0003($s0)           ## 00000003
 /* 00B94 809C9954 50400017 */  beql    $v0, $zero, .L809C99B4     

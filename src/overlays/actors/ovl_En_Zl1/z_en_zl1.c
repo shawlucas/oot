@@ -79,7 +79,7 @@ void EnZl1_Init(Actor* thisx, GlobalContext* globalCtx) {
     Collider_SetCylinder(globalCtx, &this->collider, &this->actor, &sCylinderInit);
     Actor_SetScale(&this->actor, 0.01f);
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawFunc_Circle, 24.0f);
-    this->actor.unk_1F = 0;
+    this->actor.naviRange = 0;
 
     if (gSaveContext.sceneSetupIndex >= 4) {
         frameCount = SkelAnime_GetFrameCount(&D_06000438.genericHeader);

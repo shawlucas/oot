@@ -144,7 +144,7 @@ void EnNutsball_Draw(Actor* thisx, GameState* state) {
     OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_nutsball.c", 327);
 
     func_80093D18(globalCtx->state.gfxCtx);
-    Matrix_Mult(&globalCtx->mf_11DA0, MTXMODE_APPLY);
+    Matrix_Mult(&globalCtx->softspriteMatrix, MTXMODE_APPLY);
     Matrix_RotateZ(thisx->initPosRot.rot.z * 9.58738e-05f, MTXMODE_APPLY);
     gSPMatrix(NEXT_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_nutsball.c", 333),
               G_MTX_MODELVIEW | G_MTX_LOAD);

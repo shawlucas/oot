@@ -610,7 +610,7 @@ void func_80083108(GlobalContext* globalCtx) {
         ((globalCtx->sceneNum == SCENE_SPOT20) && (gSaveContext.cutsceneIndex == 0xFFF0))) {
         gSaveContext.unk_13E7 = 0;
 
-        if ((player->stateFlags1 & 0x00800000) || (globalCtx->unk_11E5C >= 2) ||
+        if ((player->stateFlags1 & 0x00800000) || (globalCtx->bowGameFlag >= 2) ||
             ((globalCtx->sceneNum == SCENE_BOWLING) && Flags_GetSwitch(globalCtx, 0x38))) {
             if (gSaveContext.equips.buttonItems[0] != ITEM_NONE) {
                 gSaveContext.unk_13E7 = 1;
@@ -631,7 +631,7 @@ void func_80083108(GlobalContext* globalCtx) {
                         Interface_LoadItemIcon1(globalCtx, 0);
                     } else {
                         gSaveContext.equips.buttonItems[0] = ITEM_BOW;
-                        if (globalCtx->unk_11E5C >= 2) {
+                        if (globalCtx->bowGameFlag >= 2) {
                             if (LINK_AGE_IN_YEARS == YEARS_CHILD) {
                                 gSaveContext.equips.buttonItems[0] = ITEM_SLINGSHOT;
                             }
@@ -655,7 +655,7 @@ void func_80083108(GlobalContext* globalCtx) {
                     Interface_ChangeAlpha(1);
                 } else if (gSaveContext.minigameState == 1) {
                     Interface_ChangeAlpha(8);
-                } else if (globalCtx->unk_11E5C >= 2) {
+                } else if (globalCtx->bowGameFlag >= 2) {
                     Interface_ChangeAlpha(8);
                 } else if ((globalCtx->sceneNum == SCENE_BOWLING) && Flags_GetSwitch(globalCtx, 0x38)) {
                     Interface_ChangeAlpha(8);
@@ -2085,11 +2085,11 @@ void Interface_LoadActionLabel(InterfaceContext* interfaceCtx, u16 action, s16 a
         action = 0x0A;
     }
 
-    if (gSaveContext.language != 0) {
+    if (gSaveContext.j_n != 0) {
         action += 0x1D;
     }
 
-    if (gSaveContext.language == 2) {
+    if (gSaveContext.j_n == 2) {
         action += 0x1D;
     }
 
@@ -2113,13 +2113,13 @@ void Interface_SetDoAction(GlobalContext* globalCtx, u16 action) {
     InterfaceContext* interfaceCtx = &globalCtx->interfaceCtx;
     PauseContext* pauseCtx = &globalCtx->pauseCtx;
 
-    if (interfaceCtx->unk_1F0 != action) {
-        interfaceCtx->unk_1F0 = action;
-        interfaceCtx->unk_1EC = 1;
-        interfaceCtx->unk_1F4 = 0.0f;
+    if (interfaceCtx->doActionOld != action) {
+        interfaceCtx->doActionOld = action;
+        interfaceCtx->doActionFlag = 1;
+        interfaceCtx->doActionRotate = 0.0f;
         Interface_LoadActionLabel(interfaceCtx, action, 1);
         if (pauseCtx->state != 0) {
-            interfaceCtx->unk_1EC = 3;
+            interfaceCtx->doActionFlag = 3;
         }
     }
 }
@@ -2149,15 +2149,15 @@ void Interface_SetNaviCall(GlobalContext* globalCtx, u16 naviCallState) {
 void Interface_LoadActionLabelB(GlobalContext* globalCtx, u16 action) {
     InterfaceContext* interfaceCtx = &globalCtx->interfaceCtx;
 
-    if (gSaveContext.language != 0) {
+    if (gSaveContext.j_n != 0) {
         action += 0x1D;
     }
 
-    if (gSaveContext.language == 2) {
+    if (gSaveContext.j_n == 2) {
         action += 0x1D;
     }
 
-    interfaceCtx->unk_1FC = action;
+    interfaceCtx->spAction = action;
 
     osCreateMesgQueue(&interfaceCtx->loadQueue, &interfaceCtx->loadMsg, OS_MESG_BLOCK);
     DmaMgr_SendRequest2(&interfaceCtx->dmaRequest_160, (u32)interfaceCtx->do_actionSegment + 0x180,
@@ -2165,7 +2165,7 @@ void Interface_LoadActionLabelB(GlobalContext* globalCtx, u16 action) {
                         NULL, "../z_parameter.c", 2228);
     osRecvMesg(&interfaceCtx->loadQueue, NULL, OS_MESG_BLOCK);
 
-    interfaceCtx->unk_1FA = 1;
+    interfaceCtx->spActionFlag = 1;
 }
 
 s32 Health_ChangeBy(GlobalContext* globalCtx, s16 healthChange) {
@@ -2495,7 +2495,7 @@ void Interface_UpdateMagicBar(GlobalContext* globalCtx) {
             break;
         case 7:
             if ((globalCtx->pauseCtx.state == 0) && (globalCtx->pauseCtx.flag == 0) &&
-                (globalCtx->msgCtx.msgMode == 0) && (globalCtx->unk_10A20 == 0) && (globalCtx->sceneLoadFlag == 0) &&
+                (globalCtx->msgCtx.msgMode == 0) && (globalCtx->goverCtx == 0) && (globalCtx->sceneLoadFlag == 0) &&
                 (globalCtx->transitionMode == 0) && !Gameplay_InCsMode(globalCtx)) {
                 if ((gSaveContext.magic == 0) || ((func_8008F2F8(globalCtx) >= 2) && (func_8008F2F8(globalCtx) < 5)) ||
                     ((gSaveContext.equips.buttonItems[1] != ITEM_LENS) &&
@@ -2768,8 +2768,8 @@ void Interface_DrawItemButtons(GlobalContext* globalCtx) {
             // Start Button Texture, Color & Label
             gDPPipeSync(NEXT_OVERLAY_DISP);
             gDPSetPrimColor(NEXT_OVERLAY_DISP, 0, 0, 120, 120, 120, interfaceCtx->startAlpha);
-            gSPTextureRectangle(NEXT_OVERLAY_DISP, sStartButtonLeftPos[gSaveContext.language] << 2, 68,
-                                (sStartButtonLeftPos[gSaveContext.language] + 22) << 2, 156, G_TX_RENDERTILE, 0, 0,
+            gSPTextureRectangle(NEXT_OVERLAY_DISP, sStartButtonLeftPos[gSaveContext.j_n] << 2, 68,
+                                (sStartButtonLeftPos[gSaveContext.j_n] + 22) << 2, 156, G_TX_RENDERTILE, 0, 0,
                                 1462, 1462);
             gDPPipeSync(NEXT_OVERLAY_DISP);
             gDPSetPrimColor(NEXT_OVERLAY_DISP, 0, 0, 255, 255, 255, interfaceCtx->startAlpha);
@@ -2790,11 +2790,11 @@ void Interface_DrawItemButtons(GlobalContext* globalCtx) {
                        G_TX_NOLOD);
             gDPSetTileSize(NEXT_OVERLAY_DISP, G_TX_RENDERTILE, 0, 0, 188, 60);
 
-            temp = R_START_LABEL_DD(gSaveContext.language) / 100.0f;
-            gSPTextureRectangle(NEXT_OVERLAY_DISP, R_START_LABEL_X(gSaveContext.language) << 2,
-                                R_START_LABEL_Y(gSaveContext.language) << 2,
-                                (R_START_LABEL_X(gSaveContext.language) + (s16)(16.0f / temp)) << 2,
-                                (R_START_LABEL_Y(gSaveContext.language) + (s16)(48.0f / temp)) << 2, G_TX_RENDERTILE, 0,
+            temp = R_START_LABEL_DD(gSaveContext.j_n) / 100.0f;
+            gSPTextureRectangle(NEXT_OVERLAY_DISP, R_START_LABEL_X(gSaveContext.j_n) << 2,
+                                R_START_LABEL_Y(gSaveContext.j_n) << 2,
+                                (R_START_LABEL_X(gSaveContext.j_n) + (s16)(16.0f / temp)) << 2,
+                                (R_START_LABEL_Y(gSaveContext.j_n) + (s16)(48.0f / temp)) << 2, G_TX_RENDERTILE, 0,
                                 0, (s16)(1024.0f / temp), (s16)(1024.0f / temp));
         }
     }
@@ -2825,7 +2825,7 @@ void Interface_DrawItemButtons(GlobalContext* globalCtx) {
                               PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
 
             gDPSetTextureImage(NEXT_OVERLAY_DISP, G_IM_FMT_IA, G_IM_SIZ_16b, 1,
-                               sCUpLabelTextures[gSaveContext.language]);
+                               sCUpLabelTextures[gSaveContext.j_n]);
             gDPSetTile(NEXT_OVERLAY_DISP, G_IM_FMT_IA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0,
                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
                        G_TX_NOLOD);
@@ -2913,8 +2913,8 @@ void Interface_DrawAmmoCount(GlobalContext* globalCtx, s16 button, s16 alpha) {
 
         if ((button == 0) && (gSaveContext.minigameState == 1)) {
             ammo = globalCtx->interfaceCtx.hbaAmmo;
-        } else if ((button == 0) && (globalCtx->unk_11E5C >= 2)) {
-            ammo = globalCtx->unk_11E5C - 1;
+        } else if ((button == 0) && (globalCtx->bowGameFlag >= 2)) {
+            ammo = globalCtx->bowGameFlag - 1;
         } else if ((button == 0) && (globalCtx->sceneNum == SCENE_BOWLING) && Flags_GetSwitch(globalCtx, 0x38)) {
             ammo = globalCtx->bombchuBowlingAmmo;
             if (ammo < 0) {
@@ -2958,13 +2958,13 @@ void Interface_DrawActionButton(GlobalContext* globalCtx) {
 
     Matrix_Translate(0.0f, 0.0f, XREG(18) / 10.0f, MTXMODE_NEW);
     Matrix_Scale(1.0f, 1.0f, 1.0f, MTXMODE_APPLY);
-    Matrix_RotateX(interfaceCtx->unk_1F4 / 10000.0f, MTXMODE_APPLY);
+    Matrix_RotateX(interfaceCtx->doActionRotate / 10000.0f, MTXMODE_APPLY);
 
     if (1) {} // Necessary to match
 
     gSPMatrix(NEXT_OVERLAY_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_parameter.c", 3177),
               G_MTX_MODELVIEW | G_MTX_LOAD);
-    gSPVertex(NEXT_OVERLAY_DISP, interfaceCtx->vtx_128, 4, 0);
+    gSPVertex(NEXT_OVERLAY_DISP, interfaceCtx->parameterFrameVtx, 4, 0);
 
     gDPLoadTextureBlock(NEXT_OVERLAY_DISP, &D_02000A00[0], G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
@@ -2979,81 +2979,81 @@ void Interface_InitVertices(GlobalContext* globalCtx) {
     InterfaceContext* interfaceCtx = &globalCtx->interfaceCtx;
     s16 i;
 
-    interfaceCtx->vtx_128 = Graph_Alloc(globalCtx->state.gfxCtx, 8 * sizeof(Vtx));
+    interfaceCtx->parameterFrameVtx = Graph_Alloc(globalCtx->state.gfxCtx, 8 * sizeof(Vtx));
 
     // clang-format off
-    interfaceCtx->vtx_128[0].v.ob[0] =
-    interfaceCtx->vtx_128[2].v.ob[0] = -14;
-    interfaceCtx->vtx_128[1].v.ob[0] =
-    interfaceCtx->vtx_128[3].v.ob[0] = interfaceCtx->vtx_128[0].v.ob[0] + 28;
+    interfaceCtx->parameterFrameVtx[0].v.ob[0] =
+    interfaceCtx->parameterFrameVtx[2].v.ob[0] = -14;
+    interfaceCtx->parameterFrameVtx[1].v.ob[0] =
+    interfaceCtx->parameterFrameVtx[3].v.ob[0] = interfaceCtx->parameterFrameVtx[0].v.ob[0] + 28;
 
-    interfaceCtx->vtx_128[0].v.ob[1] =
-    interfaceCtx->vtx_128[1].v.ob[1] = 14;
-    interfaceCtx->vtx_128[2].v.ob[1] =
-    interfaceCtx->vtx_128[3].v.ob[1] = interfaceCtx->vtx_128[0].v.ob[1] - 28;
+    interfaceCtx->parameterFrameVtx[0].v.ob[1] =
+    interfaceCtx->parameterFrameVtx[1].v.ob[1] = 14;
+    interfaceCtx->parameterFrameVtx[2].v.ob[1] =
+    interfaceCtx->parameterFrameVtx[3].v.ob[1] = interfaceCtx->parameterFrameVtx[0].v.ob[1] - 28;
 
-    interfaceCtx->vtx_128[4].v.ob[0] =
-    interfaceCtx->vtx_128[6].v.ob[0] = -(XREG(21) / 2);
-    interfaceCtx->vtx_128[5].v.ob[0] =
-    interfaceCtx->vtx_128[7].v.ob[0] = interfaceCtx->vtx_128[4].v.ob[0] + XREG(21);
+    interfaceCtx->parameterFrameVtx[4].v.ob[0] =
+    interfaceCtx->parameterFrameVtx[6].v.ob[0] = -(XREG(21) / 2);
+    interfaceCtx->parameterFrameVtx[5].v.ob[0] =
+    interfaceCtx->parameterFrameVtx[7].v.ob[0] = interfaceCtx->parameterFrameVtx[4].v.ob[0] + XREG(21);
 
-    interfaceCtx->vtx_128[4].v.ob[1] =
-    interfaceCtx->vtx_128[5].v.ob[1] = XREG(28) / 2;
-    interfaceCtx->vtx_128[6].v.ob[1] =
-    interfaceCtx->vtx_128[7].v.ob[1] = interfaceCtx->vtx_128[4].v.ob[1] - XREG(28);
+    interfaceCtx->parameterFrameVtx[4].v.ob[1] =
+    interfaceCtx->parameterFrameVtx[5].v.ob[1] = XREG(28) / 2;
+    interfaceCtx->parameterFrameVtx[6].v.ob[1] =
+    interfaceCtx->parameterFrameVtx[7].v.ob[1] = interfaceCtx->parameterFrameVtx[4].v.ob[1] - XREG(28);
 
     for (i = 0; i < 8; i += 4) {
-        interfaceCtx->vtx_128[i].v.ob[2] = interfaceCtx->vtx_128[i+1].v.ob[2] =
-        interfaceCtx->vtx_128[i+2].v.ob[2] = interfaceCtx->vtx_128[i+3].v.ob[2] = 0;
+        interfaceCtx->parameterFrameVtx[i].v.ob[2] = interfaceCtx->parameterFrameVtx[i+1].v.ob[2] =
+        interfaceCtx->parameterFrameVtx[i+2].v.ob[2] = interfaceCtx->parameterFrameVtx[i+3].v.ob[2] = 0;
 
-        interfaceCtx->vtx_128[i].v.flag = interfaceCtx->vtx_128[i+1].v.flag =
-        interfaceCtx->vtx_128[i+2].v.flag = interfaceCtx->vtx_128[i+3].v.flag = 0;
+        interfaceCtx->parameterFrameVtx[i].v.flag = interfaceCtx->parameterFrameVtx[i+1].v.flag =
+        interfaceCtx->parameterFrameVtx[i+2].v.flag = interfaceCtx->parameterFrameVtx[i+3].v.flag = 0;
 
-        interfaceCtx->vtx_128[i].v.tc[0] = interfaceCtx->vtx_128[i].v.tc[1] =
-        interfaceCtx->vtx_128[i+1].v.tc[1] = interfaceCtx->vtx_128[i+2].v.tc[0] = 0;
-        interfaceCtx->vtx_128[i+1].v.tc[0] = interfaceCtx->vtx_128[i+2].v.tc[1] =
-        interfaceCtx->vtx_128[i+3].v.tc[0] = interfaceCtx->vtx_128[i+3].v.tc[1] = 1024;
+        interfaceCtx->parameterFrameVtx[i].v.tc[0] = interfaceCtx->parameterFrameVtx[i].v.tc[1] =
+        interfaceCtx->parameterFrameVtx[i+1].v.tc[1] = interfaceCtx->parameterFrameVtx[i+2].v.tc[0] = 0;
+        interfaceCtx->parameterFrameVtx[i+1].v.tc[0] = interfaceCtx->parameterFrameVtx[i+2].v.tc[1] =
+        interfaceCtx->parameterFrameVtx[i+3].v.tc[0] = interfaceCtx->parameterFrameVtx[i+3].v.tc[1] = 1024;
 
-        interfaceCtx->vtx_128[i].v.cn[0] = interfaceCtx->vtx_128[i+1].v.cn[0] =
-        interfaceCtx->vtx_128[i+2].v.cn[0] = interfaceCtx->vtx_128[i+3].v.cn[0] =
-        interfaceCtx->vtx_128[i].v.cn[1] = interfaceCtx->vtx_128[i+1].v.cn[1] =
-        interfaceCtx->vtx_128[i+2].v.cn[1] = interfaceCtx->vtx_128[i+3].v.cn[1] =
-        interfaceCtx->vtx_128[i].v.cn[2] = interfaceCtx->vtx_128[i+1].v.cn[2] =
-        interfaceCtx->vtx_128[i+2].v.cn[2] = interfaceCtx->vtx_128[i+3].v.cn[2] = 0xFF;
+        interfaceCtx->parameterFrameVtx[i].v.cn[0] = interfaceCtx->parameterFrameVtx[i+1].v.cn[0] =
+        interfaceCtx->parameterFrameVtx[i+2].v.cn[0] = interfaceCtx->parameterFrameVtx[i+3].v.cn[0] =
+        interfaceCtx->parameterFrameVtx[i].v.cn[1] = interfaceCtx->parameterFrameVtx[i+1].v.cn[1] =
+        interfaceCtx->parameterFrameVtx[i+2].v.cn[1] = interfaceCtx->parameterFrameVtx[i+3].v.cn[1] =
+        interfaceCtx->parameterFrameVtx[i].v.cn[2] = interfaceCtx->parameterFrameVtx[i+1].v.cn[2] =
+        interfaceCtx->parameterFrameVtx[i+2].v.cn[2] = interfaceCtx->parameterFrameVtx[i+3].v.cn[2] = 0xFF;
 
-        interfaceCtx->vtx_128[i].v.cn[3] = interfaceCtx->vtx_128[i+1].v.cn[3] =
-        interfaceCtx->vtx_128[i+2].v.cn[3] = interfaceCtx->vtx_128[i+3].v.cn[3] = 0xFF;
+        interfaceCtx->parameterFrameVtx[i].v.cn[3] = interfaceCtx->parameterFrameVtx[i+1].v.cn[3] =
+        interfaceCtx->parameterFrameVtx[i+2].v.cn[3] = interfaceCtx->parameterFrameVtx[i+3].v.cn[3] = 0xFF;
     }
 
-    interfaceCtx->vtx_128[5].v.tc[0] = interfaceCtx->vtx_128[7].v.tc[0] = 1536;
-    interfaceCtx->vtx_128[6].v.tc[1] = interfaceCtx->vtx_128[7].v.tc[1] = 512;
+    interfaceCtx->parameterFrameVtx[5].v.tc[0] = interfaceCtx->parameterFrameVtx[7].v.tc[0] = 1536;
+    interfaceCtx->parameterFrameVtx[6].v.tc[1] = interfaceCtx->parameterFrameVtx[7].v.tc[1] = 512;
 
-    interfaceCtx->vtx_12C = Graph_Alloc(globalCtx->state.gfxCtx, 4 * sizeof(Vtx));
+    interfaceCtx->heartVtx = Graph_Alloc(globalCtx->state.gfxCtx, 4 * sizeof(Vtx));
 
-    interfaceCtx->vtx_12C[0].v.ob[0] = interfaceCtx->vtx_12C[2].v.ob[0] = -8;
-    interfaceCtx->vtx_12C[1].v.ob[0] = interfaceCtx->vtx_12C[3].v.ob[0] = 8;
-    interfaceCtx->vtx_12C[0].v.ob[1] = interfaceCtx->vtx_12C[1].v.ob[1] = 8;
-    interfaceCtx->vtx_12C[2].v.ob[1] = interfaceCtx->vtx_12C[3].v.ob[1] = -8;
+    interfaceCtx->heartVtx[0].v.ob[0] = interfaceCtx->heartVtx[2].v.ob[0] = -8;
+    interfaceCtx->heartVtx[1].v.ob[0] = interfaceCtx->heartVtx[3].v.ob[0] = 8;
+    interfaceCtx->heartVtx[0].v.ob[1] = interfaceCtx->heartVtx[1].v.ob[1] = 8;
+    interfaceCtx->heartVtx[2].v.ob[1] = interfaceCtx->heartVtx[3].v.ob[1] = -8;
 
-    interfaceCtx->vtx_12C[0].v.ob[2] = interfaceCtx->vtx_12C[1].v.ob[2] =
-    interfaceCtx->vtx_12C[2].v.ob[2] = interfaceCtx->vtx_12C[3].v.ob[2] = 0;
+    interfaceCtx->heartVtx[0].v.ob[2] = interfaceCtx->heartVtx[1].v.ob[2] =
+    interfaceCtx->heartVtx[2].v.ob[2] = interfaceCtx->heartVtx[3].v.ob[2] = 0;
 
-    interfaceCtx->vtx_12C[0].v.flag = interfaceCtx->vtx_12C[1].v.flag =
-    interfaceCtx->vtx_12C[2].v.flag = interfaceCtx->vtx_12C[3].v.flag = 0;
+    interfaceCtx->heartVtx[0].v.flag = interfaceCtx->heartVtx[1].v.flag =
+    interfaceCtx->heartVtx[2].v.flag = interfaceCtx->heartVtx[3].v.flag = 0;
 
-    interfaceCtx->vtx_12C[0].v.tc[0] = interfaceCtx->vtx_12C[0].v.tc[1] =
-    interfaceCtx->vtx_12C[1].v.tc[1] = interfaceCtx->vtx_12C[2].v.tc[0] = 0;
-    interfaceCtx->vtx_12C[1].v.tc[0] = interfaceCtx->vtx_12C[2].v.tc[1] =
-    interfaceCtx->vtx_12C[3].v.tc[0] = interfaceCtx->vtx_12C[3].v.tc[1] = 512;
+    interfaceCtx->heartVtx[0].v.tc[0] = interfaceCtx->heartVtx[0].v.tc[1] =
+    interfaceCtx->heartVtx[1].v.tc[1] = interfaceCtx->heartVtx[2].v.tc[0] = 0;
+    interfaceCtx->heartVtx[1].v.tc[0] = interfaceCtx->heartVtx[2].v.tc[1] =
+    interfaceCtx->heartVtx[3].v.tc[0] = interfaceCtx->heartVtx[3].v.tc[1] = 512;
 
-    interfaceCtx->vtx_12C[0].v.cn[0] = interfaceCtx->vtx_12C[1].v.cn[0] =
-    interfaceCtx->vtx_12C[2].v.cn[0] = interfaceCtx->vtx_12C[3].v.cn[0] =
-    interfaceCtx->vtx_12C[0].v.cn[1] = interfaceCtx->vtx_12C[1].v.cn[1] =
-    interfaceCtx->vtx_12C[2].v.cn[1] = interfaceCtx->vtx_12C[3].v.cn[1] =
-    interfaceCtx->vtx_12C[0].v.cn[2] = interfaceCtx->vtx_12C[1].v.cn[2] =
-    interfaceCtx->vtx_12C[2].v.cn[2] = interfaceCtx->vtx_12C[3].v.cn[2] =
-    interfaceCtx->vtx_12C[0].v.cn[3] = interfaceCtx->vtx_12C[1].v.cn[3] =
-    interfaceCtx->vtx_12C[2].v.cn[3] = interfaceCtx->vtx_12C[3].v.cn[3] = 0xFF;
+    interfaceCtx->heartVtx[0].v.cn[0] = interfaceCtx->heartVtx[1].v.cn[0] =
+    interfaceCtx->heartVtx[2].v.cn[0] = interfaceCtx->heartVtx[3].v.cn[0] =
+    interfaceCtx->heartVtx[0].v.cn[1] = interfaceCtx->heartVtx[1].v.cn[1] =
+    interfaceCtx->heartVtx[2].v.cn[1] = interfaceCtx->heartVtx[3].v.cn[1] =
+    interfaceCtx->heartVtx[0].v.cn[2] = interfaceCtx->heartVtx[1].v.cn[2] =
+    interfaceCtx->heartVtx[2].v.cn[2] = interfaceCtx->heartVtx[3].v.cn[2] =
+    interfaceCtx->heartVtx[0].v.cn[3] = interfaceCtx->heartVtx[1].v.cn[3] =
+    interfaceCtx->heartVtx[2].v.cn[3] = interfaceCtx->heartVtx[3].v.cn[3] = 0xFF;
     // clang-format on
 }
 
@@ -3255,12 +3255,12 @@ void Interface_Draw(GlobalContext* globalCtx) {
         gDPSetPrimColor(NEXT_OVERLAY_DISP, 0, 0, 255, 255, 255, interfaceCtx->bAlpha);
         gDPSetCombineMode(NEXT_OVERLAY_DISP, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
 
-        if (interfaceCtx->unk_1FA == 0) {
+        if (interfaceCtx->spActionFlag == 0) {
             // B Button Icon & possibly Ammo Count
             if (gSaveContext.equips.buttonItems[0] != ITEM_NONE) {
                 Interface_DrawItemIconTexture(globalCtx, (void*)(u32)interfaceCtx->icon_itemSegment, 0);
 
-                if ((player->stateFlags1 & 0x00800000) || (globalCtx->unk_11E5C >= 2) ||
+                if ((player->stateFlags1 & 0x00800000) || (globalCtx->bowGameFlag >= 2) ||
                     ((globalCtx->sceneNum == SCENE_BOWLING) && Flags_GetSwitch(globalCtx, 0x38))) {
                     gDPPipeSync(NEXT_OVERLAY_DISP);
                     gDPSetCombineLERP(NEXT_OVERLAY_DISP, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0,
@@ -3289,10 +3289,10 @@ void Interface_Draw(GlobalContext* globalCtx) {
                        G_TX_NOLOD);
             gDPSetTileSize(NEXT_OVERLAY_DISP, G_TX_RENDERTILE, 0, 0, 188, 60);
 
-            R_B_LABEL_DD = 1024.0f / (WREG(37 + gSaveContext.language) / 100.0f);
-            gSPTextureRectangle(NEXT_OVERLAY_DISP, R_B_LABEL_X(gSaveContext.language) << 2,
-                                R_B_LABEL_Y(gSaveContext.language) << 2, (R_B_LABEL_X(gSaveContext.language) + 48) << 2,
-                                (R_B_LABEL_Y(gSaveContext.language) + 16) << 2, G_TX_RENDERTILE, 0, 0, R_B_LABEL_DD,
+            R_B_LABEL_DD = 1024.0f / (WREG(37 + gSaveContext.j_n) / 100.0f);
+            gSPTextureRectangle(NEXT_OVERLAY_DISP, R_B_LABEL_X(gSaveContext.j_n) << 2,
+                                R_B_LABEL_Y(gSaveContext.j_n) << 2, (R_B_LABEL_X(gSaveContext.j_n) + 48) << 2,
+                                (R_B_LABEL_Y(gSaveContext.j_n) + 16) << 2, G_TX_RENDERTILE, 0, 0, R_B_LABEL_DD,
                                 R_B_LABEL_DD);
         }
 
@@ -3350,14 +3350,14 @@ void Interface_Draw(GlobalContext* globalCtx) {
                           PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
         gDPSetPrimColor(NEXT_OVERLAY_DISP, 0, 0, 255, 255, 255, interfaceCtx->aAlpha);
         gDPSetEnvColor(NEXT_OVERLAY_DISP, 0, 0, 0, 0);
-        Matrix_Translate(0.0f, 0.0f, WREG(46 + gSaveContext.language) / 10.0f, MTXMODE_NEW);
+        Matrix_Translate(0.0f, 0.0f, WREG(46 + gSaveContext.j_n) / 10.0f, MTXMODE_NEW);
         Matrix_Scale(1.0f, 1.0f, 1.0f, MTXMODE_APPLY);
-        Matrix_RotateX(interfaceCtx->unk_1F4 / 10000.0f, MTXMODE_APPLY);
+        Matrix_RotateX(interfaceCtx->doActionRotate / 10000.0f, MTXMODE_APPLY);
         gSPMatrix(NEXT_OVERLAY_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_parameter.c", 3701),
                   G_MTX_MODELVIEW | G_MTX_LOAD);
-        gSPVertex(NEXT_OVERLAY_DISP, &interfaceCtx->vtx_128[4], 4, 0);
+        gSPVertex(NEXT_OVERLAY_DISP, &interfaceCtx->parameterFrameVtx[4], 4, 0);
 
-        if ((interfaceCtx->unk_1EC < 2) || (interfaceCtx->unk_1EC == 3)) {
+        if ((interfaceCtx->doActionFlag < 2) || (interfaceCtx->doActionFlag == 3)) {
             Interface_DrawActionLabel(globalCtx->state.gfxCtx, (void*)(u32)interfaceCtx->do_actionSegment);
         } else {
             Interface_DrawActionLabel(globalCtx->state.gfxCtx, (void*)((u32)interfaceCtx->do_actionSegment + 0x180));
@@ -3437,7 +3437,7 @@ void Interface_Draw(GlobalContext* globalCtx) {
         if ((globalCtx->pauseCtx.state == 0) && (globalCtx->pauseCtx.flag == 0)) {
             if (gSaveContext.minigameState != 1) {
                 // Carrots rendering if the action corresponds to riding a horse
-                if (interfaceCtx->unk_1EE == 8) {
+                if (interfaceCtx->doAction == 8) {
                     // Load Carrot Icon
                     gDPSetTextureImage(NEXT_OVERLAY_DISP, G_IM_FMT_RGBA, G_IM_SIZ_32b, 1, &D_02002100);
                     gDPSetTile(NEXT_OVERLAY_DISP, G_IM_FMT_RGBA, G_IM_SIZ_32b, 0, 0x0000, G_TX_LOADTILE, 0,
@@ -3545,10 +3545,10 @@ void Interface_Draw(GlobalContext* globalCtx) {
             }
         }
 
-        if ((globalCtx->pauseCtx.state == 0) && (globalCtx->pauseCtx.flag == 0) && (globalCtx->unk_10A20 == 0) &&
+        if ((globalCtx->pauseCtx.state == 0) && (globalCtx->pauseCtx.flag == 0) && (globalCtx->goverCtx == 0) &&
             (msgCtx->msgMode == 0) && !(player->stateFlags2 & 0x01000000) && (globalCtx->sceneLoadFlag == 0) &&
             (globalCtx->transitionMode == 0) && !Gameplay_InCsMode(globalCtx) && (gSaveContext.minigameState != 1) &&
-            (globalCtx->unk_11E5C < 2) &&
+            (globalCtx->bowGameFlag < 2) &&
             !((globalCtx->sceneNum == SCENE_BOWLING) && Flags_GetSwitch(globalCtx, 0x38))) {
             sp274 = 0;
             switch (gSaveContext.timer1State) {
@@ -3955,21 +3955,21 @@ void Interface_Update(GlobalContext* globalCtx) {
     Input* input = &globalCtx->state.input[2];
 
     if (CHECK_PAD(input->press, L_JPAD)) {
-        gSaveContext.language = 0;
-        osSyncPrintf("J_N=%x J_N=%x\n", gSaveContext.language, &gSaveContext.language);
+        gSaveContext.j_n = 0;
+        osSyncPrintf("J_N=%x J_N=%x\n", gSaveContext.j_n, &gSaveContext.j_n);
     } else if (CHECK_PAD(input->press, U_JPAD)) {
-        gSaveContext.language = 1;
-        osSyncPrintf("J_N=%x J_N=%x\n", gSaveContext.language, &gSaveContext.language);
+        gSaveContext.j_n = 1;
+        osSyncPrintf("J_N=%x J_N=%x\n", gSaveContext.j_n, &gSaveContext.j_n);
     } else if (CHECK_PAD(input->press, R_JPAD)) {
-        gSaveContext.language = 2;
-        osSyncPrintf("J_N=%x J_N=%x\n", gSaveContext.language, &gSaveContext.language);
+        gSaveContext.j_n = 2;
+        osSyncPrintf("J_N=%x J_N=%x\n", gSaveContext.j_n, &gSaveContext.j_n);
     }
 
     if ((globalCtx->pauseCtx.state == 0) && (globalCtx->pauseCtx.flag == 0)) {
         if ((gSaveContext.minigameState == 1) || (gSaveContext.sceneSetupIndex < 4) ||
             ((globalCtx->sceneNum == SCENE_SPOT20) && (gSaveContext.sceneSetupIndex == 4))) {
             if ((msgCtx->msgMode == 0) || ((msgCtx->msgMode != 0) && (globalCtx->sceneNum == SCENE_BOWLING))) {
-                if (globalCtx->unk_10A20 == 0) {
+                if (globalCtx->goverCtx == 0) {
                     func_80083108(globalCtx);
                 }
             }
@@ -4143,21 +4143,21 @@ void Interface_Update(GlobalContext* globalCtx) {
         }
     }
 
-    switch (interfaceCtx->unk_1EC) {
+    switch (interfaceCtx->doActionFlag) {
         case 1:
-            interfaceCtx->unk_1F4 = interfaceCtx->unk_1F4 + (31400.0f / WREG(5));
-            if (interfaceCtx->unk_1F4 >= 15700.0f) {
-                interfaceCtx->unk_1F4 = -15700.0f;
-                interfaceCtx->unk_1EC = 2;
+            interfaceCtx->doActionRotate = interfaceCtx->doActionRotate + (31400.0f / WREG(5));
+            if (interfaceCtx->doActionRotate >= 15700.0f) {
+                interfaceCtx->doActionRotate = -15700.0f;
+                interfaceCtx->doActionFlag = 2;
             }
             break;
         case 2:
-            interfaceCtx->unk_1F4 = interfaceCtx->unk_1F4 + (31400.0f / WREG(5));
-            if (interfaceCtx->unk_1F4 >= 0.0f) {
-                interfaceCtx->unk_1F4 = 0.0f;
-                interfaceCtx->unk_1EC = 0;
-                interfaceCtx->unk_1EE = interfaceCtx->unk_1F0;
-                action = interfaceCtx->unk_1EE;
+            interfaceCtx->doActionRotate = interfaceCtx->doActionRotate + (31400.0f / WREG(5));
+            if (interfaceCtx->doActionRotate >= 0.0f) {
+                interfaceCtx->doActionRotate = 0.0f;
+                interfaceCtx->doActionFlag = 0;
+                interfaceCtx->doAction = interfaceCtx->doActionOld;
+                action = interfaceCtx->doAction;
                 if ((action == 0x1D) || (action == 0x1E)) {
                     action = 0xA;
                 }
@@ -4165,19 +4165,19 @@ void Interface_Update(GlobalContext* globalCtx) {
             }
             break;
         case 3:
-            interfaceCtx->unk_1F4 = interfaceCtx->unk_1F4 + (31400.0f / WREG(5));
-            if (interfaceCtx->unk_1F4 >= 15700.0f) {
-                interfaceCtx->unk_1F4 = -15700.0f;
-                interfaceCtx->unk_1EC = 2;
+            interfaceCtx->doActionRotate = interfaceCtx->doActionRotate + (31400.0f / WREG(5));
+            if (interfaceCtx->doActionRotate >= 15700.0f) {
+                interfaceCtx->doActionRotate = -15700.0f;
+                interfaceCtx->doActionFlag = 2;
             }
             break;
         case 4:
-            interfaceCtx->unk_1F4 = interfaceCtx->unk_1F4 + (31400.0f / WREG(5));
-            if (interfaceCtx->unk_1F4 >= 0.0f) {
-                interfaceCtx->unk_1F4 = 0.0f;
-                interfaceCtx->unk_1EC = 0;
-                interfaceCtx->unk_1EE = interfaceCtx->unk_1F0;
-                action = interfaceCtx->unk_1EE;
+            interfaceCtx->doActionRotate = interfaceCtx->doActionRotate + (31400.0f / WREG(5));
+            if (interfaceCtx->doActionRotate >= 0.0f) {
+                interfaceCtx->doActionRotate = 0.0f;
+                interfaceCtx->doActionFlag = 0;
+                interfaceCtx->doAction = interfaceCtx->doActionOld;
+                action = interfaceCtx->doAction;
                 if ((action == 0x1D) || (action == 0x1E)) {
                     action = 0xA;
                 }
@@ -4186,10 +4186,10 @@ void Interface_Update(GlobalContext* globalCtx) {
             break;
     }
 
-    WREG(7) = interfaceCtx->unk_1F4;
+    WREG(7) = interfaceCtx->doActionRotate;
 
     if ((globalCtx->pauseCtx.state == 0) && (globalCtx->pauseCtx.flag == 0) && (msgCtx->msgMode == 0) &&
-        (globalCtx->sceneLoadFlag == 0) && (globalCtx->unk_10A20 == 0) && (globalCtx->transitionMode == 0) &&
+        (globalCtx->sceneLoadFlag == 0) && (globalCtx->goverCtx == 0) && (globalCtx->transitionMode == 0) &&
         ((globalCtx->csCtx.state == 0) || !func_8008E988(globalCtx))) {
         if ((gSaveContext.magicAcquired != 0) && (gSaveContext.magicLevel == 0)) {
             gSaveContext.magicLevel = gSaveContext.doubleMagic + 1;
@@ -4284,12 +4284,12 @@ void Interface_Update(GlobalContext* globalCtx) {
                 gSaveContext.nextDayTime = 0;
                 globalCtx->fadeTransition = 4;
                 gSaveContext.nextTransition = 2;
-                globalCtx->unk_11DE9 = 1;
+                globalCtx->actorStopFlag = 1;
             } else {
                 gSaveContext.nextDayTime = 0x8001;
                 globalCtx->fadeTransition = 5;
                 gSaveContext.nextTransition = 3;
-                globalCtx->unk_11DE9 = 1;
+                globalCtx->actorStopFlag = 1;
             }
 
             if (globalCtx->sceneNum == SCENE_SPOT13) {

@@ -334,7 +334,7 @@ void EnBom_Draw(Actor* thisx, GlobalContext* globalCtx) {
 
     if (thisx->params == BOMB_BODY) {
         func_80093D18(globalCtx->state.gfxCtx);
-        func_800D1FD4(&globalCtx->mf_11DA0);
+        func_800D1FD4(&globalCtx->softspriteMatrix);
         func_8002EBCC(thisx, globalCtx, 0);
 
         gSPMatrix(NEXT_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_bom.c", 928),

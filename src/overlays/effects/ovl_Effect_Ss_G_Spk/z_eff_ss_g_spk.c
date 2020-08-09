@@ -96,7 +96,7 @@ void EffectSsGSpk_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
 
     SkinMatrix_SetTranslate(&sp11C, this->pos.x, this->pos.y, this->pos.z);
     SkinMatrix_SetScale(&spDC, scale, scale, 1.0f);
-    SkinMatrix_MtxFMtxFMult(&sp11C, &globalCtx->mf_11DA0, &sp5C);
+    SkinMatrix_MtxFMtxFMult(&sp11C, &globalCtx->softspriteMatrix, &sp5C);
     SkinMatrix_MtxFMtxFMult(&sp5C, &spDC, &sp9C);
 
     mtx = SkinMatrix_MtxFToNewMtx(gfxCtx, &sp9C);

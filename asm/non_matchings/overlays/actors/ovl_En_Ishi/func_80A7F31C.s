@@ -36,7 +36,7 @@ glabel func_80A7F31C
 /* 00F3C 80A7F39C 00AD2821 */  addu    $a1, $a1, $t5              
 /* 00F40 80A7F3A0 0C29FB65 */  jal     func_80A7ED94              
 /* 00F44 80A7F3A4 8CA5FA28 */  lw      $a1, %lo(D_80A7FA28)($a1)  
-/* 00F48 80A7F3A8 0C00B5FB */  jal     func_8002D7EC              
+/* 00F48 80A7F3A8 0C00B5FB */  jal     ActorPosition_Move              
 /* 00F4C 80A7F3AC 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00F50 80A7F3B0 44802000 */  mtc1    $zero, $f4                 ## $f4 = 0.00
 /* 00F54 80A7F3B4 240E00C5 */  addiu   $t6, $zero, 0x00C5         ## $t6 = 000000C5

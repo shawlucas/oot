@@ -2356,7 +2356,7 @@ glabel L808CD598
 /* 028EC 808CD6AC 0C00B642 */  jal     func_8002D908              
 /* 028F0 808CD6B0 02C02025 */  or      $a0, $s6, $zero            ## $a0 = 00000000
 .L808CD6B4:
-/* 028F4 808CD6B4 0C00B5FB */  jal     func_8002D7EC              
+/* 028F4 808CD6B4 0C00B5FB */  jal     ActorPosition_Move              
 /* 028F8 808CD6B8 02C02025 */  or      $a0, $s6, $zero            ## $a0 = 00000000
 /* 028FC 808CD6BC 86CD0228 */  lh      $t5, 0x0228($s6)           ## 00000228
 /* 02900 808CD6C0 25AE0001 */  addiu   $t6, $t5, 0x0001           ## $t6 = 00000001

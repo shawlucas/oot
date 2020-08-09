@@ -10,7 +10,7 @@ glabel func_80A02EC0
 /* 012B0 80A02EE0 44800000 */  mtc1    $zero, $f0                 ## $f0 = 0.00
 /* 012B4 80A02EE4 00000000 */  nop
 /* 012B8 80A02EE8 E4800064 */  swc1    $f0, 0x0064($a0)           ## 00000064
-/* 012BC 80A02EEC 0C00B5FB */  jal     func_8002D7EC              
+/* 012BC 80A02EEC 0C00B5FB */  jal     ActorPosition_Move              
 /* 012C0 80A02EF0 E480005C */  swc1    $f0, 0x005C($a0)           ## 0000005C
 /* 012C4 80A02EF4 8FA2001C */  lw      $v0, 0x001C($sp)           
 /* 012C8 80A02EF8 8FA40018 */  lw      $a0, 0x0018($sp)           

@@ -224,7 +224,7 @@ void func_800985DC(GlobalContext* globalCtx, SceneCmd* cmd) {
 
 // Scene Command 0x02: Cutscene Camera List
 void func_80098630(GlobalContext* globalCtx, SceneCmd* cmd) {
-    globalCtx->unk_11DFC = SEGMENTED_TO_VIRTUAL(cmd->csCameraList.segment);
+    globalCtx->cameraData = SEGMENTED_TO_VIRTUAL(cmd->csCameraList.segment);
 }
 
 // Scene Command 0x03: Collision Header

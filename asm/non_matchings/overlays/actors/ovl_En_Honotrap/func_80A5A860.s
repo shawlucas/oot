@@ -60,7 +60,7 @@ glabel func_80A5A860
 /* 00CD4 80A5A904 C432B13C */  lwc1    $f18, %lo(D_80A5B13C)($at) 
 /* 00CD8 80A5A908 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00CDC 80A5A90C 46120102 */  mul.s   $f4, $f0, $f18             
-/* 00CE0 80A5A910 0C00B5FB */  jal     func_8002D7EC              
+/* 00CE0 80A5A910 0C00B5FB */  jal     ActorPosition_Move              
 /* 00CE4 80A5A914 E6040060 */  swc1    $f4, 0x0060($s0)           ## 00000060
 /* 00CE8 80A5A918 44803000 */  mtc1    $zero, $f6                 ## $f6 = 0.00
 /* 00CEC 80A5A91C 240E001D */  addiu   $t6, $zero, 0x001D         ## $t6 = 0000001D

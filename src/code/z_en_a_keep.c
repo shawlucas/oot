@@ -133,7 +133,7 @@ void EnAObj_Init(Actor* thisx, GlobalContext* globalCtx) {
             Collider_InitCylinder(globalCtx, &this->collider);
             Collider_SetCylinder(globalCtx, &this->collider, thisx, &sCylinderInit);
             thisx->colChkInfo.mass = 0xFF;
-            thisx->unk_1F = 0;
+            thisx->naviRange = 0;
             break;
         case A_OBJ_KNOB:
             thisx->gravity = -1.5f;

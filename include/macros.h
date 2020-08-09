@@ -11,6 +11,9 @@
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 
 #define concat(a, b) a##b 
+#define bitcheck(xx, yy) ((xx) & (yy))
+#define bitset(xx, yy) ((xx) |= (yy))
+#define bitclr(xx, yy) ((xx) &= ~(yy))
 
 #define SQ(x) ((x)*(x))
 #define ABS(x) (((x) >= 0) ? (x) : -(x))
@@ -32,6 +35,8 @@
 #define LINK_IS_ADULT (gSaveContext.linkAge == 0)
 #define LINK_AGE_IN_YEARS (LINK_IS_CHILD ? YEARS_CHILD : YEARS_ADULT)
 
+#define GET_PAD_PATTERN(padmgr) (u8)((padmgr)->validCtrlrsMask)
+
 #define SLOT(item) gItemSlots[item]
 #define INV_CONTENT(item) gSaveContext.items[SLOT(item)]
 #define AMMO(item) gSaveContext.ammo[SLOT(item)]
@@ -45,16 +50,7 @@
 #define CAPACITY(upg, value) gUpgradeCapacities[upg][value]
 #define CUR_CAPACITY(upg) CAPACITY(upg, CUR_UPG_VALUE(upg))
 
-#define CHECK_QUEST_ITEM(item) (gBitFlags[item] & gSaveContext.questItems)
-
-#define xSetSegment(segtbl, number, base) \
-        ((void)((segtbl)[number] = (u32)(base)))
-#define SetSegment(number, base) \
-        xSetSegment(gSegments, number, base)
-#define xSetSegmentK0(segtbl, number, base) \
-        xSetSegment(segtbl, number, OS_K0_TO_PHYSICAL(base))
-#define SetSegmentK0(number, base) \
-        SetSegment(number, OS_K0_TO_PHYSICAL(base))        
+#define CHECK_QUEST_ITEM(item) (gBitFlags[item] & gSaveContext.questItems)    
 
 #ifndef HAYAKAWA_TESTdx
 #define SET_NEXT_GAMESTATE(game, func, name) \
@@ -93,6 +89,8 @@ if (1) {  \
 #define LOG_HEX(exp, value, file, line) LOG(exp, value, "%x", file, line)
 
 #define GAME_PLAY (GlobalContext *)state
+
+#define J_N gSaveContext.j_n
 
 /*
  * `x` vertex x

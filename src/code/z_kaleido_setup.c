@@ -42,9 +42,9 @@ void KaleidoSetup_Update(GlobalContext* globalCtx) {
     PauseContext* pauseCtx = &globalCtx->pauseCtx;
     Input* input = &globalCtx->state.input[0];
 
-    if (pauseCtx->state == 0 && pauseCtx->flag == 0 && globalCtx->unk_10A20 == 0 && globalCtx->sceneLoadFlag == 0 &&
+    if (pauseCtx->state == 0 && pauseCtx->flag == 0 && globalCtx->goverCtx == 0 && globalCtx->sceneLoadFlag == 0 &&
         globalCtx->transitionMode == 0 && gSaveContext.cutsceneIndex < 0xFFF0 &&
-        gSaveContext.nextCutsceneIndex < 0xFFF0 && !Gameplay_InCsMode(globalCtx) && globalCtx->unk_11E5C < 2 &&
+        gSaveContext.nextCutsceneIndex < 0xFFF0 && !Gameplay_InCsMode(globalCtx) && globalCtx->bowGameFlag < 2 &&
         gSaveContext.unk_13F0 != 8 && gSaveContext.unk_13F0 != 9 &&
         (globalCtx->sceneNum != SCENE_BOWLING || !Flags_GetSwitch(globalCtx, 0x38))) {
 

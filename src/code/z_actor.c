@@ -230,7 +230,7 @@ void ActorShadow_FootPosSet(Actor* actor, s32 jyoint_no, s32 L_foot_jyoint, Vec3
 }
 
 void ProjectionPos_Set(GlobalContext* globalCtx, Vec3f* targetPos, Vec3f* displayPos, f32* w) {
-    SkinMatrix_Vec3fMtxFMultXYZW(&globalCtx->mf_11D60, targetPos, displayPos, w);
+    SkinMatrix_Vec3fMtxFMultXYZW(&globalCtx->projectionMatrix, targetPos, displayPos, w);
     *w = (*w < 1.0f) ? 1.0f : (1.0f / *w);
 }
 
@@ -424,11 +424,11 @@ void TargetContext_DrawTarget(TargetContext* targetCtx, GlobalContext* globalCtx
     CLOSE_DISP(globalCtx->state.gfxCtx, "../z_actor.c", 2158);
 }
 
-#define	MOVE_FRAME	4
-#define	MOVE_RATIO_ADD	(1.0f/(float)MOVE_FRAME)
+#define MOVE_FRAME 4
+#define MOVE_RATIO_ADD (1.0f / (float)MOVE_FRAME)
 
 void func_8002C7BC(TargetContext* targetCtx, Actor* playerActor, Actor* targetActor, GlobalContext* globalCtx) {
-    Player* player = (Player *)playerActor;
+    Player* player = (Player*)playerActor;
     Actor* elfTargetActor = NULL;
     s32 targetType;
     Vec3f cameraPos;
@@ -467,9 +467,10 @@ void func_8002C7BC(TargetContext* targetCtx, Actor* playerActor, Actor* targetAc
     if (!Math_ApproxF(&targetCtx->moveRatio, 0.0f, MOVE_RATIO_ADD)) {
         f32 moveRatio = MOVE_RATIO_ADD / targetCtx->moveRatio;
         f32 dx, dy, dz;
-        
+
         dx = elfTargetActor->posRot.pos.x - targetCtx->naviRefPos.x;
-        dy = (elfTargetActor->posRot.pos.y + (elfTargetActor->unk_4C * elfTargetActor->scale.y)) - targetCtx->naviRefPos.y;
+        dy = (elfTargetActor->posRot.pos.y + (elfTargetActor->unk_4C * elfTargetActor->scale.y)) -
+             targetCtx->naviRefPos.y;
         dz = elfTargetActor->posRot.pos.z - targetCtx->naviRefPos.z;
         targetCtx->naviRefPos.x += dx * moveRatio;
         targetCtx->naviRefPos.y += dy * moveRatio;
@@ -480,9 +481,7 @@ void func_8002C7BC(TargetContext* targetCtx, Actor* playerActor, Actor* targetAc
 
     if ((targetActor != NULL) && !targetCtx->rock_on) {
         ProjectionPos_Set(globalCtx, &targetActor->posRot2.pos, &cameraPos, &cameraW);
-        if (cameraPos.z <= 0.0f || 
-            fabsf(cameraPos.x * cameraW) >= 1.0f || 
-            fabsf(cameraPos.y * cameraW) >= 1.0f ) {
+        if (cameraPos.z <= 0.0f || fabsf(cameraPos.x * cameraW) >= 1.0f || fabsf(cameraPos.y * cameraW) >= 1.0f) {
             targetActor = NULL;
         }
     }
@@ -522,10 +521,10 @@ void func_8002C7BC(TargetContext* targetCtx, Actor* playerActor, Actor* targetAc
  * Tests if current scene switch flag is set.
  */
 s32 Flags_GetSwitch(GlobalContext* globalCtx, s32 flag) {
-    if (flag < 0x20) {
-        return globalCtx->actorCtx.flags.swch & (1 << flag);
+    if (flag < 32) {
+        return bitcheck(globalCtx->actorCtx.flags.swch, (1 << (flag)));
     } else {
-        return globalCtx->actorCtx.flags.tempSwch & (1 << flag);
+        return bitcheck(globalCtx->actorCtx.flags.tempSwch, (1 << ((flag)-32)));
     }
 }
 
@@ -533,10 +532,10 @@ s32 Flags_GetSwitch(GlobalContext* globalCtx, s32 flag) {
  * Sets current scene switch flag.
  */
 void Flags_SetSwitch(GlobalContext* globalCtx, s32 flag) {
-    if (flag < 0x20) {
-        globalCtx->actorCtx.flags.swch |= (1 << flag);
+    if (flag < 32) {
+        bitset(globalCtx->actorCtx.flags.swch, (1 << (flag)));
     } else {
-        globalCtx->actorCtx.flags.tempSwch |= (1 << flag);
+        bitset(globalCtx->actorCtx.flags.tempSwch, (1 << ((flag)-32)));
     }
 }
 
@@ -544,10 +543,10 @@ void Flags_SetSwitch(GlobalContext* globalCtx, s32 flag) {
  * Unsets current scene switch flag.
  */
 void Flags_UnsetSwitch(GlobalContext* globalCtx, s32 flag) {
-    if (flag < 0x20) {
-        globalCtx->actorCtx.flags.swch &= ~(1 << flag);
+    if (flag < 32) {
+        bitclr(globalCtx->actorCtx.flags.swch, (1 << (flag)));
     } else {
-        globalCtx->actorCtx.flags.tempSwch &= ~(1 << flag);
+        bitclr(globalCtx->actorCtx.flags.tempSwch, (1 << ((flag)-32)));
     }
 }
 
@@ -555,10 +554,10 @@ void Flags_UnsetSwitch(GlobalContext* globalCtx, s32 flag) {
  * Tests if current scene unknown flag is set.
  */
 s32 Flags_GetUnknown(GlobalContext* globalCtx, s32 flag) {
-    if (flag < 0x20) {
-        return globalCtx->actorCtx.flags.unk0 & (1 << flag);
+    if (flag < 32) {
+        return bitcheck(globalCtx->actorCtx.flags.unk0, (1 << (flag)));
     } else {
-        return globalCtx->actorCtx.flags.unk1 & (1 << flag);
+        return bitcheck(globalCtx->actorCtx.flags.unk1, (1 << ((flag)-32)));
     }
 }
 
@@ -566,10 +565,10 @@ s32 Flags_GetUnknown(GlobalContext* globalCtx, s32 flag) {
  * Sets current scene unknown flag.
  */
 void Flags_SetUnknown(GlobalContext* globalCtx, s32 flag) {
-    if (flag < 0x20) {
-        globalCtx->actorCtx.flags.unk0 |= (1 << flag);
+    if (flag < 32) {
+        bitset(globalCtx->actorCtx.flags.unk0, (1 << (flag)));
     } else {
-        globalCtx->actorCtx.flags.unk1 |= (1 << flag);
+        bitset(globalCtx->actorCtx.flags.unk1, (1 << ((flag)-32)));
     }
 }
 
@@ -577,10 +576,10 @@ void Flags_SetUnknown(GlobalContext* globalCtx, s32 flag) {
  * Unsets current scene unknown flag.
  */
 void Flags_UnsetUnknown(GlobalContext* globalCtx, s32 flag) {
-    if (flag < 0x20) {
-        globalCtx->actorCtx.flags.unk0 &= ~(1 << flag);
+    if (flag < 32) {
+        bitclr(globalCtx->actorCtx.flags.unk0, (1 << (flag)));
     } else {
-        globalCtx->actorCtx.flags.unk1 &= ~(1 << flag);
+        bitclr(globalCtx->actorCtx.flags.unk1, (1 << ((flag)-32)));
     }
 }
 
@@ -588,193 +587,210 @@ void Flags_UnsetUnknown(GlobalContext* globalCtx, s32 flag) {
  * Tests if current scene chest flag is set.
  */
 s32 Flags_GetTreasure(GlobalContext* globalCtx, s32 flag) {
-    return globalCtx->actorCtx.flags.chest & (1 << flag);
+    return bitcheck(globalCtx->actorCtx.flags.chest, (1 << (flag)));
 }
 
 /**
  * Sets current scene chest flag.
  */
 void Flags_SetTreasure(GlobalContext* globalCtx, s32 flag) {
-    globalCtx->actorCtx.flags.chest |= (1 << flag);
+    bitset(globalCtx->actorCtx.flags.chest, (1 << (flag)));
 }
 
 /**
  * Tests if current scene clear flag is set.
  */
-s32 Flags_GetClear(GlobalContext* globalCtx, s32 flag) {
-    return globalCtx->actorCtx.flags.clear & (1 << flag);
+s32 Flags_GetClear(GlobalContext* globalCtx, s32 roomNo) {
+    return bitcheck(globalCtx->actorCtx.flags.clear, (1 << (roomNo)));
 }
 
 /**
  * Sets current scene clear flag.
  */
-void Flags_SetClear(GlobalContext* globalCtx, s32 flag) {
-    globalCtx->actorCtx.flags.clear |= (1 << flag);
+void Flags_SetClear(GlobalContext* globalCtx, s32 roomNo) {
+    bitset(globalCtx->actorCtx.flags.clear, (1 << (roomNo)));
 }
 
 /**
  * Unsets current scene clear flag.
  */
-void Flags_UnsetClear(GlobalContext* globalCtx, s32 flag) {
-    globalCtx->actorCtx.flags.clear &= ~(1 << flag);
+void Flags_UnsetClear(GlobalContext* globalCtx, s32 roomNo) {
+    bitclr(globalCtx->actorCtx.flags.clear, (1 << (roomNo)));
 }
 
 /**
  * Tests if current scene temp clear flag is set.
  */
-s32 Flags_GetTempClear(GlobalContext* globalCtx, s32 flag) {
-    return globalCtx->actorCtx.flags.tempClear & (1 << flag);
+s32 Flags_NoEnemyCheck(GlobalContext* globalCtx, s32 roomNo) {
+    return bitcheck(globalCtx->actorCtx.flags.noEnemy, (1 << (roomNo)));
 }
 
 /**
  * Sets current scene temp clear flag.
  */
-void Flags_SetTempClear(GlobalContext* globalCtx, s32 flag) {
-    globalCtx->actorCtx.flags.tempClear |= 1 << flag;
+void Flags_SetNoEnemy(GlobalContext* globalCtx, s32 roomNo) {
+    bitset(globalCtx->actorCtx.flags.noEnemy, (1 << (roomNo)));
 }
 
 /**
  * Unsets current scene temp clear flag.
  */
-void Flags_UnsetTempClear(GlobalContext* globalCtx, s32 flag) {
-    globalCtx->actorCtx.flags.tempClear &= ~(1 << flag);
+void Flags_UnsetNoEnemy(GlobalContext* globalCtx, s32 roomNo) {
+    bitclr(globalCtx->actorCtx.flags.noEnemy, (1 << (roomNo)));
 }
 
 /**
  * Tests if current scene collectible flag is set.
  */
-s32 Flags_GetCollectible(GlobalContext* globalCtx, s32 flag) {
-    if (flag < 0x20) {
-        return globalCtx->actorCtx.flags.collect & (1 << flag);
+s32 Flags_GetCollectible(GlobalContext* globalCtx, s32 itemNo) {
+    if (itemNo < 32) {
+        return bitcheck(globalCtx->actorCtx.flags.collect, (1 << itemNo));
     } else {
-        return globalCtx->actorCtx.flags.tempCollect & (1 << flag);
+        return bitcheck(globalCtx->actorCtx.flags.tempCollect, (1 << (itemNo)-32));
     }
 }
 
 /**
  * Sets current scene collectible flag.
  */
-void Flags_SetCollectible(GlobalContext* globalCtx, s32 flag) {
-    if (flag != 0) {
-        if (flag < 0x20) {
-            globalCtx->actorCtx.flags.collect |= 1 << flag;
+void Flags_SetCollectible(GlobalContext* globalCtx, s32 itemNo) {
+    if (itemNo) {
+        if (itemNo < 32) {
+            bitset(globalCtx->actorCtx.flags.collect, (1 << (itemNo)));
         } else {
-            globalCtx->actorCtx.flags.tempCollect |= 1 << flag;
+            bitset(globalCtx->actorCtx.flags.tempCollect, (1 << ((itemNo)-32)));
         }
     }
 }
 
-void func_8002CDE4(GlobalContext* globalCtx, TitleCardContext* titleCtx) {
-    titleCtx->delayA = titleCtx->delayB = titleCtx->unk_E = titleCtx->unk_C = 0;
+void TitleCard_Init(GlobalContext* globalCtx, TitleCardContext* titleCtx) {
+    titleCtx->timer = titleCtx->waitTimer = titleCtx->color = titleCtx->alpha = 0;
 }
 
-void TitleCard_InitBossName(GlobalContext* globalCtx, TitleCardContext* titleCtx, u32 texture, s16 arg3, s16 arg4,
-                            u8 arg5, u8 arg6) {
+void TitleCard_InitBossName(GlobalContext* globalCtx, TitleCardContext* titleCtx, u8* texture, s16 x, s16 y, u8 width,
+                            u8 height) {
     titleCtx->texture = texture;
-    titleCtx->unk_4 = arg3;
-    titleCtx->unk_6 = arg4;
-    titleCtx->unk_8 = arg5;
-    titleCtx->unk_9 = arg6;
-    titleCtx->delayA = 80;
-    titleCtx->delayB = 0;
+    titleCtx->x = x;
+    titleCtx->y = y;
+    titleCtx->width = width;
+    titleCtx->height = height;
+    titleCtx->timer = 80;
+    titleCtx->waitTimer = 0;
 }
 
-void TitleCard_InitPlaceName(GlobalContext* globalCtx, TitleCardContext* titleCtx, u32 texture, s32 arg3, s32 arg4,
-                             s32 arg5, s32 arg6, s32 arg7) {
+void TitleCard_InitPlaceName(GlobalContext* globalCtx, TitleCardContext* titleCtx, u8* texture, s32 x, s32 y, s32 width,
+                             s32 height, s32 startWaitTimer) {
     Scene* loadedScene = globalCtx->loadedScene;
     u32 size = loadedScene->titleFile.vromEnd - loadedScene->titleFile.vromStart;
 
-    if ((size != 0) && (size <= 0x3000)) {
+    if (size &&
+#ifndef PAL_VERSION
+        size <= (1024 * 8)) {
+#else
+        size <= (1024 * 12)) {
+#endif
         DmaMgr_SendRequest1(texture, loadedScene->titleFile.vromStart, size, "../z_actor.c", 2765);
     }
 
     titleCtx->texture = texture;
-    titleCtx->unk_4 = arg3;
-    titleCtx->unk_6 = arg4;
-    titleCtx->unk_8 = arg5;
-    titleCtx->unk_9 = arg6;
-    titleCtx->delayA = 80;
-    titleCtx->delayB = arg7;
+    titleCtx->x = x;
+    titleCtx->y = y;
+    titleCtx->width = width;
+    titleCtx->height = height;
+    titleCtx->timer = 80;
+    titleCtx->waitTimer = startWaitTimer;
 }
 
 void TitleCard_Update(GlobalContext* globalCtx, TitleCardContext* titleCtx) {
-    if (DECR(titleCtx->delayB) == 0) {
-        if (DECR(titleCtx->delayA) == 0) {
-            Math_ApproxS(&titleCtx->unk_C, 0, 30);
-            Math_ApproxS(&titleCtx->unk_E, 0, 70);
+    if (!DECR(titleCtx->waitTimer)) {
+        if (!DECR(titleCtx->timer)) {
+            Math_ApproxS(&titleCtx->alpha, 0, 30);
+            Math_ApproxS(&titleCtx->color, 0, 70);
         } else {
-            Math_ApproxS(&titleCtx->unk_C, 255, 10);
-            Math_ApproxS(&titleCtx->unk_E, 255, 20);
+            Math_ApproxS(&titleCtx->alpha, 255, 10);
+            Math_ApproxS(&titleCtx->color, 255, 20);
         }
     }
 }
 
 void TitleCard_Draw(GlobalContext* globalCtx, TitleCardContext* titleCtx) {
-    s32 spCC;
-    s32 spC8;
-    s32 unk1;
-    s32 spC0;
-    s32 sp38;
-    s32 spB8;
-    s32 spB4;
-    s32 spB0;
 
-    if (titleCtx->unk_C != 0) {
-        spCC = titleCtx->unk_8;
-        spC8 = titleCtx->unk_9;
-        spC0 = (titleCtx->unk_4 * 4) - (spCC * 2);
-        spB8 = (titleCtx->unk_6 * 4) - (spC8 * 2);
-        sp38 = spCC * 2;
+    if (titleCtx->alpha) {
+        s32 width = titleCtx->width;
+        s32 height = titleCtx->height;
+        s32 width2 = width << 1;
+        s32 x1 = (titleCtx->x << 2) - width2;
+        s32 x2 = x1 + (width2 << 1) - 4;
+        s32 y1 = (titleCtx->y << 2) - (height << 1);
+        s32 y2;
+        s32 textureOffset;
 
         OPEN_DISP(globalCtx->state.gfxCtx, "../z_actor.c", 2824);
+#if defined(PAL_VERSION)
+        textureOffset = (width * height) * (J_N);
+#else
+        if (!(J_N)) {
+            textureOffset = 0;
+        } else {
+            textureOffset = width * height;
+        }
+#endif
 
-        spB0 = spCC * spC8 * gSaveContext.language;
-        spC8 = (spCC * spC8 > 0x1000) ? 0x1000 / spCC : spC8;
-        spB4 = spB8 + (spC8 * 4);
+        if ((width * height) > (4 * 1024)) {
+            height = (4 * 1024) / width;
+        }
 
-        if (1) {} // Necessary to match
+        y2 = y1 + (height << 2);
 
         SET_NOW_OVERLAY_DISP(func_80093808(NOW_OVERLAY_DISP));
 
-        gDPSetPrimColor(NEXT_OVERLAY_DISP, 0, 0, (u8)titleCtx->unk_E, (u8)titleCtx->unk_E, (u8)titleCtx->unk_E,
-                        (u8)titleCtx->unk_C);
+        gDPSetPrimColor(NEXT_OVERLAY_DISP, 0, 0, (u8)titleCtx->color, (u8)titleCtx->color, (u8)titleCtx->color,
+                        (u8)titleCtx->alpha);
 
-        gDPLoadTextureBlock(NEXT_OVERLAY_DISP, titleCtx->texture + spB0, G_IM_FMT_IA, G_IM_SIZ_8b, spCC, spC8, 0,
+        gDPLoadTextureBlock(NEXT_OVERLAY_DISP, titleCtx->texture + textureOffset, G_IM_FMT_IA, G_IM_SIZ_8b, width, height, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                             G_TX_NOLOD);
 
-        gSPTextureRectangle(NEXT_OVERLAY_DISP, spC0, spB8, ((sp38 * 2) + spC0) - 4, spB8 + (spC8 * 4) - 1,
-                            G_TX_RENDERTILE, 0, 0, 1024, 1024);
+        gSPTextureRectangle(NEXT_OVERLAY_DISP, x1, y1, x2, (y2 - 1),
+                            G_TX_RENDERTILE, 0<<5, 0<<5, 1<<10, 1<<10);
 
-        spC8 = titleCtx->unk_9 - spC8;
-
-        if (spC8 > 0) {
-            gDPLoadTextureBlock(NEXT_OVERLAY_DISP, titleCtx->texture + spB0 + 0x1000, G_IM_FMT_IA, G_IM_SIZ_8b, spCC,
-                                spC8, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+        if ((height = titleCtx->height - height) > 0) {
+            gDPLoadTextureBlock(NEXT_OVERLAY_DISP, titleCtx->texture + (4 * 1024) + textureOffset, G_IM_FMT_IA, G_IM_SIZ_8b, width,
+                                height, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
                                 G_TX_NOLOD, G_TX_NOLOD);
 
-            gSPTextureRectangle(NEXT_OVERLAY_DISP, spC0, spB4, ((sp38 * 2) + spC0) - 4, spB4 + (spC8 * 4) - 1,
-                                G_TX_RENDERTILE, 0, 0, 1024, 1024);
+            gSPTextureRectangle(NEXT_OVERLAY_DISP, x1, y2, x2, (y2 + (height << 2) - 1),
+                                G_TX_RENDERTILE, 0<<5, 0<<5, 1<<10, 1<<10);
         }
+    
+#if 0
+        gDPLoadTextureBlock(NEXT_OVERLAY_DISP, titleCtx->texture, G_IM_FMT_IA, G_IM_SIZ_8b, titleCtx->width, titleCtx->height, 0,
+                            G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR,
+                            G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        gSPTextureRectangle(NEXT_OVERLAY_DISP, (x4 - width2), (y4 - height2), (x4 + width2 - 4), (y4 + height2 - 4),
+                            G_TX_RENDERTILE,
+                            0<<5, 0<<5,
+                            1<<10, 1<<10);
+#endif
 
         CLOSE_DISP(globalCtx->state.gfxCtx, "../z_actor.c", 2880);
     }
 }
 
-s32 func_8002D53C(GlobalContext* globalCtx, TitleCardContext* titleCtx) {
-    if ((globalCtx->actorCtx.titleCtx.delayB != 0) || (globalCtx->actorCtx.titleCtx.unk_C != 0)) {
-        titleCtx->delayA = 0;
-        titleCtx->delayB = 0;
-        return 0;
+s32 TitleCard_Destroy(GlobalContext* globalCtx, TitleCardContext* titleCtx) {
+    if (NAME_DISP_CHECK2(globalCtx)) {
+        titleCtx->timer = 0;
+        titleCtx->waitTimer = 0;
+        return false;
     }
 
-    return 1;
+    return true;
 }
 
 void Actor_Kill(Actor* actor) {
     actor->draw = NULL;
     actor->update = NULL;
-    actor->flags &= ~0x1;
+    ACTOR_CLEAR_STATUS(actor, ACTOR_STATUS_ANCHOR);
 }
 
 void Actor_InitPosRot(Actor* actor) {
@@ -791,11 +807,11 @@ void Actor_SetHeight(Actor* actor, f32 offset) {
     actor->posRot2.rot.z = actor->posRot.rot.z;
 }
 
-void func_8002D5F4(Actor* actor) {
+void Actor_SetPosRot(Actor* actor) {
     actor->posRot.rot = actor->shape.rot;
 }
 
-void func_8002D610(Actor* actor) {
+void Actor_SetShapeRot(Actor* actor) {
     actor->shape.rot = actor->posRot.rot;
 }
 
@@ -806,26 +822,29 @@ void Actor_SetScale(Actor* actor, f32 scale) {
 }
 
 void Actor_SetObjectDependency(GlobalContext* globalCtx, Actor* actor) {
-    gSegments[6] = PHYSICAL_TO_VIRTUAL(globalCtx->objectCtx.status[actor->objBankIndex].segment);
+    SetSegmentK0(GAMEPLAY_OBJECT_EXCHANGE_SEGMENT, globalCtx->objectCtx.status[actor->objBankIndex].segment);
 }
 
-void Actor_Init(Actor* actor, GlobalContext* globalCtx) {
+void Actor_Init(Actor* actor, GameState* game) {
+    GlobalContext* globalCtx = (GlobalContext *)game;
+
     Actor_InitPosRot(actor);
-    func_8002D610(actor);
+    Actor_SetShapeRot(actor);
     Actor_SetHeight(actor, 0.0f);
     Math_Vec3f_Copy(&actor->pos4, &actor->posRot.pos);
-    Actor_SetScale(actor, 0.01f);
-    actor->unk_1F = 3;
+    Actor_SetScale(actor, 1.0f/100.0f);
+    actor->naviRange = NAVI_RANGE_D;
     actor->minVelocityY = -20.0f;
     actor->xyzDistFromLinkSq = FLT_MAX;
-    actor->naviEnemyId = 0xFF;
+    //actor->naviEnemyId = 0xFF;
     actor->uncullZoneForward = 1000.0f;
     actor->uncullZoneScale = 350.0f;
     actor->uncullZoneDownward = 700.0f;
+    actor->naviEnemyId = 0xFF;
     func_80061E48(&actor->colChkInfo);
     actor->floorPolySource = 0x32;
     ActorShape_Init(&actor->shape, 0.0f, NULL, 0.0f);
-    if (Object_IsLoaded(&globalCtx->objectCtx, actor->objBankIndex)) {
+    if (Object_IsLoaded(&globalCtx->objectCtx, (s32) actor->objBankIndex)) {
         Actor_SetObjectDependency(globalCtx, actor);
         actor->init(actor, globalCtx);
         actor->init = NULL;
@@ -848,7 +867,7 @@ void Actor_Destroy(Actor* actor, GlobalContext* globalCtx) {
     }
 }
 
-void func_8002D7EC(Actor* actor) {
+void ActorPosition_Move(Actor* actor) {
     f32 speedRate = R_UPDATE_RATE * 0.5f;
     actor->posRot.pos.x += (actor->velocity.x * speedRate) + actor->colChkInfo.displacement.x;
     actor->posRot.pos.y += (actor->velocity.y * speedRate) + actor->colChkInfo.displacement.y;
@@ -867,7 +886,7 @@ void func_8002D868(Actor* actor) {
 
 void Actor_MoveForward(Actor* actor) {
     func_8002D868(actor);
-    func_8002D7EC(actor);
+    ActorPosition_Move(actor);
 }
 
 void func_8002D908(Actor* actor) {
@@ -879,7 +898,7 @@ void func_8002D908(Actor* actor) {
 
 void func_8002D97C(Actor* actor) {
     func_8002D908(actor);
-    func_8002D7EC(actor);
+    ActorPosition_Move(actor);
 }
 
 void func_8002D9A4(Actor* actor, f32 arg1) {
@@ -1435,7 +1454,7 @@ struct_80115FF8 D_80115FF8[] = {
 };
 
 u32 func_8002F090(Actor* actor, f32 arg1) {
-    return arg1 < D_80115FF8[actor->unk_1F].unk_0;
+    return arg1 < D_80115FF8[actor->naviRange].unk_0;
 }
 
 s32 func_8002F0C8(Actor* actor, Player* player, s32 flag) {
@@ -1457,7 +1476,7 @@ s32 func_8002F0C8(Actor* actor, Player* player, s32 flag) {
             dist = actor->xyzDistFromLinkSq;
         }
 
-        return !func_8002F090(actor, D_80115FF8[actor->unk_1F].unk_4 * dist);
+        return !func_8002F090(actor, D_80115FF8[actor->naviRange].unk_4 * dist);
     }
 
     return 0;
@@ -1952,8 +1971,8 @@ void func_800304DC(GlobalContext* globalCtx, ActorContext* actorCtx, ActorEntry*
     bzero(actorCtx, sizeof(*actorCtx));
 
     ActorOverlayTable_Init();
-    Matrix_MtxFCopy(&globalCtx->mf_11DA0, &gMtxFClear);
-    Matrix_MtxFCopy(&globalCtx->mf_11D60, &gMtxFClear);
+    Matrix_MtxFCopy(&globalCtx->softspriteMatrix, &gMtxFClear);
+    Matrix_MtxFCopy(&globalCtx->projectionMatrix, &gMtxFClear);
 
     overlayEntry = &gActorOverlayTable[0];
     for (i = 0; i < ARRAY_COUNT(gActorOverlayTable); i++) {
@@ -1967,7 +1986,7 @@ void func_800304DC(GlobalContext* globalCtx, ActorContext* actorCtx, ActorEntry*
     actorCtx->flags.clear = saveSceneFlags->clear;
     actorCtx->flags.collect = saveSceneFlags->collect;
 
-    func_8002CDE4(globalCtx, &actorCtx->titleCtx);
+    TitleCard_Init(globalCtx, &actorCtx->titleCtx);
 
     actorCtx->absoluteSpace = NULL;
 
@@ -2381,7 +2400,7 @@ void func_800315AC(GlobalContext* globalCtx, ActorContext* actorCtx) {
             HREG(66) = i;
 
             if (!HREG2(1)) {
-                SkinMatrix_Vec3fMtxFMultXYZW(&globalCtx->mf_11D60, &actor->posRot.pos, &actor->projectedPos,
+                SkinMatrix_Vec3fMtxFMultXYZW(&globalCtx->projectionMatrix, &actor->posRot.pos, &actor->projectedPos,
                                              &actor->projectedW);
             }
 
@@ -2530,7 +2549,7 @@ void func_80031B14(GlobalContext* globalCtx, ActorContext* actorCtx) {
     }
 
     CollisionCheck_InitContext(globalCtx, &globalCtx->colChkCtx);
-    actorCtx->flags.tempClear = 0;
+    actorCtx->flags.noEnemy = 0;
     actorCtx->flags.tempSwch &= 0xFFFFFF;
     globalCtx->msgCtx.unk_E3F4 = 0;
 }
@@ -2611,7 +2630,7 @@ Actor* Actor_RemoveFromTypeList(GlobalContext* globalCtx, ActorContext* actorCtx
 
     if ((actorToRemove->room == globalCtx->roomCtx.curRoom.num) && (actorToRemove->type == ACTORTYPE_ENEMY) &&
         (actorCtx->actorList[ACTORTYPE_ENEMY].length == 0)) {
-        Flags_SetTempClear(globalCtx, globalCtx->roomCtx.curRoom.num);
+        Flags_SetNoEnemy(globalCtx, globalCtx->roomCtx.curRoom.num);
     }
 
     return newFirstActor;
@@ -5237,7 +5256,7 @@ s32 func_800374E0(GlobalContext* globalCtx, Actor* actor, u16 textId) {
             ret = 0;
             break;
         case 0x1041:
-            if (msgCtx->unk_E2FA == 0x1035) {
+            if (msgCtx->selectionMsgNo == 0x1035) {
                 if (msgCtx->choiceIndex == 0) {
                     func_80035B18(globalCtx, actor, 0x1036);
                     Flags_SetInfTable(0x2A);
@@ -5247,7 +5266,7 @@ s32 func_800374E0(GlobalContext* globalCtx, Actor* actor, u16 textId) {
                     Flags_SetInfTable(0x2B);
                 }
             }
-            if (msgCtx->unk_E2FA == 0x1038) {
+            if (msgCtx->selectionMsgNo == 0x1038) {
                 if (msgCtx->choiceIndex == 0) {
                     func_80035B18(globalCtx, actor, 0x1039);
                     Flags_SetInfTable(0x2E);

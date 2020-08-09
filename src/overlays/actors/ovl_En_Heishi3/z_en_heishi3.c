@@ -65,7 +65,7 @@ void EnHeishi3_Init(Actor* thisx, GlobalContext* globalCtx) {
     SkelAnime_Init(globalCtx, &this->skelAnime, &D_0600BAC8, &D_06005C30, this->limbDrawTable,
                    this->transitionDrawTable, 17);
     this->actor.colChkInfo.mass = 0xFF;
-    this->actor.unk_1F = 6;
+    this->actor.naviRange = 6;
     Collider_InitCylinder(globalCtx, &this->collider);
     Collider_SetCylinder(globalCtx, &this->collider, &this->actor, &sCylinderInit);
     // "Castle Gate Soldier - Power Up"

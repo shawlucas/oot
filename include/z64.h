@@ -9,6 +9,7 @@
 #include <sched.h>
 #include <graph.h>
 #include <gfxprint.h>
+#include <sys_segment.h>
 #include <z64light.h>
 #include <z64actor.h>
 #include <z_actor_dlftbls.h>
@@ -254,7 +255,7 @@ typedef struct {
     /* 0x1404 */ u16          minigameState;
     /* 0x1406 */ u16          minigameScore; // "yabusame_total"
     /* 0x1408 */ char         unk_1408[0x0001];
-    /* 0x1409 */ u8           language;
+    /* 0x1409 */ u8           j_n;
     /* 0x140A */ u8           audioSetting;
     /* 0x140B */ char         unk_140B[0x0001];
     /* 0x140C */ u8           zTargetingSetting; // 0: Switch; 1: Hold
@@ -635,9 +636,9 @@ typedef struct {
 } SoundContext; // size = 0x4
 
 typedef struct {
-    /* 0x00 */ u32 toggle;
+    /* 0x00 */ s32 toggle;
     /* 0x04 */ s32 counter;
-} SubGlobalContext7B8; // size = 0x8
+} Pause; // size = 0x8
 
 typedef struct {
     /* 0x00 */ char unk_00[0x2];
@@ -708,14 +709,14 @@ typedef struct {
 
 typedef struct {
     /* 0x00 */ u32      texture;
-    /* 0x04 */ s16      unk_4;
-    /* 0x06 */ s16      unk_6;
-    /* 0x08 */ u8       unk_8;
-    /* 0x09 */ u8       unk_9;
-    /* 0x0A */ u8       delayA;
-    /* 0x0B */ u8       delayB;
-    /* 0x0C */ s16      unk_C;
-    /* 0x0E */ s16      unk_E;
+    /* 0x04 */ s16      x;
+    /* 0x06 */ s16      y;
+    /* 0x08 */ u8       width;
+    /* 0x09 */ u8       height;
+    /* 0x0A */ u8       timer;
+    /* 0x0B */ u8       waitTimer;
+    /* 0x0C */ s16      alpha;
+    /* 0x0E */ s16      color;
 } TitleCardContext; // size = 0x10
 
 typedef struct {
@@ -740,7 +741,7 @@ typedef struct {
         /* 0x0110 */ u32    unk1;
         /* 0x0114 */ u32    chest;
         /* 0x0118 */ u32    clear;
-        /* 0x011C */ u32    tempClear;
+        /* 0x011C */ u32    noEnemy;
         /* 0x0120 */ u32    collect;
         /* 0x0124 */ u32    tempCollect;
     }                   flags;
@@ -773,28 +774,32 @@ typedef struct {
 } SoundSource; // size = 0x1C
 
 typedef struct {
-    /* 0x00 */ char unk_0[0x4];
-} SubGlobalContext1F74; // size = 0x4
-
-typedef struct {
-    /* 0x000 */ char unk_00[0x128];
+    /* 0x000 */ View view;
     /* 0x128 */ void* staticSegments[3];
     /* 0x134 */ Gfx* dpList;
-    /* 0x138 */ Gfx* unk_138;
-    /* 0x13C */ void* roomVtx;
-    /* 0x140 */ s16  unk_140;
+    /* 0x138 */ Gfx* roomDLp;
+    /* 0x13C */ Vtx_t* roomVtx;
+    /* 0x140 */ s16  vrBoxDrawFlag;
     /* 0x144 */ Vec3f rot;
+                Vec3f eye;
+                s16 angle;
 } SkyboxContext; // size = 0x150
 
 typedef struct {
     /* 0x0000 */ View   view;
-    /* 0x0128 */ char   unk_128[0xE188];
+    /* 0x0128 */ Kanfont kanfont;
     /* 0xE2B0 */ void*  textboxSegment; // "fukidashiSegment"
-    /* 0xE2B4 */ char   unk_E2B4[0x44];
-    /* 0xE2FA */ u16    unk_E2F8;
-    /* 0xE2FA */ u16    unk_E2FA;
-    /* 0xE2FC */ char   unk_E2FC[0x04];
-    /* 0xE300 */ s32    unk_E300;
+    /* 0xE2B4 */ void*  textureSegment;
+    /* 0xE2B8 */ NA_OCARINA_PLAY_INFO* info; /* Ocarina */
+    /* 0xE2BC */ DmaRequest req;
+    /* 0xE2DC */ OSMesgQueue mq;
+    /* 0xE2F4 */ OSMesg msg;
+    /* 0xE2F8 */ u16    msgNo;
+    /* 0xE2FA */ u16    selectionMsgNo;
+    /* 0xE2FC */ u8     msgDispType;
+    /* 0xE2FD */ u8     msgDispType0;
+    /* 0xE2FE */ u8     msgDispType1;
+    /* 0xE300 */ u8*    msgData;
     /* 0xE304 */ u8     msgMode;
     /* 0xE305 */ char   unk_E305[0xD1];
     /* 0xE3D6 */ u16    unk_E3D6;
@@ -818,30 +823,30 @@ typedef struct {
 
 typedef struct {
     /* 0x0000 */ View   view;
-    /* 0x0128 */ Vtx*   vtx_128;
-    /* 0x012C */ Vtx*   vtx_12C;
+    /* 0x0128 */ Vtx*   parameterFrameVtx;
+    /* 0x012C */ Vtx*   heartVtx;
     /* 0x0130 */ void*  parameterSegment;
     /* 0x0134 */ void*  do_actionSegment;
     /* 0x0138 */ void*  icon_itemSegment;
     /* 0x013C */ void*  mapSegment;
-    /* 0x0140 */ u8     unk_140[32];
+    /* 0x0140 */ u8     mapPalette[16 * 2];
     /* 0x0160 */ DmaRequest dmaRequest_160;
     /* 0x0180 */ DmaRequest dmaRequest_180;
-    /* 0x01A0 */ char   unk_1A0[0x20];
+    /* 0x01A0 */ DmaRequest dmaRequest_1A0;
     /* 0x01C0 */ OSMesgQueue loadQueue;
     /* 0x01D8 */ OSMesg loadMsg;
     /* 0x01DC */ Viewport viewport;
-    /* 0x01EC */ s16    unk_1EC;
-    /* 0x01EE */ u16    unk_1EE;
-    /* 0x01F0 */ u16    unk_1F0;
-    /* 0x01F4 */ f32    unk_1F4;
+    /* 0x01EC */ s16    doActionFlag;
+    /* 0x01EE */ u16    doAction;
+    /* 0x01F0 */ u16    doActionOld;
+    /* 0x01F4 */ f32    doActionRotate;
     /* 0x01F8 */ s16    naviCalling;
-    /* 0x01FA */ s16    unk_1FA;
-    /* 0x01FC */ s16    unk_1FC;
-    /* 0x01FE */ s16    unk_1FE;
-    /* 0x0200 */ s16    unk_200;
-    /* 0x0202 */ s16    unk_202[3];
-    /* 0x0208 */ s16    unk_208[3];
+    /* 0x01FA */ s16    spActionFlag;
+    /* 0x01FC */ s16    spAction;
+    /* 0x01FE */ s16    lifeMeter;
+    /* 0x0200 */ s16    nowMode;
+    /* 0x0202 */ s16    lifeMeterPrimColor[3];
+    /* 0x0208 */ s16    lifeMeterEnvColor[3];
     /* 0x020E */ s16    unk_20E[6];
     /* 0x021A */ s16    unk_21A[6];
     /* 0x0226 */ s16    unk_226;
@@ -1300,34 +1305,40 @@ typedef struct {
     /* 0x03 */ u8 byte3;
 } ElfMessage; // size = 0x4
 
+typedef struct {
+    u16 gameOverMode;
+} GameOverContext;
+
+#define GAME_PLAY_FADE_IN -20
+#define GAME_PLAY_FADE_OUT 20
+
 // Global Context (dbg ram start: 80212020)
 typedef struct GlobalContext {
     /* 0x00000 */ GameState state;
     /* 0x000A4 */ s16 sceneNum;
     /* 0x000A6 */ u8 sceneConfig;
-    /* 0x000A7 */ char unk_A7[0x9];
+    /* 0x000A8 */ void* keepSegment;
+    /* 0x000AC */ void* objectSegment;
     /* 0x000B0 */ void* sceneSegment;
-    /* 0x000B4 */ char unk_B4[0x4];
     /* 0x000B8 */ View view;
     /* 0x001E0 */ Camera camera;
-                  Camera subCameras[3];
+    /* 0x0034C */ Camera subCameras[3];
     /* 0x00790 */ Camera* cameraPtrs[4];
     /* 0x007A0 */ s16 activeCamera;
     /* 0x007A2 */ s16 nextCamera;
     /* 0x007A4 */ SoundContext soundCtx;
     /* 0x007A8 */ LightingContext lightCtx;
-    /* 0x007B8 */ SubGlobalContext7B8 sub_7B8;
-    /* 0x007C0 */ CollisionContext colCtx;
-    /* 0x01C24 */ ActorContext actorCtx;
+    /* 0x007B8 */ Pause pause;
+    /* 0x007C0 */ CollisionContext colCtx; // "BGCheck"
+    /* 0x01C24 */ ActorContext actorCtx; // Actor_info"
     /* 0x01D64 */ CutsceneContext csCtx; // "demo_play"
-    /* 0x01DB4 */ SoundSource soundSources[16];
-    /* 0x01F74 */ SubGlobalContext1F74 sub_1F74;
-    /* 0x01F78 */ SkyboxContext skyboxCtx;
-    /* 0x020C8 */ char unk_20C8[0x10];
+    /* 0x01DB4 */ SoundSource soundSources[16]; // "Effect_SE_Info"
+    /* 0x01F74 */ Sram sram;
+    /* 0x01F78 */ SkyboxContext skyboxCtx; // "Vr_box"
     /* 0x020D8 */ MessageContext msgCtx; // "message"
     /* 0x104F0 */ InterfaceContext interfaceCtx; // "parameter"
     /* 0x10760 */ PauseContext pauseCtx;
-    /* 0x10A20 */ u16 unk_10A20;
+    /* 0x10A20 */ u16 goverCtx;
     /* 0x10A24 */ EnvironmentContext envCtx;
     /* 0x10B20 */ AnimationContext animationCtx;
     /* 0x117A4 */ ObjectContext objectCtx;
@@ -1340,31 +1351,31 @@ typedef struct GlobalContext {
     /* 0x11D50 */ char unk_11D50[0x8];
     /* 0x11D58 */ void (*unk_11D58)(struct GlobalContext*, s32);
     /* 0x11D5C */ void (*unk_11D5C)(struct GlobalContext*, Actor*);
-    /* 0x11D60 */ MtxF mf_11D60;
-    /* 0x11DA0 */ MtxF mf_11DA0;
-    /* 0x11DE0 */ Mtx* unk_11DE0;
+    /* 0x11D60 */ MtxF projectionMatrix;
+    /* 0x11DA0 */ MtxF softspriteMatrix;
+    /* 0x11DE0 */ Mtx* rcpSoftSpriteMtx;
     /* 0x11DE4 */ unsigned long gameplayFrames;
     /* 0x11DE8 */ u8 linkAgeOnLoad;
-    /* 0x11DE9 */ u8 unk_11DE9;
+    /* 0x11DE9 */ u8 actorStopFlag;
     /* 0x11DEA */ u8 curSpawn;
     /* 0x11DEB */ u8 nbSetupActors;
     /* 0x11DEC */ u8 nbRooms;
     /* 0x11DF0 */ RomFile* roomList;
     /* 0x11DF4 */ ActorEntry* linkActorEntry;
     /* 0x11DF8 */ ActorEntry* setupActorList;
-    /* 0x11DFC */ UNK_PTR unk_11DFC;
+    /* 0x11DFC */ UNK_PTR cameraData; // "camera_data"
     /* 0x11E00 */ EntranceEntry* setupEntranceList;
-    /* 0x11E04 */ UNK_PTR setupExitList;
+    /* 0x11E04 */ UNK_PTR setupExitList; // "Scene_No* next_scene_data"
     /* 0x11E08 */ Path* setupPathList;
     /* 0x11E0C */ ElfMessage* cUpElfMsgs;
-    /* 0x11E10 */ char unk_11E10[0x4];
+    /* 0x11E10 */ void* specialEffect;
     /* 0x11E14 */ u8 skyboxId;
     /* 0x11E15 */ s8 sceneLoadFlag; // "fade_direction"
-    /* 0x11E16 */ s16 unk_11E16;
-    /* 0x11E18 */ s16 unk_11E18;
+    /* 0x11E16 */ s16 bgFadeCounter;
+    /* 0x11E18 */ s16 nextScene;
     /* 0x11E1A */ s16 nextEntranceIndex;
-    /* 0x11E1C */ char unk_11E1C[0x40];
-    /* 0x11E5C */ s8 unk_11E5C;
+    /* 0x11E1C */ MtxF dynamicCheckMtx;
+    /* 0x11E5C */ s8 bowGameFlag;
     /* 0x11E5D */ s8 bombchuBowlingAmmo; // "bombchu_game_flag"
     /* 0x11E5E */ u8 fadeTransition;
     /* 0x11E60 */ CollisionCheckContext colChkCtx;
@@ -1679,7 +1690,7 @@ typedef struct {
     /* 0x0080 */ OSThread thread;
     /* 0x0230 */ Input inputs[4];
     /* 0x0290 */ PadState pads[4];
-    /* 0x02A8 */ volatile u8 validCtrlrsMask;
+    /* 0x02A8 */ volatile u8 validCtrlrsMask; // "pad_pattern"
     /* 0x02A9 */ u8 ncontrollers;
     /* 0x02AA */ u8 ctrlrIsConnected[4]; // "Key_switch" originally
     /* 0x02AE */ u8 pakType[4]; // 1 if rumble pack, 2 if mempak?

@@ -93,7 +93,7 @@ void EnFu_Init(Actor* thisx, GlobalContext* globalCtx) {
         this->skelanime.animPlaybackSpeed = 2.0f;
     }
     this->behaviorFlags = 0;
-    this->actor.unk_1F = 6;
+    this->actor.naviRange = 6;
 }
 
 void EnFu_Destroy(Actor* thisx, GlobalContext* globalCtx) {

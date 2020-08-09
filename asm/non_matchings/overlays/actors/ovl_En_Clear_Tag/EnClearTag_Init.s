@@ -31,7 +31,7 @@ glabel EnClearTag_Init
 /* 00468 809D3A18 E6240068 */  swc1    $f4, 0x0068($s1)           ## 00000068
 /* 0046C 809D3A1C 00008025 */  or      $s0, $zero, $zero          ## $s0 = 00000000
 .L809D3A20:
-/* 00470 809D3A20 0C00B5FB */  jal     func_8002D7EC              
+/* 00470 809D3A20 0C00B5FB */  jal     ActorPosition_Move              
 /* 00474 809D3A24 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 /* 00478 809D3A28 26100001 */  addiu   $s0, $s0, 0x0001           ## $s0 = 00000001
 /* 0047C 809D3A2C 00108400 */  sll     $s0, $s0, 16               

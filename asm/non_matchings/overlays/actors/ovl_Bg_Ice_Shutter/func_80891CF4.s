@@ -5,7 +5,7 @@ glabel func_80891CF4
 /* 00240 80891D00 AFBF001C */  sw      $ra, 0x001C($sp)           
 /* 00244 80891D04 AFA50024 */  sw      $a1, 0x0024($sp)           
 /* 00248 80891D08 00A02025 */  or      $a0, $a1, $zero            ## $a0 = 00000000
-/* 0024C 80891D0C 0C00B349 */  jal     Flags_GetTempClear
+/* 0024C 80891D0C 0C00B349 */  jal     Flags_NoEnemyCheck
               
 /* 00250 80891D10 82050003 */  lb      $a1, 0x0003($s0)           ## 00000003
 /* 00254 80891D14 10400010 */  beq     $v0, $zero, .L80891D58     

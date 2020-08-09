@@ -188,7 +188,7 @@ glabel func_80912594
 .L809127DC:
 /* 0219C 809127DC 0C00B642 */  jal     func_8002D908
 /* 021A0 809127E0 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
-/* 021A4 809127E4 0C00B5FB */  jal     func_8002D7EC
+/* 021A4 809127E4 0C00B5FB */  jal     ActorPosition_Move
 /* 021A8 809127E8 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 /* 021AC 809127EC 3C013F80 */  lui     $at, 0x3F80                ## $at = 3F800000
 /* 021B0 809127F0 4481C000 */  mtc1    $at, $f24                  ## $f24 = 1.00

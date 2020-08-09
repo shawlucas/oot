@@ -179,7 +179,7 @@ void BgHeavyBlock_MovePiece(BgHeavyBlock* this, GlobalContext* globalCtx) {
 
     thisx->velocity.x *= 0.98f;
     thisx->velocity.z *= 0.98f;
-    func_8002D7EC(thisx);
+    ActorPosition_Move(thisx);
     thisx->shape.rot.x += thisx->posRot.rot.x;
     thisx->shape.rot.y += thisx->posRot.rot.y;
     thisx->shape.rot.z += thisx->posRot.rot.z;

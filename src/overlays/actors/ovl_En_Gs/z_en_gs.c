@@ -61,7 +61,7 @@ void EnGs_Init(Actor* thisx, GlobalContext* globalCtx) {
     Collider_SetCylinder(globalCtx, &this->unk_14C, thisx, &D_80A4FDA0);
     func_80061EFC(&thisx->colChkInfo, &D_80A4FDD8, &D_80A4FDCC);
 
-    thisx->unk_1F = 6;
+    thisx->naviRange = 6;
     this->unk_1D8 = thisx->posRot.pos;
     this->actionFunc = func_80A4F734;
     this->unk_1B4[0].x = 1.0f;
@@ -564,7 +564,7 @@ void EnGs_Draw(Actor* thisx, GlobalContext* globalCtx) {
         Matrix_Pull();
         if (this->unk_19E & 2) {
             func_80093D84(globalCtx->state.gfxCtx);
-            func_800D1FD4(&globalCtx->mf_11DA0);
+            func_800D1FD4(&globalCtx->softspriteMatrix);
             Matrix_Scale(0.05f, -0.05f, 1.0f, MTXMODE_APPLY);
 
             gSPMatrix(NEXT_POLY_XLU_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_gs.c", 1087),

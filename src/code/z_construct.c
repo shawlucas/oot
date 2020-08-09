@@ -21,12 +21,12 @@ void func_801109B0(GlobalContext* globalCtx) {
 
     View_Init(&interfaceCtx->view, globalCtx->state.gfxCtx);
 
-    interfaceCtx->unk_1EC = interfaceCtx->unk_1EE = 0;
-    interfaceCtx->unk_1FA = interfaceCtx->unk_261 = interfaceCtx->unk_1FC = 0;
-    interfaceCtx->unk_1F0 = 0;
+    interfaceCtx->doActionFlag = interfaceCtx->doAction = 0;
+    interfaceCtx->spActionFlag = interfaceCtx->unk_261 = interfaceCtx->spAction = 0;
+    interfaceCtx->doActionOld = 0;
     interfaceCtx->unk_22E = 0;
     interfaceCtx->unk_230 = 16;
-    interfaceCtx->unk_1F4 = 0.0f;
+    interfaceCtx->doActionRotate = 0.0f;
     interfaceCtx->unk_228 = XREG(95);
     interfaceCtx->minimapAlpha = 0;
     interfaceCtx->unk_260 = 0;
@@ -62,9 +62,9 @@ void func_801109B0(GlobalContext* globalCtx) {
 
     do_actionStart = _do_action_staticSegmentRomStart;
 
-    if (gSaveContext.language == 0) {
+    if (gSaveContext.j_n == 0) {
         do_actionOffset = 0;
-    } else if (gSaveContext.language == 1) {
+    } else if (gSaveContext.j_n == 1) {
         do_actionOffset = 0x2B80;
     } else {
         do_actionOffset = 0x5700;
@@ -73,9 +73,9 @@ void func_801109B0(GlobalContext* globalCtx) {
     DmaMgr_SendRequest1(interfaceCtx->do_actionSegment, do_actionStart + do_actionOffset, 0x300, "../z_construct.c",
                         174);
 
-    if (gSaveContext.language == 0) {
+    if (gSaveContext.j_n == 0) {
         do_actionOffset = 0x480;
-    } else if (gSaveContext.language == 1) {
+    } else if (gSaveContext.j_n == 1) {
         do_actionOffset = 0x3000;
     } else {
         do_actionOffset = 0x5B80;
@@ -195,8 +195,8 @@ void func_80110F68(GlobalContext* globalCtx) {
     globalCtx->msgCtx.unk_E3EE = 0;
 
     msgCtx->msgMode = 0;
-    msgCtx->unk_E300 = 0;
-    msgCtx->unk_E2F8 = msgCtx->unk_E3E4 = msgCtx->choiceIndex = msgCtx->unk_E3F0 = msgCtx->unk_E3D6 = 0;
+    msgCtx->msgData = NULL;
+    msgCtx->msgNo = msgCtx->unk_E3E4 = msgCtx->choiceIndex = msgCtx->unk_E3F0 = msgCtx->unk_E3D6 = 0;
     msgCtx->unk_E3E2 = 0xFF;
 
     View_Init(&msgCtx->view, globalCtx->state.gfxCtx);
@@ -212,7 +212,7 @@ void func_80110F68(GlobalContext* globalCtx) {
         __assert("message->fukidashiSegment != NULL", "../z_construct.c", 352);
     }
 
-    Kscope_KanfontGet(&globalCtx->msgCtx.unk_128);
+    Kscope_KanfontGet(&globalCtx->msgCtx.kanfont);
 
     YREG(31) = 0;
 }

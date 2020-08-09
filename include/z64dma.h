@@ -9,7 +9,7 @@ typedef struct {
     /* 0x08 */ u32      size;     // File Transfer size
     /* 0x0C */ char*    filename; // Filename for debugging
     /* 0x10 */ s32      line;     // Line for debugging
-    /* 0x14 */ s32      unk_14;
+    /* 0x14 */ s32      pri;
     /* 0x18 */ OSMesgQueue* notifyQueue; // Message queue for the notification message
     /* 0x1C */ OSMesg   notifyMsg;       // Completion notification message
 } DmaRequest; // size = 0x20

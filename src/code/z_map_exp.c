@@ -33,8 +33,8 @@ void Map_SetPaletteData(GlobalContext* globalCtx, s16 room) {
                  room, mapIndex, gSaveContext.sceneFlags[mapIndex].rooms, interfaceCtx->mapPaletteNum);
     osSyncPrintf(VT_RST);
 
-    interfaceCtx->unk_140[paletteNum * 2] = 2;
-    interfaceCtx->unk_140[paletteNum * 2 + 1] = 0xBF;
+    interfaceCtx->mapPalette[paletteNum * 2] = 2;
+    interfaceCtx->mapPalette[paletteNum * 2 + 1] = 0xBF;
 }
 
 void Map_SetFloorPalettesData(GlobalContext* globalCtx, s16 floor) {
@@ -44,13 +44,13 @@ void Map_SetFloorPalettesData(GlobalContext* globalCtx, s16 floor) {
     s16 i;
 
     for (i = 0; i < 16; i++) {
-        interfaceCtx->unk_140[i] = 0;
-        interfaceCtx->unk_140[i + 16] = 0;
+        interfaceCtx->mapPalette[i] = 0;
+        interfaceCtx->mapPalette[i + 16] = 0;
     }
 
     if (gSaveContext.dungeonItems[mapIndex] & gBitFlags[DUNGEON_MAP]) {
-        interfaceCtx->unk_140[30] = 0;
-        interfaceCtx->unk_140[31] = 1;
+        interfaceCtx->mapPalette[30] = 0;
+        interfaceCtx->mapPalette[31] = 1;
     }
 
     switch (globalCtx->sceneNum) {
@@ -541,11 +541,11 @@ void Map_Update(GlobalContext* globalCtx) {
             case SCENE_GANON_SONOGO:
             case SCENE_GANONTIKA_SONOGO:
             case SCENE_TAKARAYA:
-                interfaceCtx->unk_140[30] = 0;
+                interfaceCtx->mapPalette[30] = 0;
                 if (gSaveContext.dungeonItems[mapIndex] & gBitFlags[DUNGEON_MAP]) {
-                    interfaceCtx->unk_140[31] = 1;
+                    interfaceCtx->mapPalette[31] = 1;
                 } else {
-                    interfaceCtx->unk_140[31] = 0;
+                    interfaceCtx->mapPalette[31] = 0;
                 }
 
                 for (floor = 0; floor < 8; floor++) {

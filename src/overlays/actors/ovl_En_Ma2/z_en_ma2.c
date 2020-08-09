@@ -241,7 +241,7 @@ void EnMa2_Init(Actor* thisx, GlobalContext* globalCtx) {
 
     func_8002E4B4(globalCtx, &this->actor, 0.0f, 0.0f, 0.0f, 4);
     Actor_SetScale(&this->actor, 0.01f);
-    this->actor.unk_1F = 6;
+    this->actor.naviRange = 6;
     this->unk_1E0.unk_00 = 0;
 }
 

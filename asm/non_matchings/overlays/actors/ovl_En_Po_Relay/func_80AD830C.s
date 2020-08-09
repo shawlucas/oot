@@ -305,7 +305,7 @@ glabel func_80AD830C
 /* 01040 80AD8780 10000007 */  beq     $zero, $zero, .L80AD87A0   
 /* 01044 80AD8784 00000000 */  nop
 .L80AD8788:
-/* 01048 80AD8788 0C00B34E */  jal     Flags_SetTempClear
+/* 01048 80AD8788 0C00B34E */  jal     Flags_SetNoEnemy
               
 /* 0104C 80AD878C 24050004 */  addiu   $a1, $zero, 0x0004         ## $a1 = 00000004
 /* 01050 80AD8790 3C038016 */  lui     $v1, %hi(gSaveContext)

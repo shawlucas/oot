@@ -59,7 +59,7 @@ glabel EnDu_Update
 /* 011C0 809FEDF0 10000003 */  beq     $zero, $zero, .L809FEE00   
 /* 011C4 809FEDF4 E608002C */  swc1    $f8, 0x002C($s0)           ## 0000002C
 .L809FEDF8:
-/* 011C8 809FEDF8 0C00B5FB */  jal     func_8002D7EC              
+/* 011C8 809FEDF8 0C00B5FB */  jal     ActorPosition_Move              
 /* 011CC 809FEDFC 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 .L809FEE00:
 /* 011D0 809FEE00 44800000 */  mtc1    $zero, $f0                 ## $f0 = 0.00

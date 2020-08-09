@@ -251,7 +251,7 @@ s32 func_8008EF30(GlobalContext* globalCtx) {
 }
 
 s32 func_8008EF44(GlobalContext* globalCtx, s32 arg1) {
-    globalCtx->unk_11E5C = (arg1 + 1);
+    globalCtx->bowGameFlag = (arg1 + 1);
     return 1;
 }
 
@@ -566,7 +566,7 @@ void func_80090AFC(GlobalContext* globalCtx, Player* player, f32 arg2) {
 
         gfxCtx->overlay.p = Gfx_CallSetupDL(gfxCtx->overlay.p, 7);
 
-        SkinMatrix_Vec3fMtxFMultXYZW(&globalCtx->mf_11D60, &sp74, &sp68, &sp64);
+        SkinMatrix_Vec3fMtxFMultXYZW(&globalCtx->projectionMatrix, &sp74, &sp68, &sp64);
 
         sp60 = (sp64 < 200.0f) ? 0.07999999821186066f : (sp64 / 200.0f) * 0.07999999821186066f;
 

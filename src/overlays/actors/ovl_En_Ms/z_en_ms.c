@@ -48,7 +48,7 @@ static u16 sOfferTextIDs[] = {
 };
 
 static InitChainEntry sInitChain[] = {
-    ICHAIN_U8(unk_1F, 2, ICHAIN_CONTINUE),
+    ICHAIN_U8(naviRange, 2, ICHAIN_CONTINUE),
     ICHAIN_F32(unk_4C, 500, ICHAIN_STOP),
 };
 

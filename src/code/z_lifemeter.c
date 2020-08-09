@@ -22,8 +22,8 @@ void Health_InitData(GlobalContext* globalCtx) {
 
     interfaceCtx->unk_228 = 0x140;
     interfaceCtx->unk_226 = gSaveContext.health;
-    interfaceCtx->unk_22A = interfaceCtx->unk_1FE = 0;
-    interfaceCtx->unk_22C = interfaceCtx->unk_200 = 0;
+    interfaceCtx->unk_22A = interfaceCtx->lifeMeter = 0;
+    interfaceCtx->unk_22C = interfaceCtx->nowMode = 0;
 
     interfaceCtx->unk_20E[0] = 255;
     interfaceCtx->unk_20E[2] = 70;
@@ -51,22 +51,22 @@ void Health_InitData(GlobalContext* globalCtx) {
 // this function still needs some work but it should be functionally equivalent
 void Health_UpdateData(GlobalContext* globalCtx) {
     InterfaceContext* interfaceCtx = &globalCtx->interfaceCtx;
-    f32 temp_f0 = interfaceCtx->unk_1FE * 0.1f;
+    f32 temp_f0 = interfaceCtx->lifeMeter * 0.1f;
     s16 temp1, temp2, temp3;
 
     if (0) {}
 
-    if (interfaceCtx->unk_200 != 0) {
-        interfaceCtx->unk_1FE--;
-        if (interfaceCtx->unk_1FE <= 0) {
-            interfaceCtx->unk_1FE = 0;
-            interfaceCtx->unk_200 = 0;
+    if (interfaceCtx->nowMode != 0) {
+        interfaceCtx->lifeMeter--;
+        if (interfaceCtx->lifeMeter <= 0) {
+            interfaceCtx->lifeMeter = 0;
+            interfaceCtx->nowMode = 0;
         }
     } else {
-        interfaceCtx->unk_1FE++;
-        if (interfaceCtx->unk_1FE >= 10) {
-            interfaceCtx->unk_1FE = 10;
-            interfaceCtx->unk_200 = 1;
+        interfaceCtx->lifeMeter++;
+        if (interfaceCtx->lifeMeter >= 10) {
+            interfaceCtx->lifeMeter = 10;
+            interfaceCtx->nowMode = 1;
         }
     }
 
@@ -90,21 +90,21 @@ void Health_UpdateData(GlobalContext* globalCtx) {
     temp2 = D_8011FF38[1];
     temp3 = D_8011FF38[2];
     temp1 *= temp_f0;
-    interfaceCtx->unk_202[0] = (u8)(temp1 + 0xFF);
+    interfaceCtx->lifeMeterPrimColor[0] = (u8)(temp1 + 0xFF);
     temp2 *= temp_f0;
-    interfaceCtx->unk_202[1] = (u8)(temp2 + 0x46);
+    interfaceCtx->lifeMeterPrimColor[1] = (u8)(temp2 + 0x46);
     temp3 *= temp_f0;
-    interfaceCtx->unk_202[2] = (u8)(temp3 + 0x32);
+    interfaceCtx->lifeMeterPrimColor[2] = (u8)(temp3 + 0x32);
 
     temp1 = D_8011FF4C[0];
     temp2 = D_8011FF4C[1];
     temp3 = D_8011FF4C[2];
     temp1 *= temp_f0;
-    interfaceCtx->unk_208[0] = (u8)(temp1 + 0x32);
+    interfaceCtx->lifeMeterEnvColor[0] = (u8)(temp1 + 0x32);
     temp2 *= temp_f0;
-    interfaceCtx->unk_208[1] = (u8)(temp2 + 0x28);
+    interfaceCtx->lifeMeterEnvColor[1] = (u8)(temp2 + 0x28);
     temp3 *= temp_f0;
-    interfaceCtx->unk_208[2] = (u8)(temp3 + 0x3C);
+    interfaceCtx->lifeMeterEnvColor[2] = (u8)(temp3 + 0x3C);
 
     D_8015FDD0[0] = 0xFF;
     D_8015FDD0[1] = 0xFF;
@@ -197,7 +197,7 @@ void Health_Draw(GlobalContext* globalCtx) {
     f32 temp4;
     InterfaceContext* interfaceCtx = &globalCtx->interfaceCtx;
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Vtx* sp154 = interfaceCtx->vtx_12C;
+    Vtx* sp154 = interfaceCtx->heartVtx;
     s32 curHeartFraction = gSaveContext.health % 0x10;
     s16 totalHeartCount = gSaveContext.healthCapacity / 0x10;
     s16 fullHeartCount = gSaveContext.health / 0x10;
@@ -231,10 +231,10 @@ void Health_Draw(GlobalContext* globalCtx) {
                 if (curColorSet != 1) {
                     curColorSet = 1;
                     gDPPipeSync(NEXT_OVERLAY_DISP);
-                    gDPSetPrimColor(NEXT_OVERLAY_DISP, 0, 0, interfaceCtx->unk_202[0], interfaceCtx->unk_202[1],
-                                    interfaceCtx->unk_202[2], interfaceCtx->healthAlpha);
-                    gDPSetEnvColor(NEXT_OVERLAY_DISP, interfaceCtx->unk_208[0], interfaceCtx->unk_208[1],
-                                   interfaceCtx->unk_208[2], 0xFF);
+                    gDPSetPrimColor(NEXT_OVERLAY_DISP, 0, 0, interfaceCtx->lifeMeterPrimColor[0], interfaceCtx->lifeMeterPrimColor[1],
+                                    interfaceCtx->lifeMeterPrimColor[2], interfaceCtx->healthAlpha);
+                    gDPSetEnvColor(NEXT_OVERLAY_DISP, interfaceCtx->lifeMeterEnvColor[0], interfaceCtx->lifeMeterEnvColor[1],
+                                   interfaceCtx->lifeMeterEnvColor[2], 0xFF);
                 }
             } else if (i > fullHeartCount) {
                 if (curColorSet != 2) {

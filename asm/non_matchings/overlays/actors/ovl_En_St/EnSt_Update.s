@@ -35,7 +35,7 @@ glabel EnSt_Update
 /* 023EC 80B06C7C 860903CE */  lh      $t1, 0x03CE($s0)           ## 000003CE
 /* 023F0 80B06C80 55200004 */  bnel    $t1, $zero, .L80B06C94     
 /* 023F4 80B06C84 44800000 */  mtc1    $zero, $f0                 ## $f0 = 0.00
-/* 023F8 80B06C88 0C00B5FB */  jal     func_8002D7EC              
+/* 023F8 80B06C88 0C00B5FB */  jal     ActorPosition_Move              
 /* 023FC 80B06C8C 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 02400 80B06C90 44800000 */  mtc1    $zero, $f0                 ## $f0 = 0.00
 .L80B06C94:

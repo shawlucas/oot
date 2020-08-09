@@ -40,7 +40,7 @@ void SkyboxDraw_Draw(SkyboxContext* skyboxCtx, GraphicsContext* gfxCtx, s16 skyb
     gDPSetTextureLUT(NEXT_DISP, G_TT_RGBA16);
     gDPSetTextureConvert(NEXT_DISP, G_TC_FILT);
 
-    if (skyboxCtx->unk_140) {
+    if (skyboxCtx->vrBoxDrawFlag) {
         gSPDisplayList(NEXT_DISP, skyboxCtx->dpList);
         gSPDisplayList(NEXT_DISP, skyboxCtx->dpList + 150 * 1);
 
@@ -59,7 +59,7 @@ void SkyboxDraw_Draw(SkyboxContext* skyboxCtx, GraphicsContext* gfxCtx, s16 skyb
                 gSPDisplayList(NEXT_DISP, skyboxCtx->dpList + 150 * 5);
                 gDPPipeSync(NEXT_DISP);
 
-                if (skyboxCtx->unk_140 != 2) {
+                if (skyboxCtx->vrBoxDrawFlag != 2) {
                     gDPLoadTLUT_pal256(NEXT_DISP, (u16*)skyboxCtx->staticSegments[2] + 256 * 3);
                     gSPDisplayList(NEXT_DISP, skyboxCtx->dpList + 150 * 6);
                     gSPDisplayList(NEXT_DISP, skyboxCtx->dpList + 150 * 7);

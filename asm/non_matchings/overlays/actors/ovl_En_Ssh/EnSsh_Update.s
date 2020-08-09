@@ -21,7 +21,7 @@ glabel EnSsh_Update
 /* 01E4C 80B040BC 0C02927F */  jal     SkelAnime_FrameUpdateMatrix
               
 /* 01E50 80B040C0 2604014C */  addiu   $a0, $s0, 0x014C           ## $a0 = 0000014C
-/* 01E54 80B040C4 0C00B5FB */  jal     func_8002D7EC              
+/* 01E54 80B040C4 0C00B5FB */  jal     ActorPosition_Move              
 /* 01E58 80B040C8 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 01E5C 80B040CC 44800000 */  mtc1    $zero, $f0                 ## $f0 = 0.00
 /* 01E60 80B040D0 240F0004 */  addiu   $t7, $zero, 0x0004         ## $t7 = 00000004

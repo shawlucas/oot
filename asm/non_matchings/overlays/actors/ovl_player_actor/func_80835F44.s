@@ -248,7 +248,7 @@ glabel func_80835F44
 /* 040B0 808362C0 8FA40028 */  lw      $a0, 0x0028($sp)           
 /* 040B4 808362C4 A3A60027 */  sb      $a2, 0x0027($sp)           
 /* 040B8 808362C8 AFA7002C */  sw      $a3, 0x002C($sp)           
-/* 040BC 808362CC 0C00B54F */  jal     func_8002D53C              
+/* 040BC 808362CC 0C00B54F */  jal     TitleCard_Destroy              
 /* 040C0 808362D0 24851D4C */  addiu   $a1, $a0, 0x1D4C           ## $a1 = 00001D4C
 /* 040C4 808362D4 8FA7002C */  lw      $a3, 0x002C($sp)           
 /* 040C8 808362D8 83A60027 */  lb      $a2, 0x0027($sp)           

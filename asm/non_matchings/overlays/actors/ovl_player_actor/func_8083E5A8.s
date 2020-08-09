@@ -21,7 +21,7 @@ glabel func_8083E5A8
 /* 0C3C8 8083E5D8 24A51D4C */  addiu   $a1, $a1, 0x1D4C           ## $a1 = 00001D4C
 /* 0C3CC 8083E5DC 50400128 */  beql    $v0, $zero, .L8083EA80     
 /* 0C3D0 8083E5E0 00001025 */  or      $v0, $zero, $zero          ## $v0 = 00000000
-/* 0C3D4 8083E5E4 0C00B54F */  jal     func_8002D53C              
+/* 0C3D4 8083E5E4 0C00B54F */  jal     TitleCard_Destroy              
 /* 0C3D8 8083E5E8 AFA20034 */  sw      $v0, 0x0034($sp)           
 /* 0C3DC 8083E5EC 10400123 */  beq     $v0, $zero, .L8083EA7C     
 /* 0C3E0 8083E5F0 3C038016 */  lui     $v1, %hi(gGameInfo)

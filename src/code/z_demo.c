@@ -343,10 +343,10 @@ void func_80064824(GlobalContext* globalCtx, CutsceneContext* csCtx, CsCmdBase* 
             }
             break;
         case 28:
-            globalCtx->unk_11DE9 = 1;
+            globalCtx->actorStopFlag = 1;
             break;
         case 29:
-            globalCtx->unk_11DE9 = 0;
+            globalCtx->actorStopFlag = 0;
             break;
         case 30:
             Flags_SetEnv(globalCtx, 3);

@@ -146,7 +146,7 @@ glabel func_80A9BC1C
 /* 00E94 80A9BE34 A60B00B6 */  sh      $t3, 0x00B6($s0)           ## 000000B6
 /* 00E98 80A9BE38 0C2A6C5D */  jal     func_80A9B174              
 /* 00E9C 80A9BE3C 2604005C */  addiu   $a0, $s0, 0x005C           ## $a0 = 0000005C
-/* 00EA0 80A9BE40 0C00B5FB */  jal     func_8002D7EC              
+/* 00EA0 80A9BE40 0C00B5FB */  jal     ActorPosition_Move              
 /* 00EA4 80A9BE44 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00EA8 80A9BE48 44802000 */  mtc1    $zero, $f4                 ## $f4 = 0.00
 /* 00EAC 80A9BE4C 240C00C5 */  addiu   $t4, $zero, 0x00C5         ## $t4 = 000000C5

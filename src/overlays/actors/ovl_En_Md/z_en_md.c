@@ -599,7 +599,7 @@ void EnMd_Init(Actor* thisx, GlobalContext* globalCtx) {
 
     func_80034EC0(&this->skelAnime, sAnimations, 0);
     Actor_SetScale(&this->actor, 0.01f);
-    this->actor.unk_1F = 6;
+    this->actor.naviRange = 6;
     this->alpha = 255;
     Actor_SpawnAttached(&globalCtx->actorCtx, &this->actor, globalCtx, ACTOR_EN_ELF, this->actor.posRot.pos.x,
                         this->actor.posRot.pos.y, this->actor.posRot.pos.z, 0, 0, 0, 3);

@@ -188,7 +188,7 @@ glabel func_8084FCAC
 /* 1DD30 8084FF40 17000004 */  bne     $t8, $zero, .L8084FF54     
 /* 1DD34 8084FF44 3C050001 */  lui     $a1, 0x0001                ## $a1 = 00010000
 /* 1DD38 8084FF48 00A42821 */  addu    $a1, $a1, $a0              
-/* 1DD3C 8084FF4C 0C00B34E */  jal     Flags_SetTempClear
+/* 1DD3C 8084FF4C 0C00B34E */  jal     Flags_SetNoEnemy
               
 /* 1DD40 8084FF50 80A51CBC */  lb      $a1, 0x1CBC($a1)           ## 00011CBC
 .L8084FF54:

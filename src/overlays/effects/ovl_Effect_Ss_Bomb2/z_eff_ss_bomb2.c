@@ -89,7 +89,7 @@ void EffectSsBomb2_DrawFade(GlobalContext* globalCtx, u32 index, EffectSs* this)
     scale = this->regs[SS_BOMB2_SCALE] * 0.01f;
     SkinMatrix_SetTranslate(&sp11C, this->pos.x, this->pos.y, this->pos.z);
     SkinMatrix_SetScale(&spDC, scale, scale, 1.0f);
-    SkinMatrix_MtxFMtxFMult(&sp11C, &globalCtx->mf_11DA0, &sp5C);
+    SkinMatrix_MtxFMtxFMult(&sp11C, &globalCtx->softspriteMatrix, &sp5C);
 
     SkinMatrix_MtxFMtxFMult(&sp5C, &spDC, &sp9C);
     mtx = SkinMatrix_MtxFToNewMtx(gfxCtx, &sp9C);
@@ -135,7 +135,7 @@ void EffectSsBomb2_DrawLayered(GlobalContext* globalCtx, u32 index, EffectSs* th
     scale = this->regs[SS_BOMB2_SCALE] * 0.01f;
     SkinMatrix_SetTranslate(&sp1B4, this->pos.x, this->pos.y, this->pos.z);
     SkinMatrix_SetScale(&sp174, scale, scale, 1.0f);
-    SkinMatrix_MtxFMtxFMult(&sp1B4, &globalCtx->mf_11DA0, &spF4);
+    SkinMatrix_MtxFMtxFMult(&sp1B4, &globalCtx->softspriteMatrix, &spF4);
     SkinMatrix_MtxFMtxFMult(&spF4, &sp174, &sp134);
     mtx = SkinMatrix_MtxFToNewMtx(gfxCtx, &sp134);
 

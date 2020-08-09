@@ -152,7 +152,7 @@ void BgBdanSwitch_Init(Actor* thisx, GlobalContext* globalCtx) {
         case YELLOW_TALL_2:
             func_8086D098(this, globalCtx);
             this->actor.flags |= 1;
-            this->actor.unk_1F = 4;
+            this->actor.naviRange = 4;
     }
 
     flag = Flags_GetSwitch(globalCtx, (this->actor.params >> 8) & 0x3F);

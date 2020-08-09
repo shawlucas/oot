@@ -570,7 +570,7 @@ glabel EnClearTag_Update
 /* 00E04 809D43B4 244EFFFF */  addiu   $t6, $v0, 0xFFFF           ## $t6 = FFFFFFFF
 /* 00E08 809D43B8 A62E0184 */  sh      $t6, 0x0184($s1)           ## 00000184
 .L809D43BC:
-/* 00E0C 809D43BC 0C00B5FB */  jal     func_8002D7EC              
+/* 00E0C 809D43BC 0C00B5FB */  jal     ActorPosition_Move              
 /* 00E10 809D43C0 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 /* 00E14 809D43C4 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 /* 00E18 809D43C8 0C00B56E */  jal     Actor_SetHeight
@@ -664,7 +664,7 @@ glabel EnClearTag_Update
 /* 00F54 809D4504 10000036 */  beq     $zero, $zero, .L809D45E0   
 /* 00F58 809D4508 9223014E */  lbu     $v1, 0x014E($s1)           ## 0000014E
 .L809D450C:
-/* 00F5C 809D450C 0C00B5FB */  jal     func_8002D7EC              
+/* 00F5C 809D450C 0C00B5FB */  jal     ActorPosition_Move              
 /* 00F60 809D4510 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 /* 00F64 809D4514 922C01A4 */  lbu     $t4, 0x01A4($s1)           ## 000001A4
 /* 00F68 809D4518 240F0017 */  addiu   $t7, $zero, 0x0017         ## $t7 = 00000017

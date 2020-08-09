@@ -9,10 +9,10 @@
 
 .balign 16
 
-glabel D_8014B2F0
+glabel key_off_flag
     .word 0x00000000
 
-glabel D_8014B2F4
+glabel start_flag
     .word 0x00000000
 
 glabel D_8014B2F8

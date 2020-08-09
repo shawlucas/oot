@@ -308,7 +308,7 @@ void EnKz_Init(Actor* thisx, GlobalContext* globalCtx) {
     Collider_SetCylinder(globalCtx, &this->collider, &this->actor, &sCylinderInit);
     func_80061EFC(&this->actor.colChkInfo, NULL, &sColChkInfoInit);
     Actor_SetScale(&this->actor, 0.01);
-    this->actor.unk_1F = 3;
+    this->actor.naviRange = 3;
     this->unk_1E0.unk_00 = 0;
     func_80034EC0(&this->skelanime, sAnimations, 0);
 

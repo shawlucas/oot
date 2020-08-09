@@ -15,7 +15,7 @@ glabel func_80BA180C
 /* 00AE0 80BA1840 A20F0003 */  sb      $t7, 0x0003($s0)           ## 00000003
 /* 00AE4 80BA1844 0C2E8370 */  jal     func_80BA0DC0              
 /* 00AE8 80BA1848 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
-/* 00AEC 80BA184C 0C00B5FB */  jal     func_8002D7EC              
+/* 00AEC 80BA184C 0C00B5FB */  jal     ActorPosition_Move              
 /* 00AF0 80BA1850 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00AF4 80BA1854 44802000 */  mtc1    $zero, $f4                 ## $f4 = 0.00
 /* 00AF8 80BA1858 24180085 */  addiu   $t8, $zero, 0x0085         ## $t8 = 00000085

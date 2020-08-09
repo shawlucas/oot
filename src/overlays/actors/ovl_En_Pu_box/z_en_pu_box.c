@@ -57,7 +57,7 @@ void EnPubox_Init(Actor* thisx, GlobalContext* globalCtx) {
     ActorShape_Init(&thisx->shape, 0.0f, ActorShadow_DrawFunc_Circle, 6.0f);
     this->dyna.unk_160 = 0;
     this->dyna.unk_15C = 0;
-    thisx->unk_1F = 1;
+    thisx->naviRange = 1;
     thisx->gravity = -2.0f;
     DynaPolyInfo_Alloc(&D_060006D0, &local_c);
     this->dyna.dynaPolyId = DynaPolyInfo_RegisterActor(globalCtx, &globalCtx->colCtx.dyna, thisx, local_c);
