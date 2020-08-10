@@ -227,7 +227,7 @@ endseg
 beginseg
     name "nes_message_data_static"
     romalign 0x1000
-    include "build/baserom/nes_message_data_static.o"
+    include "build/data/message/NES/nes_c.o"
 endseg
 
 beginseg
