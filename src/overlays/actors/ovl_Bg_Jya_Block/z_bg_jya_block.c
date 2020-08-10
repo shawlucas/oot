@@ -68,17 +68,15 @@ void BgJyaBlock_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgJyaBlock_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Gfx* dispRefs[4];
 
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_bg_jya_block.c", 145);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_bg_jya_block.c", 145);
     func_80093D18(globalCtx->state.gfxCtx);
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0x08, SEGMENTED_TO_VIRTUAL(&D_05004350));
-    gSPMatrix(gfxCtx->polyOpa.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_jya_block.c", 153),
+    gSPSegment(NEXT_DISP, 0x08, SEGMENTED_TO_VIRTUAL(&D_05004350));
+    gSPMatrix(NEXT_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_jya_block.c", 153),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gDPSetEnvColor(gfxCtx->polyOpa.p++, 232, 210, 176, 255);
-    gSPDisplayList(gfxCtx->polyOpa.p++, D_05004CD0);
+    gDPSetEnvColor(NEXT_DISP, 232, 210, 176, 255);
+    gSPDisplayList(NEXT_DISP, D_05004CD0);
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_bg_jya_block.c", 158);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_bg_jya_block.c", 158);
 }

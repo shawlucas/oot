@@ -40,7 +40,7 @@ void Select_LoadGame(SelectContext* this, s32 entranceIndex) {
     gSaveContext.unk_13C7 = 1;
     D_8011FB30 = 0;
     this->state.running = false;
-    SET_NEXT_GAMESTATE(&this->state, Gameplay_Init, GlobalContext)
+    SET_NEXT_GAMESTATE(&this->state, Gameplay_Init, GlobalContext);
 }
 
 static SceneSelectEntry sScenes[] = {
@@ -504,65 +504,60 @@ void Select_PrintCutsceneSetting(SelectContext* this, GfxPrint* printer, u16 csI
 
 void Select_DrawMenu(SelectContext* this) {
     s32 arg;
-    GfxPrint* printer;
     GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4];
 
     gfxCtx = this->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, gfxCtx, "../z_select.c", 930);
+    OPEN_DISP(gfxCtx, "../z_select.c", 930);
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0x00, NULL);
+    gSPSegment(NEXT_DISP, 0x00, NULL);
     func_80095248(gfxCtx, 0, 0, 0);
-    SET_FULLSCREEN_VIEWPORT(&this->view)
+    SET_FULLSCREEN_VIEWPORT(&this->view);
     func_800AAA50(&this->view, 0xF);
     func_80094140(gfxCtx);
-    printer = alloca(sizeof(GfxPrint));
-    GfxPrint_Init(printer);
-    GfxPrint_Open(printer, gfxCtx->polyOpa.p);
-    Select_PrintMenu(this, printer);
+    {
+    GfxPrint* gfxprint = alloca(sizeof(GfxPrint));
+    GfxPrint_InitPrint();
+    GfxPrint_OpenPrint(NOW_DISP);
+    Select_PrintMenu(this, gfxprint);
     arg = gSaveContext.linkAge;
-    Select_PrintAgeSetting(this, printer, arg);
+    Select_PrintAgeSetting(this, gfxprint, arg);
     arg = gSaveContext.cutsceneIndex;
-    Select_PrintCutsceneSetting(this, printer, arg);
-    gfxCtx->polyOpa.p = GfxPrint_Close(printer);
-    GfxPrint_Destroy(printer);
-
-    Graph_CloseDisps(dispRefs, gfxCtx, "../z_select.c", 966);
+    Select_PrintCutsceneSetting(this, gfxprint, arg);
+    SET_NOW_DISP(GfxPrint_ClosePrint());
+    GfxPrint_Cleanup();
+    }
+    CLOSE_DISP(gfxCtx, "../z_select.c", 966);
 }
 
 void Select_DrawLoadingScreen(SelectContext* this) {
-    s32 pad;
-    GfxPrint* printer;
+    GfxPrint* gfxprint;
     GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4];
 
     gfxCtx = this->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, gfxCtx, "../z_select.c", 977);
+    OPEN_DISP(gfxCtx, "../z_select.c", 977);
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0x00, NULL);
+    gSPSegment(NEXT_DISP, 0x00, NULL);
     func_80095248(gfxCtx, 0, 0, 0);
     SET_FULLSCREEN_VIEWPORT(&this->view)
     func_800AAA50(&this->view, 0xF);
     func_80094140(gfxCtx);
-    printer = alloca(sizeof(GfxPrint));
-    GfxPrint_Init(printer);
-    GfxPrint_Open(printer, gfxCtx->polyOpa.p);
-    Select_PrintLoadingMessage(this, printer);
-    gfxCtx->polyOpa.p = GfxPrint_Close(printer);
-    GfxPrint_Destroy(printer);
+    gfxprint = alloca(sizeof(GfxPrint));
+    GfxPrint_InitPrint();
+    GfxPrint_OpenPrint(NOW_DISP);
+    Select_PrintLoadingMessage(this, gfxprint);
+    SET_NOW_DISP(GfxPrint_ClosePrint());
+    GfxPrint_Cleanup();
 
-    Graph_CloseDisps(dispRefs, gfxCtx, "../z_select.c", 1006);
+    CLOSE_DISP(gfxCtx, "../z_select.c", 1006);
 }
 
 void Select_Draw(SelectContext* this) {
-    s32 pad;
     GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4];
 
     gfxCtx = this->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, gfxCtx, "../z_select.c", 1013);
+    OPEN_DISP(gfxCtx, "../z_select.c", 1013);
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0x00, NULL);
+    gSPSegment(NEXT_DISP, 0x00, NULL);
     func_80095248(gfxCtx, 0, 0, 0);
     SET_FULLSCREEN_VIEWPORT(&this->view)
     func_800AAA50(&this->view, 0xF);
@@ -573,7 +568,7 @@ void Select_Draw(SelectContext* this) {
         Select_DrawMenu(this);
     }
 
-    Graph_CloseDisps(dispRefs, gfxCtx, "../z_select.c", 1037);
+    CLOSE_DISP(gfxCtx, "../z_select.c", 1037);
 }
 
 void Select_Main(SelectContext* this) {

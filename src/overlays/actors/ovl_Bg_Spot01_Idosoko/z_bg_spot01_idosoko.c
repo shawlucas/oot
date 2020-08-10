@@ -74,15 +74,13 @@ void BgSpot01Idosoko_Update(Actor* thisx, GlobalContext* globalCtx) {
 extern u32 D_06003B20;
 
 void BgSpot01Idosoko_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Gfx* dispRefs[4];
 
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_bg_spot01_idosoko.c", 162);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_bg_spot01_idosoko.c", 162);
     func_80093D18(globalCtx->state.gfxCtx);
 
-    gSPMatrix(gfxCtx->polyOpa.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_spot01_idosoko.c", 166),
+    gSPMatrix(NEXT_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_spot01_idosoko.c", 166),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(gfxCtx->polyOpa.p++, &D_06003B20);
+    gSPDisplayList(NEXT_DISP, &D_06003B20);
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_bg_spot01_idosoko.c", 171);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_bg_spot01_idosoko.c", 171);
 }

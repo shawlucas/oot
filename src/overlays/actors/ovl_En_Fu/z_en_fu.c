@@ -93,7 +93,7 @@ void EnFu_Init(Actor* thisx, GlobalContext* globalCtx) {
         this->skelanime.animPlaybackSpeed = 2.0f;
     }
     this->behaviorFlags = 0;
-    this->actor.unk_1F = 6;
+    this->actor.naviRange = 6;
 }
 
 void EnFu_Destroy(Actor* thisx, GlobalContext* globalCtx) {
@@ -298,15 +298,12 @@ void EnFu_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec
 void EnFu_Draw(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad;
     EnFu* this = THIS;
-    GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4];
 
-    gfxCtx = globalCtx->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_fu.c", 773);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_fu.c", 773);
     func_800943C8(globalCtx->state.gfxCtx);
-    gSPSegment(gfxCtx->polyOpa.p++, 0x08, SEGMENTED_TO_VIRTUAL(sEyesSegments[this->facialExpression]));
-    gSPSegment(gfxCtx->polyOpa.p++, 0x09, SEGMENTED_TO_VIRTUAL(sMouthSegments[this->facialExpression]));
+    gSPSegment(NEXT_DISP, 0x08, SEGMENTED_TO_VIRTUAL(sEyesSegments[this->facialExpression]));
+    gSPSegment(NEXT_DISP, 0x09, SEGMENTED_TO_VIRTUAL(sMouthSegments[this->facialExpression]));
     SkelAnime_DrawSV(globalCtx, this->skelanime.skeleton, this->skelanime.limbDrawTbl, this->skelanime.dListCount,
                      EnFu_OverrideLimbDraw, EnFu_PostLimbDraw, &this->actor);
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_fu.c", 791);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_fu.c", 791);
 }

@@ -108,11 +108,11 @@ glabel func_800A8484
 /* B1F644 800A84A4 3C118016 */  lui   $s1, %hi(gSaveContext) # $s1, 0x8016
 /* B1F648 800A84A8 2631E660 */  addiu $s1, %lo(gSaveContext) # addiu $s1, $s1, -0x19a0
 /* B1F64C 800A84AC 8E261354 */  lw    $a2, 0x1354($s1)
-/* B1F650 800A84B0 3C078013 */  lui   $a3, %hi(D_8012A4E0)
+/* B1F650 800A84B0 3C078013 */  lui   $a3, %hi(sramSaveAddress)
 /* B1F654 800A84B4 3C048014 */  lui   $a0, %hi(D_80140864) # $a0, 0x8014
 /* B1F658 800A84B8 00067040 */  sll   $t6, $a2, 1
 /* B1F65C 800A84BC 00EE3821 */  addu  $a3, $a3, $t6
-/* B1F660 800A84C0 94E5A4E0 */  lhu   $a1, %lo(D_8012A4E0)($a3)
+/* B1F660 800A84C0 94E5A4E0 */  lhu   $a1, %lo(sramSaveAddress)($a3)
 /* B1F664 800A84C4 24840864 */  addiu $a0, %lo(D_80140864) # addiu $a0, $a0, 0x864
 /* B1F668 800A84C8 0C00084C */  jal   osSyncPrintf
 /* B1F66C 800A84CC A7A50026 */   sh    $a1, 0x26($sp)

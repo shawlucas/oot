@@ -134,8 +134,8 @@ glabel func_800A8A20
 /* B1FC50 800A8AB0 A7B80066 */  sh    $t8, 0x66($sp)
 .L800A8AB4:
 /* B1FC54 800A8AB4 97B90072 */  lhu   $t9, 0x72($sp)
-/* B1FC58 800A8AB8 3C098013 */  lui   $t1, %hi(D_8012A4E0) # $t1, 0x8013
-/* B1FC5C 800A8ABC 2529A4E0 */  addiu $t1, %lo(D_8012A4E0) # addiu $t1, $t1, -0x5b20
+/* B1FC58 800A8AB8 3C098013 */  lui   $t1, %hi(sramSaveAddress) # $t1, 0x8013
+/* B1FC5C 800A8ABC 2529A4E0 */  addiu $t1, %lo(sramSaveAddress) # addiu $t1, $t1, -0x5b20
 /* B1FC60 800A8AC0 00194040 */  sll   $t0, $t9, 1
 /* B1FC64 800A8AC4 01091021 */  addu  $v0, $t0, $t1
 /* B1FC68 800A8AC8 94520000 */  lhu   $s2, ($v0)
@@ -189,8 +189,8 @@ glabel func_800A8A20
 /* B1FD24 800A8B84 95A50000 */   lhu   $a1, ($t5)
 /* B1FD28 800A8B88 8FAE005C */  lw    $t6, 0x5c($sp)
 /* B1FD2C 800A8B8C 8FB9007C */  lw    $t9, 0x7c($sp)
-/* B1FD30 800A8B90 3C188013 */  lui   $t8, %hi(D_8012A4E0) # $t8, 0x8013
-/* B1FD34 800A8B94 2718A4E0 */  addiu $t8, %lo(D_8012A4E0) # addiu $t8, $t8, -0x5b20
+/* B1FD30 800A8B90 3C188013 */  lui   $t8, %hi(sramSaveAddress) # $t8, 0x8013
+/* B1FD34 800A8B94 2718A4E0 */  addiu $t8, %lo(sramSaveAddress) # addiu $t8, $t8, -0x5b20
 /* B1FD38 800A8B98 000E7840 */  sll   $t7, $t6, 1
 /* B1FD3C 800A8B9C 01F81021 */  addu  $v0, $t7, $t8
 /* B1FD40 800A8BA0 94520006 */  lhu   $s2, 6($v0)

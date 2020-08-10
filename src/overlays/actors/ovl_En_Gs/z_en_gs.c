@@ -61,7 +61,7 @@ void EnGs_Init(Actor* thisx, GlobalContext* globalCtx) {
     Collider_SetCylinder(globalCtx, &this->unk_14C, thisx, &D_80A4FDA0);
     func_80061EFC(&thisx->colChkInfo, &D_80A4FDD8, &D_80A4FDCC);
 
-    thisx->unk_1F = 6;
+    thisx->naviRange = 6;
     this->unk_1D8 = thisx->posRot.pos;
     this->actionFunc = func_80A4F734;
     this->unk_1B4[0].x = 1.0f;
@@ -531,12 +531,9 @@ void EnGs_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnGs* this = THIS;
     s32 tmp;
     u32 frames;
-    GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4];
 
     if (!(this->unk_19E & 8)) {
-        gfxCtx = globalCtx->state.gfxCtx;
-        Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_gs.c", 1046);
+        OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_gs.c", 1046);
         frames = globalCtx->gameplayFrames;
         func_80093D18(globalCtx->state.gfxCtx);
         Matrix_Push();
@@ -550,35 +547,35 @@ void EnGs_Draw(Actor* thisx, GlobalContext* globalCtx) {
             Matrix_RotateZ(this->unk_1A0[1].z * 0.0000958738f, MTXMODE_APPLY);
         }
 
-        gSPMatrix(gfxCtx->polyOpa.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_gs.c", 1064),
+        gSPMatrix(NEXT_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_gs.c", 1064),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gfxCtx->polyOpa.p++, D_06000950);
+        gSPDisplayList(NEXT_DISP, D_06000950);
 
         if (this->unk_19E & 4) {
-            gDPSetPrimColor(gfxCtx->polyOpa.p++, 0, 0, this->flashColor.r, this->flashColor.g, this->flashColor.b,
+            gDPSetPrimColor(NEXT_DISP, 0, 0, this->flashColor.r, this->flashColor.g, this->flashColor.b,
                             this->flashColor.a);
         } else {
-            gDPSetPrimColor(gfxCtx->polyOpa.p++, 0, 0, 255, 255, 255, 255);
+            gDPSetPrimColor(NEXT_DISP, 0, 0, 255, 255, 255, 255);
         }
 
-        gSPDisplayList(gfxCtx->polyOpa.p++, D_060009D0);
-        gSPDisplayList(gfxCtx->polyOpa.p++, D_06000A60);
+        gSPDisplayList(NEXT_DISP, D_060009D0);
+        gSPDisplayList(NEXT_DISP, D_06000A60);
 
         Matrix_Pull();
         if (this->unk_19E & 2) {
             func_80093D84(globalCtx->state.gfxCtx);
-            func_800D1FD4(&globalCtx->mf_11DA0);
+            func_800D1FD4(&globalCtx->softspriteMatrix);
             Matrix_Scale(0.05f, -0.05f, 1.0f, MTXMODE_APPLY);
 
-            gSPMatrix(gfxCtx->polyXlu.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_gs.c", 1087),
+            gSPMatrix(NEXT_POLY_XLU_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_gs.c", 1087),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPSegment(
-                gfxCtx->polyXlu.p++, 0x08,
+                NEXT_POLY_XLU_DISP, 0x08,
                 Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, 0, 0, 0x20, 0x40, 1, 0, -frames * 0x14, 0x20, 0x80));
-            gDPSetPrimColor(gfxCtx->polyXlu.p++, 128, 128, 255, 255, 0, 255);
-            gDPSetEnvColor(gfxCtx->polyXlu.p++, 255, 0, 0, 0);
-            gSPDisplayList(gfxCtx->polyXlu.p++, D_0404D4E0);
+            gDPSetPrimColor(NEXT_POLY_XLU_DISP, 128, 128, 255, 255, 0, 255);
+            gDPSetEnvColor(NEXT_POLY_XLU_DISP, 255, 0, 0, 0);
+            gSPDisplayList(NEXT_POLY_XLU_DISP, D_0404D4E0);
         }
-        Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_gs.c", 1101);
+        CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_gs.c", 1101);
     }
 }

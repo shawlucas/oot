@@ -30,8 +30,8 @@ glabel EnHorseNormal_Init
 /* 001AC 80A6B3FC 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 001B0 80A6B400 3C01C060 */  lui     $at, 0xC060                ## $at = C0600000
 /* 001B4 80A6B404 44812000 */  mtc1    $at, $f4                   ## $f4 = -3.50
-/* 001B8 80A6B408 3C068003 */  lui     $a2, %hi(ActorShadow_DrawFunc_Squiggly)
-/* 001BC 80A6B40C 24C6B644 */  addiu   $a2, %lo(ActorShadow_DrawFunc_Squiggly)
+/* 001B8 80A6B408 3C068003 */  lui     $a2, %hi(ActorShadow_Horse)
+/* 001BC 80A6B40C 24C6B644 */  addiu   $a2, %lo(ActorShadow_Horse)
 /* 001C0 80A6B410 260400B4 */  addiu   $a0, $s0, 0x00B4           ## $a0 = 000000B4
 /* 001C4 80A6B414 24050000 */  addiu   $a1, $zero, 0x0000         ## $a1 = 00000000
 /* 001C8 80A6B418 3C0741A0 */  lui     $a3, 0x41A0                ## $a3 = 41A00000

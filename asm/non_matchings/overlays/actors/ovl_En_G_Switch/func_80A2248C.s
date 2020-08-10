@@ -66,7 +66,7 @@ glabel func_80A2248C
 /* 00684 80A22544 24010002 */  addiu   $at, $zero, 0x0002         ## $at = 00000002
 /* 00688 80A22548 14A10005 */  bne     $a1, $at, .L80A22560       
 /* 0068C 80A2254C 00000000 */  nop
-/* 00690 80A22550 0C00B34E */  jal     Flags_SetTempClear
+/* 00690 80A22550 0C00B34E */  jal     Flags_SetNoEnemy
               
 /* 00694 80A22554 00C02025 */  or      $a0, $a2, $zero            ## $a0 = 00000000
 /* 00698 80A22558 10000006 */  beq     $zero, $zero, .L80A22574   

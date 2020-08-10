@@ -76,7 +76,7 @@ void ObjBombiwa_Init(Actor* thisx, GlobalContext* globalCtx) {
             thisx->posRot.rot.y = rand;
             thisx->shape.rot.y = rand;
         }
-        thisx->shape.unk_08 = -200.0f;
+        thisx->shape.offset_y = -200.0f;
         thisx->posRot.pos.y = thisx->initPosRot.pos.y + 20.0f;
     }
 }

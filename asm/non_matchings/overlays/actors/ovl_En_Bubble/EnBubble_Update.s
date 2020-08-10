@@ -3,7 +3,7 @@ glabel EnBubble_Update
 /* 00F5C 809CCB5C AFBF0024 */  sw      $ra, 0x0024($sp)           
 /* 00F60 809CCB60 AFB00020 */  sw      $s0, 0x0020($sp)           
 /* 00F64 809CCB64 00808025 */  or      $s0, $a0, $zero            ## $s0 = 00000000
-/* 00F68 809CCB68 0C00B5FB */  jal     func_8002D7EC              
+/* 00F68 809CCB68 0C00B5FB */  jal     ActorPosition_Move              
 /* 00F6C 809CCB6C AFA5002C */  sw      $a1, 0x002C($sp)           
 /* 00F70 809CCB70 3C014180 */  lui     $at, 0x4180                ## $at = 41800000
 /* 00F74 809CCB74 44810000 */  mtc1    $at, $f0                   ## $f0 = 16.00

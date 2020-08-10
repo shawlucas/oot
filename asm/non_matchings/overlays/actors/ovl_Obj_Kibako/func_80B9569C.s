@@ -53,7 +53,7 @@ glabel func_80B9569C
 .L80B95750:
 /* 00AB0 80B95750 0C2E5340 */  jal     func_80B94D00              
 /* 00AB4 80B95754 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
-/* 00AB8 80B95758 0C00B5FB */  jal     func_8002D7EC              
+/* 00AB8 80B95758 0C00B5FB */  jal     ActorPosition_Move              
 /* 00ABC 80B9575C 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00AC0 80B95760 44802000 */  mtc1    $zero, $f4                 ## $f4 = 0.00
 /* 00AC4 80B95764 24080005 */  addiu   $t0, $zero, 0x0005         ## $t0 = 00000005

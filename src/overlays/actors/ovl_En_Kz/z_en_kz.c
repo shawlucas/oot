@@ -308,7 +308,7 @@ void EnKz_Init(Actor* thisx, GlobalContext* globalCtx) {
     Collider_SetCylinder(globalCtx, &this->collider, &this->actor, &sCylinderInit);
     func_80061EFC(&this->actor.colChkInfo, NULL, &sColChkInfoInit);
     Actor_SetScale(&this->actor, 0.01);
-    this->actor.unk_1F = 3;
+    this->actor.naviRange = 3;
     this->unk_1E0.unk_00 = 0;
     func_80034EC0(&this->skelanime, sAnimations, 0);
 
@@ -476,14 +476,11 @@ void EnKz_Draw(Actor* thisx, GlobalContext* globalCtx) {
         0x06001C70,
     };
     EnKz* this = THIS;
-    GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4];
 
-    gfxCtx = globalCtx->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_kz.c", 1259);
-    gSPSegment(gfxCtx->polyOpa.p++, 0x08, SEGMENTED_TO_VIRTUAL(sEyeSegments[this->eyeIdx]));
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_kz.c", 1259);
+    gSPSegment(NEXT_DISP, 0x08, SEGMENTED_TO_VIRTUAL(sEyeSegments[this->eyeIdx]));
     func_800943C8(globalCtx->state.gfxCtx);
     SkelAnime_DrawSV(globalCtx, this->skelanime.skeleton, this->skelanime.limbDrawTbl, this->skelanime.dListCount,
                      EnKz_OverrideLimbDraw, EnKz_PostLimbDraw, &this->actor);
-    Graph_CloseDisps(&dispRefs, globalCtx->state.gfxCtx, "../z_en_kz.c", 1281);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_kz.c", 1281);
 }

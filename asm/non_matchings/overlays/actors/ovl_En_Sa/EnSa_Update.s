@@ -74,7 +74,7 @@ glabel EnSa_Update
 /* 01784 80AF6CE4 10000003 */  beq     $zero, $zero, .L80AF6CF4   
 /* 01788 80AF6CE8 E612002C */  swc1    $f18, 0x002C($s0)          ## 0000002C
 .L80AF6CEC:
-/* 0178C 80AF6CEC 0C00B5FB */  jal     func_8002D7EC              
+/* 0178C 80AF6CEC 0C00B5FB */  jal     ActorPosition_Move              
 /* 01790 80AF6CF0 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 .L80AF6CF4:
 /* 01794 80AF6CF4 862900A4 */  lh      $t1, 0x00A4($s1)           ## 000000A4

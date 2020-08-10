@@ -136,7 +136,7 @@ glabel func_80B24038
 /* 0151C 80B2420C 0C01DE80 */  jal     Math_ApproxF
               
 /* 01520 80B24210 3C063F80 */  lui     $a2, 0x3F80                ## $a2 = 3F800000
-/* 01524 80B24214 0C00B5FB */  jal     func_8002D7EC              
+/* 01524 80B24214 0C00B5FB */  jal     ActorPosition_Move              
 /* 01528 80B24218 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 0152C 80B2421C 8FBF0024 */  lw      $ra, 0x0024($sp)           
 /* 01530 80B24220 D7B40018 */  ldc1    $f20, 0x0018($sp)          

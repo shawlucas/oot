@@ -63,7 +63,7 @@ glabel func_80AA9870
 /* 038A4 80AA98F4 8FA40048 */  lw      $a0, 0x0048($sp)           
 /* 038A8 80AA98F8 8FA5003C */  lw      $a1, 0x003C($sp)           
 /* 038AC 80AA98FC 24060016 */  addiu   $a2, $zero, 0x0016         ## $a2 = 00000016
-/* 038B0 80AA9900 0C00AF6C */  jal     func_8002BDB0              
+/* 038B0 80AA9900 0C00AF6C */  jal     ActorShadow_FootPosSet              
 /* 038B4 80AA9904 AFA30034 */  sw      $v1, 0x0034($sp)           
 /* 038B8 80AA9908 8FA30034 */  lw      $v1, 0x0034($sp)           
 /* 038BC 80AA990C 8FAA0048 */  lw      $t2, 0x0048($sp)           

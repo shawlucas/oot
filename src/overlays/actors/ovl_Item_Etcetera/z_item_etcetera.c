@@ -89,7 +89,7 @@ void ItemEtcetera_Init(Actor* thisx, GlobalContext* globalCtx) {
             this->futureActionFunc = ItemEtcetera_UpdateFireArrow;
             Actor_SetScale(&this->actor, 0.5f);
             this->actor.draw = NULL;
-            this->actor.shape.unk_08 = 50.0f;
+            this->actor.shape.offset_y = 50.0f;
             break;
         case ITEM_ETCETERA_RUPEE_GREEN_CHEST_GAME:
         case ITEM_ETCETERA_RUPEE_BLUE_CHEST_GAME:

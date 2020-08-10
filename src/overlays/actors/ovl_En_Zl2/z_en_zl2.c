@@ -765,7 +765,7 @@ void func_80B501E8(EnZl2* this, GlobalContext* globalCtx) {
     CsCmdActorAction* npcAction = EnZl2_GetNpcAction(globalCtx, 0);
 
     if (npcAction != NULL) {
-        this->actor.shape.unk_14 = this->alpha =
+        this->actor.shape.shadowAlpha = this->alpha =
             (1.0f - func_8006F93C(npcAction->endFrame, npcAction->startFrame, globalCtx->csCtx.frames)) * 255.0f;
         func_80B501C4(this, this->alpha);
     }
@@ -774,7 +774,7 @@ void func_80B501E8(EnZl2* this, GlobalContext* globalCtx) {
 void func_80B50260(EnZl2* this, GlobalContext* globalCtx) {
     this->action = 1;
     this->drawConfig = 0;
-    this->actor.shape.unk_14 = 0;
+    this->actor.shape.shadowAlpha = 0;
 }
 
 void func_80B50278(EnZl2* this, GlobalContext* globalCtx) {
@@ -784,7 +784,7 @@ void func_80B50278(EnZl2* this, GlobalContext* globalCtx) {
     this->actor.posRot.pos.y = npcAction->startPos.y;
     this->actor.posRot.pos.z = npcAction->startPos.z;
     this->actor.posRot.rot.y = this->actor.shape.rot.y = npcAction->rot.y;
-    this->actor.shape.unk_14 = 0xFF;
+    this->actor.shape.shadowAlpha = 0xFF;
     this->action = 2;
     this->drawConfig = 1;
 }
@@ -802,7 +802,7 @@ void func_80B50304(EnZl2* this, GlobalContext* globalCtx) {
     this->action = 3;
     this->drawConfig = 1;
     this->unk_23C = 0.0f;
-    actorShape->unk_14 = 0xFF;
+    actorShape->shadowAlpha = 0xFF;
     this->actor.posRot.rot.y = actorShape->rot.y = Math_atan2f(actionXDelta, actionZDelta) * 10430.3779296875f;
 }
 
@@ -818,7 +818,7 @@ void func_80B5042C(EnZl2* this, GlobalContext* globalCtx) {
     func_80B4FD00(this, &D_060022D0, 2, -8.0f, 0);
     this->action = 5;
     this->drawConfig = 1;
-    this->actor.shape.unk_14 = 0xFF;
+    this->actor.shape.shadowAlpha = 0xFF;
     this->unk_27C = 0.0f;
 }
 
@@ -836,7 +836,7 @@ void func_80B504D4(EnZl2* this, GlobalContext* globalCtx) {
     this->drawConfig = 1;
     this->unk_27C = 0.0f;
     func_80B4ED18(this, 1);
-    this->actor.shape.unk_14 = 0xFF;
+    this->actor.shape.shadowAlpha = 0xFF;
 }
 
 void func_80B5053C(EnZl2* this, s32 arg1) {
@@ -850,7 +850,7 @@ void func_80B50580(EnZl2* this, GlobalContext* globalCtx) {
     func_80B4FD00(this, &D_06000A50, 2, -8.0f, 0);
     this->action = 9;
     this->drawConfig = 1;
-    this->actor.shape.unk_14 = 0xFF;
+    this->actor.shape.shadowAlpha = 0xFF;
 }
 
 void func_80B505D4(EnZl2* this, s32 arg1) {
@@ -874,7 +874,7 @@ void func_80B50670(EnZl2* this, GlobalContext* globalCtx) {
     func_80B4FD00(this, &D_0600B5FC, 0, -8.0f, 0);
     this->action = 13;
     this->drawConfig = 1;
-    this->actor.shape.unk_14 = 0xFF;
+    this->actor.shape.shadowAlpha = 0xFF;
 }
 
 void func_80B506C4(EnZl2* this, GlobalContext* globalCtx) {
@@ -883,7 +883,7 @@ void func_80B506C4(EnZl2* this, GlobalContext* globalCtx) {
     this->drawConfig = 1;
     func_80B4ECE8(this, 4);
     func_80B4ED18(this, 2);
-    this->actor.shape.unk_14 = 0xFF;
+    this->actor.shape.shadowAlpha = 0xFF;
     func_80B4FE90(this);
 }
 
@@ -898,7 +898,7 @@ void func_80B50780(EnZl2* this, GlobalContext* globalCtx) {
     func_80B4FD00(this, &D_06001670, 2, -8.0f, 0);
     this->action = 16;
     this->drawConfig = 1;
-    this->actor.shape.unk_14 = 0xFF;
+    this->actor.shape.shadowAlpha = 0xFF;
     func_80B4FFF0(this, globalCtx);
     func_80B4ECE8(this, 3);
 }
@@ -914,7 +914,7 @@ void func_80B5082C(EnZl2* this, GlobalContext* globalCtx) {
     func_80B4FD00(this, &D_06002B14, 2, -8.0f, 0);
     this->action = 18;
     this->drawConfig = 1;
-    this->actor.shape.unk_14 = 0xFF;
+    this->actor.shape.shadowAlpha = 0xFF;
 }
 
 void func_80B50880(EnZl2* this, s32 arg1) {
@@ -930,7 +930,7 @@ void func_80B508C8(EnZl2* this, GlobalContext* globalCtx) {
     this->action = 20;
     this->drawConfig = 1;
     func_80B4ECE8(this, 6);
-    this->actor.shape.unk_14 = 0xFF;
+    this->actor.shape.shadowAlpha = 0xFF;
 }
 
 void func_80B50928(EnZl2* this, s32 arg1) {
@@ -1291,7 +1291,7 @@ void func_80B5154C(EnZl2* this, GlobalContext* globalCtx) {
 void func_80B515C4(EnZl2* this) {
     this->action = 25;
     this->drawConfig = 0;
-    this->actor.shape.unk_14 = 0;
+    this->actor.shape.shadowAlpha = 0;
 }
 
 void func_80B515D8(EnZl2* this, GlobalContext* globalCtx) {
@@ -1299,7 +1299,7 @@ void func_80B515D8(EnZl2* this, GlobalContext* globalCtx) {
     func_80B4EDB8(this, globalCtx, 0);
     this->action = 26;
     this->drawConfig = 1;
-    this->actor.shape.unk_14 = 0xFF;
+    this->actor.shape.shadowAlpha = 0xFF;
     this->unk_27C = 0.0f;
 }
 
@@ -1313,7 +1313,7 @@ void func_80B51678(EnZl2* this) {
     func_80B4FD00(this, &D_06007D0C, 2, -8.0f, 0);
     this->action = 27;
     this->drawConfig = 1;
-    this->actor.shape.unk_14 = 0xFF;
+    this->actor.shape.shadowAlpha = 0xFF;
     this->unk_27C = 0.0f;
 }
 
@@ -1327,7 +1327,7 @@ void func_80B51704(EnZl2* this) {
     func_80B4FD00(this, &D_060090D8, 2, -8.0f, 0);
     this->action = 28;
     this->drawConfig = 1;
-    this->actor.shape.unk_14 = 0xFF;
+    this->actor.shape.shadowAlpha = 0xFF;
     this->unk_27C = 0.0f;
 }
 
@@ -1341,7 +1341,7 @@ void func_80B51790(EnZl2* this) {
     func_80B4FD00(this, &D_06005F40, 2, -8.0f, 0);
     this->action = 29;
     this->drawConfig = 1;
-    this->actor.shape.unk_14 = 0xFF;
+    this->actor.shape.shadowAlpha = 0xFF;
 }
 
 void func_80B517E0(EnZl2* this, s32 arg1) {
@@ -1355,7 +1355,7 @@ void func_80B51824(EnZl2* this) {
     func_80B4FD00(this, &D_060022D0, 2, -8.0f, 0);
     this->action = 30;
     this->drawConfig = 1;
-    this->actor.shape.unk_14 = 0xFF;
+    this->actor.shape.shadowAlpha = 0xFF;
     this->unk_27C = 0.0f;
 }
 
@@ -1370,7 +1370,7 @@ void func_80B518C0(EnZl2* this) {
     func_80B4FD00(this, SEGMENTED_TO_VIRTUAL(&D_06004900), 2, -8.0f, 0);
     this->action = 32;
     this->drawConfig = 1;
-    this->actor.shape.unk_14 = 0xFF;
+    this->actor.shape.shadowAlpha = 0xFF;
     this->unk_27C = 0.0f;
 }
 
@@ -1478,7 +1478,7 @@ void func_80B51CA8(EnZl2* this, GlobalContext* globalCtx) {
 void func_80B51D0C(EnZl2* this, GlobalContext* globalCtx) {
     this->action = 33;
     this->drawConfig = 0;
-    this->actor.shape.unk_14 = 0;
+    this->actor.shape.shadowAlpha = 0;
 }
 
 void func_80B51D24(EnZl2* this, GlobalContext* globalCtx) {
@@ -1526,7 +1526,7 @@ void func_80B51DA4(EnZl2* this, GlobalContext* globalCtx) {
 void func_80B51EA8(EnZl2* this) {
     this->action = 33;
     this->drawConfig = 0;
-    this->actor.shape.unk_14 = 0;
+    this->actor.shape.shadowAlpha = 0;
 }
 
 void func_80B51EBC(EnZl2* this, GlobalContext* globalCtx) {
@@ -1538,7 +1538,7 @@ void func_80B51EBC(EnZl2* this, GlobalContext* globalCtx) {
     func_80B4FD00(this, &D_0600B224, 0, 0.0f, 0);
     this->action = 34;
     this->drawConfig = 1;
-    shape->unk_14 = 0xFF;
+    shape->shadowAlpha = 0xFF;
 }
 
 void func_80B51F38(EnZl2* this, GlobalContext* globalCtx) {
@@ -1650,7 +1650,7 @@ void EnZl2_Init(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad;
 
     ActorShape_Init(actorShape, 0.0f, ActorShadow_DrawFunc_Circle, 30.0f);
-    actorShape->unk_14 = 0;
+    actorShape->shadowAlpha = 0;
     SkelAnime_InitSV(globalCtx, &this->skelAnime, &D_06010D70, NULL, NULL, NULL, 0);
 
     switch (thisx->params) {
@@ -1693,14 +1693,14 @@ void func_80B523C8(EnZl2* this, GlobalContext* globalCtx) {
     Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_zl2.c", 1623);
     func_80093D18(globalCtx->state.gfxCtx);
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0x08, SEGMENTED_TO_VIRTUAL(sp74));
-    gSPSegment(gfxCtx->polyOpa.p++, 0x09, SEGMENTED_TO_VIRTUAL(sp70));
-    gSPSegment(gfxCtx->polyOpa.p++, 0x0A, SEGMENTED_TO_VIRTUAL(sp64));
-    gDPSetEnvColor(gfxCtx->polyOpa.p++, 0, 0, 0, 255);
-    gSPSegment(gfxCtx->polyOpa.p++, 0x0B, &D_80116280[2]);
+    gSPSegment(gfxCtx->polyOpa.thaGfx.p++, 0x08, SEGMENTED_TO_VIRTUAL(sp74));
+    gSPSegment(gfxCtx->polyOpa.thaGfx.p++, 0x09, SEGMENTED_TO_VIRTUAL(sp70));
+    gSPSegment(gfxCtx->polyOpa.thaGfx.p++, 0x0A, SEGMENTED_TO_VIRTUAL(sp64));
+    gDPSetEnvColor(gfxCtx->polyOpa.thaGfx.p++, 0, 0, 0, 255);
+    gSPSegment(gfxCtx->polyOpa.thaGfx.p++, 0x0B, &D_80116280[2]);
 
-    gfxCtx->polyOpa.p = SkelAnime_DrawSV2(globalCtx, skelAnime->skeleton, skelAnime->limbDrawTbl, skelAnime->dListCount,
-                                          EnZl2_OverrideLimbDraw, EnZl2_PostLimbDraw, &this->actor, gfxCtx->polyOpa.p);
+    gfxCtx->polyOpa.thaGfx.p = SkelAnime_DrawSV2(globalCtx, skelAnime->skeleton, skelAnime->limbDrawTbl, skelAnime->dListCount,
+                                          EnZl2_OverrideLimbDraw, EnZl2_PostLimbDraw, &this->actor, gfxCtx->polyOpa.thaGfx.p);
     Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_zl2.c", 1648);
 }
 
@@ -1717,17 +1717,16 @@ void func_80B525D4(EnZl2* this, GlobalContext* globalCtx) {
     Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_zl2.c", 1663);
     func_80093D84(globalCtx->state.gfxCtx);
 
-    gSPSegment(gfxCtx->polyXlu.p++, 0x08, SEGMENTED_TO_VIRTUAL(sp78));
-    gSPSegment(gfxCtx->polyXlu.p++, 0x09, SEGMENTED_TO_VIRTUAL(sp78));
-    gSPSegment(gfxCtx->polyXlu.p++, 0x0A, SEGMENTED_TO_VIRTUAL(sp6C));
-    gDPSetEnvColor(gfxCtx->polyXlu.p++, 0, 0, 0, this->alpha);
-    gSPSegment(gfxCtx->polyXlu.p++, 0x0B, &D_80116280[0]);
+    gSPSegment(gfxCtx->polyXlu.thaGfx.p++, 0x08, SEGMENTED_TO_VIRTUAL(sp78));
+    gSPSegment(gfxCtx->polyXlu.thaGfx.p++, 0x09, SEGMENTED_TO_VIRTUAL(sp78));
+    gSPSegment(gfxCtx->polyXlu.thaGfx.p++, 0x0A, SEGMENTED_TO_VIRTUAL(sp6C));
+    gDPSetEnvColor(gfxCtx->polyXlu.thaGfx.p++, 0, 0, 0, this->alpha);
+    gSPSegment(gfxCtx->polyXlu.thaGfx.p++, 0x0B, &D_80116280[0]);
 
-    gfxCtx->polyXlu.p = SkelAnime_DrawSV2(globalCtx, skelAnime->skeleton, skelAnime->limbDrawTbl, skelAnime->dListCount,
-                                          EnZl2_OverrideLimbDraw, NULL, &this->actor, gfxCtx->polyXlu.p);
+    gfxCtx->polyXlu.thaGfx.p = SkelAnime_DrawSV2(globalCtx, skelAnime->skeleton, skelAnime->limbDrawTbl, skelAnime->dListCount,
+                                          EnZl2_OverrideLimbDraw, NULL, &this->actor, gfxCtx->polyXlu.thaGfx.p);
     Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_zl2.c", 1692);
 }
-
 void EnZl2_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnZl2* this = THIS;
 

@@ -60,7 +60,7 @@ void EnOkarinaTag_Init(Actor* thisx, GlobalContext* globalCtx) {
         this->unk_152 = 0;
         this->unk_158 = 1;
     }
-    this->actor.unk_1F = 1;
+    this->actor.naviRange = 1;
     if (this->actor.posRot.rot.z > 0) {
         this->unk_15C = this->actor.posRot.rot.z * 40.0f;
     }

@@ -1035,13 +1035,13 @@ void func_80AECCB0(EnRu1* this, GlobalContext* globalCtx) {
 void func_80AECDA0(EnRu1* this, GlobalContext* globalCtx) {
     func_80AEB264(this, &D_06000E54, 0, 0, 0);
     this->action = 15;
-    this->actor.shape.unk_08 = -10000.0f;
+    this->actor.shape.offset_y = -10000.0f;
     func_80AEAEA4(this, 5);
     func_80AEAEB8(this, 2);
 }
 
 void func_80AECE04(EnRu1* this, GlobalContext* globalCtx) {
-    this->actor.shape.unk_08 += (250.0f / 3.0f);
+    this->actor.shape.offset_y += (250.0f / 3.0f);
 }
 
 void func_80AECE20(EnRu1* this, GlobalContext* globalCtx) {
@@ -1125,9 +1125,9 @@ void func_80AED0D8(EnRu1* this, GlobalContext* globalCtx) {
 
 void func_80AED110(EnRu1* this) {
     Actor* thisx = &this->actor;
-    if (thisx->shape.unk_08 >= 0.0f) {
+    if (thisx->shape.offset_y >= 0.0f) {
         this->action = 18;
-        thisx->shape.unk_08 = 0.0f;
+        thisx->shape.offset_y = 0.0f;
         func_80AED0B0(this, 1);
     }
 }
@@ -1293,7 +1293,7 @@ void func_80AED738(EnRu1* this, GlobalContext* globalCtx) {
         if (this->unk_2A4 < 20.0f) {
             temp_v0 = ((20.0f - this->unk_2A4) * 255.0f) / 20.0f;
             this->unk_2A8 = temp_v0;
-            this->actor.shape.unk_14 = temp_v0;
+            this->actor.shape.shadowAlpha = temp_v0;
         } else {
             Actor_Kill(this);
         }
@@ -1503,7 +1503,7 @@ void func_80AEE050(EnRu1* this) {
             }
             this->actor.velocity.x = Math_Sins(this->actor.posRot.rot.y) * this->actor.speedXZ;
             this->actor.velocity.z = Math_Coss(this->actor.posRot.rot.y) * this->actor.speedXZ;
-            func_8002D7EC(this);
+            ActorPosition_Move(this);
         }
     } else {
         if (this->unk_350 == 1) {
@@ -1584,7 +1584,7 @@ s32 func_80AEE394(EnRu1* this, GlobalContext* globalCtx) {
             this->action = 36;
             this->drawConfig = 0;
             this->unk_28C = dynaActor;
-            this->actor.shape.unk_14 = 0;
+            this->actor.shape.shadowAlpha = 0;
             return 1;
         }
     }
@@ -2009,7 +2009,7 @@ void func_80AEF624(EnRu1* this, GlobalContext* globalCtx) {
         func_80AEB3A4(this, globalCtx);
         this->action = 37;
         this->drawConfig = 1;
-        thisx->shape.unk_14 = 0xFF;
+        thisx->shape.shadowAlpha = 0xFF;
     }
 }
 
@@ -2364,14 +2364,14 @@ void func_80AF0400(EnRu1* this, GlobalContext* globalCtx) {
     Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_ru1.c", 1282);
     func_80093D18(globalCtx->state.gfxCtx);
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0x08, SEGMENTED_TO_VIRTUAL(addr1));
-    gSPSegment(gfxCtx->polyOpa.p++, 0x09, SEGMENTED_TO_VIRTUAL(addr1));
-    gSPSegment(gfxCtx->polyOpa.p++, 0x09, SEGMENTED_TO_VIRTUAL(addr2));
-    gDPSetEnvColor(gfxCtx->polyOpa.p++, 0, 0, 0, 255);
-    gSPSegment(gfxCtx->polyOpa.p++, 0x0C, &D_80116280[2]);
+    gSPSegment(gfxCtx->polyOpa.thaGfx.p++, 0x08, SEGMENTED_TO_VIRTUAL(addr1));
+    gSPSegment(gfxCtx->polyOpa.thaGfx.p++, 0x09, SEGMENTED_TO_VIRTUAL(addr1));
+    gSPSegment(gfxCtx->polyOpa.thaGfx.p++, 0x09, SEGMENTED_TO_VIRTUAL(addr2));
+    gDPSetEnvColor(gfxCtx->polyOpa.thaGfx.p++, 0, 0, 0, 255);
+    gSPSegment(gfxCtx->polyOpa.thaGfx.p++, 0x0C, &D_80116280[2]);
 
-    gfxCtx->polyOpa.p = SkelAnime_DrawSV2(globalCtx, skelAnime->skeleton, skelAnime->limbDrawTbl, skelAnime->dListCount,
-                                          EnRu1_OverrideLimbDraw, EnRu1_PostLimbDraw, &this->actor, gfxCtx->polyOpa.p);
+    gfxCtx->polyOpa.thaGfx.p = SkelAnime_DrawSV2(globalCtx, skelAnime->skeleton, skelAnime->limbDrawTbl, skelAnime->dListCount,
+                                          EnRu1_OverrideLimbDraw, EnRu1_PostLimbDraw, &this->actor, gfxCtx->polyOpa.thaGfx.p);
 
     Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_ru1.c", 1309);
 }
@@ -2389,17 +2389,18 @@ void func_80AF05D4(EnRu1* this, GlobalContext* globalCtx) {
     Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_ru1.c", 1324);
     func_80093D84(globalCtx->state.gfxCtx);
 
-    gSPSegment(gfxCtx->polyXlu.p++, 0x08, SEGMENTED_TO_VIRTUAL(addr1));
-    gSPSegment(gfxCtx->polyXlu.p++, 0x09, SEGMENTED_TO_VIRTUAL(addr1));
-    gSPSegment(gfxCtx->polyXlu.p++, 0x09, SEGMENTED_TO_VIRTUAL(addr2));
-    gDPSetEnvColor(gfxCtx->polyXlu.p++, 0, 0, 0, this->unk_2A8);
-    gSPSegment(gfxCtx->polyXlu.p++, 0x0C, &D_80116280[0]);
+    gSPSegment(gfxCtx->polyXlu.thaGfx.p++, 0x08, SEGMENTED_TO_VIRTUAL(addr1));
+    gSPSegment(gfxCtx->polyXlu.thaGfx.p++, 0x09, SEGMENTED_TO_VIRTUAL(addr1));
+    gSPSegment(gfxCtx->polyXlu.thaGfx.p++, 0x09, SEGMENTED_TO_VIRTUAL(addr2));
+    gDPSetEnvColor(gfxCtx->polyXlu.thaGfx.p++, 0, 0, 0, this->unk_2A8);
+    gSPSegment(gfxCtx->polyXlu.thaGfx.p++, 0x0C, &D_80116280[0]);
 
-    gfxCtx->polyXlu.p = SkelAnime_DrawSV2(globalCtx, skelAnime->skeleton, skelAnime->limbDrawTbl, skelAnime->dListCount,
-                                          EnRu1_OverrideLimbDraw, NULL, &this->actor, gfxCtx->polyXlu.p);
+    gfxCtx->polyXlu.thaGfx.p = SkelAnime_DrawSV2(globalCtx, skelAnime->skeleton, skelAnime->limbDrawTbl, skelAnime->dListCount,
+                                          EnRu1_OverrideLimbDraw, NULL, &this->actor, gfxCtx->polyXlu.thaGfx.p);
 
     Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_ru1.c", 1353);
 }
+
 
 void EnRu1_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnRu1* this = THIS;

@@ -64,7 +64,7 @@ glabel func_80A22764
 /* 0096C 80A2282C 1000008C */  beq     $zero, $zero, .L80A22A60   
 /* 00970 80A22830 9203018D */  lbu     $v1, 0x018D($s0)           ## 0000018D
 .L80A22834:
-/* 00974 80A22834 0C00B5FB */  jal     func_8002D7EC              
+/* 00974 80A22834 0C00B5FB */  jal     ActorPosition_Move              
 /* 00978 80A22838 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 0097C 80A2283C 44800000 */  mtc1    $zero, $f0                 ## $f0 = 0.00
 /* 00980 80A22840 C612005C */  lwc1    $f18, 0x005C($s0)          ## 0000005C
@@ -94,7 +94,7 @@ glabel func_80A22764
 /* 009D8 80A22898 10000071 */  beq     $zero, $zero, .L80A22A60   
 /* 009DC 80A2289C 9203018D */  lbu     $v1, 0x018D($s0)           ## 0000018D
 .L80A228A0:
-/* 009E0 80A228A0 0C00B5FB */  jal     func_8002D7EC              
+/* 009E0 80A228A0 0C00B5FB */  jal     ActorPosition_Move              
 /* 009E4 80A228A4 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 009E8 80A228A8 C60A016C */  lwc1    $f10, 0x016C($s0)          ## 0000016C
 /* 009EC 80A228AC C6060024 */  lwc1    $f6, 0x0024($s0)           ## 00000024

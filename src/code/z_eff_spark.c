@@ -129,7 +129,7 @@ s32 EffectSpark_Update(void* thisx) {
 }
 
 // original name: "EffectSparkInfo_disp"
-#ifdef NON_MATCHING
+#if 0
 // minor ordering and saved register usage differences
 void EffectSpark_Draw(void* thisx, GraphicsContext* gfxCtx) {
     Vtx* vertices;
@@ -158,25 +158,25 @@ void EffectSpark_Draw(void* thisx, GraphicsContext* gfxCtx) {
     Gfx* dispRefs[4]; // sp1AC
 
     globalCtx = Effect_GetGlobalCtx();
-    Graph_OpenDisps(dispRefs, gfxCtx, "../z_eff_spark.c", 293);
+    OPEN_DISP(gfxCtx, "../z_eff_spark.c", 293);
 
     if (this != NULL) {
-        gSPMatrix(gfxCtx->polyXlu.p++, &gMtxClear, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(NEXT_POLY_XLU_DISP, &gMtxClear, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         gfxCtx->polyXlu.p = Gfx_CallSetupDL(gfxCtx->polyXlu.p, 0x26);
-        gDPSetCycleType(gfxCtx->polyXlu.p++, G_CYC_2CYCLE);
-        gDPPipeSync(gfxCtx->polyXlu.p++);
+        gDPSetCycleType(NEXT_POLY_XLU_DISP, G_CYC_2CYCLE);
+        gDPPipeSync(NEXT_POLY_XLU_DISP);
 
-        gSPTexture(gfxCtx->polyXlu.p++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
-        gDPLoadTextureBlock(gfxCtx->polyXlu.p++, D_04038FB0, G_IM_FMT_I, G_IM_SIZ_8b, 32, 32, 0,
+        gSPTexture(NEXT_POLY_XLU_DISP, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
+        gDPLoadTextureBlock(NEXT_POLY_XLU_DISP, D_04038FB0, G_IM_FMT_I, G_IM_SIZ_8b, 32, 32, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-        gDPSetCombineMode(gfxCtx->polyXlu.p++, G_CC_SHADEDECALA, G_CC_PASS2);
-        gDPSetRenderMode(gfxCtx->polyXlu.p++, G_RM_PASS, G_RM_ZB_CLD_SURF2);
-        gSPClearGeometryMode(gfxCtx->polyXlu.p++,
+        gDPSetCombineMode(NEXT_POLY_XLU_DISP, G_CC_SHADEDECALA, G_CC_PASS2);
+        gDPSetRenderMode(NEXT_POLY_XLU_DISP, G_RM_PASS, G_RM_ZB_CLD_SURF2);
+        gSPClearGeometryMode(NEXT_POLY_XLU_DISP,
                              G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR);
-        gSPSetGeometryMode(gfxCtx->polyXlu.p++, G_ZBUFFER | G_SHADE | G_SHADING_SMOOTH);
-        gDPPipeSync(gfxCtx->polyXlu.p++);
+        gSPSetGeometryMode(NEXT_POLY_XLU_DISP, G_ZBUFFER | G_SHADE | G_SHADING_SMOOTH);
+        gDPPipeSync(NEXT_POLY_XLU_DISP);
 
         vertices = Graph_Alloc(gfxCtx, this->numElements * sizeof(Vtx[4]));
         if (vertices == NULL) {
@@ -218,7 +218,7 @@ void EffectSpark_Draw(void* thisx, GraphicsContext* gfxCtx) {
             SkinMatrix_SetTranslate(&spEC, elem->position.x, elem->position.y, elem->position.z);
             temp = ((Math_Rand_ZeroOne() * 2.5f) + 1.5f) * 0.015625f;
             SkinMatrix_SetScale(&spAC, temp, temp, 1.0f);
-            SkinMatrix_MtxFMtxFMult(&spEC, &globalCtx->mf_11DA0, &sp6C);
+            SkinMatrix_MtxFMtxFMult(&spEC, &globalCtx->softspriteMatrix, &sp6C);
             SkinMatrix_MtxFMtxFMult(&sp6C, &spAC, &sp12C);
 
             vertices[j].v.ob[0] = -32;
@@ -274,15 +274,15 @@ void EffectSpark_Draw(void* thisx, GraphicsContext* gfxCtx) {
                 break;
             }
 
-            gSPMatrix(gfxCtx->polyXlu.p++, mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPVertex(gfxCtx->polyXlu.p++, &vertices[4 * i], 4, 0);
-            gSP2Triangles(gfxCtx->polyXlu.p++, 2, 0, 3, 0, 2, 3, 1, 0);
+            gSPMatrix(NEXT_POLY_XLU_DISP, mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPVertex(NEXT_POLY_XLU_DISP, &vertices[4 * i], 4, 0);
+            gSP2Triangles(NEXT_POLY_XLU_DISP, 2, 0, 3, 0, 2, 3, 1, 0);
         }
 
-        gDPPipeSync(gfxCtx->polyXlu.p++);
+        gDPPipeSync(NEXT_POLY_XLU_DISP);
     }
 
-    Graph_CloseDisps(dispRefs, gfxCtx, "../z_eff_spark.c", 498);
+    CLOSE_DISP(gfxCtx, "../z_eff_spark.c", 498);
 }
 #else
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_eff_spark/EffectSpark_Draw.s")

@@ -8,6 +8,12 @@
 #define ACTOR_NUMBER_MAX 200
 #define INVISIBLE_ACTOR_MAX 20
 #define AM_FIELD_SIZE 0x27A0
+#define GROUND_BGCHECK_OFFSET_Y 50.0f
+
+#define NAME_DISP_CHECK(globalCtx) (0)
+#define NAME_DISP_CHECK2(globalCtx) ((globalCtx)->actorCtx.titleCtx.waitTimer || \
+                                     (globalCtx)->actorCtx.titleCtx.alpha)
+#define ACTOR_CLEAR_STATUS(this, bitData) bitclr((this)->flags, (bitData))
 
 // From z64.h
 struct Actor;
@@ -97,11 +103,11 @@ typedef struct {
 typedef struct {
     /* 0x00 */ Vec3s  rot; // Current actor shape rotation
     /* 0x06 */ u8     unk_06;
-    /* 0x08 */ f32    unk_08; // Model y axis offset. Represents model space units. collision mesh related
+    /* 0x08 */ f32    offset_y; // Model y axis offset. Represents model space units. collision mesh related
     /* 0x0C */ void (*shadowDrawFunc)(struct Actor*, struct LightMapper*, struct GlobalContext*);
-    /* 0x10 */ f32    unk_10;
-    /* 0x14 */ u8     unk_14;
-    /* 0x15 */ u8     unk_15;
+    /* 0x10 */ f32    shadowSize;
+    /* 0x14 */ u8     shadowAlpha;
+    /* 0x15 */ u8     footHitFlag;
 } ActorShape; // size = 0x18
 
 typedef struct Actor {
@@ -112,7 +118,7 @@ typedef struct Actor {
     /* 0x008 */ PosRot  initPosRot; // Initial position/rotation when spawned. Is sometimes used for other purposes
     /* 0x01C */ s16     params; // original name: "args_data"; Configurable variable set by an actor's spawn data
     /* 0x01E */ s8      objBankIndex; // original name: "bank"; Object bank index of this actor's object dependency
-    /* 0x01F */ s8      unk_1F;
+    /* 0x01F */ s8      naviRange;
     /* 0x020 */ u16     sfx; // Plays sound effect relative to actor's location (if within range of camera?)
     /* 0x024 */ PosRot  posRot; // position/rotation in the world
     /* 0x038 */ PosRot  posRot2;
@@ -136,7 +142,7 @@ typedef struct Actor {
     /* 0x094 */ f32     yDistFromLink;
     /* 0x098 */ CollisionCheckInfo colChkInfo;
     /* 0x0B4 */ ActorShape shape;
-    /* 0x0CC */ Vec3f   unk_CC[2];
+    /* 0x0CC */ Vec3f   footPos[2];
     /* 0x0E4 */ Vec3f   projectedPos; // actor position in projected space
     /* 0x0F0 */ f32     projectedW; // w component of the projected actor position vector
     /* 0x0F4 */ f32     uncullZoneForward; // amount to increase the uncull zone forward by (in projected space)
@@ -451,7 +457,8 @@ typedef enum {
     /* 0x08 */ ACTORTYPE_MISC,
     /* 0x09 */ ACTORTYPE_BOSS,
     /* 0x0A */ ACTORTYPE_DOOR,
-    /* 0x0B */ ACTORTYPE_CHEST
+    /* 0x0B */ ACTORTYPE_CHEST,
+    /* 0x0C */ ACTORTYPE_MAX
 } ActorType;
 
 typedef enum {
@@ -928,5 +935,50 @@ typedef enum {
     /* 0x01D6 */ ACTOR_OBJ_WARP2BLOCK,
     /* 0x01D7 */ ACTOR_ID_MAX // originally "ACTOR_DLF_MAX"
 } ActorID;
+
+enum {
+    NAVI_RANGE_A,
+    NAVI_RANGE_B,
+    NAVI_RANGE_C,
+    NAVI_RANGE_D,
+    NAVI_RANGE_E,
+    NAVI_RANGE_F,
+    NAVI_RANGE_G,	/* 住吉参上! 追加しました。	*/
+    NAVI_RANGE_H,
+    NAVI_RANGE_I,
+    NAVI_RANGE_P,	/* テスト用 */
+    NAVI_RANGE_MAX
+};
+
+#define	ACTOR_STATUS_NON		(0)
+#define	ACTOR_STATUS_ANCHOR_KEEP	(1)					/* 注目対象？ */
+#define	ACTOR_STATUS_ANCHOR		ACTOR_STATUS_ANCHOR_KEEP		/* 注目継続？ */
+#define	ACTOR_STATUS_FIGHT		((1<<2) | ACTOR_STATUS_ANCHOR)		/* 戦意有り？ */
+#define	ACTOR_STATUS_TALK		((1<<3) | ACTOR_STATUS_ANCHOR)		/* 会話有り？ */
+#define	ACTOR_STATUS_NO_CULL_MOVE	(1<<4)					/* カリングで動作処理停止しない？ */
+#define	ACTOR_STATUS_NO_CULL_DRAW	(1<<5)					/* カリングで描画処理停止しない？ */
+#define	ACTOR_STATUS_NO_CULL_FLAG	(1<<6)					/* カリング距離外フラグ（結果フラグ） */
+#define	ACTOR_STATUS_INVISIBLE		(1<<7)					/* 見えないフラグ */
+#define	ACTOR_STATUS_TALKING_NOW	(1<<8)					/* 会話中フラグ */
+#define	ACTOR_STATUS_HOOK_CARRY		(1<<9)					/* フックショット引っ張られフラグ */
+#define	ACTOR_STATUS_HOOK_STOP		(1<<10)					/* フックショット引っ張りフラグ */
+#define	ACTOR_STATUS_ZOMBI		(1<<11)					/* ゾンビなフラグ */
+#define	ACTOR_STATUS_NO_QUAKE		(1<<12)					/* 地震影響無しフラグ */
+#define	ACTOR_STATUS_HOOK_CARRY_NOW	(1<<13)					/* フックショット引っ張られ中フラグ */
+#define ACTOR_STATUS_ARROW_CARRY	(1<<14)					/* 矢押されフラグ */
+#define ACTOR_STATUS_ARROW_CARRY_NOW	(1<<15)					/* 矢押され中フラグ */
+#define ACTOR_STATUS_TALK_PLEASE	(1<<16)					/* 会話強要フラグ */
+#define ACTOR_STATUS_CARRY_ANGLE_SET	(1<<17)					/* 持ち上げられ角度セットフラグ */
+#define ACTOR_STATUS_ELF_MAIL		(1<<18 | ACTOR_STATUS_ANCHOR)		/* 妖精へのメール有り？ */
+#define	ACTOR_STATUS_LEVEL_SE_PLAYER	(1<<19)					/* レベルＳＥセットタイプ（プレイヤー） */
+#define	ACTOR_STATUS_LEVEL_SE_SYSTEM	(1<<20)					/* レベルＳＥセットタイプ（システム） */
+#define	ACTOR_STATUS_LEVEL_SE_FIX	(1<<21)					/* レベルＳＥセットタイプ（固定） */
+#define	ACTOR_STATUS_MAP_LIGHT_MODE	(1<<22)					/* 地形タイプライティングフラグ */
+#define	ACTOR_STATUS_THROW_ONLY		(1<<23)					/* 投げられのみフラグ */
+#define	ACTOR_STATUS_BODY_HIT		(1<<24)					/* 体当たりＳＥセットフラグ */
+#define	ACTOR_STATUS_OKARINA_NO_STOP	(1<<25)					/* オカリナ演奏中停止無しフラグ */
+#define ACTOR_STATUS_MOVEBG_ABLE_SW_ON  (1<<26)                                 /* moveBG SWフラグセットが出来るフラグ */
+#define ACTOR_STATUS_ANCHOR_NO_ROCK	(1<<27)                                 /* 注目ロック無しフラグ */
+#define ACTOR_STATUS_LEVEL_SE_TIMER	(1<<28)					/* レベルＳＥセットタイプ（タイマー） */
 
 #endif

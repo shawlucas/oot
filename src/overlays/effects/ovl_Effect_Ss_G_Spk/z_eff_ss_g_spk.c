@@ -96,22 +96,22 @@ void EffectSsGSpk_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
 
     SkinMatrix_SetTranslate(&sp11C, this->pos.x, this->pos.y, this->pos.z);
     SkinMatrix_SetScale(&spDC, scale, scale, 1.0f);
-    SkinMatrix_MtxFMtxFMult(&sp11C, &globalCtx->mf_11DA0, &sp5C);
+    SkinMatrix_MtxFMtxFMult(&sp11C, &globalCtx->softspriteMatrix, &sp5C);
     SkinMatrix_MtxFMtxFMult(&sp5C, &spDC, &sp9C);
 
     mtx = SkinMatrix_MtxFToNewMtx(gfxCtx, &sp9C);
 
     if (mtx != NULL) {
-        gSPMatrix(gfxCtx->polyXlu.p++, mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPSegment(gfxCtx->polyXlu.p++, 0x08, SEGMENTED_TO_VIRTUAL(D_809A7498[this->regs[SS_G_SPK_TEX_IDX]]));
+        gSPMatrix(gfxCtx->polyXlu.thaGfx.p++, mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPSegment(gfxCtx->polyXlu.thaGfx.p++, 0x08, SEGMENTED_TO_VIRTUAL(D_809A7498[this->regs[SS_G_SPK_TEX_IDX]]));
 
         func_80094BC4(gfxCtx);
-        gDPSetPrimColor(gfxCtx->polyXlu.p++, 0, 0, this->regs[SS_G_SPK_PRIM_R], this->regs[SS_G_SPK_PRIM_G],
+        gDPSetPrimColor(gfxCtx->polyXlu.thaGfx.p++, 0, 0, this->regs[SS_G_SPK_PRIM_R], this->regs[SS_G_SPK_PRIM_G],
                         this->regs[SS_G_SPK_PRIM_B], 255);
 
-        gDPSetEnvColor(gfxCtx->polyXlu.p++, this->regs[SS_G_SPK_ENV_R], this->regs[SS_G_SPK_ENV_G],
+        gDPSetEnvColor(gfxCtx->polyXlu.thaGfx.p++, this->regs[SS_G_SPK_ENV_R], this->regs[SS_G_SPK_ENV_G],
                        this->regs[SS_G_SPK_ENV_B], this->regs[SS_G_SPK_ENV_A]);
-        gSPDisplayList(gfxCtx->polyXlu.p++, this->displayList);
+        gSPDisplayList(gfxCtx->polyXlu.thaGfx.p++, this->displayList);
     }
     if (1) {}
     if (1) {}

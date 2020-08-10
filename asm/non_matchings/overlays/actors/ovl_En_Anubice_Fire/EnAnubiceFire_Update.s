@@ -17,7 +17,7 @@ glabel EnAnubiceFire_Update
 /* 00778 809B2D18 8FA5004C */  lw      $a1, 0x004C($sp)           
 /* 0077C 809B2D1C 0320F809 */  jalr    $ra, $t9                   
 /* 00780 809B2D20 00000000 */  nop
-/* 00784 809B2D24 0C00B5FB */  jal     func_8002D7EC              
+/* 00784 809B2D24 0C00B5FB */  jal     ActorPosition_Move              
 /* 00788 809B2D28 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 0078C 809B2D2C 26080024 */  addiu   $t0, $s0, 0x0024           ## $t0 = 00000024
 /* 00790 809B2D30 8D0F0000 */  lw      $t7, 0x0000($t0)           ## 00000024

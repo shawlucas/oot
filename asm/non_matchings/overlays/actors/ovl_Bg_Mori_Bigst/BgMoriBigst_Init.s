@@ -31,7 +31,7 @@ glabel BgMoriBigst_Init
 /* 000B8 808A0C78 30A5003F */  andi    $a1, $a1, 0x003F           ## $a1 = 00000000
 /* 000BC 808A0C7C AFA20034 */  sw      $v0, 0x0034($sp)           
 /* 000C0 808A0C80 82050003 */  lb      $a1, 0x0003($s0)           ## 00000003
-/* 000C4 808A0C84 0C00B349 */  jal     Flags_GetTempClear
+/* 000C4 808A0C84 0C00B349 */  jal     Flags_NoEnemyCheck
               
 /* 000C8 808A0C88 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 /* 000CC 808A0C8C AFA20038 */  sw      $v0, 0x0038($sp)           

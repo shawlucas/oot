@@ -131,7 +131,7 @@ void func_80889C18(BgHidanKousi* this, GlobalContext* globalCtx) {
 }
 
 void func_80889C90(BgHidanKousi* this, GlobalContext* globalCtx) {
-    func_8002D7EC(&this->dyna.actor);
+    ActorPosition_Move(&this->dyna.actor);
     if (D_80889E40[this->dyna.actor.params & 0xFF] <
         Math_Vec3f_DistXYZ(&this->dyna.actor.initPosRot.pos, &this->dyna.actor.posRot.pos)) {
         func_80889ACC(this);
@@ -152,15 +152,13 @@ void BgHidanKousi_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgHidanKousi_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Gfx* dispRefs[4];
 
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_bg_hidan_kousi.c", 350);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_bg_hidan_kousi.c", 350);
     func_80093D18(globalCtx->state.gfxCtx);
 
-    gSPMatrix(gfxCtx->polyOpa.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_hidan_kousi.c", 354),
+    gSPMatrix(NEXT_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_hidan_kousi.c", 354),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(gfxCtx->polyOpa.p++, D_80889E84[thisx->params & 0xFF]);
+    gSPDisplayList(NEXT_DISP, D_80889E84[thisx->params & 0xFF]);
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_bg_hidan_kousi.c", 359);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_bg_hidan_kousi.c", 359);
 }

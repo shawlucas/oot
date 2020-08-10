@@ -217,18 +217,18 @@ void ArrowFire_Draw(Actor* thisx, GlobalContext* globalCtx) {
 
         // Draw red effect over the screen when arrow hits
         if (this->unk_15C > 0) {
-            gfxCtx->polyXlu.p = func_800937C0(gfxCtx->polyXlu.p);
-            gDPSetPrimColor(gfxCtx->polyXlu.p++, 0, 0, (s32)(40.0f * this->unk_15C) & 0xFF, 0, 0,
+            gfxCtx->polyXlu.thaGfx.p = func_800937C0(gfxCtx->polyXlu.thaGfx.p);
+            gDPSetPrimColor(gfxCtx->polyXlu.thaGfx.p++, 0, 0, (s32)(40.0f * this->unk_15C) & 0xFF, 0, 0,
                             (s32)(150.0f * this->unk_15C) & 0xFF);
-            gDPSetAlphaDither(gfxCtx->polyXlu.p++, G_AD_DISABLE);
-            gDPSetColorDither(gfxCtx->polyXlu.p++, G_CD_DISABLE);
-            gDPFillRectangle(gfxCtx->polyXlu.p++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
+            gDPSetAlphaDither(gfxCtx->polyXlu.thaGfx.p++, G_AD_DISABLE);
+            gDPSetColorDither(gfxCtx->polyXlu.thaGfx.p++, G_CD_DISABLE);
+            gDPFillRectangle(gfxCtx->polyXlu.thaGfx.p++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
         }
 
         // Draw fire on the arrow
         func_80093D84(globalCtx->state.gfxCtx);
-        gDPSetPrimColor(gfxCtx->polyXlu.p++, 0x80, 0x80, 255, 200, 0, this->alpha);
-        gDPSetEnvColor(gfxCtx->polyXlu.p++, 255, 0, 0, 128);
+        gDPSetPrimColor(gfxCtx->polyXlu.thaGfx.p++, 0x80, 0x80, 255, 200, 0, this->alpha);
+        gDPSetEnvColor(gfxCtx->polyXlu.thaGfx.p++, 255, 0, 0, 128);
         Matrix_RotateRPY(0x4000, 0x0, 0x0, MTXMODE_APPLY);
         if (this->timer != 0) {
             Matrix_Translate(0.0f, 0.0f, 0.0f, MTXMODE_APPLY);
@@ -237,13 +237,13 @@ void ArrowFire_Draw(Actor* thisx, GlobalContext* globalCtx) {
         }
         Matrix_Scale(this->radius * 0.2f, this->unk_158 * 4.0f, this->radius * 0.2f, MTXMODE_APPLY);
         Matrix_Translate(0.0f, -700.0f, 0.0f, MTXMODE_APPLY);
-        gSPMatrix(gfxCtx->polyXlu.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_arrow_fire.c", 666),
+        gSPMatrix(gfxCtx->polyXlu.thaGfx.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_arrow_fire.c", 666),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gfxCtx->polyXlu.p++, sTextureDL);
-        gSPDisplayList(gfxCtx->polyXlu.p++,
+        gSPDisplayList(gfxCtx->polyXlu.thaGfx.p++, sTextureDL);
+        gSPDisplayList(gfxCtx->polyXlu.thaGfx.p++,
                        Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, 255 - (stateFrames * 2) % 256, 0, 64, 32, 1,
                                         255 - stateFrames % 256, 511 - (stateFrames * 10) % 512, 64, 64));
-        gSPDisplayList(gfxCtx->polyXlu.p++, sVertexDL);
+        gSPDisplayList(gfxCtx->polyXlu.thaGfx.p++, sVertexDL);
         Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_arrow_fire.c", 682);
     }
 }

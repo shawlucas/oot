@@ -53,7 +53,7 @@ glabel func_80BA1958
 .L80BA1A0C:
 /* 00CAC 80BA1A0C 0C2E8370 */  jal     func_80BA0DC0              
 /* 00CB0 80BA1A10 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
-/* 00CB4 80BA1A14 0C00B5FB */  jal     func_8002D7EC              
+/* 00CB4 80BA1A14 0C00B5FB */  jal     ActorPosition_Move              
 /* 00CB8 80BA1A18 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00CBC 80BA1A1C 3C0480BA */  lui     $a0, %hi(D_80BA1B54)       ## $a0 = 80BA0000
 /* 00CC0 80BA1A20 3C0580BA */  lui     $a1, %hi(D_80BA1B50)       ## $a1 = 80BA0000

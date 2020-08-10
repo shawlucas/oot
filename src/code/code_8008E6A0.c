@@ -1,11 +1,11 @@
 #include <global.h>
 
-void func_8008E6A0(SubGlobalContext7B8* this) {
+void func_8008E6A0(Pause* this) {
     this->counter = 0;
     this->toggle = false;
 }
 
-u32 func_8008E6AC(SubGlobalContext7B8* this, Input* input) {
+u32 func_8008E6AC(Pause* this, Input* input) {
     if (CHECK_PAD(input->cur, R_TRIG) && CHECK_PAD(input->press, D_JPAD)) {
         this->toggle = !this->toggle;
     }

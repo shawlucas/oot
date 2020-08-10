@@ -2,7 +2,7 @@ glabel func_80B21900
 /* 00B20 80B21900 27BDFFE8 */  addiu   $sp, $sp, 0xFFE8           ## $sp = FFFFFFE8
 /* 00B24 80B21904 AFBF0014 */  sw      $ra, 0x0014($sp)           
 /* 00B28 80B21908 AFA5001C */  sw      $a1, 0x001C($sp)           
-/* 00B2C 80B2190C 0C00B5FB */  jal     func_8002D7EC              
+/* 00B2C 80B2190C 0C00B5FB */  jal     ActorPosition_Move              
 /* 00B30 80B21910 AFA40018 */  sw      $a0, 0x0018($sp)           
 /* 00B34 80B21914 8FA40018 */  lw      $a0, 0x0018($sp)           
 /* 00B38 80B21918 848E015E */  lh      $t6, 0x015E($a0)           ## 0000015E

@@ -261,7 +261,7 @@ void EnMa1_Init(Actor* thisx, GlobalContext* globalCtx) {
 
     func_8002E4B4(globalCtx, &this->actor, 0.0f, 0.0f, 0.0f, 4);
     Actor_SetScale(&this->actor, 0.01f);
-    this->actor.unk_1F = 6;
+    this->actor.naviRange = 6;
     this->unk_1E8.unk_00 = 0;
 
     if ((!(gSaveContext.eventChkInf[1] & 0x10)) || (CHECK_QUEST_ITEM(QUEST_SONG_EPONA))) {
@@ -432,19 +432,18 @@ void EnMa1_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnMa1* this = THIS;
     Camera* camera;
     f32 someFloat;
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Gfx* dispRefs[5];
+    s32 pad;
 
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_ma1.c", 1226);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_ma1.c", 1226);
     camera = ACTIVE_CAM;
     someFloat = Math_Vec3f_DistXZ(&this->actor.posRot.pos, &camera->eye);
     func_800F6268(someFloat, 0x2F);
     func_80093D18(globalCtx->state.gfxCtx);
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0x09, SEGMENTED_TO_VIRTUAL(D_80AA16C4[this->unk_1E6]));
-    gSPSegment(gfxCtx->polyOpa.p++, 0x08, SEGMENTED_TO_VIRTUAL(D_80AA16D0[this->unk_1E4]));
+    gSPSegment(NEXT_DISP, 0x09, SEGMENTED_TO_VIRTUAL(D_80AA16C4[this->unk_1E6]));
+    gSPSegment(NEXT_DISP, 0x08, SEGMENTED_TO_VIRTUAL(D_80AA16D0[this->unk_1E4]));
 
     SkelAnime_DrawSV(globalCtx, this->skelAnime.skeleton, this->skelAnime.limbDrawTbl, this->skelAnime.dListCount,
                      EnMa1_OverrideLimbDraw, EnMa1_PostLimbDraw, &this->actor);
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_ma1.c", 1261);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_ma1.c", 1261);
 }

@@ -13,7 +13,7 @@
 void EnSkjneedle_Init(Actor* thisx, GlobalContext* globalCtx);
 void EnSkjneedle_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnSkjneedle_Update(Actor* thisx, GlobalContext* globalCtx);
-void EnSkjneedle_Draw(Actor* thisx, GlobalContext* globalCtx);
+void EnSkjneedle_Draw(Actor* thisx, GameState* state);
 
 s32 func_80B01F6C(EnSkjneedle* this);
 
@@ -38,7 +38,7 @@ static ColliderCylinderInit_Set3 sCylinderInit = {
 };
 
 static InitChainEntry sInitChain[] = {
-    ICHAIN_U8(unk_1F, 2, ICHAIN_CONTINUE),
+    ICHAIN_U8(naviRange, 2, ICHAIN_CONTINUE),
     ICHAIN_F32(unk_4C, 30, ICHAIN_STOP),
 };
 
@@ -88,14 +88,13 @@ void EnSkjneedle_Update(Actor* thisx, GlobalContext* globalCtx) {
     }
 }
 
-void EnSkjneedle_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Gfx* dispRefs[5];
+void EnSkjneedle_Draw(Actor* thisx, GameState* state) {
+    GlobalContext* globalCtx = GAME_PLAY;
 
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_skj_needle.c", 200);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_skj_needle.c", 200);
     func_80093D18(globalCtx->state.gfxCtx);
-    gSPMatrix(gfxCtx->polyOpa.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_skj_needle.c", 205),
+    gSPMatrix(NEXT_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_skj_needle.c", 205),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(gfxCtx->polyOpa.p++, &D_06000EB0);
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_skj_needle.c", 210);
+    gSPDisplayList(NEXT_DISP, &D_06000EB0);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_skj_needle.c", 210);
 }

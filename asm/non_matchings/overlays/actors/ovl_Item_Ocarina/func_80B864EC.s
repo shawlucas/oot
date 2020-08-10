@@ -9,7 +9,7 @@ glabel func_80B864EC
 /* 003BC 80B864EC 27BDFFE8 */  addiu   $sp, $sp, 0xFFE8           ## $sp = FFFFFFE8
 /* 003C0 80B864F0 AFBF0014 */  sw      $ra, 0x0014($sp)           
 /* 003C4 80B864F4 AFA5001C */  sw      $a1, 0x001C($sp)           
-/* 003C8 80B864F8 0C00B5FB */  jal     func_8002D7EC              
+/* 003C8 80B864F8 0C00B5FB */  jal     ActorPosition_Move              
 /* 003CC 80B864FC AFA40018 */  sw      $a0, 0x0018($sp)           
 /* 003D0 80B86500 8FA40018 */  lw      $a0, 0x0018($sp)           
 /* 003D4 80B86504 84820150 */  lh      $v0, 0x0150($a0)           ## 00000150

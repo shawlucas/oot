@@ -1874,7 +1874,7 @@ s32 DmaMgr_SendRequestImpl(DmaRequest* req, u32 ram, u32 vrom, u32 size, u32 unk
     req->vromAddr = vrom;
     req->dramAddr = (void*)ram;
     req->size = size;
-    req->unk_14 = 0;
+    req->pri = 0;
     req->notifyQueue = queue;
     req->notifyMsg = msg;
 

@@ -181,7 +181,7 @@ void EnItem00_Init(Actor* thisx, GlobalContext* globalCtx) {
 
     this->unk_156 = 0;
     ActorShape_Init(&this->actor.shape, sp34, ActorShadow_DrawFunc_Circle, sp30);
-    this->actor.shape.unk_14 = 0xB4;
+    this->actor.shape.shadowAlpha = 0xB4;
     this->actor.posRot2.pos = this->actor.posRot.pos;
     this->unk_152 = 0;
 
@@ -300,7 +300,7 @@ void func_8001DFC8(EnItem00* this, GlobalContext* globalCtx) {
     }
 
     if (this->actor.params == ITEM00_HEART_PIECE) {
-        this->actor.shape.unk_08 = Math_Sins(this->actor.shape.rot.y) * 150.0f + 850.0f;
+        this->actor.shape.offset_y = Math_Sins(this->actor.shape.rot.y) * 150.0f + 850.0f;
     }
 
     Math_SmoothScaleMaxMinF(&this->actor.speedXZ, 0.0f, 1.0f, 0.5f, 0.0f);
@@ -506,11 +506,11 @@ void EnItem00_Update(Actor* thisx, GlobalContext* globalCtx) {
     if ((this->actor.params == ITEM00_SHIELD_DEKU) || (this->actor.params == ITEM00_SHIELD_HYLIAN) ||
         (this->actor.params == ITEM00_TUNIC_ZORA) || (this->actor.params == ITEM00_TUNIC_GORON)) {
         f32 newUnkBC = Math_Coss(this->actor.shape.rot.x) * 37.0f;
-        this->actor.shape.unk_08 = newUnkBC;
+        this->actor.shape.offset_y = newUnkBC;
         if (newUnkBC >= 0.0f) {
-            this->actor.shape.unk_08 = this->actor.shape.unk_08;
+            this->actor.shape.offset_y = this->actor.shape.offset_y;
         } else {
-            this->actor.shape.unk_08 = -this->actor.shape.unk_08;
+            this->actor.shape.offset_y = -this->actor.shape.offset_y;
         }
     }
 
@@ -525,7 +525,7 @@ void EnItem00_Update(Actor* thisx, GlobalContext* globalCtx) {
         }
     }
 
-    if (globalCtx->unk_10A20 != 0) {
+    if (globalCtx->goverCtx != 0) {
         return;
     }
 
@@ -658,8 +658,8 @@ void EnItem00_Update(Actor* thisx, GlobalContext* globalCtx) {
 // Draw Function prototypes (used in EnItem00_Draw)
 void func_8001EF30(EnItem00* this, GlobalContext* globalCtx);
 void func_8001F080(EnItem00* this, GlobalContext* globalCtx);
-void func_8001F1F4(EnItem00* this, GlobalContext* globalCtx);
-void func_8001F334(EnItem00* this, GlobalContext* globalCtx);
+void func_8001F1F4(EnItem00* this, GameState* state);
+void func_8001F334(EnItem00* this, GameState* state);
 
 void EnItem00_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnItem00* this = THIS;
@@ -733,31 +733,28 @@ void EnItem00_Draw(Actor* thisx, GlobalContext* globalCtx) {
  * Draw Function used for Rupee types of En_Item00.
  */
 void func_8001EF30(EnItem00* this, GlobalContext* globalCtx) {
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
+    s32 pad;
     s32 iconNb;
-    Gfx* dispRefs[5];
-
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_item00.c", 1546);
+    
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_item00.c", 1546);
 
     func_80093D18(globalCtx->state.gfxCtx);
     func_8002EBCC(&this->actor, globalCtx, 0);
 
-    if (1) { // Necessary to match
-        if (this->actor.params <= ITEM00_RUPEE_RED) {
-            iconNb = this->actor.params;
-        } else {
-            iconNb = this->actor.params - 0x10;
-        }
+    if (this->actor.params <= ITEM00_RUPEE_RED) {
+        iconNb = this->actor.params;
+    } else {
+        iconNb = this->actor.params - 0x10;
     }
 
-    gSPMatrix(gfxCtx->polyOpa.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_item00.c", 1562),
+    gSPMatrix(NEXT_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_item00.c", 1562),
               G_MTX_MODELVIEW | G_MTX_LOAD);
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0x08, SEGMENTED_TO_VIRTUAL(D_80115530[iconNb]));
+    gSPSegment(NEXT_DISP, 0x08, SEGMENTED_TO_VIRTUAL(D_80115530[iconNb]));
 
-    gSPDisplayList(gfxCtx->polyOpa.p++, &D_04042440);
+    gSPDisplayList(NEXT_DISP, &D_04042440);
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_item00.c", 1568);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_item00.c", 1568);
 }
 
 /**
@@ -765,14 +762,12 @@ void func_8001EF30(EnItem00* this, GlobalContext* globalCtx) {
  */
 void func_8001F080(EnItem00* this, GlobalContext* globalCtx) {
     s32 iconNb;
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Gfx* dispRefs[4];
 
     iconNb = this->actor.params - 3;
 
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_item00.c", 1594);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_item00.c", 1594);
 
-    gfxCtx->polyOpa.p = func_800BC8A0(globalCtx, gfxCtx->polyOpa.p);
+    SET_NOW_DISP(func_800BC8A0(globalCtx, NOW_DISP));
 
     if (this->actor.params == ITEM00_BOMBS_SPECIAL) {
         iconNb = 1;
@@ -780,57 +775,55 @@ void func_8001F080(EnItem00* this, GlobalContext* globalCtx) {
         iconNb -= 3;
     }
 
-    gfxCtx->polyOpa.p = func_800946E4(gfxCtx->polyOpa.p);
+    SET_NOW_DISP(func_800946E4(NOW_DISP));
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0x08, SEGMENTED_TO_VIRTUAL(D_80115544[iconNb]));
+    gSPSegment(NEXT_DISP, 0x08, SEGMENTED_TO_VIRTUAL(D_80115544[iconNb]));
 
-    gSPMatrix(gfxCtx->polyOpa.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_item00.c", 1607),
+    gSPMatrix(NEXT_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_item00.c", 1607),
               G_MTX_MODELVIEW | G_MTX_LOAD);
-    gSPDisplayList(gfxCtx->polyOpa.p++, &D_0403F070);
+    gSPDisplayList(NEXT_DISP, &D_0403F070);
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_item00.c", 1611);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_item00.c", 1611);
 }
 
 /**
  * Draw Function used for the Heart Container type of En_Item00.
  */
-void func_8001F1F4(EnItem00* this, GlobalContext* globalCtx) {
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Gfx* dispRefs[5];
+void func_8001F1F4(EnItem00* this, GameState* state) {
+    GlobalContext* globalCtx = GAME_PLAY;
 
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_item00.c", 1623);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_item00.c", 1623);
 
     func_80093D18(globalCtx->state.gfxCtx);
     func_8002EBCC(&this->actor, globalCtx, 0);
-    gSPMatrix(gfxCtx->polyOpa.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_item00.c", 1634),
+    gSPMatrix(NEXT_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_item00.c", 1634),
               G_MTX_MODELVIEW | G_MTX_LOAD);
-    gSPDisplayList(gfxCtx->polyOpa.p++, &D_0403BBA0);
+    gSPDisplayList(NEXT_DISP, &D_0403BBA0);
 
     func_80093D84(globalCtx->state.gfxCtx);
     func_8002ED80(&this->actor, globalCtx, 0);
-    gSPMatrix(gfxCtx->polyXlu.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_item00.c", 1644),
+    gSPMatrix(NEXT_POLY_XLU_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_item00.c", 1644),
               G_MTX_MODELVIEW | G_MTX_LOAD);
-    gSPDisplayList(gfxCtx->polyXlu.p++, &D_0403BCD8);
+    gSPDisplayList(NEXT_POLY_XLU_DISP, &D_0403BCD8);
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_item00.c", 1647);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_item00.c", 1647);
 }
 
 /**
  * Draw Function used for the Piece of Heart type of En_Item00.
  */
-void func_8001F334(EnItem00* this, GlobalContext* globalCtx) {
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Gfx* dispRefs[5];
+void func_8001F334(EnItem00* this, GameState* state) {
+    GlobalContext* globalCtx = GAME_PLAY;
 
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_item00.c", 1658);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_item00.c", 1658);
 
     func_80093D84(globalCtx->state.gfxCtx);
     func_8002ED80(&this->actor, globalCtx, 0);
-    gSPMatrix(gfxCtx->polyXlu.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_item00.c", 1670),
+    gSPMatrix(NEXT_POLY_XLU_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_item00.c", 1670),
               G_MTX_MODELVIEW | G_MTX_LOAD);
-    gSPDisplayList(gfxCtx->polyXlu.p++, &D_0403B030);
+    gSPDisplayList(NEXT_POLY_XLU_DISP, &D_0403B030);
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_item00.c", 1673);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_item00.c", 1673);
 }
 
 /**

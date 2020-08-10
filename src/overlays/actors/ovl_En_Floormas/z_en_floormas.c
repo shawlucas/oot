@@ -1075,40 +1075,33 @@ static Color_RGBA8 sMergeColor = { 0x00, 0xFF, 0x00, 0x00 };
 
 void EnFloormas_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnFloormas* this = THIS;
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Gfx* gfx[4];
-    s32 pad;
 
-    Graph_OpenDisps(gfx, globalCtx->state.gfxCtx, "../z_en_floormas.c", 2318);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_floormas.c", 2318);
     func_80093D18(globalCtx->state.gfxCtx);
     if (this->collider.base.type == COLTYPE_UNK12) {
         func_80026230(globalCtx, &sMergeColor, this->actionTarget % 0x28, 0x28);
     }
 
-    gfxCtx->polyOpa.p =
-        SkelAnime_DrawSV2(globalCtx, this->skelAnime.skeleton, this->skelAnime.limbDrawTbl, this->skelAnime.dListCount,
-                          EnFloormas_OverrideLimbDraw, EnFloormas_PostLimbDraw, &this->actor, gfxCtx->polyOpa.p);
+    SET_NOW_DISP(SkelAnime_DrawSV2(globalCtx, this->skelAnime.skeleton, this->skelAnime.limbDrawTbl, this->skelAnime.dListCount,
+                          EnFloormas_OverrideLimbDraw, EnFloormas_PostLimbDraw, &this->actor, NOW_DISP));
     if (this->collider.base.type == COLTYPE_UNK12) {
         func_80026608(globalCtx);
     }
-    Graph_CloseDisps(gfx, globalCtx->state.gfxCtx, "../z_en_floormas.c", 2340);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_floormas.c", 2340);
 }
 
 void EnFloormas_DrawHighlighted(Actor* thisx, GlobalContext* globalCtx) {
     EnFloormas* this = THIS;
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Gfx* gfx[4];
 
-    Graph_OpenDisps(gfx, globalCtx->state.gfxCtx, "../z_en_floormas.c", 2352);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_floormas.c", 2352);
     func_80093D84(globalCtx->state.gfxCtx);
     if (this->collider.base.type == COLTYPE_UNK12) {
         func_80026690(globalCtx, &sMergeColor, this->actionTarget % 0x28, 0x28);
     }
-    gfxCtx->polyXlu.p =
-        SkelAnime_DrawSV2(globalCtx, this->skelAnime.skeleton, this->skelAnime.limbDrawTbl, this->skelAnime.dListCount,
-                          EnFloormas_OverrideLimbDraw, EnFloormas_PostLimbDraw, &this->actor, gfxCtx->polyXlu.p);
+    SET_NOW_POLY_XLU_DISP(SkelAnime_DrawSV2(globalCtx, this->skelAnime.skeleton, this->skelAnime.limbDrawTbl, this->skelAnime.dListCount,
+                          EnFloormas_OverrideLimbDraw, EnFloormas_PostLimbDraw, &this->actor, NOW_POLY_XLU_DISP));
     if (this->collider.base.type == COLTYPE_UNK12) {
         func_80026A6C(globalCtx);
     }
-    Graph_CloseDisps(gfx, globalCtx->state.gfxCtx, "../z_en_floormas.c", 2374);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_floormas.c", 2374);
 }

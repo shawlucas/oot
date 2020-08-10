@@ -206,7 +206,7 @@ glabel EnAnubice_Update
 /* 00EC4 809B1FE4 C606006C */  lwc1    $f6, 0x006C($s0)           ## 0000006C
 /* 00EC8 809B1FE8 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00ECC 809B1FEC 46062200 */  add.s   $f8, $f4, $f6              
-/* 00ED0 809B1FF0 0C00B5FB */  jal     func_8002D7EC              
+/* 00ED0 809B1FF0 0C00B5FB */  jal     ActorPosition_Move              
 /* 00ED4 809B1FF4 E6080060 */  swc1    $f8, 0x0060($s0)           ## 00000060
 /* 00ED8 809B1FF8 86080260 */  lh      $t0, 0x0260($s0)           ## 00000260
 /* 00EDC 809B1FFC 3C0140A0 */  lui     $at, 0x40A0                ## $at = 40A00000

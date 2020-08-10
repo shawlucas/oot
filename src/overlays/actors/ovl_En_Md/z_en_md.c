@@ -574,10 +574,10 @@ void func_80AAB5A4(EnMd* this, GlobalContext* globalCtx) {
                    ? 100.0f
                    : 400.0f;
         this->alpha = func_80034DD4(this, globalCtx, this->alpha, temp);
-        this->actor.shape.unk_14 = this->alpha;
+        this->actor.shape.shadowAlpha = this->alpha;
     } else {
         this->alpha = 255;
-        this->actor.shape.unk_14 = this->alpha;
+        this->actor.shape.shadowAlpha = this->alpha;
     }
 }
 
@@ -599,7 +599,7 @@ void EnMd_Init(Actor* thisx, GlobalContext* globalCtx) {
 
     func_80034EC0(&this->skelAnime, sAnimations, 0);
     Actor_SetScale(&this->actor, 0.01f);
-    this->actor.unk_1F = 6;
+    this->actor.naviRange = 6;
     this->alpha = 255;
     Actor_SpawnAttached(&globalCtx->actorCtx, &this->actor, globalCtx, ACTOR_EN_ELF, this->actor.posRot.pos.x,
                         this->actor.posRot.pos.y, this->actor.posRot.pos.z, 0, 0, 0, 3);
@@ -807,18 +807,15 @@ void EnMd_Draw(Actor* thisx, GlobalContext* globalCtx) {
         0x06005D30,
     };
     EnMd* this = THIS;
-    GraphicsContext* gfxCtx;
-    Gfx* dispRefs[4];
 
-    gfxCtx = globalCtx->state.gfxCtx;
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_md.c", 1280);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_md.c", 1280);
     if (this->alpha == 255) {
-        gSPSegment(gfxCtx->polyOpa.p++, 0x08, SEGMENTED_TO_VIRTUAL(sEyesSegments[this->eyeIdx]));
+        gSPSegment(NEXT_DISP, 0x08, SEGMENTED_TO_VIRTUAL(sEyesSegments[this->eyeIdx]));
         func_80034BA0(globalCtx, &this->skelAnime, EnMd_OverrideLimbDraw, EnMd_PostLimbDraw, &this->actor, this->alpha);
     } else if (this->alpha != 0) {
-        gSPSegment(gfxCtx->polyXlu.p++, 0x08, SEGMENTED_TO_VIRTUAL(sEyesSegments[this->eyeIdx]));
+        gSPSegment(NEXT_POLY_XLU_DISP, 0x08, SEGMENTED_TO_VIRTUAL(sEyesSegments[this->eyeIdx]));
         func_80034CC4(globalCtx, &this->skelAnime, EnMd_OverrideLimbDraw, EnMd_PostLimbDraw, &this->actor, this->alpha);
     }
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_md.c", 1317);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_md.c", 1317);
 }

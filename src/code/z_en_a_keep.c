@@ -133,7 +133,7 @@ void EnAObj_Init(Actor* thisx, GlobalContext* globalCtx) {
             Collider_InitCylinder(globalCtx, &this->collider);
             Collider_SetCylinder(globalCtx, &this->collider, thisx, &sCylinderInit);
             thisx->colChkInfo.mass = 0xFF;
-            thisx->unk_1F = 0;
+            thisx->naviRange = 0;
             break;
         case A_OBJ_KNOB:
             thisx->gravity = -1.5f;
@@ -319,10 +319,8 @@ void EnAObj_Update(Actor* thisx, GlobalContext* globalCtx) {
 
 void EnAObj_Draw(Actor* thisx, GlobalContext* globalCtx) {
     s32 type = thisx->params;
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Gfx* dispRefs[4];
 
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_a_keep.c", 701);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_en_a_keep.c", 701);
 
     func_80093D18(globalCtx->state.gfxCtx);
 
@@ -331,12 +329,12 @@ void EnAObj_Draw(Actor* thisx, GlobalContext* globalCtx) {
     }
 
     if (thisx->params == A_OBJ_KNOB) {
-        gDPSetPrimColor(gfxCtx->polyOpa.p++, 0, 1, 60, 60, 60, 50);
+        gDPSetPrimColor(NEXT_DISP, 0, 1, 60, 60, 60, 50);
     }
 
-    gSPMatrix(gfxCtx->polyOpa.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_a_keep.c", 712),
+    gSPMatrix(NEXT_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_a_keep.c", 712),
               G_MTX_MODELVIEW | G_MTX_LOAD);
-    gSPDisplayList(gfxCtx->polyOpa.p++, D_80115484[type]);
+    gSPDisplayList(NEXT_DISP, D_80115484[type]);
 
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_en_a_keep.c", 715);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_en_a_keep.c", 715);
 }

@@ -353,7 +353,6 @@ beginseg
     include "build/src/code/z_skin_awb.o"
     include "build/src/code/z_skin_matrix.o"
     include "build/src/code/z_sram.o"
-    include "build/data/z_sram.data.o"
     include "build/src/code/code_800A9D40.o"
     include "build/src/code/code_800A9F30.o"
     include "build/data/z_text.data.o"

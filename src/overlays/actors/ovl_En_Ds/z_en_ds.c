@@ -44,7 +44,7 @@ void EnDs_Init(Actor* thisx, GlobalContext* globalCtx) {
     Actor_SetScale(this, 0.013f);
 
     this->actionFunc = EnDs_Wait;
-    this->actor.unk_1F = 1;
+    this->actor.naviRange = 1;
     this->unk_1E8 = 0;
     this->actor.flags &= ~0x1;
     this->unk_1E4 = 0.0f;

@@ -68,7 +68,7 @@ void DoorAna_Init(Actor* thisx, GlobalContext* globalCtx) {
     } else {
         DoorAna_SetupAction(this, DoorAna_WaitOpen);
     }
-    this->actor.unk_1F = 0;
+    this->actor.naviRange = 0;
 }
 
 void DoorAna_Destroy(Actor* thisx, GlobalContext* globalCtx) {
@@ -115,7 +115,7 @@ void DoorAna_WaitOpen(DoorAna* this, GlobalContext* globalCtx) {
 
     player = PLAYER;
     if (Math_ApproxF(&this->actor.scale.x, 0.01f, 0.001f) != 0) {
-        if ((this->actor.unk_1F != 0) && (globalCtx->sceneLoadFlag == 0) && (player->stateFlags1 & 0x80000000) &&
+        if ((this->actor.naviRange != 0) && (globalCtx->sceneLoadFlag == 0) && (player->stateFlags1 & 0x80000000) &&
             (player->unk_84F == 0)) {
             destinationIdx = ((this->actor.params >> 0xC) & 7) - 1;
             Gameplay_SetupRespawnPoint(globalCtx, RESPAWN_MODE_RETURN, 0x4FF);
@@ -132,9 +132,9 @@ void DoorAna_WaitOpen(DoorAna* this, GlobalContext* globalCtx) {
                 this->actor.xzDistFromLink <= 15.0f && -50.0f <= this->actor.yDistFromLink &&
                 this->actor.yDistFromLink <= 15.0f) {
                 player->stateFlags1 |= 0x80000000;
-                this->actor.unk_1F = 1;
+                this->actor.naviRange = 1;
             } else {
-                this->actor.unk_1F = 0;
+                this->actor.naviRange = 0;
             }
         }
     }
@@ -161,13 +161,11 @@ void DoorAna_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void DoorAna_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    Gfx* dispRefs[4];
 
-    Graph_OpenDisps(dispRefs, globalCtx->state.gfxCtx, "../z_door_ana.c", 440);
+    OPEN_DISP(globalCtx->state.gfxCtx, "../z_door_ana.c", 440);
     func_80093D84(globalCtx->state.gfxCtx);
-    gSPMatrix(gfxCtx->polyXlu.p++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_door_ana.c", 446),
+    gSPMatrix(NEXT_POLY_XLU_DISP, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_door_ana.c", 446),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(gfxCtx->polyXlu.p++, D_05001390);
-    Graph_CloseDisps(dispRefs, globalCtx->state.gfxCtx, "../z_door_ana.c", 449);
+    gSPDisplayList(NEXT_POLY_XLU_DISP, D_05001390);
+    CLOSE_DISP(globalCtx->state.gfxCtx, "../z_door_ana.c", 449);
 }

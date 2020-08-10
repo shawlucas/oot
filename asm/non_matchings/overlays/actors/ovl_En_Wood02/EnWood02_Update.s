@@ -279,7 +279,7 @@ glabel EnWood02_Update
 /* 00B74 80B3BAE4 0C01E107 */  jal     Math_SmoothScaleMaxF
               
 /* 00B78 80B3BAE8 3C063F80 */  lui     $a2, 0x3F80                ## $a2 = 3F800000
-/* 00B7C 80B3BAEC 0C00B5FB */  jal     func_8002D7EC              
+/* 00B7C 80B3BAEC 0C00B5FB */  jal     ActorPosition_Move              
 /* 00B80 80B3BAF0 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 /* 00B84 80B3BAF4 8624014C */  lh      $a0, 0x014C($s1)           ## 0000014C
 /* 00B88 80B3BAF8 00800821 */  addu    $at, $a0, $zero            

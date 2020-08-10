@@ -220,14 +220,12 @@ void func_80063D7C(GraphicsContext* gfxCtx) {
     Gfx* sp78;
     GfxPrint gfxPrint;
     Gfx* tempRet;
-    s32 pad;
-    Gfx* dispRefs[4]; // stores state of GfxCtx next ptrs
 
-    Graph_OpenDisps(dispRefs, gfxCtx, "../z_debug.c", 628);
+    OPEN_DISP(gfxCtx, "../z_debug.c", 628);
     GfxPrint_Init(&gfxPrint);
-    sp78 = gfxCtx->polyOpa.p;
-    tempRet = Graph_GfxPlusOne(gfxCtx->polyOpa.p);
-    gSPDisplayList(gfxCtx->overlay.p++, tempRet);
+    sp78 = NOW_DISP;
+    tempRet = Graph_GfxPlusOne(NOW_DISP);
+    gSPDisplayList(NEXT_OVERLAY_DISP, tempRet);
     GfxPrint_Open(&gfxPrint, tempRet);
 
     if ((OREG(0) == 1) || (OREG(0) == 8)) {
@@ -242,8 +240,8 @@ void func_80063D7C(GraphicsContext* gfxCtx) {
     sp7C = GfxPrint_Close(&gfxPrint);
     gSPEndDisplayList(sp7C++);
     Graph_BranchDlist(sp78, sp7C);
-    gfxCtx->polyOpa.p = sp7C;
-    if (0) {}
-    Graph_CloseDisps(dispRefs, gfxCtx, "../z_debug.c", 664);
+    SET_NOW_DISP(sp7C);
+
+    CLOSE_DISP(gfxCtx, "../z_debug.c", 664);
     GfxPrint_Destroy(&gfxPrint);
 }

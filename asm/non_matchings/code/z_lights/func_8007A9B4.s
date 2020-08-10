@@ -63,7 +63,7 @@ glabel func_8007A9B4
 /* AF1C30 8007AA90 44888000 */  mtc1  $t0, $f16
 /* AF1C34 8007AA94 00000000 */  nop   
 /* AF1C38 8007AA98 468084A0 */  cvt.s.w $f18, $f16
-/* AF1C3C 8007AA9C 0C00AF81 */  jal   func_8002BE04
+/* AF1C3C 8007AA9C 0C00AF81 */  jal   ProjectionPos_Set
 /* AF1C40 8007AAA0 E7B2009C */   swc1  $f18, 0x9c($sp)
 /* AF1C44 8007AAA4 A2000009 */  sb    $zero, 9($s0)
 /* AF1C48 8007AAA8 C7A40090 */  lwc1  $f4, 0x90($sp)

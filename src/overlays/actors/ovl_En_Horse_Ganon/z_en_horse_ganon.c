@@ -160,7 +160,7 @@ void EnHorseGanon_Init(Actor* thisx, GlobalContext* globalCtx) {
 
     this->actor.gravity = -3.5f;
 
-    ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawFunc_Squiggly, 20.0f);
+    ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_Horse, 20.0f);
     this->actor.speedXZ = 0.0f;
     this->actor.posRot2.pos = this->actor.posRot.pos;
     this->action = 0;

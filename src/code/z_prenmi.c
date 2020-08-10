@@ -26,26 +26,25 @@ void PreNMI_Update(PreNMIContext* prenmiCtx) {
 
 void PreNMI_Draw(PreNMIContext* prenmiCtx) {
     GraphicsContext* gfxCtx = prenmiCtx->state.gfxCtx;
-    Gfx* dispRefs[5];
 
     osSyncPrintf(VT_COL(YELLOW, BLACK) "prenmi_draw\n" VT_RST);
 
-    Graph_OpenDisps(dispRefs, gfxCtx, "../z_prenmi.c", 96);
+    OPEN_DISP(gfxCtx, "../z_prenmi.c", 96);
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0x00, NULL);
+    gSPSegment(NEXT_DISP, 0x00, NULL);
     func_80095248(gfxCtx, 0, 0, 0);
     func_800940B0(gfxCtx);
-    gDPSetFillColor(gfxCtx->polyOpa.p++, (GPACK_RGBA5551(255, 255, 255, 1) << 16) | GPACK_RGBA5551(255, 255, 255, 1));
-    gDPFillRectangle(gfxCtx->polyOpa.p++, 0, prenmiCtx->timer + 100, SCREEN_WIDTH - 1, prenmiCtx->timer + 100);
+    gDPSetFillColor(NEXT_DISP, (GPACK_RGBA5551(255, 255, 255, 1) << 16) | GPACK_RGBA5551(255, 255, 255, 1));
+    gDPFillRectangle(NEXT_DISP, 0, prenmiCtx->timer + 100, SCREEN_WIDTH - 1, prenmiCtx->timer + 100);
 
-    Graph_CloseDisps(dispRefs, gfxCtx, "../z_prenmi.c", 112);
+    CLOSE_DISP(gfxCtx, "../z_prenmi.c", 112);
 }
 
 void PreNMI_Main(PreNMIContext* prenmiCtx) {
     PreNMI_Update(prenmiCtx);
     PreNMI_Draw(prenmiCtx);
 
-    prenmiCtx->state.unk_A0 = 1;
+    prenmiCtx->state.next_game_dlf_no = 1;
 }
 
 void PreNMI_Destroy(PreNMIContext* prenmiCtx) {

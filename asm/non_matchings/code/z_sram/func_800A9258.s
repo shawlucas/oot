@@ -177,8 +177,8 @@ glabel func_800A9258
 /* B205AC 800A940C 0C00084C */  jal   osSyncPrintf
 /* B205B0 800A9410 3265FFFF */   andi  $a1, $s3, 0xffff
 /* B205B4 800A9414 8E861354 */  lw    $a2, 0x1354($s4)
-/* B205B8 800A9418 3C138013 */  lui   $s3, %hi(D_8012A4E0) # $s3, 0x8013
-/* B205BC 800A941C 2673A4E0 */  addiu $s3, %lo(D_8012A4E0) # addiu $s3, $s3, -0x5b20
+/* B205B8 800A9418 3C138013 */  lui   $s3, %hi(sramSaveAddress) # $s3, 0x8013
+/* B205BC 800A941C 2673A4E0 */  addiu $s3, %lo(sramSaveAddress) # addiu $s3, $s3, -0x5b20
 /* B205C0 800A9420 0006C040 */  sll   $t8, $a2, 1
 /* B205C4 800A9424 0278C821 */  addu  $t9, $s3, $t8
 /* B205C8 800A9428 97300000 */  lhu   $s0, ($t9)

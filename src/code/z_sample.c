@@ -12,12 +12,11 @@ void Sample_HandleStateChange(SampleContext* this) {
 void Sample_Draw(SampleContext* this) {
     GraphicsContext* gfxCtx = this->state.gfxCtx;
     View* view = &this->view;
-    Gfx* dispRefs[5];
 
-    Graph_OpenDisps(dispRefs, gfxCtx, "../z_sample.c", 62);
+    OPEN_DISP(gfxCtx, "../z_sample.c", 62);
 
-    gSPSegment(gfxCtx->polyOpa.p++, 0x00, NULL);
-    gSPSegment(gfxCtx->polyOpa.p++, 0x01, this->staticSegment);
+    gSPSegment(NEXT_DISP, 0x00, NULL);
+    gSPSegment(NEXT_DISP, 0x01, this->staticSegment);
 
     func_80095248(gfxCtx, 0, 0, 0);
 
@@ -27,18 +26,18 @@ void Sample_Draw(SampleContext* this) {
     if (1) {
         Mtx* mtx = Graph_Alloc(gfxCtx, sizeof(Mtx));
         guPosition(mtx, SREG(37), SREG(38), SREG(39), 1.0f, SREG(40), SREG(41), SREG(42));
-        gSPMatrix(gfxCtx->polyOpa.p++, mtx, G_MTX_LOAD);
+        gSPMatrix(NEXT_DISP, mtx, G_MTX_LOAD);
     }
 
-    gfxCtx->polyOpa.p = Gfx_SetFog2(gfxCtx->polyOpa.p, 0xFF, 0xFF, 0xFF, 0, 0, 0);
+    SET_NOW_DISP(Gfx_SetFog2(NOW_DISP, 0xFF, 0xFF, 0xFF, 0, 0, 0));
     func_80093D18(gfxCtx);
 
-    gDPSetCycleType(gfxCtx->polyOpa.p++, G_CYC_1CYCLE);
-    gDPSetRenderMode(gfxCtx->polyOpa.p++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
-    gDPSetCombineMode(gfxCtx->polyOpa.p++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
-    gDPSetPrimColor(gfxCtx->polyOpa.p++, 0, 0, 255, 255, 0, 0);
+    gDPSetCycleType(NEXT_DISP, G_CYC_1CYCLE);
+    gDPSetRenderMode(NEXT_DISP, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+    gDPSetCombineMode(NEXT_DISP, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+    gDPSetPrimColor(NEXT_DISP, 0, 0, 255, 255, 0, 0);
 
-    Graph_CloseDisps(dispRefs, gfxCtx, "../z_sample.c", 111);
+    CLOSE_DISP(gfxCtx, "../z_sample.c", 111);
 }
 
 void Sample_Main(SampleContext* this) {
