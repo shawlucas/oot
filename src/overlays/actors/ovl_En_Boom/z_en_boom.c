@@ -36,7 +36,7 @@ static ColliderQuadInit sQuadInit = {
 };
 
 static InitChainEntry sInitChain[] = {
-    ICHAIN_S8(naviRange, 5, ICHAIN_CONTINUE),
+    ICHAIN_S8(unk_1F, 5, ICHAIN_CONTINUE),
     ICHAIN_VEC3S(shape.rot, 0, ICHAIN_STOP),
 };
 

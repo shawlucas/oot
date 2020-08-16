@@ -74,7 +74,7 @@ ELF := $(ROM:.z64=.elf)
 # description of ROM segments
 SPEC := spec
 
-SRC_DIRS := $(shell find src -type d) data/message/NES/
+SRC_DIRS := $(shell find src -type d)
 ASM_DIRS := $(shell find asm -type d -not -path "asm/non_matchings*") $(shell find data -type d)
 SCENE_DIRS := $(shell find scenes -type d -not -path "scenes/xml*")
 TEXTURE_DIRS := assets/textures
@@ -185,11 +185,6 @@ build/asm/%.o: asm/%.s
 
 build/data/%.o: data/%.s
 	iconv --from UTF-8 --to EUC-JP $^ | $(AS) $(ASFLAGS) -o $@
-
-build/data/message/%.o: data/message/%.c
-	$(CC) -c $(CFLAGS) $(MIPS_VERSION) $(OPTFLAGS) -o $@ $^
-	$(OBJCOPY) -O binary $@ $@.bin
-
 #build/assets/%.o: assets/%.s
 #	$(AS) $(ASFLAGS) $^ -o $@
 #	$(OBJCOPY) -O binary $@ $@.bin
