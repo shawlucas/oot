@@ -295,7 +295,7 @@ u32 Fault_WaitForInputImpl() {
         Fault_Sleep(0x10);
         Fault_UpdatePadImpl();
 
-        kDown = curInput->press.in.button;
+        kDown = curInput->press.button;
 
         if (kDown == L_TRIG) {
             sFaultStructPtr->faultActive = !sFaultStructPtr->faultActive;
@@ -565,8 +565,8 @@ void Fault_WaitForButtonCombo() {
         Fault_Sleep(0x10);
         Fault_UpdatePadImpl();
 
-        kDown = curInput->press.in.button;
-        kCur = curInput->cur.in.button;
+        kDown = curInput->press.button;
+        kCur = curInput->cur.button;
 
         if (kCur == 0) {
             if (s1 == s2) {
@@ -756,7 +756,7 @@ void Fault_DrawMemDump(u32 pc, u32 sp, u32 unk0, u32 unk1) {
         do {
             Fault_Sleep(0x10);
             Fault_UpdatePadImpl();
-        } while (curInput->press.in.button == 0);
+        } while (curInput->press.button == 0);
 
         if (CHECK_PAD(curInput->press, START_BUTTON) || CHECK_PAD(curInput->cur, A_BUTTON)) {
             return;

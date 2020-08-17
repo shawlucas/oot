@@ -114,11 +114,11 @@ void func_8006390C(Input* input) {
     s32 i;
 
     regGroup = (gGameInfo->regGroup * REG_PAGES + gGameInfo->regPage) * REG_PER_PAGE - REG_PER_PAGE;
-    dpad = input->cur.in.button & (U_JPAD | L_JPAD | R_JPAD | D_JPAD);
+    dpad = input->cur.button & (U_JPAD | L_JPAD | R_JPAD | D_JPAD);
     if (CHECK_PAD(input->cur, L_TRIG) || CHECK_PAD(input->cur, R_TRIG) || CHECK_PAD(input->cur, START_BUTTON)) {
         input_combo = inputCombos;
         for (i = 0; i < REG_GROUPS; i++) {
-            if (~(~input_combo->push | input->cur.in.button) || ~(~input_combo->held | input->press.in.button)) {
+            if (~(~input_combo->push | input->cur.button) || ~(~input_combo->held | input->press.button)) {
                 input_combo++;
             } else {
                 break;

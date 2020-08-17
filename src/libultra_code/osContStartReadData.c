@@ -26,8 +26,8 @@ void osContGetReadData(OSContPad* contData) {
         contData->errno = (read.rxsize & 0xC0) >> 4;
         if (contData->errno == 0) {
             contData->button = read.button;
-            contData->stick_x = read.joyX;
-            contData->stick_y = read.joyY;
+            contData->x = read.joyX;
+            contData->y = read.joyY;
         }
     };
 }

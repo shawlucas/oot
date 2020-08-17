@@ -123,7 +123,9 @@ if (1) {  \
         View_SetViewport(view, &viewport); \
     }
 
-#define CHECK_PAD(state, combo) (~(state.in.button | ~(combo)) == 0)
+#define CHECK_PAD(state, combo) (~(state.button | ~(combo)) == 0)
+#define pad_button(pad) (int)((pad)->cur.button)
+#define PAD_BUTTON() pad_button(input)
 
 #define S_Private gSaveContext.memory.privatef
 #define S_Information gSaveContext.memory.information

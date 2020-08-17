@@ -675,20 +675,21 @@ void Sram_SaveSound(Sram* sram) {
     ssSRAMWrite((void *)SRAM_START_ADDR, sram->read_buff, 0x10);
 }
 
-#if 0
-void func_800A9AD0(GameState* game, Sram* sram) {
-    //Input* input = &game->input[2];
+void Sram_Initialize(GameState* game, Sram* sram) {
+    Input* input = &game->input[2];
     u16 i, j;
     u16* k;
 
     osSyncPrintf("sram_initialize( Game *game, Sram *sram )\n");
 
     ssSRAMRead(sram->read_buff, (void *)SRAM_START_ADDR, SRAM_SIZE);
-    for (i = 0; i < 9; i++) {
+    for (i = 0; i < (sizeof(sramCheckData) / sizeof(u8) - 3); i++) {
         if (sramCheckData[i+3] != sram->read_buff[i+3]) {
             /* Memory Transfer */
             osSyncPrintf("ＳＲＡＭ破壊！！！！！！\n"); /* "SRAM destruction! ! ! ! ! !" */
+            J_N = sram->read_buff[2];
             MemCopy(sram->read_buff, &sramCheckData, sizeof(sramCheckData)/sizeof(u8));
+            sram->read_buff[2] = J_N;
             Sram_SaveSound(sram);
          }
     }
@@ -706,7 +707,7 @@ void func_800A9AD0(GameState* game, Sram* sram) {
 #endif
 
 #if !defined(ROM_F)
-    if ((s32)((&game->input[2])->cur.in.button) & R_JPAD) {
+    if (PAD_BUTTON() & R_JPAD) {
         bzero(sram->read_buff, SRAM_SIZE);
         for (i = 0; i < (SAVE_MAX) / 2; i++) {
             sram->read_buff[i] = i;
@@ -715,7 +716,7 @@ void func_800A9AD0(GameState* game, Sram* sram) {
         osSyncPrintf("ＳＲＡＭ破壊！！！！！！\n");
     }
 #endif
-    osSyncPrintf("ＧＯＯＤ！ＧＯＯＤ！ サイズ＝%d + %d ＝ %d\n", sizeof(Memory), sizeof(SAVE_BASE), sizeof(Memory) + sizeof(SAVE_BASE));
+    osSyncPrintf("ＧＯＯＤ！ＧＯＯＤ！ サイズ＝%d + %d ＝ %d\n", sizeof(Memory), 4, sizeof(Memory) + sizeof(SAVE_BASE));
     osSyncPrintf(VT_FGCOL(BLUE));
     osSyncPrintf("Na_SetSoundOutputMode = %d\n",NA_SOUT_STEREO + S_SOUND);
     osSyncPrintf("Na_SetSoundOutputMode = %d\n",NA_SOUT_STEREO + S_SOUND);
@@ -723,9 +724,6 @@ void func_800A9AD0(GameState* game, Sram* sram) {
     osSyncPrintf(VT_RST);
     func_800F6700(NA_SOUT_STEREO + S_SOUND); /* Sound output set */
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_sram/func_800A9AD0.s")
-#endif
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_sram/func_800A9CD4.s")
 

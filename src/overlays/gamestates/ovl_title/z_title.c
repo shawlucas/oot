@@ -157,7 +157,7 @@ void Title_Main(GameState* thisx) {
 }
 
 void Title_Destroy(TitleContext* this) {
-    func_800A9AD0(this, &this->sram);
+    Sram_Initialize(this, &this->sram);
 }
 
 void Title_Init(TitleContext* this) {
