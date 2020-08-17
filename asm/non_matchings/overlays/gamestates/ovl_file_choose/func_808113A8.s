@@ -6,7 +6,7 @@ glabel func_808113A8
 /* 0D678 808113B8 AFBF0024 */  sw      $ra, 0x0024($sp)           
 /* 0D67C 808113BC 261201E0 */  addiu   $s2, $s0, 0x01E0           ## $s2 = 000001E0
 /* 0D680 808113C0 AFB1001C */  sw      $s1, 0x001C($sp)           
-/* 0D684 808113C4 0C02A735 */  jal     func_800A9CD4              
+/* 0D684 808113C4 0C02A735 */  jal     Sram_TitleInit              
 /* 0D688 808113C8 02402825 */  or      $a1, $s2, $zero            ## $a1 = 000001E0
 /* 0D68C 808113CC 3C028016 */  lui     $v0, %hi(gGameInfo)
 /* 0D690 808113D0 2442FA90 */  addiu   $v0, %lo(gGameInfo)

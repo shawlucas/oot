@@ -177,7 +177,7 @@ void Title_Init(TitleContext* this) {
     this->state.destroy = Title_Destroy;
     this->exit = false;
     gSaveContext.fileNum = 0xFF;
-    func_800A9CD4(&this->state, &this->sram);
+    Sram_TitleInit(&this->state, &this->sram);
     this->ult = 0;
     this->unk_1D4 = 0x14;
     this->coverAlpha = 255;

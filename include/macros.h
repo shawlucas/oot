@@ -10,6 +10,12 @@
 
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 
+#if defined(__STDC__)
+    #define assert(EX, FILE, LINE) ((EX) ? ((void)0) : __assert( # EX , FILE, LINE))
+#else
+    #define assert(EX, FILE, LINE) ((EX) ? ((void)0) : __assert("EX", FILE, LINE))
+#endif
+
 #define concat(a, b) a##b 
 #define bitcheck(xx, yy) ((xx) & (yy))
 #define bitset(xx, yy) ((xx) |= (yy))

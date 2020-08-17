@@ -1314,7 +1314,7 @@ void func_800A7EC0(MtxF *mf, s16 a, f32 x, f32 y, f32 z);
 // ? Save_Initialize(?);
 // ? Save_Initialize999(?);
 // ? Sram_SaveSound(?);
-// ? func_800A9D28(?);
+// ? Sram_Ct(?);
 void func_800A9D40(u32 addr, u8 handleType, u8 handleDomain, u8 handleLatency, u8 handlePageSize, u8 handleRelDuration,
                    u8 handlePulse, u32 handleSpeed);
 void func_800A9E14(UNK_PTR dramAddr, size_t size, UNK_TYPE arg2);

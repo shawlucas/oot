@@ -629,50 +629,49 @@ void Sram_StartClear(FileChooseContext* this, Sram* sram) {
 
     i = sramSaveAddress[this->decisionNo];
     MemCopy(sram->read_buff + i, &gSaveContext.entranceIndex, SAVE_MAX);
-    ssSRAMWrite((void *)((s32)SRAM_START_ADDR + i), &gSaveContext.entranceIndex, SAVE_SIZE);
+    ssSRAMWrite((void*)((s32)SRAM_START_ADDR + i), &gSaveContext.entranceIndex, SAVE_SIZE);
     MemCopy(&this->f_64dd[this->decisionNo], sram->read_buff + i + SAVE_64DD, 2);
 
     i = sramSaveAddress[this->decisionNo + 3];
     MemCopy(sram->read_buff + i, &gSaveContext.entranceIndex, SAVE_MAX);
-    ssSRAMWrite((void *)((s32)SRAM_START_ADDR + i), &gSaveContext.entranceIndex, SAVE_SIZE);
+    ssSRAMWrite((void*)((s32)SRAM_START_ADDR + i), &gSaveContext.entranceIndex, SAVE_SIZE);
 
     osSyncPrintf("ＣＬＥＡＲ終了\n");
 }
 
 void func_800F6700(s8 arg);
-void Sram_StartCopy(FileChooseContext* this, Sram *sram )
-{
-    u16	i;
-    
-    osSyncPrintf("ＲＥＡＤ=%d(%x)  ＣＯＰＹ=%d(%x)\n",this->decisionNo,sramSaveAddress[this->decisionNo], this->copyNo, sramSaveAddress[this->copyNo]);
+void Sram_StartCopy(FileChooseContext* this, Sram* sram) {
+    u16 i;
+
+    osSyncPrintf("ＲＥＡＤ=%d(%x)  ＣＯＰＹ=%d(%x)\n", this->decisionNo, sramSaveAddress[this->decisionNo],
+                 this->copyNo, sramSaveAddress[this->copyNo]);
     /* ＲＥＡＤ */
     i = sramSaveAddress[this->decisionNo];
-    MemCopy(&gSaveContext.entranceIndex, sram->read_buff+i, SAVE_MAX );
+    MemCopy(&gSaveContext.entranceIndex, sram->read_buff + i, SAVE_MAX);
     /* ＣＯＰＹ */
     i = sramSaveAddress[this->copyNo];
-    MemCopy( sram->read_buff+i, &gSaveContext.entranceIndex, SAVE_MAX );
-    i = sramSaveAddress[this->copyNo+3];
-    MemCopy( sram->read_buff+i, &gSaveContext.entranceIndex, SAVE_MAX );
-    ssSRAMWrite((void *)SRAM_START_ADDR, sram->read_buff, SRAM_SIZE);
+    MemCopy(sram->read_buff + i, &gSaveContext.entranceIndex, SAVE_MAX);
+    i = sramSaveAddress[this->copyNo + 3];
+    MemCopy(sram->read_buff + i, &gSaveContext.entranceIndex, SAVE_MAX);
+    ssSRAMWrite((void*)SRAM_START_ADDR, sram->read_buff, SRAM_SIZE);
 
     i = sramSaveAddress[this->copyNo];
-    MemCopy( &this->save[this->copyNo], sram->read_buff+i + 0x22, 2 );
-    MemCopy( &this->name[this->copyNo], sram->read_buff+i + 0x24, 8 );
-    MemCopy( &this->health[this->copyNo], sram->read_buff+i+SAVE_LIFE, 2 );
-    MemCopy( &this->item[this->copyNo], sram->read_buff+i + 0xA4, 4 );
-    MemCopy( &this->f_64dd[this->copyNo], sram->read_buff+i+SAVE_64DD, 2 );
-    MemCopy( &this->heartStatus[this->copyNo], sram->read_buff + i + 0xCF, 1);
+    MemCopy(&this->save[this->copyNo], sram->read_buff + i + 0x22, 2);
+    MemCopy(&this->name[this->copyNo], sram->read_buff + i + 0x24, 8);
+    MemCopy(&this->health[this->copyNo], sram->read_buff + i + SAVE_LIFE, 2);
+    MemCopy(&this->item[this->copyNo], sram->read_buff + i + 0xA4, 4);
+    MemCopy(&this->f_64dd[this->copyNo], sram->read_buff + i + SAVE_64DD, 2);
+    MemCopy(&this->heartStatus[this->copyNo], sram->read_buff + i + 0xCF, 1);
 #if defined(PAL_VERSION)
-    MemCopy( &this->nowLife[this->copyNo], sram->read_buff+i+SAVE_LIFE_NOW, 2 );
+    MemCopy(&this->nowLife[this->copyNo], sram->read_buff + i + SAVE_LIFE_NOW, 2);
 #endif
-    osSyncPrintf("f_64dd[%d]=%d\n", gSaveContext.fileNum,this->f_64dd[gSaveContext.fileNum]);
-    osSyncPrintf("heart_status[%d]=%d\n", gSaveContext.fileNum,this->heartStatus[gSaveContext.fileNum]);
+    osSyncPrintf("f_64dd[%d]=%d\n", gSaveContext.fileNum, this->f_64dd[gSaveContext.fileNum]);
+    osSyncPrintf("heart_status[%d]=%d\n", gSaveContext.fileNum, this->heartStatus[gSaveContext.fileNum]);
     osSyncPrintf("ＣＯＰＹ終了\n");
 }
 
-
 void Sram_SaveSound(Sram* sram) {
-    ssSRAMWrite((void *)SRAM_START_ADDR, sram->read_buff, 0x10);
+    ssSRAMWrite((void*)SRAM_START_ADDR, sram->read_buff, 0x10);
 }
 
 void Sram_Initialize(GameState* game, Sram* sram) {
@@ -682,16 +681,16 @@ void Sram_Initialize(GameState* game, Sram* sram) {
 
     osSyncPrintf("sram_initialize( Game *game, Sram *sram )\n");
 
-    ssSRAMRead(sram->read_buff, (void *)SRAM_START_ADDR, SRAM_SIZE);
+    ssSRAMRead(sram->read_buff, (void*)SRAM_START_ADDR, SRAM_SIZE);
     for (i = 0; i < (sizeof(sramCheckData) / sizeof(u8) - 3); i++) {
-        if (sramCheckData[i+3] != sram->read_buff[i+3]) {
+        if (sramCheckData[i + 3] != sram->read_buff[i + 3]) {
             /* Memory Transfer */
             osSyncPrintf("ＳＲＡＭ破壊！！！！！！\n"); /* "SRAM destruction! ! ! ! ! !" */
             J_N = sram->read_buff[2];
-            MemCopy(sram->read_buff, &sramCheckData, sizeof(sramCheckData)/sizeof(u8));
+            MemCopy(sram->read_buff, &sramCheckData, sizeof(sramCheckData) / sizeof(u8));
             sram->read_buff[2] = J_N;
             Sram_SaveSound(sram);
-         }
+        }
     }
 
     S_SOUND = sram->read_buff[0] & 0x3; /* SOUND stereo/monaural/headphones/3D */
@@ -712,19 +711,23 @@ void Sram_Initialize(GameState* game, Sram* sram) {
         for (i = 0; i < (SAVE_MAX) / 2; i++) {
             sram->read_buff[i] = i;
         }
-        ssSRAMWrite((void *)SRAM_START_ADDR, sram->read_buff, SRAM_SIZE);
+        ssSRAMWrite((void*)SRAM_START_ADDR, sram->read_buff, SRAM_SIZE);
         osSyncPrintf("ＳＲＡＭ破壊！！！！！！\n");
     }
 #endif
     osSyncPrintf("ＧＯＯＤ！ＧＯＯＤ！ サイズ＝%d + %d ＝ %d\n", sizeof(Memory), 4, sizeof(Memory) + sizeof(SAVE_BASE));
     osSyncPrintf(VT_FGCOL(BLUE));
-    osSyncPrintf("Na_SetSoundOutputMode = %d\n",NA_SOUT_STEREO + S_SOUND);
-    osSyncPrintf("Na_SetSoundOutputMode = %d\n",NA_SOUT_STEREO + S_SOUND);
-    osSyncPrintf("Na_SetSoundOutputMode = %d\n",NA_SOUT_STEREO + S_SOUND);
+    osSyncPrintf("Na_SetSoundOutputMode = %d\n", NA_SOUT_STEREO + S_SOUND);
+    osSyncPrintf("Na_SetSoundOutputMode = %d\n", NA_SOUT_STEREO + S_SOUND);
+    osSyncPrintf("Na_SetSoundOutputMode = %d\n", NA_SOUT_STEREO + S_SOUND);
     osSyncPrintf(VT_RST);
     func_800F6700(NA_SOUT_STEREO + S_SOUND); /* Sound output set */
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_sram/func_800A9CD4.s")
+void Sram_TitleInit(GameState* game, Sram* sram) {
+    sram->read_buff = (u8*)GameState_Alloc(game, SRAM_SIZE, "../z_sram.c", 1294);
+    assert(sram->read_buff != NULL, "../z_sram.c", 1295);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_sram/func_800A9D28.s")
+void Sram_Ct(GameState* game, Sram* sram) {
+}
