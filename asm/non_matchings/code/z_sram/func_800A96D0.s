@@ -10,7 +10,7 @@ glabel func_800A96D0
 /* B20874 800A96D4 AFBF001C */  sw    $ra, 0x1c($sp)
 /* B20878 800A96D8 AFB00018 */  sw    $s0, 0x18($sp)
 /* B2087C 800A96DC AFA40028 */  sw    $a0, 0x28($sp)
-/* B20880 800A96E0 0C02A068 */  jal   func_800A81A0
+/* B20880 800A96E0 0C02A068 */  jal   Save_Initialize
 /* B20884 800A96E4 AFA5002C */   sw    $a1, 0x2c($sp)
 /* B20888 800A96E8 8FA20028 */  lw    $v0, 0x28($sp)
 /* B2088C 800A96EC 3C010001 */  lui   $at, (0x00018000 >> 16) # lui $at, 1

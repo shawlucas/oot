@@ -1,4 +1,4 @@
-glabel func_800A81A0
+glabel Save_Initialize
 /* B1F340 800A81A0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* B1F344 800A81A4 AFBF0014 */  sw    $ra, 0x14($sp)
 /* B1F348 800A81A8 3C048016 */  lui   $a0, %hi(gSaveContext+0x1c) # $a0, 0x8016

@@ -101,7 +101,7 @@ void EnMag_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->effect_rgb_fg = this->effect_prim_f = this->title_mode = this->effect_alpha = this->title_alpha =
         this->sub_alpha = this->copy_alpha = 0;
 
-    if (gSaveContext.unk_13E7) {
+    if (gSaveContext.ck_fg) {
         this->title_alpha = 210;
         this->sub_alpha = 255;
         this->copy_alpha = 255;
@@ -116,11 +116,11 @@ void EnMag_Init(Actor* thisx, GlobalContext* globalCtx) {
         this->effect_env[0] = 200.0f;
         this->effect_env[2] = 0.0f;
 
-        gSaveContext.unk_13E7 = 0;
+        gSaveContext.ck_fg = 0;
         this->title_mode = 2;
         check_time = 20;
         gSaveContext.fadeDuration = 1;
-        gSaveContext.unk_1419 = 255;
+        gSaveContext.wipeSpeed = 255;
     }
     Kscope_KanfontGet(kanfont);
     this->key_point = 0;
@@ -159,7 +159,7 @@ void EnMag_Update(Actor* thisx, GameState* state) {
                 this->title_mode = 2;
                 check_time = 20;
                 gSaveContext.fadeDuration = 1;
-                gSaveContext.unk_1419 = 255;
+                gSaveContext.wipeSpeed = 255;
             }
         } else if (this->title_mode >= 2) {
             if (!check_time) {
@@ -169,7 +169,7 @@ void EnMag_Update(Actor* thisx, GameState* state) {
                         func_800F68BC(0);
                         Audio_PlaySoundGeneral(NA_SE_SY_PIECE_OF_HEART, &D_801333D4, 4, &D_801333E0, &D_801333E0,
                                                &D_801333E8);
-                        gSaveContext.gameMode = 2;
+                        gSaveContext.gameInfo.gameMode = 2;
                         globalCtx->sceneLoadFlag = 20;
                         globalCtx->fadeTransition = 2;
                     }

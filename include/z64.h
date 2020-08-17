@@ -6,6 +6,7 @@
 #include <ultra64/gbi.h>
 #include <ultra64/gs2dex.h>
 #include <ultra64/controller.h>
+#include <audio/audio.h>
 #include <sched.h>
 #include <graph.h>
 #include <gfxprint.h>
@@ -62,9 +63,9 @@ typedef struct {
 } GameInfo; // size = 0x15D4
 
 typedef struct {
-    /* 0x00 */ u8    buttonItems[4];
-    /* 0x04 */ u8    cButtonSlots[3];
-    /* 0x08 */ u16   equipment;
+    /* 0x00 */ u8    buttonItems[4]; // "register_item"
+    /* 0x04 */ u8    cButtonSlots[3]; // "register_item_pt"
+    /* 0x08 */ u16   equipment; // "equip_item"
 } ItemEquips; // size = 0x0A
 
 typedef struct {
@@ -106,17 +107,15 @@ typedef enum {
 } ButtonStatus;
 
 typedef struct {
-    u8	item_register[6*4];
-    s8	item_count[16];	
-    /*---------- ＥＱＵＩＰＭＥＮＴ ----------*/
-    u16	equip_register;		
-    long	non_equip_register;	
-    /*---------- ＣＯＬＬＥＣＴ ----------*/
-    long	collect_register;	
-    /*---------- ＭＡＰ ----------*/
-    u8	key_compass_map[20];
-    s8	key_register[20];
-    s16	n_coin_total;
+    u8	items[6*4];
+    s8	ammo[16];	
+    u16	equipment;		
+    u32 upgrades;
+    u32 questItems;
+    u8  dungeonItems[20];
+    s8  dungeonKeys[19];
+    s8  defenseHearts;
+    s16 gsTokens;
 } Table_t;
 
 typedef struct {
@@ -125,110 +124,101 @@ typedef struct {
 
 
 typedef struct {
-    u8 newf[6]; // string "ZELDAZ"
-    u16 savect;
-    u8 playerName[8];
-    s16 n64ddFlag;
-    s16 healthCapacity;
-    s16 health;
-    s8 magicLevel;
-    s8 magic;
-    s16 rupees;
-    u16 bgsHitsLeft;
-    u16 naviTimer;
-    u8 magicAcquired;
-    u8 swordAbility;
-    u8 doubleMagic;
-    u8 doubleDefense;
-    u8 bgsFlag;
-    u8 ocarina_round;
-    ItemEquips childEquips;
-    ItemEquips adultEquips;
-    Vec3f position;
-    s16 angle_y;
-    s16 sceneNo;
-    u8 roomId;
-    u8 flag;
-    s16 sceneDataId;
-} PrivateF;
+    /* 0x0000 */ u8 newf[6]; // string "ZELDAZ"
+    /* 0x0006 */ u16 savect;
+    /* 0x0008 */ u8 playerName[8];
+    /* 0x0010 */ s16 n64ddFlag;
+    /* 0x0012 */ s16 healthCapacity;
+    /* 0x0014 */ s16 health;
+    /* 0x0016 */ s8 magicLevel;
+    /* 0x0017 */ s8 magic;
+    /* 0x0018 */ s16 rupees;
+    /* 0x001A */ u16 bgsHitsLeft;
+    /* 0x001C */ u16 naviTimer;
+    /* 0x001E */ u8 magicAcquired;
+    /* 0x001F */ u8 swordAbility;
+    /* 0x0020 */ u8 doubleMagic;
+    /* 0x0021 */ u8 doubleDefense;
+    /* 0x0022 */ u8 bgsFlag;
+    /* 0x0023 */ u8 ocarina_round;
+    /* 0x0024 */ ItemEquips childEquips;
+    /* 0x002E */ ItemEquips adultEquips;
+    /* 0x0038 */ Vec3f position;
+    /* 0x0044 */ s16 angle_y;
+    /* 0x0046 */ s16 sceneNo;
+    /* 0x0048 */ u8 roomId;
+    /* 0x0049 */ u8 flag;
+    /* 0x004A */ s16 sceneDataId;
+} PrivateF; // size = 0x4C
+
+typedef struct {
+    Vec3i pos;
+    s32 yaw;
+    s32 playerParams;
+    s32 entranceIndex;
+    s32 roomIndex;
+    s32 set;
+    s32 tempSwchFlags;
+    s32 tempCollectFlags;
+} FaroresWindInfo;
+
+typedef struct {
+    SaveSceneFlags sceneFlags[124];
+    FaroresWindInfo fw;
+    char unk_E8C[0x0010];
+    s32 gsFlags[6];
+    char unk_EB4[0x0010];
+    s32 unk_EC4;
+    char unk_EC8[0x000C];
+    u16 eventChkInf[14]; // "event_chk_inf"
+    u16 itemGetInf[4]; // "item_get_inf"
+    u16 infTable[30]; // "inf_table"
+    s32 sceneNoDungeon;
+    long worldMapAreaData;
+    s32 dungeonInformation;
+    u8 ocaRecFlag;
+    u8 ocaRecBuff[900];
+    u8 ocaRecFlag8;
+    u8 ocaRecBuff8[128];
+} Information;
+
+typedef struct {
+    PrivateF privatef;
+    ItemEquips equips;
+    Table_t table;
+    Information information;
+    HorseData horseData;
+    Save_t save;
+} Memory;
+
+typedef struct {
+    /* 0x00 */ s32 gameMode;
+    /* 0x04 */ s32 sceneSetupIndex;
+    /* 0x08 */ s32 respawnFlag;
+    /* 0x0C */ RespawnData respawn[3];
+    /* 0x54 */ f32 playerWipeSpeedF;
+    /* 0x58 */ u16 playerWipeDoorSE;
+    /* 0x5A */ u8 playerWipeItem;
+    /* 0x5B */ u8 nextWalk;
+    /* 0x5C */ s16 dogParams;
+    /* 0x5E */ u8 guideStatus;
+    /* 0x5F */ u8 nameDisplay;
+    /* 0x60 */ s16 nayrusLoveTimer;
+} SaveContextInfo;
 
 // Save Context (dbg ram start: 8015E660)
 typedef struct {
-    /* 0x0000 */ s32          entranceIndex;
+    /* 0x0000 */ s32          entranceIndex; // "scene_no"
     /* 0x0004 */ s32          linkAge; // 0: Adult; 1: Child
-    /* 0x0008 */ s32          cutsceneIndex;
-    /* 0x000C */ u16          dayTime; // "zelda_time"
-    /* 0x0010 */ s32          nightFlag;
-    /* 0x0014 */ s32          unk_14;
-    /* 0x0018 */ s32          unk_18;
-    /* 0x001C */ char         newf[6]; // string "ZELDAZ"
-    /* 0x0022 */ s16          deaths;
-    /* 0x0024 */ char         playerName[8];
-    /* 0x002C */ s16          n64ddFlag;
-    /* 0x002E */ s16          healthCapacity; // "max_life"
-    /* 0x0030 */ s16          health; // "now_life"
-    /* 0x0032 */ s8           magicLevel;
-    /* 0x0033 */ s8           magic;
-    /* 0x0034 */ s16          rupees;
-    /* 0x0036 */ u16          bgsHitsLeft;
-    /* 0x0038 */ u16          naviTimer;
-    /* 0x003A */ u8           magicAcquired;
-    /* 0x003B */ char         unk_3B[0x0001];
-    /* 0x003C */ u8           doubleMagic;
-    /* 0x003D */ u8           doubleDefense;
-    /* 0x003E */ s8           bgsFlag;
-    /* 0x0040 */ ItemEquips   childEquips;
-    /* 0x004A */ ItemEquips   adultEquips;
-    /* 0x0054 */ char         unk_54[0x0014];
-    /* 0x0068 */ ItemEquips   equips;
-    /* 0x0072 */ char         unk_72[0x0002];
-    /* 0x0074 */ u8           items[24];
-    /* 0x008C */ s8           ammo[16];
-    /* 0x009C */ u16          equipment;
-    /* 0x00A0 */ u32          upgrades;
-    /* 0x00A4 */ u32          questItems;
-    /* 0x00A8 */ u8           dungeonItems[20];
-    /* 0x00BC */ s8           dungeonKeys[19];
-    /* 0x00CF */ s8           defenseHearts;
-    /* 0x00D0 */ s16          gsTokens;
-    /* 0x00D4 */ SaveSceneFlags sceneFlags[124];
-    struct {
-        /* 0x0E64 */ Vec3i pos;
-        /* 0x0E70 */ s32  yaw;
-        /* 0x0E74 */ s32  playerParams;
-        /* 0x0E78 */ s32  entranceIndex;
-        /* 0x0E7C */ s32  roomIndex;
-        /* 0x0E80 */ s32  set;
-        /* 0x0E84 */ s32  tempSwchFlags;
-        /* 0x0E88 */ s32  tempCollectFlags;
-    }                         fw;
-    /* 0x0E8C */ char         unk_E8C[0x0010];
-    /* 0x0E9C */ s32          gsFlags[6];
-    /* 0x0EB4 */ char         unk_EB4[0x0010];
-    /* 0x0EC4 */ s32          unk_EC4;
-    /* 0x0EC8 */ char         unk_EC8[0x000C];
-    /* 0x0ED4 */ u16          eventChkInf[14]; // "event_chk_inf"
-    /* 0x0EF0 */ u16          itemGetInf[4]; // "item_get_inf"
-    /* 0x0EF8 */ u16          infTable[30]; // "inf_table"
-    /* 0x0F34 */ char         unk_F34[0x0004];
-    /* 0x0F38 */ u32          worldMapAreaData; // "area_arrival"
-    /* 0x0F3C */ char         unk_F3C[0x0389];
-    /* 0x12C5 */ u8           unk_12C5;
-    /* 0x12C6 */ char         unk_12C6[0x0082];
-    /* 0x1348 */ HorseData    horseData;
-    /* 0x1352 */ u16          checksum; // "check_sum"
+    /* 0x0008 */ s32          cutsceneIndex; // "day_time"
+    /* 0x000C */ u16          zeldaTime; // "zelda_time"
+    /* 0x0010 */ s32          nightFlag; // "asahiru_fg"
+    /* 0x0014 */ s32          totalDay; 
+    /* 0x0018 */ s32          eventDay;
+    /* 0x001C */ Memory       memory;
     /* 0x1354 */ s32          fileNum; // "file_no"
-    /* 0x1358 */ char         unk_1358[0x0004];
-    /* 0x135C */ s32          gameMode;
-    /* 0x1360 */ s32          sceneSetupIndex;
-    /* 0x1364 */ s32          respawnFlag; // "restart_flag"
-    /* 0x1368 */ RespawnData  respawn[3]; // "restart_data"
-    /* 0x13BC */ char         unk_13BC[0x0008];
-    /* 0x13C4 */ s16          dogParams;
-    /* 0x13C6 */ u8           unk_13C6;
-    /* 0x13C7 */ u8           unk_13C7;
-    /* 0x13C8 */ s16          nayrusLoveTimer;
-    /* 0x13CA */ char         unk_13CA[0x0002];
+    /* 0x1358 */ s32          nextLinkAge;
+    /* 0x135C */ SaveContextInfo gameInfo;
     /* 0x13CC */ s16          rupeeAccumulator;
     /* 0x13CE */ s16          timer1State;
     /* 0x13D0 */ s16          timer1Value;
@@ -240,24 +230,24 @@ typedef struct {
     /* 0x13E0 */ u8           seqIndex;
     /* 0x13E1 */ u8           nightSeqIndex;
     /* 0x13E2 */ u8           buttonStatus[5];
-    /* 0x13E7 */ u8           unk_13E7;
-    /* 0x13E8 */ u16          unk_13E8; // alpha type?
-    /* 0x13EA */ u16          unk_13EA; // also alpha type?
-    /* 0x13EC */ u16          unk_13EC; // alpha type counter?
-    /* 0x13EE */ u16          unk_13EE; // previous alpha type?
-    /* 0x13F0 */ s16          unk_13F0;
-    /* 0x13F2 */ s16          unk_13F2;
-    /* 0x13F4 */ s16          unk_13F4;
-    /* 0x13F6 */ s16          unk_13F6;
-    /* 0x13F8 */ s16          unk_13F8;
+    /* 0x13E7 */ u8           ck_fg;
+    /* 0x13E8 */ u16          alphaType; // alpha type?
+    /* 0x13EA */ u16          prevAlphaType; // also alpha type?
+    /* 0x13EC */ u16          alphaCount; // alpha type counter?
+    /* 0x13EE */ u16          lastTimeType; // previous alpha type?
+    /* 0x13F0 */ s16          magicFlag;
+    /* 0x13F2 */ s16          keepMagicFlag;
+    /* 0x13F4 */ s16          magicNowMax;
+    /* 0x13F6 */ s16          magicNowNow;
+    /* 0x13F8 */ s16          magicUsed;
     /* 0x13FA */ u16          eventInf[4]; // "event_inf"
     /* 0x1402 */ u16          mapIndex; // intended for maps/minimaps but commonly used as the dungeon index
     /* 0x1404 */ u16          minigameState;
     /* 0x1406 */ u16          minigameScore; // "yabusame_total"
-    /* 0x1408 */ char         unk_1408[0x0001];
+    /* 0x1408 */ u8           noSave;
     /* 0x1409 */ u8           j_n;
     /* 0x140A */ u8           audioSetting;
-    /* 0x140B */ char         unk_140B[0x0001];
+    /* 0x140B */ u8           language;
     /* 0x140C */ u8           zTargetingSetting; // 0: Switch; 1: Hold
     /* 0x140E */ u16          unk_140E; // bgm related
     /* 0x1410 */ u8           unk_1410;
@@ -267,13 +257,13 @@ typedef struct {
     /* 0x1415 */ u8           chamberCutsceneNum;
     /* 0x1416 */ u16          nextDayTime; // "next_zelda_time"
     /* 0x1418 */ u8           fadeDuration;
-    /* 0x1419 */ u8           unk_1419; // transition related
+    /* 0x1419 */ u8           wipeSpeed; // transition related
     /* 0x141A */ u16          environmentTime;
     /* 0x141C */ u8           dogIsLost;
     /* 0x141D */ u8           nextTransition;
-    /* 0x141E */ char         unk_141E[0x0002];
-    /* 0x1420 */ s16          worldMapArea;
-    /* 0x1422 */ s16          unk_1422; // day time related
+    /* 0x141E */ s16          roomType;
+    /* 0x1420 */ s16          worldMapArea; // "area_type"
+    /* 0x1422 */ s16          sunMoonFlag; // day time related
     /* 0x1424 */ s16          healthAccumulator;
 } SaveContext; // size = 0x1428
 

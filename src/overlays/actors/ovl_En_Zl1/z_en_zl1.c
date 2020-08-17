@@ -81,7 +81,7 @@ void EnZl1_Init(Actor* thisx, GlobalContext* globalCtx) {
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawFunc_Circle, 24.0f);
     this->actor.naviRange = 0;
 
-    if (gSaveContext.sceneSetupIndex >= 4) {
+    if (gSaveContext.gameInfo.sceneSetupIndex >= 4) {
         frameCount = SkelAnime_GetFrameCount(&D_06000438.genericHeader);
         SkelAnime_ChangeAnim(&this->skelAnime, &D_06000438, 1.0f, 0.0f, frameCount, 0, 0.0f);
         this->unk_1E6 = 0;

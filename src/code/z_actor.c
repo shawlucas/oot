@@ -1748,27 +1748,27 @@ f32 D_8015BC18;
 void func_8002FA60(GlobalContext* globalCtx) {
     Vec3f lightPos;
 
-    if (gSaveContext.fw.set) {
-        gSaveContext.respawn[RESPAWN_MODE_TOP].data = 0x28;
-        gSaveContext.respawn[RESPAWN_MODE_TOP].pos.x = gSaveContext.fw.pos.x;
-        gSaveContext.respawn[RESPAWN_MODE_TOP].pos.y = gSaveContext.fw.pos.y;
-        gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z = gSaveContext.fw.pos.z;
-        gSaveContext.respawn[RESPAWN_MODE_TOP].yaw = gSaveContext.fw.yaw;
-        gSaveContext.respawn[RESPAWN_MODE_TOP].playerParams = gSaveContext.fw.playerParams;
-        gSaveContext.respawn[RESPAWN_MODE_TOP].entranceIndex = gSaveContext.fw.entranceIndex;
-        gSaveContext.respawn[RESPAWN_MODE_TOP].roomIndex = gSaveContext.fw.roomIndex;
-        gSaveContext.respawn[RESPAWN_MODE_TOP].tempSwchFlags = gSaveContext.fw.tempSwchFlags;
-        gSaveContext.respawn[RESPAWN_MODE_TOP].tempCollectFlags = gSaveContext.fw.tempCollectFlags;
+    if (gSaveContext.memory.information.fw.set) {
+        gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].data = 0x28;
+        gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.x = gSaveContext.memory.information.fw.pos.x;
+        gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.y = gSaveContext.memory.information.fw.pos.y;
+        gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.z = gSaveContext.memory.information.fw.pos.z;
+        gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].yaw = gSaveContext.memory.information.fw.yaw;
+        gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].playerParams = gSaveContext.memory.information.fw.playerParams;
+        gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].entranceIndex = gSaveContext.memory.information.fw.entranceIndex;
+        gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].roomIndex = gSaveContext.memory.information.fw.roomIndex;
+        gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].tempSwchFlags = gSaveContext.memory.information.fw.tempSwchFlags;
+        gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].tempCollectFlags = gSaveContext.memory.information.fw.tempCollectFlags;
     } else {
-        gSaveContext.respawn[RESPAWN_MODE_TOP].data = 0;
-        gSaveContext.respawn[RESPAWN_MODE_TOP].pos.x = 0.0f;
-        gSaveContext.respawn[RESPAWN_MODE_TOP].pos.y = 0.0f;
-        gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z = 0.0f;
+        gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].data = 0;
+        gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.x = 0.0f;
+        gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.y = 0.0f;
+        gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.z = 0.0f;
     }
 
-    lightPos.x = gSaveContext.respawn[RESPAWN_MODE_TOP].pos.x;
-    lightPos.y = gSaveContext.respawn[RESPAWN_MODE_TOP].pos.y + 80.0f;
-    lightPos.z = gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z;
+    lightPos.x = gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.x;
+    lightPos.y = gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.y + 80.0f;
+    lightPos.z = gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.z;
 
     Lights_InitType0PositionalLight(&D_8015BC00, lightPos.x, lightPos.y, lightPos.z, 0xFF, 0xFF, 0xFF, -1);
 
@@ -1812,7 +1812,7 @@ void func_8002FBAC(GlobalContext* globalCtx) {
 
     OPEN_DISP(globalCtx->state.gfxCtx, "../z_actor.c", 5308);
 
-    if (gSaveContext.respawn[RESPAWN_MODE_TOP].data != 0) {
+    if (gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].data != 0) {
         if (LINK_IS_ADULT) {
             spD8 = 80.0f;
         } else {
@@ -1822,57 +1822,57 @@ void func_8002FBAC(GlobalContext* globalCtx) {
         spD0 = 0xFF;
         spD4 = 1.0f;
 
-        temp_a3 = gSaveContext.respawn[RESPAWN_MODE_TOP].data - 0x28;
+        temp_a3 = gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].data - 0x28;
         spCC = temp_a3;
 
         if (temp_a3 < 0) {
-            gSaveContext.respawn[RESPAWN_MODE_TOP].data++;
-            spD4 = ABS(gSaveContext.respawn[RESPAWN_MODE_TOP].data) * 0.025f;
+            gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].data++;
+            spD4 = ABS(gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].data) * 0.025f;
             D_8015BC14 = 60;
             D_8015BC18 = 1.0f;
         } else if (D_8015BC14 != 0) {
             D_8015BC14--;
         } else if (D_8015BC18 > 0.0f) {
             spC0 = D_8015BC18;
-            temp_ret = Math_Vec3f_DistXYZAndStoreDiff(&gSaveContext.respawn[RESPAWN_MODE_DOWN].pos,
-                                                      &gSaveContext.respawn[RESPAWN_MODE_TOP].pos, &spB4);
+            temp_ret = Math_Vec3f_DistXYZAndStoreDiff(&gSaveContext.gameInfo.respawn[RESPAWN_MODE_DOWN].pos,
+                                                      &gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos, &spB4);
 
             if (temp_ret < 20.0f) {
                 D_8015BC18 = 0.0f;
-                Math_Vec3f_Copy(&gSaveContext.respawn[RESPAWN_MODE_TOP].pos,
-                                &gSaveContext.respawn[RESPAWN_MODE_DOWN].pos);
+                Math_Vec3f_Copy(&gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos,
+                                &gSaveContext.gameInfo.respawn[RESPAWN_MODE_DOWN].pos);
             } else {
                 sp9C = (1.0f / D_8015BC18) * temp_ret;
                 phi_f14 = 20.0f / sp9C;
                 phi_f14 = (phi_f14 < 0.05f) ? 0.05f : phi_f14;
                 Math_ApproxF(&D_8015BC18, 0.0f, phi_f14);
                 temp_f2 = ((D_8015BC18 / spC0) * temp_ret) / temp_ret;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.x =
-                    gSaveContext.respawn[RESPAWN_MODE_DOWN].pos.x + (spB4.x * temp_f2);
-                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.y =
-                    gSaveContext.respawn[RESPAWN_MODE_DOWN].pos.y + (spB4.y * temp_f2);
-                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z =
-                    gSaveContext.respawn[RESPAWN_MODE_DOWN].pos.z + (spB4.z * temp_f2);
+                gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.x =
+                    gSaveContext.gameInfo.respawn[RESPAWN_MODE_DOWN].pos.x + (spB4.x * temp_f2);
+                gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.y =
+                    gSaveContext.gameInfo.respawn[RESPAWN_MODE_DOWN].pos.y + (spB4.y * temp_f2);
+                gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.z =
+                    gSaveContext.gameInfo.respawn[RESPAWN_MODE_DOWN].pos.z + (spB4.z * temp_f2);
                 temp_f12 = sp9C * 0.5f;
                 temp_f14 = temp_ret - temp_f12;
                 spD8 += sqrtf((temp_f12 * temp_f12) - (temp_f14 * temp_f14)) * 0.2f;
                 osSyncPrintf("-------- DISPLAY Y=%f\n", spD8);
             }
 
-            spA4.x = Math_Rand_CenteredFloat(6.0f) + gSaveContext.respawn[RESPAWN_MODE_TOP].pos.x;
-            spA4.y = Math_Rand_ZeroOne() * 6.0f + gSaveContext.respawn[RESPAWN_MODE_TOP].pos.y + 80.0f;
-            spA4.z = Math_Rand_CenteredFloat(6.0f) + gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z;
+            spA4.x = Math_Rand_CenteredFloat(6.0f) + gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.x;
+            spA4.y = Math_Rand_ZeroOne() * 6.0f + gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.y + 80.0f;
+            spA4.z = Math_Rand_CenteredFloat(6.0f) + gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.z;
 
             func_80028BB0(globalCtx, &spA4, &D_80116048, &D_80116054, &D_80116060, &D_80116064, 1000, 0x10);
 
             if (D_8015BC18 == 0.0f) {
-                gSaveContext.respawn[RESPAWN_MODE_TOP] = gSaveContext.respawn[RESPAWN_MODE_DOWN];
-                gSaveContext.respawn[RESPAWN_MODE_TOP].playerParams = 0x06FF;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].data = 0x28;
+                gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP] = gSaveContext.gameInfo.respawn[RESPAWN_MODE_DOWN];
+                gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].playerParams = 0x06FF;
+                gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].data = 0x28;
             }
 
             // somehow this shouldn't be optimized out
-            gSaveContext.respawn[RESPAWN_MODE_TOP].pos = gSaveContext.respawn[RESPAWN_MODE_TOP].pos;
+            gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos = gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos;
         } else if (temp_a3 > 0) {
             temp_f12 = temp_a3 * 0.1f;
 
@@ -1880,37 +1880,37 @@ void func_8002FBAC(GlobalContext* globalCtx) {
                 sp7C.x = globalCtx->view.eye.x;
                 sp7C.y = globalCtx->view.eye.y - spD8;
                 sp7C.z = globalCtx->view.eye.z;
-                temp_ret = Math_Vec3f_DistXYZAndStoreDiff(&sp7C, &gSaveContext.respawn[RESPAWN_MODE_TOP].pos, &sp70);
+                temp_ret = Math_Vec3f_DistXYZAndStoreDiff(&sp7C, &gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos, &sp70);
                 temp_f2 = (((1.0f - temp_f12) / (1.0f - ((f32)(temp_a3 - 1) * 0.1f))) * temp_ret) / temp_ret;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.x = sp70.x * temp_f2 + sp7C.x;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.y = sp70.y * temp_f2 + sp7C.y;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z = sp70.z * temp_f2 + sp7C.z;
+                gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.x = sp70.x * temp_f2 + sp7C.x;
+                gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.y = sp70.y * temp_f2 + sp7C.y;
+                gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.z = sp70.z * temp_f2 + sp7C.z;
             }
 
             // somehow this shouldn't be optimized out
-            gSaveContext.respawn[RESPAWN_MODE_TOP].pos = gSaveContext.respawn[RESPAWN_MODE_TOP].pos;
+            gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos = gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos;
 
             spD0 = 0xFF - (((temp_a3 * 0x10) - temp_a3) * 2);
 
             if (spD0 < 0) {
-                gSaveContext.fw.set = 0;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].data = 0;
+                gSaveContext.memory.information.fw.set = 0;
+                gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].data = 0;
                 spD0 = 0;
             } else {
-                gSaveContext.respawn[RESPAWN_MODE_TOP].data++;
+                gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].data++;
             }
 
             spD4 = spCC * 0.200000000000000011102230246252 + 1.0f;
         }
 
         if ((globalCtx->csCtx.state == 0) &&
-            (gSaveContext.respawn[RESPAWN_MODE_TOP].entranceIndex == gSaveContext.entranceIndex) &&
-            (globalCtx->roomCtx.curRoom.num == gSaveContext.respawn[RESPAWN_MODE_TOP].roomIndex)) {
+            (gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].entranceIndex == gSaveContext.entranceIndex) &&
+            (globalCtx->roomCtx.curRoom.num == gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].roomIndex)) {
             gfxCtx->polyXlu.p = Gfx_CallSetupDL(gfxCtx->polyXlu.p, 0x19);
 
-            Matrix_Translate(gSaveContext.respawn[RESPAWN_MODE_TOP].pos.x,
-                             gSaveContext.respawn[RESPAWN_MODE_TOP].pos.y + spD8,
-                             gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z, MTXMODE_NEW);
+            Matrix_Translate(gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.x,
+                             gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.y + spD8,
+                             gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.z, MTXMODE_NEW);
             Matrix_Scale(0.025f * spD4, 0.025f * spD4, 0.025f * spD4, MTXMODE_APPLY);
             Matrix_Mult(&globalCtx->mf_11D60, MTXMODE_APPLY);
             Matrix_Push();
@@ -1935,9 +1935,9 @@ void func_8002FBAC(GlobalContext* globalCtx) {
             gSPDisplayList(NEXT_POLY_XLU_DISP, &D_04010130);
         }
 
-        lightPos.x = gSaveContext.respawn[RESPAWN_MODE_TOP].pos.x;
-        lightPos.y = gSaveContext.respawn[RESPAWN_MODE_TOP].pos.y + spD8;
-        lightPos.z = gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z;
+        lightPos.x = gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.x;
+        lightPos.y = gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.y + spD8;
+        lightPos.z = gSaveContext.gameInfo.respawn[RESPAWN_MODE_TOP].pos.z;
 
         Lights_InitType0PositionalLight(&D_8015BC00, lightPos.x, lightPos.y, lightPos.z, 0xFF, 0xFF, 0xFF,
                                         500.0f * spD4);
@@ -1966,7 +1966,7 @@ void func_800304DC(GlobalContext* globalCtx, ActorContext* actorCtx, ActorEntry*
     SaveSceneFlags* saveSceneFlags;
     s32 i;
 
-    saveSceneFlags = &gSaveContext.sceneFlags[globalCtx->sceneNum];
+    saveSceneFlags = &gSaveContext.memory.information.sceneFlags[globalCtx->sceneNum];
 
     bzero(actorCtx, sizeof(*actorCtx));
 
@@ -4189,28 +4189,28 @@ void func_80035B18(GlobalContext* globalCtx, Actor* actor, u16 textId) {
  * Tests if event_chk_inf flag is set.
  */
 s32 Flags_GetEventChkInf(s32 flag) {
-    return gSaveContext.eventChkInf[flag >> 4] & (1 << (flag & 0xF));
+    return gSaveContext.memory.information.eventChkInf[flag >> 4] & (1 << (flag & 0xF));
 }
 
 /**
  * Sets event_chk_inf flag.
  */
 void Flags_SetEventChkInf(s32 flag) {
-    gSaveContext.eventChkInf[flag >> 4] |= (1 << (flag & 0xF));
+    gSaveContext.memory.information.eventChkInf[flag >> 4] |= (1 << (flag & 0xF));
 }
 
 /**
  * Tests if "inf_table flag is set.
  */
 s32 Flags_GetInfTable(s32 flag) {
-    return gSaveContext.infTable[flag >> 4] & (1 << (flag & 0xF));
+    return gSaveContext.memory.information.infTable[flag >> 4] & (1 << (flag & 0xF));
 }
 
 /**
  * Sets "inf_table" flag.
  */
 void Flags_SetInfTable(s32 flag) {
-    gSaveContext.infTable[flag >> 4] |= (1 << (flag & 0xF));
+    gSaveContext.memory.information.infTable[flag >> 4] |= (1 << (flag & 0xF));
 }
 
 u32 func_80035BFC(GlobalContext* globalCtx, s16 arg1) {
@@ -4507,7 +4507,7 @@ u32 func_80035BFC(GlobalContext* globalCtx, s16 arg1) {
                 retTextId = 0x7002;
             } else if (Flags_GetInfTable(0x6A)) {
                 retTextId = 0x7004;
-            } else if ((gSaveContext.dayTime >= 0x4000) && (gSaveContext.dayTime < 0xC556)) {
+            } else if ((gSaveContext.zeldaTime >= 0x4000) && (gSaveContext.zeldaTime < 0xC556)) {
                 retTextId = 0x7002;
             } else {
                 retTextId = 0x7003;
@@ -5294,7 +5294,7 @@ s32 func_800374E0(GlobalContext* globalCtx, Actor* actor, u16 textId) {
         case 0x2030:
         case 0x2031:
             if (msgCtx->choiceIndex == 0) {
-                if (gSaveContext.rupees >= 10) {
+                if (gSaveContext.memory.privatef.rupees >= 10) {
                     func_80035B18(globalCtx, actor, 0x2034);
                     Rupees_ChangeBy(-10);
                 } else {

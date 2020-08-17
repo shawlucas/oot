@@ -19,25 +19,25 @@ void Select_LoadGame(SelectContext* this, s32 entranceIndex) {
     osSyncPrintf("\n\n\nＦＩＬＥ＿ＮＯ＝%x\n\n\n", gSaveContext.fileNum);
     osSyncPrintf(VT_RST);
     if (gSaveContext.fileNum == 0xFF) {
-        func_800A82C8();
-        gSaveContext.unk_13F6 = gSaveContext.magic;
-        gSaveContext.magic = 0;
-        gSaveContext.unk_13F4 = 0;
-        gSaveContext.magicLevel = gSaveContext.magic;
+        Save_Initialize999();
+        gSaveContext.magicNowNow = gSaveContext.memory.privatef.magic;
+        gSaveContext.memory.privatef.magic = 0;
+        gSaveContext.magicNowMax = 0;
+        gSaveContext.memory.privatef.magicLevel = gSaveContext.memory.privatef.magic;
     }
     gSaveContext.buttonStatus[4] = BTN_ENABLED;
     gSaveContext.buttonStatus[3] = BTN_ENABLED;
     gSaveContext.buttonStatus[2] = BTN_ENABLED;
     gSaveContext.buttonStatus[1] = BTN_ENABLED;
     gSaveContext.buttonStatus[0] = BTN_ENABLED;
-    gSaveContext.unk_13E7 = gSaveContext.unk_13E8 = gSaveContext.unk_13EA = gSaveContext.unk_13EC = 0;
+    gSaveContext.ck_fg = gSaveContext.alphaType = gSaveContext.prevAlphaType = gSaveContext.alphaCount = 0;
     Audio_SetBGM(NA_BGM_STOP);
     gSaveContext.entranceIndex = entranceIndex;
-    gSaveContext.respawnFlag = 0;
-    gSaveContext.respawn[RESPAWN_MODE_DOWN].entranceIndex = -1;
+    gSaveContext.gameInfo.respawnFlag = 0;
+    gSaveContext.gameInfo.respawn[RESPAWN_MODE_DOWN].entranceIndex = -1;
     gSaveContext.seqIndex = 0xFF;
     gSaveContext.nightSeqIndex = 0xFF;
-    gSaveContext.unk_13C7 = 1;
+    gSaveContext.gameInfo.nameDisplay = 1;
     D_8011FB30 = 0;
     this->state.running = false;
     SET_NEXT_GAMESTATE(&this->state, Gameplay_Init, GlobalContext);
@@ -454,16 +454,16 @@ void Select_PrintCutsceneSetting(SelectContext* this, GfxPrint* printer, u16 csI
     switch (csIndex) {
         case 0:
             label = "\x8D ﾖﾙ \x8Cｺﾞﾛﾝ";
-            gSaveContext.dayTime = 0;
+            gSaveContext.zeldaTime = 0;
             break;
         case 0x8000:
             // clang-format off
-            gSaveContext.dayTime = 0x8000; label = "\x8Dｵﾋﾙ \x8Cｼﾞｬﾗ";
+            gSaveContext.zeldaTime = 0x8000; label = "\x8Dｵﾋﾙ \x8Cｼﾞｬﾗ";
             // clang-format on
             break;
         case 0xFFF0:
             // clang-format off
-            gSaveContext.dayTime = 0x8000; label = "ﾃﾞﾓ00";
+            gSaveContext.zeldaTime = 0x8000; label = "ﾃﾞﾓ00";
             // clang-format on
             break;
         case 0xFFF1:
@@ -498,7 +498,7 @@ void Select_PrintCutsceneSetting(SelectContext* this, GfxPrint* printer, u16 csI
             break;
     };
 
-    gSaveContext.environmentTime = gSaveContext.dayTime;
+    gSaveContext.environmentTime = gSaveContext.zeldaTime;
     GfxPrint_Printf(printer, "Stage:\x8C%s", label);
 }
 

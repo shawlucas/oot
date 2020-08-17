@@ -99,7 +99,7 @@ void func_8008E750(GlobalContext* globalCtx, Player* player) {
 s32 func_8008E8DC(GlobalContext* globalCtx, Player* player) {
     return (player->stateFlags1 & 0x20000080 || player->action || globalCtx->sceneLoadFlag == 0x14 ||
             player->stateFlags1 & 1 || player->unk_692 & 0x80 ||
-            (gSaveContext.unk_13F0 && func_8008F0D8(player, player->unk_154) >= 0));
+            (gSaveContext.magicFlag && func_8008F0D8(player, player->unk_154) >= 0));
 }
 
 s32 func_8008E988(GlobalContext* globalCtx) {
@@ -196,10 +196,10 @@ void func_8008ECAC(GlobalContext* globalCtx, Player* player) {
             sword = ITEM_NONE;
             player->currentSword = sword;
         } else {
-            if (gSaveContext.equips.buttonItems[EQUIP_SWORD] == ITEM_SWORD_KNIFE) {
+            if (gSaveContext.memory.equips.buttonItems[EQUIP_SWORD] == ITEM_SWORD_KNIFE) {
                 sword = ITEM_SWORD_BGS;
             } else {
-                sword = gSaveContext.equips.buttonItems[EQUIP_SWORD];
+                sword = gSaveContext.memory.equips.buttonItems[EQUIP_SWORD];
             }
             player->currentSword = sword;
         }
@@ -272,7 +272,7 @@ s32 func_8008EF5C(GlobalContext* globalCtx, Vec3f* pos, f32 radius, f32 arg3) {
 s32 func_8008F034() {
     s32 temp_v1;
 
-    temp_v1 = (s32)(gSaveContext.upgrades & gUpgradeMasks[2]) >> gUpgradeShifts[2];
+    temp_v1 = (s32)(gSaveContext.memory.table.upgrades & gUpgradeMasks[2]) >> gUpgradeShifts[2];
     if (LINK_IS_ADULT) {
         return temp_v1;
     } else if (temp_v1 != 0) {
@@ -339,7 +339,7 @@ s32 func_8008F1A0(Player* player) {
 }
 
 s32 func_8008F1CC(Player* player) {
-    return player->heldItemActionParam == 5 && gSaveContext.bgsHitsLeft <= 0.0f;
+    return player->heldItemActionParam == 5 && gSaveContext.memory.privatef.bgsHitsLeft <= 0.0f;
 }
 
 s32 func_8008F224(Player* player, s32 arg1) {
@@ -386,11 +386,11 @@ s32 func_8008F2F8(GlobalContext* globalCtx) {
     if (func_8008E988(globalCtx) == 0) {
         temp_a3 = &D_80125C88[phi_v1];
         if (!temp_a3) {}
-        if (temp_a3->unk_0 != 0 && !(gSaveContext.unk_13C6 & temp_a3->unk_0) &&
+        if (temp_a3->unk_0 != 0 && !(gSaveContext.gameInfo.guideStatus & temp_a3->unk_0) &&
             ((phi_v1 == 0 && player->currentTunic != 1) ||
              ((phi_v1 == 1 || phi_v1 == 3) && player->currentBoots == 1 && player->currentTunic != 2))) {
             func_8010B680(globalCtx, temp_a3->unk_2, NULL);
-            gSaveContext.unk_13C6 |= temp_a3->unk_0;
+            gSaveContext.gameInfo.guideStatus |= temp_a3->unk_0;
         }
     }
     return phi_v1 + 1;

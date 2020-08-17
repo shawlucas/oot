@@ -21,7 +21,7 @@ void Health_InitData(GlobalContext* globalCtx) {
     InterfaceContext* interfaceCtx = &globalCtx->interfaceCtx;
 
     interfaceCtx->unk_228 = 0x140;
-    interfaceCtx->unk_226 = gSaveContext.health;
+    interfaceCtx->unk_226 = gSaveContext.memory.privatef.health;
     interfaceCtx->unk_22A = interfaceCtx->lifeMeter = 0;
     interfaceCtx->unk_22C = interfaceCtx->nowMode = 0;
 
@@ -147,7 +147,7 @@ void Health_UpdateData(GlobalContext* globalCtx) {
 #endif
 
 s32 func_80078E18(GlobalContext* globalCtx) {
-    gSaveContext.health = globalCtx->interfaceCtx.unk_226;
+    gSaveContext.memory.privatef.health = globalCtx->interfaceCtx.unk_226;
     return 1;
 }
 
@@ -157,8 +157,8 @@ s32 func_80078E34(GlobalContext* globalCtx) {
     interfaceCtx->unk_228 = 0x140;
     interfaceCtx->unk_226 += 0x10;
 
-    if (interfaceCtx->unk_226 >= gSaveContext.health) {
-        interfaceCtx->unk_226 = gSaveContext.health;
+    if (interfaceCtx->unk_226 >= gSaveContext.memory.privatef.health) {
+        interfaceCtx->unk_226 = gSaveContext.memory.privatef.health;
         return 1;
     }
 
@@ -176,7 +176,7 @@ s32 func_80078E84(GlobalContext* globalCtx) {
 
         if (interfaceCtx->unk_226 <= 0) {
             interfaceCtx->unk_226 = 0;
-            globalCtx->unk_11D58(globalCtx, -(gSaveContext.health + 1));
+            globalCtx->unk_11D58(globalCtx, -(gSaveContext.memory.privatef.health + 1));
             return 1;
         }
     }
@@ -198,17 +198,17 @@ void Health_Draw(GlobalContext* globalCtx) {
     InterfaceContext* interfaceCtx = &globalCtx->interfaceCtx;
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
     Vtx* sp154 = interfaceCtx->heartVtx;
-    s32 curHeartFraction = gSaveContext.health % 0x10;
-    s16 totalHeartCount = gSaveContext.healthCapacity / 0x10;
-    s16 fullHeartCount = gSaveContext.health / 0x10;
+    s32 curHeartFraction = gSaveContext.memory.privatef.health % 0x10;
+    s16 totalHeartCount = gSaveContext.memory.privatef.healthCapacity / 0x10;
+    s16 fullHeartCount = gSaveContext.memory.privatef.health / 0x10;
     s32 pad2;
     f32 sp144 = interfaceCtx->unk_22A * 0.1f;
     s32 curCombineModeSet = 0;
     u8* curBgImgLoaded = NULL;
-    s32 ddHeartCountMinusOne = gSaveContext.defenseHearts - 1;
+    s32 ddHeartCountMinusOne = gSaveContext.memory.table.defenseHearts - 1;
     OPEN_DISP(gfxCtx, "../z_lifemeter.c", 353);
 
-    if (!(gSaveContext.health % 0x10)) {
+    if (!(gSaveContext.memory.privatef.health % 0x10)) {
         fullHeartCount--;
     }
 
@@ -407,17 +407,17 @@ void Health_HandleCriticalAlarm(GlobalContext* globalCtx) {
 u32 Health_IsCritical(void) {
     s32 var;
 
-    if (gSaveContext.healthCapacity <= 0x50) {
+    if (gSaveContext.memory.privatef.healthCapacity <= 0x50) {
         var = 0x10;
-    } else if (gSaveContext.healthCapacity <= 0xA0) {
+    } else if (gSaveContext.memory.privatef.healthCapacity <= 0xA0) {
         var = 0x18;
-    } else if (gSaveContext.healthCapacity <= 0xF0) {
+    } else if (gSaveContext.memory.privatef.healthCapacity <= 0xF0) {
         var = 0x20;
     } else {
         var = 0x2C;
     }
 
-    if ((var >= gSaveContext.health) && (gSaveContext.health > 0)) {
+    if ((var >= gSaveContext.memory.privatef.health) && (gSaveContext.memory.privatef.health > 0)) {
         return 1;
     } else {
         return 0;

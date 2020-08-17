@@ -44,7 +44,7 @@ void Object_InitBank(GlobalContext* globalCtx, ObjectContext* objectCtx) {
     if (globalCtx2->sceneNum == SCENE_SPOT00) {
         spaceSize = 1024000;
     } else if (globalCtx2->sceneNum == SCENE_GANON_DEMO) {
-        if (gSaveContext.sceneSetupIndex != 4) {
+        if (gSaveContext.gameInfo.sceneSetupIndex != 4) {
             spaceSize = 1177600;
         } else {
             spaceSize = 1024000;
@@ -379,10 +379,10 @@ void func_80098D5C(GlobalContext* globalCtx, SceneCmd* cmd) {
 
 // Scene Command 0x10: Time Settings
 void func_80098D80(GlobalContext* globalCtx, SceneCmd* cmd) {
-    u32 dayTime;
+    u32 zeldaTime;
 
     if ((cmd->timeSettings.hour != 0xFF) && (cmd->timeSettings.min != 0xFF)) {
-        gSaveContext.environmentTime = gSaveContext.dayTime =
+        gSaveContext.environmentTime = gSaveContext.zeldaTime =
             ((cmd->timeSettings.hour + (cmd->timeSettings.min / 60.0f)) * 60.0f) / 0.021972656f;
     }
 
@@ -392,20 +392,20 @@ void func_80098D80(GlobalContext* globalCtx, SceneCmd* cmd) {
         globalCtx->envCtx.unk_02 = 0;
     }
 
-    if (gSaveContext.unk_1422 == 0) {
+    if (gSaveContext.sunMoonFlag == 0) {
         D_8011FB40 = globalCtx->envCtx.unk_02;
     }
 
-    dayTime = gSaveContext.dayTime;
-    globalCtx->envCtx.unk_04.x = -(Math_Sins(dayTime - 0x8000) * 120.0f) * 25.0f;
-    dayTime = gSaveContext.dayTime;
-    globalCtx->envCtx.unk_04.y = (Math_Coss(dayTime - 0x8000) * 120.0f) * 25.0f;
-    dayTime = gSaveContext.dayTime;
-    globalCtx->envCtx.unk_04.z = (Math_Coss(dayTime - 0x8000) * 20.0f) * 25.0f;
+    zeldaTime = gSaveContext.zeldaTime;
+    globalCtx->envCtx.unk_04.x = -(Math_Sins(zeldaTime - 0x8000) * 120.0f) * 25.0f;
+    zeldaTime = gSaveContext.zeldaTime;
+    globalCtx->envCtx.unk_04.y = (Math_Coss(zeldaTime - 0x8000) * 120.0f) * 25.0f;
+    zeldaTime = gSaveContext.zeldaTime;
+    globalCtx->envCtx.unk_04.z = (Math_Coss(zeldaTime - 0x8000) * 20.0f) * 25.0f;
 
     if (((globalCtx->envCtx.unk_02 == 0) && (gSaveContext.cutsceneIndex < 0xFFF0)) ||
         (gSaveContext.entranceIndex == 0x0604)) {
-        gSaveContext.environmentTime = gSaveContext.dayTime;
+        gSaveContext.environmentTime = gSaveContext.zeldaTime;
         if ((gSaveContext.environmentTime >= 0x2AAC) && (gSaveContext.environmentTime < 0x4555)) {
             gSaveContext.environmentTime = 0x3556;
         } else if ((gSaveContext.environmentTime >= 0x4555) && (gSaveContext.environmentTime < 0x5556)) {
@@ -463,11 +463,11 @@ void func_800991A0(GlobalContext* globalCtx, SceneCmd* cmd) {
 
     osSyncPrintf("\n[ZU]sceneset age    =[%X]", gSaveContext.linkAge);
     osSyncPrintf("\n[ZU]sceneset time   =[%X]", gSaveContext.cutsceneIndex);
-    osSyncPrintf("\n[ZU]sceneset counter=[%X]", gSaveContext.sceneSetupIndex);
+    osSyncPrintf("\n[ZU]sceneset counter=[%X]", gSaveContext.gameInfo.sceneSetupIndex);
 
-    if (gSaveContext.sceneSetupIndex != 0) {
+    if (gSaveContext.gameInfo.sceneSetupIndex != 0) {
         altHeaders = SEGMENTED_TO_VIRTUAL(cmd->altHeaders.segment);
-        altHeader = altHeaders[gSaveContext.sceneSetupIndex - 1];
+        altHeader = altHeaders[gSaveContext.gameInfo.sceneSetupIndex - 1];
 
         if (altHeader != NULL) {
             Scene_ExecuteCommands(globalCtx, SEGMENTED_TO_VIRTUAL(altHeader));
@@ -476,9 +476,9 @@ void func_800991A0(GlobalContext* globalCtx, SceneCmd* cmd) {
             // Translates to: "COUGHH! THERE IS NO SPECIFIED DATAAAAA!"
             osSyncPrintf("\nげぼはっ！ 指定されたデータがないでええっす！");
 
-            if (gSaveContext.sceneSetupIndex == 3) {
+            if (gSaveContext.gameInfo.sceneSetupIndex == 3) {
                 altHeaders = SEGMENTED_TO_VIRTUAL(cmd->altHeaders.segment);
-                altHeader = altHeaders[gSaveContext.sceneSetupIndex - 2];
+                altHeader = altHeaders[gSaveContext.gameInfo.sceneSetupIndex - 2];
 
                 // Translates to: "USING ADULT DAY DATA THERE!"
                 osSyncPrintf("\nそこで、大人の昼データを使用するでええっす！！");
@@ -516,8 +516,8 @@ void func_800993C0(GlobalContext* globalCtx, SceneCmd* cmd) {
     if (((globalCtx->sceneNum >= SCENE_SPOT00) && (globalCtx->sceneNum <= SCENE_GANON_TOU)) ||
         ((globalCtx->sceneNum >= SCENE_ENTRA) && (globalCtx->sceneNum <= SCENE_SHRINE_R))) {
         if (gSaveContext.cutsceneIndex < 0xFFF0) {
-            gSaveContext.worldMapAreaData |= gBitFlags[gSaveContext.worldMapArea];
-            osSyncPrintf("０００  ａｒｅａ＿ａｒｒｉｖａｌ＝%x (%d)\n", gSaveContext.worldMapAreaData,
+            gSaveContext.memory.information.worldMapAreaData |= gBitFlags[gSaveContext.worldMapArea];
+            osSyncPrintf("０００  ａｒｅａ＿ａｒｒｉｖａｌ＝%x (%d)\n", gSaveContext.memory.information.worldMapAreaData,
                          gSaveContext.worldMapArea);
         }
     }

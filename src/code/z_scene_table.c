@@ -1092,7 +1092,7 @@ void func_80099BD8(GlobalContext* globalCtx) {
 
     CLOSE_DISP(globalCtx->state.gfxCtx, "../z_scene_table.c", 5145);
 
-    if (gSaveContext.sceneSetupIndex == 5) {
+    if (gSaveContext.gameInfo.sceneSetupIndex == 5) {
         D_8015FCF0 = 1;
         D_8015FCF8.x = -20.0f;
         D_8015FCF8.y = 1220.0f;
@@ -1841,14 +1841,14 @@ void func_8009DA30(GlobalContext* globalCtx) {
 
     gSPSegment(NEXT_POLY_XLU_DISP, 0x0A, displayListHead);
 
-    if ((gSaveContext.dayTime >= 0x4AAC) && (gSaveContext.dayTime <= 0xC555)) {
+    if ((gSaveContext.zeldaTime >= 0x4AAC) && (gSaveContext.zeldaTime <= 0xC555)) {
         gSPEndDisplayList(displayListHead);
     } else {
-        if (gSaveContext.dayTime > 0xC555) {
+        if (gSaveContext.zeldaTime > 0xC555) {
             if (globalCtx->unk_11D30[0] != 255) {
                 Math_ApproxS(&globalCtx->unk_11D30[0], 255, 5);
             }
-        } else if (gSaveContext.dayTime >= 0x4000) {
+        } else if (gSaveContext.zeldaTime >= 0x4000) {
             if (globalCtx->unk_11D30[0] != 0) {
                 Math_ApproxS(&globalCtx->unk_11D30[0], 0, 10);
             }
@@ -1939,11 +1939,11 @@ void func_8009E0B8(GlobalContext* globalCtx) {
     gDPPipeSync(gfxCtx->polyXlu.thaGfx.p++);
     gDPSetEnvColor(gfxCtx->polyXlu.thaGfx.p++, 128, 128, 128, 128);
 
-    if (gSaveContext.sceneSetupIndex == 4) {
+    if (gSaveContext.gameInfo.sceneSetupIndex == 4) {
         spA3 = 255 - (u8)globalCtx->unk_11D30[0];
-    } else if (gSaveContext.sceneSetupIndex == 6) {
+    } else if (gSaveContext.gameInfo.sceneSetupIndex == 6) {
         spA0 = globalCtx->unk_11D30[0] + 500;
-    } else if (((gSaveContext.sceneSetupIndex < 4) || LINK_IS_ADULT) && (gSaveContext.eventChkInf[0] & 0x80)) {
+    } else if (((gSaveContext.gameInfo.sceneSetupIndex < 4) || LINK_IS_ADULT) && (gSaveContext.memory.information.eventChkInf[0] & 0x80)) {
         spA0 = 2150;
     }
 
@@ -1971,7 +1971,7 @@ void func_8009E54C(GlobalContext* globalCtx) {
 
     OPEN_DISP(globalCtx->state.gfxCtx, "../z_scene_table.c", 7058);
 
-    if ((gSaveContext.sceneSetupIndex > 3) || (LINK_IS_ADULT && !(gSaveContext.eventChkInf[6] & 0x200))) {
+    if ((gSaveContext.gameInfo.sceneSetupIndex > 3) || (LINK_IS_ADULT && !(gSaveContext.memory.information.eventChkInf[6] & 0x200))) {
         globalCtx->unk_11D30[0] = 87;
     }
 
@@ -2198,14 +2198,14 @@ void func_8009F5D4(GlobalContext* globalCtx) {
 
     gSPSegment(NEXT_POLY_XLU_DISP, 0x08, displayListHead);
 
-    if ((gSaveContext.dayTime >= 0x4AAC) && (gSaveContext.dayTime <= 0xC000)) {
+    if ((gSaveContext.zeldaTime >= 0x4AAC) && (gSaveContext.zeldaTime <= 0xC000)) {
         gSPEndDisplayList(displayListHead);
     } else {
-        if (gSaveContext.dayTime > 0xC000) {
+        if (gSaveContext.zeldaTime > 0xC000) {
             if (globalCtx->unk_11D30[0] != 255) {
                 Math_ApproxS(&globalCtx->unk_11D30[0], 255, 5);
             }
-        } else if (gSaveContext.dayTime >= 0x4000) {
+        } else if (gSaveContext.zeldaTime >= 0x4000) {
             if (globalCtx->unk_11D30[0] != 0) {
                 Math_ApproxS(&globalCtx->unk_11D30[0], 0, 10);
             }

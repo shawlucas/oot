@@ -245,7 +245,7 @@ void func_8098E960(DemoSa* this, GlobalContext* globalCtx) {
     s32 pad[2];
     Player* player;
 
-    if ((gSaveContext.chamberCutsceneNum == 0) && (gSaveContext.sceneSetupIndex < 4)) {
+    if ((gSaveContext.chamberCutsceneNum == 0) && (gSaveContext.gameInfo.sceneSetupIndex < 4)) {
         player = PLAYER;
         this->action = 1;
         globalCtx->csCtx.segment = D_8099010C;

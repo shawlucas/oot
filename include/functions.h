@@ -1311,14 +1311,14 @@ void SkinMatrix_SetTranslate(MtxF* mf, f32 x, f32 y, f32 z);
 void SkinMatrix_SetScaleRotateYRPTranslate(MtxF* mf, f32 scaleX, f32 scaleY, f32 scaleZ, s16 yaw, s16 roll, s16 pitch, f32 dx, f32 dy, f32 dz);
 Mtx* SkinMatrix_MtxFToNewMtx(GraphicsContext* gfxCtx, MtxF* src);
 void func_800A7EC0(MtxF *mf, s16 a, f32 x, f32 y, f32 z);
-// ? func_800A81A0(?);
-// ? func_800A82C8(?);
+// ? Save_Initialize(?);
+// ? Save_Initialize999(?);
 // ? func_800A9A9C(?);
 // ? func_800A9D28(?);
 void func_800A9D40(u32 addr, u8 handleType, u8 handleDomain, u8 handleLatency, u8 handlePageSize, u8 handleRelDuration,
                    u8 handlePulse, u32 handleSpeed);
 void func_800A9E14(UNK_PTR dramAddr, size_t size, UNK_TYPE arg2);
-void Sram_ReadWrite(UNK_TYPE arg0, UNK_PTR dramAddr, size_t size, UNK_TYPE arg3);
+void Sram_ReadWrite(void* arg0, void* dramAddr, size_t size, s32 arg3);
 void func_800A9F30(PadMgr*, s32);
 void func_800A9F6C(f32, u8, u8, u8);
 void func_800AA000(f32, u8, u8, u8);

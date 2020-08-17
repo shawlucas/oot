@@ -1,4 +1,4 @@
-glabel func_800A88D4
+glabel Sram_Save
 /* B1FA74 800A88D4 3C058016 */  lui   $a1, %hi(gSaveContext) # $a1, 0x8016
 /* B1FA78 800A88D8 24A5E660 */  addiu $a1, %lo(gSaveContext) # addiu $a1, $a1, -0x19a0
 /* B1FA7C 800A88DC 27BDFFE0 */  addiu $sp, $sp, -0x20

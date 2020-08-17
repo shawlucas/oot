@@ -72,7 +72,7 @@ void OceffSpot_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     Lights_Remove(globalCtx, &globalCtx->lightCtx, this->light1);
     Lights_Remove(globalCtx, &globalCtx->lightCtx, this->light2);
     func_800876C8(globalCtx);
-    if (gSaveContext.nayrusLoveTimer && globalCtx->actorCtx.actorList[ACTORTYPE_PLAYER].length) {
+    if (gSaveContext.gameInfo.nayrusLoveTimer && globalCtx->actorCtx.actorList[ACTORTYPE_PLAYER].length) {
         player->unk_692 |= 0x40;
     }
 }
@@ -84,7 +84,7 @@ void OceffSpot_End(OceffSpot* this, GlobalContext* globalCtx) {
         Actor_Kill(&this->actor);
         if (D_8011FB40 != 400 && globalCtx->msgCtx.unk_E40E == 0 && (gSaveContext.eventInf[0] & 0xF) != 1) {
             if (globalCtx->msgCtx.unk_E3F0 != 0x31 || globalCtx->msgCtx.unk_E3EE != 8) {
-                gSaveContext.unk_1422 = 1;
+                gSaveContext.sunMoonFlag = 1;
                 osSyncPrintf(VT_FGCOL(YELLOW));
                 // Sun's Song Flag
                 osSyncPrintf("z_oceff_spot  太陽の歌フラグ\n");

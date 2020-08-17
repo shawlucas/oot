@@ -19,5 +19,5 @@ void SaveContext_Init(void) {
     gSaveContext.environmentTime = 0;
     gSaveContext.dogIsLost = true;
     gSaveContext.nextTransition = 0xFF;
-    gSaveContext.unk_13EE = 50;
+    gSaveContext.lastTimeType = 50;
 }

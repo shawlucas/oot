@@ -8,12 +8,12 @@
 #include <global.h>
 
 void Opening_SetupTitleScreen(OpeningContext* this) {
-    gSaveContext.gameMode = 1;
+    gSaveContext.gameInfo.gameMode = 1;
     this->state.running = false;
     gSaveContext.linkAge = 0;
-    func_800A82C8();
+    Save_Initialize999();
     gSaveContext.cutsceneIndex = 0xFFF3;
-    gSaveContext.sceneSetupIndex = 7;
+    gSaveContext.gameInfo.sceneSetupIndex = 7;
     SET_NEXT_GAMESTATE(&this->state, Gameplay_Init, GlobalContext);
 }
 

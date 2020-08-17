@@ -168,10 +168,10 @@ s8 EnDog_CanFollow(EnDog* this, GlobalContext* globalCtx) {
 
     if (this->collider.base.maskB & 1) {
         this->collider.base.maskB &= ~1;
-        if (gSaveContext.dogParams != 0) {
+        if (gSaveContext.gameInfo.dogParams != 0) {
             return 0;
         }
-        gSaveContext.dogParams = (this->actor.params & 0x7FFF);
+        gSaveContext.gameInfo.dogParams = (this->actor.params & 0x7FFF);
         return 1;
     }
 
@@ -233,7 +233,7 @@ void EnDog_Init(Actor* thisx, GlobalContext* globalCtx) {
         this->actor.params = (this->actor.params & 0xF0FF) | ((((this->actor.params & 0x0F00) >> 8) + 1) << 8);
     }
 
-    followingDog = ((gSaveContext.dogParams & 0x0F00) >> 8);
+    followingDog = ((gSaveContext.gameInfo.dogParams & 0x0F00) >> 8);
     if (followingDog == ((this->actor.params & 0x0F00) >> 8) && ((this->actor.params & 0x8000) == 0)) {
         Actor_Kill(&this->actor);
         return;
@@ -344,7 +344,7 @@ void EnDog_ChooseMovement(EnDog* this, GlobalContext* globalCtx) {
 void EnDog_FollowLink(EnDog* this, GlobalContext* globalCtx) {
     f32 speed;
 
-    if (gSaveContext.dogParams == 0) {
+    if (gSaveContext.gameInfo.dogParams == 0) {
         this->nextBehavior = DOG_SIT;
         this->actionFunc = EnDog_Wait;
         this->actor.speedXZ = 0.0f;
@@ -355,7 +355,7 @@ void EnDog_FollowLink(EnDog* this, GlobalContext* globalCtx) {
         if (this->nextBehavior != DOG_SIT && this->nextBehavior != DOG_SIT_2) {
             this->nextBehavior = DOG_BOW;
         }
-        gSaveContext.dogParams = 0;
+        gSaveContext.gameInfo.dogParams = 0;
         speed = 0.0f;
     } else if (this->actor.xzDistFromLink > 100.0f) {
         this->nextBehavior = DOG_RUN;
@@ -422,7 +422,7 @@ void EnDog_Wait(EnDog* this, GlobalContext* globalCtx) {
     this->unusedAngle = (this->actor.yawTowardsLink - this->actor.shape.rot.y);
 
     // If another dog is following Link and he gets within 200 units of waiting dog, run away
-    if ((gSaveContext.dogParams != 0) && (this->actor.xzDistFromLink < 200.0f)) {
+    if ((gSaveContext.gameInfo.dogParams != 0) && (this->actor.xzDistFromLink < 200.0f)) {
         this->nextBehavior = DOG_RUN;
         this->actionFunc = EnDog_RunAway;
     }

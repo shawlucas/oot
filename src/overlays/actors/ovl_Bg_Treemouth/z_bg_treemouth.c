@@ -70,9 +70,9 @@ void BgTreemouth_Init(Actor* thisx, GlobalContext* globalCtx) {
     ActorShape_Init(&thisx->shape, 0.0f, NULL, 0.0f);
     Actor_SetHeight(thisx, 50.0f);
 
-    if ((gSaveContext.sceneSetupIndex < 4) && LINK_IS_CHILD) {
+    if ((gSaveContext.gameInfo.sceneSetupIndex < 4) && LINK_IS_CHILD) {
         BgTreemouth_SetupAction(this, func_808BC8B8);
-    } else if (LINK_IS_ADULT || (gSaveContext.sceneSetupIndex == 7)) {
+    } else if (LINK_IS_ADULT || (gSaveContext.gameInfo.sceneSetupIndex == 7)) {
         this->unk_168 = 0.0f;
         BgTreemouth_SetupAction(this, BgTreemouth_DoNothing);
     } else {
@@ -114,7 +114,7 @@ void func_808BC6F8(BgTreemouth* this, GlobalContext* globalCtx) {
         this->unk_168 = 1.0f;
     }
 
-    if ((gSaveContext.sceneSetupIndex == 6) && (globalCtx->csCtx.frames >= 0x2BD) &&
+    if ((gSaveContext.gameInfo.sceneSetupIndex == 6) && (globalCtx->csCtx.frames >= 0x2BD) &&
         (globalCtx->state.frames % 8 == 0)) {
         sp34.x = (Math_Rand_ZeroOne() * 1158.0f) + 3407.0f;
         sp34.y = 970.0f;
@@ -230,14 +230,14 @@ void BgTreemouth_Draw(Actor* thisx, GlobalContext* globalCtx) {
     OPEN_DISP(globalCtx->state.gfxCtx, "../z_bg_treemouth.c", 893);
     func_80093D18(globalCtx->state.gfxCtx);
 
-    if ((gSaveContext.sceneSetupIndex < 4) || LINK_IS_ADULT) {
-        if (gSaveContext.eventChkInf[0] & 0x80) {
+    if ((gSaveContext.gameInfo.sceneSetupIndex < 4) || LINK_IS_ADULT) {
+        if (gSaveContext.memory.information.eventChkInf[0] & 0x80) {
             alpha = 2150;
         }
     } else { // neeeded to match
     }
 
-    if (gSaveContext.sceneSetupIndex == 6) {
+    if (gSaveContext.gameInfo.sceneSetupIndex == 6) {
         alpha = (globalCtx->unk_11D30[0] + 0x1F4);
     }
 

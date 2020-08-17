@@ -64,7 +64,7 @@ void OceffStorm_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     Player* player = PLAYER;
 
     func_800876C8(globalCtx);
-    if (gSaveContext.nayrusLoveTimer) {
+    if (gSaveContext.gameInfo.nayrusLoveTimer) {
         player->unk_692 |= 0x40;
     }
 }

@@ -551,8 +551,8 @@ u32 func_80096FE8(GlobalContext* globalCtx, RoomContext* roomCtx) {
     roomCtx->unk_30 = 0;
     roomCtx->status = 0;
 
-    if (gSaveContext.respawnFlag > 0) {
-        nextRoomNum = gSaveContext.respawn[gSaveContext.respawnFlag - 1].roomIndex;
+    if (gSaveContext.gameInfo.respawnFlag > 0) {
+        nextRoomNum = gSaveContext.gameInfo.respawn[gSaveContext.gameInfo.respawnFlag - 1].roomIndex;
     } else {
         nextRoomNum = globalCtx->setupEntranceList[globalCtx->curSpawn].room;
     }

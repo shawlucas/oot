@@ -45,7 +45,7 @@ void KaleidoSetup_Update(GlobalContext* globalCtx) {
     if (pauseCtx->state == 0 && pauseCtx->flag == 0 && globalCtx->goverCtx == 0 && globalCtx->sceneLoadFlag == 0 &&
         globalCtx->transitionMode == 0 && gSaveContext.cutsceneIndex < 0xFFF0 &&
         gSaveContext.nextCutsceneIndex < 0xFFF0 && !Gameplay_InCsMode(globalCtx) && globalCtx->bowGameFlag < 2 &&
-        gSaveContext.unk_13F0 != 8 && gSaveContext.unk_13F0 != 9 &&
+        gSaveContext.magicFlag != 8 && gSaveContext.magicFlag != 9 &&
         (globalCtx->sceneNum != SCENE_BOWLING || !Flags_GetSwitch(globalCtx, 0x38))) {
 
         if (CHECK_PAD(input->cur, L_TRIG) && CHECK_PAD(input->press, U_CBUTTONS)) {
@@ -53,7 +53,7 @@ void KaleidoSetup_Update(GlobalContext* globalCtx) {
                 pauseCtx->flag = 3;
             }
         } else if (CHECK_PAD(input->press, START_BUTTON)) {
-            gSaveContext.unk_13EE = gSaveContext.unk_13EA;
+            gSaveContext.lastTimeType = gSaveContext.prevAlphaType;
             WREG(16) = -0xAF;
             WREG(17) = 0x9B;
             pauseCtx->unk_1EA = 0;

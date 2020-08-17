@@ -34,23 +34,29 @@
 #define LINK_IS_CHILD (gSaveContext.linkAge != 0)
 #define LINK_IS_ADULT (gSaveContext.linkAge == 0)
 #define LINK_AGE_IN_YEARS (LINK_IS_CHILD ? YEARS_CHILD : YEARS_ADULT)
+#define LINK_AGE_IS_CHILD (LINK_AGE_IN_YEARS == YEARS_CHILD)
+#define LINK_AGE_IS_ADULT (LINK_AGE_IN_YEARS == YEARS_ADULT)
 
 #define GET_PAD_PATTERN(padmgr) (u8)((padmgr)->validCtrlrsMask)
 
 #define SLOT(item) gItemSlots[item]
-#define INV_CONTENT(item) gSaveContext.items[SLOT(item)]
-#define AMMO(item) gSaveContext.ammo[SLOT(item)]
+#define INV_CONTENT(item) gSaveContext.memory.table.items[SLOT(item)]
+#define AMMO(item) gSaveContext.memory.table.ammo[SLOT(item)]
 #define BEANS_BOUGHT AMMO(ITEM_BEAN + 1)
 
-#define ALL_EQUIP_VALUE(equip) ((s32)(gSaveContext.equipment & gEquipMasks[equip]) >> gEquipShifts[equip])
-#define CUR_EQUIP_VALUE(equip) ((s32)(gSaveContext.equips.equipment & gEquipMasks[equip]) >> gEquipShifts[equip])
-#define CHECK_OWNED_EQUIP(equip, value) ((gBitFlags[value] << gEquipShifts[equip]) & gSaveContext.equipment)
+#define ALL_EQUIP_VALUE(equip) ((s32)(gSaveContext.memory.table.equipment & gEquipMasks[equip]) >> gEquipShifts[equip])
+#define CUR_EQUIP_VALUE(equip) ((s32)(gSaveContext.memory.equips.equipment & gEquipMasks[equip]) >> gEquipShifts[equip])
+#define CHECK_OWNED_EQUIP(equip, value) ((gBitFlags[value] << gEquipShifts[equip]) & gSaveContext.memory.table.equipment)
+#define SETEQUIP_REGISTER(no, pt) (EQUIP_REGISTER |= (pt << gEquipShifts[no]))
+#define ITEM_REGISTER_SET(item) (S_Table.items[SLOT(item)] = item)
 
-#define CUR_UPG_VALUE(upg) ((s32)(gSaveContext.upgrades & gUpgradeMasks[upg]) >> gUpgradeShifts[upg])
+#define CUR_UPG_VALUE(upg) ((s32)(gSaveContext.memory.table.upgrades & gUpgradeMasks[upg]) >> gUpgradeShifts[upg])
 #define CAPACITY(upg, value) gUpgradeCapacities[upg][value]
 #define CUR_CAPACITY(upg) CAPACITY(upg, CUR_UPG_VALUE(upg))
 
-#define CHECK_QUEST_ITEM(item) (gBitFlags[item] & gSaveContext.questItems)    
+#define CHECK_QUEST_ITEM(item) (gBitFlags[item] & gSaveContext.memory.table.questItems) 
+
+#define EQUIP_SWORD_CHK(itemNo) (S_Table.equipment & ( gBitFlags[itemNo - ITEM_SWORD_KOKIRI] << gEquipShifts[EQUIP_SWORD]))
 
 #ifndef HAYAKAWA_TESTdx
 #define SET_NEXT_GAMESTATE(game, func, name) \
@@ -118,5 +124,44 @@ if (1) {  \
     }
 
 #define CHECK_PAD(state, combo) (~(state.in.button | ~(combo)) == 0)
+
+#define S_Private gSaveContext.memory.privatef
+#define S_Information gSaveContext.memory.information
+#define S_Equips  gSaveContext.memory.equips
+#define S_Table   gSaveContext.memory.table
+#define S_Save    gSaveContext.memory.save
+#define HORSE_SCENE gSaveContext.memory.horseData.scene
+#define HORSE_POS gSaveContext.memory.horseData.pos
+#define HORSE_ANGLE gSaveContext.memory.horseData.angle
+
+#define EQUIP_REGISTER S_Table.equipment
+#define EVENT_CHK_INF(no) (S_Information.eventChkInf[no])
+#define INF_TABLE(no) (S_Information.infTable[no])
+
+#define GET_EVENT_CHK_INF(no, data) (EVENT_CHK_INF(no) & data)
+#define GETQUESTITEM_MELODY(no) (S_Table.questItems & gBitFlags[C_SEAL + (no - ITEM_SONG_MINUET)])
+
+#define MAGIC_LEVEL S_Private.magicLevel
+#define CURRENT_MAGIC S_Private.magic
+#define HOLD_SWORD INF_TABLE(29)
+#define ROOM_INF S_Information.sceneFlags
+
+#define SET_INF_TABLE(no, data) (INF_TABLE(no) |= data)
+#define SET_EVENT_CHK_INF(no, data) (EVENT_CHK_INF(no) |= data)
+
+#define REGISTER_ITEM(no) S_Equips.buttonItems[no]
+#define REGISTER_ITEM_PT(no) S_Equips.cButtonSlots[no]
+
+#define SCENE_DATA_ID S_Private.sceneDataId
+
+#define OCA_REC_FLAG S_Information.ocaRecFlag
+#define OCA_REC_FLAG8 S_Information.ocaRecFlag8
+
+#define EQUIP_ITEM S_Equips.equipment
+
+#define ZCommonGet(member) (0, gSaveContext.member)
+#define ZCommon_SceneNoGet() ZCommonGet(entranceIndex)
+#define ZCommonSet(member, value) (gSaveContext.member = (value))
+#define ZCommon_SceneNoSet(no) ZCommonSet(entranceIndex, no)
 
 #endif

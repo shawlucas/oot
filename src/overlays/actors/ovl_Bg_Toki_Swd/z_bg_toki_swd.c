@@ -70,7 +70,7 @@ void BgTokiSwd_Init(Actor* thisx, GlobalContext* globalCtx) {
         thisx->draw = NULL;
     }
 
-    if (gSaveContext.sceneSetupIndex == 5) {
+    if (gSaveContext.gameInfo.sceneSetupIndex == 5) {
         globalCtx->unk_11D30[0] = 0xFF;
     }
 
@@ -87,13 +87,13 @@ void BgTokiSwd_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void func_808BAF40(BgTokiSwd* this, GlobalContext* globalCtx) {
-    if (((gSaveContext.eventChkInf[4] & 0x8000) == 0) && (gSaveContext.sceneSetupIndex < 4) &&
+    if (((gSaveContext.memory.information.eventChkInf[4] & 0x8000) == 0) && (gSaveContext.gameInfo.sceneSetupIndex < 4) &&
         (func_8002E12C(&this->actor, 800.0f, 0x7530) != 0) && !Gameplay_InCsMode(globalCtx)) {
-        gSaveContext.eventChkInf[4] |= 0x8000;
+        gSaveContext.memory.information.eventChkInf[4] |= 0x8000;
         globalCtx->csCtx.segment = D_808BBD90;
         gSaveContext.cutsceneTrigger = 1;
     }
-    if (LINK_IS_CHILD || ((gSaveContext.eventChkInf[5] & 0x20))) {
+    if (LINK_IS_CHILD || ((gSaveContext.memory.information.eventChkInf[5] & 0x20))) {
         if (func_8002F410(&this->actor, globalCtx) != 0) {
             if (LINK_IS_CHILD) {
                 Item_Give(globalCtx, ITEM_SWORD_MASTER);
@@ -112,7 +112,7 @@ void func_808BAF40(BgTokiSwd* this, GlobalContext* globalCtx) {
             }
         }
     }
-    if (gSaveContext.sceneSetupIndex == 5) {
+    if (gSaveContext.gameInfo.sceneSetupIndex == 5) {
         if (globalCtx->unk_11D30[0] > 0) {
             globalCtx->unk_11D30[0]--;
         } else {

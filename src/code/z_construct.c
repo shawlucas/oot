@@ -15,9 +15,9 @@ void func_801109B0(GlobalContext* globalCtx) {
     s32 do_actionOffset;
     s32 temp;
 
-    gSaveContext.unk_1422 = 0;
-    gSaveContext.unk_13EA = 0;
-    gSaveContext.unk_13E8 = 0;
+    gSaveContext.sunMoonFlag = 0;
+    gSaveContext.prevAlphaType = 0;
+    gSaveContext.alphaType = 0;
 
     View_Init(&interfaceCtx->view, globalCtx->state.gfxCtx);
 
@@ -94,35 +94,35 @@ void func_801109B0(GlobalContext* globalCtx) {
         __assert("parameter->icon_itemSegment != NULL", "../z_construct.c", 193);
     }
 
-    osSyncPrintf("Register_Item[%x, %x, %x, %x]\n", gSaveContext.equips.buttonItems[0],
-                 gSaveContext.equips.buttonItems[1], gSaveContext.equips.buttonItems[2],
-                 gSaveContext.equips.buttonItems[3]);
+    osSyncPrintf("Register_Item[%x, %x, %x, %x]\n", gSaveContext.memory.equips.buttonItems[0],
+                 gSaveContext.memory.equips.buttonItems[1], gSaveContext.memory.equips.buttonItems[2],
+                 gSaveContext.memory.equips.buttonItems[3]);
 
-    if (gSaveContext.equips.buttonItems[0] < 0xF0) {
+    if (gSaveContext.memory.equips.buttonItems[0] < 0xF0) {
         DmaMgr_SendRequest1(interfaceCtx->icon_itemSegment,
-                            _icon_item_staticSegmentRomStart + gSaveContext.equips.buttonItems[0] * 0x1000, 0x1000,
+                            _icon_item_staticSegmentRomStart + gSaveContext.memory.equips.buttonItems[0] * 0x1000, 0x1000,
                             "../z_construct.c", 198);
-    } else if (gSaveContext.equips.buttonItems[0] != 0xFF) {
+    } else if (gSaveContext.memory.equips.buttonItems[0] != 0xFF) {
         DmaMgr_SendRequest1(interfaceCtx->icon_itemSegment,
-                            _icon_item_staticSegmentRomStart + gSaveContext.equips.buttonItems[0] * 0x1000, 0x1000,
+                            _icon_item_staticSegmentRomStart + gSaveContext.memory.equips.buttonItems[0] * 0x1000, 0x1000,
                             "../z_construct.c", 203);
     }
 
-    if (gSaveContext.equips.buttonItems[1] < 0xF0) {
+    if (gSaveContext.memory.equips.buttonItems[1] < 0xF0) {
         DmaMgr_SendRequest1((void*)((u32)interfaceCtx->icon_itemSegment + 0x1000),
-                            _icon_item_staticSegmentRomStart + gSaveContext.equips.buttonItems[1] * 0x1000, 0x1000,
+                            _icon_item_staticSegmentRomStart + gSaveContext.memory.equips.buttonItems[1] * 0x1000, 0x1000,
                             "../z_construct.c", 209);
     }
 
-    if (gSaveContext.equips.buttonItems[2] < 0xF0) {
+    if (gSaveContext.memory.equips.buttonItems[2] < 0xF0) {
         DmaMgr_SendRequest1((void*)((u32)interfaceCtx->icon_itemSegment + 0x2000),
-                            _icon_item_staticSegmentRomStart + gSaveContext.equips.buttonItems[2] * 0x1000, 0x1000,
+                            _icon_item_staticSegmentRomStart + gSaveContext.memory.equips.buttonItems[2] * 0x1000, 0x1000,
                             "../z_construct.c", 214);
     }
 
-    if (gSaveContext.equips.buttonItems[3] < 0xF0) {
+    if (gSaveContext.memory.equips.buttonItems[3] < 0xF0) {
         DmaMgr_SendRequest1((void*)((u32)interfaceCtx->icon_itemSegment + 0x3000),
-                            _icon_item_staticSegmentRomStart + gSaveContext.equips.buttonItems[3] * 0x1000, 0x1000,
+                            _icon_item_staticSegmentRomStart + gSaveContext.memory.equips.buttonItems[3] * 0x1000, 0x1000,
                             "../z_construct.c", 219);
     }
 
@@ -130,9 +130,9 @@ void func_801109B0(GlobalContext* globalCtx) {
 
     if ((gSaveContext.timer1State == 4) || (gSaveContext.timer1State == 8) || (gSaveContext.timer2State == 4) ||
         (gSaveContext.timer2State == 10)) {
-        osSyncPrintf("restart_flag=%d\n", gSaveContext.respawnFlag);
+        osSyncPrintf("restart_flag=%d\n", gSaveContext.gameInfo.respawnFlag);
 
-        if ((gSaveContext.respawnFlag == -1) || (gSaveContext.respawnFlag == 1)) {
+        if ((gSaveContext.gameInfo.respawnFlag == -1) || (gSaveContext.gameInfo.respawnFlag == 1)) {
             if (gSaveContext.timer1State == 4) {
                 gSaveContext.timer1State = 1;
                 gSaveContext.timerX[0] = 140;
@@ -148,7 +148,7 @@ void func_801109B0(GlobalContext* globalCtx) {
 
         gSaveContext.timerX[temp] = 26;
 
-        if (gSaveContext.healthCapacity > 0xA0) {
+        if (gSaveContext.memory.privatef.healthCapacity > 0xA0) {
             gSaveContext.timerY[temp] = 54;
         } else {
             gSaveContext.timerY[temp] = 46;
@@ -532,7 +532,7 @@ void func_80111070(void) {
     WREG(94) = 3;
     WREG(95) = 6;
 
-    if (gSaveContext.gameMode == 0) {
+    if (gSaveContext.gameInfo.gameMode == 0) {
         VREG(0) = 0x34;
         VREG(1) = 0x24;
         VREG(2) = 0xD6;

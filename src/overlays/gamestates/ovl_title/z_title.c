@@ -148,7 +148,7 @@ void Title_Main(GameState* thisx) {
     if (this->exit) {
         gSaveContext.seqIndex = 0xFF;
         gSaveContext.nightSeqIndex = 0xFF;
-        gSaveContext.gameMode = 1;
+        gSaveContext.gameInfo.gameMode = 1;
         this->state.running = false;
         SET_NEXT_GAMESTATE(&this->state, Opening_Init, OpeningContext);
     }
