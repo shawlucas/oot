@@ -1,4 +1,4 @@
-glabel func_800A9A9C
+glabel Sram_SaveSound
 /* B20C3C 800A9A9C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* B20C40 800A9AA0 AFA40018 */  sw    $a0, 0x18($sp)
 /* B20C44 800A9AA4 8FAE0018 */  lw    $t6, 0x18($sp)

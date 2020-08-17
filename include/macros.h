@@ -170,4 +170,7 @@ if (1) {  \
 
 #define PLAYER_NAME S_Private.playerName
 
+#define S_SOUND gSaveContext.audioSetting
+#define Z_TARGET gSaveContext.zTargetingSetting
+
 #endif

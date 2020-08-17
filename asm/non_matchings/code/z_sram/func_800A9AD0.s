@@ -59,8 +59,8 @@ glabel func_800A9AD0
 /* B20CB0 800A9B10 00003825 */   move  $a3, $zero
 /* B20CB4 800A9B14 3C148014 */  lui   $s4, %hi(D_80140EC4) # $s4, 0x8014
 /* B20CB8 800A9B18 3C138016 */  lui   $s3, %hi(gSaveContext) # $s3, 0x8016
-/* B20CBC 800A9B1C 3C128013 */  lui   $s2, %hi(D_8012A4EC) # $s2, 0x8013
-/* B20CC0 800A9B20 2652A4EC */  addiu $s2, %lo(D_8012A4EC) # addiu $s2, $s2, -0x5b14
+/* B20CBC 800A9B1C 3C128013 */  lui   $s2, %hi(sramCheckData) # $s2, 0x8013
+/* B20CC0 800A9B20 2652A4EC */  addiu $s2, %lo(sramCheckData) # addiu $s2, $s2, -0x5b14
 /* B20CC4 800A9B24 2673E660 */  addiu $s3, %lo(gSaveContext) # addiu $s3, $s3, -0x19a0
 /* B20CC8 800A9B28 26940EC4 */  addiu $s4, %lo(D_80140EC4) # addiu $s4, $s4, 0xec4
 /* B20CCC 800A9B2C 00008025 */  move  $s0, $zero
@@ -85,7 +85,7 @@ glabel func_800A9AD0
 /* B20D14 800A9B74 926A1409 */  lbu   $t2, 0x1409($s3)
 /* B20D18 800A9B78 8E2B0000 */  lw    $t3, ($s1)
 /* B20D1C 800A9B7C 02202025 */  move  $a0, $s1
-/* B20D20 800A9B80 0C02A6A7 */  jal   func_800A9A9C
+/* B20D20 800A9B80 0C02A6A7 */  jal   Sram_SaveSound
 /* B20D24 800A9B84 A16A0002 */   sb    $t2, 2($t3)
 /* B20D28 800A9B88 8E230000 */  lw    $v1, ($s1)
 /* B20D2C 800A9B8C 26100001 */  addiu $s0, $s0, 1
@@ -110,7 +110,7 @@ glabel func_800A9AD0
 /* B20D74 800A9BD4 A2601409 */  sb    $zero, 0x1409($s3)
 /* B20D78 800A9BD8 8E2B0000 */  lw    $t3, ($s1)
 /* B20D7C 800A9BDC 02202025 */  move  $a0, $s1
-/* B20D80 800A9BE0 0C02A6A7 */  jal   func_800A9A9C
+/* B20D80 800A9BE0 0C02A6A7 */  jal   Sram_SaveSound
 /* B20D84 800A9BE4 A1600002 */   sb    $zero, 2($t3)
 .L800A9BE8:
 /* B20D88 800A9BE8 8FAC0030 */  lw    $t4, 0x30($sp)

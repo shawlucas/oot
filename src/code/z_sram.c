@@ -7,7 +7,8 @@ u16 sramSaveAddress[] = {
     0x0020, 0x1470, 0x28C0, 0x3D10, 0x5160, 0x65B0,
 };
 
-u8 D_8012A4EC[] = {
+// sram_check_data
+u8 sramCheckData[] = {
     0x00, 0x00, 0x00, 0x98, 0x09, 0x10, 0x21, 'Z', 'E', 'L', 'D', 'A',
 };
 
@@ -620,13 +621,111 @@ void Sram_StartSave(FileChooseContext* this, Sram* sram) {
     osSyncPrintf("now_life[%d]=%d\n", gSaveContext.fileNum, this->nowLife[gSaveContext.fileNum]);
 #endif
 }
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_sram/func_800A96D0.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_sram/func_800A97F0.s")
+void Sram_StartClear(FileChooseContext* this, Sram* sram) {
+    u16 i;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_sram/func_800A9A9C.s")
+    Save_Initialize();
 
+    i = sramSaveAddress[this->decisionNo];
+    MemCopy(sram->read_buff + i, &gSaveContext.entranceIndex, SAVE_MAX);
+    ssSRAMWrite((void *)((s32)SRAM_START_ADDR + i), &gSaveContext.entranceIndex, SAVE_SIZE);
+    MemCopy(&this->f_64dd[this->decisionNo], sram->read_buff + i + SAVE_64DD, 2);
+
+    i = sramSaveAddress[this->decisionNo + 3];
+    MemCopy(sram->read_buff + i, &gSaveContext.entranceIndex, SAVE_MAX);
+    ssSRAMWrite((void *)((s32)SRAM_START_ADDR + i), &gSaveContext.entranceIndex, SAVE_SIZE);
+
+    osSyncPrintf("ＣＬＥＡＲ終了\n");
+}
+
+void func_800F6700(s8 arg);
+void Sram_StartCopy(FileChooseContext* this, Sram *sram )
+{
+    u16	i;
+    
+    osSyncPrintf("ＲＥＡＤ=%d(%x)  ＣＯＰＹ=%d(%x)\n",this->decisionNo,sramSaveAddress[this->decisionNo], this->copyNo, sramSaveAddress[this->copyNo]);
+    /* ＲＥＡＤ */
+    i = sramSaveAddress[this->decisionNo];
+    MemCopy(&gSaveContext.entranceIndex, sram->read_buff+i, SAVE_MAX );
+    /* ＣＯＰＹ */
+    i = sramSaveAddress[this->copyNo];
+    MemCopy( sram->read_buff+i, &gSaveContext.entranceIndex, SAVE_MAX );
+    i = sramSaveAddress[this->copyNo+3];
+    MemCopy( sram->read_buff+i, &gSaveContext.entranceIndex, SAVE_MAX );
+    ssSRAMWrite((void *)SRAM_START_ADDR, sram->read_buff, SRAM_SIZE);
+
+    i = sramSaveAddress[this->copyNo];
+    MemCopy( &this->save[this->copyNo], sram->read_buff+i + 0x22, 2 );
+    MemCopy( &this->name[this->copyNo], sram->read_buff+i + 0x24, 8 );
+    MemCopy( &this->health[this->copyNo], sram->read_buff+i+SAVE_LIFE, 2 );
+    MemCopy( &this->item[this->copyNo], sram->read_buff+i + 0xA4, 4 );
+    MemCopy( &this->f_64dd[this->copyNo], sram->read_buff+i+SAVE_64DD, 2 );
+    MemCopy( &this->heartStatus[this->copyNo], sram->read_buff + i + 0xCF, 1);
+#if defined(PAL_VERSION)
+    MemCopy( &this->nowLife[this->copyNo], sram->read_buff+i+SAVE_LIFE_NOW, 2 );
+#endif
+    osSyncPrintf("f_64dd[%d]=%d\n", gSaveContext.fileNum,this->f_64dd[gSaveContext.fileNum]);
+    osSyncPrintf("heart_status[%d]=%d\n", gSaveContext.fileNum,this->heartStatus[gSaveContext.fileNum]);
+    osSyncPrintf("ＣＯＰＹ終了\n");
+}
+
+
+void Sram_SaveSound(Sram* sram) {
+    ssSRAMWrite((void *)SRAM_START_ADDR, sram->read_buff, 0x10);
+}
+
+#if 0
+void func_800A9AD0(GameState* game, Sram* sram) {
+    //Input* input = &game->input[2];
+    u16 i, j;
+    u16* k;
+
+    osSyncPrintf("sram_initialize( Game *game, Sram *sram )\n");
+
+    ssSRAMRead(sram->read_buff, (void *)SRAM_START_ADDR, SRAM_SIZE);
+    for (i = 0; i < 9; i++) {
+        if (sramCheckData[i+3] != sram->read_buff[i+3]) {
+            /* Memory Transfer */
+            osSyncPrintf("ＳＲＡＭ破壊！！！！！！\n"); /* "SRAM destruction! ! ! ! ! !" */
+            MemCopy(sram->read_buff, &sramCheckData, sizeof(sramCheckData)/sizeof(u8));
+            Sram_SaveSound(sram);
+         }
+    }
+
+    S_SOUND = sram->read_buff[0] & 0x3; /* SOUND stereo/monaural/headphones/3D */
+    Z_TARGET = sram->read_buff[1] & 0x1;
+
+#if defined(PAL_VERSION)
+    J_N = sram->read_buff[2]; /* 0: English / 1: German / 2: French */
+    if (J_N > 2) {
+        J_N = 0;
+        sram->read_buff[2] = J_N;
+        Sram_SaveSound(sram);
+    }
+#endif
+
+#if !defined(ROM_F)
+    if ((s32)((&game->input[2])->cur.in.button) & R_JPAD) {
+        bzero(sram->read_buff, SRAM_SIZE);
+        for (i = 0; i < (SAVE_MAX) / 2; i++) {
+            sram->read_buff[i] = i;
+        }
+        ssSRAMWrite((void *)SRAM_START_ADDR, sram->read_buff, SRAM_SIZE);
+        osSyncPrintf("ＳＲＡＭ破壊！！！！！！\n");
+    }
+#endif
+    osSyncPrintf("ＧＯＯＤ！ＧＯＯＤ！ サイズ＝%d + %d ＝ %d\n", sizeof(Memory), sizeof(SAVE_BASE), sizeof(Memory) + sizeof(SAVE_BASE));
+    osSyncPrintf(VT_FGCOL(BLUE));
+    osSyncPrintf("Na_SetSoundOutputMode = %d\n",NA_SOUT_STEREO + S_SOUND);
+    osSyncPrintf("Na_SetSoundOutputMode = %d\n",NA_SOUT_STEREO + S_SOUND);
+    osSyncPrintf("Na_SetSoundOutputMode = %d\n",NA_SOUT_STEREO + S_SOUND);
+    osSyncPrintf(VT_RST);
+    func_800F6700(NA_SOUT_STEREO + S_SOUND); /* Sound output set */
+}
+#else
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_sram/func_800A9AD0.s")
+#endif
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_sram/func_800A9CD4.s")
 

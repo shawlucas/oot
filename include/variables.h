@@ -473,7 +473,7 @@ extern EntranceInfo gEntranceTable[1556];
 extern Scene gSceneTable[110];
 //extern ? D_8012A4A0;
 //extern ? sramSaveAddress;
-//extern ? D_8012A4EC;
+//extern ? sramCheckData;
 //extern ? D_8012A4F8;
 //extern ? D_8012A544;
 //extern ? D_8012A550;

@@ -18,7 +18,7 @@ glabel D_80140E88
     .balign 4
 
 .text
-glabel func_800A97F0
+glabel Sram_StartCopy
 /* B20990 800A97F0 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* B20994 800A97F4 AFB3002C */  sw    $s3, 0x2c($sp)
 /* B20998 800A97F8 3C010001 */  lui   $at, (0x00018000 >> 16) # lui $at, 1
