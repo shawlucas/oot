@@ -5,12 +5,15 @@
 OSThread gMainThread;
 u8 sMainStack[0x900];
 StackEntry sMainStackInfo;
-OSMesg sPiMgrCmdBuff[50];
+
+#define NUM_PI_MSGS 50
+
+OSMesg sPiMgrCmdBuff[NUM_PI_MSGS];
 OSMesgQueue gPiMgrCmdQ;
 OSViMode gViConfigMode;
-u8 D_80013960;
+u8 viModeNo;
 
-s8 D_80009430 = 1;
+s8 vidirty = 1;
 u8 volatile gViConfigUseDefault = 1;
 u8 gViConfigAdditionalScanLines = 0;
 u32 gViConfigFeatures = OS_VI_DITHER_FILTER_ON | OS_VI_GAMMA_OFF;
@@ -58,23 +61,23 @@ void Idle_ThreadEntry(void* a0) {
 
     switch (osTvType) {
         case 1:
-            D_80013960 = 2;
+            viModeNo = 2;
             gViConfigMode = osViModeNtscLan1;
             break;
 
         case 2:
-            D_80013960 = 0x1E;
+            viModeNo = 0x1E;
             gViConfigMode = osViModeMpalLan1;
             break;
 
         case 0:
-            D_80013960 = 0x2C;
+            viModeNo = 0x2C;
             gViConfigMode = osViModeFpalLan1;
             gViConfigYScale = 0.833f;
             break;
     }
 
-    D_80009430 = 1;
+    vidirty = 1;
     osViSetMode(&gViConfigMode);
     ViConfig_UpdateVi(1);
     osViBlack(1);

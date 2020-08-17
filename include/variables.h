@@ -84,7 +84,7 @@ extern u8 osAppNmiBuffer[];
 
 extern u8 D_80009320[];
 extern u8 D_800093F0[];
-extern s8 D_80009430;
+extern s8 vidirty;
 extern u32 D_80009460;
 extern u32 gDmaMgrDmaBuffSize;
 extern volatile u8 gViConfigUseDefault;
@@ -121,7 +121,7 @@ extern u8 gBuildDate[];
 extern u8 gBuildMakeOption[];
 extern OSMesgQueue gPiMgrCmdQ;
 extern OSViMode gViConfigMode;
-extern u8 D_80013960;
+extern u8 viModeNo;
 extern OSMesg piAccessBuf;
 extern OSMesgQueue __osPiAccessQueue;
 extern OSPiHandle __Dom1SpeedParam;
