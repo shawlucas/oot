@@ -8,7 +8,7 @@ glabel func_80B3149C
 /* 00494 80B314B4 00A08025 */  or      $s0, $a1, $zero            ## $s0 = 00000000
 /* 00498 80B314B8 8CA41C44 */  lw      $a0, 0x1C44($a1)           ## 00001C44
 /* 0049C 80B314BC A3A00023 */  sb      $zero, 0x0023($sp)         
-/* 004A0 80B314C0 0C00B6E3 */  jal     func_8002DB8C              
+/* 004A0 80B314C0 0C00B6E3 */  jal     ActorSearch_DistanceXZ              
 /* 004A4 80B314C4 8FA50028 */  lw      $a1, 0x0028($sp)           
 /* 004A8 80B314C8 8FAE0028 */  lw      $t6, 0x0028($sp)           
 /* 004AC 80B314CC 3C0142C8 */  lui     $at, 0x42C8                ## $at = 42C80000

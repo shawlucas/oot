@@ -98,7 +98,7 @@ void BgHakaTubo_Idle(BgHakaTubo* this, GlobalContext* globalCtx) {
         this->potCollider.base.acFlags &= ~2;
         // If the colliding actor is within a 50 unit radius and 50 unit height cylinder centered
         // on the actor's position, break the pot
-        if (func_8002DBB0(&this->dyna.actor, &this->potCollider.base.ac->posRot.pos) < 50.0f &&
+        if (ActorSearch_PosDistanceXZ(&this->dyna.actor, &this->potCollider.base.ac->posRot.pos) < 50.0f &&
             (this->potCollider.base.ac->posRot.pos.y - this->dyna.actor.posRot.pos.y) < 50.0f) {
             pos.x = this->dyna.actor.posRot.pos.x;
             pos.z = this->dyna.actor.posRot.pos.z;

@@ -5,7 +5,7 @@ glabel func_80A5A5C8
 /* 009A4 80A5A5D4 25CEA658 */  addiu   $t6, $t6, %lo(func_80A5A658) ## $t6 = 80A5A658
 /* 009A8 80A5A5D8 AC8E014C */  sw      $t6, 0x014C($a0)           ## 0000014C
 /* 009AC 80A5A5DC AFA40018 */  sw      $a0, 0x0018($sp)           
-/* 009B0 80A5A5E0 0C00B6DB */  jal     func_8002DB6C              
+/* 009B0 80A5A5E0 0C00B6DB */  jal     ActorSearch_PosDistance              
 /* 009B4 80A5A5E4 2485022C */  addiu   $a1, $a0, 0x022C           ## $a1 = 0000022C
 /* 009B8 80A5A5E8 3C013F80 */  lui     $at, 0x3F80                ## $at = 3F800000
 /* 009BC 80A5A5EC 44816000 */  mtc1    $at, $f12                  ## $f12 = 1.00

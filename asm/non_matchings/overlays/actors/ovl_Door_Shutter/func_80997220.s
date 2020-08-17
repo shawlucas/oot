@@ -13,7 +13,7 @@ glabel func_80997220
 /* 00FAC 8099724C 00021E00 */  sll     $v1, $v0, 24               
 /* 00FB0 80997250 0440004C */  bltz    $v0, .L80997384            
 /* 00FB4 80997254 00031E03 */  sra     $v1, $v1, 24               
-/* 00FB8 80997258 0C00B6F4 */  jal     func_8002DBD0              
+/* 00FB8 80997258 0C00B6F4 */  jal     ActorSearch_PosProjectDistanceXZ              
 /* 00FBC 8099725C A3A3004B */  sb      $v1, 0x004B($sp)           
 /* 00FC0 80997260 C7A40044 */  lwc1    $f4, 0x0044($sp)           
 /* 00FC4 80997264 44803000 */  mtc1    $zero, $f6                 ## $f6 = 0.00

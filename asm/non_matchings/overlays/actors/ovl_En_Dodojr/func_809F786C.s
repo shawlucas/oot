@@ -3,7 +3,7 @@ glabel func_809F786C
 /* 014B0 809F7870 AFBF0024 */  sw      $ra, 0x0024($sp)           
 /* 014B4 809F7874 AFB00020 */  sw      $s0, 0x0020($sp)           
 /* 014B8 809F7878 00808025 */  or      $s0, $a0, $zero            ## $s0 = 00000000
-/* 014BC 809F787C 0C00B61A */  jal     func_8002D868              
+/* 014BC 809F787C 0C00B61A */  jal     ActorPosition_SpeedSet              
 /* 014C0 809F7880 AFA5002C */  sw      $a1, 0x002C($sp)           
 /* 014C4 809F7884 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 014C8 809F7888 0C27DA2C */  jal     func_809F68B0              

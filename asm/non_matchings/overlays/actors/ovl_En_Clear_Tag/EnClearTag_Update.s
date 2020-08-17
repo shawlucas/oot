@@ -510,7 +510,7 @@ glabel EnClearTag_Update
 /* 00D2C 809D42DC 95AF0004 */  lhu     $t7, 0x0004($t5)           ## 00000004
 /* 00D30 809D42E0 0018C823 */  subu    $t9, $zero, $t8            
 /* 00D34 809D42E4 A63900B4 */  sh      $t9, 0x00B4($s1)           ## 000000B4
-/* 00D38 809D42E8 0C00B642 */  jal     func_8002D908              
+/* 00D38 809D42E8 0C00B642 */  jal     ActorPosition_SpeedSetXY              
 /* 00D3C 809D42EC A62F00B8 */  sh      $t7, 0x00B8($s1)           ## 000000B8
 /* 00D40 809D42F0 C626005C */  lwc1    $f6, 0x005C($s1)           ## 0000005C
 /* 00D44 809D42F4 C6280170 */  lwc1    $f8, 0x0170($s1)           ## 00000170

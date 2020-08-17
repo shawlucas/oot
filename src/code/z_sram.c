@@ -8,172 +8,94 @@ u16 sramSaveAddress[] = {
 };
 
 // sram_check_data
-u8 sramCheckData[] = {
-    0x00, 0x00, 0x00, 0x98, 0x09, 0x10, 0x21, 'Z', 'E', 'L', 'D', 'A',
-};
-
-PrivateF D_8012A4F8 = {
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0x0000,
-    SSS,
-    SSS,
-    SSS,
-    SSS,
-    SSS,
-    SSS,
-    SSS,
-    SSS,
-    0,
-    0x0030,
-    0x0030,
-    0,
-    0x0030,
-    0x0000,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    { ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, 0x0000 },
-    { ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, 0x0000 },
-
-    { 0.0f, 0.0f, 0.0f },
-    0,
-    0,
-    0,
-    0,
-    SCENE_LINK_HOME,
-};
-
-ItemEquips D_8012A544 = {
-    ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, 0x1100,
-};
-
-Table_t D_8012A550 = {
-    /*-------------------- table --------------------*/
-    /*---------- ＩＴＥＭ ----------*/
-    0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-    0xff, 0xff, 0xff, 0xff, 0xff, /* item_register[6*4] */
-
-    0, 0, 0, 0, 0, 0, /* item_count[16] */
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-
-    /*---------- ＥＱＵＩＰＭＥＮＴ ----------*/
-    0x1100, /* equip_register */
-
-    0x00000000, /* non_equip_register */
-
-    /*---------- ＣＯＬＬＥＣＴ ----------*/
-    0x00000000, /* collect_register */
-
-    /*---------- ＭＡＰ ----------*/
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, /* key_compass_map[20] */
-
-    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, /* key_register[20] */
-};
-
-Save_t D_8012A5B0 = { 0x0000 };
-
-PrivateF D_8012A5B4 = {
-    'Z',
-    'E',
-    'L',
-    'D',
-    'A',
-    'Z',    /* newf[6] */
-    0x0000, /* savect */
-    AAL,
-    AAI,
-    AAN,
-    AAK,
-    SSS,
-    SSS,
-    SSS,
-    SSS, /* player_name[8] */
-    0,   /* f_64dd */
-    224,
-    224, /* max_life, now_life */
-    0,
-    48,                       /* magic_max, magic_now */
-    150,                      /* lupy_count */
-    8,                        /* long_sword_hp */
-    0,                        /* navi_timer */
-    1,                        /* magic_mode */
-    0,                        /* sword_ability */
-    0,                        /* magic_ability */
-    0,                        /* life_ability */
-    0,                        /* last_sword */
-    0,                        /* ocarina_round */
-    { 0xff, 0xff, 0xff, 0xff, /* child_register_item[4] */
-      0xff, 0xff, 0xff,       /* child_register_item_pt[3] */
-      0x0000 },               /* child_equip_item */
-    { 0xff, 0xff, 0xff, 0xff, /* adult_register_item[4] */
-      0xff, 0xff, 0xff,       /* adult_register_item_pt[3] */
-      0x0000 },               /* adult_equip_item */
-
-    { 0.0f, 0.0f, 0.0f }, /* position */
-    0,                    /* angle_y */
-    0,                    /* scene */
-    0,                    /* room_ID */
-    0,                    /* flag */
-    SCENE_SPOT00,         /* scene_data_ID */
-};
-
-ItemEquips D_8012A600 = {
-    ITEM_SWORD_MASTER, ITEM_BOW, ITEM_BOMB, ITEM_OCARINA_FAIRY, ITEM_BOW, ITEM_BOMB, ITEM_OCARINA_FAIRY, 0x1122,
-};
-
-Table_t D_8012A60C = {
-    ITEM_STICK, ITEM_NUT, ITEM_BOMB, ITEM_BOW, ITEM_ARROW_FIRE, ITEM_DINS_FIRE, ITEM_SLINGSHOT, ITEM_OCARINA_FAIRY,
-    ITEM_BOMBCHU, ITEM_HOOKSHOT, ITEM_ARROW_ICE, ITEM_FARORES_WIND, ITEM_BOOMERANG, ITEM_LENS, ITEM_BEAN, ITEM_HAMMER,
-    ITEM_ARROW_LIGHT, ITEM_NAYRUS_LOVE, ITEM_BOTTLE, ITEM_POTION_RED, ITEM_POTION_GREEN, ITEM_POTION_BLUE,
-    ITEM_POCKET_EGG, ITEM_WEIRD_EGG,
-
-    50, 50, 10, 30, 1, 1, 30, 1, 50, 1, 1, 1, 1, 1, 1, 1,
-
-    /*---------- ＥＱＵＩＰＭＥＮＴ ----------*/
-    0x7777, /* equip_register */
-
-    0x00125249, /* non_equip_register */
-
-    /*---------- ＣＯＬＬＥＣＴ ----------*/
-    0x01e3ffff, /* collect_register */
-
-    /*---------- ＭＡＰ ----------*/
-    7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, /* key_compass_map[20] */
-
-    8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, /* key_register[20] */
-
-};
-
-Save_t D_8012A66C = {
-    0x0000,
-};
-
-s16 D_8012A670[] = {
-    YDAN_0,       DDAN_0,        BDAN_0,  MORI1_0, HIDAN_0,     MIZUSIN_0,   JYASINZOU_0,    HAKADAN_0,
-    HAKADAN_CH_0, ICE_DOUKUTU_0, GANON_0, MEN_0,   GERUDOWAY_0, GANONTIKA_0, GANON_SONOGO_0, GANONTIKA_SONOGO_0,
+static u8 sramCheckData[] = {
+    0x00, /* Sound */
+    0x00, /* ZTarget */
+    0x00, /* Language */
+    0x98, 0x09, 0x10, 0x21, 'Z', 'E', 'L', 'D', 'A',
 };
 
 // save_initialize
 void Save_Initialize(void) {
+
+    static PrivateF zeldaSavePrivatef = {
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0x0000,
+        SSS,
+        SSS,
+        SSS,
+        SSS,
+        SSS,
+        SSS,
+        SSS,
+        SSS,
+        0,
+        0x0030,
+        0x0030,
+        0,
+        0x0030,
+        0x0000,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        { ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, 0x0000 },
+        { ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, 0x0000 },
+
+        { 0.0f, 0.0f, 0.0f },
+        0,
+        0,
+        0,
+        0,
+        SCENE_LINK_HOME,
+    };
+
+    static ItemEquips zeldaSaveEquips = {
+        ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE, 0x1100,
+    };
+
+    static Table_t zeldaSaveTable = {
+        /*-------------------- table --------------------*/
+        /*---------- ＩＴＥＭ ----------*/
+        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, /* item_register[6*4] */
+
+        0, 0, 0, 0, 0, 0, /* item_count[16] */
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+
+        /*---------- ＥＱＵＩＰＭＥＮＴ ----------*/
+        0x1100, /* equip_register */
+
+        0x00000000, /* non_equip_register */
+
+        /*---------- ＣＯＬＬＥＣＴ ----------*/
+        0x00000000, /* collect_register */
+
+        /*---------- ＭＡＰ ----------*/
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, /* key_compass_map[20] */
+
+        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, /* key_register[20] */
+    };
+
+    static Save_t zeldaSaveChecksum = { 0x0000 };
     bzero(&gSaveContext.memory, sizeof(gSaveContext.memory));
 
     gSaveContext.totalDay = 0;
     gSaveContext.eventDay = 0;
 
-    S_Private = D_8012A4F8; // zelda_save_privateF
-    S_Equips = D_8012A544;  // zelda_save_Used
-    S_Table = D_8012A550;   // zelda_save_Table
-    S_Save = D_8012A5B0;    // zelda_save_Save
+    S_Private = zeldaSavePrivatef; // zelda_save_privateF
+    S_Equips = zeldaSaveEquips;    // zelda_save_Used
+    S_Table = zeldaSaveTable;      // zelda_save_Table
+    S_Save = zeldaSaveChecksum;    // zelda_save_Save
 
     HORSE_SCENE = SCENE_SPOT00;
     HORSE_POS.x = -1840;
@@ -188,15 +110,92 @@ void Save_Initialize(void) {
 }
 
 void Save_Initialize999(void) {
+
+    static PrivateF zeldaSavePrivatef999 = {
+        'Z',
+        'E',
+        'L',
+        'D',
+        'A',
+        'Z',    /* newf[6] */
+        0x0000, /* savect */
+        AAL,
+        AAI,
+        AAN,
+        AAK,
+        SSS,
+        SSS,
+        SSS,
+        SSS, /* player_name[8] */
+        0,   /* f_64dd */
+        224,
+        224, /* max_life, now_life */
+        0,
+        48,                       /* magic_max, magic_now */
+        150,                      /* lupy_count */
+        8,                        /* long_sword_hp */
+        0,                        /* navi_timer */
+        1,                        /* magic_mode */
+        0,                        /* sword_ability */
+        0,                        /* magic_ability */
+        0,                        /* life_ability */
+        0,                        /* last_sword */
+        0,                        /* ocarina_round */
+        { 0xff, 0xff, 0xff, 0xff, /* child_register_item[4] */
+          0xff, 0xff, 0xff,       /* child_register_item_pt[3] */
+          0x0000 },               /* child_equip_item */
+        { 0xff, 0xff, 0xff, 0xff, /* adult_register_item[4] */
+          0xff, 0xff, 0xff,       /* adult_register_item_pt[3] */
+          0x0000 },               /* adult_equip_item */
+
+        { 0.0f, 0.0f, 0.0f }, /* position */
+        0,                    /* angle_y */
+        0,                    /* scene */
+        0,                    /* room_ID */
+        0,                    /* flag */
+        SCENE_SPOT00,         /* scene_data_ID */
+    };
+
+    static ItemEquips zeldaSaveEquips999 = {
+        ITEM_SWORD_MASTER, ITEM_BOW, ITEM_BOMB, ITEM_OCARINA_FAIRY, ITEM_BOW, ITEM_BOMB, ITEM_OCARINA_FAIRY, 0x1122,
+    };
+
+    static Table_t zeldaSaveTable999 = {
+        ITEM_STICK, ITEM_NUT, ITEM_BOMB, ITEM_BOW, ITEM_ARROW_FIRE, ITEM_DINS_FIRE, ITEM_SLINGSHOT, ITEM_OCARINA_FAIRY,
+        ITEM_BOMBCHU, ITEM_HOOKSHOT, ITEM_ARROW_ICE, ITEM_FARORES_WIND, ITEM_BOOMERANG, ITEM_LENS, ITEM_BEAN,
+        ITEM_HAMMER, ITEM_ARROW_LIGHT, ITEM_NAYRUS_LOVE, ITEM_BOTTLE, ITEM_POTION_RED, ITEM_POTION_GREEN,
+        ITEM_POTION_BLUE, ITEM_POCKET_EGG, ITEM_WEIRD_EGG,
+
+        50, 50, 10, 30, 1, 1, 30, 1, 50, 1, 1, 1, 1, 1, 1, 1,
+
+        /*---------- ＥＱＵＩＰＭＥＮＴ ----------*/
+        0x7777, /* equip_register */
+
+        0x00125249, /* non_equip_register */
+
+        /*---------- ＣＯＬＬＥＣＴ ----------*/
+        0x01e3ffff, /* collect_register */
+
+        /*---------- ＭＡＰ ----------*/
+        7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, /* key_compass_map[20] */
+
+        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, /* key_register[20] */
+
+    };
+
+    static Save_t zeldaSaveChecksum999 = {
+        0x0000,
+    };
+
     bzero(&gSaveContext.memory, sizeof(gSaveContext.memory));
 
     gSaveContext.totalDay = 0;
     gSaveContext.eventDay = 0;
 
-    S_Private = D_8012A5B4; // "zelda_save_privatef999"
-    S_Equips = D_8012A600;  // "zelda_save_equips999"
-    S_Table = D_8012A60C;   // "zelda_save_Table999"
-    S_Save = D_8012A66C;    // "zelda_save_Save999"
+    S_Private = zeldaSavePrivatef999; // "zelda_save_privatef999"
+    S_Equips = zeldaSaveEquips999;    // "zelda_save_equips999"
+    S_Table = zeldaSaveTable999;      // "zelda_save_Table999"
+    S_Save = zeldaSaveChecksum999;    // "zelda_save_Save999"
 
     HORSE_SCENE = SCENE_SPOT00;
     HORSE_POS.x = -1840;
@@ -229,6 +228,11 @@ void Sram_LoadCheck(Sram* sram) {
     u16* k;
     u8* nnn;
 
+    static s16 sceneTable[] = {
+        YDAN_0,       DDAN_0,        BDAN_0,  MORI1_0, HIDAN_0,     MIZUSIN_0,   JYASINZOU_0,    HAKADAN_0,
+        HAKADAN_CH_0, ICE_DOUKUTU_0, GANON_0, MEN_0,   GERUDOWAY_0, GANONTIKA_0, GANON_SONOGO_0, GANONTIKA_SONOGO_0,
+    };
+
     osSyncPrintf("個人Ｆｉｌｅ作成\n"); // "Personal file creation"
     i = sramSaveAddress[gSaveContext.fileNum];
     osSyncPrintf("ぽいんと＝%x(%d)\n", i, gSaveContext.fileNum); // "Point = %x(%d)\n"
@@ -251,7 +255,7 @@ void Sram_LoadCheck(Sram* sram) {
         case SCENE_MEN:
         case SCENE_GERUDOWAY:
         case SCENE_GANONTIKA:
-            ZCommon_SceneNoSet(D_8012A670[SCENE_DATA_ID]);
+            ZCommon_SceneNoSet(sceneTable[SCENE_DATA_ID]);
             break;
         case SCENE_YDAN_BOSS:
             ZCommon_SceneNoSet(YDAN_0);

@@ -103,7 +103,7 @@ glabel func_8092F0BC
 /* 02C44 8092F214 8FA40024 */  lw      $a0, 0x0024($sp)           
 /* 02C48 8092F218 46085180 */  add.s   $f6, $f10, $f8             
 /* 02C4C 8092F21C 46043481 */  sub.s   $f18, $f6, $f4             
-/* 02C50 8092F220 0C00B6B0 */  jal     func_8002DAC0              
+/* 02C50 8092F220 0C00B6B0 */  jal     ActorSearch_PosAngleY              
 /* 02C54 8092F224 E492002C */  swc1    $f18, 0x002C($a0)          ## 0000002C
 /* 02C58 8092F228 8FB90024 */  lw      $t9, 0x0024($sp)           
 /* 02C5C 8092F22C 3C058093 */  lui     $a1, %hi(D_80937358)       ## $a1 = 80930000
@@ -114,7 +114,7 @@ glabel func_8092F0BC
 /* 02C70 8092F240 00084880 */  sll     $t1, $t0,  2               
 /* 02C74 8092F244 02295021 */  addu    $t2, $s1, $t1              
 /* 02C78 8092F248 8D460790 */  lw      $a2, 0x0790($t2)           ## 00000790
-/* 02C7C 8092F24C 0C00B6F4 */  jal     func_8002DBD0              
+/* 02C7C 8092F24C 0C00B6F4 */  jal     ActorSearch_PosProjectDistanceXZ              
 /* 02C80 8092F250 24C6005C */  addiu   $a2, $a2, 0x005C           ## $a2 = 0000005C
 /* 02C84 8092F254 862B07A0 */  lh      $t3, 0x07A0($s1)           ## 80939438
 /* 02C88 8092F258 3C058093 */  lui     $a1, %hi(D_8093734C)       ## $a1 = 80930000
@@ -123,7 +123,7 @@ glabel func_8092F0BC
 /* 02C94 8092F264 022C6821 */  addu    $t5, $s1, $t4              
 /* 02C98 8092F268 8DA60790 */  lw      $a2, 0x0790($t5)           ## 00000790
 /* 02C9C 8092F26C 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
-/* 02CA0 8092F270 0C00B6F4 */  jal     func_8002DBD0              
+/* 02CA0 8092F270 0C00B6F4 */  jal     ActorSearch_PosProjectDistanceXZ              
 /* 02CA4 8092F274 24C60050 */  addiu   $a2, $a2, 0x0050           ## $a2 = 00000050
 /* 02CA8 8092F278 3C01C3AF */  lui     $at, 0xC3AF                ## $at = C3AF0000
 /* 02CAC 8092F27C 44815000 */  mtc1    $at, $f10                  ## $f10 = -350.00

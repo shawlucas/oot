@@ -14,7 +14,7 @@ glabel func_80A69C18
 /* 00878 80A69C48 14410015 */  bne     $v0, $at, .L80A69CA0
 .L80A69C4C:
 /* 0087C 80A69C4C 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
-/* 00880 80A69C50 0C00B69E */  jal     func_8002DA78
+/* 00880 80A69C50 0C00B69E */  jal     ActorSearch_AngleY
 /* 00884 80A69C54 8DC51C44 */  lw      $a1, 0x1C44($t6)           ## 00001C44
 /* 00888 80A69C58 86030032 */  lh      $v1, 0x0032($s0)           ## 00000032
 /* 0088C 80A69C5C 00432023 */  subu    $a0, $v0, $v1
@@ -45,7 +45,7 @@ glabel func_80A69C18
 /* 008DC 80A69CAC 1040007F */  beq     $v0, $zero, .L80A69EAC
 /* 008E0 80A69CB0 8FA9004C */  lw      $t1, 0x004C($sp)
 /* 008E4 80A69CB4 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
-/* 008E8 80A69CB8 0C00B6E3 */  jal     func_8002DB8C
+/* 008E8 80A69CB8 0C00B6E3 */  jal     ActorSearch_DistanceXZ
 /* 008EC 80A69CBC 8D251C44 */  lw      $a1, 0x1C44($t1)           ## 00001C44
 /* 008F0 80A69CC0 3C01447A */  lui     $at, 0x447A                ## $at = 447A0000
 /* 008F4 80A69CC4 44811000 */  mtc1    $at, $f2                   ## $f2 = 1000.00

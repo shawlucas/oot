@@ -39,7 +39,7 @@ glabel func_80BA1ECC
 .L80BA1F5C:
 /* 0016C 80BA1F5C AFA40038 */  sw      $a0, 0x0038($sp)           
 /* 00170 80BA1F60 AFA60018 */  sw      $a2, 0x0018($sp)           
-/* 00174 80BA1F64 0C00B6F4 */  jal     func_8002DBD0              
+/* 00174 80BA1F64 0C00B6F4 */  jal     ActorSearch_PosProjectDistanceXZ              
 /* 00178 80BA1F68 AFA70030 */  sw      $a3, 0x0030($sp)           
 /* 0017C 80BA1F6C 8FA40038 */  lw      $a0, 0x0038($sp)           
 /* 00180 80BA1F70 3C014248 */  lui     $at, 0x4248                ## $at = 42480000
@@ -67,7 +67,7 @@ glabel func_80BA1ECC
 /* 001D8 80BA1FC8 1000001B */  beq     $zero, $zero, .L80BA2038   
 /* 001DC 80BA1FCC 00001025 */  or      $v0, $zero, $zero          ## $v0 = 00000000
 .L80BA1FD0:
-/* 001E0 80BA1FD0 0C00B6F4 */  jal     func_8002DBD0              
+/* 001E0 80BA1FD0 0C00B6F4 */  jal     ActorSearch_PosProjectDistanceXZ              
 /* 001E4 80BA1FD4 AFA70030 */  sw      $a3, 0x0030($sp)           
 /* 001E8 80BA1FD8 8FA70030 */  lw      $a3, 0x0030($sp)           
 /* 001EC 80BA1FDC 3C014248 */  lui     $at, 0x4248                ## $at = 42480000

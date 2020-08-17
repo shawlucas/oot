@@ -2353,7 +2353,7 @@ glabel L808CD598
 /* 028E0 808CD6A0 298100CC */  slti    $at, $t4, 0x00CC           
 /* 028E4 808CD6A4 10200003 */  beq     $at, $zero, .L808CD6B4     
 /* 028E8 808CD6A8 00000000 */  nop
-/* 028EC 808CD6AC 0C00B642 */  jal     func_8002D908              
+/* 028EC 808CD6AC 0C00B642 */  jal     ActorPosition_SpeedSetXY              
 /* 028F0 808CD6B0 02C02025 */  or      $a0, $s6, $zero            ## $a0 = 00000000
 .L808CD6B4:
 /* 028F4 808CD6B4 0C00B5FB */  jal     ActorPosition_Move              

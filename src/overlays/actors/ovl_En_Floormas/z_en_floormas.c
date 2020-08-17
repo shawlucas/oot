@@ -362,7 +362,7 @@ void EnFloormas_SetupTakeDamage(EnFloormas* this) {
     if ((this->collider.body.acHitItem->toucher.flags & 0x1F824) != 0) {
         this->actor.posRot.rot.y = this->collider.base.ac->posRot.rot.y;
     } else {
-        this->actor.posRot.rot.y = func_8002DA78(&this->actor, this->collider.base.ac) + 0x8000;
+        this->actor.posRot.rot.y = ActorSearch_AngleY(&this->actor, this->collider.base.ac) + 0x8000;
     }
     func_8003426C(&this->actor, 0x4000, 0xFF, 0, 0x14);
     this->actionFunc = EnFloormas_TakeDamage;
@@ -687,8 +687,8 @@ void EnFloormas_SmDecideAction(EnFloormas* this, GlobalContext* globalCtx) {
             return;
         }
 
-        Math_ApproxUpdateScaledS(&this->actor.shape.rot.y, func_8002DA78(&this->actor, primaryFloormas), 0x38E);
-        if (func_8002DB8C(&this->actor, primaryFloormas) < 80.0f) {
+        Math_ApproxUpdateScaledS(&this->actor.shape.rot.y, ActorSearch_AngleY(&this->actor, primaryFloormas), 0x38E);
+        if (ActorSearch_DistanceXZ(&this->actor, primaryFloormas) < 80.0f) {
             EnFloormas_SetupSlaveJumpAtMaster(this);
         }
     } else {
@@ -811,7 +811,7 @@ void EnFloormas_SmSlaveJumpAtMaster(EnFloormas* this, GlobalContext* globalCtx) 
         this->actor.speedXZ = 5.0f;
         this->actor.velocity.y = 7.0f;
     } else if (this->skelAnime.animCurrentFrame < 20.0f) {
-        Math_SmoothScaleMaxS(&this->actor.shape.rot.y, func_8002DA78(&this->actor, primFloormas), 2, 0xE38);
+        Math_SmoothScaleMaxS(&this->actor.shape.rot.y, ActorSearch_AngleY(&this->actor, primFloormas), 2, 0xE38);
     } else if ((((primFloormas->posRot.pos.y - this->actor.posRot.pos.y) < -10.0f) &&
                 (fabsf(this->actor.posRot.pos.x - primFloormas->posRot.pos.x) < 10.0f)) &&
                (fabsf(this->actor.posRot.pos.z - primFloormas->posRot.pos.z) < 10.0f)) {

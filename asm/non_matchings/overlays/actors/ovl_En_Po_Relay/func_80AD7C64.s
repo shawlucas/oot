@@ -317,7 +317,7 @@ glabel func_80AD7C64
 /* 00938 80AD8078 0C2B5E51 */  jal     func_80AD7944              
 /* 0093C 80AD807C 27A40050 */  addiu   $a0, $sp, 0x0050           ## $a0 = FFFFFFF0
 /* 00940 80AD8080 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
-/* 00944 80AD8084 0C00B6EC */  jal     func_8002DBB0              
+/* 00944 80AD8084 0C00B6EC */  jal     ActorSearch_PosDistanceXZ              
 /* 00948 80AD8088 27A50050 */  addiu   $a1, $sp, 0x0050           ## $a1 = FFFFFFF0
 /* 0094C 80AD808C 3C014220 */  lui     $at, 0x4220                ## $at = 42200000
 /* 00950 80AD8090 44818000 */  mtc1    $at, $f16                  ## $f16 = 40.00
@@ -374,7 +374,7 @@ glabel func_80AD7C64
 .L80AD8144:
 /* 00A04 80AD8144 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 .L80AD8148:
-/* 00A08 80AD8148 0C00B6B0 */  jal     func_8002DAC0              
+/* 00A08 80AD8148 0C00B6B0 */  jal     ActorSearch_PosAngleY              
 /* 00A0C 80AD814C 27A50050 */  addiu   $a1, $sp, 0x0050           ## $a1 = FFFFFFF0
 /* 00A10 80AD8150 A602019A */  sh      $v0, 0x019A($s0)           ## 0000019A
 /* 00A14 80AD8154 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000

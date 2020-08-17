@@ -68,7 +68,7 @@ glabel func_80ADA530
 /* 0168C 80ADA61C 1320000B */  beq     $t9, $zero, .L80ADA64C     
 /* 01690 80ADA620 00000000 */  nop
 /* 01694 80ADA624 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
-/* 01698 80ADA628 0C00B6B0 */  jal     func_8002DAC0              
+/* 01698 80ADA628 0C00B6B0 */  jal     ActorSearch_PosAngleY              
 /* 0169C 80ADA62C 26050008 */  addiu   $a1, $s0, 0x0008           ## $a1 = 00000008
 /* 016A0 80ADA630 00022C00 */  sll     $a1, $v0, 16               
 /* 016A4 80ADA634 00052C03 */  sra     $a1, $a1, 16               
@@ -79,7 +79,7 @@ glabel func_80ADA530
 /* 016B4 80ADA644 10000012 */  beq     $zero, $zero, .L80ADA690   
 /* 016B8 80ADA648 8FBF001C */  lw      $ra, 0x001C($sp)           
 .L80ADA64C:
-/* 016BC 80ADA64C 0C00B6EC */  jal     func_8002DBB0              
+/* 016BC 80ADA64C 0C00B6EC */  jal     ActorSearch_PosDistanceXZ              
 /* 016C0 80ADA650 AFA50028 */  sw      $a1, 0x0028($sp)           
 /* 016C4 80ADA654 3C014396 */  lui     $at, 0x4396                ## $at = 43960000
 /* 016C8 80ADA658 44819000 */  mtc1    $at, $f18                  ## $f18 = 300.00
@@ -88,7 +88,7 @@ glabel func_80ADA530
 /* 016D4 80ADA664 00000000 */  nop
 /* 016D8 80ADA668 45020009 */  bc1fl   .L80ADA690                 
 /* 016DC 80ADA66C 8FBF001C */  lw      $ra, 0x001C($sp)           
-/* 016E0 80ADA670 0C00B6B0 */  jal     func_8002DAC0              
+/* 016E0 80ADA670 0C00B6B0 */  jal     ActorSearch_PosAngleY              
 /* 016E4 80ADA674 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 016E8 80ADA678 00022C00 */  sll     $a1, $v0, 16               
 /* 016EC 80ADA67C 00052C03 */  sra     $a1, $a1, 16               

@@ -4,7 +4,7 @@ glabel func_80B31CC0
 /* 00CA8 80B31CC8 AFA40018 */  sw      $a0, 0x0018($sp)           
 /* 00CAC 80B31CCC AFA5001C */  sw      $a1, 0x001C($sp)           
 /* 00CB0 80B31CD0 8CA41C44 */  lw      $a0, 0x1C44($a1)           ## 00001C44
-/* 00CB4 80B31CD4 0C00B6E3 */  jal     func_8002DB8C              
+/* 00CB4 80B31CD4 0C00B6E3 */  jal     ActorSearch_DistanceXZ              
 /* 00CB8 80B31CD8 8FA50018 */  lw      $a1, 0x0018($sp)           
 /* 00CBC 80B31CDC 8FAF0018 */  lw      $t7, 0x0018($sp)           
 /* 00CC0 80B31CE0 3C0142C8 */  lui     $at, 0x42C8                ## $at = 42C80000

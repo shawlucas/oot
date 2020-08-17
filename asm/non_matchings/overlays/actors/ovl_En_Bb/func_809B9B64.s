@@ -38,7 +38,7 @@ glabel func_809B9B64
 /* 018F0 809B9BD0 00000000 */  nop
 .L809B9BD4:
 /* 018F4 809B9BD4 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
-/* 018F8 809B9BD8 0C00B6D2 */  jal     func_8002DB48              
+/* 018F8 809B9BD8 0C00B6D2 */  jal     ActorSearch_Distance              
 /* 018FC 809B9BDC A7A2004E */  sh      $v0, 0x004E($sp)           
 /* 01900 809B9BE0 3C01437A */  lui     $at, 0x437A                ## $at = 437A0000
 /* 01904 809B9BE4 44812000 */  mtc1    $at, $f4                   ## $f4 = 250.00

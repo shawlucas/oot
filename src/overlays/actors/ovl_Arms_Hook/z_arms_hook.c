@@ -80,7 +80,7 @@ void ArmsHook_Wait(ArmsHook* this, GlobalContext* globalCtx) {
         length = (player->heldItemActionParam == 0x10) ? 13 : 26;
 
         ArmsHook_SetupAction(this, ArmsHook_Shoot);
-        func_8002D9A4(&this->actor, 20.0f);
+        Actor_VectorToPosSpeed(&this->actor, 20.0f);
         this->actor.attachedA = &PLAYER->actor;
         this->timer = length;
     }
@@ -186,7 +186,7 @@ void ArmsHook_Shoot(ArmsHook* this, GlobalContext* globalCtx) {
                 this->grabbed = NULL;
             } else {
                 if (this->actor.attachedB != NULL) {
-                    sp94 = func_8002DB48(this, grabbed);
+                    sp94 = ActorSearch_Distance(this, grabbed);
                     sp90 =
                         sqrtf(SQ(this->grabbedDistDiff.x) + SQ(this->grabbedDistDiff.y) + SQ(this->grabbedDistDiff.z));
                     Math_Vec3f_Diff(&grabbed->posRot.pos, &this->grabbedDistDiff, &this->actor.posRot.pos);

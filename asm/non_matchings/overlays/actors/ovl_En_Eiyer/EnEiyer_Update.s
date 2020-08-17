@@ -25,7 +25,7 @@ glabel EnEiyer_Update
 /* 01624 80A015C4 10000004 */  beq     $zero, $zero, .L80A015D8   
 /* 01628 80A015C8 8E020190 */  lw      $v0, 0x0190($s0)           ## 00000190
 .L80A015CC:
-/* 0162C 80A015CC 0C00B65F */  jal     func_8002D97C              
+/* 0162C 80A015CC 0C00B65F */  jal     ActorPosition_MoveForwardXY              
 /* 01630 80A015D0 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 01634 80A015D4 8E020190 */  lw      $v0, 0x0190($s0)           ## 00000190
 .L80A015D8:

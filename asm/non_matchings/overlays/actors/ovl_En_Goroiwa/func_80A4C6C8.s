@@ -24,7 +24,7 @@ glabel func_80A4C6C8
 /* 00A6C 80A4C70C 0C01DE80 */  jal     Math_ApproxF
               
 /* 00A70 80A4C710 00000000 */  nop
-/* 00A74 80A4C714 0C00B61A */  jal     func_8002D868              
+/* 00A74 80A4C714 0C00B61A */  jal     ActorPosition_SpeedSet              
 /* 00A78 80A4C718 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00A7C 80A4C71C 8FB80034 */  lw      $t8, 0x0034($sp)           
 /* 00A80 80A4C720 8608001C */  lh      $t0, 0x001C($s0)           ## 0000001C

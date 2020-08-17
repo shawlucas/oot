@@ -197,7 +197,7 @@ void EnWallmas_SetupTakeDamage(EnWallmas* this) {
     if ((this->collider.body.acHitItem->toucher.flags & 0x1F824) != 0) {
         this->actor.posRot.rot.y = this->collider.base.ac->posRot.rot.y;
     } else {
-        this->actor.posRot.rot.y = func_8002DA78(&this->actor, this->collider.base.ac) + 0x8000;
+        this->actor.posRot.rot.y = ActorSearch_AngleY(&this->actor, this->collider.base.ac) + 0x8000;
     }
 
     func_8003426C(&this->actor, 0x4000, 0xFF, 0, 0x14);

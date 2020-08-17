@@ -27,7 +27,7 @@ glabel EnClearTag_Init
 /* 00458 809D3A08 A22F014E */  sb      $t7, 0x014E($s1)           ## 0000014E
 /* 0045C 809D3A0C A6380150 */  sh      $t8, 0x0150($s1)           ## 00000150
 /* 00460 809D3A10 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
-/* 00464 809D3A14 0C00B642 */  jal     func_8002D908              
+/* 00464 809D3A14 0C00B642 */  jal     ActorPosition_SpeedSetXY              
 /* 00468 809D3A18 E6240068 */  swc1    $f4, 0x0068($s1)           ## 00000068
 /* 0046C 809D3A1C 00008025 */  or      $s0, $zero, $zero          ## $s0 = 00000000
 .L809D3A20:
@@ -51,7 +51,7 @@ glabel EnClearTag_Init
 /* 004B4 809D3A64 E6200050 */  swc1    $f0, 0x0050($s1)           ## 00000050
 /* 004B8 809D3A68 E6200054 */  swc1    $f0, 0x0054($s1)           ## 00000054
 /* 004BC 809D3A6C E6260058 */  swc1    $f6, 0x0058($s1)           ## 00000058
-/* 004C0 809D3A70 0C00B642 */  jal     func_8002D908              
+/* 004C0 809D3A70 0C00B642 */  jal     ActorPosition_SpeedSetXY              
 /* 004C4 809D3A74 E6280068 */  swc1    $f8, 0x0068($s1)           ## 00000068
 /* 004C8 809D3A78 3C07809D */  lui     $a3, %hi(D_809D5C6C)       ## $a3 = 809D0000
 /* 004CC 809D3A7C 24E75C6C */  addiu   $a3, $a3, %lo(D_809D5C6C)  ## $a3 = 809D5C6C

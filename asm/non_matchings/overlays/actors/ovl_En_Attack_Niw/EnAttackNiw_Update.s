@@ -79,7 +79,7 @@ glabel EnAttackNiw_Update
 /* 00CD8 809B5DD8 25085670 */  addiu   $t0, $t0, %lo(func_809B5670) ## $t0 = 809B5670
 /* 00CDC 809B5DDC 15090005 */  bne     $t0, $t1, .L809B5DF4       
 /* 00CE0 809B5DE0 00000000 */  nop
-/* 00CE4 809B5DE4 0C00B65F */  jal     func_8002D97C              
+/* 00CE4 809B5DE4 0C00B65F */  jal     ActorPosition_MoveForwardXY              
 /* 00CE8 809B5DE8 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00CEC 809B5DEC 10000004 */  beq     $zero, $zero, .L809B5E00   
 /* 00CF0 809B5DF0 3C01C6FA */  lui     $at, 0xC6FA                ## $at = C6FA0000

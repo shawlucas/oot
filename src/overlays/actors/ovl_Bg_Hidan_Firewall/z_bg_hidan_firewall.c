@@ -83,7 +83,7 @@ s32 BgHidanFirewall_CheckProximity(BgHidanFirewall* this, GlobalContext* globalC
     Vec3f distance;
 
     player = PLAYER;
-    func_8002DBD0(&this->actor, &distance, &player->actor.posRot.pos);
+    ActorSearch_PosProjectDistanceXZ(&this->actor, &distance, &player->actor.posRot.pos);
 
     if (fabsf(distance.x) < 100.0f && fabsf(distance.z) < 120.0f) {
         return 1;
@@ -142,7 +142,7 @@ void BgHidanFirewall_ColliderFollowPlayer(BgHidanFirewall* this, GlobalContext* 
 
     player = PLAYER;
 
-    func_8002DBD0(&this->actor, &sp30, &player->actor.posRot.pos);
+    ActorSearch_PosProjectDistanceXZ(&this->actor, &sp30, &player->actor.posRot.pos);
     if (sp30.x < -70.0f) {
         sp30.x = -70.0f;
     } else {

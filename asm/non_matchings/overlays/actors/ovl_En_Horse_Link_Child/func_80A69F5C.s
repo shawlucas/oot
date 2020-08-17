@@ -29,7 +29,7 @@ glabel func_80A69F5C
 /* 00BF4 80A69FC4 00000000 */  nop
 /* 00BF8 80A69FC8 84C300B6 */  lh      $v1, 0x00B6($a2)           ## 000000B6
 /* 00BFC 80A69FCC 00C02825 */  or      $a1, $a2, $zero            ## $a1 = 00000000
-/* 00C00 80A69FD0 0C00B69E */  jal     func_8002DA78
+/* 00C00 80A69FD0 0C00B69E */  jal     ActorSearch_AngleY
 /* 00C04 80A69FD4 A7A30032 */  sh      $v1, 0x0032($sp)
 /* 00C08 80A69FD8 18400003 */  blez    $v0, .L80A69FE8
 /* 00C0C 80A69FDC 87A30032 */  lh      $v1, 0x0032($sp)

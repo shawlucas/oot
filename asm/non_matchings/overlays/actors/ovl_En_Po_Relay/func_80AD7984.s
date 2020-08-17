@@ -31,7 +31,7 @@ glabel func_80AD7984
 /* 002B8 80AD79F8 27A50024 */  addiu   $a1, $sp, 0x0024           ## $a1 = FFFFFFF4
 /* 002BC 80AD79FC 3B1900FF */  xori    $t9, $t8, 0x00FF           ## $t9 = 801600FF
 /* 002C0 80AD7A00 0019C82B */  sltu    $t9, $zero, $t9            
-/* 002C4 80AD7A04 0C00B6B0 */  jal     func_8002DAC0              
+/* 002C4 80AD7A04 0C00B6B0 */  jal     ActorSearch_PosAngleY              
 /* 002C8 80AD7A08 A2190194 */  sb      $t9, 0x0194($s0)           ## 00000194
 /* 002CC 80AD7A0C 8E080004 */  lw      $t0, 0x0004($s0)           ## 00000004
 /* 002D0 80AD7A10 3C010800 */  lui     $at, 0x0800                ## $at = 08000000

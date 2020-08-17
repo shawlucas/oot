@@ -71,7 +71,7 @@ glabel EnBomChu_Update
 /* 00EA8 809C66D8 02202825 */  or      $a1, $s1, $zero            ## $a1 = 00000000
 /* 00EAC 809C66DC 0320F809 */  jalr    $ra, $t9                   
 /* 00EB0 809C66E0 00000000 */  nop
-/* 00EB4 809C66E4 0C00B65F */  jal     func_8002D97C              
+/* 00EB4 809C66E4 0C00B65F */  jal     ActorPosition_MoveForwardXY              
 /* 00EB8 809C66E8 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00EBC 809C66EC C60A0024 */  lwc1    $f10, 0x0024($s0)          ## 00000024
 /* 00EC0 809C66F0 8E0901A0 */  lw      $t1, 0x01A0($s0)           ## 000001A0

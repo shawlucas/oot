@@ -199,7 +199,7 @@ glabel func_80995518
 /* 00B80 809957D0 96220218 */  lhu     $v0, 0x0218($s1)           ## 00000218
 /* 00B84 809957D4 8DF01C44 */  lw      $s0, 0x1C44($t7)           ## 00001C44
 /* 00B88 809957D8 27A50058 */  addiu   $a1, $sp, 0x0058           ## $a1 = FFFFFFC0
-/* 00B8C 809957DC 0C00B6F4 */  jal     func_8002DBD0              
+/* 00B8C 809957DC 0C00B6F4 */  jal     ActorSearch_PosProjectDistanceXZ              
 /* 00B90 809957E0 26060024 */  addiu   $a2, $s0, 0x0024           ## $a2 = 00000025
 /* 00B94 809957E4 C7A0005C */  lwc1    $f0, 0x005C($sp)           
 /* 00B98 809957E8 3C0141A0 */  lui     $at, 0x41A0                ## $at = 41A00000

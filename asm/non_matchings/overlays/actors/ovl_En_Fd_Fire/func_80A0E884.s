@@ -115,7 +115,7 @@ glabel func_80A0E884
 /* 00560 80A0EA10 00000000 */  nop
 /* 00564 80A0EA14 E6120068 */  swc1    $f18, 0x0068($s0)          ## 00000068
 .L80A0EA18:
-/* 00568 80A0EA18 0C00B61A */  jal     func_8002D868              
+/* 00568 80A0EA18 0C00B61A */  jal     ActorPosition_SpeedSet              
 /* 0056C 80A0EA1C 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 .L80A0EA20:
 /* 00570 80A0EA20 8FBF0024 */  lw      $ra, 0x0024($sp)           

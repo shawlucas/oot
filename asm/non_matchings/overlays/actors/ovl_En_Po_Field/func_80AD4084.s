@@ -21,7 +21,7 @@ glabel func_80AD4084
 /* 005D0 80AD40D0 10000006 */  beq     $zero, $zero, .L80AD40EC
 /* 005D4 80AD40D4 A6080032 */  sh      $t0, 0x0032($s0)           ## 00000032
 .L80AD40D8:
-/* 005D8 80AD40D8 0C00B69E */  jal     func_8002DA78
+/* 005D8 80AD40D8 0C00B69E */  jal     ActorSearch_AngleY
 /* 005DC 80AD40DC 8E05024C */  lw      $a1, 0x024C($s0)           ## 0000024C
 /* 005E0 80AD40E0 34018000 */  ori     $at, $zero, 0x8000         ## $at = 00008000
 /* 005E4 80AD40E4 00414821 */  addu    $t1, $v0, $at

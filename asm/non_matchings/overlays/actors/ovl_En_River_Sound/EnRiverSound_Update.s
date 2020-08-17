@@ -102,7 +102,7 @@ glabel EnRiverSound_Update
 /* 00700 80AE7030 8FAA004C */  lw      $t2, 0x004C($sp)           
 .L80AE7034:
 /* 00704 80AE7034 26050008 */  addiu   $a1, $s0, 0x0008           ## $a1 = 00000008
-/* 00708 80AE7038 0C00B6F4 */  jal     func_8002DBD0              
+/* 00708 80AE7038 0C00B6F4 */  jal     ActorSearch_PosProjectDistanceXZ              
 /* 0070C 80AE703C 26060024 */  addiu   $a2, $s0, 0x0024           ## $a2 = 00000024
 /* 00710 80AE7040 1000000D */  beq     $zero, $zero, .L80AE7078   
 /* 00714 80AE7044 8FBF0024 */  lw      $ra, 0x0024($sp)           

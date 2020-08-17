@@ -51,11 +51,11 @@ glabel func_80AD3194
 /* 0057C 80AD322C E60A002C */  swc1    $f10, 0x002C($s0)          ## 0000002C
 /* 00580 80AD3230 A6180194 */  sh      $t8, 0x0194($s0)           ## 00000194
 .L80AD3234:
-/* 00584 80AD3234 0C00B6EC */  jal     func_8002DBB0              
+/* 00584 80AD3234 0C00B6EC */  jal     ActorSearch_PosDistanceXZ              
 /* 00588 80AD3238 AFA5002C */  sw      $a1, 0x002C($sp)           
 /* 0058C 80AD323C 8FA5002C */  lw      $a1, 0x002C($sp)           
 /* 00590 80AD3240 46000506 */  mov.s   $f20, $f0                  
-/* 00594 80AD3244 0C00B6B0 */  jal     func_8002DAC0              
+/* 00594 80AD3244 0C00B6B0 */  jal     ActorSearch_PosAngleY              
 /* 00598 80AD3248 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 0059C 80AD324C A6020032 */  sh      $v0, 0x0032($s0)           ## 00000032
 /* 005A0 80AD3250 86050032 */  lh      $a1, 0x0032($s0)           ## 00000032

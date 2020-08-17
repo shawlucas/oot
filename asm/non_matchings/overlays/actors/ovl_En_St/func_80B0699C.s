@@ -90,7 +90,7 @@ glabel func_80B0699C
 /* 02244 80B06AD4 AA0800B4 */  swl     $t0, 0x00B4($s0)           ## 000000B4
 /* 02248 80B06AD8 BA0800B7 */  swr     $t0, 0x00B7($s0)           ## 000000B7
 /* 0224C 80B06ADC 97080004 */  lhu     $t0, 0x0004($t8)           ## 00000004
-/* 02250 80B06AE0 0C00B61A */  jal     func_8002D868              
+/* 02250 80B06AE0 0C00B61A */  jal     ActorPosition_SpeedSet              
 /* 02254 80B06AE4 A60800B8 */  sh      $t0, 0x00B8($s0)           ## 000000B8
 /* 02258 80B06AE8 24090002 */  addiu   $t1, $zero, 0x0002         ## $t1 = 00000002
 /* 0225C 80B06AEC A60903C0 */  sh      $t1, 0x03C0($s0)           ## 000003C0

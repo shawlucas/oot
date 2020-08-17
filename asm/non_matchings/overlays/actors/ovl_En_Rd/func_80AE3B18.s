@@ -52,7 +52,7 @@ glabel func_80AE3B18
 /* 017BC 80AE3BBC 10000012 */  beq     $zero, $zero, .L80AE3C08   
 /* 017C0 80AE3BC0 240900FF */  addiu   $t1, $zero, 0x00FF         ## $t1 = 000000FF
 .L80AE3BC4:
-/* 017C4 80AE3BC4 0C00B6DB */  jal     func_8002DB6C              
+/* 017C4 80AE3BC4 0C00B6DB */  jal     ActorSearch_PosDistance              
 /* 017C8 80AE3BC8 8FA4002C */  lw      $a0, 0x002C($sp)           
 /* 017CC 80AE3BCC 3C014316 */  lui     $at, 0x4316                ## $at = 43160000
 /* 017D0 80AE3BD0 44815000 */  mtc1    $at, $f10                  ## $f10 = 150.00

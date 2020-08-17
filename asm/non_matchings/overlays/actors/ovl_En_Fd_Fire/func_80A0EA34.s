@@ -18,7 +18,7 @@ glabel func_80A0EA34
 /* 005B0 80A0EA60 0C01E0C4 */  jal     Math_SmoothScaleMaxMinF
               
 /* 005B4 80A0EA64 E7A00010 */  swc1    $f0, 0x0010($sp)           
-/* 005B8 80A0EA68 0C00B61A */  jal     func_8002D868              
+/* 005B8 80A0EA68 0C00B61A */  jal     ActorPosition_SpeedSet              
 /* 005BC 80A0EA6C 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 005C0 80A0EA70 44800000 */  mtc1    $zero, $f0                 ## $f0 = 0.00
 /* 005C4 80A0EA74 3C063E99 */  lui     $a2, 0x3E99                ## $a2 = 3E990000

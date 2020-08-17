@@ -38,7 +38,7 @@ glabel EnWeiyer_Update
 /* 01560 80B337F0 10000004 */  beq     $zero, $zero, .L80B33804   
 /* 01564 80B337F4 3C014234 */  lui     $at, 0x4234                ## $at = 42340000
 .L80B337F8:
-/* 01568 80B337F8 0C00B65F */  jal     func_8002D97C              
+/* 01568 80B337F8 0C00B65F */  jal     ActorPosition_MoveForwardXY              
 /* 0156C 80B337FC 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 01570 80B33800 3C014234 */  lui     $at, 0x4234                ## $at = 42340000
 .L80B33804:

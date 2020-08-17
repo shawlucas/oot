@@ -139,7 +139,7 @@ glabel func_80AD4664
 /* 00D4C 80AD484C 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00D50 80AD4850 4503000D */  bc1tl   .L80AD4888                 
 /* 00D54 80AD4854 8FBF0074 */  lw      $ra, 0x0074($sp)           
-/* 00D58 80AD4858 0C00B69E */  jal     func_8002DA78              
+/* 00D58 80AD4858 0C00B69E */  jal     ActorSearch_AngleY              
 /* 00D5C 80AD485C 02202825 */  or      $a1, $s1, $zero            ## $a1 = 00000000
 /* 00D60 80AD4860 A60200B6 */  sh      $v0, 0x00B6($s0)           ## 000000B6
 /* 00D64 80AD4864 0C2B4F8B */  jal     func_80AD3E2C              

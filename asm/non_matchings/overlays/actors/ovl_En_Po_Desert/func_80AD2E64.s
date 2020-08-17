@@ -51,7 +51,7 @@ glabel func_80AD2E64
 /* 00278 80AD2F28 448A8000 */  mtc1    $t2, $f16                  ## $f16 = 0.00
 /* 0027C 80AD2F2C 00000000 */  nop
 /* 00280 80AD2F30 468084A0 */  cvt.s.w $f18, $f16
-/* 00284 80AD2F34 0C00B6EC */  jal     func_8002DBB0
+/* 00284 80AD2F34 0C00B6EC */  jal     ActorSearch_PosDistanceXZ
 /* 00288 80AD2F38 E4920010 */  swc1    $f18, 0x0010($a0)          ## 00000010
 /* 0028C 80AD2F3C 3C013F80 */  lui     $at, 0x3F80                ## $at = 3F800000
 /* 00290 80AD2F40 44811000 */  mtc1    $at, $f2                   ## $f2 = 1.00

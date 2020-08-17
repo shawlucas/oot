@@ -30,7 +30,7 @@ glabel func_809E0C8C
 /* 00AB4 809E0CF4 46083280 */  add.s   $f10, $f6, $f8             
 /* 00AB8 809E0CF8 E7AA0030 */  swc1    $f10, 0x0030($sp)          
 /* 00ABC 809E0CFC C450002C */  lwc1    $f16, 0x002C($v0)          ## 0000002C
-/* 00AC0 809E0D00 0C00B6CA */  jal     func_8002DB28              
+/* 00AC0 809E0D00 0C00B6CA */  jal     ActorSearch_PosAngleX              
 /* 00AC4 809E0D04 E7B00034 */  swc1    $f16, 0x0034($sp)          
 /* 00AC8 809E0D08 00022C00 */  sll     $a1, $v0, 16               
 /* 00ACC 809E0D0C 28413001 */  slti    $at, $v0, 0x3001           

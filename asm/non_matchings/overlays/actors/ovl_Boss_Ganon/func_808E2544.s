@@ -79,7 +79,7 @@ glabel func_808E2544
 /* 0BD40 808E25B0 2A010005 */  slti    $at, $s0, 0x0005           
 /* 0BD44 808E25B4 5420FFF6 */  bnel    $at, $zero, .L808E2590     
 /* 0BD48 808E25B8 00104040 */  sll     $t0, $s0,  1               
-/* 0BD4C 808E25BC 0C00B642 */  jal     func_8002D908              
+/* 0BD4C 808E25BC 0C00B642 */  jal     ActorPosition_SpeedSetXY              
 /* 0BD50 808E25C0 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 /* 0BD54 808E25C4 0C00B5FB */  jal     ActorPosition_Move              
 /* 0BD58 808E25C8 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
@@ -490,7 +490,7 @@ glabel L808E29A8
 /* 0C358 808E2BC8 92230621 */  lbu     $v1, 0x0621($s1)           ## 00000621
 /* 0C35C 808E2BCC 44814000 */  mtc1    $at, $f8                   ## $f8 = -30.00
 /* 0C360 808E2BD0 A62A01C2 */  sh      $t2, 0x01C2($s1)           ## 000001C2
-/* 0C364 808E2BD4 0C00B642 */  jal     func_8002D908              
+/* 0C364 808E2BD4 0C00B642 */  jal     ActorPosition_SpeedSetXY              
 /* 0C368 808E2BD8 E6280068 */  swc1    $f8, 0x0068($s1)           ## 00000068
 /* 0C36C 808E2BDC 0C00B5FB */  jal     ActorPosition_Move              
 /* 0C370 808E2BE0 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
@@ -532,7 +532,7 @@ glabel L808E29A8
 /* 0C3F4 808E2C64 2408000C */  addiu   $t0, $zero, 0x000C         ## $t0 = 0000000C
 /* 0C3F8 808E2C68 A62801C2 */  sh      $t0, 0x01C2($s1)           ## 000001C2
 /* 0C3FC 808E2C6C 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
-/* 0C400 808E2C70 0C00B642 */  jal     func_8002D908              
+/* 0C400 808E2C70 0C00B642 */  jal     ActorPosition_SpeedSetXY              
 /* 0C404 808E2C74 E6240068 */  swc1    $f4, 0x0068($s1)           ## 00000068
 /* 0C408 808E2C78 0C00B5FB */  jal     ActorPosition_Move              
 /* 0C40C 808E2C7C 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000

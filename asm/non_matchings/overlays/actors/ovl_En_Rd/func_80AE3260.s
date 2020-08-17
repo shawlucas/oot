@@ -19,7 +19,7 @@ glabel func_80AE3260
 /* 00E90 80AE3290 8C4E0028 */  lw      $t6, 0x0028($v0)           ## 00000028
 /* 00E94 80AE3294 ACAE0004 */  sw      $t6, 0x0004($a1)           ## FFFFFFF0
 /* 00E98 80AE3298 8C4F002C */  lw      $t7, 0x002C($v0)           ## 0000002C
-/* 00E9C 80AE329C 0C00B6B0 */  jal     func_8002DAC0              
+/* 00E9C 80AE329C 0C00B6B0 */  jal     ActorSearch_PosAngleY              
 /* 00EA0 80AE32A0 ACAF0008 */  sw      $t7, 0x0008($a1)           ## FFFFFFF4
 /* 00EA4 80AE32A4 00022C00 */  sll     $a1, $v0, 16               
 /* 00EA8 80AE32A8 00052C03 */  sra     $a1, $a1, 16               
@@ -30,7 +30,7 @@ glabel func_80AE3260
               
 /* 00EBC 80AE32BC AFA00010 */  sw      $zero, 0x0010($sp)         
 /* 00EC0 80AE32C0 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
-/* 00EC4 80AE32C4 0C00B6DB */  jal     func_8002DB6C              
+/* 00EC4 80AE32C4 0C00B6DB */  jal     ActorSearch_PosDistance              
 /* 00EC8 80AE32C8 27A5002C */  addiu   $a1, $sp, 0x002C           ## $a1 = FFFFFFEC
 /* 00ECC 80AE32CC 3C014234 */  lui     $at, 0x4234                ## $at = 42340000
 /* 00ED0 80AE32D0 44812000 */  mtc1    $at, $f4                   ## $f4 = 45.00

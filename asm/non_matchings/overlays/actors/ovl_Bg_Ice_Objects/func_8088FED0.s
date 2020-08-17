@@ -27,7 +27,7 @@ glabel func_8088FED0
 /* 00724 8088FF34 0C223E32 */  jal     func_8088F8C8              
 /* 00728 8088FF38 02202825 */  or      $a1, $s1, $zero            ## $a1 = 00000000
 /* 0072C 8088FF3C 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
-/* 00730 8088FF40 0C00B6EC */  jal     func_8002DBB0              
+/* 00730 8088FF40 0C00B6EC */  jal     ActorSearch_PosDistanceXZ              
 /* 00734 8088FF44 26050168 */  addiu   $a1, $s0, 0x0168           ## $a1 = 00000168
 /* 00738 8088FF48 3C013F80 */  lui     $at, 0x3F80                ## $at = 3F800000
 /* 0073C 8088FF4C 44814000 */  mtc1    $at, $f8                   ## $f8 = 1.00

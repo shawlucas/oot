@@ -29,7 +29,7 @@ glabel func_8089E650
 /* 00A78 8089E6A8 0C227842 */  jal     func_8089E108              
 /* 00A7C 8089E6AC AFA30028 */  sw      $v1, 0x0028($sp)           
 /* 00A80 8089E6B0 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
-/* 00A84 8089E6B4 0C00B6DB */  jal     func_8002DB6C              
+/* 00A84 8089E6B4 0C00B6DB */  jal     ActorSearch_PosDistance              
 /* 00A88 8089E6B8 27A5003C */  addiu   $a1, $sp, 0x003C           ## $a1 = FFFFFFF4
 /* 00A8C 8089E6BC C6120068 */  lwc1    $f18, 0x0068($s0)          ## 00000068
 /* 00A90 8089E6C0 26040024 */  addiu   $a0, $s0, 0x0024           ## $a0 = 00000024
@@ -43,7 +43,7 @@ glabel func_8089E650
 .L8089E6E0:
 /* 00AB0 8089E6E0 0C00D611 */  jal     func_80035844              
 /* 00AB4 8089E6E4 AFA40020 */  sw      $a0, 0x0020($sp)           
-/* 00AB8 8089E6E8 0C00B65F */  jal     func_8002D97C              
+/* 00AB8 8089E6E8 0C00B65F */  jal     ActorPosition_MoveForwardXY              
 /* 00ABC 8089E6EC 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00AC0 8089E6F0 C7A4003C */  lwc1    $f4, 0x003C($sp)           
 /* 00AC4 8089E6F4 C6060024 */  lwc1    $f6, 0x0024($s0)           ## 00000024

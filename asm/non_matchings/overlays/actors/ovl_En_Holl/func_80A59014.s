@@ -19,7 +19,7 @@ glabel func_80A59014
 /* 00440 80A59050 24460024 */  addiu   $a2, $v0, 0x0024           ## $a2 = 00000024
 .L80A59054:
 /* 00444 80A59054 27A50044 */  addiu   $a1, $sp, 0x0044           ## $a1 = FFFFFFEC
-/* 00448 80A59058 0C00B6F4 */  jal     func_8002DBD0              
+/* 00448 80A59058 0C00B6F4 */  jal     ActorSearch_PosProjectDistanceXZ              
 /* 0044C 80A5905C AFA7005C */  sw      $a3, 0x005C($sp)           
 /* 00450 80A59060 8FAE0058 */  lw      $t6, 0x0058($sp)           
 /* 00454 80A59064 24010006 */  addiu   $at, $zero, 0x0006         ## $at = 00000006

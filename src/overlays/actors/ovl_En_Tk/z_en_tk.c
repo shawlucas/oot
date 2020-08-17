@@ -261,7 +261,7 @@ s32 EnTk_CheckNextSpot(EnTk* this, GlobalContext* globalCtx) {
         }
 
         dy = prop->posRot.pos.y - this->actor.groundY;
-        dxz = func_8002DB8C(&this->actor, prop);
+        dxz = ActorSearch_DistanceXZ(&this->actor, prop);
         if (dxz > 40.f || dy > 10.f) {
             prop = prop->next;
             continue;
@@ -280,7 +280,7 @@ void EnTk_CheckCurrentSpot(EnTk* this) {
 
     if (this->currentSpot != NULL) {
         dy = this->currentSpot->posRot.pos.y - this->actor.groundY;
-        dxz = func_8002DB8C(&this->actor, this->currentSpot);
+        dxz = ActorSearch_DistanceXZ(&this->actor, this->currentSpot);
         if (dxz > 40.f || dy > 10.f) {
             this->currentSpot = NULL;
         }

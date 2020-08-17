@@ -32,7 +32,7 @@ glabel func_80A59618
 /* 00A64 80A59674 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00A68 80A59678 27A50038 */  addiu   $a1, $sp, 0x0038           ## $a1 = FFFFFFF0
 /* 00A6C 80A5967C AFA7004C */  sw      $a3, 0x004C($sp)           
-/* 00A70 80A59680 0C00B6F4 */  jal     func_8002DBD0              
+/* 00A70 80A59680 0C00B6F4 */  jal     ActorSearch_PosProjectDistanceXZ              
 /* 00A74 80A59684 24C60024 */  addiu   $a2, $a2, 0x0024           ## $a2 = 00000024
 /* 00A78 80A59688 3C01C248 */  lui     $at, 0xC248                ## $at = C2480000
 /* 00A7C 80A5968C C7AC003C */  lwc1    $f12, 0x003C($sp)          

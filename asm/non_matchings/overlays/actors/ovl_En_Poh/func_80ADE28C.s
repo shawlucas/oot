@@ -31,7 +31,7 @@ glabel func_80ADE28C
 /* 005A8 80ADE2F8 10000006 */  beq     $zero, $zero, .L80ADE314
 /* 005AC 80ADE2FC A6090032 */  sh      $t1, 0x0032($s0)           ## 00000032
 .L80ADE300:
-/* 005B0 80ADE300 0C00B69E */  jal     func_8002DA78
+/* 005B0 80ADE300 0C00B69E */  jal     ActorSearch_AngleY
 /* 005B4 80ADE304 8E0502C4 */  lw      $a1, 0x02C4($s0)           ## 000002C4
 /* 005B8 80ADE308 34018000 */  ori     $at, $zero, 0x8000         ## $at = 00008000
 /* 005BC 80ADE30C 00415021 */  addu    $t2, $v0, $at

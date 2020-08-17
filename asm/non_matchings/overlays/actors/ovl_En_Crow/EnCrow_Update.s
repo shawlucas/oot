@@ -35,7 +35,7 @@ glabel EnCrow_Update
 /* 01064 809E12A4 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 01068 809E12A8 E7A00030 */  swc1    $f0, 0x0030($sp)           
 /* 0106C 809E12AC 46004282 */  mul.s   $f10, $f8, $f0             
-/* 01070 809E12B0 0C00B65F */  jal     func_8002D97C              
+/* 01070 809E12B0 0C00B65F */  jal     ActorPosition_MoveForwardXY              
 /* 01074 809E12B4 E7AA0034 */  swc1    $f10, 0x0034($sp)          
 /* 01078 809E12B8 10000006 */  beq     $zero, $zero, .L809E12D4   
 /* 0107C 809E12BC C7A00030 */  lwc1    $f0, 0x0030($sp)           

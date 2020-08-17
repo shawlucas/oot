@@ -44,7 +44,7 @@ glabel func_80A5A860
 /* 00C9C 80A5A8CC C430B138 */  lwc1    $f16, %lo(D_80A5B138)($at) 
 /* 00CA0 80A5A8D0 E610006C */  swc1    $f16, 0x006C($s0)          ## 0000006C
 .L80A5A8D4:
-/* 00CA4 80A5A8D4 0C00B61A */  jal     func_8002D868              
+/* 00CA4 80A5A8D4 0C00B61A */  jal     ActorPosition_SpeedSet              
 /* 00CA8 80A5A8D8 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 00CAC 80A5A8DC 3C013F80 */  lui     $at, 0x3F80                ## $at = 3F800000
 /* 00CB0 80A5A8E0 44811000 */  mtc1    $at, $f2                   ## $f2 = 1.00

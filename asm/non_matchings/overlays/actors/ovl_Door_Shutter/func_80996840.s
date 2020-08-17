@@ -20,7 +20,7 @@ glabel func_80996840
 /* 005D4 80996874 460C3200 */  add.s   $f8, $f6, $f12             
 /* 005D8 80996878 E7A8002C */  swc1    $f8, 0x002C($sp)           
 /* 005DC 8099687C C44A002C */  lwc1    $f10, 0x002C($v0)          ## 0000002C
-/* 005E0 80996880 0C00B6F4 */  jal     func_8002DBD0              
+/* 005E0 80996880 0C00B6F4 */  jal     ActorSearch_PosProjectDistanceXZ              
 /* 005E4 80996884 E7AA0030 */  swc1    $f10, 0x0030($sp)          
 /* 005E8 80996888 C7A0001C */  lwc1    $f0, 0x001C($sp)           
 /* 005EC 8099688C C7B00044 */  lwc1    $f16, 0x0044($sp)          

@@ -63,7 +63,7 @@ glabel func_809FC41C
 /* 00330 809FC500 00C02025 */  or      $a0, $a2, $zero            ## $a0 = 00000000
 /* 00334 809FC504 8CE51C44 */  lw      $a1, 0x1C44($a3)           ## 00001C44
 /* 00338 809FC508 AFA60020 */  sw      $a2, 0x0020($sp)           
-/* 0033C 809FC50C 0C00B6E3 */  jal     func_8002DB8C              
+/* 0033C 809FC50C 0C00B6E3 */  jal     ActorSearch_DistanceXZ              
 /* 00340 809FC510 AFA3001C */  sw      $v1, 0x001C($sp)           
 /* 00344 809FC514 3C0142F0 */  lui     $at, 0x42F0                ## $at = 42F00000
 /* 00348 809FC518 44812000 */  mtc1    $at, $f4                   ## $f4 = 120.00

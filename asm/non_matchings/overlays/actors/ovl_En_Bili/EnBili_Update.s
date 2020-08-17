@@ -65,7 +65,7 @@ glabel EnBili_Update
 /* 01480 809C0D20 25EF067C */  addiu   $t7, $t7, %lo(func_809C067C) ## $t7 = 809C067C
 /* 01484 809C0D24 15F90005 */  bne     $t7, $t9, .L809C0D3C       
 /* 01488 809C0D28 00000000 */  nop
-/* 0148C 809C0D2C 0C00B65F */  jal     func_8002D97C              
+/* 0148C 809C0D2C 0C00B65F */  jal     ActorPosition_MoveForwardXY              
 /* 01490 809C0D30 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 01494 809C0D34 10000004 */  beq     $zero, $zero, .L809C0D48   
 /* 01498 809C0D38 86180214 */  lh      $t8, 0x0214($s0)           ## 00000214

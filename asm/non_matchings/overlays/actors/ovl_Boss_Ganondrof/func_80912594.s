@@ -186,7 +186,7 @@ glabel func_80912594
 /* 02194 809127D4 00000000 */  nop
 /* 02198 809127D8 A62D0030 */  sh      $t5, 0x0030($s1)           ## 00000030
 .L809127DC:
-/* 0219C 809127DC 0C00B642 */  jal     func_8002D908
+/* 0219C 809127DC 0C00B642 */  jal     ActorPosition_SpeedSetXY
 /* 021A0 809127E0 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 /* 021A4 809127E4 0C00B5FB */  jal     ActorPosition_Move
 /* 021A8 809127E8 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000

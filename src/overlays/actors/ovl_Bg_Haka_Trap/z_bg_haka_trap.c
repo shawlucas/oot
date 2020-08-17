@@ -178,7 +178,7 @@ void func_8087FFC0(BgHakaTrap* this, GlobalContext* globalCtx) {
     f32 zNonNegative;
     Player* player = PLAYER;
 
-    func_8002DBD0(&this->dyna.actor, &sp28, &player->actor.posRot.pos);
+    ActorSearch_PosProjectDistanceXZ(&this->dyna.actor, &sp28, &player->actor.posRot.pos);
 
     sine = Math_Sins(this->dyna.actor.shape.rot.y);
     cosine = Math_Coss(this->dyna.actor.shape.rot.y);
@@ -401,7 +401,7 @@ void func_808809E4(BgHakaTrap* this, GlobalContext* globalCtx, s16 arg2) {
     Player* player = PLAYER;
     Vec3f sp18;
 
-    func_8002DBD0(&this->dyna.actor, &sp18, &player->actor.posRot.pos);
+    ActorSearch_PosProjectDistanceXZ(&this->dyna.actor, &sp18, &player->actor.posRot.pos);
 
     if ((fabsf(sp18.x) < 70.0f) && (fabsf(sp18.y) < 100.0f) && (sp18.z < 500.0f) && (PLAYER->currentBoots != 1)) {
         player->fanWindSpeed = ((500.0f - sp18.z) * 0.06f + 5.0f) * arg2 * (1.0f / 14848.0f) * (2.0f / 3.0f);

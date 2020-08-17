@@ -3,7 +3,7 @@ glabel func_80A699FC
 /* 00630 80A69A00 AFBF002C */  sw      $ra, 0x002C($sp)
 /* 00634 80A69A04 AFB00028 */  sw      $s0, 0x0028($sp)
 /* 00638 80A69A08 00808025 */  or      $s0, $a0, $zero            ## $s0 = 00000000
-/* 0063C 80A69A0C 0C00B6E3 */  jal     func_8002DB8C
+/* 0063C 80A69A0C 0C00B6E3 */  jal     ActorSearch_DistanceXZ
 /* 00640 80A69A10 8CA51C44 */  lw      $a1, 0x1C44($a1)           ## 00001C44
 /* 00644 80A69A14 260401A0 */  addiu   $a0, $s0, 0x01A0           ## $a0 = 000001A0
 /* 00648 80A69A18 AFA40034 */  sw      $a0, 0x0034($sp)

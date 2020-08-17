@@ -92,7 +92,7 @@ glabel func_80A10220
 /* 01070 80A102D0 AFA300EC */  sw      $v1, 0x00EC($sp)           
 /* 01074 80A102D4 AFA200E4 */  sw      $v0, 0x00E4($sp)           
 /* 01078 80A102D8 460C2181 */  sub.s   $f6, $f4, $f12             
-/* 0107C 80A102DC 0C00B642 */  jal     func_8002D908              
+/* 0107C 80A102DC 0C00B642 */  jal     ActorPosition_SpeedSetXY              
 /* 01080 80A102E0 E7A60104 */  swc1    $f6, 0x0104($sp)           
 /* 01084 80A102E4 0C00B5FB */  jal     ActorPosition_Move              
 /* 01088 80A102E8 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000

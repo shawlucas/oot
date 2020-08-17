@@ -37,7 +37,7 @@ glabel func_808C0464
 /* 010D4 808C04E4 27A50030 */  addiu   $a1, $sp, 0x0030           ## $a1 = FFFFFFF0
 /* 010D8 808C04E8 13200023 */  beq     $t9, $zero, .L808C0578     
 /* 010DC 808C04EC 246608B8 */  addiu   $a2, $v1, 0x08B8           ## $a2 = 000008B8
-/* 010E0 808C04F0 0C00B6F4 */  jal     func_8002DBD0              
+/* 010E0 808C04F0 0C00B6F4 */  jal     ActorSearch_PosProjectDistanceXZ              
 /* 010E4 808C04F4 AFA6002C */  sw      $a2, 0x002C($sp)           
 /* 010E8 808C04F8 C7A00030 */  lwc1    $f0, 0x0030($sp)           
 /* 010EC 808C04FC 3C0142C8 */  lui     $at, 0x42C8                ## $at = 42C80000

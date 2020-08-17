@@ -427,7 +427,7 @@ void TargetContext_DrawTarget(TargetContext* targetCtx, GlobalContext* globalCtx
 #define MOVE_FRAME 4
 #define MOVE_RATIO_ADD (1.0f / (float)MOVE_FRAME)
 
-void func_8002C7BC(TargetContext* targetCtx, Actor* playerActor, Actor* targetActor, GlobalContext* globalCtx) {
+void TargetContext_Process(TargetContext* targetCtx, Actor* playerActor, Actor* targetActor, GlobalContext* globalCtx) {
     Player* player = (Player*)playerActor;
     Actor* elfTargetActor = NULL;
     s32 targetType;
@@ -874,7 +874,7 @@ void ActorPosition_Move(Actor* actor) {
     actor->posRot.pos.z += (actor->velocity.z * speedRate) + actor->colChkInfo.displacement.z;
 }
 
-void func_8002D868(Actor* actor) {
+void ActorPosition_SpeedSet(Actor* actor) {
     actor->velocity.x = Math_Sins(actor->posRot.rot.y) * actor->speedXZ;
     actor->velocity.z = Math_Coss(actor->posRot.rot.y) * actor->speedXZ;
 
@@ -885,76 +885,76 @@ void func_8002D868(Actor* actor) {
 }
 
 void Actor_MoveForward(Actor* actor) {
-    func_8002D868(actor);
+    ActorPosition_SpeedSet(actor);
     ActorPosition_Move(actor);
 }
 
-void func_8002D908(Actor* actor) {
+void ActorPosition_SpeedSetXY(Actor* actor) {
     f32 sp24 = Math_Coss(actor->posRot.rot.x) * actor->speedXZ;
     actor->velocity.x = Math_Sins(actor->posRot.rot.y) * sp24;
     actor->velocity.y = Math_Sins(actor->posRot.rot.x) * actor->speedXZ;
     actor->velocity.z = Math_Coss(actor->posRot.rot.y) * sp24;
 }
 
-void func_8002D97C(Actor* actor) {
-    func_8002D908(actor);
+void ActorPosition_MoveForwardXY(Actor* actor) {
+    ActorPosition_SpeedSetXY(actor);
     ActorPosition_Move(actor);
 }
 
-void func_8002D9A4(Actor* actor, f32 arg1) {
-    actor->speedXZ = Math_Coss(actor->posRot.rot.x) * arg1;
-    actor->velocity.y = -Math_Sins(actor->posRot.rot.x) * arg1;
+void Actor_VectorToPosSpeed(Actor* actor, f32 vectorSpeed) {
+    actor->speedXZ = Math_Coss(actor->posRot.rot.x) * vectorSpeed;
+    actor->velocity.y = -Math_Sins(actor->posRot.rot.x) * vectorSpeed;
 }
 
-void func_8002D9F8(Actor* actor, UNK_PTR arg1) {
-    Vec3f sp1C;
-    func_800A54FC(arg1, &sp1C, actor->shape.rot.y);
-    actor->posRot.pos.x += sp1C.x * actor->scale.x;
-    actor->posRot.pos.y += sp1C.y * actor->scale.y;
-    actor->posRot.pos.z += sp1C.z * actor->scale.z;
+void ActorPosition_MoveAnime(Actor* actor, SkelAnime* skelAnime) {
+    Vec3f animeTrans;
+    func_800A54FC(skelAnime, &animeTrans, actor->shape.rot.y);
+    actor->posRot.pos.x += animeTrans.x * actor->scale.x;
+    actor->posRot.pos.y += animeTrans.y * actor->scale.y;
+    actor->posRot.pos.z += animeTrans.z * actor->scale.z;
 }
 
-s16 func_8002DA78(Actor* actorA, Actor* actorB) {
+s16 ActorSearch_AngleY(Actor* actorA, Actor* actorB) {
     return Math_Vec3f_Yaw(&actorA->posRot.pos, &actorB->posRot.pos);
 }
 
-s16 func_8002DA9C(Actor* actorA, Actor* actorB) {
+s16 ActorEyeSearch_AngleY(Actor* actorA, Actor* actorB) {
     return Math_Vec3f_Yaw(&actorA->posRot2.pos, &actorB->posRot2.pos);
 }
 
-s16 func_8002DAC0(Actor* actor, Vec3f* arg1) {
-    return Math_Vec3f_Yaw(&actor->posRot.pos, arg1);
+s16 ActorSearch_PosAngleY(Actor* actor, Vec3f* targetPos) {
+    return Math_Vec3f_Yaw(&actor->posRot.pos, targetPos);
 }
 
-s16 func_8002DAE0(Actor* actorA, Actor* actorB) {
+s16 ActorSearch_AngleX(Actor* actorA, Actor* actorB) {
     return Math_Vec3f_Pitch(&actorA->posRot.pos, &actorB->posRot.pos);
 }
 
-s16 func_8002DB04(Actor* actorA, Actor* actorB) {
+s16 ActorEyeSearch_AngleX(Actor* actorA, Actor* actorB) {
     return Math_Vec3f_Pitch(&actorA->posRot2.pos, &actorB->posRot2.pos);
 }
 
-s16 func_8002DB28(Actor* actor, Vec3f* arg1) {
-    return Math_Vec3f_Pitch(&actor->posRot.pos, arg1);
+s16 ActorSearch_PosAngleX(Actor* actor, Vec3f* targetPos) {
+    return Math_Vec3f_Pitch(&actor->posRot.pos, targetPos);
 }
 
-f32 func_8002DB48(Actor* actorA, Actor* actorB) {
+f32 ActorSearch_Distance(Actor* actorA, Actor* actorB) {
     return Math_Vec3f_DistXYZ(&actorA->posRot.pos, &actorB->posRot.pos);
 }
 
-f32 func_8002DB6C(Actor* actor, Vec3f* arg1) {
-    return Math_Vec3f_DistXYZ(&actor->posRot.pos, arg1);
+f32 ActorSearch_PosDistance(Actor* actor, Vec3f* targetPos) {
+    return Math_Vec3f_DistXYZ(&actor->posRot.pos, targetPos);
 }
 
-f32 func_8002DB8C(Actor* actorA, Actor* actorB) {
+f32 ActorSearch_DistanceXZ(Actor* actorA, Actor* actorB) {
     return Math_Vec3f_DistXZ(&actorA->posRot.pos, &actorB->posRot.pos);
 }
 
-f32 func_8002DBB0(Actor* actor, Vec3f* arg1) {
-    return Math_Vec3f_DistXZ(&actor->posRot.pos, arg1);
+f32 ActorSearch_PosDistanceXZ(Actor* actor, Vec3f* targetPos) {
+    return Math_Vec3f_DistXZ(&actor->posRot.pos, targetPos);
 }
 
-void func_8002DBD0(Actor* actor, Vec3f* result, Vec3f* arg2) {
+void ActorSearch_PosProjectDistanceXZ(Actor* actor, Vec3f* result, Vec3f* targetPos) {
     f32 cosRot2Y;
     f32 sinRot2Y;
     f32 deltaX;
@@ -962,12 +962,12 @@ void func_8002DBD0(Actor* actor, Vec3f* result, Vec3f* arg2) {
 
     cosRot2Y = Math_Coss(actor->shape.rot.y);
     sinRot2Y = Math_Sins(actor->shape.rot.y);
-    deltaX = arg2->x - actor->posRot.pos.x;
-    deltaZ = arg2->z - actor->posRot.pos.z;
+    deltaX = targetPos->x - actor->posRot.pos.x;
+    deltaZ = targetPos->z - actor->posRot.pos.z;
 
     result->x = (deltaX * cosRot2Y) - (deltaZ * sinRot2Y);
     result->z = (deltaX * sinRot2Y) + (deltaZ * cosRot2Y);
-    result->y = arg2->y - actor->posRot.pos.y;
+    result->y = targetPos->y - actor->posRot.pos.y;
 }
 
 f32 Actor_HeightDiff(Actor* actorA, Actor* actorB) {
@@ -1088,7 +1088,7 @@ s32 func_8002DFC8(Actor* actor, s16 arg1, GlobalContext* globalCtx) {
 }
 
 s32 func_8002E020(Actor* actorA, Actor* actorB, s16 arg2) {
-    s16 var = (s16)(func_8002DA78(actorA, actorB) + 0x8000) - actorB->shape.rot.y;
+    s16 var = (s16)(ActorSearch_AngleY(actorA, actorB) + 0x8000) - actorB->shape.rot.y;
 
     if (ABS(var) < arg2) {
         return 1;
@@ -1108,7 +1108,7 @@ s32 func_8002E084(Actor* actor, s16 arg1) {
 }
 
 s32 func_8002E0D0(Actor* actorA, Actor* actorB, s16 arg2) {
-    s16 var = func_8002DA78(actorA, actorB) - actorA->shape.rot.y;
+    s16 var = ActorSearch_AngleY(actorA, actorB) - actorA->shape.rot.y;
 
     if (ABS(var) < arg2) {
         return 1;
@@ -1132,8 +1132,8 @@ s32 func_8002E12C(Actor* actor, f32 arg1, s16 arg2) {
 }
 
 s32 func_8002E1A8(Actor* actorA, Actor* actorB, f32 arg2, s16 arg3) {
-    if (func_8002DB48(actorA, actorB) < arg2) {
-        s16 var = func_8002DA78(actorA, actorB) - actorA->shape.rot.y;
+    if (ActorSearch_Distance(actorA, actorB) < arg2) {
+        s16 var = ActorSearch_AngleY(actorA, actorB) - actorA->shape.rot.y;
 
         if (ABS(var) < arg3) {
             return 1;
@@ -2087,11 +2087,11 @@ void Actor_UpdateAll(GlobalContext* globalCtx, ActorContext* actorCtx) {
                 }
             } else {
                 Math_Vec3f_Copy(&actor->pos4, &actor->posRot.pos);
-                actor->xzDistFromLink = func_8002DB8C(actor, &player->actor);
+                actor->xzDistFromLink = ActorSearch_DistanceXZ(actor, &player->actor);
                 actor->yDistFromLink = Actor_HeightDiff(actor, &player->actor);
                 actor->xyzDistFromLinkSq = SQ(actor->xzDistFromLink) + SQ(actor->yDistFromLink);
 
-                actor->yawTowardsLink = func_8002DA78(actor, &player->actor);
+                actor->yawTowardsLink = ActorSearch_AngleY(actor, &player->actor);
                 actor->flags &= ~0x1000000;
 
                 if ((DECR(actor->freezeTimer) == 0) && (actor->flags & 0x50)) {
@@ -2139,7 +2139,7 @@ void Actor_UpdateAll(GlobalContext* globalCtx, ActorContext* actorCtx) {
         }
     }
 
-    func_8002C7BC(&actorCtx->targetCtx, player, actor, globalCtx);
+    TargetContext_Process(&actorCtx->targetCtx, player, actor, globalCtx);
     TitleCard_Update(globalCtx, &actorCtx->titleCtx);
     func_8003FB64(globalCtx, &globalCtx->colCtx.dyna);
 }
@@ -3263,7 +3263,7 @@ Actor* func_80033684(GlobalContext* globalCtx, Actor* explosiveActor) {
         if ((actor == explosiveActor) || (actor->params != 1)) {
             actor = actor->next;
         } else {
-            if (func_8002DB48(explosiveActor, actor) <= (actor->shape.rot.z * 10) + 80.0f) {
+            if (ActorSearch_Distance(explosiveActor, actor) <= (actor->shape.rot.z * 10) + 80.0f) {
                 return actor;
             } else {
                 actor = actor->next;
@@ -3975,7 +3975,7 @@ Actor* Actor_FindNearby(GlobalContext* globalCtx, Actor* refActor, s16 actorId, 
         if (actor == refActor || ((actorId != -1) && (actorId != actor->id))) {
             actor = actor->next;
         } else {
-            if (func_8002DB48(refActor, actor) <= range) {
+            if (ActorSearch_Distance(refActor, actor) <= range) {
                 return actor;
             } else {
                 actor = actor->next;

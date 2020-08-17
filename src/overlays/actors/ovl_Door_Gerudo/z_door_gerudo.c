@@ -72,7 +72,7 @@ f32 func_809946BC(GlobalContext* globalCtx, DoorGerudo* this, f32 arg2, f32 arg3
     playerPos.x = player->actor.posRot.pos.x;
     playerPos.y = player->actor.posRot.pos.y + arg2;
     playerPos.z = player->actor.posRot.pos.z;
-    func_8002DBD0(&this->dyna.actor, &sp1C, &playerPos);
+    ActorSearch_PosProjectDistanceXZ(&this->dyna.actor, &sp1C, &playerPos);
 
     if ((arg3 < fabsf(sp1C.x)) || (arg4 < fabsf(sp1C.y))) {
         return FLT_MAX;

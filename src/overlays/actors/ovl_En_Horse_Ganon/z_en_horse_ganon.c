@@ -120,7 +120,7 @@ void func_80A686A8(EnHorseGanon* this, GlobalContext* globalCtx) {
     }
     this->actor.shape.rot.y = this->actor.posRot.rot.y;
 
-    if (func_8002DB8C(&this->actor, &PLAYER->actor) <= 300.0f) {
+    if (ActorSearch_DistanceXZ(&this->actor, &PLAYER->actor) <= 300.0f) {
         if (this->actor.speedXZ < 12.0f) {
             this->actor.speedXZ += 1.0f;
         } else {

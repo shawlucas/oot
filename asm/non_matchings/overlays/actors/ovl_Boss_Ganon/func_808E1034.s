@@ -190,7 +190,7 @@ glabel func_808E1034
 /* 0A9E8 808E1258 E7A80084 */  swc1    $f8, 0x0084($sp)           
 /* 0A9EC 808E125C C46A002C */  lwc1    $f10, 0x002C($v1)          ## 0000002C
 /* 0A9F0 808E1260 46005181 */  sub.s   $f6, $f10, $f0             
-/* 0A9F4 808E1264 0C00B642 */  jal     func_8002D908              
+/* 0A9F4 808E1264 0C00B642 */  jal     ActorPosition_SpeedSetXY              
 /* 0A9F8 808E1268 E7A60080 */  swc1    $f6, 0x0080($sp)           
 /* 0A9FC 808E126C 0C00B5FB */  jal     ActorPosition_Move              
 /* 0AA00 808E1270 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000

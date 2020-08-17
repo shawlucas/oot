@@ -74,7 +74,7 @@ glabel L809B3C70
 /* 00378 809B3C98 2B210009 */  slti    $at, $t9, 0x0009           
 /* 0037C 809B3C9C 1420000A */  bne     $at, $zero, .L809B3CC8     
 /* 00380 809B3CA0 00000000 */  nop
-/* 00384 809B3CA4 0C00B669 */  jal     func_8002D9A4              
+/* 00384 809B3CA4 0C00B669 */  jal     Actor_VectorToPosSpeed              
 /* 00388 809B3CA8 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 0038C 809B3CAC A60000B8 */  sh      $zero, 0x00B8($s0)         ## 000000B8
 /* 00390 809B3CB0 860200B8 */  lh      $v0, 0x00B8($s0)           ## 000000B8
@@ -84,7 +84,7 @@ glabel L809B3C70
 /* 003A0 809B3CC0 10000005 */  beq     $zero, $zero, .L809B3CD8   
 /* 003A4 809B3CC4 A60200B4 */  sh      $v0, 0x00B4($s0)           ## 000000B4
 .L809B3CC8:
-/* 003A8 809B3CC8 0C00B669 */  jal     func_8002D9A4              
+/* 003A8 809B3CC8 0C00B669 */  jal     Actor_VectorToPosSpeed              
 /* 003AC 809B3CCC 3C054316 */  lui     $a1, 0x4316                ## $a1 = 43160000
 /* 003B0 809B3CD0 2409000C */  addiu   $t1, $zero, 0x000C         ## $t1 = 0000000C
 /* 003B4 809B3CD4 A2090248 */  sb      $t1, 0x0248($s0)           ## 00000248

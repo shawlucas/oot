@@ -58,7 +58,7 @@ glabel func_80AE2C1C
               
 /* 008F0 80AE2CF0 A6080032 */  sh      $t0, 0x0032($s0)           ## 00000032
 /* 008F4 80AE2CF4 8FA40038 */  lw      $a0, 0x0038($sp)           
-/* 008F8 80AE2CF8 0C00B6DB */  jal     func_8002DB6C              
+/* 008F8 80AE2CF8 0C00B6DB */  jal     ActorSearch_PosDistance              
 /* 008FC 80AE2CFC 26050008 */  addiu   $a1, $s0, 0x0008           ## $a1 = 00000008
 /* 00900 80AE2D00 3C014316 */  lui     $at, 0x4316                ## $at = 43160000
 /* 00904 80AE2D04 44813000 */  mtc1    $at, $f6                   ## $f6 = 150.00
@@ -80,7 +80,7 @@ glabel func_80AE2C1C
 /* 0093C 80AE2D3C 28411554 */  slti    $at, $v0, 0x1554           
 /* 00940 80AE2D40 50200032 */  beql    $at, $zero, .L80AE2E0C     
 /* 00944 80AE2D44 92020307 */  lbu     $v0, 0x0307($s0)           ## 00000307
-/* 00948 80AE2D48 0C00B6D2 */  jal     func_8002DB48              
+/* 00948 80AE2D48 0C00B6D2 */  jal     ActorSearch_Distance              
 /* 0094C 80AE2D4C 8FA50038 */  lw      $a1, 0x0038($sp)           
 /* 00950 80AE2D50 3C014316 */  lui     $at, 0x4316                ## $at = 43160000
 /* 00954 80AE2D54 44814000 */  mtc1    $at, $f8                   ## $f8 = 150.00
@@ -141,7 +141,7 @@ glabel func_80AE2C1C
 .L80AE2E20:
 /* 00A20 80AE2E20 54400021 */  bnel    $v0, $zero, .L80AE2EA8     
 /* 00A24 80AE2E24 8618001C */  lh      $t8, 0x001C($s0)           ## 0000001C
-/* 00A28 80AE2E28 0C00B6D2 */  jal     func_8002DB48              
+/* 00A28 80AE2E28 0C00B6D2 */  jal     ActorSearch_Distance              
 /* 00A2C 80AE2E2C 8FA50038 */  lw      $a1, 0x0038($sp)           
 /* 00A30 80AE2E30 3C014234 */  lui     $at, 0x4234                ## $at = 42340000
 /* 00A34 80AE2E34 44815000 */  mtc1    $at, $f10                  ## $f10 = 45.00

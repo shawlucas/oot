@@ -10,7 +10,7 @@ glabel func_809FC5D0
 /* 00420 809FC5F0 AFB90038 */  sw      $t9, 0x0038($sp)
 /* 00424 809FC5F4 27A5002C */  addiu   $a1, $sp, 0x002C           ## $a1 = FFFFFFEC
 /* 00428 809FC5F8 25060024 */  addiu   $a2, $t0, 0x0024           ## $a2 = 00000024
-/* 0042C 809FC5FC 0C00B6F4 */  jal     func_8002DBD0
+/* 0042C 809FC5FC 0C00B6F4 */  jal     ActorSearch_PosProjectDistanceXZ
 /* 00430 809FC600 AFA8003C */  sw      $t0, 0x003C($sp)
 /* 00434 809FC604 8FA70040 */  lw      $a3, 0x0040($sp)
 /* 00438 809FC608 3C0A80A0 */  lui     $t2, %hi(func_809FC9DC)    ## $t2 = 80A00000

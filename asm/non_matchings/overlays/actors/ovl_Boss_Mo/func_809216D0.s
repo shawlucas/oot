@@ -1279,7 +1279,7 @@ glabel L80921B08
 /* 06CE0 809227E0 0C01E1EF */  jal     Math_SmoothScaleMaxS
               
 /* 06CE4 809227E4 00073C03 */  sra     $a3, $a3, 16               
-/* 06CE8 809227E8 0C00B642 */  jal     func_8002D908              
+/* 06CE8 809227E8 0C00B642 */  jal     ActorPosition_SpeedSetXY              
 /* 06CEC 809227EC 02202025 */  or      $a0, $s1, $zero            ## $a0 = 00000000
 /* 06CF0 809227F0 10000008 */  beq     $zero, $zero, .L80922814   
 /* 06CF4 809227F4 00000000 */  nop

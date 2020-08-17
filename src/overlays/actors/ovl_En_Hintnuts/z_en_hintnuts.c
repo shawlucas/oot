@@ -373,11 +373,11 @@ void EnHintnuts_Run(EnHintnuts* this, GlobalContext* globalCtx) {
     Math_ApproxF(&this->actor.speedXZ, 7.5f, 1.0f);
     if (Math_SmoothScaleMaxMinS(&this->actor.posRot.rot.y, this->unk_196, 1, 0xE38, 0xB6) == 0) {
         if (this->actor.bgCheckFlags & 0x20) {
-            this->unk_196 = func_8002DAC0(&this->actor, &this->actor.initPosRot.pos);
+            this->unk_196 = ActorSearch_PosAngleY(&this->actor, &this->actor.initPosRot.pos);
         } else if (this->actor.bgCheckFlags & 8) {
             this->unk_196 = this->actor.wallPolyRot;
         } else if (this->animFlagAndTimer == 0) {
-            diffRotInit = func_8002DAC0(&this->actor, &this->actor.initPosRot.pos);
+            diffRotInit = ActorSearch_PosAngleY(&this->actor, &this->actor.initPosRot.pos);
             diffRot = diffRotInit - this->actor.yawTowardsLink;
             if (ABS(diffRot) >= 0x2001) {
                 this->unk_196 = diffRotInit;
@@ -393,7 +393,7 @@ void EnHintnuts_Run(EnHintnuts* this, GlobalContext* globalCtx) {
     this->actor.shape.rot.y = this->actor.posRot.rot.y + 0x8000;
     if (func_8002F194(&this->actor, globalCtx) != 0) {
         EnHintnuts_SetupTalk(this);
-    } else if (this->animFlagAndTimer == 0 && func_8002DBB0(&this->actor, &this->actor.initPosRot.pos) < 20.0f &&
+    } else if (this->animFlagAndTimer == 0 && ActorSearch_PosDistanceXZ(&this->actor, &this->actor.initPosRot.pos) < 20.0f &&
                fabsf(this->actor.posRot.pos.y - this->actor.initPosRot.pos.y) < 2.0f) {
         this->actor.speedXZ = 0.0f;
         if (this->actor.type == ACTORTYPE_BG) {

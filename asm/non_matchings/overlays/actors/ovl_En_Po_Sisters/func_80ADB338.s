@@ -11,7 +11,7 @@ glabel func_80ADB338
 /* 023CC 80ADB35C 01E02025 */  or      $a0, $t7, $zero            ## $a0 = 00000000
 /* 023D0 80ADB360 14E0002C */  bne     $a3, $zero, .L80ADB414     
 /* 023D4 80ADB364 00604025 */  or      $t0, $v1, $zero            ## $t0 = 00000000
-/* 023D8 80ADB368 0C00B6EC */  jal     func_8002DBB0              
+/* 023D8 80ADB368 0C00B6EC */  jal     ActorSearch_PosDistanceXZ              
 /* 023DC 80ADB36C AFA60020 */  sw      $a2, 0x0020($sp)           
 /* 023E0 80ADB370 3C014416 */  lui     $at, 0x4416                ## $at = 44160000
 /* 023E4 80ADB374 44812000 */  mtc1    $at, $f4                   ## $f4 = 600.00

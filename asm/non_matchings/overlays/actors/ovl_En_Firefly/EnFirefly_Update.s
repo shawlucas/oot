@@ -62,7 +62,7 @@ glabel EnFirefly_Update
 /* 0171C 80A1478C 01EEC023 */  subu    $t8, $t7, $t6              
 /* 01720 80A14790 A6180030 */  sh      $t8, 0x0030($s0)           ## 00000030
 .L80A14794:
-/* 01724 80A14794 0C00B65F */  jal     func_8002D97C              
+/* 01724 80A14794 0C00B65F */  jal     ActorPosition_MoveForwardXY              
 /* 01728 80A14798 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 0172C 80A1479C 3C014120 */  lui     $at, 0x4120                ## $at = 41200000
 .L80A147A0:

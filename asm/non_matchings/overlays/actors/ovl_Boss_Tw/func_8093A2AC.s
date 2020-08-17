@@ -133,7 +133,7 @@ glabel func_8093A2AC
 /* 017AC 8093A47C 0C01E107 */  jal     Math_SmoothScaleMaxF
               
 /* 017B0 8093A480 3C073F80 */  lui     $a3, 0x3F80                ## $a3 = 3F800000
-/* 017B4 8093A484 0C00B642 */  jal     func_8002D908              
+/* 017B4 8093A484 0C00B642 */  jal     ActorPosition_SpeedSetXY              
 /* 017B8 8093A488 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000
 /* 017BC 8093A48C 0C00B5FB */  jal     ActorPosition_Move              
 /* 017C0 8093A490 02002025 */  or      $a0, $s0, $zero            ## $a0 = 00000000

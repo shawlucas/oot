@@ -11,7 +11,7 @@ glabel func_80997A34
 /* 017B8 80997A58 24020001 */  addiu   $v0, $zero, 0x0001         ## $v0 = 00000001
 .L80997A5C:
 /* 017BC 80997A5C 8FA40018 */  lw      $a0, 0x0018($sp)           
-/* 017C0 80997A60 0C00B6B0 */  jal     func_8002DAC0              
+/* 017C0 80997A60 0C00B6B0 */  jal     ActorSearch_PosAngleY              
 /* 017C4 80997A64 24A500E0 */  addiu   $a1, $a1, 0x00E0           ## $a1 = 000000E0
 /* 017C8 80997A68 8FAE0018 */  lw      $t6, 0x0018($sp)           
 /* 017CC 80997A6C 85C300B6 */  lh      $v1, 0x00B6($t6)           ## 000000B6

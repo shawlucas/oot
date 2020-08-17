@@ -357,7 +357,7 @@ glabel func_808382DC
 .L808387EC:
 /* 065DC 808387EC 00E02025 */  or      $a0, $a3, $zero            ## $a0 = 00000000
 /* 065E0 808387F0 02002825 */  or      $a1, $s0, $zero            ## $a1 = 00000000
-/* 065E4 808387F4 0C00B69E */  jal     func_8002DA78
+/* 065E4 808387F4 0C00B69E */  jal     ActorSearch_AngleY
 /* 065E8 808387F8 AFA6004C */  sw      $a2, 0x004C($sp)
 /* 065EC 808387FC 3C0140A0 */  lui     $at, 0x40A0                ## $at = 40A00000
 /* 065F0 80838800 44818000 */  mtc1    $at, $f16                  ## $f16 = 5.00
