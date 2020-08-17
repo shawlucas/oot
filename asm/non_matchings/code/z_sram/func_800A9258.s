@@ -59,7 +59,7 @@ glabel D_80140E18
     .balign 4
 
 .text
-glabel func_800A9258
+glabel Sram_StartSave
 /* B203F8 800A9258 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* B203FC 800A925C AFB60040 */  sw    $s6, 0x40($sp)
 /* B20400 800A9260 3C160001 */  lui   $s6, (0x00018000 >> 16) # lui $s6, 1

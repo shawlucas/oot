@@ -401,10 +401,225 @@ void Sram_Save(Sram* sram) {
     ssSRAMWrite((void*)((int)SRAM_START_ADDR + i), &gSaveContext.entranceIndex, SAVE_SIZE);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_sram/func_800A8A20.s")
+void Sram_StartLoad(FileChooseContext* this, Sram* sram) {
+    u16 i, j, s, t, m, mmm;
+    u16* k;
+    u16 keepTime;
 
-#pragma GLOBAL_ASM("asm/non_matchings/code/z_sram/func_800A9258.s")
+    osSyncPrintf("ＳＲＡＭ ＳＴＡＲＴ─ＬＯＡＤ\n");
 
+    bzero(sram->read_buff, SRAM_SIZE);
+    ssSRAMRead(sram->read_buff, (void*)SRAM_START_ADDR, SRAM_SIZE);
+
+    keepTime = ZCommonGet(zeldaTime);
+    for (s = 0; s < 3; s++) {
+        t = sramSaveAddress[s];
+        osSyncPrintf("ぽいんと＝%x(%d)    SAVE_MAX=%d\n", t, gSaveContext.fileNum, SAVE_MAX);
+        MemCopy(&gSaveContext.entranceIndex, sram->read_buff + t, SAVE_MAX);
+
+        mmm = CHECK_SUM;
+        CHECK_SUM = 0;
+        k = (u16*)&gSaveContext.entranceIndex;
+        osSyncPrintf("\n＝＝＝＝＝＝＝＝＝＝＝＝＝  Ｓ（%d） ＝＝＝＝＝＝＝＝＝＝＝＝＝\n", s);
+        for (i = j = m = 0; i < (SAVE_MAX) / 2; i++, t += 2) {
+            j += *k++;
+        }
+        osSyncPrintf("\nＳＡＶＥチェックサム計算  j=%x  mmm=%x  ", j, mmm);
+        if (j != mmm) {
+            osSyncPrintf("ＥＲＲＯＲ！！！ ＝ %x(%d)\n", sramSaveAddress[s], s);
+            t = sramSaveAddress[s + 3];
+            MemCopy(&gSaveContext.entranceIndex, sram->read_buff + t, SAVE_MAX);
+
+            mmm = CHECK_SUM;
+            CHECK_SUM = 0;
+            k = (u16*)&gSaveContext.entranceIndex;
+            osSyncPrintf("================= ＢＡＣＫ─ＵＰ ========================\n");
+            for (i = j = m = 0; i < (SAVE_MAX) / 2; i++, t += 2) {
+                j += *k++;
+            }
+            osSyncPrintf("\n（Ｂ）ＳＡＶＥチェックサム計算  j=%x  mmm=%x  ", j, mmm);
+            if (j != mmm) {
+                osSyncPrintf("ＥＲＲＯＲ！！！ ＝ %x(%d+3)\n", sramSaveAddress[s + 3], s);
+
+                bzero(&gSaveContext.entranceIndex, sizeof(s32));
+                bzero(&gSaveContext.linkAge, sizeof(s32));
+                bzero(&gSaveContext.cutsceneIndex, sizeof(s32));
+                bzero(&gSaveContext.zeldaTime, sizeof(s32));
+                bzero(&gSaveContext.nightFlag, sizeof(s32));
+                bzero(&gSaveContext.totalDay, sizeof(s32));
+                bzero(&gSaveContext.eventDay, sizeof(s32));
+#if !defined(ROM_F)
+                if (!s) {
+                    Save_Initialize999();
+                    S_Private.newf[0] = REG0;
+                    S_Private.newf[1] = REG1;
+                    S_Private.newf[2] = REG2;
+                    S_Private.newf[3] = REG3;
+                    S_Private.newf[4] = REG4;
+                    S_Private.newf[5] = REG5;
+                    osSyncPrintf("newf=%x,%x,%x,%x,%x,%x\n", S_Private.newf[0], S_Private.newf[1], S_Private.newf[2],
+                                 S_Private.newf[3], S_Private.newf[4], S_Private.newf[5]);
+                } else {
+                    Save_Initialize();
+                }
+#else
+                Save_Initialize();
+#endif
+                k = (u16*)&gSaveContext.entranceIndex;
+                /* Checksum calculation */
+                osSyncPrintf("\n--------------------------------------------------------------\n");
+                for (i = j = m = 0; i < (SAVE_MAX) / 2; i++) {
+                    osSyncPrintf("%x ", *k);
+                    if ((++m) == 0x20) {
+                        osSyncPrintf("\n");
+                        m = 0;
+                    }
+
+                    j += *k++;
+                }
+
+                CHECK_SUM = j;
+                osSyncPrintf("\nCheck_Sum=%x(%x)\n", CHECK_SUM, j);
+                i = sramSaveAddress[s + 3];
+                ssSRAMWrite((void*)((s32)SRAM_START_ADDR + i), &gSaveContext.entranceIndex, SAVE_SIZE);
+                osSyncPrintf("??????=%x,%x,%x,%x,%x,%x\n", S_Private.newf[0], S_Private.newf[1], S_Private.newf[2],
+                             S_Private.newf[3], S_Private.newf[4], S_Private.newf[5]);
+                osSyncPrintf("\nぽいんと＝%x(%d+3)  check_sum=%x(%x)\n", i, s, CHECK_SUM, j);
+            }
+            i = sramSaveAddress[s];
+            ssSRAMWrite((void*)((s32)SRAM_START_ADDR + i), &gSaveContext.entranceIndex, SAVE_SIZE);
+            osSyncPrintf("ぽいんと＝%x(%d)  check_sum=%x(%x)\n", i, s, CHECK_SUM, j);
+        } else {
+            osSyncPrintf("\nＳＡＶＥデータ ＯＫ！！！！\n");
+        }
+    }
+
+    bzero(sram->read_buff, SRAM_SIZE);
+    ssSRAMRead(sram->read_buff, (void*)SRAM_START_ADDR, SRAM_SIZE);
+    ZCommonSet(zeldaTime, keepTime);
+    osSyncPrintf("SAVECT=%x, NAME=%x, LIFE=%x, ITEM=%x,  64DD=%x,  HEART=%x\n", 0x22, 0x24, 0x2e, 0xa4, 0x2c, 0xcf);
+
+    MemCopy(&this->save[0], sram->read_buff + 0x42, 2);
+    MemCopy(&this->save[1], sram->read_buff + 0x1492, 2);
+    MemCopy(&this->save[2], sram->read_buff + 0x28E2, 2);
+
+    MemCopy(&this->name[0], sram->read_buff + 0x44, 8);
+    MemCopy(&this->name[1], sram->read_buff + 0x1494, 8);
+    MemCopy(&this->name[2], sram->read_buff + 0x28E4, 8);
+
+    MemCopy(&this->health[0], sram->read_buff + 0x4E, 2);
+    MemCopy(&this->health[1], sram->read_buff + 0x149E, 2);
+    MemCopy(&this->health[2], sram->read_buff + 0x28EE, 2);
+
+    MemCopy(&this->item[0], sram->read_buff + 0xC4, 4);
+    MemCopy(&this->item[1], sram->read_buff + 0x1514, 4);
+    MemCopy(&this->item[2], sram->read_buff + 0x2964, 4);
+
+    MemCopy(&this->f_64dd[0], sram->read_buff + 0x4C, 2);
+    MemCopy(&this->f_64dd[1], sram->read_buff + 0x149C, 2);
+    MemCopy(&this->f_64dd[2], sram->read_buff + 0x28EC, 2);
+
+    MemCopy(&this->heartStatus[0], sram->read_buff + 0xEF, 1);
+    MemCopy(&this->heartStatus[1], sram->read_buff + 0x153F, 1);
+    MemCopy(&this->heartStatus[2], sram->read_buff + 0x298F, 1);
+
+#if defined(PAL_VERSION)
+    MemCopy(&this->nowLife[0], sram->read_buff + SRAM_Point00 + SAVE_LIFE_NOW, 2);
+    MemCopy(&this->nowLife[1], sram->read_buff + SRAM_Point01 + SAVE_LIFE_NOW, 2);
+    MemCopy(&this->nowLife[2], sram->read_buff + SRAM_Point02 + SAVE_LIFE_NOW, 2);
+#endif
+
+    osSyncPrintf("f_64dd=%d, %d, %d\n", this->f_64dd[0], this->f_64dd[1], this->f_64dd[2]);
+    osSyncPrintf("heart_status=%d, %d, %d\n", this->heartStatus[0], this->heartStatus[1], this->heartStatus[2]);
+
+#if defined(PAL_VERSION)
+    osSyncPrintf("now_life=%d, %d, %d\n", this->nowLife[0], this->nowLife[1], this->nowLife[2]);
+#endif
+}
+void Sram_StartSave(FileChooseContext* this, Sram* sram) {
+    u16 i, j, m;
+    u16* k;
+
+#if !defined(ROM_F)
+    if (this->no) {
+        Save_Initialize();
+    } else {
+        Save_Initialize999();
+    }
+#else
+    Save_Initialize();
+#endif
+    /* Link START place [LINK-HOME] */
+    ZCommon_SceneNoSet(LINK_HOME_0);
+    ZCommon_LinkAgeBeChild();
+
+    /* Zelda time setting [AM 10:00] */
+    ZCommonSet(zeldaTime, 0x6AAB);
+    ZCommonSet(cutsceneIndex, 0xFFF1);
+
+#if !defined(ROM_F)
+    if (!this->no)
+        ZCommonSet(cutsceneIndex, 0x0000);
+#endif
+    for (i = 0; i < 8; i++) {
+        PLAYER_NAME[i] = this->name[this->no][i];
+    }
+    S_Private.newf[0] = REG0;
+    S_Private.newf[1] = REG1;
+    S_Private.newf[2] = REG2;
+    S_Private.newf[3] = REG3;
+    S_Private.newf[4] = REG4;
+    S_Private.newf[5] = REG5;
+    S_Private.n64ddFlag = this->n64ddFlag;
+    osSyncPrintf("６４ＤＤフラグ=%d\n", this->n64ddFlag); /* 64DD flag=%d */
+    osSyncPrintf("newf=%x,%x,%x,%x,%x,%x\n", S_Private.newf[0], S_Private.newf[1], S_Private.newf[2], S_Private.newf[3],
+                 S_Private.newf[4], S_Private.newf[5]);
+
+    osSyncPrintf("\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
+    k = (u16*)&gSaveContext.entranceIndex;
+
+    /* Checksum calculation */
+    for (i = j = m = 0; i < (SAVE_MAX) / 2; i++) {
+        osSyncPrintf("%x ", *k);
+        j += *k++;
+        if ((++m) == 0x20) {
+            osSyncPrintf("\n");
+            m = 0;
+        }
+    }
+    CHECK_SUM = j;
+    osSyncPrintf("\nチェックサム＝%x\n", CHECK_SUM);
+
+    i = sramSaveAddress[gSaveContext.fileNum];
+    osSyncPrintf("I=%x no=%d\n", i, gSaveContext.fileNum);
+    MemCopy(sram->read_buff + i, &gSaveContext.entranceIndex, SAVE_MAX);
+
+    i = sramSaveAddress[gSaveContext.fileNum + 3];
+    osSyncPrintf("I=%x no=%d\n", i, gSaveContext.fileNum + 3);
+    MemCopy(sram->read_buff + i, &gSaveContext.entranceIndex, SAVE_MAX);
+
+    ssSRAMWrite((void*)SRAM_START_ADDR, sram->read_buff, SRAM_SIZE);
+    osSyncPrintf("ＳＡＶＥ終了\n");
+
+    osSyncPrintf("z_common_data.file_no = %d\n", gSaveContext.fileNum);
+    osSyncPrintf("SAVECT=%x, NAME=%x, LIFE=%x, ITEM=%x,  SAVE_64DD=%x\n", SAVE_SAVECT, SAVE_NAME, SAVE_LIFE, 0xA4,
+                 SAVE_64DD);
+    m = sramSaveAddress[gSaveContext.fileNum];
+    MemCopy(&this->save[gSaveContext.fileNum], sram->read_buff + m + SAVE_SAVECT, 2);
+    MemCopy(&this->name[gSaveContext.fileNum], sram->read_buff + m + SAVE_NAME, 8);
+    MemCopy(&this->health[gSaveContext.fileNum], sram->read_buff + m + SAVE_LIFE, 2);
+    MemCopy(&this->item[gSaveContext.fileNum], sram->read_buff + m + 0xA4, 4);
+    MemCopy(&this->f_64dd[gSaveContext.fileNum], sram->read_buff + m + SAVE_64DD, 2);
+    MemCopy(&this->heartStatus[gSaveContext.fileNum], sram->read_buff + m + 0xCF, 1);
+#if defined(PAL_VERSION)
+    MemCopy(&this->nowLife[gSaveContext.fileNum], sram->read_buff + m + SAVE_LIFE_NOW, 2);
+#endif
+    osSyncPrintf("f_64dd[%d]=%d\n", gSaveContext.fileNum, this->f_64dd[gSaveContext.fileNum]);
+    osSyncPrintf("heart_status[%d]=%d\n", gSaveContext.fileNum, this->heartStatus[gSaveContext.fileNum]);
+#if defined(PAL_VERSION)
+    osSyncPrintf("now_life[%d]=%d\n", gSaveContext.fileNum, this->nowLife[gSaveContext.fileNum]);
+#endif
+}
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_sram/func_800A96D0.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/code/z_sram/func_800A97F0.s")

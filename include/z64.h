@@ -1282,6 +1282,102 @@ typedef struct SelectContext {
     /* 0x023C */ s32 unk_23C;
 } SelectContext; // size = 0x240
 
+#if defined(PAL_VERSION)
+typedef struct FileChooseContext {
+    /* 0x0000 */ GameState state;
+    /* 0x00A4 */ Vtx_t* frameVtx;
+    /* 0x00A8 */ void* staticSegment;
+    /* 0x00AC */ void* parameterSegment;
+    /* 0x00B0 */ void* titleSegment;
+    /* 0x00B4 */ View view;
+    /* 0x01DC */ Sram sram;
+    /* 0x01E0 */ SkyboxContext skyBoxCtx;
+                 MessageContext msgCtx;
+                 Kanfont kanfont;
+                 EnvironmentContext envCtx;
+                 Vtx_t* titleVtx;
+                 Vtx_t* selectVtx;
+                 Vtx_t* characterVtx;
+                 Vtx_t* cursorVtx;
+                 u8 n64ddFlag;
+                 u16 save[3];
+                 u8 name[3][8];
+                 u16 health[3];
+                 long item[3];
+                 s16 f_64dd[3];
+                 s8 heartStatus[3];
+                 u16 nowLife[3];
+                 s16 no;
+                 s16 yesNo;
+                 s16 mode;
+                 s16 menuPos;
+                 s16 prevMenuPos; // "menu_pos_old"
+                 s16 nextMenuPos;
+                 s16 decisionMode;
+                 s16 decisionNo;
+                 s16 decisionNo1;
+                 s16 decisionYpd[3];
+
+                 s16 copyEraseMoveCounter; /* "cpd1_mct" */
+                 s16 copyEraseYPos[6]; /* "cpd1_yp" */
+                 s16 copyNo;
+
+                 s16 cautionNo;
+                 s16 cautionPt;
+
+                 s16 titleNo0;
+                 s16 titleNo1;
+                 s16 frameRgb[3];
+
+                 s16 frameTitleAlpha[2];
+                 s16 baseAlpha;
+                 s16 fileAlpha[3]; /* Selected file no alpha file */
+                 s16 plateAlpha[3]; /* Selected file name plate alpha value */
+                 s16 nameAlpha[3]; /* Selected file name alpha value */
+                 s16 connectAlpha[3]; /* Selected file connector-alpha value */
+                 s16 decisionAlpha[3]; /* Selection decision panel alpha value */
+                 s16 panelAlpha[4]; /* (copy/erase) (yes/no) panel alpha value */
+                 s16 optionAlpha; /* (option) panel alpha value */
+                 s16 namePlateAlpha; /* Name registration panel alpha value */
+                 s16 abAlpha; /* AB button description panel alpha value */
+                 s16 cautionAlpha; /* caution panel alpha value */
+
+                 s16 cursorRGBA[4];
+                 s16 cursorPt;
+                 s16 cursorCt;
+                 s16 panelPt[2];
+
+                 s16 keyWaitX;
+                 s16 keyWaitY;
+                 s16 prevKeyX;
+                 s16 prevKeyY;
+                 s16 wKeyX;
+                 s16 wKeyY;
+                 s16 shiftXp;
+                 s16 scrollXp;
+
+                 f32 gotoAngle; /* Selection screen/Name registration screen ANGLE value */
+                 s16 nameContents; /* Name registration table of contents */
+                 s16 namePage; /* Name registration replacement (0: Hiragana,
+                                    1: Katakana,
+                                    2: English number,
+                                    3: Hiragana → Katakana,
+                                    4: Katakana → Hiragana,
+                                    5: Hiragana → English number,
+                                    6: English number → Hiragana,
+                                    7: Katakana → English number,
+                                    8: Alphanumeric → Katakana) 
+                                    */
+                s16 pageAlpha; /* Name registration page color */
+                s16 mjp;
+                s16 nameXpos;
+                s16 nameYpos;
+                s16 nameIndex; /* Name registration character index */
+
+                s16 submenuAlpha[5];
+} FileChooseContext;
+#endif
+
 typedef struct {
     /* 0x0000 */ GameState state;
     /* 0x00A4 */ void* staticSegment;

@@ -7,6 +7,8 @@
 #define ssSRAMRead(p,s,sz)    Sram_ReadWrite(s, p, sz, OS_READ)
 #define ssSRAMWrite(s,p,sz)   Sram_ReadWrite(s, p, sz, OS_WRITE)
 
+#define SRAM_SIZE             0x8000
+
 #define Save_Size       (sizeof(int)/sizeof(u8))
 #define SAVE_BASE       ( Save_Size +\
                           Save_Size +\
@@ -42,11 +44,11 @@
 
 #define SAVE_MAX	(SAVE_BASE + sizeof(Memory)/sizeof(u8))
 #define SAVE_SAVECT	(SAVE_BASE + sizeof(S_Private.newf)/sizeof(u8))
-#define SAVE_NAME	(SAVE_SAVECT + sizeof(unshort)/sizeof(u8))
+#define SAVE_NAME	(SAVE_SAVECT + sizeof(u16)/sizeof(u8))
 #define SAVE_64DD	(SAVE_NAME + sizeof(S_Private.playerName)/sizeof(u8))
 #define SAVE_LIFE	(SAVE_64DD + sizeof(short)/sizeof(u8))
-#define SAVE_ITEM	((SAVE_BASE + (sizeof(S_Private)/sizeof(u8)) + (sizeof(S_Used)/sizeof(u8))  + (sizeof(S_Table)/sizeof(u8))) - (sizeof(long)/sizeof(u8) + sizeof(S_Table.key_compass_map)/sizeof(u8) + sizeof(S_Table.key_register)/sizeof(u8)+ sizeof(unshort)/sizeof(u8)) )
-#define SAVE_HEART	((SAVE_BASE + (sizeof(S_Private)/sizeof(u8)) + (sizeof(S_Used)/sizeof(u8))  + (sizeof(S_Table)/sizeof(u8))) - (sizeof(S_Table.key_register)/sizeof(u8)+ sizeof(unshort)/sizeof(u8)) )
+#define SAVE_ITEM	((SAVE_BASE + (sizeof(S_Private)/sizeof(u8)) + (sizeof(S_Equips)/sizeof(u8))  + (sizeof(S_Table)/sizeof(u8))) - (sizeof(long)/sizeof(u8) + sizeof(S_Table.dungeonItems)/sizeof(u8) + sizeof(S_Table.dungeonKeys)/sizeof(u8)+ sizeof(u16)/sizeof(u8)) )
+#define SAVE_HEART	((SAVE_BASE + (sizeof(S_Private)/sizeof(u8)) + (sizeof(S_Equips)/sizeof(u8))  + (sizeof(S_Table)/sizeof(u8))) - (sizeof(S_Table.dungeonKeys)/sizeof(u8)+ sizeof(u16)/sizeof(u8)) )
 #if defined(PAL_VERSION)
 #define SAVE_LIFE_NOW	(SAVE_LIFE + sizeof(short)/sizeof(u8))
 #endif

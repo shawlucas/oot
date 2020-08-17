@@ -164,4 +164,10 @@ if (1) {  \
 #define ZCommonSet(member, value) (gSaveContext.member = (value))
 #define ZCommon_SceneNoSet(no) ZCommonSet(entranceIndex, no)
 
+#define ZCommon_LinkAgeSet(year) ZCommonSet(linkAge, ((year) == 5))
+#define ZCommon_LinkAgeBeAdult() ZCommon_LinkAgeSet(YEARS_ADULT)
+#define ZCommon_LinkAgeBeChild() ZCommon_LinkAgeSet(YEARS_CHILD)
+
+#define PLAYER_NAME S_Private.playerName
+
 #endif

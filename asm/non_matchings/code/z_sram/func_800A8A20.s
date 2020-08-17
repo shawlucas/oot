@@ -94,7 +94,7 @@ glabel D_80140CC4
     .balign 4
 
 .text
-glabel func_800A8A20
+glabel Sram_StartLoad
 /* B1FBC0 800A8A20 27BDFF88 */  addiu $sp, $sp, -0x78
 /* B1FBC4 800A8A24 AFA40078 */  sw    $a0, 0x78($sp)
 /* B1FBC8 800A8A28 AFBF004C */  sw    $ra, 0x4c($sp)
