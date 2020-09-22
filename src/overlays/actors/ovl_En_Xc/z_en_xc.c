@@ -305,7 +305,21 @@ void func_80B3C31C(EnXc* this) {
     }
 }
 
+#ifdef NON_MATCHING
+void func_80B3C3A4(EnXc *this, GlobalContext *globalCtx) {
+    GlobalContext* gctx = globalCtx;
+    Vec3f* pos = &this->actor.posRot.pos;
+    s16 rot = this->actor.shape.rot.y;
+    f32 x = (Math_Sins(rot) * 30.0f) + pos->x;
+    f32 y = pos->y + 3.0f;
+    f32 z = pos->z;
+
+    Actor_Spawn(&gctx->actorCtx, gctx, (u16)0x16, x, y, (Math_Coss(rot) * 30.0f) + pos->z, 0xFA0, this->actor.shape.rot.y, 0, -0xA);
+}
+#else
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Xc/func_80B3C3A4.s")
+#endif
+
 
 void func_80B3C468(EnXc* this, GlobalContext* globalCtx) {
     func_8002E4B4(globalCtx, &this->actor, 75.0f, 30.0f, 30.0f, 4);
