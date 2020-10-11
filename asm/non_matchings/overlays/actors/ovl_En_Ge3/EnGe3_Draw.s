@@ -56,10 +56,10 @@ glabel EnGe3_Draw
 /* 00AF0 80A35110 8E05019C */  lw      $a1, 0x019C($s0)           ## 0000019C
 /* 00AF4 80A35114 8E0601B8 */  lw      $a2, 0x01B8($s0)           ## 000001B8
 /* 00AF8 80A35118 9207019A */  lbu     $a3, 0x019A($s0)           ## 0000019A
-/* 00AFC 80A3511C 3C0F80A3 */  lui     $t7, %hi(func_80A34E58)    ## $t7 = 80A30000
-/* 00B00 80A35120 3C1880A3 */  lui     $t8, %hi(func_80A35004)    ## $t8 = 80A30000
-/* 00B04 80A35124 27185004 */  addiu   $t8, $t8, %lo(func_80A35004) ## $t8 = 80A35004
-/* 00B08 80A35128 25EF4E58 */  addiu   $t7, $t7, %lo(func_80A34E58) ## $t7 = 80A34E58
+/* 00AFC 80A3511C 3C0F80A3 */  lui     $t7, %hi(EnGe3_OverrideLimbDraw)    ## $t7 = 80A30000
+/* 00B00 80A35120 3C1880A3 */  lui     $t8, %hi(EnGe3_PostLimbDraw)    ## $t8 = 80A30000
+/* 00B04 80A35124 27185004 */  addiu   $t8, $t8, %lo(EnGe3_PostLimbDraw) ## $t8 = 80A35004
+/* 00B08 80A35128 25EF4E58 */  addiu   $t7, $t7, %lo(EnGe3_OverrideLimbDraw) ## $t7 = 80A34E58
 /* 00B0C 80A3512C AFAF0010 */  sw      $t7, 0x0010($sp)
 /* 00B10 80A35130 AFB80014 */  sw      $t8, 0x0014($sp)
 /* 00B14 80A35134 AFB00018 */  sw      $s0, 0x0018($sp)

@@ -1,4 +1,4 @@
-glabel func_80A35004
+glabel EnGe3_PostLimbDraw
 /* 009E4 80A35004 27BDFFD8 */  addiu   $sp, $sp, 0xFFD8           ## $sp = FFFFFFD8
 /* 009E8 80A35008 3C0E80A3 */  lui     $t6, %hi(D_80A351C8)       ## $t6 = 80A30000
 /* 009EC 80A3500C AFBF0014 */  sw      $ra, 0x0014($sp)           

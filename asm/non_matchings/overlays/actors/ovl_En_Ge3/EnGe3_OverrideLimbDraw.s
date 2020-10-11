@@ -8,7 +8,7 @@ glabel D_80A351F0
     .balign 4
 
 .text
-glabel func_80A34E58
+glabel EnGe3_OverrideLimbDraw
 /* 00838 80A34E58 27BDFFA8 */  addiu   $sp, $sp, 0xFFA8           ## $sp = FFFFFFA8
 /* 0083C 80A34E5C 24010005 */  addiu   $at, $zero, 0x0005         ## $at = 00000005
 /* 00840 80A34E60 AFBF0014 */  sw      $ra, 0x0014($sp)           
