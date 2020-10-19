@@ -516,6 +516,9 @@ beginseg
     include "build/src/code/z_construct.o"
     include "build/data/rsp.text.o"
     include "build/data/rsp.rodata.o"
+    include "build/src/gz/n64/list/list.o"
+    include "build/src/gz/n64/vector/vector.o"
+    include "build/src/gz/src/menu.o"
 endseg
 
 beginseg

@@ -258,7 +258,7 @@ extern u8 D_8011FB30;
 extern u8 D_8011FB34;
 extern u8 D_8011FB38;
 extern u8 D_8011FB3C;
-extern u16 D_8011FB40;
+extern u16 gDaySpeed;
 //extern ? D_8011FB44;
 //extern ? D_8011FB48;
 //extern ? D_8011FC1C;

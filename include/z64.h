@@ -1955,4 +1955,43 @@ typedef struct {
     /* 0x20 */ Vec3s* limbDrawTable;
 } struct_80091A24_arg3; // size >= 0x24
 
+typedef struct GfxTexture
+{
+  u8  imFmt;
+  u8  imSiz;
+  void     *data;
+  s16       tileWidth;
+  s16   tileHeight;
+  s16   tileX;
+  s16   tilesY;
+  size_t    tileSize;
+} GfxTexture;
+
+typedef struct TexDesc {
+
+    g_ifmt_t  imFmt;
+    g_isiz_t  imSiz;
+    u32  address;
+    s16   tileWidth;
+    s16   tileHeight;
+    s16   tilesX;
+    s16   tilesY;
+    u32  fileVaddr;
+    size_t    fileVsize;
+} TexDesc;
+typedef struct GfxSprite
+{
+  GfxTexture *texture;
+  s16            textureTile;
+  f32               x;
+  f32               y;
+  f32               xScale;
+  f32               yScale;
+} GfxSprite;
+
+typedef struct GfxTexldr {
+    u32 vaddr;
+    void* data;
+} GfxTexldr;
+
 #endif

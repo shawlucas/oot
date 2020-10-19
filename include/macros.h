@@ -114,4 +114,7 @@ extern GraphicsContext* oGfxCtx;
 
 #define VTX_T(x,y,z,s,t,cr,cg,cb,a) { { x, y, z }, 0, { s, t }, { cr, cg, cb, a } }
 
+#define ssSRAMRead(p,s,sz)    SsSram_ReadWrite(s, p, sz, OS_READ)
+#define ssSRAMWrite(s,p,sz)   SsSram_ReadWrite(s, p, sz, OS_WRITE)
+
 #endif

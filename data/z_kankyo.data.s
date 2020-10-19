@@ -24,7 +24,7 @@ glabel D_8011FB38
 glabel D_8011FB3C
     .incbin "baserom.z64", 0xB96CDC, 0x4
 
-glabel D_8011FB40
+glabel gDaySpeed
     .incbin "baserom.z64", 0xB96CE0, 0x4
 
 glabel D_8011FB44

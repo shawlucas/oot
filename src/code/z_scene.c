@@ -388,7 +388,7 @@ void func_80098D80(GlobalContext* globalCtx, SceneCmd* cmd) {
     }
 
     if (gSaveContext.unk_1422 == 0) {
-        D_8011FB40 = globalCtx->envCtx.unk_02;
+        gDaySpeed = globalCtx->envCtx.unk_02;
     }
 
     dayTime = gSaveContext.dayTime;
