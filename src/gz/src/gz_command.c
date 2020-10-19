@@ -70,6 +70,7 @@ void gz_hide_menu(void) {
 
 void gz_log(const char* fmt, ...) {
     va_list va;
+    s32 l;
     s32 i;
     LogEntry* ent = &gz.log[SETTINGS_LOG_MAX - 1];
     if (ent->msg)
@@ -78,6 +79,76 @@ void gz_log(const char* fmt, ...) {
         gz.log[i] = gz.log[i - 1];
     
     va_start(va, fmt);
-    
-    
+    l = vsprintf(NULL, fmt, va);
+    va_end(va);
+
+    ent = &gz.log[0];
+    ent->msg = malloc(l + 1);
+    if (!ent->msg)
+        return;
+    va_start(va, fmt);
+    vsprintf(ent->msg, fmt, va);
+    va_end(va);
+    ent->age = 0;
+}
+
+void gz_warp(GameState* game, s16 entranceIdx, s32 age) {
+    GlobalContext* globalCtx = (GlobalContext *)game;
+    if (age == 0)
+        age = globalCtx->linkAgeOnLoad;
+    else
+        --age;
+
+    if (globalCtx->linkAgeOnLoad == age)
+        gSaveContext.linkAge = age;
+    else
+        globalCtx->linkAgeOnLoad = age;
+
+    Select_LoadGame(globalCtx, entranceIdx);      
+}
+
+void gz_set_input_mask(u16 button, u8 x, u8 y) {
+    gz.zInputMask.button = button;
+    gz.zInputMask.stick_x = x;
+    gz.zInputMask.stick_y = y;
+}
+
+void gz_save_memfile(GlobalContext* globalCtx, gzMemFile* memfile) {
+    #if 0
+    u32 f;
+    ActorContext* actorCtx = &globalCtx->actorCtx;
+
+    memcpy(&memfile->saveCtx, &gSaveContext, sizeof(memfile->saveCtx));
+    memfile->entranceOverride = gz.entranceOverrideNext;
+    memfile->nextEntrance = gz.nextEntrance;
+    memfile->sceneIdx = globalCtx->sceneNum;
+    f = actorCtx->flags.chest;
+    memfile->saveCtx.sceneFlags[globalCtx->sceneNum].chest = f;
+    f = actorCtx->flags.swch;
+    memfile->saveCtx.sceneFlags[globalCtx->sceneNum].swch = f;
+    f = actorCtx->flags.clear;
+    memfile->saveCtx.sceneFlags[globalCtx->sceneNum].clear = f;
+    f = actorCtx->flags.collect;
+    memfile->saveCtx.sceneFlags[globalCtx->sceneNum].collect = f;
+    memcpy(&memfile->sceneFlags, &actorCtx->flags.swch, sizeof(memfile->sceneFlags));
+
+    /* pause screen stuff */
+    {
+        /*
+        PauseContext* pauseCtx = &globalCtx->pauseCtx;
+        memfile->startIconDD = ZREG(48); //
+        memfile->pauseScreen = pauseCtx->kscpPos;
+        */
+    }
+    #endif
+}
+
+void gz_load_memfile(gzMemFile* memfile) {
+    #if 0
+
+    #endif
+}
+
+void CommandInfo_Break(void) {
+    if ()
 }

@@ -2631,6 +2631,7 @@ void func_80112098(GlobalContext* globalCtx);
 void Title_Init(GameState* thisx);
 void Title_Destroy(GameState* thisx);
 void Select_Init(GameState* thisx);
+void Select_LoadGame(SelectContext* this, s32 entranceIndex);
 void Select_Destroy(GameState* thisx);
 void Opening_Init(GameState* thisx);
 void Opening_Destroy(GameState* thisx);

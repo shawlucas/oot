@@ -159,16 +159,16 @@ typedef struct gz
   u8                 ocaInputFlag;
   u8                 ocaSyncFlag;
   u8                 roomLoadFlag;
-  Input             zInputMask;
+  OSContPad             zInputMask;
   u8                 vcontEnabled[4];
   Input           vcontInput[4];
   s32               frameCounter;
   s32               lagViOffset;
-  int64_t               cpuCounter;
+  s64               cpuCounter;
   s32               cpuCounterFreq;
   u8                 timerActive;
-  int64_t               timerCounterOffset;
-  int64_t               timerCounterPrev;
+  s64               timerCounterOffset;
+  s64               timerCounterPrev;
   s32                   colViewState;
   s32                   hitViewState;
   u8                 hideRooms;
@@ -195,11 +195,11 @@ void          gz_apply_settings();
 void          gz_show_menu(void);
 void          gz_hide_menu(void);
 void          gz_log(const char *fmt, ...);
-void          gz_save_memfile(struct gzMemFile *memfile);
-void          gz_load_memfile(struct gzMemFile *memfile);
-void          gz_warp(s16 entrance_index,
-                      u16 cutsceneIdx, int age);
-void          gz_set_input_mask(u16 pad, u8 x, u8 y);
+void          gz_save_memfile(GlobalContext* globalCtx, gzMemFile *memfile);
+void          gz_load_memfile(gzMemFile *memfile);
+void          gz_warp(GameState* game, s16 entranceIndex,
+                      s32 age);
+void          gz_set_input_mask(u16 button, u8 x, u8 y);
 
 void          CommandInfo_Break(void);
 void          CommandInfo_Levitate(void);

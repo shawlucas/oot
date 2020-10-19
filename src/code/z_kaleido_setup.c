@@ -97,7 +97,7 @@ void KaleidoSetup_Init(GlobalContext* globalCtx) {
     pauseCtx->unk_1E4 = 0;
     pauseCtx->mode = 0;
     pauseCtx->kscpPos = 0;
-    pauseCtx->unk_218 = 0;
+    pauseCtx->itemCursor = 0;
     pauseCtx->unk_1F4 = 160.0f;
     pauseCtx->unk_1F8 = 160.0f;
     pauseCtx->unk_1FC = 160.0f;
