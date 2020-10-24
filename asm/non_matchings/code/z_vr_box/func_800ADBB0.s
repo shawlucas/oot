@@ -233,11 +233,11 @@ glabel L800ADE10
 /* B250A0 800ADF00 1420FFD2 */  bnez  $at, .L800ADE4C
 /* B250A4 800ADF04 AD19FFF0 */   sw    $t9, -0x10($t0)
 .L800ADF08:
-/* B250A8 800ADF08 3C198013 */  lui   $t9, %hi(D_8012ACA0) # $t9, 0x8013
+/* B250A8 800ADF08 3C198013 */  lui   $t9, %hi(sIndexData0) # $t9, 0x8013
 /* B250AC 800ADF0C 00177080 */  sll   $t6, $s7, 2
-/* B250B0 800ADF10 3C0F8013 */  lui   $t7, %hi(D_8012AC90) # $t7, 0x8013
-/* B250B4 800ADF14 25EFAC90 */  addiu $t7, %lo(D_8012AC90) # addiu $t7, $t7, -0x5370
-/* B250B8 800ADF18 2739ACA0 */  addiu $t9, %lo(D_8012ACA0) # addiu $t9, $t9, -0x5360
+/* B250B0 800ADF10 3C0F8013 */  lui   $t7, %hi(sMapSize) # $t7, 0x8013
+/* B250B4 800ADF14 25EFAC90 */  addiu $t7, %lo(sMapSize) # addiu $t7, $t7, -0x5370
+/* B250B8 800ADF18 2739ACA0 */  addiu $t9, %lo(sIndexData0) # addiu $t9, $t9, -0x5360
 /* B250BC 800ADF1C 3C1E8013 */  lui   $fp, %hi(D_8012AD40) # $fp, 0x8013
 /* B250C0 800ADF20 3C12FD48 */  lui   $s2, (0xFD4800FF >> 16) # lui $s2, 0xfd48
 /* B250C4 800ADF24 365200FF */  ori   $s2, (0xFD4800FF & 0xFFFF) # ori $s2, $s2, 0xff

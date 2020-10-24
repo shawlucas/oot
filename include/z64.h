@@ -1955,4 +1955,12 @@ typedef struct {
     /* 0x20 */ Vec3s* limbDrawTable;
 } struct_80091A24_arg3; // size >= 0x24
 
+typedef struct {
+    /* 0x08 */ s32 x;
+    /* 0x0C */ s32 y;
+    /* 0x10 */ s32 z;
+    /* 0x14 */ s32 tileWidth;
+    /* 0x18 */ s32 tileHeight;
+} RoomDef;
+
 #endif

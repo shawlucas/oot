@@ -889,9 +889,6 @@ glabel D_80142BF0
     .asciz "../z_vr_box.c"
     .balign 4
 
-glabel D_80142C00
-    .asciz "\n\n\n＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊\n\n\nＴＹＰＥ＝%d\n\n\n＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊\n\n\n"
-
 .late_rodata
 glabel jtbl_80142DC0
     .word L800AF25C

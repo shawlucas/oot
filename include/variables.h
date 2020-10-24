@@ -447,8 +447,8 @@ extern u16 gSramSlotOffsets[2][3];
 //extern ? D_8012A71C;
 extern u8 gLetterTLUT[4][32]; // original name: "moji_tlut"
 extern u8 gFontFF[]; // original name: "font_ff"
-//extern ? D_8012AC90;
-//extern ? D_8012ACA0;
+//extern ? sMapSize;
+//extern ? sIndexData0;
 //extern ? D_8012AD20;
 //extern ? D_8012AD2C;
 //extern ? D_8012AD40;
