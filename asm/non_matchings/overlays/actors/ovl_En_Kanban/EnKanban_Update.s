@@ -970,8 +970,8 @@ glabel L80A92A24
 /* 00F80 80A92F20 A62900B4 */  sh      $t1, 0x00B4($s1)           ## 000000B4
 /* 00F84 80A92F24 93AA00FF */  lbu     $t2, 0x00FF($sp)           
 .L80A92F28:
-/* 00F88 80A92F28 3C0E80A9 */  lui     $t6, %hi(D_80A946C4)       ## $t6 = 80A90000
-/* 00F8C 80A92F2C 25CE46C4 */  addiu   $t6, $t6, %lo(D_80A946C4)  ## $t6 = 80A946C4
+/* 00F88 80A92F28 3C0E80A9 */  lui     $t6, %hi(D_80A946D0-0xC)       ## $t6 = 80A90000
+/* 00F8C 80A92F2C 25CE46C4 */  addiu   $t6, $t6, %lo(D_80A946D0-0xC)  ## $t6 = 80A946C4
 /* 00F90 80A92F30 1140005F */  beq     $t2, $zero, .L80A930B0     
 /* 00F94 80A92F34 27AC00AC */  addiu   $t4, $sp, 0x00AC           ## $t4 = FFFFFFAC
 /* 00F98 80A92F38 8DCB0000 */  lw      $t3, 0x0000($t6)           ## 80A946C4
