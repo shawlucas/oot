@@ -9,6 +9,8 @@ void EnKanban_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnKanban_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnKanban_Draw(Actor* thisx, GlobalContext* globalCtx);
 
+void func_80A91FA0(EnKanban* this);
+
 const ActorInit En_Kanban_InitVars = {
     ACTOR_EN_KANBAN,
     ACTORTYPE_PROP,
@@ -65,7 +67,14 @@ Gfx* D_80A946D0[] = {
 
 #include "z_en_kanban_texture.c" EARLY
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Kanban/func_80A91FA0.s")
+void func_80A91FA0(EnKanban* this) {
+    f32 a, b, c, y;
+    CollisionPoly* colPoly = this->actor.floorPoly;
+
+    if (colPoly != NULL) {
+        a = colPoly->norm.x *  0.00003051851f;
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Kanban/EnKanban_Init.s")
 
