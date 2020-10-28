@@ -10,6 +10,7 @@ void EnKanban_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnKanban_Draw(Actor* thisx, GlobalContext* globalCtx);
 
 void func_80A91FA0(EnKanban* this);
+void func_80A921C0(EnKanban* this, GlobalContext* globalCtx);
 
 const ActorInit En_Kanban_InitVars = {
     ACTOR_EN_KANBAN,
@@ -68,19 +69,75 @@ Gfx* D_80A946D0[] = {
 #include "z_en_kanban_texture.c" EARLY
 
 void func_80A91FA0(EnKanban* this) {
-    f32 a, b, c, y;
+    f32 x, y, z;
     CollisionPoly* colPoly = this->actor.floorPoly;
 
     if (colPoly != NULL) {
-        a = colPoly->norm.x *  0.00003051851f;
+        x = colPoly->norm.x * 0.00003051851f;
+        y = colPoly->norm.y * 0.00003051851f;
+        z = colPoly->norm.z * 0.00003051851f;
+
+        this->groundAngle.x = -Math_atan2f(-z * y, 1.0f);
+        this->groundAngle.z = Math_atan2f(y * -x, 1.0f);
     }
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Kanban/EnKanban_Init.s")
+void EnKanban_Init(Actor* thisx, GlobalContext* globalCtx) {
+    EnKanban* this = THIS;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Kanban/EnKanban_Destroy.s")
+    Actor_SetScale(&this->actor, 0.01f);
+    if (this->actor.params != -0x23) {
+        this->actor.unk_1F = 0;
+        this->actor.flags |= 1;
+        Collider_InitCylinder(globalCtx, &this->collider);
+        Collider_SetCylinder(globalCtx, &this->collider, &this->actor, &D_80A94490);
+        osSyncPrintf("KANBAN ARG    %x\n", this->actor.params);
+        if (this->actor.params == 0x300) {
+            if (gSaveContext.linkAge == 1) {
+                this->actor.textId = 0x409D;
+            } else {
+                this->actor.textId = 0x4090;
+            }
+        } else {
+            this->actor.textId = this->actor.params | 0x300;
+        }
+        this->angleSpeedX = 1;
+        this->breakBit = 0xFFFF;
+        func_8002E4B4(globalCtx, &this->actor, 10.0f, 10.0f, 50.0f, 4);
+        func_80A91FA0(this);
+        if (gSaveContext.linkAge == 1) {
+            this->actor.posRot.pos.y = this->actor.posRot.pos.y - 15.0f;
+        }
+    }
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Kanban/func_80A921C0.s")
+void EnKanban_Destroy(Actor* thisx, GlobalContext* globalCtx) {
+    EnKanban* this = THIS;
+
+    if (this->moveMode == 0) {
+        Collider_DestroyCylinder(globalCtx, &this->collider);
+    }
+}
+
+void func_80A921C0(EnKanban* this, GlobalContext* globalCtx) {
+    if (this->messageMode == 0) {
+        if (this->messageWait == 0) {
+            s16 yawDiff = this->actor.yawTowardsLink - this->actor.shape.rot.y;
+            if (ABS(yawDiff) < 0x2800) {
+                if (func_8002F194(&this->actor, globalCtx)) {
+                    this->messageMode = 1;
+                } else {
+                    func_8002F2CC(&this->actor, globalCtx, 68.0f);
+                }
+            }
+        } else {
+            this->messageWait--;
+        }
+    } else if (func_8002F334(&this->actor, globalCtx)) {
+        this->messageMode = 0;
+        this->messageWait = 0x14;
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Kanban/EnKanban_Update.s")
 
