@@ -6,9 +6,23 @@
 
 struct EnIn;
 
+typedef void (*EnInActionFunc)(struct EnIn*, GlobalContext*);
+
+typedef struct EnInAnimation {
+    /* 0x0000 */ AnimationHeader* anim;
+    /* 0x0004 */ f32 animPlaybackSpeed;
+    /* 0x0008 */ u8 flags;
+    /* 0x000C */ f32 transition;
+} EnInAnimation; // size = 0x0010
+
 typedef struct EnIn {
     /* 0x0000 */ Actor actor;
-    /* 0x014C */ char unk_14C[0x25C];
+    /* 0x014C */ SkelAnime skelAnime;
+    /* 0x0190 */ EnInActionFunc actionFunc;
+    /* 0x0194 */ ColliderCylinder collider;
+    /* 0x01E0 */ f32 unk_1E0;
+    /* 0x01E4 */ s8 objBankIdx;
+    /* 0x01E5 */ char unk_1E5[0x1C3];
 } EnIn; // size = 0x03A8
 
 extern const ActorInit En_In_InitVars;
