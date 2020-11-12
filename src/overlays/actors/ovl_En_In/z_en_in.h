@@ -22,7 +22,10 @@ typedef struct EnIn {
     /* 0x0194 */ ColliderCylinder collider;
     /* 0x01E0 */ f32 unk_1E0;
     /* 0x01E4 */ s8 objBankIdx;
-    /* 0x01E5 */ char unk_1E5[0x1C3];
+    /* 0x01E5 */ char unk_1E5[0x19];
+    /* 0x01FE */ Vec3s limbDrawTable[20];
+    /* 0x0276 */ Vec3s transitionDrawTable[20];
+    /* 0x02EE */ char unk_307[0xBA];
 } EnIn; // size = 0x03A8
 
 extern const ActorInit En_In_InitVars;

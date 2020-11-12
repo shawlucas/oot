@@ -9,7 +9,13 @@ void EnIn_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnIn_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnIn_Draw(Actor* thisx, GlobalContext* globalCtx);
 
+u16 func_80A78FB0(GlobalContext* globalCtx);
+u16 func_80A79010(GlobalContext* globalCtx);
+u16 func_80A79168(GlobalContext* globalCtx, EnIn* this); // thisx ?
+s16 func_80A791CC(GlobalContext* globalCtx, EnIn* this); // thisx ?
+
 void func_80A79FB0(EnIn* this, GlobalContext* globalCtx);
+void func_80A7A304(EnIn* this, GlobalContext* globalCtx);
 
 const ActorInit En_In_InitVars = {
     ACTOR_EN_IN,
