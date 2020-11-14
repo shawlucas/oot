@@ -2154,7 +2154,6 @@ endseg
 beginseg
     name "ovl_En_Dnt_Demo"
     include "build/src/overlays/actors/ovl_En_Dnt_Demo/z_en_dnt_demo.o"
-    include "build/data/overlays/actors/z_en_dnt_demo.data.o"
     include "build/data/overlays/actors/z_en_dnt_demo.reloc.o"
 endseg
 
