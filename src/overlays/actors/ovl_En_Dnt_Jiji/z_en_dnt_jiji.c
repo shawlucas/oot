@@ -9,7 +9,7 @@ void EnDntJiji_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EnDntJiji_Update(Actor* thisx, GlobalContext* globalCtx);
 void EnDntJiji_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-/*
+
 const ActorInit En_Dnt_Jiji_InitVars = {
     ACTOR_EN_DNT_JIJI,
     ACTORTYPE_NPC,
@@ -21,7 +21,21 @@ const ActorInit En_Dnt_Jiji_InitVars = {
     (ActorFunc)EnDntJiji_Update,
     (ActorFunc)EnDntJiji_Draw,
 };
-*/
+
+ColliderCylinderInit D_809F2FA0 =
+{
+    { COLTYPE_UNK10, 0x00, 0x00, 0x39, 0x20, COLSHAPE_CYLINDER },
+    { 0x00, { 0x00000000, 0x00, 0x00 }, { 0x00000000, 0x00, 0x00 }, 0x00, 0x00, 0x01 },
+    { 30, 80, 0, { 0, 0, 0 } },
+};
+
+UNK_PTR D_809F2FCC[] = {
+    0x060030A0,
+    0x06002EA0,
+    0x06003020,
+};
+
+
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Dnt_Jiji/EnDntJiji_Init.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Dnt_Jiji/EnDntJiji_Destroy.s")

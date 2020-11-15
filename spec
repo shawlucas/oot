@@ -2160,7 +2160,6 @@ endseg
 beginseg
     name "ovl_En_Dnt_Jiji"
     include "build/src/overlays/actors/ovl_En_Dnt_Jiji/z_en_dnt_jiji.o"
-    include "build/data/overlays/actors/z_en_dnt_jiji.data.o"
     include "build/data/overlays/actors/z_en_dnt_jiji.reloc.o"
 endseg
 
