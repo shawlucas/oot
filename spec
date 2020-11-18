@@ -556,6 +556,11 @@ beginseg
 endseg
 
 beginseg
+    name "ovl_rando"
+    include "build/src/overlays/gamestates/ovl_rando/z_rando.o"
+endseg
+
+beginseg
     name "ovl_kaleido_scope"
     include "build/src/overlays/actors/ovl_kaleido_scope/z_kaleido_collect.o"
     include "build/data/overlays/actors/z_kaleido_collect.data.o"

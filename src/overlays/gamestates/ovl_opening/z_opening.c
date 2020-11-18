@@ -5,6 +5,7 @@
  */
 
 #include "global.h"
+#include "overlays/gamestates/ovl_rando/z_rando.h"
 
 void Opening_SetupTitleScreen(OpeningContext* this) {
     gSaveContext.gameMode = 1;
@@ -13,7 +14,7 @@ void Opening_SetupTitleScreen(OpeningContext* this) {
     Sram_InitDebugSave();
     gSaveContext.cutsceneIndex = 0xFFF3;
     gSaveContext.sceneSetupIndex = 7;
-    SET_NEXT_GAMESTATE(&this->state, Gameplay_Init, GlobalContext);
+    SET_NEXT_GAMESTATE(&this->state, RandoContext_Init, RandoContext);
 }
 
 void func_80803C5C(OpeningContext* this) {

@@ -252,7 +252,7 @@ extern s32 D_8011D3AC;
 //extern ? D_8011E09A;
 extern s16 D_8011E0B0;
 //extern ? D_8011E0D4;
-extern GameStateOverlay gGameStateOverlayTable[6];
+extern GameStateOverlay gGameStateOverlayTable[7];
 //extern ? D_8011FAF0;
 extern u8 D_8011FB30;
 extern u8 D_8011FB34;

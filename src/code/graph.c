@@ -1,5 +1,6 @@
 #include "global.h"
 #include "vt.h"
+#include "overlays/gamestates/ovl_rando/z_rando.h"
 
 #define GFXPOOL_HEAD_MAGIC 0x1234
 #define GFXPOOL_TAIL_MAGIC 0x5678
@@ -126,6 +127,10 @@ GameStateOverlay* Graph_GetNextGameState(GameState* gameState) {
         return &gGameStateOverlayTable[5];
     }
 
+    if (gameStateInitFunc == RandoContext_Init) {
+        return &gGameStateOverlayTable[6];
+    }
+    
     LOG_ADDRESS("game_init_func", gameStateInitFunc, "../graph.c", 696);
     return NULL;
 }

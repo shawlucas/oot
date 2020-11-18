@@ -1,4 +1,5 @@
 #include "global.h"
+#include "overlays/gamestates/ovl_rando/z_rando.h"
 
 #define GAMESTATE_OVERLAY(name, init, destroy, size)                                                         \
     {                                                                                                        \
@@ -15,4 +16,5 @@ GameStateOverlay gGameStateOverlayTable[] = {
     GAMESTATE_OVERLAY_INTERNAL(Gameplay_Init, Gameplay_Destroy, sizeof(GlobalContext)),
     GAMESTATE_OVERLAY(opening, Opening_Init, Opening_Destroy, sizeof(OpeningContext)),
     GAMESTATE_OVERLAY(file_choose, func_80811A20, func_80811A18, 0x1CAE0),
+    GAMESTATE_OVERLAY(rando, RandoContext_Init, RandoContext_Destroy, sizeof(RandoContext)),
 };
