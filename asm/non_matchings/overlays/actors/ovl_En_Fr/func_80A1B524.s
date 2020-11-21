@@ -14,11 +14,11 @@ glabel func_80A1B524
 /* 00BA0 80A1B540 144E0022 */  bne     $v0, $t6, .L80A1B5CC
 /* 00BA4 80A1B544 AFA50034 */  sw      $a1, 0x0034($sp)
 /* 00BA8 80A1B548 848F001C */  lh      $t7, 0x001C($a0)           ## 0000001C
-/* 00BAC 80A1B54C 3C0180A2 */  lui     $at, %hi(D_80A1D06C)       ## $at = 80A20000
+/* 00BAC 80A1B54C 3C0180A2 */  lui     $at, %hi(D_80A1D068+4)       ## $at = 80A20000
 /* 00BB0 80A1B550 01E20019 */  multu   $t7, $v0
 /* 00BB4 80A1B554 0000C012 */  mflo    $t8
 /* 00BB8 80A1B558 00380821 */  addu    $at, $at, $t8
-/* 00BBC 80A1B55C C424D06C */  lwc1    $f4, %lo(D_80A1D06C)($at)
+/* 00BBC 80A1B55C C424D06C */  lwc1    $f4, %lo(D_80A1D068+4)($at)
 /* 00BC0 80A1B560 3C0180A2 */  lui     $at, %hi(D_80A1D298)       ## $at = 80A20000
 /* 00BC4 80A1B564 C426D298 */  lwc1    $f6, %lo(D_80A1D298)($at)
 /* 00BC8 80A1B568 46062202 */  mul.s   $f8, $f4, $f6

@@ -4,13 +4,13 @@ glabel func_80A1B778
 /* 00DE0 80A1B780 AFB00028 */  sw      $s0, 0x0028($sp)
 /* 00DE4 80A1B784 AFA5003C */  sw      $a1, 0x003C($sp)
 /* 00DE8 80A1B788 848E001C */  lh      $t6, 0x001C($a0)           ## 0000001C
-/* 00DEC 80A1B78C 3C0180A2 */  lui     $at, %hi(D_80A1D070)       ## $at = 80A20000
+/* 00DEC 80A1B78C 3C0180A2 */  lui     $at, %hi(D_80A1D068+8)       ## $at = 80A20000
 /* 00DF0 80A1B790 C4860390 */  lwc1    $f6, 0x0390($a0)           ## 00000390
 /* 00DF4 80A1B794 000E7880 */  sll     $t7, $t6,  2
 /* 00DF8 80A1B798 01EE7823 */  subu    $t7, $t7, $t6
 /* 00DFC 80A1B79C 000F7880 */  sll     $t7, $t7,  2
 /* 00E00 80A1B7A0 002F0821 */  addu    $at, $at, $t7
-/* 00E04 80A1B7A4 C424D070 */  lwc1    $f4, %lo(D_80A1D070)($at)
+/* 00E04 80A1B7A4 C424D070 */  lwc1    $f4, %lo(D_80A1D068+8)($at)
 /* 00E08 80A1B7A8 00808025 */  or      $s0, $a0, $zero            ## $s0 = 00000000
 /* 00E0C 80A1B7AC 24180064 */  addiu   $t8, $zero, 0x0064         ## $t8 = 00000064
 /* 00E10 80A1B7B0 46062200 */  add.s   $f8, $f4, $f6
