@@ -9,8 +9,8 @@ void EfcErupc_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EfcErupc_Update(Actor* thisx, GlobalContext* globalCtx);
 void EfcErupc_Draw(Actor* thisx, GlobalContext* globalCtx);
 
-extern UNK_TYPE D_06001720;
-extern UNK_TYPE D_06002570;
+extern Gfx D_06001720[];
+extern Gfx D_06002570[];
 extern UNK_TYPE D_06002760;
 extern UNK_TYPE D_060027D8;
 
@@ -117,9 +117,60 @@ void func_8099CD2C(EfcErupc* this, GlobalContext* globalCtx) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Efc_Erupc/EfcErupc_Update.s")
+void EfcErupc_Update(Actor* thisx, GlobalContext* globalCtx) {
+    EfcErupc* this = THIS;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Efc_Erupc/EfcErupc_Draw.s")
+    this->actionFunc(this, globalCtx);
+    func_8099D52C(this, globalCtx);
+}
+
+void func_8099D334(BossFdParticle* particle, GlobalContext* globalCtx);
+
+void EfcErupc_Draw(Actor* thisx, GlobalContext* globalCtx) {
+    EfcErupc* this = THIS;
+    s32 pad;
+
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_efc_erupc.c", 282);
+    func_80093D84(globalCtx->state.gfxCtx);
+    gSPSegment(POLY_XLU_DISP++, 0x08,
+               Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, this->unk_14C, this->unk_14E * -4, 32, 64, 1,
+                                this->unk_14C * 4, this->unk_14E * -20, 64, 64));
+    gSPSegment(
+        POLY_XLU_DISP++, 0x09,
+        Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, 0, this->unk_150 * -4, 16, 128, 1, 0, this->unk_150 * 12, 32, 32));
+    gSPSegment(
+        POLY_XLU_DISP++, 0x0A,
+        Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, 0, this->unk_150 * -4, 16, 128, 1, 0, this->unk_150 * 12, 32, 32));
+    Matrix_Push();
+    Matrix_Scale(0.8f, 0.8f, 0.8f, MTXMODE_APPLY);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_efc_erupc.c", 321),
+              G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+
+    if (globalCtx->csCtx.state != 0) {
+        if (globalCtx->csCtx.npcActions[1] && (globalCtx->csCtx.npcActions[1]->action == 2)) {
+            gSPDisplayList(POLY_XLU_DISP++, D_06002570);
+        }
+    }
+    Matrix_Pull();
+    Matrix_Scale(3.4f, 3.4f, 3.4f, MTXMODE_APPLY);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_efc_erupc.c", 333),
+              G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    
+    if (globalCtx->csCtx.state != 0) {
+        CsCmdActorAction* npcAction = globalCtx->csCtx.npcActions[2];
+        if (npcAction) {
+            u16 action = npcAction->action;
+            if (action == 2 || action == 3) {
+                gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, 255, 255, 200, 255);
+                gDPSetEnvColor(POLY_XLU_DISP++, 100, 0, 0, 255);
+                gSPDisplayList(POLY_XLU_DISP++, D_06001720);
+            }
+        }
+    }
+
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_efc_erupc.c", 356);
+    func_8099D334(this->fdParticle, globalCtx);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Efc_Erupc/func_8099D334.s")
 
