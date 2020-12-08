@@ -9,12 +9,13 @@ void EfcErupc_Destroy(Actor* thisx, GlobalContext* globalCtx);
 void EfcErupc_Update(Actor* thisx, GlobalContext* globalCtx);
 void EfcErupc_Draw(Actor* thisx, GlobalContext* globalCtx);
 
+void func_8099CD2C(EfcErupc* this, GlobalContext* globalCtx);
+void func_8099D52C(EfcErupc* this, GlobalContext* globalCtx);
+
 extern Gfx D_06001720[];
 extern Gfx D_06002570[];
 extern Gfx D_06002760[];
-extern UNK_TYPE D_060027D8;
-
-void func_8099CD2C(EfcErupc* this, GlobalContext* globalCtx);
+extern Gfx D_060027D8[];
 
 const ActorInit Efc_Erupc_InitVars = {
     ACTOR_EFC_ERUPC,
@@ -28,7 +29,7 @@ const ActorInit Efc_Erupc_InitVars = {
     (ActorFunc)EfcErupc_Draw,
 };
 
-DamageTable D_8099D75C = { 0xFF, 0x80, 0x00, 0xFF, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0xFF, 0x00,
+DamageTable D_8099D770 = { 0xFF, 0x80, 0x00, 0xFF, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0xFF, 0x00,
                            0x00, 0xFF, 0x80, 0x00, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x64,
                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
@@ -53,7 +54,6 @@ void EfcErupc_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 
 void func_8099D650(BossFdParticle* fdParticle, Vec3f* pos, Vec3f* velocity, Vec3f* acceleration, f32 scale);
 
-//#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Efc_Erupc/func_8099CD2C.s")
 void func_8099CD2C(EfcErupc* this, GlobalContext* globalCtx) {
     Vec3f pos;
     Vec3f velocity;
@@ -155,7 +155,7 @@ void EfcErupc_Draw(Actor* thisx, GlobalContext* globalCtx) {
     Matrix_Scale(3.4f, 3.4f, 3.4f, MTXMODE_APPLY);
     gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_efc_erupc.c", 333),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    
+
     if (globalCtx->csCtx.state != 0) {
         CsCmdActorAction* npcAction = globalCtx->csCtx.npcActions[2];
         if (npcAction) {
@@ -172,64 +172,72 @@ void EfcErupc_Draw(Actor* thisx, GlobalContext* globalCtx) {
     func_8099D334(this->fdParticle, globalCtx);
 }
 
-void func_8099D334(BossFdParticle *particle, GlobalContext *globalCtx) {
-    Gfx *sp70;
-    Gfx *temp_v0;
-    Gfx *temp_v0_2;
-    Gfx *temp_v0_3;
-    Gfx *temp_v0_4;
-    Gfx *temp_v0_5;
-    Gfx *temp_v0_6;
-    MtxF *temp_s4;
-    f32 temp_f12;
-    s16 temp_s3;
-    BossFdParticle *phi_s1;
+void func_8099D334(BossFdParticle* particle, GlobalContext* globalCtx) {
+    s32 pad;
     s16 i;
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
+    
     OPEN_DISPS(gfxCtx, "../z_efc_erupc.c", 368);
-    phi_s1 = particle;
-    i = (u16)0;
-loop_1:
-    if (phi_s1->type != 0) {
-        temp_s4 = &globalCtx->mf_11DA0;
-        func_80093D84(globalCtx->state.gfxCtx);
-        temp_v0 = gfxCtx->polyXlu.p;
-        gfxCtx->polyXlu.p = temp_v0 + 8;
-        gSPDisplayList(POLY_XLU_DISP++, D_06002760);
-        gDPSetPrimColor(POLY_XLU_DISP++, 0x00, 0x00, particle->color.r, particle->color.g, particle->color.b, particle->alpha);
-        gDPSetEnvColor(POLY_XLU_DISP++, 150, 0, 0, 0);
-        temp_v0_3 = gfxCtx->polyXlu.p;
-        gfxCtx->polyXlu.p = temp_v0_3 + 8;
-        temp_v0_3->words.w1 = 0x96000000;
-        temp_v0_3->words.w0 = 0xFB000000;
-        temp_v0_4 = gfxCtx->polyXlu.p;
-        gfxCtx->polyXlu.p = temp_v0_4 + 8;
-        temp_v0_4->words.w1 = 0;
-        temp_v0_4->words.w0 = 0xE7000000;
-        Matrix_Translate(phi_s1->pos.x, phi_s1->pos.y, (bitwise f32) phi_s1->pos.z, MTXMODE_NEW);
-        func_800D1FD4(temp_s4);
-        temp_f12 = phi_s1->scale;
-        Matrix_Scale(temp_f12, temp_f12, 1.0f, MTXMODE_APPLY);
-        temp_v0_5 = gfxCtx->polyXlu.p;
-        gfxCtx->polyXlu.p = temp_v0_5 + 8;
-        temp_v0_5->words.w0 = 0xDA380003;
-        temp_v0_5->words.w1 = Matrix_NewMtx(gfxCtx,  "../z_efc_erupc.c", 393);
-        temp_v0_6 = gfxCtx->polyXlu.p;
-        gfxCtx->polyXlu.p = temp_v0_6 + 8;
-        temp_v0_6->words.w1 = 0x60027D8;
-        temp_v0_6->words.w0 = 0xDE000000;
+
+    for (i = 0; i < NUM_OF_FD_PARTICLES; i++, particle++) {
+        if (particle->type != FD_NULL) {
+            func_80093D84(globalCtx->state.gfxCtx);
+            gSPDisplayList(POLY_XLU_DISP++, D_06002760);
+            gDPSetPrimColor(POLY_XLU_DISP++, 0x00, 0x00, particle->color.r, particle->color.g, particle->color.b,
+                            particle->alpha);
+            gDPSetEnvColor(POLY_XLU_DISP++, 150, 0, 0, 0);
+            gDPPipeSync(POLY_XLU_DISP++);
+            Matrix_Translate(particle->pos.x, particle->pos.y, particle->pos.z, MTXMODE_NEW);
+            func_800D1FD4(&globalCtx->mf_11DA0);
+            Matrix_Scale(particle->scale, particle->scale, 1.0f, MTXMODE_APPLY);
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_efc_erupc.c", 393),
+                      G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPDisplayList(POLY_XLU_DISP++, D_060027D8);
+        }
     }
-    temp_s3 = i + 1;
-    phi_s1 = phi_s1 + 0x3C;
-    i = temp_s3;
-    if ((s32) temp_s3 < 0x64) {
-        goto loop_1;
-    }
+
     CLOSE_DISPS(gfxCtx, "../z_efc_erupc.c", 399);
 }
 
-
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Efc_Erupc/func_8099D52C.s")
+
+#if 0
+void func_8099D52C(EfcErupc *this, GlobalContext *globalCtx) {
+    BossFdParticle *fdParticle = this->fdParticle;
+    DamageTable damageTable = D_8099D770;
+    s16 i;
+    s16 j;
+
+
+
+    for (i = 0; i < NUM_OF_FD_PARTICLES; i++, fdParticle++) {
+    if (fdParticle->type != 0) {
+        fdParticle->timer1++;
+        fdParticle->pos.x += fdParticle->velocity.x;
+        fdParticle->pos.y += fdParticle->velocity.y;
+        fdParticle->pos.z += fdParticle->velocity.z;
+        fdParticle->velocity.x += fdParticle->accel.x;
+        fdParticle->velocity.y += fdParticle->accel.y;
+        fdParticle->velocity.z += fdParticle->accel.z;
+        if ((fdParticle->timer1 & 3) < 0) {
+            j = fdParticle->timer1 & 3;
+            if (fdParticle->timer1 & 3) {
+                j = (fdParticle->timer1 & 3) - 4;
+            }
+        }
+        fdParticle->color.r = damageTable.table[j];
+        fdParticle->color.g = damageTable.table[j + 1];
+        fdParticle->color.b = damageTable.table[j + 2];
+        fdParticle->alpha -= 20;
+        
+        if (fdParticle->alpha <= 0) {
+            fdParticle->alpha = 0;
+            fdParticle->type = 0;
+        }
+    }
+    }
+}
+#endif
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Efc_Erupc/func_8099D650.s")
 

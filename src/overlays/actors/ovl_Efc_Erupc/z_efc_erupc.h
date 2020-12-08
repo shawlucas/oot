@@ -5,6 +5,8 @@
 #include "global.h"
 #include "overlays/actors/ovl_Boss_Fd/z_boss_fd.h"
 
+#define NUM_OF_FD_PARTICLES 100
+
 struct EfcErupc;
 
 typedef void (*EfcErupcActionFunc)(struct EfcErupc*, GlobalContext*);
