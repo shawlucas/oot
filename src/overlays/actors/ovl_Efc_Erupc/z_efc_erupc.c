@@ -14,6 +14,7 @@ extern UNK_TYPE D_06002570;
 extern UNK_TYPE D_06002760;
 extern UNK_TYPE D_060027D8;
 
+void func_8099CD2C(EfcErupc* this, GlobalContext* globalCtx);
 
 const ActorInit Efc_Erupc_InitVars = {
     ACTOR_EFC_ERUPC,
@@ -27,22 +28,94 @@ const ActorInit Efc_Erupc_InitVars = {
     (ActorFunc)EfcErupc_Draw,
 };
 
-DamageTable D_8099D75C = { 0xFF, 0x80, 0x00, 0xFF, 
-                           0x00, 0x00, 0xFF, 0xFF, 
-                           0x00, 0xFF, 0x00, 0x00, 
-                           0xFF, 0x80, 0x00, 0xFF, 
-                           0x00, 0x00, 0x00, 0x00, 
-                           0x00, 0x64, 0x00, 0x00, 
-                           0x00, 0x00, 0x00, 0x00, 
-                           0x00, 0x00, 0x00, 0x00 };
+DamageTable D_8099D75C = { 0xFF, 0x80, 0x00, 0xFF, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0xFF, 0x00,
+                           0x00, 0xFF, 0x80, 0x00, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x64,
+                           0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Efc_Erupc/func_8099CCB0.s")
+void EfcErupc_SetupAction(EfcErupc* this, EfcErupcActionFunc actionFunc) {
+    this->actionFunc = actionFunc;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Efc_Erupc/EfcErupc_Init.s")
+void EfcErupc_Init(Actor* thisx, GlobalContext* globalCtx) {
+    EfcErupc* this = THIS;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Efc_Erupc/EfcErupc_Destroy.s")
+    EfcErupc_SetupAction(this, func_8099CD2C);
+    Actor_SetScale(&this->actor, 1.0f);
+    func_8099D71C(this->fdParticle);
+    this->unk_150 = 0;
+    this->unk_152 = 5;
+    this->unk_154 = -0x64;
+    this->unk_14C = this->unk_14E = this->unk_150;
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Efc_Erupc/func_8099CD2C.s")
+void EfcErupc_Destroy(Actor* thisx, GlobalContext* globalCtx) {
+}
+
+void func_8099D650(BossFdParticle* fdParticle, Vec3f* pos, Vec3f* velocity, Vec3f* acceleration, f32 scale);
+
+//#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Efc_Erupc/func_8099CD2C.s")
+void func_8099CD2C(EfcErupc* this, GlobalContext* globalCtx) {
+    Vec3f pos;
+    Vec3f velocity;
+    Vec3f acceleration;
+    s32 i;
+
+    if (globalCtx->csCtx.state) {
+
+        if (globalCtx->csCtx.npcActions[1]) {
+            if (globalCtx->csCtx.npcActions[1]->action == 2) {
+                if (this->unk_150 == 30) {
+                    func_800788CC(NA_SE_IT_EARTHQUAKE);
+                }
+                if (this->unk_150 < 65) {
+                    if (this->unk_154 < 200) {
+                        this->unk_154 += 10;
+                    }
+                } else {
+                    if (this->unk_154 >= -99) {
+                        this->unk_154 -= 10;
+                    }
+                }
+                this->unk_150++;
+            } else {
+                if (this->unk_154 >= -99) {
+                    this->unk_154 -= 10;
+                }
+            }
+        }
+    }
+    if (globalCtx->csCtx.state) {
+        if (globalCtx->csCtx.npcActions[2]) {
+            switch (globalCtx->csCtx.npcActions[2]->action) {
+                case 2:
+                    if (this->unk_14E == 0) {
+                        func_800F3F3C(6);
+                        gSaveContext.eventChkInf[2] |= 0x8000;
+                    }
+                    this->unk_14E++;
+                    break;
+                case 3:
+                    this->unk_14E = 30;
+                    break;
+            }
+            this->unk_14C++;
+        }
+    }
+
+    acceleration.z = 0.0f;
+    acceleration.x = 0.0f;
+    pos.y = this->actor.posRot.pos.y + 300.0f;
+
+    for (i = 0; i < this->unk_152; i++) {
+        pos.x = Math_Rand_CenteredFloat(100.0f) + this->actor.posRot.pos.x;
+        pos.z = Math_Rand_CenteredFloat(100.0f) + this->actor.posRot.pos.z;
+        velocity.x = Math_Rand_CenteredFloat(100.0f);
+        velocity.y = Math_Rand_ZeroFloat(100.0f);
+        velocity.z = Math_Rand_CenteredFloat(100.0f);
+        acceleration.y = this->unk_154 * 0.1f;
+        func_8099D650(this->fdParticle, &pos, &velocity, &acceleration, 80.0f);
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Efc_Erupc/EfcErupc_Update.s")
 
