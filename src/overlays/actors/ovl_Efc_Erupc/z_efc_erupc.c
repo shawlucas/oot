@@ -14,7 +14,7 @@ extern UNK_TYPE D_06002570;
 extern UNK_TYPE D_06002760;
 extern UNK_TYPE D_060027D8;
 
-/*
+
 const ActorInit Efc_Erupc_InitVars = {
     ACTOR_EFC_ERUPC,
     ACTORTYPE_ITEMACTION,
@@ -26,7 +26,16 @@ const ActorInit Efc_Erupc_InitVars = {
     (ActorFunc)EfcErupc_Update,
     (ActorFunc)EfcErupc_Draw,
 };
-*/
+
+DamageTable D_8099D75C = { 0xFF, 0x80, 0x00, 0xFF, 
+                           0x00, 0x00, 0xFF, 0xFF, 
+                           0x00, 0xFF, 0x00, 0x00, 
+                           0xFF, 0x80, 0x00, 0xFF, 
+                           0x00, 0x00, 0x00, 0x00, 
+                           0x00, 0x64, 0x00, 0x00, 
+                           0x00, 0x00, 0x00, 0x00, 
+                           0x00, 0x00, 0x00, 0x00 };
+
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Efc_Erupc/func_8099CCB0.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Efc_Erupc/EfcErupc_Init.s")

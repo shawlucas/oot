@@ -1630,7 +1630,6 @@ endseg
 beginseg
     name "ovl_Efc_Erupc"
     include "build/src/overlays/actors/ovl_Efc_Erupc/z_efc_erupc.o"
-    include "build/data/overlays/actors/z_efc_erupc.data.o"
     include "build/data/overlays/actors/z_efc_erupc.reloc.o"
 endseg
 
