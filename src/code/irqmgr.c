@@ -23,7 +23,7 @@ void IrqMgr_AddClient(IrqMgr* this, IrqMgrClient* c, OSMesgQueue* msgQ) {
     LogUtils_CheckNullPointer("c", c, "../irqmgr.c", 97);
     LogUtils_CheckNullPointer("msgQ", msgQ, "../irqmgr.c", 98);
 
-    prevMask = osSetIntMask(1);
+    prevMask = osSetIntMask(OS_IM_NONE);
 
     c->queue = msgQ;
     c->prev = this->clients;
@@ -32,11 +32,11 @@ void IrqMgr_AddClient(IrqMgr* this, IrqMgrClient* c, OSMesgQueue* msgQ) {
     osSetIntMask(prevMask);
 
     if (this->resetStatus > STATUS_IDLE) {
-        osSendMesg(c->queue, (OSMesg) & this->prenmiMsg, OS_MESG_NOBLOCK);
+        osSendMesg(c->queue, (OSMesg)&this->prenmiMsg, OS_MESG_NOBLOCK);
     }
 
     if (this->resetStatus >= STATUS_NMI) {
-        osSendMesg(c->queue, (OSMesg) & this->nmiMsg, OS_MESG_NOBLOCK);
+        osSendMesg(c->queue, (OSMesg)&this->nmiMsg, OS_MESG_NOBLOCK);
     }
 }
 
@@ -51,7 +51,7 @@ void IrqMgr_RemoveClient(IrqMgr* this, IrqMgrClient* c) {
     LogUtils_CheckNullPointer("this", this, "../irqmgr.c", 129);
     LogUtils_CheckNullPointer("c", c, "../irqmgr.c", 130);
 
-    prevMask = osSetIntMask(1);
+    prevMask = osSetIntMask(OS_IM_NONE);
 
     while (iter) {
         if (iter == c) {
@@ -113,7 +113,7 @@ void IrqMgr_HandlePreNMI(IrqMgr* this) {
 
     sIrqMgrResetTime = this->resetTime = osGetTime();
     osSetTimer(&this->timer, OS_USEC_TO_CYCLES(450000), 0ull, &this->queue, (OSMesg)PRENMI450_MSG);
-    IrqMgr_JamMesgForClient(this, (OSMesg) & this->prenmiMsg);
+    IrqMgr_JamMesgForClient(this, (OSMesg) &this->prenmiMsg);
 }
 
 void IrqMgr_CheckStack() {
@@ -133,14 +133,16 @@ void IrqMgr_CheckStack() {
 
 void IrqMgr_HandlePRENMI450(IrqMgr* this) {
     u64 temp = STATUS_NMI; // required to match
+
     gIrqMgrResetStatus = temp;
     this->resetStatus = STATUS_NMI;
     osSetTimer(&this->timer, OS_USEC_TO_CYCLES(30000), 0ull, &this->queue, (OSMesg)PRENMI480_MSG);
-    IrqMgr_SendMesgForClient(this, (OSMesg) & this->nmiMsg);
+    IrqMgr_SendMesgForClient(this, (OSMesg)&this->nmiMsg);
 }
 
 void IrqMgr_HandlePRENMI480(IrqMgr* this) {
     u32 ret;
+
     osSetTimer(&this->timer, OS_USEC_TO_CYCLES(20000), 0ull, &this->queue, (OSMesg)PRENMI500_MSG);
     ret = osAfterPreNMI();
     if (ret) {

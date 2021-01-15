@@ -69,7 +69,6 @@ void func_800C0F28(PreRenderContext* this, Gfx** gfxp, void* buf, void* bufSave)
         ult = x2;
         lrt = (ult + add) - 1;
 
-        if (1) {}
         gDPLoadTextureTile(gfx++, buf, G_IM_FMT_RGBA, G_IM_SIZ_16b, this->width, this->height, uls, ult, lrs, lrt, 0,
                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                            G_TX_NOLOD);
@@ -121,7 +120,6 @@ void func_800C1258(PreRenderContext* this, Gfx** gfxp) {
         uly = this->uly + y2;
         lrt = (ult + add) - 1;
 
-        if (1) {}
         gDPLoadTextureTile(gfx++, this->fbufSave, G_IM_FMT_RGBA, G_IM_SIZ_16b, this->widthSave, this->height - 1,
                            this->ulxSave, ult, this->lrxSave, lrt, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -183,7 +181,6 @@ void func_800C170C(PreRenderContext* this, Gfx** gfxp, void* fbuf, void* fbufSav
         gDPLoadTextureTile(gfx++, fbuf, G_IM_FMT_RGBA, G_IM_SIZ_16b, this->width, this->height, uls, ult, lrs, lrt, 0,
                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                            G_TX_NOLOD);
-        if (1) {}
         gSPTextureRectangle(gfx++, uls << 2, ult << 2, (lrs + 1) << 2, (lrt + 1) << 2, G_TX_RENDERTILE, uls << 5,
                             ult << 5, 1 << 10, 1 << 10);
 
@@ -240,7 +237,7 @@ void func_800C1B24(PreRenderContext* this, Gfx** gfxp, void* fbuf, void* cvgSave
         gDPLoadTextureTile(gfx++, fbuf, G_IM_FMT_IA, G_IM_SIZ_16b, this->width, this->height, uls, ult, lrs, lrt, 0,
                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                            G_TX_NOLOD);
-        if (1) {}
+
         gSPTextureRectangle(gfx++, uls << 2, ult << 2, (lrs + 1) << 2, (lrt + 1) << 2, G_TX_RENDERTILE, uls << 5,
                             ult << 5, 1 << 10, 1 << 10);
 
@@ -623,6 +620,7 @@ void PreRender_Calc(PreRenderContext* this) {
     for (y = 0; y < this->height; y++) {
         for (x = 0; x < this->width; x++) {
             s32 a = this->cvgSave[x + y * this->width];
+
             a >>= 5;
             a++;
             if (a != 8) {

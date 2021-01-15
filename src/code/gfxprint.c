@@ -252,9 +252,9 @@ void GfxPrint_PrintChar(GfxPrint* this, u8 c) {
     } else if (c >= 0xA0 && c < 0xE0) {
         if (this->flag & GFXPRINT_FLAG1) {
             if (c < 0xC0) {
-                charParam = c - 0x20;
+                charParam = c - 32;
             } else {
-                charParam = c + 0x20;
+                charParam = c + 32;
             }
         }
         GfxPrint_PrintCharImpl(this, charParam);
@@ -263,13 +263,13 @@ void GfxPrint_PrintChar(GfxPrint* this, u8 c) {
             case 0:
                 break;
             case '\n':
-                this->posY += 0x20;
+                this->posY += 32;
             case '\r':
                 this->posX = this->baseX;
                 break;
             case '\t':
                 do {
-                    GfxPrint_PrintCharImpl(this, 0x20);
+                    GfxPrint_PrintCharImpl(this, ' ');
                 } while ((this->posX - this->baseX) % 256);
                 break;
             case 0x8D:

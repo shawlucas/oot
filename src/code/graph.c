@@ -257,7 +257,7 @@ void Graph_TaskSet00(GraphicsContext* gfxCtx) {
     gfxCtx->schedMsgQ = &gSchedContext.cmdQ;
 
     osSendMesg(&gSchedContext.cmdQ, scTask, OS_MESG_BLOCK);
-    Sched_SendEntryMsg(&gSchedContext);
+    Sched_SendEntryMsg(&gSchedContext.interruptQ);
 }
 
 void Graph_Update(GraphicsContext* gfxCtx, GameState* gameState) {

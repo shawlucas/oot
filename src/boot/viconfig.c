@@ -39,8 +39,8 @@ void ViConfig_UpdateVi(u32 arg0) {
 
 void ViConfig_UpdateBlack() {
     if (gViConfigUseDefault != 0) {
-        osViBlack(1);
+        osViBlack(true);
     } else {
-        osViBlack(0);
+        osViBlack(false);
     }
 }

@@ -22,29 +22,29 @@ void SystemArena_CheckPointer(void* ptr, u32 size, const char* name, const char*
 }
 
 void* SystemArena_Malloc(u32 size) {
-    void* ptr;
-    ptr = __osMalloc(&gSystemArena, size);
+    void* ptr = __osMalloc(&gSystemArena, size);
+
     SystemArena_CheckPointer(ptr, size, "malloc", "確保"); // Secure
     return ptr;
 }
 
 void* SystemArena_MallocDebug(u32 size, const char* file, s32 line) {
-    void* ptr;
-    ptr = __osMallocDebug(&gSystemArena, size, file, line);
+    void* ptr = __osMallocDebug(&gSystemArena, size, file, line);
+
     SystemArena_CheckPointer(ptr, size, "malloc_DEBUG", "確保"); // Secure
     return ptr;
 }
 
 void* SystemArena_MallocR(u32 size) {
-    void* ptr;
-    ptr = __osMallocR(&gSystemArena, size);
+    void* ptr = __osMallocR(&gSystemArena, size);
+
     SystemArena_CheckPointer(ptr, size, "malloc_r", "確保"); // Secure
     return ptr;
 }
 
 void* SystemArena_MallocRDebug(u32 size, const char* file, s32 line) {
-    void* ptr;
-    ptr = __osMallocRDebug(&gSystemArena, size, file, line);
+    void* ptr = __osMallocRDebug(&gSystemArena, size, file, line);
+
     SystemArena_CheckPointer(ptr, size, "malloc_r_DEBUG", "確保"); // Secure
     return ptr;
 }

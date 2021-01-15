@@ -390,7 +390,6 @@ beginseg
     include "build/src/code/fault.o"
     include "build/data/fault.bss.o"
     include "build/src/code/fault_drawer.o"
-    include "build/data/fault_drawer.bss.o"
     include "build/asm/code_800D71F0.o"
     include "build/src/code/ucode_disas.o"
     include "build/src/code/code_800DACC0.o"

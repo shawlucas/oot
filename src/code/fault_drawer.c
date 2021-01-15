@@ -70,9 +70,8 @@ FaultDrawer sFaultDrawerDefault = {
     NULL, // inputCallback
 };
 
-// bss
-extern FaultDrawer sFaultDrawerStruct;
-extern char D_8016B6C0[0x20]; // ? unused
+FaultDrawer sFaultDrawerStruct;
+char D_8016B6C0[0x20]; // ? unused
 
 void FaultDrawer_SetOsSyncPrintfEnabled(u32 enabled) {
     sFaultDrawerStruct.osSyncPrintfEnabled = enabled;
@@ -110,11 +109,11 @@ void FaultDrawer_DrawRecImpl(s32 xStart, s32 yStart, s32 xEnd, s32 yEnd, u16 col
 void FaultDrawer_DrawChar(char c) {
     u16* fb;
     s32 x, y;
-    u32* dataPtr;
+    const u32* dataPtr;
     u32 data;
     s32 cursorX = sFaultDrawerStruct.cursorX;
     s32 cursorY = sFaultDrawerStruct.cursorY;
-    u32** fontData = &sFaultDrawerStruct.fontData;
+    const u32** fontData = &sFaultDrawerStruct.fontData;
     s32 shift = c % 4;
 
     dataPtr = &fontData[0][(((c / 8) * 16) + ((c & 4) >> 2))];
@@ -205,7 +204,7 @@ void FaultDrawer_FillScreen() {
     FaultDrawer_SetCursor(sFaultDrawerStruct.xStart, sFaultDrawerStruct.yStart);
 }
 
-u32 FaultDrawer_FormatStringFunc(u32 arg0, const char* str, s32 count) {
+char* FaultDrawer_FormatStringFunc(char* arg0, const char* str, size_t count) {
     for (count; count != 0; count--, str++) {
         s32 curXStart;
         s32 curXEnd;

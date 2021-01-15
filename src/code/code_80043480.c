@@ -76,7 +76,7 @@ s32 func_800435B4(DynaPolyActor* dynaActor) {
     }
 }
 
-s32 func_800435D8(GlobalContext* globalCtx, DynaPolyActor* actor, s16 arg2, s16 arg3, s16 arg4) {
+s32 func_800435D8(GlobalContext* globalCtx, DynaPolyActor* dynaPolyActor, s16 arg2, s16 arg3, s16 arg4) {
     Vec3f posA;
     Vec3f posB;
     Vec3f posResult;
@@ -88,29 +88,29 @@ s32 func_800435D8(GlobalContext* globalCtx, DynaPolyActor* actor, s16 arg2, s16 
     f32 a3;
     f32 sign;
 
-    sin = Math_SinS(actor->unk_158);
-    cos = Math_CosS(actor->unk_158);
-    sign = (0.0f <= actor->unk_150) ? 1.0f : -1.0f;
+    sin = Math_SinS(dynaPolyActor->unk_158);
+    cos = Math_CosS(dynaPolyActor->unk_158);
+    sign = (0.0f <= dynaPolyActor->unk_150) ? 1.0f : -1.0f;
 
     a2 = (f32)arg2 - 0.1f;
-    posA.x = actor->actor.posRot.pos.x + (a2 * cos);
-    posA.y = actor->actor.posRot.pos.y + arg4;
-    posA.z = actor->actor.posRot.pos.z - (a2 * sin);
+    posA.x = dynaPolyActor->actor.posRot.pos.x + (a2 * cos);
+    posA.y = dynaPolyActor->actor.posRot.pos.y + arg4;
+    posA.z = dynaPolyActor->actor.posRot.pos.z - (a2 * sin);
 
     a3 = (f32)arg3 - 0.1f;
     posB.x = sign * a3 * sin + posA.x;
     posB.y = posA.y;
     posB.z = sign * a3 * cos + posA.z;
     if (BgCheck_EntityLineTest3(&globalCtx->colCtx, &posA, &posB, &posResult, &poly, true, false, false, true, &bgId,
-                                actor, 0.0f)) {
+                                &dynaPolyActor->actor, 0.0f)) {
         return false;
     }
-    posA.x = (actor->actor.posRot.pos.x * 2) - posA.x;
-    posA.z = (actor->actor.posRot.pos.z * 2) - posA.z;
+    posA.x = (dynaPolyActor->actor.posRot.pos.x * 2) - posA.x;
+    posA.z = (dynaPolyActor->actor.posRot.pos.z * 2) - posA.z;
     posB.x = sign * a3 * sin + posA.x;
     posB.z = sign * a3 * cos + posA.z;
     if (BgCheck_EntityLineTest3(&globalCtx->colCtx, &posA, &posB, &posResult, &poly, true, false, false, true, &bgId,
-                                actor, 0.0f)) {
+                                &dynaPolyActor->actor, 0.0f)) {
         return false;
     }
     return true;

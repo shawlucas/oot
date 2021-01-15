@@ -83,6 +83,13 @@ typedef struct {
 } TwoHeadGfxArena; // size = 0x10
 
 typedef struct {
+    /* 0x0000 */ OSViMode viMode;
+    /* 0x0050 */ char unk_50[0x30];
+    /* 0x0080 */ u32 viFeatures;
+    /* 0x0084 */ char unk_84[4];
+} unk_80166528;
+
+typedef struct {
     /* 0x00 */ u16* fb1;
     /* 0x04 */ u16* swapBuffer;
     /* 0x08 */ OSViMode* viMode;
@@ -1227,7 +1234,7 @@ typedef struct {
     /* 0x14 */ u16 backColor;
     /* 0x14 */ u16 cursorX;
     /* 0x16 */ u16 cursorY;
-    /* 0x18 */ u32* fontData;
+    /* 0x18 */ const u32* fontData;
     /* 0x1C */ u8 charW;
     /* 0x1D */ u8 charH;
     /* 0x1E */ s8 charWPad;
@@ -1265,7 +1272,7 @@ typedef struct StackEntry {
     /* 0x08 */ u32 head;
     /* 0x0C */ u32 tail;
     /* 0x10 */ u32 initValue;
-    /* 0x14 */ s32 minSpace;
+    /* 0x14 */ u32 minSpace;
     /* 0x18 */ const char* name;
 } StackEntry;
 
@@ -1698,7 +1705,7 @@ typedef struct {
 } SpeedMeterAllocEntry; // size = 0x1C
 
 typedef struct {
-    /* 0x00 */ OSTime* time;
+    /* 0x00 */ volatile OSTime* time;
     /* 0x04 */ u8 x;
     /* 0x05 */ u8 y;
     /* 0x06 */ u16 color;

@@ -12,7 +12,7 @@ OSMesgQueue* PadMgr_LockSerialMesgQueue(PadMgr* padmgr) {
                      padmgr->serialMsgQ.validCount, padmgr, &padmgr->serialMsgQ, &ctrlrQ);
     }
 
-    osRecvMesg(&padmgr->serialMsgQ, &ctrlrQ, OS_MESG_BLOCK);
+    osRecvMesg(&padmgr->serialMsgQ, (OSMesg)&ctrlrQ, OS_MESG_BLOCK);
 
     if (D_8012D280 > 2) {
         // "serialMsgQ Locked"
@@ -404,15 +404,15 @@ void PadMgr_Init(PadMgr* padmgr, OSMesgQueue* siIntMsgQ, IrqMgr* irqMgr, OSId id
     bzero(padmgr, sizeof(PadMgr));
     padmgr->irqMgr = irqMgr;
 
-    osCreateMesgQueue(&padmgr->interruptMsgQ, padmgr->interruptMsgBuf, 4);
+    osCreateMesgQueue(&padmgr->interruptMsgQ, padmgr->interruptMsgBuf, ARRAY_COUNT(padmgr->interruptMsgBuf));
     IrqMgr_AddClient(padmgr->irqMgr, &padmgr->irqClient, &padmgr->interruptMsgQ);
-    osCreateMesgQueue(&padmgr->serialMsgQ, padmgr->serialMsgBuf, 1);
+    osCreateMesgQueue(&padmgr->serialMsgQ, padmgr->serialMsgBuf, ARRAY_COUNT(padmgr->serialMsgBuf));
     PadMgr_UnlockSerialMesgQueue(padmgr, siIntMsgQ);
-    osCreateMesgQueue(&padmgr->lockMsgQ, padmgr->lockMsgBuf, 1);
+    osCreateMesgQueue(&padmgr->lockMsgQ, padmgr->lockMsgBuf, ARRAY_COUNT(padmgr->lockMsgBuf));
     PadMgr_UnlockPadData(padmgr);
     PadSetup_Init(siIntMsgQ, &padmgr->validCtrlrsMask, padmgr->padStatus);
 
-    padmgr->ncontrollers = 4;
+    padmgr->ncontrollers = MAXCONTROLLERS;
     osContSetCh(padmgr->ncontrollers);
 
     osCreateThread(&padmgr->thread, id, PadMgr_ThreadEntry, padmgr, stack, priority);

@@ -62,7 +62,7 @@ void SpeedMeter_DrawTimeEntries(SpeedMeter* this, GraphicsContext* gfxCtx) {
         return;
     }
 
-    gSpeedMeterTimeEntryPtr = &sSpeedMeterTimeEntryArray;
+    gSpeedMeterTimeEntryPtr = &sSpeedMeterTimeEntryArray[0];
     for (i = 0; i < ARRAY_COUNT(sSpeedMeterTimeEntryArray); i++) {
         temp = ((f64)*gSpeedMeterTimeEntryPtr->time / gIrqMgrRetraceTime) * 64.0;
         gSpeedMeterTimeEntryPtr->x = temp + baseX;
@@ -161,7 +161,7 @@ void SpeedMeter_DrawAllocEntries(SpeedMeter* meter, GraphicsContext* gfxCtx, Gam
     u32 zeldaFreeMax;
     u32 zeldaFree;
     u32 zeldaAlloc;
-    s32 sysFreeMax;
+    u32 sysFreeMax;
     s32 sysFree;
     s32 sysAlloc;
 

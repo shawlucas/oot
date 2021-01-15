@@ -82,7 +82,7 @@ void func_800B3FF4(PosRot* arg0, Vec3f* arg1, Vec3f* arg2) {
     func_800B3F38(arg1, &sp1C);
     OLib_Vec3fToVecSphGeo(&sp28, &sp1C);
     sp28.yaw += arg0->rot.y;
-    func_800B3B50(arg2, arg0, &sp28);
+    func_800B3B50(arg2, &arg0->pos, &sp28);
 }
 
 void func_800B404C(s32 arg0, Vec3s* arg1, Vec3f* arg2) {
@@ -178,9 +178,9 @@ void DbgCamera_Enable(DBCamera* dbCamera, Camera* camera) {
 s32 func_800B8730(void) {
     s32 temp_v1;
     void* phi_v0;
-    s32 phi_v1;
+    u32 phi_v1;
 
-    for (phi_v1 = 0; phi_v1 < 0x1A; phi_v1++) {
+    for (phi_v1 = 0; phi_v1 < sizeof(D_801612D0); phi_v1++) {
         if (D_801612D0[phi_v1] != 'O') {
             return phi_v1 + 'A';
         }

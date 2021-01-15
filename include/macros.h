@@ -89,6 +89,16 @@
     }                                      \
     (void)0
 
+#define SETUP_DMA_IO_MSG_BUF(ioMsg, priority, msgQueue, rom, ram, _size) \
+do                                                                       \
+{                                                                        \
+        ioMsg.hdr.pri = priority;                                        \
+        ioMsg.hdr.retQueue = msgQueue;                                   \
+        ioMsg.devAddr = rom;                                             \
+        ioMsg.dramAddr = ram;                                            \
+        ioMsg.size = _size;                                              \
+} while (0)                                                              \
+
 extern GraphicsContext* __gfxCtx;
 
 #define WORK_DISP       __gfxCtx->work.p

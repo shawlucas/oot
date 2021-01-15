@@ -1,7 +1,7 @@
 #include "global.h"
 #include "vt.h"
 
-u32 gCurrentRegion = 0;
+u32 gCurrentRegion = REGION_NULL;
 LocaleCartInfo sCartInfo;
 
 void Locale_Init() {
@@ -21,7 +21,7 @@ void Locale_Init() {
         default:
             osSyncPrintf(VT_COL(RED, WHITE));
             osSyncPrintf("z_locale_init: 日本用かアメリカ用か判別できません\n");
-            LogUtils_HungupThread("../z_locale.c", 0x76);
+            LogUtils_HungupThread("../z_locale.c", 118);
             osSyncPrintf(VT_RST);
             break;
     }

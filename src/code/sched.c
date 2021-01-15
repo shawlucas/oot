@@ -24,7 +24,7 @@ void Sched_SwapFrameBuffer(CfbInfo* cfbInfo) {
                          (cfbInfo != NULL ? cfbInfo->swapBuffer : NULL));
         }
         width = cfbInfo->viMode != NULL ? cfbInfo->viMode->comRegs.width : gScreenWidth;
-        Fault_SetFB(cfbInfo->swapBuffer, width, 0x10);
+        Fault_SetFB(cfbInfo->swapBuffer, width, 16);
         if (HREG(80) == 0xD && HREG(95) != 0xD) {
             HREG(81) = 0;
             HREG(82) = 0;
@@ -82,7 +82,7 @@ void Sched_HandleReset(SchedContext* sc) {
             if (sc->curRDPTask != NULL) {
                 LOG_TIME("(((u64)(now - rdp_start_time)*(1000000LL/15625LL))/((62500000LL*3/4)/15625LL))",
                          OS_CYCLES_TO_USEC(now - sRDPStartTime), "../sched.c", 431);
-                osSendMesg(&sc->interruptQ, RDP_DONE_MSG, 0);
+                osSendMesg(&sc->interruptQ, RDP_DONE_MSG, OS_MESG_NOBLOCK);
             }
         }
     }
@@ -491,8 +491,8 @@ void Sched_ThreadEntry(void* arg) {
 void Sched_Init(SchedContext* sc, void* stack, OSPri priority, UNK_TYPE arg3, UNK_TYPE arg4, IrqMgr* irqMgr) {
     bzero(sc, sizeof(SchedContext));
     sc->unk_24C = 1;
-    osCreateMesgQueue(&sc->interruptQ, sc->intBuf, 8);
-    osCreateMesgQueue(&sc->cmdQ, sc->cmdMsgBuf, 8);
+    osCreateMesgQueue(&sc->interruptQ, sc->intBuf, ARRAY_COUNT(sc->intBuf));
+    osCreateMesgQueue(&sc->cmdQ, sc->cmdMsgBuf, ARRAY_COUNT(sc->cmdMsgBuf));
     osSetEventMesg(OS_EVENT_SP, &sc->interruptQ, RSP_DONE_MSG);
     osSetEventMesg(OS_EVENT_DP, &sc->interruptQ, RDP_DONE_MSG);
     IrqMgr_AddClient(irqMgr, &sc->irqClient, &sc->interruptQ);

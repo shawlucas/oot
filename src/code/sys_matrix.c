@@ -20,7 +20,7 @@ MtxF* sMatrixStack;   // "Matrix_stack"
 MtxF* sCurrentMatrix; // "Matrix_now"
 
 void Matrix_Init(GameState* gameState) {
-    sCurrentMatrix = GameState_Alloc(gameState, 20 * sizeof(MtxF), "../sys_matrix.c", 153);
+    sCurrentMatrix = GameState_Alloc(gameState, sizeof(MtxF) * 20, "../sys_matrix.c", 153);
     sMatrixStack = sCurrentMatrix;
 }
 

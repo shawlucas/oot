@@ -20,6 +20,7 @@ void* Yaz0_FirstDMA() {
     DmaMgr_DMARomToRam(sYaz0CurRomStart, sYaz0DataBuffer, dmaSize);
     sYaz0CurRomStart += dmaSize;
     sYaz0CurSize -= dmaSize;
+
     return sYaz0DataBuffer;
 }
 

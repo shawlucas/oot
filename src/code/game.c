@@ -1,13 +1,6 @@
 #include "global.h"
 #include "vt.h"
 
-typedef struct {
-    /* 0x0000 */ OSViMode viMode;
-    /* 0x0050 */ char unk_50[0x30];
-    /* 0x0080 */ u32 viFeatures;
-    /* 0x0084 */ char unk_84[4];
-} unk_80166528;
-
 SpeedMeter D_801664D0;
 struct_801664F0 D_801664F0;
 struct_80166500 D_80166500;
@@ -24,7 +17,7 @@ void GameState_FaultPrint(void) {
     FaultDrawer_DrawText(120, 180, "%08x", sLastButtonPressed);
     for (i = 0; i < ARRAY_COUNT(sBtnChars); i++) {
         if (sLastButtonPressed & (1 << i)) {
-            FaultDrawer_DrawText((i * 8) + 0x78, 0xBE, "%c", sBtnChars[i]);
+            FaultDrawer_DrawText((i * 8) + 120, 190, "%c", sBtnChars[i]);
         }
     }
 }
@@ -391,7 +384,7 @@ void GameState_Init(GameState* gameState, GameStateFunc init, GraphicsContext* g
     gameState->frames = 0;
     gameState->main = NULL;
     gameState->destroy = NULL;
-    gameState->running = 1;
+    gameState->running = true;
     startTime = osGetTime();
     gameState->size = 0;
     gameState->init = NULL;

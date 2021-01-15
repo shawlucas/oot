@@ -9,7 +9,7 @@ void ActorShape_Init(ActorShape* shape, f32 arg1, void* shadowDrawFunc, f32 arg3
     shape->unk_08 = arg1;
     shape->shadowDrawFunc = shadowDrawFunc;
     shape->unk_10 = arg3;
-    shape->unk_14 = -1;
+    shape->unk_14 = 0xFF;
 }
 
 void func_8002B200(Actor* actor, Lights* lights, GlobalContext* globalCtx, Gfx* dlist, Color_RGBA8* color) {
@@ -58,13 +58,13 @@ void func_8002B200(Actor* actor, Lights* lights, GlobalContext* globalCtx, Gfx* 
 }
 
 void ActorShadow_DrawFunc_Circle(Actor* actor, Lights* lights, GlobalContext* globalCtx) {
-    func_8002B200(actor, lights, globalCtx, &D_04049210, NULL);
+    func_8002B200(actor, lights, globalCtx, D_04049210, NULL);
 }
 
 Color_RGBA8 D_80115F80 = { 255, 255, 255, 255 };
 
 void ActorShadow_DrawFunc_WhiteCircle(Actor* actor, Lights* lights, GlobalContext* globalCtx) {
-    func_8002B200(actor, lights, globalCtx, &D_04049210, &D_80115F80);
+    func_8002B200(actor, lights, globalCtx, D_04049210, &D_80115F80);
 }
 
 void ActorShadow_DrawFunc_Squiggly(Actor* actor, Lights* lights, GlobalContext* globalCtx) {
@@ -886,11 +886,12 @@ void func_8002D9A4(Actor* actor, f32 arg1) {
 }
 
 void func_8002D9F8(Actor* actor, SkelAnime* skelAnime) {
-    Vec3f sp1C;
-    SkelAnime_UpdateTranslation(skelAnime, &sp1C, actor->shape.rot.y);
-    actor->posRot.pos.x += sp1C.x * actor->scale.x;
-    actor->posRot.pos.y += sp1C.y * actor->scale.y;
-    actor->posRot.pos.z += sp1C.z * actor->scale.z;
+    Vec3f pos;
+
+    SkelAnime_UpdateTranslation(skelAnime, &pos, actor->shape.rot.y);
+    actor->posRot.pos.x += pos.x * actor->scale.x;
+    actor->posRot.pos.y += pos.y * actor->scale.y;
+    actor->posRot.pos.z += pos.z * actor->scale.z;
 }
 
 s16 func_8002DA78(Actor* actorA, Actor* actorB) {
@@ -1000,9 +1001,8 @@ s32 func_8002DDF4(GlobalContext* globalCtx) {
 }
 
 void func_8002DE04(GlobalContext* globalCtx, Actor* actorA, Actor* actorB) {
-    ArmsHook* hookshot;
+    ArmsHook* hookshot = (ArmsHook*)Actor_Find(&globalCtx->actorCtx, ACTOR_ARMS_HOOK, ACTORTYPE_ITEMACTION);
 
-    hookshot = (ArmsHook*)Actor_Find(&globalCtx->actorCtx, ACTOR_ARMS_HOOK, ACTORTYPE_ITEMACTION);
     hookshot->grabbed = actorB;
     hookshot->grabbedDistDiff.x = 0.0f;
     hookshot->grabbedDistDiff.y = 0.0f;
@@ -1200,15 +1200,15 @@ s32 func_8002E2AC(GlobalContext* globalCtx, Actor* actor, Vec3f* arg2, s32 arg3)
     return 1;
 }
 
-void func_8002E4B4(GlobalContext* globalCtx, Actor* actor, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
+void func_8002E4B4(GlobalContext* globalCtx, Actor* actor, f32 arg2, f32 radius, f32 arg4, s32 arg5) {
     f32 sp74;
     s32 pad;
-    Vec3f sp64;
+    Vec3f posResult;
     s32 bgId;
-    CollisionPoly* sp5C;
+    CollisionPoly* colPoly;
     f32 sp58;
     WaterBox* waterBox;
-    f32 sp50;
+    f32 ySurface;
     Vec3f ripplePos;
 
     sp74 = actor->posRot.pos.y - actor->pos4.y;
@@ -1218,13 +1218,13 @@ void func_8002E4B4(GlobalContext* globalCtx, Actor* actor, f32 arg2, f32 arg3, f
     }
 
     if (arg5 & 1) {
-        if ((!(arg5 & 0x80) && BgCheck_EntitySphVsWall3(&globalCtx->colCtx, &sp64, &actor->posRot.pos, &actor->pos4,
-                                                        arg3, &actor->wallPoly, &bgId, actor, arg2)) ||
-            ((arg5 & 0x80) && BgCheck_EntitySphVsWall4(&globalCtx->colCtx, &sp64, &actor->posRot.pos, &actor->pos4,
-                                                       arg3, &actor->wallPoly, &bgId, actor, arg2))) {
-            sp5C = actor->wallPoly;
-            Math_Vec3f_Copy(&actor->posRot.pos, &sp64);
-            actor->wallPolyRot = Math_Atan2S(sp5C->normal.z, sp5C->normal.x);
+        if ((!(arg5 & 0x80) && BgCheck_EntitySphVsWall3(&globalCtx->colCtx, &posResult, &actor->posRot.pos, &actor->pos4,
+                                                        radius, &actor->wallPoly, &bgId, actor, arg2)) ||
+            ((arg5 & 0x80) && BgCheck_EntitySphVsWall4(&globalCtx->colCtx, &posResult, &actor->posRot.pos, &actor->pos4,
+                                                       radius, &actor->wallPoly, &bgId, actor, arg2))) {
+            colPoly = actor->wallPoly;
+            Math_Vec3f_Copy(&actor->posRot.pos, &posResult);
+            actor->wallPolyRot = Math_Atan2S(colPoly->normal.z, colPoly->normal.x);
             actor->bgCheckFlags |= 8;
             actor->wallPolySource = bgId;
         } else {
@@ -1232,12 +1232,12 @@ void func_8002E4B4(GlobalContext* globalCtx, Actor* actor, f32 arg2, f32 arg3, f
         }
     }
 
-    sp64.x = actor->posRot.pos.x;
-    sp64.z = actor->posRot.pos.z;
+    posResult.x = actor->posRot.pos.x;
+    posResult.z = actor->posRot.pos.z;
 
     if (arg5 & 2) {
-        sp64.y = actor->pos4.y + 10.0f;
-        if (BgCheck_EntityCheckCeiling(&globalCtx->colCtx, &sp58, &sp64, (arg4 + sp74) - 10.0f, &D_8015BBA0,
+        posResult.y = actor->pos4.y + 10.0f;
+        if (BgCheck_EntityCheckCeiling(&globalCtx->colCtx, &sp58, &posResult, (arg4 + sp74) - 10.0f, &D_8015BBA0,
                                        &D_8015BBA4, actor)) {
             actor->bgCheckFlags |= 0x10;
             actor->posRot.pos.y = (sp58 + sp74) - 10.0f;
@@ -1247,12 +1247,12 @@ void func_8002E4B4(GlobalContext* globalCtx, Actor* actor, f32 arg2, f32 arg3, f
     }
 
     if (arg5 & 4) {
-        sp64.y = actor->pos4.y;
-        func_8002E2AC(globalCtx, actor, &sp64, arg5);
-        sp50 = actor->posRot.pos.y;
-        if (WaterBox_GetSurface1(globalCtx, &globalCtx->colCtx, actor->posRot.pos.x, actor->posRot.pos.z, &sp50,
+        posResult.y = actor->pos4.y;
+        func_8002E2AC(globalCtx, actor, &posResult, arg5);
+        ySurface = actor->posRot.pos.y;
+        if (WaterBox_GetSurface1(globalCtx, &globalCtx->colCtx, actor->posRot.pos.x, actor->posRot.pos.z, &ySurface,
                                  &waterBox)) {
-            actor->yDistToWater = sp50 - actor->posRot.pos.y;
+            actor->yDistToWater = ySurface - actor->posRot.pos.y;
             if (actor->yDistToWater < 0.0f) {
                 actor->bgCheckFlags &= ~0x60;
             } else {
@@ -1260,7 +1260,7 @@ void func_8002E4B4(GlobalContext* globalCtx, Actor* actor, f32 arg2, f32 arg3, f
                     actor->bgCheckFlags |= 0x40;
                     if (!(arg5 & 0x40)) {
                         ripplePos.x = actor->posRot.pos.x;
-                        ripplePos.y = sp50;
+                        ripplePos.y = ySurface;
                         ripplePos.z = actor->posRot.pos.z;
                         EffectSsGRipple_Spawn(globalCtx, &ripplePos, 100, 500, 0);
                         EffectSsGRipple_Spawn(globalCtx, &ripplePos, 100, 500, 4);
@@ -1276,13 +1276,13 @@ void func_8002E4B4(GlobalContext* globalCtx, Actor* actor, f32 arg2, f32 arg3, f
     }
 }
 
-s32 D_8015BBA8[16];
+Mtx D_8015BBA8;
 
 Gfx* func_8002E830(Vec3f* object, Vec3f* eye, Vec3f* lightDir, GraphicsContext* gfxCtx, Gfx* gfx, Hilite** hilite) {
-    Gfx* lookAt;
+    LookAt* lookAt;
     f32 correctedEyeX;
 
-    lookAt = Graph_Alloc(gfxCtx, 4 * sizeof(Gfx));
+    lookAt = (LookAt *)Graph_Alloc(gfxCtx, 4 * sizeof(Gfx));
 
     correctedEyeX = (eye->x == object->x) && (eye->z == object->z) ? eye->x + 0.001f : eye->x;
 
@@ -1295,11 +1295,11 @@ Gfx* func_8002E830(Vec3f* object, Vec3f* eye, Vec3f* lightDir, GraphicsContext* 
 
     func_800ABE74(correctedEyeX, eye->y, eye->z);
     guLookAtHilite(&D_8015BBA8, lookAt, *hilite, correctedEyeX, eye->y, eye->z, object->x, object->y, object->z, 0.0f,
-                   1.0f, 0.0f, lightDir->x, lightDir->y, lightDir->z, lightDir->x, lightDir->y, lightDir->z, 0x10,
-                   0x10);
+                   1.0f, 0.0f, lightDir->x, lightDir->y, lightDir->z, lightDir->x, lightDir->y, lightDir->z, 16,
+                   16);
 
     gSPLookAt(gfx++, lookAt);
-    gDPSetHilite1Tile(gfx++, 1, *hilite, 0x10, 0x10);
+    gDPSetHilite1Tile(gfx++, 1, *hilite, 16, 16);
 
     return gfx;
 }
@@ -1351,7 +1351,7 @@ void func_8002EBCC(Actor* actor, GlobalContext* globalCtx, s32 flag) {
 
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_actor.c", 4384);
 
-        gDPSetHilite1Tile(displayListHead++, 1, hilite, 0x10, 0x10);
+        gDPSetHilite1Tile(displayListHead++, 1, hilite, 16, 16);
         gSPEndDisplayList(displayListHead);
         gSPSegment(POLY_OPA_DISP++, 0x07, displayList);
 
@@ -1377,7 +1377,7 @@ void func_8002ED80(Actor* actor, GlobalContext* globalCtx, s32 flag) {
 
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_actor.c", 4429);
 
-        gDPSetHilite1Tile(displayListHead++, 1, hilite, 0x10, 0x10);
+        gDPSetHilite1Tile(displayListHead++, 1, hilite, 16, 16);
         gSPEndDisplayList(displayListHead);
         gSPSegment(POLY_XLU_DISP++, 0x07, displayList);
 
@@ -3954,8 +3954,8 @@ s32 func_800354B4(GlobalContext* globalCtx, Actor* actor, f32 range, s16 arg3, s
 }
 
 void func_8003555C(GlobalContext* globalCtx, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3) {
-    Color_RGB8 color1;
-    Color_RGB8 color2;
+    Color_RGBA8 color1;
+    Color_RGBA8 color2;
 
     color1.r = 200;
     color1.g = 160;
