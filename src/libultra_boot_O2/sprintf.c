@@ -6,6 +6,7 @@ char* proutSprintf(char* dst, const char* fmt, size_t size) {
 
 s32 vsprintf(char* dst, const char* fmt, va_list args) {
     s32 ret = _Printf(&proutSprintf, dst, fmt, args);
+
     if (ret > -1) {
         dst[ret] = 0;
     }

@@ -316,7 +316,7 @@ void EnAObj_Update(Actor* thisx, GlobalContext* globalCtx) {
         case A_OBJ_SIGNPOST_OBLONG:
         case A_OBJ_SIGNPOST_ARROW:
             Collider_CylinderUpdate(&this->dyna.actor, &this->collider);
-            CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider);
+            CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);
     }
 }
 

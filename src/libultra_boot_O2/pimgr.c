@@ -1,16 +1,15 @@
 #include "global.h"
 #include "ultra64/internal.h"
 
-OSMgrArgs __osPiDevMgr = { 0 };
-
 OSPiHandle __Dom1SpeedParam;
 OSPiHandle __Dom2SpeedParam;
 OSThread piThread;
 u8 piStackThread[0x1000];
 OSMesgQueue piEventQueue;
-OSMesg piEventBuf[2];
+OSMesg piEventBuf[1];
 OSThread __osThreadSave;
 
+OSMgrArgs __osPiDevMgr = { 0 };
 OSPiHandle* __osPiTable = NULL;
 OSPiHandle* __osCurrentHandle[] = {
     &__Dom1SpeedParam,
@@ -24,7 +23,7 @@ void osCreatePiManager(OSPri pri, OSMesgQueue* cmdQ, OSMesg* cmdBuf, s32 cmdMsgC
 
     if (!__osPiDevMgr.initialized) {
         osCreateMesgQueue(cmdQ, cmdBuf, cmdMsgCnt);
-        osCreateMesgQueue(&piEventQueue, piEventBuf, 1);
+        osCreateMesgQueue(&piEventQueue, piEventBuf, ARRAY_COUNT(piEventBuf));
         if (!__osPiAccessQueueEnabled) {
             __osPiCreateAccessQueue();
         }

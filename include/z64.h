@@ -901,7 +901,7 @@ typedef struct GlobalContext {
     /* 0x11D60 */ MtxF mf_11D60;
     /* 0x11DA0 */ MtxF mf_11DA0;
     /* 0x11DE0 */ Mtx* unk_11DE0;
-    /* 0x11DE4 */ u32 gameplayFrames;
+    /* 0x11DE4 */ unsigned long gameplayFrames;
     /* 0x11DE8 */ u8 linkAgeOnLoad;
     /* 0x11DE9 */ u8 unk_11DE9;
     /* 0x11DEA */ u8 curSpawn;

@@ -17,14 +17,14 @@ void __osViSwapContext() {
     s2 = osVirtualToPhysical(s1->buffer);
     origin = (s0->fldRegs[field].origin) + s2;
     if (s1->state & 2) {
-        s1->x.scale |= s0->comRegs.xScale & ~0xfff;
+        s1->x.scale |= s0->comRegs.xScale & ~0xFFF;
     } else {
         s1->x.scale = s0->comRegs.xScale;
     }
     if (s1->state & 4) {
-        sp34 = (u32)(s0->fldRegs[field].yScale & 0xfff);
+        sp34 = (u32)(s0->fldRegs[field].yScale & 0xFFF);
         s1->y.scale = s1->y.factor * sp34;
-        s1->y.scale |= s0->fldRegs[field].yScale & ~0xfff;
+        s1->y.scale |= s0->fldRegs[field].yScale & ~0xFFF;
     } else {
         s1->y.scale = s0->fldRegs[field].yScale;
     }
@@ -40,7 +40,7 @@ void __osViSwapContext() {
         origin = osVirtualToPhysical(s1->buffer);
     }
     if (s1->state & 0x80) {
-        s1->y.scale = (s1->y.offset << 0x10) & 0x3ff0000;
+        s1->y.scale = (s1->y.offset << 0x10) & 0x3FF0000;
         origin = osVirtualToPhysical(s1->buffer);
     }
     HW_REG(VI_ORIGIN_REG, u32) = origin;

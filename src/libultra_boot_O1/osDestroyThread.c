@@ -2,7 +2,6 @@
 
 void osDestroyThread(OSThread* thread) {
     register s32 int_disabled;
-
     register OSThread* s1;
     register OSThread* s2;
 

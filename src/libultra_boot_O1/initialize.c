@@ -5,12 +5,12 @@ typedef struct {
     u32 ins_04; // addiu   k0, k0, 0x39e0
     u32 ins_08; // jr      k0 ; __osException
     u32 ins_0C; // nop
-} struct_exceptionPreamble;
+} __osExceptionVector;
 
 u64 osClockRate = OS_CLOCK_RATE;
 s32 osViClock = VI_NTSC_CLOCK;
 u32 __osShutdown = 0;
-u32 __OSGlobalIntMask = 0x003FFF01;
+OSIntMask __OSGlobalIntMask = OS_IM_ALL;
 
 u32 D_800145C0;
 
@@ -32,22 +32,22 @@ void __osInitialize_common(void) {
     u32 sp2C;
 
     D_800145C0 = 1;
-    __osSetSR(__osGetSR() | 0x20000000);
-    __osSetFpcCsr(0x1000800);
+    __osSetSR(__osGetSR() | SR_CU1);
+    __osSetFpcCsr(FPCSR_FS | FPCSR_EV);
     __osSetWatchLo(0x4900000);
 
-    while (__osSiRawReadIo((void*)0x1fc007fc, &sp2C)) {
+    while (__osSiRawReadIo(PIF_RAM_START + 0x3C, &sp2C)) {
         ;
     }
 
-    while (__osSiRawWriteIo((void*)0x1fc007fc, sp2C | 8)) {
+    while (__osSiRawWriteIo(PIF_RAM_START + 0x3C, sp2C | 8)) {
         ;
     }
 
-    *(struct_exceptionPreamble*)0x80000000 = *(struct_exceptionPreamble*)__osExceptionPreamble; // TLB miss
-    *(struct_exceptionPreamble*)0x80000080 = *(struct_exceptionPreamble*)__osExceptionPreamble; // XTLB miss
-    *(struct_exceptionPreamble*)0x80000100 = *(struct_exceptionPreamble*)__osExceptionPreamble; // cache errors
-    *(struct_exceptionPreamble*)0x80000180 = *(struct_exceptionPreamble*)__osExceptionPreamble; // general exceptions
+    *(__osExceptionVector*)0x80000000 = *(__osExceptionVector*)__osExceptionPreamble; // TLB miss
+    *(__osExceptionVector*)0x80000080 = *(__osExceptionVector*)__osExceptionPreamble; // XTLB miss
+    *(__osExceptionVector*)0x80000100 = *(__osExceptionVector*)__osExceptionPreamble; // cache errors
+    *(__osExceptionVector*)0x80000180 = *(__osExceptionVector*)__osExceptionPreamble; // general exceptions
 
     osWritebackDCache(0x80000000, 0x190);
     osInvalICache(0x80000000, 0x190);
@@ -61,23 +61,23 @@ void __osInitialize_common(void) {
         bzero(osAppNmiBuffer, 0x40);
     }
 
-    if (osTvType == 0) {
+    if (osTvType == OS_TV_PAL) {
         osViClock = VI_PAL_CLOCK;
-    } else if (osTvType == 2) {
+    } else if (osTvType == OS_TV_MPAL) {
         osViClock = VI_MPAL_CLOCK;
     } else {
         osViClock = VI_NTSC_CLOCK;
     }
 
-    if (__osGetCause() & 0x1000) {
+    if (__osGetCause() & CAUSE_IP5) {
         while (true) {
             ;
         }
     }
 
     HW_REG(AI_CONTROL_REG, u32) = 1;
-    HW_REG(AI_DACRATE_REG, u32) = 0x3fff;
-    HW_REG(AI_BITRATE_REG, u32) = 0xf;
+    HW_REG(AI_DACRATE_REG, u32) = 0x3FFF;
+    HW_REG(AI_BITRATE_REG, u32) = 0xF;
 }
 
 void __osInitialize_autodetect() {
