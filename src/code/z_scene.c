@@ -15,7 +15,7 @@ s32 Object_Spawn(ObjectContext* objectCtx, s16 objectId) {
                  objectCtx->spaceEnd);
 
     if (!((objectCtx->num < OBJECT_EXCHANGE_BANK_MAX) &&
-          (((s32)objectCtx->status[objectCtx->num].segment + size) < (s32)objectCtx->spaceEnd))) {
+          (((u32)objectCtx->status[objectCtx->num].segment + size) < (u32)objectCtx->spaceEnd))) {
         __assert("this->num < OBJECT_EXCHANGE_BANK_MAX && (this->status[this->num].Segment + size) < this->endSegment",
                  "../z_scene.c", 142);
     }

@@ -1069,7 +1069,7 @@ void func_80090A28(Player* this, Vec3f* vecs) {
 void func_80090AFC(GlobalContext* globalCtx, Player* this, f32 arg2) {
     static Vec3f D_801260C8 = { -500.0f, -100.0f, 0.0f };
     CollisionPoly* sp9C;
-    f32 sp98;
+    s32 bgId;
     Vec3f sp8C;
     Vec3f sp80;
     Vec3f sp74;
@@ -1084,7 +1084,7 @@ void func_80090AFC(GlobalContext* globalCtx, Player* this, f32 arg2) {
 
     if (1) {}
 
-    if (BgCheck_AnyLineTest3(&globalCtx->colCtx, &sp8C, &sp80, &sp74, &sp9C, 1, 1, 1, 1, &sp98)) {
+    if (BgCheck_AnyLineTest3(&globalCtx->colCtx, &sp8C, &sp80, &sp74, &sp9C, 1, 1, 1, 1, &bgId)) {
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_player_lib.c", 2572);
 
         OVERLAY_DISP = Gfx_CallSetupDL(OVERLAY_DISP, 0x07);
@@ -1207,7 +1207,7 @@ void func_80090D20(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3s* 
             gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_player_lib.c", 2712),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gDPSetEnvColor(POLY_XLU_DISP++, bottleColor->r, bottleColor->g, bottleColor->b, 0);
-            gSPDisplayList(POLY_XLU_DISP++, sBottleDLists[(0, gSaveContext.linkAge)]);
+            gSPDisplayList(POLY_XLU_DISP++, sBottleDLists[((void)0, gSaveContext.linkAge)]);
 
             CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_player_lib.c", 2717);
         }
@@ -1339,7 +1339,7 @@ void func_80090D20(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3s* 
         } else if (limbIndex == PLAYER_LIMB_HEAD) {
             Matrix_MultVec3f(&D_801260D4, &this->actor.posRot2.pos);
         } else {
-            Vec3f* vec = &D_801261E0[(0, gSaveContext.linkAge)];
+            Vec3f* vec = &D_801261E0[((void)0, gSaveContext.linkAge)];
 
             func_8002BDB0(&this->actor, limbIndex, PLAYER_LIMB_L_FOOT, vec, PLAYER_LIMB_R_FOOT, vec);
         }
@@ -1374,7 +1374,7 @@ u32 func_80091738(GlobalContext* globalCtx, u8* segment, SkelAnime* skelAnime) {
 
 u8 D_801261F8[] = { 2, 2, 5 };
 
-s32 func_80091880(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3s* pos, Vec3s* rot, void* arg) {
+s32 func_80091880(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* arg) {
     u8* ptr = arg;
     u8 modelGroup = D_801261F8[ptr[0] - 1];
     s32 type;

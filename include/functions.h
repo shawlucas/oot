@@ -458,6 +458,7 @@ void func_800304B0(GlobalContext* globalCtx);
 void func_800304DC(GlobalContext* globalCtx, ActorContext* actorCtx, ActorEntry* actorEntry);
 void Actor_UpdateAll(GlobalContext* globalCtx, ActorContext* actorCtx);
 s32 func_800314D4(GlobalContext* globalCtx, Actor* actorB, Vec3f* arg2, f32 arg3);
+void func_80031A28(GlobalContext* globalCtx, ActorContext* actorCtx);
 void func_80031B14(GlobalContext* globalCtx, ActorContext* actorCtx);
 void func_80031C3C(ActorContext* actorCtx, GlobalContext* globalCtx);
 Actor* Actor_Spawn(ActorContext* actorCtx, GlobalContext* globalCtx, s16 actorId, f32 posX, f32 posY, f32 posZ,
@@ -2290,7 +2291,7 @@ void func_800F6268(f32, UNK_TYPE);
 void func_800F6584(UNK_TYPE);
 // ? func_800F64E0(?);
 void func_800F6584(UNK_TYPE);
-// ? func_800F66C0(?);
+void func_800F66C0(s8);
 void func_800F66DC(s8);
 void func_800F6700(s8 outputMode);
 void func_800F67A0(u8);
