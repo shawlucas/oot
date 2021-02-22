@@ -1,7 +1,7 @@
 #ifndef _ULTRA64_HARDWARE_H_
 #define _ULTRA64_HARDWARE_H_
 
-#define HW_REG(reg, type) *(volatile type*)((reg) | 0xa0000000)
+#define HW_REG(reg, type) *(volatile type*)((reg) | 0xA0000000)
 
 #define AI_DRAM_ADDR_REG 0x04500000
 #define AI_LEN_REG 0x04500004
@@ -62,6 +62,15 @@
 #define PI_BSD_DOM2_PGS_REG 0x0460002C //PI dom2 page size
 #define PI_BSD_DOM2_RLS_REG 0x04600030 //PI dom2 release
 
+#define PI_DOM1_ADDR1 0x06000000 /* to 0x07FFFFFF */
+#define PI_DOM1_ADDR2 0x10000000 /* to 0x1FBFFFFF */
+#define PI_DOM1_ADDR3 0x1FD00000 /* to 0x7FFFFFFF */
+#define PI_DOM2_ADDR1 0x05000000 /* to 0x05FFFFFF */
+#define PI_DOM2_ADDR2 0x08000000 /* to 0x0FFFFFFF */
+
+#define PI_DOMAIN1                0
+#define PI_DOMAIN2                1
+
 #define PI_STATUS_BUSY 0x1
 #define PI_STATUS_IOBUSY 0x2
 #define PI_STATUS_ERROR 0x3
@@ -86,5 +95,47 @@
 #define MI_VERSION_REG 0x04300004
 #define MI_INTR_REG 0x04300008
 #define MI_INTR_MASK_REG 0x0430000C
+
+/* source: fpu.h, OpenBSD */
+
+#define FPCSR_FS    0x01000000
+
+/* cause bits */
+#define	FPCSR_C_E	0x00020000	/* unimplemented operation */
+#define	FPCSR_C_V	0x00010000	/* invalid operation */
+#define	FPCSR_C_Z	0x00008000	/* division by zero */
+#define	FPCSR_C_O	0x00004000	/* overflow */
+#define	FPCSR_C_U	0x00002000	/* underflow */
+#define	FPCSR_C_I	0x00001000	/* inexact */
+
+/* enable bits */
+#define	FPCSR_E_V	0x00000800	/* invalid operation */
+#define	FPCSR_E_Z	0x00000400	/* division by zero */
+#define	FPCSR_E_O	0x00000200	/* overflow */
+#define	FPCSR_E_U	0x00000100	/* underflow */
+#define	FPCSR_E_I	0x00000080	/* inexact */
+
+/* flags bits */
+#define	FPCSR_F_V	0x00000040	/* invalid operation */
+#define	FPCSR_F_Z	0x00000020	/* division by zero */
+#define	FPCSR_F_O	0x00000010	/* overflow */
+#define	FPCSR_F_U	0x00000008	/* underflow */
+#define	FPCSR_F_I	0x00000004	/* inexact */
+
+/* Status Register Flags */
+#define SR_CU0      0x10000000 /* Coprocessor 0 Usable */
+#define SR_CU1      0x20000000 /* Coprocessor 1 Usable */
+#define SR_CU2      0x40000000 /* Coprocessor 2 Usable */
+#define SR_XX       0x80000000 /* MIPS IV Instructions Usable */
+
+/* Interrupt pending bits */
+#define CAUSE_IP8   0x00008000  /* External level 8 pending - COMPARE */
+#define CAUSE_IP7   0x00004000  /* External level 7 pending - INT4    */
+#define CAUSE_IP6   0x00002000  /* External level 6 pending - INT3    */
+#define CAUSE_IP5   0x00001000  /* External level 5 pending - INT2    */
+#define CAUSE_IP4   0x00000800  /* External level 4 pending - INT1    */
+#define CAUSE_IP3   0x00000400  /* External level 3 pending - INT0    */
+#define CAUSE_SW2   0x00000200  /* Software level 2 pending           */
+#define CAUSE_SW1   0x00000100  /* Software level 1 pending           */
 
 #endif

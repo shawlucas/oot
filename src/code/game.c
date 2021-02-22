@@ -17,7 +17,7 @@ void GameState_FaultPrint(void) {
     FaultDrawer_DrawText(120, 180, "%08x", sLastButtonPressed);
     for (i = 0; i < ARRAY_COUNT(sBtnChars); i++) {
         if (sLastButtonPressed & (1 << i)) {
-            FaultDrawer_DrawText((i * 8) + 0x78, 0xBE, "%c", sBtnChars[i]);
+            FaultDrawer_DrawText((i * 8) + 120, 190, "%c", sBtnChars[i]);
         }
     }
 }
@@ -69,7 +69,7 @@ void func_800C4344(GameState* gameState) {
     }
 
     if (HREG(80) == 0xC) {
-        selectedInput = &gameState->input[(u32)HREG(81) < 4U ? HREG(81) : 0];
+        selectedInput = &gameState->input[(u32)HREG(81) < 4 ? HREG(81) : 0];
         hReg82 = HREG(82);
         HREG(83) = selectedInput->cur.button;
         HREG(84) = selectedInput->press.button;
@@ -197,13 +197,13 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
 void GameState_SetFrameBuffer(GraphicsContext* gfxCtx) {
     OPEN_DISPS(gfxCtx, "../game.c", 814);
 
-    gSPSegment(POLY_OPA_DISP++, 0, 0);
+    gSPSegment(POLY_OPA_DISP++, 0, NULL);
     gSPSegment(POLY_OPA_DISP++, 0xF, gfxCtx->curFrameBuffer);
     gSPSegment(POLY_OPA_DISP++, 0xE, gZBuffer);
-    gSPSegment(POLY_XLU_DISP++, 0, 0);
+    gSPSegment(POLY_XLU_DISP++, 0, NULL);
     gSPSegment(POLY_XLU_DISP++, 0xF, gfxCtx->curFrameBuffer);
     gSPSegment(POLY_XLU_DISP++, 0xE, gZBuffer);
-    gSPSegment(OVERLAY_DISP++, 0, 0);
+    gSPSegment(OVERLAY_DISP++, 0, NULL);
     gSPSegment(OVERLAY_DISP++, 0xF, gfxCtx->curFrameBuffer);
     gSPSegment(OVERLAY_DISP++, 0xE, gZBuffer);
 
@@ -386,7 +386,7 @@ void GameState_Init(GameState* gameState, GameStateFunc init, GraphicsContext* g
     gameState->frames = 0;
     gameState->main = NULL;
     gameState->destroy = NULL;
-    gameState->running = 1;
+    gameState->running = true;
     startTime = osGetTime();
     gameState->size = 0;
     gameState->init = NULL;
@@ -471,7 +471,7 @@ u32 GameState_IsRunning(GameState* gameState) {
     return gameState->running;
 }
 
-void* GameState_Alloc(GameState* gameState, size_t size, char* file, s32 line) {
+void* GameState_Alloc(GameState* gameState, size_t size, const char* file, s32 line) {
     void* ret;
 
     if (THA_IsCrash(&gameState->tha)) {

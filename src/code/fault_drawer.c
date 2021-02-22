@@ -143,7 +143,7 @@ void FaultDrawer_DrawChar(char c) {
 
 s32 FaultDrawer_ColorToPrintColor(u16 color) {
     s32 i;
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < ARRAY_COUNT(sFaultDrawerStruct.printColors); i++) {
         if (color == sFaultDrawerStruct.printColors[i]) {
             return i;
         }
@@ -265,7 +265,7 @@ void* FaultDrawer_FormatStringFunc(void* arg, const char* str, u32 count) {
     return arg;
 }
 
-void FaultDrawer_VPrintf(const char* str, char* args) { // va_list
+void FaultDrawer_VPrintf(const char* str, va_list args) {
     _Printf(FaultDrawer_FormatStringFunc, (char*)&sFaultDrawerStruct, str, args);
 }
 
@@ -300,5 +300,5 @@ void FaultDrawer_WritebackFBDCache() {
 
 void FaultDrawer_SetDefault() {
     bcopy(&sFaultDrawerDefault, &sFaultDrawerStruct, sizeof(FaultDrawer));
-    sFaultDrawerStruct.fb = (u16*)((osMemSize | 0x80000000) - 0x25800);
+    sFaultDrawerStruct.fb = (u16*)(PHYS_TO_K0(osMemSize) - 0x25800);
 }

@@ -5,7 +5,7 @@ s32 __osSiRawStartDma(s32 dir, void* addr) {
         return -1;
     }
     if (dir == OS_WRITE) {
-        osWritebackDCache(addr, 0x40);
+        osWritebackDCache(addr, sizeof(OSPifRam));
     }
     HW_REG(SI_DRAM_ADDR_REG, void*) = (void*)osVirtualToPhysical(addr);
     if (dir == OS_READ) {
@@ -14,7 +14,7 @@ s32 __osSiRawStartDma(s32 dir, void* addr) {
         HW_REG(SI_PIF_ADDR_WR64B_REG, void*) = (void*)PIF_RAM_START;
     }
     if (dir == OS_READ) {
-        osInvalDCache(addr, 0x40);
+        osInvalDCache(addr, sizeof(OSPifRam));
     }
     return 0;
 }

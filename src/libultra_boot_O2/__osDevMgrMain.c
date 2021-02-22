@@ -17,7 +17,7 @@ void __osDevMgrMain(void* arg) {
     while (true) {
         osRecvMesg(arg0->cmdQueue, (OSMesg)&ioMesg, OS_MESG_BLOCK);
         if ((ioMesg->piHandle != NULL) && (ioMesg->piHandle->type == DEVICE_TYPE_64DD) &&
-            ((ioMesg->piHandle->transferInfo.cmdType == 0) || (ioMesg->piHandle->transferInfo.cmdType == 1))) {
+            ((ioMesg->piHandle->transferInfo.cmdType == OS_READ) || (ioMesg->piHandle->transferInfo.cmdType == OS_WRITE))) {
             transfer = &ioMesg->piHandle->transferInfo;
             block = &transfer->block[transfer->blockNum];
             transfer->sectorNum = -1;
@@ -25,10 +25,10 @@ void __osDevMgrMain(void* arg) {
                 block->dramAddr = (void*)((u32)block->dramAddr - block->sectorSize);
             }
 
-            phi_s2 = ((transfer->transferMode == 2) && (ioMesg->piHandle->transferInfo.cmdType == 0)) ? 1 : 0;
+            phi_s2 = ((transfer->transferMode == 2) && (ioMesg->piHandle->transferInfo.cmdType == OS_READ)) ? 1 : 0;
 
             osRecvMesg(arg0->acccessQueue, &sp6C, OS_MESG_BLOCK);
-            __osResetGlobalIntMask(0x00100401);
+            __osResetGlobalIntMask(OS_IM_PI);
             __osEPiRawWriteIo(ioMesg->piHandle, 0x05000510, transfer->bmCtlShadow | 0x80000000);
 
             while (true) {
@@ -44,7 +44,7 @@ void __osDevMgrMain(void* arg) {
                     }
                     block->errStatus = 4;
                     HW_REG(PI_STATUS_REG, u32) = PI_STATUS_CLEAR_INTR;
-                    __osSetGlobalIntMask(0x00100C01);
+                    __osSetGlobalIntMask(OS_IM_CART | OS_IM_PI);
                 }
                 osSendMesg(ioMesg->hdr.retQueue, ioMesg, OS_MESG_NOBLOCK);
 
@@ -61,25 +61,25 @@ void __osDevMgrMain(void* arg) {
             }
         } else {
             switch (ioMesg->hdr.type) {
-                case 11:
+                case OS_MESG_TYPE_DMAREAD:
                     osRecvMesg(arg0->acccessQueue, &sp6C, OS_MESG_BLOCK);
                     phi_s0 = arg0->piDmaCallback(OS_READ, ioMesg->devAddr, ioMesg->dramAddr, ioMesg->size);
                     break;
-                case 12:
+                case OS_MESG_TYPE_DMAWRITE:
                     osRecvMesg(arg0->acccessQueue, &sp6C, OS_MESG_BLOCK);
                     phi_s0 = arg0->piDmaCallback(OS_WRITE, ioMesg->devAddr, ioMesg->dramAddr, ioMesg->size);
                     break;
-                case 15:
+                case OS_MESG_TYPE_EDMAREAD:
                     osRecvMesg(arg0->acccessQueue, &sp6C, OS_MESG_BLOCK);
                     phi_s0 = arg0->epiDmaCallback(ioMesg->piHandle, OS_READ, ioMesg->devAddr, ioMesg->dramAddr,
                                                   ioMesg->size);
                     break;
-                case 16:
+                case OS_MESG_TYPE_EDMAWRITE:
                     osRecvMesg(arg0->acccessQueue, &sp6C, OS_MESG_BLOCK);
                     phi_s0 = arg0->epiDmaCallback(ioMesg->piHandle, OS_WRITE, ioMesg->devAddr, ioMesg->dramAddr,
                                                   ioMesg->size);
                     break;
-                case 10:
+                case OS_MESG_TYPE_LOOPBACK:
                     osSendMesg(ioMesg->hdr.retQueue, ioMesg, OS_MESG_NOBLOCK);
                     phi_s0 = -1;
                     break;

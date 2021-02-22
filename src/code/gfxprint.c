@@ -317,7 +317,7 @@ GfxPrint* GfxPrint_Callback(GfxPrint* this, const char* str, size_t size) {
 void GfxPrint_Init(GfxPrint* this) {
     this->flag &= ~GFXPRINT_OPEN;
 
-    this->callback = &GfxPrint_Callback;
+    this->callback = GfxPrint_Callback;
     this->dlist = NULL;
     this->posX = 0;
     this->posY = 0;

@@ -54,13 +54,13 @@ void LogUtils_LogHexDump(void* ptr, s32 size0) {
         while (true) {
             if (i < rest) {
                 u8 a = *(addr + i);
-                osSyncPrintf("%c", (a >= 0x20 && a < 0x7f) ? a : '.');
+                osSyncPrintf("%c", (a >= 0x20 && a < 0x7F) ? a : '.');
             } else {
                 osSyncPrintf(" ");
             }
 
             i++;
-            if (i > 0xf) {
+            if (i > 0xF) {
                 break;
             }
         }
@@ -77,6 +77,7 @@ void LogUtils_LogPointer(s32 value, u32 max, void* ptr, const char* name, const 
 
 void LogUtils_CheckBoundary(const char* name, s32 value, s32 unk, const char* file, s32 line) {
     u32 mask = (unk - 1);
+
     if (value & mask) {
         osSyncPrintf(VT_COL(RED, WHITE) "%s %d:%s(%08x) は バウンダリ(%d)違反です\n" VT_RST, file, line, name, value,
                      unk);
@@ -90,7 +91,7 @@ void LogUtils_CheckNullPointer(const char* exp, void* ptr, const char* file, s32
 }
 
 void LogUtils_CheckValidPointer(const char* exp, void* ptr, const char* file, s32 line) {
-    if (ptr == NULL || (u32)ptr < 0x80000000 || (0x80000000 + osMemSize) <= (u32)ptr) {
+    if (ptr == NULL || (u32)ptr < 0x80000000 || (u32)PHYSICAL_TO_VIRTUAL(osMemSize) <= (u32)ptr) {
         osSyncPrintf(VT_COL(RED, WHITE) "%s %d:ポインタ %s(%08x) が異常です\n" VT_RST, file, line, exp, ptr);
     }
 }

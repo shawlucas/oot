@@ -90,7 +90,7 @@ extern u8 gBuildDate[];
 extern u8 gBuildMakeOption[];
 extern OSMesgQueue gPiMgrCmdQ;
 extern OSViMode gViConfigMode;
-extern u8 D_80013960;
+extern u8 gViModeType;
 extern OSMesg piAccessBuf;
 extern OSMesgQueue __osPiAccessQueue;
 extern OSPiHandle __Dom1SpeedParam;

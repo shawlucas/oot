@@ -7,7 +7,7 @@ StackEntry sMainStackInfo;
 OSMesg sPiMgrCmdBuff[50];
 OSMesgQueue gPiMgrCmdQ;
 OSViMode gViConfigMode;
-u8 D_80013960;
+u8 gViModeType;
 
 s8 D_80009430 = 1;
 vu8 gViConfigUseDefault = 1;
@@ -42,32 +42,32 @@ void Idle_ThreadEntry(void* arg) {
     osSyncPrintf(VT_FGCOL(GREEN));
     osSyncPrintf("ＲＡＭサイズは %d キロバイトです(osMemSize/osGetMemSize)\n", (s32)osMemSize / 1024);
     osSyncPrintf("_bootSegmentEnd(%08x) 以降のＲＡＭ領域はクリアされました(boot)\n", _bootSegmentEnd);
-    osSyncPrintf("Ｚバッファのサイズは %d キロバイトです\n", 0x96);
-    osSyncPrintf("ダイナミックバッファのサイズは %d キロバイトです\n", 0x92);
-    osSyncPrintf("ＦＩＦＯバッファのサイズは %d キロバイトです\n", 0x60);
-    osSyncPrintf("ＹＩＥＬＤバッファのサイズは %d キロバイトです\n", 3);
+    osSyncPrintf("Ｚバッファのサイズは %d キロバイトです\n", sizeof(gZBuffer) / 1024);
+    osSyncPrintf("ダイナミックバッファのサイズは %d キロバイトです\n", sizeof(gGfxPools) / 1024);
+    osSyncPrintf("ＦＩＦＯバッファのサイズは %d キロバイトです\n", sizeof(gGfxSPTaskOutputBuffer) / 1024);
+    osSyncPrintf("ＹＩＥＬＤバッファのサイズは %d キロバイトです\n", sizeof(gGfxSPTaskYieldBuffer) / 1024);
     osSyncPrintf("オーディオヒープのサイズは %d キロバイトです\n", ((s32)gSystemHeap - (s32)gAudioHeap) / 1024);
     osSyncPrintf(VT_RST);
 
     osCreateViManager(OS_PRIORITY_VIMGR);
 
-    gViConfigFeatures = 0x42;
+    gViConfigFeatures = OS_VI_GAMMA_OFF | OS_VI_DITHER_FILTER_ON;
     gViConfigXScale = 1.0f;
     gViConfigYScale = 1.0f;
 
     switch (osTvType) {
-        case 1:
-            D_80013960 = 2;
+        case OS_TV_NTSC:
+            gViModeType = OS_VI_NTSC_LAN1;
             gViConfigMode = osViModeNtscLan1;
             break;
 
-        case 2:
-            D_80013960 = 0x1E;
+        case OS_TV_MPAL:
+            gViModeType = OS_VI_MPAL_LAN1;
             gViConfigMode = osViModeMpalLan1;
             break;
 
-        case 0:
-            D_80013960 = 0x2C;
+        case OS_TV_PAL:
+            gViModeType = OS_VI_FPAL_LAN1;
             gViConfigMode = osViModeFpalLan1;
             gViConfigYScale = 0.833f;
             break;
@@ -76,11 +76,11 @@ void Idle_ThreadEntry(void* arg) {
     D_80009430 = 1;
     osViSetMode(&gViConfigMode);
     ViConfig_UpdateVi(1);
-    osViBlack(1);
+    osViBlack(true);
     osViSwapBuffer(0x803DA80); //! @bug Invalid vram address (probably intended to be 0x803DA800)
-    osCreatePiManager(OS_PRIORITY_PIMGR, &gPiMgrCmdQ, sPiMgrCmdBuff, 50);
+    osCreatePiManager(OS_PRIORITY_PIMGR, &gPiMgrCmdQ, sPiMgrCmdBuff, ARRAY_COUNT(sPiMgrCmdBuff));
     StackCheck_Init(&sMainStackInfo, sMainStack, sMainStack + sizeof(sMainStack), 0, 0x400, "main");
-    osCreateThread(&gMainThread, 3, Main_ThreadEntry, arg, sMainStack + sizeof(sMainStack), Z_PRIORITY_MAIN);
+    osCreateThread(&gMainThread, Z_THREAD_MAIN, Main_ThreadEntry, arg, sMainStack + sizeof(sMainStack), Z_PRIORITY_MAIN);
     osStartThread(&gMainThread);
     osSetThreadPri(NULL, OS_PRIORITY_IDLE);
 

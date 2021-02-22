@@ -8,7 +8,7 @@ OSTimer __osEepromTimer;
 OSMesgQueue __osEepromTimerMsgQ;
 OSMesg __osEepromTimerMsg;
 
-u32 gOSContInitialized = 0;
+u32 gOSContInitialized = false;
 
 #define HALF_SECOND OS_USEC_TO_CYCLES(500000)
 
@@ -23,7 +23,7 @@ s32 osContInit(OSMesgQueue* mq, u8* ctlBitfield, OSContStatus* status) {
         return 0;
     }
 
-    gOSContInitialized = 1;
+    gOSContInitialized = true;
     currentTime = osGetTime();
     if (HALF_SECOND > currentTime) {
         osCreateMesgQueue(&timerqueue, &mesg, 1);

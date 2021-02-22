@@ -1,7 +1,7 @@
 #include "global.h"
 #include "vt.h"
 
-u32 gCurrentRegion = 0;
+u32 gCurrentRegion = REGION_NULL;
 LocaleCartInfo sCartInfo;
 
 void Locale_Init(void) {
@@ -9,11 +9,11 @@ void Locale_Init(void) {
     osEPiReadIo(gCartHandle, 0x3C, &sCartInfo.regionInfo);
 
     switch (sCartInfo.countryCode) {
-        case 'J': // "NTSC-U (North America)"
-            gCurrentRegion = REGION_US;
-            break;
-        case 'E': // "NTSC-J (Japan)"
+        case 'J': // "NTSC-J (Japan)"
             gCurrentRegion = REGION_JP;
+            break;
+        case 'E': // "NTSC-U (North America)" 
+            gCurrentRegion = REGION_US;
             break;
         case 'P': // "PAL (Europe)"
             gCurrentRegion = REGION_EU;
@@ -21,9 +21,8 @@ void Locale_Init(void) {
         default:
             osSyncPrintf(VT_COL(RED, WHITE));
             osSyncPrintf("z_locale_init: 日本用かアメリカ用か判別できません\n");
-            LogUtils_HungupThread("../z_locale.c", 0x76);
+            LogUtils_HungupThread("../z_locale.c", 118);
             osSyncPrintf(VT_RST);
-            break;
     }
 
     osSyncPrintf("z_locale_init:日本用かアメリカ用か３コンで判断させる\n");

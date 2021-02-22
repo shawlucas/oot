@@ -1,12 +1,12 @@
 #include "global.h"
 
-u32 __osPiAccessQueueEnabled = 0;
+u32 __osPiAccessQueueEnabled = false;
 
 OSMesg piAccessBuf;
 OSMesgQueue __osPiAccessQueue;
 
 void __osPiCreateAccessQueue(void) {
-    __osPiAccessQueueEnabled = 1;
+    __osPiAccessQueueEnabled = true;
     osCreateMesgQueue(&__osPiAccessQueue, &piAccessBuf, 1);
     osSendMesg(&__osPiAccessQueue, NULL, OS_MESG_NOBLOCK);
 }

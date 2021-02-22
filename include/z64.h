@@ -32,9 +32,13 @@
 #define SCREEN_HEIGHT 240
 
 #define REGION_NULL 0
-#define REGION_US 1
-#define REGION_JP 2
+#define REGION_JP 1
+#define REGION_US 2
 #define REGION_EU 3
+
+#define Z_THREAD_IDLE          1
+#define Z_THREAD_MAIN          3
+#define Z_THREAD_DMAMGR        18
 
 #define Z_PRIORITY_MAIN        10
 #define Z_PRIORITY_GRAPH       11

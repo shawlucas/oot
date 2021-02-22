@@ -54,10 +54,18 @@ typedef struct {
     /* 0x14 */ OSPiHandle* piHandle;
 } OSIoMesg; // size = 0x18
 
-#define OS_READ     0  // device -> RDRAM
-#define OS_WRITE    1 // device <- RDRAM
+#define OS_READ                 0  // device -> RDRAM
+#define OS_WRITE                1 // device <- RDRAM
 
-#define OS_MESG_PRI_NORMAL  0
-#define OS_MESG_PRI_HIGH    1
+#define OS_MESG_PRI_NORMAL      0
+#define OS_MESG_PRI_HIGH        1
+
+#define OS_MESG_TYPE_LOOPBACK	10
+#define OS_MESG_TYPE_DMAREAD	11
+#define OS_MESG_TYPE_DMAWRITE	12
+#define OS_MESG_TYPE_VRETRACE	13
+#define OS_MESG_TYPE_COUNTER	14
+#define OS_MESG_TYPE_EDMAREAD	15
+#define OS_MESG_TYPE_EDMAWRITE	16
 
 #endif

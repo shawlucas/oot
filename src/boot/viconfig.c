@@ -8,7 +8,7 @@ void ViConfig_UpdateVi(u32 mode) {
     if (mode != 0) {
         osSyncPrintf(VT_COL(YELLOW, BLACK) "osViSetYScale1(%f);\n" VT_RST, 1.0f);
 
-        if (osTvType == 0) {
+        if (osTvType == OS_TV_PAL) {
             osViSetMode(&osViModePalLan1);
         }
 
@@ -39,8 +39,8 @@ void ViConfig_UpdateVi(u32 mode) {
 
 void ViConfig_UpdateBlack(void) {
     if (gViConfigUseDefault != 0) {
-        osViBlack(1);
+        osViBlack(true);
     } else {
-        osViBlack(0);
+        osViBlack(false);
     }
 }

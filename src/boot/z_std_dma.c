@@ -1790,7 +1790,7 @@ void DmaMgr_ProcessMsg(DmaRequest* req) {
                                  "セグメント境界をまたがってＤＭＡ転送することはできません");
                 }
 
-                DmaMgr_DMARomToRam(iter->romStart + (vrom - iter->vromStart), (u32)ram, size);
+                DmaMgr_DMARomToRam(iter->romStart + (vrom - iter->vromStart), ram, size);
                 found = true;
 
                 if (0) {
@@ -1830,7 +1830,7 @@ void DmaMgr_ProcessMsg(DmaRequest* req) {
             return;
         }
 
-        DmaMgr_DMARomToRam(vrom, (u32)ram, size);
+        DmaMgr_DMARomToRam(vrom, ram, size);
 
         if (0) {
             osSyncPrintf("No Press ROM:%08X RAM:%08X SIZE:%08X (非公式)\n", vrom, ram, size);
@@ -1844,7 +1844,7 @@ void DmaMgr_ThreadEntry(void* arg0) {
 
     osSyncPrintf("ＤＭＡマネージャスレッド実行開始\n");
     while (true) {
-        osRecvMesg(&sDmaMgrMsgQueue, &msg, 1);
+        osRecvMesg(&sDmaMgrMsgQueue, &msg, OS_MESG_BLOCK);
         req = (DmaRequest*)msg;
         if (req == NULL) {
             break;
@@ -1868,7 +1868,7 @@ void DmaMgr_ThreadEntry(void* arg0) {
 s32 DmaMgr_SendRequestImpl(DmaRequest* req, u32 ram, u32 vrom, u32 size, u32 unk, OSMesgQueue* queue, OSMesg msg) {
     static s32 sDmaMgrQueueFullLogged = 0;
 
-    if ((1 && (ram == 0)) || (osMemSize < ram + size + 0x80000000) || (vrom & 1) || (vrom > 0x4000000U) ||
+    if ((1 && (ram == 0)) || (osMemSize < (u32)PHYSICAL_TO_VIRTUAL(ram + size)) || (vrom & 1) || (vrom > 0x4000000U) ||
         (size == 0) || (size & 1)) {
         DmaMgr_Error(req, NULL, "ILLIGAL DMA-FUNCTION CALL", "パラメータ異常です");
     }
@@ -1952,7 +1952,7 @@ void DmaMgr_Init(void) {
 
     osCreateMesgQueue(&sDmaMgrMsgQueue, sDmaMgrMsgs, ARRAY_COUNT(sDmaMgrMsgs));
     StackCheck_Init(&sDmaMgrStackInfo, sDmaMgrStack, sDmaMgrStack + sizeof(sDmaMgrStack), 0, 0x100, "dmamgr");
-    osCreateThread(&sDmaMgrThread, 0x12, &DmaMgr_ThreadEntry, 0, sDmaMgrStack + sizeof(sDmaMgrStack),
+    osCreateThread(&sDmaMgrThread, Z_THREAD_DMAMGR, DmaMgr_ThreadEntry, NULL, sDmaMgrStack + sizeof(sDmaMgrStack),
                    Z_PRIORITY_DMAMGR);
     osStartThread(&sDmaMgrThread);
 }
@@ -1974,11 +1974,11 @@ s32 DmaMgr_SendRequest1(void* ram0, u32 vrom, u32 size, const char* file, s32 li
     req.filename = file;
     req.line = line;
     osCreateMesgQueue(&queue, &msg, 1);
-    ret = DmaMgr_SendRequestImpl(&req, ram, vrom, size, 0, &queue, 0);
+    ret = DmaMgr_SendRequestImpl(&req, ram, vrom, size, 0, &queue, NULL);
     if (ret == -1) {
         return ret;
     }
 
-    osRecvMesg(&queue, NULL, 1);
+    osRecvMesg(&queue, NULL, OS_MESG_BLOCK);
     return 0;
 }
