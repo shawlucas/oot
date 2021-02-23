@@ -163,7 +163,7 @@ void PadMgr_RumbleStop(PadMgr* padMgr) {
     s32 i;
     OSMesgQueue* ctrlrQ = PadMgr_LockSerialMesgQueue(padMgr);
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(padMgr->pfs); i++) {
         if (osProbeRumblePak(ctrlrQ, &padMgr->pfs[i], i) == 0) {
             if ((gFaultStruct.msgId == 0) && (padMgr->rumbleOnFrames != 0)) {
                 osSyncPrintf(VT_FGCOL(YELLOW));
@@ -190,7 +190,7 @@ void PadMgr_RumbleSetSingle(PadMgr* padMgr, u32 ctrlr, u32 rumble) {
 void PadMgr_RumbleSet(PadMgr* padMgr, u8* ctrlrRumbles) {
     s32 i;
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(padMgr->rumbleEnable); i++) {
         padMgr->rumbleEnable[i] = ctrlrRumbles[i];
     }
 
@@ -223,14 +223,14 @@ void PadMgr_ProcessInputs(PadMgr* padMgr) {
                     osSyncPrintf(VT_RST);
                 }
                 break;
-            case 4:
+            case CONT_OVERRUN_ERROR:
                 input->cur = input->prev;
                 LOG_NUM("this->Key_switch[i]", padMgr->ctrlrIsConnected[i], "../padmgr.c", 380);
                 osSyncPrintf(VT_FGCOL(YELLOW));
                 osSyncPrintf("padmgr: %dコン: %s\n", i + 1, "オーバーランエラーが発生"); // "Overrun error occurred"
                 osSyncPrintf(VT_RST);
                 break;
-            case 8:
+            case CONT_NO_RESPONSE_ERROR:
                 input->cur.button = 0;
                 input->cur.stick_x = 0;
                 input->cur.stick_y = 0;
@@ -281,7 +281,7 @@ void PadMgr_HandleRetraceMsg(PadMgr* padMgr) {
     PadMgr_UnlockSerialMesgQueue(padMgr, queue);
 
     mask = 0;
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(padMgr->padStatus); i++) {
         if (padMgr->padStatus[i].errno == 0) {
             if (padMgr->padStatus[i].type == 5) {
                 mask |= 1 << i;
@@ -323,7 +323,7 @@ void PadMgr_RequestPadData(PadMgr* padMgr, Input* inputs, s32 mode) {
 
     ogInput = &padMgr->inputs[0];
     newInput = &inputs[0];
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < MAXCONTROLLERS; i++) {
         if (mode != 0) {
             *newInput = *ogInput;
             ogInput->press.button = 0;
@@ -399,15 +399,15 @@ void PadMgr_Init(PadMgr* padMgr, OSMesgQueue* siIntMsgQ, IrqMgr* irqMgr, OSId id
     bzero(padMgr, sizeof(PadMgr));
     padMgr->irqMgr = irqMgr;
 
-    osCreateMesgQueue(&padMgr->interruptMsgQ, padMgr->interruptMsgBuf, 4);
+    osCreateMesgQueue(&padMgr->interruptMsgQ, padMgr->interruptMsgBuf, ARRAY_COUNT(padMgr->interruptMsgBuf));
     IrqMgr_AddClient(padMgr->irqMgr, &padMgr->irqClient, &padMgr->interruptMsgQ);
-    osCreateMesgQueue(&padMgr->serialMsgQ, padMgr->serialMsgBuf, 1);
+    osCreateMesgQueue(&padMgr->serialMsgQ, padMgr->serialMsgBuf, ARRAY_COUNT(padMgr->serialMsgBuf));
     PadMgr_UnlockSerialMesgQueue(padMgr, siIntMsgQ);
-    osCreateMesgQueue(&padMgr->lockMsgQ, padMgr->lockMsgBuf, 1);
+    osCreateMesgQueue(&padMgr->lockMsgQ, padMgr->lockMsgBuf, ARRAY_COUNT(padMgr->lockMsgBuf));
     PadMgr_UnlockPadData(padMgr);
     PadSetup_Init(siIntMsgQ, (u8*)&padMgr->validCtrlrsMask, padMgr->padStatus);
 
-    padMgr->nControllers = 4;
+    padMgr->nControllers = MAXCONTROLLERS;
     osContSetCh(padMgr->nControllers);
 
     osCreateThread(&padMgr->thread, id, (void (*)(void*))PadMgr_ThreadEntry, padMgr, stack, priority);

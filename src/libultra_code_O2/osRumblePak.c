@@ -10,8 +10,8 @@ s32 osSetRumble(OSPfs* pfs, u32 vibrate) {
     s32 ret;
     u8* buf = (u8*)&osPifBuffers[pfs->channel];
 
-    if (!(pfs->status & 8)) {
-        return 5;
+    if (!(pfs->status & PFS_MOTOR_INITIALIZED)) {
+        return PFS_ERR_INVALID;
     }
 
     __osSiGetAccess();

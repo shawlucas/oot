@@ -51,7 +51,7 @@ void EnItem00_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnItem00* this = THIS;
     s32 pad2;
     f32 sp34 = 980.0f;
-    f32 sp30 = 6.0f;
+    f32 shadowScale = 6.0f;
     s32 getItemId = 0;
     s16 spawnParam8000;
     s32 pad3;
@@ -153,7 +153,7 @@ void EnItem00_Init(Actor* thisx, GlobalContext* globalCtx) {
             Actor_SetScale(&this->actor, 0.5f);
             this->unk_15C = 0.5f;
             sp34 = 0.0f;
-            sp30 = 0.6f;
+            shadowScale = 0.6f;
             this->actor.world.rot.x = 0x4000;
             break;
         case ITEM00_SHIELD_HYLIAN:
@@ -162,7 +162,7 @@ void EnItem00_Init(Actor* thisx, GlobalContext* globalCtx) {
             Actor_SetScale(&this->actor, 0.5f);
             this->unk_15C = 0.5f;
             sp34 = 0.0f;
-            sp30 = 0.6f;
+            shadowScale = 0.6f;
             this->actor.world.rot.x = 0x4000;
             break;
         case ITEM00_TUNIC_ZORA:
@@ -172,14 +172,14 @@ void EnItem00_Init(Actor* thisx, GlobalContext* globalCtx) {
             Actor_SetScale(&this->actor, 0.5f);
             this->unk_15C = 0.5f;
             sp34 = 0.0f;
-            sp30 = 0.6f;
+            shadowScale = 0.6f;
             this->actor.world.rot.x = 0x4000;
             break;
     }
 
     this->unk_156 = 0;
-    ActorShape_Init(&this->actor.shape, sp34, ActorShadow_DrawCircle, sp30);
-    this->actor.shape.shadowAlpha = 0xB4;
+    ActorShape_Init(&this->actor.shape, sp34, ActorShadow_DrawCircle, shadowScale);
+    this->actor.shape.shadowAlpha = 180;
     this->actor.focus.pos = this->actor.world.pos;
     this->unk_152 = 0;
 
@@ -216,7 +216,7 @@ void EnItem00_Init(Actor* thisx, GlobalContext* globalCtx) {
             Item_Give(globalCtx, ITEM_HEART);
             break;
         case ITEM00_FLEXIBLE:
-            Health_ChangeBy(globalCtx, 0x70);
+            Health_ChangeBy(globalCtx, 112);
             break;
         case ITEM00_BOMBS_A:
         case ITEM00_BOMBS_B:
@@ -791,13 +791,13 @@ void func_8001F1F4(EnItem00* this, GlobalContext* globalCtx) {
     func_8002EBCC(&this->actor, globalCtx, 0);
     gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_item00.c", 1634),
               G_MTX_MODELVIEW | G_MTX_LOAD);
-    gSPDisplayList(POLY_OPA_DISP++, &gHeartPieceExteriorDL);
+    gSPDisplayList(POLY_OPA_DISP++, gHeartPieceExteriorDL);
 
     func_80093D84(globalCtx->state.gfxCtx);
     func_8002ED80(&this->actor, globalCtx, 0);
     gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_item00.c", 1644),
               G_MTX_MODELVIEW | G_MTX_LOAD);
-    gSPDisplayList(POLY_XLU_DISP++, &gHeartContainerInteriorDL);
+    gSPDisplayList(POLY_XLU_DISP++, gHeartContainerInteriorDL);
 
     CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_item00.c", 1647);
 }
@@ -814,7 +814,7 @@ void func_8001F334(EnItem00* this, GlobalContext* globalCtx) {
     func_8002ED80(&this->actor, globalCtx, 0);
     gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_item00.c", 1670),
               G_MTX_MODELVIEW | G_MTX_LOAD);
-    gSPDisplayList(POLY_XLU_DISP++, &gHeartPieceInteriorDL);
+    gSPDisplayList(POLY_XLU_DISP++, gHeartPieceInteriorDL);
 
     CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_item00.c", 1673);
 }

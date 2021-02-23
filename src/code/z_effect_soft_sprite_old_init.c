@@ -245,7 +245,7 @@ void EffectSsKiraKira_SpawnDispersed(GlobalContext* globalCtx, Vec3f* pos, Vec3f
     initParams.accel.y = ((Rand_ZeroOne() * initParams.accel.y) + initParams.accel.y) * 0.5f;
     initParams.life = life;
     initParams.updateMode = 0;
-    initParams.rotSpeed = 0x1518;
+    initParams.rotSpeed = 5400;
     initParams.yaw = Rand_ZeroOne() * 16384.0f;
     initParams.scale = scale;
     initParams.primColor = *primColor;
@@ -264,7 +264,7 @@ void EffectSsKiraKira_SpawnFocused(GlobalContext* globalCtx, Vec3f* pos, Vec3f* 
     Math_Vec3f_Copy(&initParams.accel, accel);
     initParams.life = life;
     initParams.updateMode = 1;
-    initParams.rotSpeed = 0x1518;
+    initParams.rotSpeed = 5400;
     initParams.yaw = Rand_ZeroOne() * 16384.0f;
     initParams.scale = scale;
     Color_RGBA8_Copy(&initParams.primColor, primColor);

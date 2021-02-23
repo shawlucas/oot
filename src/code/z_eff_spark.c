@@ -85,9 +85,9 @@ void EffectSpark_Init(void* thisx, void* initParamsx) {
             elem->unkVelocity.x = 30000.0f - Rand_ZeroOne() * 15000.0f;
             elem->unkVelocity.y = 30000.0f - Rand_ZeroOne() * 15000.0f;
             elem->unkVelocity.z = 30000.0f - Rand_ZeroOne() * 15000.0f;
-            elem->unkPosition.x = Rand_ZeroOne() * 65534.0f;
-            elem->unkPosition.y = Rand_ZeroOne() * 65534.0f;
-            elem->unkPosition.z = Rand_ZeroOne() * 65534.0f;
+            elem->unkPosition.x = Rand_ZeroOne() * (SHT_MAX * 2);
+            elem->unkPosition.y = Rand_ZeroOne() * (SHT_MAX * 2);
+            elem->unkPosition.z = Rand_ZeroOne() * (SHT_MAX * 2);
         }
 
         this->timer = 0;
@@ -174,7 +174,7 @@ void EffectSpark_Draw(void* thisx, GraphicsContext* gfxCtx) {
         gSPSetGeometryMode(POLY_XLU_DISP++, G_ZBUFFER | G_SHADE | G_SHADING_SMOOTH);
         gDPPipeSync(POLY_XLU_DISP++);
 
-        vertices = Graph_Alloc(gfxCtx, this->numElements * sizeof(Vtx[4]));
+        vertices = Graph_Alloc(gfxCtx, this->numElements * sizeof(Vtx) * 4);
         if (vertices == NULL) {
             // Translates to: "Memory Allocation Failure graph_malloc"
             osSyncPrintf("EffectSparkInfo_disp():メモリー確保失敗 graph_malloc\n");

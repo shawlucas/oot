@@ -38,6 +38,10 @@
 
 #define Z_THREAD_IDLE          1
 #define Z_THREAD_MAIN          3
+#define Z_THREAD_GRAPH         4
+#define Z_THREAD_SCHED         5
+#define Z_THREAD_AUDIOMGR      10
+#define Z_THREAD_IRQMGR        19
 #define Z_THREAD_DMAMGR        18
 
 #define Z_PRIORITY_MAIN        10

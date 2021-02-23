@@ -3,10 +3,10 @@
 #include "objects/gameplay_keep/gameplay_keep.h"
 
 static Vtx sVertices[5] = {
-    VTX(-32, -32, 0, 0, 1024, 0xFF, 0xFF, 0xFF, 0xFF),
-    VTX(32, 32, 0, 1024, 0, 0xFF, 0xFF, 0xFF, 0xFF),
-    VTX(-32, 32, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF),
-    VTX(32, -32, 0, 1024, 1024, 0xFF, 0xFF, 0xFF, 0xFF),
+    VTX(-32, -32, 0, 0, 1024, 255, 255, 255, 255),
+    VTX(32, 32, 0, 1024, 0, 255, 255, 255, 255),
+    VTX(-32, 32, 0, 0, 0, 255, 255, 255, 255),
+    VTX(32, -32, 0, 1024, 1024, 255, 255, 255, 255),
 };
 
 // original name: "EffectShieldParticle_ct"
@@ -43,8 +43,8 @@ void EffectShieldParticle_Init(void* thisx, void* initParamsx) {
             elem->startXChange = 0.0f;
             elem->startX = 0.0f;
             elem->endXChange = elem->initialSpeed;
-            elem->yaw = Rand_ZeroOne() * 65534.0f;
-            elem->pitch = Rand_ZeroOne() * 65534.0f;
+            elem->yaw = Rand_ZeroOne() * (SHT_MAX * 2);
+            elem->pitch = Rand_ZeroOne() * (SHT_MAX * 2);
         }
 
         this->lightDecay = initParams->lightDecay;

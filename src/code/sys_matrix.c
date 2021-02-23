@@ -20,7 +20,7 @@ MtxF* sMatrixStack;   // "Matrix_stack"
 MtxF* sCurrentMatrix; // "Matrix_now"
 
 void Matrix_Init(GameState* gameState) {
-    sCurrentMatrix = GameState_Alloc(gameState, 20 * sizeof(MtxF), "../sys_matrix.c", 153);
+    sCurrentMatrix = GameState_Alloc(gameState, sizeof(MtxF) * 20, "../sys_matrix.c", 153);
     sMatrixStack = sCurrentMatrix;
 }
 
@@ -599,11 +599,11 @@ Mtx* Matrix_MtxFToMtx(MtxF* src, Mtx* dest) {
     return dest;
 }
 
-Mtx* Matrix_ToMtx(Mtx* dest, char* file, s32 line) {
+Mtx* Matrix_ToMtx(Mtx* dest, const char* file, s32 line) {
     return Matrix_MtxFToMtx(Matrix_CheckFloats(sCurrentMatrix, file, line), dest);
 }
 
-Mtx* Matrix_NewMtx(GraphicsContext* gfxCtx, char* file, s32 line) {
+Mtx* Matrix_NewMtx(GraphicsContext* gfxCtx, const char* file, s32 line) {
     return Matrix_ToMtx(Graph_Alloc(gfxCtx, sizeof(Mtx)), file, line);
 }
 
@@ -926,7 +926,7 @@ void func_800D23FC(f32 f, Vec3f* vec, u8 mode) {
 #pragma GLOBAL_ASM("asm/non_matchings/code/sys_matrix/func_800D23FC.s")
 #endif
 
-MtxF* Matrix_CheckFloats(MtxF* mf, char* file, s32 line) {
+MtxF* Matrix_CheckFloats(MtxF* mf, const char* file, s32 line) {
     s32 i, j;
 
     for (i = 0; i < 4; i++) {

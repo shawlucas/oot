@@ -113,7 +113,7 @@ void IrqMgr_HandlePreNMI(IrqMgr* this) {
 
 void IrqMgr_CheckStack() {
     osSyncPrintf("irqmgr.c: PRENMIから0.5秒経過\n"); // 0.5 seconds after PRENMI
-    if (StackCheck_Check(NULL) == 0) {
+    if (StackCheck_Check(NULL) == STACK_STATUS_OK) {
         osSyncPrintf("スタックは大丈夫みたいです\n"); // The stack looks ok
     } else {
         osSyncPrintf("%c", 7);
@@ -222,6 +222,6 @@ void IrqMgr_Init(IrqMgr* this, void* stack, OSPri pri, u8 retraceCount) {
     osCreateMesgQueue(&this->queue, this->msgBuf, ARRAY_COUNT(this->msgBuf));
     osSetEventMesg(OS_EVENT_PRENMI, &this->queue, (OSMesg)PRE_NMI_MSG);
     osViSetEvent(&this->queue, (OSMesg)RETRACE_MSG, retraceCount);
-    osCreateThread(&this->thread, 0x13, IrqMgr_ThreadEntry, this, stack, pri);
+    osCreateThread(&this->thread, Z_THREAD_IRQMGR, IrqMgr_ThreadEntry, this, stack, pri);
     osStartThread(&this->thread);
 }

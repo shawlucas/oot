@@ -17,7 +17,7 @@ void EffectBlure_AddVertex(EffectBlure* this, Vec3f* p1, Vec3f* p2) {
 
     if (this != NULL) {
         numElements = this->numElements;
-        if (numElements >= 16) {
+        if (numElements >= ARRAY_COUNT(this->elements)) {
             // Translates to: "Blure vertex addition processing: Table over %d"
             osSyncPrintf("ブラ─頂点追加処理:テーブルオーバー %d\n", numElements);
             return;
@@ -75,7 +75,7 @@ void EffectBlure_AddSpace(EffectBlure* this) {
 
     if (this != NULL) {
         numElements = this->numElements;
-        if (numElements >= 16) {
+        if (numElements >= ARRAY_COUNT(this->elements)) {
             // Translates to: "Blure space addition processing: Table over %d"
             osSyncPrintf("ブラ─空白追加処理:テーブルオーバー %d\n", numElements);
             return;
@@ -95,7 +95,7 @@ void EffectBlure_InitElements(EffectBlure* this) {
 
     this->numElements = 0;
 
-    for (i = 0; i < 16; i++) {
+    for (i = 0; i < ARRAY_COUNT(this->elements); i++) {
         elem = &this->elements[i];
 
         elem->state = 2;
@@ -401,7 +401,7 @@ void EffectBlure_SetupSmooth(EffectBlure* this, GraphicsContext* gfxCtx) {
 // original name: "SQ_NoInterpolate_disp"
 void EffectBlure_DrawElemNoInterpolation(EffectBlure* this, EffectBlureElement* elem, s32 index,
                                          GraphicsContext* gfxCtx) {
-    static Vtx_t baseVtx = VTX_T(0, 0, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+    static Vtx_t baseVtx = VTX_T(0, 0, 0, 0, 0, 255, 255, 255, 255);
     Vtx* vtx;
     Vec3s sp8C;
     Vec3s sp84;
@@ -416,7 +416,7 @@ void EffectBlure_DrawElemNoInterpolation(EffectBlure* this, EffectBlureElement* 
 
     Math_Vec3s_ToVec3f(&sp6C, &this->elements[0].p2);
 
-    vtx = Graph_Alloc(gfxCtx, sizeof(Vtx[4]));
+    vtx = Graph_Alloc(gfxCtx, sizeof(Vtx) * 4);
     if (vtx == NULL) {
         // Translates to: "Vertices cannot be secured."
         osSyncPrintf("z_eff_blure.c::SQ_NoInterpolate_disp() 頂点確保できず。\n");
@@ -499,7 +499,7 @@ void EffectBlure_DrawElemNoInterpolation(EffectBlure* this, EffectBlureElement* 
 #ifdef NON_MATCHING
 void EffectBlure_DrawElemHermiteInterpolation(EffectBlure* this, EffectBlureElement* elem, s32 index,
                                               GraphicsContext* gfxCtx) {
-    static Vtx_t baseVtx = VTX_T(0, 0, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+    static Vtx_t baseVtx = VTX_T(0, 0, 0, 0, 0, 255, 255, 255, 255);
     Vtx* vtx;
     Vec3s sp1EC;
     Vec3s sp1E4;
@@ -582,7 +582,7 @@ void EffectBlure_DrawElemHermiteInterpolation(EffectBlure* this, EffectBlureElem
     Math_Vec3f_Scale(&sp174, 0.5f);
     Math_Vec3f_Scale(&sp168, 0.5f);
 
-    vtx = Graph_Alloc(gfxCtx, sizeof(Vtx[16]));
+    vtx = Graph_Alloc(gfxCtx, sizeof(Vtx) * 16);
     if (vtx == NULL) {
         // Translates to: "Vertices cannot be secured."
         osSyncPrintf("z_eff_blure.c::SQ_HermiteInterpolate_disp() 頂点確保できず。\n");
@@ -858,17 +858,17 @@ void EffectBlure_DrawSimpleVertices(GraphicsContext* gfxCtx, EffectBlure* this, 
 }
 
 Vtx_t D_8011578C[] = {
-    VTX_T(0, 0, 0, 0, 1024, 0xFF, 0xFF, 0xFF, 0xFF),
-    VTX_T(0, 0, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF),
-    VTX_T(0, 0, 0, 2048, 1024, 0xFF, 0xFF, 0xFF, 0xFF),
-    VTX_T(0, 0, 0, 2048, 0, 0xFF, 0xFF, 0xFF, 0xFF),
+    VTX_T(0, 0, 0, 0, 1024, 255, 255, 255, 255),
+    VTX_T(0, 0, 0, 0, 0, 255, 255, 255, 255),
+    VTX_T(0, 0, 0, 2048, 1024, 255, 255, 255, 255),
+    VTX_T(0, 0, 0, 2048, 0, 255, 255, 255, 255),
 };
 
 Vtx_t D_801157CC[] = {
-    VTX_T(0, 0, 0, 2048, 1024, 0xFF, 0xFF, 0xFF, 0xFF),
-    VTX_T(0, 0, 0, 2048, 0, 0xFF, 0xFF, 0xFF, 0xFF),
-    VTX_T(0, 0, 0, 2048, 1024, 0xFF, 0xFF, 0xFF, 0xFF),
-    VTX_T(0, 0, 0, 2048, 0, 0xFF, 0xFF, 0xFF, 0xFF),
+    VTX_T(0, 0, 0, 2048, 1024, 255, 255, 255, 255),
+    VTX_T(0, 0, 0, 2048, 0, 255, 255, 255, 255),
+    VTX_T(0, 0, 0, 2048, 1024, 255, 255, 255, 255),
+    VTX_T(0, 0, 0, 2048, 0, 255, 255, 255, 255),
 };
 
 #ifdef NON_MATCHING
@@ -993,7 +993,7 @@ void EffectBlure_Draw(void* thisx, GraphicsContext* gfxCtx) {
             func_800942F0(gfxCtx);
             gDPPipeSync(POLY_XLU_DISP++);
 
-            vtx = Graph_Alloc(gfxCtx, sizeof(Vtx[32]));
+            vtx = Graph_Alloc(gfxCtx, sizeof(Vtx) * 32);
             if (vtx == NULL) {
                 // Translates to: "Blure display: Vertex table could not be secured"
                 osSyncPrintf("ブラ─表示:頂点テーブル確保できず\n");
@@ -1089,7 +1089,7 @@ void EffectBlure_Draw(void* thisx, GraphicsContext* gfxCtx) {
                     }
                 }
             }
-        } else if (this->drawMode < 2) {
+        } else if (this->drawMode < ARRAY_COUNT(sSetupHandlers)) {
             EffectBlure_DrawSimple(this, gfxCtx);
         } else {
             EffectBlure_DrawSmooth(this, gfxCtx);

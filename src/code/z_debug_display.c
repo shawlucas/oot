@@ -3,13 +3,13 @@
 
 typedef struct {
     /* 0x00 */ s16 drawType; // indicates which draw function to use when displaying the object
-    /* 0x04 */ u32 drawArg;  // segment address (display list or texture) passed to the draw funciton when called
+    /* 0x04 */ void* segment;  // segment address (display list or texture) passed to the draw funciton when called
 } DebugDispObjectInfo;       // size = 0x8
 
-typedef void (*DebugDispObject_DrawFunc)(DebugDispObject*, u32, GlobalContext*);
+typedef void (*DebugDispObject_DrawFunc)(DebugDispObject*, void*, GlobalContext*);
 
-void DebugDisplay_DrawSpriteI8(DebugDispObject* dispObj, u32 texture, GlobalContext* globalCtx);
-void DebugDisplay_DrawPolygon(DebugDispObject* dispObj, u32 dlist, GlobalContext* globalCtx);
+void DebugDisplay_DrawSpriteI8(DebugDispObject* dispObj, void* texture, GlobalContext* globalCtx);
+void DebugDisplay_DrawPolygon(DebugDispObject* dispObj, void* dlist, GlobalContext* globalCtx);
 
 static DebugDispObject_DrawFunc sDebugObjectDrawFuncTable[] = {
     DebugDisplay_DrawSpriteI8,
@@ -21,7 +21,7 @@ static DebugDispObjectInfo sDebugObjectInfoTable[] = {
     { 0, gDebugCursorTex }, { 1, gDebugArrowDL },  { 1, gDebugCameraDL },
 };
 
-static Lights1 sDebugObjectLights = gdSPDefLights1(0x80, 0x80, 0x80, 0xFF, 0xFF, 0xFF, 0x49, 0x49, 0x49);
+static Lights1 sDebugObjectLights = gdSPDefLights1(128, 128, 128, 255, 255, 255, 73, 73, 73);
 
 static DebugDispObject* sDebugObjectListHead;
 
@@ -61,12 +61,12 @@ void DebugDisplay_DrawObjects(GlobalContext* globalCtx) {
 
     while (dispObj != NULL) {
         objInfo = &sDebugObjectInfoTable[dispObj->type];
-        sDebugObjectDrawFuncTable[objInfo->drawType](dispObj, objInfo->drawArg, globalCtx);
+        sDebugObjectDrawFuncTable[objInfo->drawType](dispObj, objInfo->segment, globalCtx);
         dispObj = dispObj->next;
     }
 }
 
-void DebugDisplay_DrawSpriteI8(DebugDispObject* dispObj, u32 texture, GlobalContext* globalCtx) {
+void DebugDisplay_DrawSpriteI8(DebugDispObject* dispObj, void* texture, GlobalContext* globalCtx) {
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_debug_display.c", 169);
 
     func_80094678(globalCtx->state.gfxCtx);
@@ -88,7 +88,7 @@ void DebugDisplay_DrawSpriteI8(DebugDispObject* dispObj, u32 texture, GlobalCont
     CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_debug_display.c", 192);
 }
 
-void DebugDisplay_DrawPolygon(DebugDispObject* dispObj, u32 dlist, GlobalContext* globalCtx) {
+void DebugDisplay_DrawPolygon(DebugDispObject* dispObj, void* dlist, GlobalContext* globalCtx) {
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_debug_display.c", 211);
 
     func_8009435C(globalCtx->state.gfxCtx);

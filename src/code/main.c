@@ -39,7 +39,7 @@ void Main(void* arg) {
     OSMesg irqMgrMsgBuf[60];
     u32 sysHeap;
     u32 fb;
-    s32 debugHeap;
+    void* debugHeap;
     s32 debugHeapSize;
     s16* msg;
 
@@ -57,10 +57,10 @@ void Main(void* arg) {
     SystemHeap_Init(sysHeap, gSystemHeapSize);                                           // initializes the system heap
     if (osMemSize >= 0x800000U) {
         debugHeap = SysCfb_GetFbEnd();
-        debugHeapSize = (s32)(0x80600000 - debugHeap);
+        debugHeapSize = 0x80600000 - (u32)debugHeap;
     } else {
         debugHeapSize = 0x400;
-        debugHeap = SystemArena_MallocDebug(debugHeapSize, "../main.c", 0x235);
+        debugHeap = SystemArena_MallocDebug(debugHeapSize, "../main.c", 565);
     }
     osSyncPrintf("debug_InitArena(%08x, %08x)\n", debugHeap, debugHeapSize);
     DebugArena_Init(debugHeap, debugHeapSize);
@@ -68,23 +68,23 @@ void Main(void* arg) {
 
     R_ENABLE_ARENA_DBG = 0;
 
-    osCreateMesgQueue(&sSiIntMsgQ, sSiIntMsgBuf, 1);
+    osCreateMesgQueue(&sSiIntMsgQ, sSiIntMsgBuf, ARRAY_COUNT(sSiIntMsgBuf));
     osSetEventMesg(5, &sSiIntMsgQ, 0);
 
     Main_LogSystemHeap();
 
-    osCreateMesgQueue(&irqMgrMsgQ, irqMgrMsgBuf, 0x3c);
+    osCreateMesgQueue(&irqMgrMsgQ, irqMgrMsgBuf, ARRAY_COUNT(irqMgrMsgBuf));
     StackCheck_Init(&sIrqMgrStackInfo, sIrqMgrStack, sIrqMgrStack + sizeof(sIrqMgrStack), 0, 0x100, "irqmgr");
     IrqMgr_Init(&gIrqMgr, &sGraphStackInfo, Z_PRIORITY_IRQMGR, 1);
 
     osSyncPrintf("タスクスケジューラの初期化\n"); // Initialize the task scheduler
     StackCheck_Init(&sSchedStackInfo, sSchedStack, sSchedStack + sizeof(sSchedStack), 0, 0x100, "sched");
-    Sched_Init(&gSchedContext, &sAudioStack, Z_PRIORITY_SCHED, gViModeType, 1, &gIrqMgr);
+    Sched_Init(&gSchedContext, sAudioStack, Z_PRIORITY_SCHED, gViModeType, 1, &gIrqMgr);
 
     IrqMgr_AddClient(&gIrqMgr, &irqClient, &irqMgrMsgQ);
 
     StackCheck_Init(&sAudioStackInfo, sAudioStack, sAudioStack + sizeof(sAudioStack), 0, 0x100, "audio");
-    AudioMgr_Init(&gAudioMgr, sAudioStack + sizeof(sAudioStack), Z_PRIORITY_AUDIOMGR, 0xa, &gSchedContext, &gIrqMgr);
+    AudioMgr_Init(&gAudioMgr, sAudioStack + sizeof(sAudioStack), Z_PRIORITY_AUDIOMGR, Z_THREAD_AUDIOMGR, &gSchedContext, &gIrqMgr);
 
     StackCheck_Init(&sPadMgrStackInfo, sPadMgrStack, sPadMgrStack + sizeof(sPadMgrStack), 0, 0x100, "padmgr");
     PadMgr_Init(&gPadMgr, &sSiIntMsgQ, &gIrqMgr, 7, Z_PRIORITY_PADMGR, &sIrqMgrStack);
@@ -92,9 +92,9 @@ void Main(void* arg) {
     AudioMgr_Unlock(&gAudioMgr);
 
     StackCheck_Init(&sGraphStackInfo, sGraphStack, sGraphStack + sizeof(sGraphStack), 0, 0x100, "graph");
-    osCreateThread(&sGraphThread, 4, Graph_ThreadEntry, arg, sGraphStack + sizeof(sGraphStack), Z_PRIORITY_GRAPH);
+    osCreateThread(&sGraphThread, Z_THREAD_GRAPH, Graph_ThreadEntry, arg, sGraphStack + sizeof(sGraphStack), Z_PRIORITY_GRAPH);
     osStartThread(&sGraphThread);
-    osSetThreadPri(0, Z_PRIORITY_SCHED);
+    osSetThreadPri(NULL, Z_PRIORITY_SCHED);
 
     while (true) {
         msg = NULL;

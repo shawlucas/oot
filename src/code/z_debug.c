@@ -60,7 +60,7 @@ void func_8006376C(u8 x, u8 y, u8 colorId, const char* text) {
     s16 i;
 
     buf = &D_8015FA98[D_8011E0B0];
-    if (D_8011E0B0 < 0x16) {
+    if (D_8011E0B0 < ARRAY_COUNT(D_8015FA98)) {
         buf->x = x;
         buf->y = y;
         buf->colorId = colorId;

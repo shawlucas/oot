@@ -1,5 +1,10 @@
 #include "global.h"
 
+#define R_MIPS_32   0x2000000
+#define R_MIPS_26   0x4000000
+#define R_MIPS_HI16 0x5000000
+#define R_MIPS_LO16 0x6000000
+
 void Overlay_Relocate(void* allocatedVRamAddress, OverlayRelocationSection* overlayInfo, void* vRamAddress) {
     u32 sections[4];
     u32 relocatedValue;
@@ -40,7 +45,7 @@ void Overlay_Relocate(void* allocatedVRamAddress, OverlayRelocationSection* over
         relocDataP = (u32*)(sections[reloc >> 0x1E] + (reloc & 0xFFFFFF));
         relocData = *relocDataP;
         switch (reloc & 0x3F000000) {
-            case 0x2000000:
+            case R_MIPS_32:
                 /* R_MIPS_32
                  * Handles 32-bit address relocation.  Used in things such as
                  * jump tables.
@@ -54,17 +59,17 @@ void Overlay_Relocate(void* allocatedVRamAddress, OverlayRelocationSection* over
                     *relocDataP = relocatedAddress;
                 }
                 break;
-            case 0x4000000:
+            case R_MIPS_26:
                 /* R_MIPS_26
                  * Handles 26-bit address relocation, used for jumps and jals
                  */
-                unrelocatedAddress = ((*relocDataP & 0x3FFFFFF) << 2) | 0x80000000;
+                unrelocatedAddress = PHYS_TO_K0(((*relocDataP & 0x3FFFFFF) << 2));
                 relocOffset = unrelocatedAddress - (u32)vRamAddress;
                 relocatedValue = (*relocDataP & 0xFC000000) | (((allocu32 + relocOffset) & 0xFFFFFFF) >> 2);
-                relocatedAddress = ((relocatedValue & 0x3FFFFFF) << 2) | 0x80000000;
+                relocatedAddress = PHYS_TO_K0(((relocatedValue & 0x3FFFFFF) << 2));
                 *relocDataP = relocatedValue;
                 break;
-            case 0x5000000:
+            case R_MIPS_HI16:
                 /* R_MIPS_HI16
                  * Handles relocation for a lui instruciton, store the reference to
                  * the instruction, and will update it in the R_MIPS_LO16 section.
@@ -72,7 +77,7 @@ void Overlay_Relocate(void* allocatedVRamAddress, OverlayRelocationSection* over
                 luiRefs[(*relocDataP >> 0x10) & 0x1F] = relocDataP;
                 luiVals[(*relocDataP >> 0x10) & 0x1F] = *relocDataP;
                 break;
-            case 0x6000000:
+            case R_MIPS_LO16:
                 /* R_MIPS_LO16
                  * Updates the LUI instruction to reflect the relocated address.
                  * The full address is calculated from the LUI and lo parts, and then updated.
@@ -98,11 +103,11 @@ void Overlay_Relocate(void* allocatedVRamAddress, OverlayRelocationSection* over
 
         dbg = 0x10;
         switch (reloc & 0x3F000000) {
-            case 0x2000000:
+            case R_MIPS_32:
                 dbg = 0x16;
-            case 0x4000000:
+            case R_MIPS_26:
                 dbg += 0xA;
-            case 0x6000000:
+            case R_MIPS_LO16:
                 if (gOverlayLogSeverity >= 3) {
                     osSyncPrintf("%02d %08x %08x %08x ", dbg, relocDataP, relocatedValue, relocatedAddress);
                     osSyncPrintf(" %08x %08x %08x %08x\n", ((u32)relocDataP + (u32)vRamAddress) - allocu32, relocData,

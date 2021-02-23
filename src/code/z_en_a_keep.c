@@ -83,7 +83,7 @@ void EnAObj_Init(Actor* thisx, GlobalContext* globalCtx) {
     CollisionHeader* colHeader = NULL;
     s32 pad;
     EnAObj* this = THIS;
-    f32 sp28 = 6.0f;
+    f32 shadowScale = 6.0f;
 
     this->textId = (thisx->params >> 8) & 0xFF;
     thisx->params &= 0xFF;
@@ -110,10 +110,10 @@ void EnAObj_Init(Actor* thisx, GlobalContext* globalCtx) {
     }
 
     if (thisx->params >= 9) {
-        sp28 = 12.0f;
+        shadowScale = 12.0f;
     }
 
-    ActorShape_Init(&thisx->shape, 0.0f, ActorShadow_DrawCircle, sp28);
+    ActorShape_Init(&thisx->shape, 0.0f, ActorShadow_DrawCircle, shadowScale);
 
     thisx->focus.pos = thisx->world.pos;
     this->dyna.bgId = BGACTOR_NEG_ONE;
@@ -203,11 +203,11 @@ void func_8001D234(EnAObj* this, s16 params) {
 }
 
 void func_8001D25C(EnAObj* this, GlobalContext* globalCtx) {
-    s16 var;
+    s16 yawDiff;
 
     if (this->dyna.actor.textId != 0) {
-        var = this->dyna.actor.yawTowardsPlayer - this->dyna.actor.shape.rot.y;
-        if ((ABS(var) < 0x2800) || ((this->dyna.actor.params == 0xA) && (ABS(var) > 0x5800))) {
+        yawDiff = this->dyna.actor.yawTowardsPlayer - this->dyna.actor.shape.rot.y;
+        if ((ABS(yawDiff) < 0x2800) || ((this->dyna.actor.params == 0xA) && (ABS(yawDiff) > 0x5800))) {
             if (func_8002F194(&this->dyna.actor, globalCtx)) {
                 EnAObj_SetupAction(this, func_8001D204);
             } else {
@@ -270,8 +270,8 @@ void func_8001D480(EnAObj* this, s16 params) {
 
 void func_8001D4A8(EnAObj* this, GlobalContext* globalCtx) {
     Math_SmoothStepToF(&this->dyna.actor.speedXZ, 1.0f, 1.0f, 0.5f, 0.0f);
-    this->dyna.actor.shape.rot.x = this->dyna.actor.shape.rot.x + (this->dyna.actor.world.rot.x >> 1);
-    this->dyna.actor.shape.rot.z = this->dyna.actor.shape.rot.z + (this->dyna.actor.world.rot.z >> 1);
+    this->dyna.actor.shape.rot.x += (this->dyna.actor.world.rot.x >> 1);
+    this->dyna.actor.shape.rot.z += (this->dyna.actor.world.rot.z >> 1);
 
     if ((this->dyna.actor.speedXZ != 0.0f) && (this->dyna.actor.bgCheckFlags & 0x8)) {
         this->dyna.actor.world.rot.y =

@@ -51,7 +51,6 @@ void TransitionTriforce_Destroy(void* thisx) {
 
 void TransitionTriforce_Update(void* thisx, s32 updateRate) {
     TransitionTriforce* this = THIS;
-    f32 temp_f0;
     s32 i;
 
     for (i = updateRate; i > 0; i--) {

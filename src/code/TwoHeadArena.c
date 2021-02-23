@@ -1,6 +1,6 @@
 #include "global.h"
 
-void THGA_Ct(TwoHeadGfxArena* thga, Gfx* start, u32 size) {
+void THGA_Ct(TwoHeadGfxArena* thga, Gfx* start, size_t size) {
     THA_Ct((TwoHeadArena*)thga, start, size);
 }
 
@@ -44,24 +44,24 @@ Gfx* THGA_AllocStart8Wrapper(TwoHeadGfxArena* thga) {
     return THGA_AllocStart8(thga);
 }
 
-Gfx* THGA_AllocEnd(TwoHeadGfxArena* thga, u32 size) {
+Gfx* THGA_AllocEnd(TwoHeadGfxArena* thga, size_t size) {
     return THA_AllocEnd((TwoHeadArena*)thga, size);
 }
 
 Gfx* THGA_AllocEndArray64(TwoHeadGfxArena* thga, u32 count) {
-    return THGA_AllocEnd(thga, count * 0x40);
+    return THGA_AllocEnd(thga, count * 64);
 }
 
 Gfx* THGA_AllocEnd64(TwoHeadGfxArena* thga) {
-    return THGA_AllocEnd(thga, 0x40);
+    return THGA_AllocEnd(thga, 64);
 }
 
 Gfx* THGA_AllocEndArray16(TwoHeadGfxArena* thga, u32 count) {
-    return THGA_AllocEnd(thga, count * 0x10);
+    return THGA_AllocEnd(thga, count * 16);
 }
 
 Gfx* THGA_AllocEnd16(TwoHeadGfxArena* thga) {
-    return THGA_AllocEnd(thga, 0x10);
+    return THGA_AllocEnd(thga, 16);
 }
 
 void* THA_GetHead(TwoHeadArena* tha) {
@@ -76,7 +76,7 @@ void* THA_GetTail(TwoHeadArena* tha) {
     return tha->tail;
 }
 
-void* THA_AllocStart(TwoHeadArena* tha, u32 size) {
+void* THA_AllocStart(TwoHeadArena* tha, size_t size) {
     void* start = tha->head;
 
     tha->head = (u32)tha->head + size;
@@ -87,7 +87,7 @@ void* THA_AllocStart1(TwoHeadArena* tha) {
     return THA_AllocStart(tha, 1);
 }
 
-void* THA_AllocEnd(TwoHeadArena* tha, u32 size) {
+void* THA_AllocEnd(TwoHeadArena* tha, size_t size) {
     u32 mask;
 
     if (size == 8) {
@@ -104,24 +104,24 @@ void* THA_AllocEnd(TwoHeadArena* tha, u32 size) {
     return tha->tail;
 }
 
-void* THA_AllocEndAlign16(TwoHeadArena* tha, u32 size) {
+void* THA_AllocEndAlign16(TwoHeadArena* tha, size_t size) {
     u32 mask = ~0xF;
 
     tha->tail = (((u32)tha->tail & mask) - size) & (u64)mask;
     return tha->tail;
 }
 
-void* THA_AllocEndAlign(TwoHeadArena* tha, u32 size, u32 mask) {
+void* THA_AllocEndAlign(TwoHeadArena* tha, size_t size, u32 mask) {
     tha->tail = (((u32)tha->tail & mask) - size) & mask;
     return tha->tail;
 }
 
-s32 THA_GetSize(TwoHeadArena* tha) {
+size_t THA_GetSize(TwoHeadArena* tha) {
     return (u32)tha->tail - (u32)tha->head;
 }
 
 u32 THA_IsCrash(TwoHeadArena* tha) {
-    return THA_GetSize(tha) < 0;
+    return (s32)THA_GetSize(tha) < 0;
 }
 
 void THA_Init(TwoHeadArena* tha) {
@@ -129,7 +129,7 @@ void THA_Init(TwoHeadArena* tha) {
     tha->tail = (u32)tha->bufp + tha->size;
 }
 
-void THA_Ct(TwoHeadArena* tha, void* ptr, u32 size) {
+void THA_Ct(TwoHeadArena* tha, void* ptr, size_t size) {
     tha->bufp = ptr;
     tha->size = size;
     THA_Init(tha);

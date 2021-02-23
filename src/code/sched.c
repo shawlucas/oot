@@ -26,7 +26,7 @@ void Sched_SwapFrameBuffer(CfbInfo* cfbInfo) {
                          (cfbInfo != NULL ? cfbInfo->swapBuffer : NULL));
         }
         width = cfbInfo->viMode != NULL ? cfbInfo->viMode->comRegs.width : (u32)gScreenWidth;
-        Fault_SetFB(cfbInfo->swapBuffer, width, 0x10);
+        Fault_SetFB(cfbInfo->swapBuffer, width, 16);
 
         if (HREG(80) == 0xD && HREG(95) != 0xD) {
             HREG(81) = 0;
@@ -46,10 +46,10 @@ void Sched_SwapFrameBuffer(CfbInfo* cfbInfo) {
             HREG(95) = 0xD;
         }
         if (HREG(80) == 0xD && HREG(81) == 2) {
-            osViSetSpecialFeatures(HREG(82) != 0 ? 1 : 2);
-            osViSetSpecialFeatures(HREG(83) != 0 ? 0x40 : 0x80);
-            osViSetSpecialFeatures(HREG(84) != 0 ? 0x4 : 0x8);
-            osViSetSpecialFeatures(HREG(85) != 0 ? 0x10 : 0x20);
+            osViSetSpecialFeatures(HREG(82) != 0 ? OS_VI_GAMMA_ON : OS_VI_GAMMA_OFF);
+            osViSetSpecialFeatures(HREG(83) != 0 ? OS_VI_DITHER_FILTER_ON : OS_VI_DITHER_FILTER_OFF);
+            osViSetSpecialFeatures(HREG(84) != 0 ? OS_VI_GAMMA_DITHER_ON : OS_VI_GAMMA_DITHER_OFF);
+            osViSetSpecialFeatures(HREG(85) != 0 ? OS_VI_DIVOT_ON : OS_VI_DIVOT_OFF);
         }
     }
     cfbInfo->unk_10 = 0;
@@ -87,7 +87,7 @@ void Sched_HandleReset(SchedContext* sc) {
             if (sc->curRDPTask != NULL) {
                 LOG_TIME("(((u64)(now - rdp_start_time)*(1000000LL/15625LL))/((62500000LL*3/4)/15625LL))",
                          OS_CYCLES_TO_USEC(now - sRDPStartTime), "../sched.c", 431);
-                osSendMesg(&sc->interruptQ, RDP_DONE_MSG, 0);
+                osSendMesg(&sc->interruptQ, RDP_DONE_MSG, OS_MESG_NOBLOCK);
             }
         }
     }
@@ -116,7 +116,7 @@ void Sched_QueueTask(SchedContext* sc, OSScTask* task) {
             sc->audioListHead = task;
         }
         sc->audioListTail = task;
-        sc->doAudio = 1;
+        sc->doAudio = true;
     } else {
         if (sLogScheduler) {
             // Entered graph task
@@ -192,7 +192,7 @@ s32 Sched_Schedule(SchedContext* sc, OSScTask** sp, OSScTask** dp, s32 state) {
     if (sc->doAudio && (ret & OS_SC_SP)) {
         *sp = audioTask;
         ret &= ~OS_SC_SP;
-        sc->doAudio = 0;
+        sc->doAudio = false;
         sc->audioListHead = sc->audioListHead->next;
         if (sc->audioListHead == NULL) {
             sc->audioListTail = NULL;
@@ -243,10 +243,10 @@ u32 Sched_IsComplete(SchedContext* sc, OSScTask* task) {
             func_800C8BC4(sc, task);
         }
 
-        return 1;
+        return true;
     }
 
-    return 0;
+    return false;
 }
 
 void Sched_RunTask(SchedContext* sc, OSScTask* spTask, OSScTask* dpTask) {
@@ -304,7 +304,7 @@ void Sched_HandleEntry(SchedContext* sc) {
         Sched_QueueTask(sc, msg);
     }
 
-    if (sc->doAudio != 0 && sc->curRSPTask != NULL) {
+    if (sc->doAudio && sc->curRSPTask != NULL) {
         if (sLogScheduler) {
             osSyncPrintf("[YIELD B]");
         }
@@ -312,7 +312,7 @@ void Sched_HandleEntry(SchedContext* sc) {
         return;
     }
 
-    state = ((sc->curRSPTask == 0) * 2) | (sc->curRDPTask == 0);
+    state = ((sc->curRSPTask == 0) << 1) | (sc->curRDPTask == 0);
     if (Sched_Schedule(sc, &nextRSP, &nextRDP, state) != state) {
         Sched_RunTask(sc, nextRSP, nextRDP);
     }
@@ -377,7 +377,7 @@ void Sched_HandleRSPDone(SchedContext* sc) {
     curRSPTask = sc->curRSPTask;
     sc->curRSPTask = NULL;
     if (sLogScheduler) {
-        osSyncPrintf("RSP DONE %d %d", curRSPTask->state & 0x10, osSpTaskYielded(&curRSPTask->list));
+        osSyncPrintf("RSP DONE %d %d", curRSPTask->state & OS_SC_YIELD, osSpTaskYielded(&curRSPTask->list));
     }
     if (curRSPTask->state & OS_SC_YIELD && osSpTaskYielded(&curRSPTask->list)) {
         if (sLogScheduler) {
@@ -477,13 +477,13 @@ void Sched_ThreadEntry(void* arg) {
                 break;
         }
         switch (((OSScMsg*)msg)->type) {
-            case 1:
+            case OS_SC_RETRACE_MSG:
                 Sched_HandleRetrace(sc);
                 continue;
-            case 4:
+            case OS_SC_PRE_NMI_MSG:
                 Sched_HandleReset(sc);
                 continue;
-            case 3:
+            case OS_SC_NMI_MSG:
                 Sched_HandleStart(sc);
                 continue;
         }
@@ -493,11 +493,11 @@ void Sched_ThreadEntry(void* arg) {
 void Sched_Init(SchedContext* sc, void* stack, OSPri priority, UNK_TYPE arg3, UNK_TYPE arg4, IrqMgr* irqMgr) {
     bzero(sc, sizeof(SchedContext));
     sc->unk_24C = 1;
-    osCreateMesgQueue(&sc->interruptQ, sc->intBuf, 8);
-    osCreateMesgQueue(&sc->cmdQ, sc->cmdMsgBuf, 8);
+    osCreateMesgQueue(&sc->interruptQ, sc->intBuf, ARRAY_COUNT(sc->cmdMsgBuf));
+    osCreateMesgQueue(&sc->cmdQ, sc->cmdMsgBuf, ARRAY_COUNT(sc->cmdMsgBuf));
     osSetEventMesg(OS_EVENT_SP, &sc->interruptQ, RSP_DONE_MSG);
     osSetEventMesg(OS_EVENT_DP, &sc->interruptQ, RDP_DONE_MSG);
     IrqMgr_AddClient(irqMgr, &sc->irqClient, &sc->interruptQ);
-    osCreateThread(&sc->thread, 5, Sched_ThreadEntry, sc, stack, priority);
+    osCreateThread(&sc->thread, Z_THREAD_SCHED, Sched_ThreadEntry, sc, stack, priority);
     osStartThread(&sc->thread);
 }

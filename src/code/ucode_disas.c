@@ -105,6 +105,7 @@ const char* UCodeDisas_ParseCombineColor(u32 value, u32 idx) {
 
 const char* UCodeDisas_ParseCombineAlpha(u32 value, u32 idx) {
     const char* ret = "?";
+
     switch (value) {
         case 0:
             ret = (idx == 3) ? "LOD_FRACTION" : "COMBINED";
@@ -166,7 +167,7 @@ void UCodeDisas_ParseGeometryMode(UCodeDisas* this, u32 mode) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(sUCodeDisasGeometryModes); i++) {
-        if ((sUCodeDisasGeometryModes[i].value & mode) == 0) {
+        if (!(sUCodeDisasGeometryModes[i].value & mode)) {
             continue;
         }
 
