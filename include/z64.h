@@ -1549,21 +1549,28 @@ typedef struct {
 } UCodeInfo; // size = 0x8
 
 typedef struct {
+    s32 cmd : 8;
+    u32 b : 8;
+    u32 height : 16;
+    u32 width;
+} UCodeUnkStruct;
+
+typedef struct {
     /* 0x00 */ u32 segments[NUM_SEGMENTS];
-    /* 0x40 */ u32 dlStack[18];
+    /* 0x40 */ Gfx* dlStack[18];
     /* 0x88 */ s32 dlDepth;
-    /* 0x8C */ u32 dlCnt;
-    /* 0x90 */ u32 vtxCnt;
-    /* 0x94 */ u32 spvtxCnt;
-    /* 0x98 */ u32 tri1Cnt;
-    /* 0x9C */ u32 tri2Cnt;
-    /* 0xA0 */ u32 quadCnt;
-    /* 0xA4 */ u32 lineCnt;
-    /* 0xA8 */ u32 loaducodeCnt;
-    /* 0xAC */ u32 pipeSyncRequired;
-    /* 0xB0 */ u32 tileSyncRequired;
-    /* 0xB4 */ u32 loadSyncRequired;
-    /* 0xB8 */ u32 syncErr;
+    /* 0x8C */ s32 dlCnt;
+    /* 0x90 */ s32 vtxCnt;
+    /* 0x94 */ s32 spvtxCnt;
+    /* 0x98 */ s32 tri1Cnt;
+    /* 0x9C */ s32 tri2Cnt;
+    /* 0xA0 */ s32 quadCnt;
+    /* 0xA4 */ s32 lineCnt;
+    /* 0xA8 */ s32 loaducodeCnt;
+    /* 0xAC */ s32 pipeSyncRequired;
+    /* 0xB0 */ s32 tileSyncRequired;
+    /* 0xB4 */ s32 loadSyncRequired;
+    /* 0xB8 */ s32 syncErr;
     /* 0xBC */ s32 enableLog;
     /* 0xC0 */ s32 ucodeType;
     /* 0xC4 */ s32 ucodeInfoCount;
