@@ -1,0 +1,43 @@
+#ifndef _RESOURCE_H_
+#define _RESOURCE_H_
+
+#include "gfx.h"
+
+typedef enum ResourceID
+{
+  RES_FONT_FIPPS,
+  RES_FONT_NOTALOT35,
+  RES_FONT_ORIGAMIMOMMY,
+  RES_FONT_PCSENIOR,
+  RES_FONT_PIXELINTV,
+  RES_FONT_PRESSSTART2P,
+  RES_FONT_SMWTEXTNC,
+  RES_FONT_WERDNASRETURN,
+  RES_FONT_PIXELZIM,
+  RES_ZICON_ITEM,
+  RES_ZICON_ITEM_GRAY,
+  RES_ZICON_ITEM_24,
+  RES_ZICON_NOTE,
+  RES_ZICON_RUPEE,
+  RES_ZICON_ACTION_BUTTONS,
+  RES_ZFONT_NES,
+  RES_ICON_CHECK,
+  RES_ICON_DAYTIME,
+  RES_ICON_AMOUNT,
+  RES_ICON_BUTTONS,
+  RES_ICON_PAUSE,
+  RES_ICON_MACRO,
+  RES_ICON_MOVIE,
+  RES_ICON_ARROW,
+  RES_ICON_FILE,
+  RES_ICON_SAVE,
+  RES_ICON_OSK,
+  RES_TEXTURE_CROSSHAIR,
+  RES_MAX,
+} ResourceID;
+
+void               *Resource_Get(ResourceID res);
+void                Resource_Free(ResourceID res);
+struct GfxTexture *Resource_LoadGRCTexture(const char *name);
+
+#endif

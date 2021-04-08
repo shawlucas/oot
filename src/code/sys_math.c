@@ -45,3 +45,47 @@ f32 Math_SinF(f32 angle) {
 f32 Math_CosF(f32 angle) {
     return coss((s16)(angle * (32767.0f / M_PI))) * SHT_MINV;
 }
+
+f32 logf(f32 x) {
+    s32 n;
+    f32 x0, ak, z, zbk;
+
+    if (x < 0) {
+        return 0.0f;
+    }
+
+    if (x == 0) {
+        return 0.0f;
+    }
+
+    z = 0;
+
+    while (x >= 2) {
+        x /= 2;
+        z += FVAL_LOG2;
+    }
+
+    while (x < 1) {
+        x *= 2;
+        z -= FVAL_LOG2;
+    }
+
+    n = 1;
+    x0 = (x - 1)/(x + 1);
+
+    ak = 2 * x0;
+    x0 = x0 * x0;
+
+    do {
+        zbk = z;
+        z += ak/n;
+        ak *= x0;
+        n += 2;
+    } while (z != zbk);
+
+    return z;
+}
+
+f32 log10f(f32 x) {
+    return (logf(x) / FVAL_LOG10);
+}

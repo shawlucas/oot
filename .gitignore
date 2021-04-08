@@ -54,6 +54,6 @@ tools/*dSYM/
 *.mtl
 *.fbx
 !*_custom*
-
+!res/*
 # Per-user configuration
 .python-version

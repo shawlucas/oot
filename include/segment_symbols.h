@@ -1644,5 +1644,6 @@ DECLARE_ROM_SEGMENT(testroom_room_2)
 DECLARE_ROM_SEGMENT(testroom_room_3)
 DECLARE_ROM_SEGMENT(testroom_room_4)
 
+DECLARE_ROM_SEGMENT(pixelintv)
 
 #endif

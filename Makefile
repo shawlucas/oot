@@ -103,11 +103,15 @@ ASSET_FILES_BIN := $(foreach dir,$(ASSET_BIN_DIRS),$(wildcard $(dir)/*.bin))
 ASSET_FILES_OUT := $(foreach f,$(ASSET_FILES_XML:.xml=.c),$f) \
 				   $(foreach f,$(ASSET_FILES_BIN:.bin=.bin.inc.c),build/$f)
 
+GRC_PNG := $(wildcard res/*)
+GRC_O_FILES := $(foreach f, $(wildcard res/*), build/$f.o)
+
 # source files
 C_FILES       := $(foreach dir,$(SRC_DIRS) $(ASSET_BIN_DIRS),$(wildcard $(dir)/*.c))
 S_FILES       := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
 O_FILES       := $(foreach f,$(S_FILES:.s=.o),build/$f) \
                  $(foreach f,$(C_FILES:.c=.o),build/$f) \
+				 build/res/grc_resource.o \
                  $(foreach f,$(wildcard baserom/*),build/$f.o)
 
 TEXTURE_FILES_RGBA32 := $(foreach dir,$(ASSET_BIN_DIRS),$(wildcard $(dir)/*.rgba32.png))
@@ -133,6 +137,7 @@ TEXTURE_FILES_OUT := $(foreach f,$(TEXTURE_FILES_RGBA32:.rgba32.png=.rgba32.inc.
 
 # create build directories
 $(shell mkdir -p build/baserom $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(ASSET_BIN_DIRS),build/$(dir)))
+$(shell mkdir -p build/res)
 
 build/src/libultra_boot_O1/%.o: OPTFLAGS := -O1
 build/src/libultra_boot_O2/%.o: OPTFLAGS := -O2
@@ -161,6 +166,8 @@ build/src/libultra_code_O2_g3/%.o: CC := python3 tools/asm_processor/build.py $(
 build/src/code/jpegutils.o: CC := python3 tools/asm_processor/build.py $(CC_OLD) -- $(AS) $(ASFLAGS) --
 build/src/code/jpegdecoder.o: CC := python3 tools/asm_processor/build.py $(CC_OLD) -- $(AS) $(ASFLAGS) --
 
+build/src/libgz/%.o: CC := $(CC)
+build/src/gz/%.o: CC := $(CC)
 build/src/boot/%.o: CC := python3 tools/asm_processor/build.py $(CC) -- $(AS) $(ASFLAGS) --
 build/src/code/%.o: CC := python3 tools/asm_processor/build.py $(CC) -- $(AS) $(ASFLAGS) --
 build/src/overlays/actors/%.o: CC := python3 tools/asm_processor/build.py $(CC) -- $(AS) $(ASFLAGS) --
@@ -181,12 +188,18 @@ $(ROM): $(ELF)
 $(ELF): $(TEXTURE_FILES_OUT) $(ASSET_FILES_OUT) $(O_FILES) build/ldscript.txt build/undefined_syms.txt
 	$(LD) -T build/undefined_syms.txt -T build/ldscript.txt --no-check-sections --accept-unknown-input-arch --emit-relocs -Map build/z64.map -o $@
 
+build/res/grc_resource.o: $(GRC_O_FILES)
+	$(LD) -r $^ --accept-unknown-input-arch --no-check-sections -Map build/grc_resource.map -o $@
+
 build/ldscript.txt: $(SPEC)
 	$(CPP) $(CPPFLAGS) $< > build/spec
 	$(MKLDSCRIPT) build/spec $@
 
 build/undefined_syms.txt: undefined_syms.txt
 	$(CPP) $(CPPFLAGS) $< > build/undefined_syms.txt
+
+$(GRC_O_FILES): $(GRC_PNG)
+	grc $< -d res/resources.json -o $@
 
 clean:
 	$(RM) -r $(ROM) $(ELF) build

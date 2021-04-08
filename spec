@@ -509,6 +509,11 @@ beginseg
     include "build/data/z_message_PAL.rodata.o"
     include "build/src/code/z_message_PAL.o"
     include "build/data/z_message_PAL.bss.o"
+    include "build/src/libgz/list.o"
+    include "build/src/libgz/vector.o"
+    include "build/src/gz/menu.o"
+    include "build/src/gz/menu_checkbox.o"
+    include "build/src/gz/gfx.o"
     include "build/src/code/z_game_over.o"
     include "build/src/code/z_construct.o"
     include "build/data/rsp.text.o"
@@ -10317,4 +10322,11 @@ beginseg
     name "softsprite_matrix_static"
     romalign 0x1000
     include "build/baserom/softsprite_matrix_static.o"
+endseg
+
+beginseg
+    name "grc_resource"
+    romalign 0x1000
+    include "build/res/grc_resource.o"
+    number 9
 endseg

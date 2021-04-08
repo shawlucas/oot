@@ -1,0 +1,190 @@
+{
+  "fipps.png":
+  {
+    "type":         "texture",
+    "name":         "fipps",
+    "format":       "ia4",
+    "tile_height":  168
+  },
+  "notalot35.png":
+  {
+    "type":         "texture",
+    "name":         "notalot35",
+    "format":       "i4",
+    "tile_height":  189
+  },
+  "origamimommy.png":
+  {
+    "type":         "texture",
+    "name":         "origamimommy",
+    "format":       "ia4",
+    "tile_height":  240
+  },
+  "pcsenior.png":
+  {
+    "type":         "texture",
+    "name":         "pcsenior",
+    "format":       "i4",
+    "tile_height":  192
+  },
+  "pixelintv.png":
+  {
+    "type":         "texture",
+    "name":         "pixelintv",
+    "format":       "i4",
+    "tile_height":  192
+  },
+  "pressstart2p.png":
+  {
+    "type":         "texture",
+    "name":         "pressstart2p",
+    "format":       "i4",
+    "tile_height":  128
+  },
+  "smwtextnc.png":
+  {
+    "type":         "texture",
+    "name":         "smwtextnc",
+    "format":       "i4",
+    "tile_height":  128
+  },
+  "werdnasreturn.png":
+  {
+    "type":         "texture",
+    "name":         "werdnasreturn",
+    "format":       "i4",
+    "tile_height":  192
+  },
+  "pixelzim.png":
+  {
+    "type":         "texture",
+    "name":         "pixelzim",
+    "format":       "i4",
+    "tile_height":  144
+  },
+  "logo.png":
+  {
+    "type":         "texture",
+    "name":         "logo",
+    "format":       "rgba16",
+    "tile_height":  22
+  },
+  "move_icon.png":
+  {
+    "type":         "texture",
+    "name":         "move_icon",
+    "format":       "i4"
+  },
+  "checkbox.png":
+  {
+    "type":         "texture",
+    "name":         "checkbox",
+    "format":       "rgba32",
+    "tile_height":  10
+  },
+  "anchor.png":
+  {
+    "type":         "texture",
+    "name":         "anchor",
+    "format":       "i8",
+    "tile_height":  10
+  },
+  "list_icons.png":
+  {
+    "type":         "texture",
+    "name":         "list_icons",
+    "format":       "ia16",
+    "tile_height":  8
+  },
+  "check_icons.png":
+  {
+    "type":         "texture",
+    "name":         "check_icons",
+    "format":       "ia16",
+    "tile_height":  8
+  },
+  "day_time_icons.png":
+  {
+    "type":         "texture",
+    "name":         "day_time_icons",
+    "format":       "ia4",
+    "tile_height":  8
+  },
+  "amount_icons.png":
+  {
+    "type":         "texture",
+    "name":         "amount_icons",
+    "format":       "rgba32",
+    "tile_height":  32
+  },
+  "button_icons.png":
+  {
+    "type":         "texture",
+    "name":         "button_icons",
+    "format":       "ia8",
+    "tile_height":  8
+  },
+  "pause_icons.png":
+  {
+    "type":         "texture",
+    "name":         "pause_icons",
+    "format":       "ia8",
+    "tile_height":  16
+  },
+  "macro_icons.png":
+  {
+    "type":         "texture",
+    "name":         "macro_icons",
+    "format":       "ia8",
+    "tile_height":  8
+  },
+  "movie_icons.png":
+  {
+    "type":         "texture",
+    "name":         "movie_icons",
+    "format":       "rgba16",
+    "tile_height":  15
+  },
+  "arrow_icons.png":
+  {
+    "type":         "texture",
+    "name":         "arrow_icons",
+    "format":       "ia8",
+    "tile_height":  8
+  },
+  "flag_icons.png":
+  {
+    "type":         "texture",
+    "name":         "flag_icons",
+    "format":       "rgba32",
+    "tile_height":  8
+  },
+  "file_icons.png":
+  {
+    "type":         "texture",
+    "name":         "file_icons",
+    "format":       "rgba32",
+    "tile_height":  9
+  },
+  "save_icons.png":
+  {
+    "type":         "texture",
+    "name":         "save_icons",
+    "format":       "rgba16",
+    "tile_height":  15
+  },
+  "osk_icons.png":
+  {
+    "type":         "texture",
+    "name":         "osk_icons",
+    "format":       "i4",
+    "tile_height":  8
+  },
+  "crosshair.png":
+  {
+    "type":         "texture",
+    "name":         "crosshair",
+    "format":       "i4",
+    "tile_height":  32
+  }
+}
