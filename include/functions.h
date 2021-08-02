@@ -10,9 +10,7 @@ f32 sqrtf(f32 f);
 f64 sqrt(f64 d);
 #pragma intrinsic(sqrt)
 
-void cleararena(void);
 void bootproc(void);
-void Main_ThreadEntry(void* arg);
 void Idle_ThreadEntry(void* arg);
 void ViConfig_UpdateVi(u32 mode);
 void ViConfig_UpdateBlack(void);
@@ -1803,7 +1801,7 @@ void IrqMgr_HandlePRENMI500(IrqMgr* this);
 void IrqMgr_HandleRetrace(IrqMgr* this);
 void IrqMgr_ThreadEntry(void* arg0);
 void IrqMgr_Init(IrqMgr* this, void* stack, OSPri pri, u8 retraceCount);
-void DebugArena_CheckPointer(void* ptr, u32 size, const char* name, const char* action);
+void DebugArena_CheckPointer(void* ptr, size_t size, const char* name, const char* action);
 void* DebugArena_Malloc(u32 size);
 void* DebugArena_MallocDebug(u32 size, const char* file, s32 line);
 void* DebugArena_MallocR(u32 size);

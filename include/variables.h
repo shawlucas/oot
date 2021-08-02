@@ -31,7 +31,7 @@ extern u8 osAppNmiBuffer[];
 
 extern u8 D_80009320[];
 extern u8 D_800093F0[];
-extern s8 D_80009430;
+extern s8 gViDirty;
 extern u32 D_80009460;
 extern u32 gDmaMgrDmaBuffSize;
 extern vu8 gViConfigUseDefault;
@@ -66,7 +66,7 @@ extern u8 gBuildDate[];
 extern u8 gBuildMakeOption[];
 extern OSMesgQueue gPiMgrCmdQ;
 extern OSViMode gViConfigMode;
-extern u8 D_80013960;
+extern u8 gViModeNum;
 extern OSMesg piAccessBuf;
 extern OSMesgQueue __osPiAccessQueue;
 extern OSPiHandle __Dom1SpeedParam;
@@ -3349,7 +3349,7 @@ extern OSPifRam gPifMempakBuf;
 //extern ? D_801759BE;
 extern u16 gZBuffer[SCREEN_HEIGHT][SCREEN_WIDTH]; // 0x25800 bytes
 extern u64 gGfxSPTaskOutputBuffer[0x3000]; // 0x18000 bytes
-extern u8 gGfxSPTaskYieldBuffer[OS_YIELD_DATA_SIZE]; // 0xC00 bytes
+extern u64 gGfxSPTaskYieldBuffer[OS_YIELD_DATA_SIZE / sizeof(u64)]; // 0xC00 bytes
 extern u8 gGfxSPTaskStack[0x400]; // 0x400 bytes
 extern GfxPool gGfxPools[2]; // 0x24820 bytes
 extern u8 gAudioHeap[0x38000]; // 0x38000 bytes

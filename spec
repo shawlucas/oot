@@ -518,11 +518,52 @@ beginseg
 endseg
 
 beginseg
-    name "buffers"
+    name "zbuffer"
+    after "code"
     align 0x40
-    include "build/src/buffers/zbuffer.o"
-    include "build/src/buffers/gfxbuffers.o"
-    include "build/src/buffers/heaps.o"
+    include "build/src/buffers/sys_zb.o"
+endseg
+
+beginseg 
+    name "fifobuffer"
+    after "zbuffer"
+    align 16
+    include "build/src/buffers/sys_fifo_buffer.o"
+endseg
+
+beginseg
+    name "yieldbuffer"
+    after "fifobuffer"
+    align 16
+    include "build/src/buffers/sys_yield_buffer.o"
+endseg
+
+beginseg
+    name "dramstackbuffer"
+    after "yieldbuffer"
+    align 16
+    include "build/src/buffers/sys_dram_stack.o"
+endseg
+
+beginseg
+    name "SystemDynamic"
+    after "dramstackbuffer"
+    align 16
+    include "build/src/buffers/sys_dynamic.o"
+endseg
+
+beginseg
+    name "Audioheap"
+    after "SystemDynamic"
+    align 16
+    include "build/src/buffers/audioheap.o"
+endseg
+
+beginseg
+    name "SystemHeap"
+    after "Audioheap"
+    align 16
+    include "build/src/buffers/sys_heap.o"
 endseg
 
 beginseg

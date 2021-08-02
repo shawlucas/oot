@@ -306,7 +306,7 @@ void GameState_Update(GameState* gameState) {
             HREG(84) = HREG(81);
             gViConfigAdditionalScanLines = HREG(82);
             gViConfigYScale = HREG(81) == 0 ? 240.0f / (gViConfigAdditionalScanLines + 240.0f) : 1.0f;
-            D_80009430 = 1;
+            gViDirty = 1;
         }
     }
 

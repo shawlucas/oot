@@ -7,7 +7,7 @@
 s32 gDebugArenaLogSeverity = LOG_SEVERITY_ERROR;
 Arena sDebugArena;
 
-void DebugArena_CheckPointer(void* ptr, u32 size, const char* name, const char* action) {
+void DebugArena_CheckPointer(void* ptr, size_t size, const char* name, const char* action) {
     if (ptr == NULL) {
         if (gDebugArenaLogSeverity >= LOG_SEVERITY_ERROR) {
             // "%s: %u bytes %s failed\n"

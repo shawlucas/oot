@@ -6,11 +6,11 @@ u8 sIdleThreadStack[0x400];
 StackEntry sIdleThreadInfo;
 u8 sBootThreadStack[0x400];
 
-void cleararena(void) {
-    bzero(_dmadataSegmentStart, osMemSize - OS_K0_TO_PHYSICAL(_dmadataSegmentStart));
+static void cleararena(void) {
+    bzero(_bootSegmentEnd, (size_t)osMemSize - (size_t)OS_K0_TO_PHYSICAL(_bootSegmentEnd));
 }
 
-void bootproc(void) {
+extern void bootproc(void) {
     StackCheck_Init(&sBootThreadInfo, sBootThreadStack, sBootThreadStack + sizeof(sBootThreadStack), 0, -1, "boot");
 
     osMemSize = osGetMemSize();
