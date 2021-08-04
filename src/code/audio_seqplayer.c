@@ -956,7 +956,7 @@ void Audio_SequenceChannelSetVolume(SequenceChannel* seqChannel, u8 volume) {
     seqChannel->volume = (f32)(s32)volume / 127.0f;
 }
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 // Two reg category errors and lots of t register shifting.
 void Audio_SequenceChannelProcessScript(SequenceChannel* channel) {
     s32 i;
