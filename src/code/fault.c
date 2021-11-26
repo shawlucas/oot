@@ -311,11 +311,11 @@ u32 Fault_WaitForInputImpl() {
             }
 
             if (kDown == BTN_DUP) {
-                FaultDrawer_SetOsSyncPrintfEnabled(true);
+                FaultDrawer_SetPRINTFEnabled(true);
             }
 
             if (kDown == BTN_DDOWN) {
-                FaultDrawer_SetOsSyncPrintfEnabled(false);
+                FaultDrawer_SetPRINTFEnabled(false);
             }
         }
     }

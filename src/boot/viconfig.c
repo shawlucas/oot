@@ -6,7 +6,9 @@ OSPiHandle* gCartHandle = 0;
 
 void ViConfig_UpdateVi(u32 mode) {
     if (mode != 0) {
+    #ifdef DEBUG
         osSyncPrintf(VT_COL(YELLOW, BLACK) "osViSetYScale1(%f);\n" VT_RST, 1.0f);
+    #endif
 
         if (osTvType == OS_TV_PAL) {
             osViSetMode(&osViModePalLan1);
@@ -29,7 +31,9 @@ void ViConfig_UpdateVi(u32 mode) {
         }
 
         if (gViConfigYScale != 1.0f) {
+        #ifdef DEBUG
             osSyncPrintf(VT_COL(YELLOW, BLACK) "osViSetYScale3(%f);\n" VT_RST, gViConfigYScale);
+        #endif
             osViSetYScale(gViConfigYScale);
         }
     }
@@ -39,8 +43,8 @@ void ViConfig_UpdateVi(u32 mode) {
 
 void ViConfig_UpdateBlack(void) {
     if (gViConfigUseDefault != 0) {
-        osViBlack(1);
+        osViBlack(true);
     } else {
-        osViBlack(0);
+        osViBlack(false);
     }
 }

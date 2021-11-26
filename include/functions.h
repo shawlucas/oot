@@ -12,7 +12,6 @@ f64 sqrt(f64 d);
 
 void cleararena(void);
 void bootproc(void);
-void Main_ThreadEntry(void* arg);
 void Idle_ThreadEntry(void* arg);
 void ViConfig_UpdateVi(u32 mode);
 void ViConfig_UpdateBlack(void);

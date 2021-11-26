@@ -1345,7 +1345,7 @@ void KaleidoScope_UpdateNamePanel(GlobalContext* globalCtx) {
                     sp2A += 12;
                 }
 
-                DmaMgr_SendRequest1(pauseCtx->nameSegment, (u32)_map_name_staticSegmentRomStart + (sp2A * 0x400), 0x400,
+                DmaMgr_SendRequest(pauseCtx->nameSegment, (u32)_map_name_staticSegmentRomStart + (sp2A * 0x400), 0x400,
                                     "../z_kaleido_scope_PAL.c", 2093);
             } else {
                 osSyncPrintf("zoom_name=%d\n", pauseCtx->namedItem);
@@ -1359,7 +1359,7 @@ void KaleidoScope_UpdateNamePanel(GlobalContext* globalCtx) {
 
                 osSyncPrintf("J_N=%d  point=%d\n", gSaveContext.language, sp2A);
 
-                DmaMgr_SendRequest1(pauseCtx->nameSegment, (u32)_item_name_staticSegmentRomStart + (sp2A * 0x400),
+                DmaMgr_SendRequest(pauseCtx->nameSegment, (u32)_item_name_staticSegmentRomStart + (sp2A * 0x400),
                                     0x400, "../z_kaleido_scope_PAL.c", 2120);
             }
 
@@ -2433,10 +2433,10 @@ void KaleidoScope_LoadDungeonMap(GlobalContext* globalCtx) {
     InterfaceContext* interfaceCtx = &globalCtx->interfaceCtx;
     s32 pad;
 
-    DmaMgr_SendRequest1(interfaceCtx->mapSegment, (u32)_map_48x85_staticSegmentRomStart + (R_MAP_TEX_INDEX * 2040),
+    DmaMgr_SendRequest(interfaceCtx->mapSegment, (u32)_map_48x85_staticSegmentRomStart + (R_MAP_TEX_INDEX * 2040),
                         2040, "../z_kaleido_scope_PAL.c", 3467);
 
-    DmaMgr_SendRequest1(interfaceCtx->mapSegment + 0x800,
+    DmaMgr_SendRequest(interfaceCtx->mapSegment + 0x800,
                         (u32)_map_48x85_staticSegmentRomStart + ((R_MAP_TEX_INDEX + 1) * 2040), 2040,
                         "../z_kaleido_scope_PAL.c", 3471);
 }
@@ -2526,7 +2526,7 @@ void KaleidoScope_Update(GlobalContext* globalCtx) {
 
             size0 = (u32)_icon_item_staticSegmentRomEnd - (u32)_icon_item_staticSegmentRomStart;
             osSyncPrintf("icon_item size0=%x\n", size0);
-            DmaMgr_SendRequest1(pauseCtx->iconItemSegment, (u32)_icon_item_staticSegmentRomStart, size0,
+            DmaMgr_SendRequest(pauseCtx->iconItemSegment, (u32)_icon_item_staticSegmentRomStart, size0,
                                 "../z_kaleido_scope_PAL.c", 3662);
 
             gSegments[8] = VIRTUAL_TO_PHYSICAL(pauseCtx->iconItemSegment);
@@ -2541,7 +2541,7 @@ void KaleidoScope_Update(GlobalContext* globalCtx) {
 
             size = (u32)_icon_item_24_staticSegmentRomEnd - (u32)_icon_item_24_staticSegmentRomStart;
             osSyncPrintf("icon_item24 size=%x\n", size);
-            DmaMgr_SendRequest1(pauseCtx->iconItem24Segment, (u32)_icon_item_24_staticSegmentRomStart, size,
+            DmaMgr_SendRequest(pauseCtx->iconItem24Segment, (u32)_icon_item_24_staticSegmentRomStart, size,
                                 "../z_kaleido_scope_PAL.c", 3675);
 
             pauseCtx->iconItemAltSegment = (void*)(((u32)pauseCtx->iconItem24Segment + size + 0xF) & ~0xF);
@@ -2568,7 +2568,7 @@ void KaleidoScope_Update(GlobalContext* globalCtx) {
                     sInDungeonScene = true;
                     size2 = (u32)_icon_item_dungeon_staticSegmentRomEnd - (u32)_icon_item_dungeon_staticSegmentRomStart;
                     osSyncPrintf("icon_item_dungeon dungeon-size2=%x\n", size2);
-                    DmaMgr_SendRequest1(pauseCtx->iconItemAltSegment, (u32)_icon_item_dungeon_staticSegmentRomStart,
+                    DmaMgr_SendRequest(pauseCtx->iconItemAltSegment, (u32)_icon_item_dungeon_staticSegmentRomStart,
                                         size2, "../z_kaleido_scope_PAL.c", 3712);
 
                     interfaceCtx->mapPalette[28] = 6;
@@ -2580,7 +2580,7 @@ void KaleidoScope_Update(GlobalContext* globalCtx) {
                     sInDungeonScene = false;
                     size2 = (u32)_icon_item_field_staticSegmentRomEnd - (u32)_icon_item_field_staticSegmentRomStart;
                     osSyncPrintf("icon_item_field field-size2=%x\n", size2);
-                    DmaMgr_SendRequest1(pauseCtx->iconItemAltSegment, (u32)_icon_item_field_staticSegmentRomStart,
+                    DmaMgr_SendRequest(pauseCtx->iconItemAltSegment, (u32)_icon_item_field_staticSegmentRomStart,
                                         size2, "../z_kaleido_scope_PAL.c", 3726);
                     break;
             }
@@ -2590,17 +2590,17 @@ void KaleidoScope_Update(GlobalContext* globalCtx) {
             if (gSaveContext.language == LANGUAGE_ENG) {
                 size = (u32)_icon_item_nes_staticSegmentRomEnd - (u32)_icon_item_nes_staticSegmentRomStart;
                 osSyncPrintf("icon_item_dungeon dungeon-size=%x\n", size);
-                DmaMgr_SendRequest1(pauseCtx->iconItemLangSegment, _icon_item_nes_staticSegmentRomStart, size,
+                DmaMgr_SendRequest(pauseCtx->iconItemLangSegment, _icon_item_nes_staticSegmentRomStart, size,
                                     "../z_kaleido_scope_PAL.c", 3739);
             } else if (gSaveContext.language == LANGUAGE_GER) {
                 size = (u32)_icon_item_ger_staticSegmentRomEnd - (u32)_icon_item_ger_staticSegmentRomStart;
                 osSyncPrintf("icon_item_dungeon dungeon-size=%x\n", size);
-                DmaMgr_SendRequest1(pauseCtx->iconItemLangSegment, (u32)_icon_item_ger_staticSegmentRomStart, size,
+                DmaMgr_SendRequest(pauseCtx->iconItemLangSegment, (u32)_icon_item_ger_staticSegmentRomStart, size,
                                     "../z_kaleido_scope_PAL.c", 3746);
             } else {
                 size = (u32)_icon_item_fra_staticSegmentRomEnd - (u32)_icon_item_fra_staticSegmentRomStart;
                 osSyncPrintf("icon_item_dungeon dungeon-size=%x\n", size);
-                DmaMgr_SendRequest1(pauseCtx->iconItemLangSegment, (u32)_icon_item_fra_staticSegmentRomStart, size,
+                DmaMgr_SendRequest(pauseCtx->iconItemLangSegment, (u32)_icon_item_fra_staticSegmentRomStart, size,
                                     "../z_kaleido_scope_PAL.c", 3753);
             }
 
@@ -2613,17 +2613,17 @@ void KaleidoScope_Update(GlobalContext* globalCtx) {
 
             if (((void)0, gSaveContext.worldMapArea) < 22) {
                 if (gSaveContext.language == LANGUAGE_ENG) {
-                    DmaMgr_SendRequest1(pauseCtx->nameSegment + 0x400,
+                    DmaMgr_SendRequest(pauseCtx->nameSegment + 0x400,
                                         (u32)_map_name_staticSegmentRomStart +
                                             (((void)0, gSaveContext.worldMapArea) * 0xA00) + 0x9000,
                                         0xA00, "../z_kaleido_scope_PAL.c", 3776);
                 } else if (gSaveContext.language == LANGUAGE_GER) {
-                    DmaMgr_SendRequest1(pauseCtx->nameSegment + 0x400,
+                    DmaMgr_SendRequest(pauseCtx->nameSegment + 0x400,
                                         (u32)_map_name_staticSegmentRomStart +
                                             (((void)0, gSaveContext.worldMapArea) * 0xA00) + 0x16C00,
                                         0xA00, "../z_kaleido_scope_PAL.c", 3780);
                 } else {
-                    DmaMgr_SendRequest1(pauseCtx->nameSegment + 0x400,
+                    DmaMgr_SendRequest(pauseCtx->nameSegment + 0x400,
                                         (u32)_map_name_staticSegmentRomStart +
                                             (((void)0, gSaveContext.worldMapArea) * 0xA00) + 0x24800,
                                         0xA00, "../z_kaleido_scope_PAL.c", 3784);
@@ -3131,19 +3131,19 @@ void KaleidoScope_Update(GlobalContext* globalCtx) {
             pauseCtx->iconItemSegment = (void*)(((u32)globalCtx->objectCtx.spaceStart + 0x30) & ~0x3F);
             size0 = (u32)_icon_item_staticSegmentRomEnd - (u32)_icon_item_staticSegmentRomStart;
             osSyncPrintf("icon_item size0=%x\n", size0);
-            DmaMgr_SendRequest1(pauseCtx->iconItemSegment, (u32)_icon_item_staticSegmentRomStart, size0,
+            DmaMgr_SendRequest(pauseCtx->iconItemSegment, (u32)_icon_item_staticSegmentRomStart, size0,
                                 "../z_kaleido_scope_PAL.c", 4356);
 
             pauseCtx->iconItem24Segment = (void*)(((u32)pauseCtx->iconItemSegment + size0 + 0xF) & ~0xF);
             size = (u32)_icon_item_24_staticSegmentRomEnd - (u32)_icon_item_24_staticSegmentRomStart;
             osSyncPrintf("icon_item24 size=%x\n", size);
-            DmaMgr_SendRequest1(pauseCtx->iconItem24Segment, (u32)_icon_item_24_staticSegmentRomStart, size,
+            DmaMgr_SendRequest(pauseCtx->iconItem24Segment, (u32)_icon_item_24_staticSegmentRomStart, size,
                                 "../z_kaleido_scope_PAL.c", 4363);
 
             pauseCtx->iconItemAltSegment = (void*)(((u32)pauseCtx->iconItem24Segment + size + 0xF) & ~0xF);
             size2 = (u32)_icon_item_gameover_staticSegmentRomEnd - (u32)_icon_item_gameover_staticSegmentRomStart;
             osSyncPrintf("icon_item_dungeon gameover-size2=%x\n", size2);
-            DmaMgr_SendRequest1(pauseCtx->iconItemAltSegment, (u32)_icon_item_gameover_staticSegmentRomStart, size2,
+            DmaMgr_SendRequest(pauseCtx->iconItemAltSegment, (u32)_icon_item_gameover_staticSegmentRomStart, size2,
                                 "../z_kaleido_scope_PAL.c", 4370);
 
             pauseCtx->iconItemLangSegment = (void*)(((u32)pauseCtx->iconItemAltSegment + size2 + 0xF) & ~0xF);
@@ -3151,17 +3151,17 @@ void KaleidoScope_Update(GlobalContext* globalCtx) {
             if (gSaveContext.language == LANGUAGE_ENG) {
                 size = (u32)_icon_item_nes_staticSegmentRomEnd - (u32)_icon_item_nes_staticSegmentRomStart;
                 osSyncPrintf("icon_item_dungeon dungeon-size=%x\n", size);
-                DmaMgr_SendRequest1(pauseCtx->iconItemLangSegment, (u32)_icon_item_nes_staticSegmentRomStart, size,
+                DmaMgr_SendRequest(pauseCtx->iconItemLangSegment, (u32)_icon_item_nes_staticSegmentRomStart, size,
                                     "../z_kaleido_scope_PAL.c", 4379);
             } else if (gSaveContext.language == LANGUAGE_GER) {
                 size = (u32)_icon_item_ger_staticSegmentRomEnd - (u32)_icon_item_ger_staticSegmentRomStart;
                 osSyncPrintf("icon_item_dungeon dungeon-size=%x\n", size);
-                DmaMgr_SendRequest1(pauseCtx->iconItemLangSegment, (u32)_icon_item_ger_staticSegmentRomStart, size,
+                DmaMgr_SendRequest(pauseCtx->iconItemLangSegment, (u32)_icon_item_ger_staticSegmentRomStart, size,
                                     "../z_kaleido_scope_PAL.c", 4386);
             } else {
                 size = (u32)_icon_item_fra_staticSegmentRomEnd - (u32)_icon_item_fra_staticSegmentRomStart;
                 osSyncPrintf("icon_item_dungeon dungeon-size=%x\n", size);
-                DmaMgr_SendRequest1(pauseCtx->iconItemLangSegment, (u32)_icon_item_fra_staticSegmentRomStart, size,
+                DmaMgr_SendRequest(pauseCtx->iconItemLangSegment, (u32)_icon_item_fra_staticSegmentRomStart, size,
                                     "../z_kaleido_scope_PAL.c", 4393);
             }
 

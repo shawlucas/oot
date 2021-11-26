@@ -65,15 +65,15 @@ FaultDrawer sFaultDrawerDefault = {
         GPACK_RGBA5551(176, 176, 176, 1),
     },
     0,    // escCode
-    0,    // osSyncPrintfEnabled
+    0,    // PRINTFEnabled
     NULL, // inputCallback
 };
 
 FaultDrawer sFaultDrawerStruct;
 char D_8016B6C0[0x20];
 
-void FaultDrawer_SetOsSyncPrintfEnabled(u32 enabled) {
-    sFaultDrawerStruct.osSyncPrintfEnabled = enabled;
+void FaultDrawer_SetPRINTFEnabled(u32 enabled) {
+    sFaultDrawerStruct.PRINTFEnabled = enabled;
 }
 
 void FaultDrawer_DrawRecImpl(s32 xStart, s32 yStart, s32 xEnd, s32 yEnd, u16 color) {
@@ -151,7 +151,7 @@ s32 FaultDrawer_ColorToPrintColor(u16 color) {
 
 void FaultDrawer_UpdatePrintColor() {
     s32 idx;
-    if (sFaultDrawerStruct.osSyncPrintfEnabled) {
+    if (sFaultDrawerStruct.PRINTFEnabled) {
         osSyncPrintf(VT_RST);
         idx = FaultDrawer_ColorToPrintColor(sFaultDrawerStruct.foreColor);
         if (idx >= 0 && idx < 8) {
@@ -184,7 +184,7 @@ void FaultDrawer_SetCharPad(s8 padW, s8 padH) {
 }
 
 void FaultDrawer_SetCursor(s32 x, s32 y) {
-    if (sFaultDrawerStruct.osSyncPrintfEnabled) {
+    if (sFaultDrawerStruct.PRINTFEnabled) {
         osSyncPrintf(VT_CUP("%d", "%d"),
                      (y - sFaultDrawerStruct.yStart) / (sFaultDrawerStruct.charH + sFaultDrawerStruct.charHPad),
                      (x - sFaultDrawerStruct.xStart) / (sFaultDrawerStruct.charW + sFaultDrawerStruct.charWPad));
@@ -194,7 +194,7 @@ void FaultDrawer_SetCursor(s32 x, s32 y) {
 }
 
 void FaultDrawer_FillScreen() {
-    if (sFaultDrawerStruct.osSyncPrintfEnabled) {
+    if (sFaultDrawerStruct.PRINTFEnabled) {
         osSyncPrintf(VT_CLS);
     }
 
@@ -219,7 +219,7 @@ void* FaultDrawer_FormatStringFunc(void* arg, const char* str, u32 count) {
         } else {
             switch (*str) {
                 case '\n':
-                    if (sFaultDrawerStruct.osSyncPrintfEnabled) {
+                    if (sFaultDrawerStruct.PRINTFEnabled) {
                         osSyncPrintf("\n");
                     }
 
@@ -233,7 +233,7 @@ void* FaultDrawer_FormatStringFunc(void* arg, const char* str, u32 count) {
                     curXEnd = sFaultDrawerStruct.xEnd - sFaultDrawerStruct.charW;
                     break;
                 default:
-                    if (sFaultDrawerStruct.osSyncPrintfEnabled) {
+                    if (sFaultDrawerStruct.PRINTFEnabled) {
                         osSyncPrintf("%c", *str);
                     }
 

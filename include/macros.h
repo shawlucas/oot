@@ -170,4 +170,10 @@ extern GraphicsContext* __gfxCtx;
 #define ALIGNED8
 #endif
 
+#ifdef DEBUG
+    #define DmaMgr_SendRequest(ram0, vrom, size, file, line) DmaMgr_SendRequest1(ram0, vrom, size, file, line)
+#else
+    #define DmaMgr_SendRequest(ram0, vrom, size, file, line) DmaMgr_SendRequest0(ram0, vrom, size)
+#endif
+
 #endif

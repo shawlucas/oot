@@ -675,9 +675,14 @@ void Environment_UpdateSkybox(u8 skyboxId, EnvironmentContext* envCtx, SkyboxCon
             size = gSkyboxFiles[newSkybox1Index].file.vromEnd - gSkyboxFiles[newSkybox1Index].file.vromStart;
 
             osCreateMesgQueue(&envCtx->loadQueue, &envCtx->loadMsg, 1);
+
+            #ifdef DEBUG
             DmaMgr_SendRequest2(&envCtx->dmaRequest, (u32)skyboxCtx->staticSegments[0],
                                 gSkyboxFiles[newSkybox1Index].file.vromStart, size, 0, &envCtx->loadQueue, NULL,
                                 "../z_kankyo.c", 1264);
+            #else
+            DmaMgr_SendRequestImpl(&envCtx->dmaRequest, (u32)skyboxCtx->staticSegments[0], gSkyboxFiles[newSkybox1Index].file.vromStart, size, 0, &envCtx->loadQueue, NULL);
+            #endif
             envCtx->skybox1Index = newSkybox1Index;
         }
 
@@ -686,9 +691,15 @@ void Environment_UpdateSkybox(u8 skyboxId, EnvironmentContext* envCtx, SkyboxCon
             size = gSkyboxFiles[newSkybox2Index].file.vromEnd - gSkyboxFiles[newSkybox2Index].file.vromStart;
 
             osCreateMesgQueue(&envCtx->loadQueue, &envCtx->loadMsg, 1);
+
+            #ifdef DEBUG
             DmaMgr_SendRequest2(&envCtx->dmaRequest, (u32)skyboxCtx->staticSegments[1],
                                 gSkyboxFiles[newSkybox2Index].file.vromStart, size, 0, &envCtx->loadQueue, NULL,
                                 "../z_kankyo.c", 1281);
+            #else
+            DmaMgr_SendRequestImpl(&envCtx->dmaRequest, (u32)skyboxCtx->staticSegments[1],
+                                gSkyboxFiles[newSkybox2Index].file.vromStart, size, 0, &envCtx->loadQueue, NULL);
+            #endif
             envCtx->skybox2Index = newSkybox2Index;
         }
 
@@ -699,15 +710,27 @@ void Environment_UpdateSkybox(u8 skyboxId, EnvironmentContext* envCtx, SkyboxCon
                 size = gSkyboxFiles[newSkybox1Index].palette.vromEnd - gSkyboxFiles[newSkybox1Index].palette.vromStart;
 
                 osCreateMesgQueue(&envCtx->loadQueue, &envCtx->loadMsg, 1);
+
+                #ifdef DEBUG
                 DmaMgr_SendRequest2(&envCtx->dmaRequest, (u32)skyboxCtx->palettes,
                                     gSkyboxFiles[newSkybox1Index].palette.vromStart, size, 0, &envCtx->loadQueue, NULL,
                                     "../z_kankyo.c", 1307);
+                #else
+                DmaMgr_SendRequestImpl(&envCtx->dmaRequest, (u32)skyboxCtx->palettes,
+                                    gSkyboxFiles[newSkybox1Index].palette.vromStart, size, 0, &envCtx->loadQueue, NULL);
+                #endif
             } else {
                 size = gSkyboxFiles[newSkybox1Index].palette.vromEnd - gSkyboxFiles[newSkybox1Index].palette.vromStart;
                 osCreateMesgQueue(&envCtx->loadQueue, &envCtx->loadMsg, 1);
+
+                #ifdef DEBUG
                 DmaMgr_SendRequest2(&envCtx->dmaRequest, (u32)skyboxCtx->palettes + size,
                                     gSkyboxFiles[newSkybox1Index].palette.vromStart, size, 0, &envCtx->loadQueue, NULL,
                                     "../z_kankyo.c", 1320);
+                #else
+                DmaMgr_SendRequestImpl(&envCtx->dmaRequest, (u32)skyboxCtx->palettes + size,
+                                    gSkyboxFiles[newSkybox1Index].palette.vromStart, size, 0, &envCtx->loadQueue, NULL);
+                #endif
             }
         }
 
@@ -718,15 +741,27 @@ void Environment_UpdateSkybox(u8 skyboxId, EnvironmentContext* envCtx, SkyboxCon
                 size = gSkyboxFiles[newSkybox2Index].palette.vromEnd - gSkyboxFiles[newSkybox2Index].palette.vromStart;
 
                 osCreateMesgQueue(&envCtx->loadQueue, &envCtx->loadMsg, 1);
+
+                #ifdef DEBUG
                 DmaMgr_SendRequest2(&envCtx->dmaRequest, (u32)skyboxCtx->palettes,
                                     gSkyboxFiles[newSkybox2Index].palette.vromStart, size, 0, &envCtx->loadQueue, NULL,
                                     "../z_kankyo.c", 1342);
+                #else
+                DmaMgr_SendRequestImpl(&envCtx->dmaRequest, (u32)skyboxCtx->palettes,
+                                    gSkyboxFiles[newSkybox2Index].palette.vromStart, size, 0, &envCtx->loadQueue, NULL);
+                #endif
             } else {
                 size = gSkyboxFiles[newSkybox2Index].palette.vromEnd - gSkyboxFiles[newSkybox2Index].palette.vromStart;
                 osCreateMesgQueue(&envCtx->loadQueue, &envCtx->loadMsg, 1);
+
+                #ifdef DEBUG
                 DmaMgr_SendRequest2(&envCtx->dmaRequest, (u32)skyboxCtx->palettes + size,
                                     gSkyboxFiles[newSkybox2Index].palette.vromStart, size, 0, &envCtx->loadQueue, NULL,
                                     "../z_kankyo.c", 1355);
+                #else
+                DmaMgr_SendRequestImpl(&envCtx->dmaRequest, (u32)skyboxCtx->palettes + size,
+                                    gSkyboxFiles[newSkybox2Index].palette.vromStart, size, 0, &envCtx->loadQueue, NULL);
+                #endif
             }
         }
 
@@ -748,7 +783,10 @@ void Environment_EnableUnderwaterLights(GlobalContext* globalCtx, s32 waterLight
     if (waterLightsIndex == 0x1F) {
         waterLightsIndex = 0;
         // "Underwater color is not set in the water poly data!"
+
+        #ifdef DEBUG
         osSyncPrintf(VT_COL(YELLOW, BLACK) "\n水ポリゴンデータに水中カラーが設定されておりません!" VT_RST);
+        #endif
     }
 
     if (!globalCtx->envCtx.indoors) {

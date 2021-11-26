@@ -19,11 +19,13 @@ endif
 
 all: $(PROGRAMS)
 	cd ZAPD && $(MAKE)
-
+	cd z64compress && $(MAKE)
+	cd z64decompress && $(MAKE)
 clean:
 	$(RM) $(PROGRAMS) $(addsuffix .exe,$(PROGRAMS))
 	$(MAKE) -C ZAPD clean
-
+	$(MAKE) -C z64compress clean
+	$(MAKE) -C z64decompress clean
 distclean: clean
 
 .PHONY: all clean distclean

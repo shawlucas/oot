@@ -19,7 +19,7 @@ s32 Object_Spawn(ObjectContext* objectCtx, s16 objectId) {
            "this->num < OBJECT_EXCHANGE_BANK_MAX && (this->status[this->num].Segment + size) < this->endSegment",
            "../z_scene.c", 142);
 
-    DmaMgr_SendRequest1(objectCtx->status[objectCtx->num].segment, gObjectTable[objectId].vromStart, size,
+    DmaMgr_SendRequest(objectCtx->status[objectCtx->num].segment, gObjectTable[objectId].vromStart, size,
                         "../z_scene.c", 145);
 
     if (objectCtx->num < OBJECT_EXCHANGE_BANK_MAX - 1) {
@@ -87,10 +87,16 @@ void Object_UpdateBank(ObjectContext* objectCtx) {
             if (status->dmaRequest.vromAddr == 0) {
                 osCreateMesgQueue(&status->loadQueue, &status->loadMsg, 1);
                 objectFile = &gObjectTable[-status->id];
-                size = objectFile->vromEnd - objectFile->vromStart;
+                size = objectFile->vromEnd - objectFile->vromStart;                
+
+                #ifdef DEBUG
                 osSyncPrintf("OBJECT EXCHANGE BANK-%2d SIZE %8.3fK SEG=%08x\n", i, size / 1024.0f, status->segment);
                 DmaMgr_SendRequest2(&status->dmaRequest, status->segment, objectFile->vromStart, size, 0,
                                     &status->loadQueue, NULL, "../z_scene.c", 266);
+                #else
+                DmaMgr_SendRequestImpl(&status->dmaRequest, status->segment, objectFile->vromStart, size, 0,
+                                    &status->loadQueue, NULL);
+                #endif
             } else if (!osRecvMesg(&status->loadQueue, NULL, OS_MESG_NOBLOCK)) {
                 status->id = -status->id;
             }
@@ -127,11 +133,15 @@ void func_800981B8(ObjectContext* objectCtx) {
     for (i = 0; i < objectCtx->num; i++) {
         id = objectCtx->status[i].id;
         size = gObjectTable[id].vromEnd - gObjectTable[id].vromStart;
+
+        #ifdef DEBUG
         osSyncPrintf("OBJECT[%d] SIZE %fK SEG=%x\n", objectCtx->status[i].id, size / 1024.0f,
                      objectCtx->status[i].segment);
         osSyncPrintf("num=%d adrs=%x end=%x\n", objectCtx->num, (s32)objectCtx->status[i].segment + size,
                      objectCtx->spaceEnd);
-        DmaMgr_SendRequest1(objectCtx->status[i].segment, gObjectTable[id].vromStart, size, "../z_scene.c", 342);
+
+        #endif
+        DmaMgr_SendRequest(objectCtx->status[i].segment, gObjectTable[id].vromStart, size, "../z_scene.c", 342);
     }
 }
 

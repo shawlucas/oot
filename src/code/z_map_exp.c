@@ -130,7 +130,7 @@ void Map_InitData(GlobalContext* globalCtx, s16 room) {
             osSyncPrintf("ＫＫＫ＝%d\n", extendedMapIndex);
             osSyncPrintf(VT_RST);
             sEntranceIconMapIndex = extendedMapIndex;
-            DmaMgr_SendRequest1(interfaceCtx->mapSegment,
+            DmaMgr_SendRequest(interfaceCtx->mapSegment,
                                 (u32)_map_grand_staticSegmentRomStart + gMapData->owMinimapTexOffset[extendedMapIndex],
                                 gMapData->owMinimapTexSize[mapIndex], "../z_map_exp.c", 309);
             interfaceCtx->unk_258 = mapIndex;
@@ -158,7 +158,7 @@ void Map_InitData(GlobalContext* globalCtx, s16 room) {
             osSyncPrintf("デクの樹ダンジョンＭＡＰ テクスチャＤＭＡ(%x) scene_id_offset=%d  VREG(30)=%d\n", room,
                          mapIndex, VREG(30));
             osSyncPrintf(VT_RST);
-            DmaMgr_SendRequest1(globalCtx->interfaceCtx.mapSegment,
+            DmaMgr_SendRequest(globalCtx->interfaceCtx.mapSegment,
                                 (u32)_map_i_staticSegmentRomStart +
                                     ((gMapData->dgnMinimapTexIndexOffset[mapIndex] + room) * 0xFF0),
                                 0xFF0, "../z_map_exp.c", 346);

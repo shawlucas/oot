@@ -1507,7 +1507,7 @@ typedef struct {
     /* 0x1F */ s8 charHPad;
     /* 0x20 */ u16 printColors[10];
     /* 0x34 */ u8 escCode; // bool
-    /* 0x35 */ u8 osSyncPrintfEnabled;
+    /* 0x35 */ u8 PRINTFEnabled;
     /* 0x38 */ void(*inputCallback)();
 } FaultDrawer; // size = 0x3C
 

@@ -1433,7 +1433,7 @@ void* Gameplay_LoadFile(GlobalContext* globalCtx, RomFile* file) {
 
     size = file->vromEnd - file->vromStart;
     allocp = GameState_Alloc(&globalCtx->state, size, "../z_play.c", 4692);
-    DmaMgr_SendRequest1(allocp, file->vromStart, size, "../z_play.c", 4694);
+    DmaMgr_SendRequest(allocp, file->vromStart, size, "../z_play.c", 4694);
 
     return allocp;
 }

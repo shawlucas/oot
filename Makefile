@@ -9,6 +9,9 @@ NON_MATCHING ?= 0
 # If ORIG_COMPILER is 1, compile with QEMU_IRIX and the original compiler
 ORIG_COMPILER ?= 0
 
+VERSION ?= DEBUG
+VIDEO_MODE ?= VIDEO_AUTO
+
 ifeq ($(NON_MATCHING),1)
   CFLAGS := -DNON_MATCHING
   CPPFLAGS := -DNON_MATCHING
@@ -32,6 +35,13 @@ else
         MAKE=gmake
         CPPFLAGS += -xc++
     endif
+endif
+
+# Threads to compress and extract assets with, TODO improve later
+ifeq ($(DETECTED_OS),linux)
+  N_THREADS ?= $(shell nproc)
+else
+  N_THREADS ?= 1
 endif
 
 #### Tools ####
@@ -74,12 +84,21 @@ MKLDSCRIPT := tools/mkldscript
 ELF2ROM    := tools/elf2rom
 ZAPD       := tools/ZAPD/ZAPD.out
 
-OPTFLAGS := -O2
+ifeq ($(VERSION), DEBUG)
+	OPTFLAGS := -O2
+else
+	OPTFLAGS := -O2 -g3
+	CFLAGS += -DNDEBUG
+	ifeq ($(VERSION), PALMQ)
+		VIDEO_MODE = VIDEO_PAL
+	endif
+endif
+
 ASFLAGS := -march=vr4300 -32 -Iinclude
 MIPS_VERSION := -mips2
 
 # we support Microsoft extensions such as anonymous structs, which the compiler does support but warns for their usage. Surpress the warnings with -woff.
-CFLAGS += -G 0 -non_shared -Xfullwarn -Xcpluscomm $(INC) -Wab,-r4300_mul -woff 649,838,712
+CFLAGS += -G 0 -non_shared -Xfullwarn -Xcpluscomm $(INC) -D$(VERSION) -D$(VIDEO_MODE) -Wab,-r4300_mul -woff 649,838,712
 
 ifeq ($(shell getconf LONG_BIT), 32)
   # Work around memory allocation bug in QEMU
@@ -92,10 +111,12 @@ endif
 #### Files ####
 
 # ROM image
+ROMC := zelda_ocarina_mq_dbg_comp.z64
 ROM := zelda_ocarina_mq_dbg.z64
 ELF := $(ROM:.z64=.elf)
 # description of ROM segments
 SPEC := spec
+SPECPALMQ := specPALMQ
 
 SRC_DIRS := $(shell find src -type d)
 ASM_DIRS := $(shell find asm -type d -not -path "asm/non_matchings*") $(shell find data -type d)
@@ -162,14 +183,28 @@ build/assets/%.o: CC := python3 tools/asm_processor/build.py $(CC) -- $(AS) $(AS
 
 #### Main Targets ###
 
-all: $(ROM)
+uncompressed: $(ROM)
+
 ifeq ($(COMPARE),1)
 	@md5sum $(ROM)
 	@md5sum -c checksum.md5
 endif
 
+compressed: $(ROMC)
+ifeq ($(COMPARE), 1)
+	@md5sum $(ROMC)
+	@md5sum -c checksum_compressed.md5
+endif
+
+.PHONY: all uncompressed compressed clean assetclean distclean setup
+
+all: compressed
+
 $(ROM): $(ELF)
 	$(ELF2ROM) -cic 6105 $< $@
+
+$(ROMC): uncompressed build/$(SPECPALMQ)
+	python3 tools/z64compress_wrapper.py --mb 32 --matching --threads $(N_THREADS) $(ROM) $@ $(ELF) build/$(SPECPALMQ)
 
 $(ELF): $(TEXTURE_FILES_OUT) $(ASSET_FILES_OUT) $(O_FILES) build/ldscript.txt build/undefined_syms.txt
 	$(LD) -T build/undefined_syms.txt -T build/ldscript.txt --no-check-sections --accept-unknown-input-arch --emit-relocs -Map build/z64.map -o $@
@@ -178,11 +213,14 @@ build/ldscript.txt: $(SPEC)
 	$(CPP) $(CPPFLAGS) $< > build/spec
 	$(MKLDSCRIPT) build/spec $@
 
+build/$(SPECPALMQ): $(SPECPALMQ)
+	$(CPP) $(CPPFLAGS) $< > build/specPALMQ
+
 build/undefined_syms.txt: undefined_syms.txt
 	$(CPP) $(CPPFLAGS) $< > build/undefined_syms.txt
 
 clean:
-	$(RM) -r $(ROM) $(ELF) build
+	$(RM) -r $(ROMC) $(ROM) $(ELF) build
 
 assetclean:
 	$(RM) -r $(ASSET_BIN_DIRS)

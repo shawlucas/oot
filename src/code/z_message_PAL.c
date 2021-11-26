@@ -1149,7 +1149,7 @@ void Message_LoadItemIcon(GlobalContext* globalCtx, u16 itemId, s16 y) {
         R_TEXTBOX_ICON_XPOS = R_TEXT_INIT_XPOS - sIconItem32XOffsets[gSaveContext.language];
         R_TEXTBOX_ICON_YPOS = y + 6;
         R_TEXTBOX_ICON_SIZE = 32;
-        DmaMgr_SendRequest1((u32)msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE,
+        DmaMgr_SendRequest((u32)msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE,
                             (u32)_icon_item_staticSegmentRomStart + (itemId * 0x1000), 0x1000, "../z_message_PAL.c",
                             1473);
         // "Item 32-0"
@@ -1158,7 +1158,7 @@ void Message_LoadItemIcon(GlobalContext* globalCtx, u16 itemId, s16 y) {
         R_TEXTBOX_ICON_XPOS = R_TEXT_INIT_XPOS - sIconItem24XOffsets[gSaveContext.language];
         R_TEXTBOX_ICON_YPOS = y + 10;
         R_TEXTBOX_ICON_SIZE = 24;
-        DmaMgr_SendRequest1((u32)msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE,
+        DmaMgr_SendRequest((u32)msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE,
                             (u32)_icon_item_24_staticSegmentRomStart + (itemId - ITEM_MEDALLION_FOREST) * 0x900, 0x900,
                             "../z_message_PAL.c", 1482);
         // "Item 24"
@@ -1517,10 +1517,10 @@ void Message_Decode(GlobalContext* globalCtx) {
             msgCtx->textboxBackgroundBackColorIdx = font->msgBuf[msgCtx->msgBufPos + 2] & 0xF;
             msgCtx->textboxBackgroundYOffsetIdx = (font->msgBuf[msgCtx->msgBufPos + 3] & 0xF0) >> 4;
             msgCtx->textboxBackgroundUnkArg = font->msgBuf[msgCtx->msgBufPos + 3] & 0xF;
-            DmaMgr_SendRequest1((u32)msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE,
+            DmaMgr_SendRequest((u32)msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE,
                                 (u32)_message_texture_staticSegmentRomStart + msgCtx->textboxBackgroundIdx * 0x900,
                                 0x900, "../z_message_PAL.c", 1830);
-            DmaMgr_SendRequest1((u32)msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE + 0x900,
+            DmaMgr_SendRequest((u32)msgCtx->textboxSegment + MESSAGE_STATIC_TEX_SIZE + 0x900,
                                 (u32)_message_texture_staticSegmentRomStart +
                                     (msgCtx->textboxBackgroundIdx + 1) * 0x900,
                                 0x900, "../z_message_PAL.c", 1834);
@@ -1618,23 +1618,23 @@ void Message_OpenText(GlobalContext* globalCtx, u16 textId) {
     if (sTextIsCredits) {
         Message_FindCreditsMessage(globalCtx, textId);
         msgCtx->msgLength = font->msgLength;
-        DmaMgr_SendRequest1(font->msgBuf, (u32)(_staff_message_data_staticSegmentRomStart + font->msgOffset),
+        DmaMgr_SendRequest(font->msgBuf, (u32)(_staff_message_data_staticSegmentRomStart + font->msgOffset),
                             font->msgLength, "../z_message_PAL.c", 1954);
     } else {
         if (gSaveContext.language == LANGUAGE_ENG) {
             Message_FindMessage(globalCtx, textId);
             msgCtx->msgLength = font->msgLength;
-            DmaMgr_SendRequest1(font->msgBuf, (u32)(_nes_message_data_staticSegmentRomStart + font->msgOffset),
+            DmaMgr_SendRequest(font->msgBuf, (u32)(_nes_message_data_staticSegmentRomStart + font->msgOffset),
                                 font->msgLength, "../z_message_PAL.c", 1966);
         } else if (gSaveContext.language == LANGUAGE_GER) {
             Message_FindMessage(globalCtx, textId);
             msgCtx->msgLength = font->msgLength;
-            DmaMgr_SendRequest1(font->msgBuf, (u32)(_ger_message_data_staticSegmentRomStart + font->msgOffset),
+            DmaMgr_SendRequest(font->msgBuf, (u32)(_ger_message_data_staticSegmentRomStart + font->msgOffset),
                                 font->msgLength, "../z_message_PAL.c", 1978);
         } else {
             Message_FindMessage(globalCtx, textId);
             msgCtx->msgLength = font->msgLength;
-            DmaMgr_SendRequest1(font->msgBuf, (u32)(_fra_message_data_staticSegmentRomStart + font->msgOffset),
+            DmaMgr_SendRequest(font->msgBuf, (u32)(_fra_message_data_staticSegmentRomStart + font->msgOffset),
                                 font->msgLength, "../z_message_PAL.c", 1990);
         }
     }
@@ -1645,7 +1645,7 @@ void Message_OpenText(GlobalContext* globalCtx, u16 textId) {
     // "Text Box Type"
     osSyncPrintf("吹き出し種類＝%d\n", msgCtx->textBoxType);
     if (textBoxType < TEXTBOX_TYPE_NONE_BOTTOM) {
-        DmaMgr_SendRequest1(
+        DmaMgr_SendRequest(
             msgCtx->textboxSegment,
             (u32)(_message_staticSegmentRomStart + (messageStaticIndices[textBoxType] * MESSAGE_STATIC_TEX_SIZE)),
             MESSAGE_STATIC_TEX_SIZE, "../z_message_PAL.c", 2006);
