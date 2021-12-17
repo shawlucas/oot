@@ -268,7 +268,7 @@ void EffDust_DrawFunc_8099E4F4(Actor* thisx, GlobalContext* globalCtx2) {
     s32 i;
     f32 aux;
 
-    OPEN_DISPS(gfxCtx, "../z_eff_dust.c", 425);
+    OPEN_DISPS(gfxCtx, "../z_eff_dust.c", __LINE__);
 
     func_80093D18(gfxCtx);
 
@@ -292,7 +292,7 @@ void EffDust_DrawFunc_8099E4F4(Actor* thisx, GlobalContext* globalCtx2) {
             Matrix_Scale(this->scalingFactor, this->scalingFactor, this->scalingFactor, MTXMODE_APPLY);
             Matrix_Mult(&globalCtx->billboardMtxF, MTXMODE_APPLY);
 
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_eff_dust.c", 449),
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_eff_dust.c", __LINE__),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(POLY_XLU_DISP++, SEGMENTED_TO_VIRTUAL(gEffSparklesDL));
         }
@@ -303,7 +303,7 @@ void EffDust_DrawFunc_8099E4F4(Actor* thisx, GlobalContext* globalCtx2) {
         if (0) {}
     }
 
-    CLOSE_DISPS(gfxCtx, "../z_eff_dust.c", 458);
+    CLOSE_DISPS(gfxCtx, "../z_eff_dust.c", __LINE__);
 }
 
 void EffDust_DrawFunc_8099E784(Actor* thisx, GlobalContext* globalCtx2) {
@@ -316,7 +316,7 @@ void EffDust_DrawFunc_8099E784(Actor* thisx, GlobalContext* globalCtx2) {
     f32 aux;
     Player* player = GET_PLAYER(globalCtx);
 
-    OPEN_DISPS(gfxCtx, "../z_eff_dust.c", 472);
+    OPEN_DISPS(gfxCtx, "../z_eff_dust.c", __LINE__);
 
     func_80093D18(gfxCtx);
 
@@ -353,7 +353,7 @@ void EffDust_DrawFunc_8099E784(Actor* thisx, GlobalContext* globalCtx2) {
 
             func_800D1FD4(&globalCtx->billboardMtxF);
 
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_eff_dust.c", 506),
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_eff_dust.c", __LINE__),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(POLY_XLU_DISP++, SEGMENTED_TO_VIRTUAL(gEffSparklesDL));
         }
@@ -362,7 +362,7 @@ void EffDust_DrawFunc_8099E784(Actor* thisx, GlobalContext* globalCtx2) {
         distanceTraveled++;
     }
 
-    CLOSE_DISPS(gfxCtx, "../z_eff_dust.c", 515);
+    CLOSE_DISPS(gfxCtx, "../z_eff_dust.c", __LINE__);
 }
 
 void EffDust_Draw(Actor* thisx, GlobalContext* globalCtx) {

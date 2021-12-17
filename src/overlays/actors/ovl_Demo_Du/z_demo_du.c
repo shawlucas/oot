@@ -804,7 +804,7 @@ void DemoDu_Draw_02(Actor* thisx, GlobalContext* globalCtx2) {
     void* mouthTexture = sMouthTextures[mouthTexIndex];
     SkelAnime* skelAnime = &this->skelAnime;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_du_inKenjyanomaDemo02.c", 275);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_du_inKenjyanomaDemo02.c", __LINE__);
 
     func_80093D84(globalCtx->state.gfxCtx);
 
@@ -819,7 +819,7 @@ void DemoDu_Draw_02(Actor* thisx, GlobalContext* globalCtx2) {
     POLY_XLU_DISP = SkelAnime_DrawFlex(globalCtx, skelAnime->skeleton, skelAnime->jointTable, skelAnime->dListCount, 0,
                                        0, 0, POLY_XLU_DISP);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_demo_du_inKenjyanomaDemo02.c", 304);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_demo_du_inKenjyanomaDemo02.c", __LINE__);
 }
 
 void DemoDu_InitCs_Credits(DemoDu* this, GlobalContext* globalCtx) {
@@ -999,7 +999,7 @@ void DemoDu_Draw_01(Actor* thisx, GlobalContext* globalCtx2) {
     void* mouthTexture = sMouthTextures[mouthTexIndex];
     SkelAnime* skelAnime = &this->skelAnime;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_du.c", 615);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_du.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
 
@@ -1014,7 +1014,7 @@ void DemoDu_Draw_01(Actor* thisx, GlobalContext* globalCtx2) {
     SkelAnime_DrawFlexOpa(globalCtx, skelAnime->skeleton, skelAnime->jointTable, skelAnime->dListCount, NULL, NULL,
                           this);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_demo_du.c", 638);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_demo_du.c", __LINE__);
 }
 
 static DemoDuDrawFunc sDrawFuncs[] = {

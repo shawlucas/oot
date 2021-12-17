@@ -307,13 +307,13 @@ void ObjWarp2block_Draw(Actor* thisx, GlobalContext* globalCtx) {
 
     sp44 = &sColors[thisx->home.rot.z & 7];
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_obj_warp2block.c", 584);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_obj_warp2block.c", __LINE__);
     func_80093D18(globalCtx->state.gfxCtx);
 
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_obj_warp2block.c", 588),
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_obj_warp2block.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, sp44->r, sp44->g, sp44->b, 255);
     gSPDisplayList(POLY_OPA_DISP++, gSongOfTimeBlockDL);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_obj_warp2block.c", 594);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_obj_warp2block.c", __LINE__);
 }

@@ -25,7 +25,7 @@ void SkelAnime_DrawLimbLod(GlobalContext* globalCtx, s32 limbIndex, void** skele
     Vec3f pos;
     Vec3s rot;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", 773);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
 
     Matrix_Push();
     limb = (LodLimb*)SEGMENTED_TO_VIRTUAL(skeleton[limbIndex]);
@@ -41,12 +41,10 @@ void SkelAnime_DrawLimbLod(GlobalContext* globalCtx, s32 limbIndex, void** skele
     if ((overrideLimbDraw == NULL) || !overrideLimbDraw(globalCtx, limbIndex, &dList, &pos, &rot, arg)) {
         Matrix_TranslateRotateZYX(&pos, &rot);
         if (dList != NULL) {
-            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_skelanime.c", 805), G_MTX_LOAD);
+            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__), G_MTX_LOAD);
             gSPDisplayList(POLY_OPA_DISP++, dList);
         }
     }
-
-    if (1) {}
 
     if (postLimbDraw != NULL) {
         postLimbDraw(globalCtx, limbIndex, &dList, &rot, arg);
@@ -62,7 +60,7 @@ void SkelAnime_DrawLimbLod(GlobalContext* globalCtx, s32 limbIndex, void** skele
         SkelAnime_DrawLimbLod(globalCtx, limb->sibling, skeleton, jointTable, overrideLimbDraw, postLimbDraw, arg, lod);
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", 821);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
 }
 
 /**
@@ -84,7 +82,7 @@ void SkelAnime_DrawLod(GlobalContext* globalCtx, void** skeleton, Vec3s* jointTa
         return;
     }
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", 849);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
 
     Matrix_Push();
 
@@ -99,7 +97,7 @@ void SkelAnime_DrawLod(GlobalContext* globalCtx, void** skeleton, Vec3s* jointTa
     if ((overrideLimbDraw == NULL) || !overrideLimbDraw(globalCtx, 1, &dList, &pos, &rot, arg)) {
         Matrix_TranslateRotateZYX(&pos, &rot);
         if (dList != NULL) {
-            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_skelanime.c", 881), G_MTX_LOAD);
+            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__), G_MTX_LOAD);
             gSPDisplayList(POLY_OPA_DISP++, dList);
         }
     }
@@ -114,7 +112,7 @@ void SkelAnime_DrawLod(GlobalContext* globalCtx, void** skeleton, Vec3s* jointTa
 
     Matrix_Pop();
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", 894);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
 }
 
 /**
@@ -148,10 +146,10 @@ void SkelAnime_DrawFlexLimbLod(GlobalContext* globalCtx, s32 limbIndex, void** s
         if (newDList != NULL) {
             Matrix_ToMtx(*mtx, "../z_skelanime.c", 945);
             {
-                OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", 946);
+                OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
                 gSPMatrix(POLY_OPA_DISP++, *mtx, G_MTX_LOAD);
                 gSPDisplayList(POLY_OPA_DISP++, newDList);
-                CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", 949);
+                CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
             }
             (*mtx)++;
         } else if (limbDList != NULL) {
@@ -197,7 +195,7 @@ void SkelAnime_DrawFlexLod(GlobalContext* globalCtx, void** skeleton, Vec3s* joi
         return;
     }
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", 1000);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
 
     gSPSegment(POLY_OPA_DISP++, 0xD, mtx);
     Matrix_Push();
@@ -234,7 +232,7 @@ void SkelAnime_DrawFlexLod(GlobalContext* globalCtx, void** skeleton, Vec3s* joi
 
     Matrix_Pop();
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", 1053);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
 }
 
 /**
@@ -247,7 +245,7 @@ void SkelAnime_DrawLimbOpa(GlobalContext* globalCtx, s32 limbIndex, void** skele
     Vec3f pos;
     Vec3s rot;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", 1076);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
     Matrix_Push();
 
     limb = (StandardLimb*)SEGMENTED_TO_VIRTUAL(skeleton[limbIndex]);
@@ -261,7 +259,7 @@ void SkelAnime_DrawLimbOpa(GlobalContext* globalCtx, s32 limbIndex, void** skele
     if ((overrideLimbDraw == NULL) || !overrideLimbDraw(globalCtx, limbIndex, &dList, &pos, &rot, arg)) {
         Matrix_TranslateRotateZYX(&pos, &rot);
         if (dList != NULL) {
-            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_skelanime.c", 1103), G_MTX_LOAD);
+            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__), G_MTX_LOAD);
             gSPDisplayList(POLY_OPA_DISP++, dList);
         }
     }
@@ -281,7 +279,7 @@ void SkelAnime_DrawLimbOpa(GlobalContext* globalCtx, s32 limbIndex, void** skele
     if (limb->sibling != LIMB_DONE) {
         SkelAnime_DrawLimbOpa(globalCtx, limb->sibling, skeleton, jointTable, overrideLimbDraw, postLimbDraw, arg);
     }
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", 1121);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
 }
 
 /**
@@ -302,7 +300,7 @@ void SkelAnime_DrawOpa(GlobalContext* globalCtx, void** skeleton, Vec3s* jointTa
         return;
     }
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", 1148);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
 
     Matrix_Push();
     rootLimb = (StandardLimb*)SEGMENTED_TO_VIRTUAL(skeleton[0]);
@@ -317,7 +315,7 @@ void SkelAnime_DrawOpa(GlobalContext* globalCtx, void** skeleton, Vec3s* jointTa
     if ((overrideLimbDraw == NULL) || !overrideLimbDraw(globalCtx, 1, &dList, &pos, &rot, arg)) {
         Matrix_TranslateRotateZYX(&pos, &rot);
         if (dList != NULL) {
-            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_skelanime.c", 1176), G_MTX_LOAD);
+            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__), G_MTX_LOAD);
             gSPDisplayList(POLY_OPA_DISP++, dList);
         }
     }
@@ -332,7 +330,7 @@ void SkelAnime_DrawOpa(GlobalContext* globalCtx, void** skeleton, Vec3s* jointTa
 
     Matrix_Pop();
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", 1190);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
 }
 
 /**
@@ -347,7 +345,7 @@ void SkelAnime_DrawFlexLimbOpa(GlobalContext* globalCtx, s32 limbIndex, void** s
     Vec3f pos;
     Vec3s rot;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", 1214);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
 
     Matrix_Push();
 
@@ -389,7 +387,7 @@ void SkelAnime_DrawFlexLimbOpa(GlobalContext* globalCtx, s32 limbIndex, void** s
         SkelAnime_DrawFlexLimbOpa(globalCtx, limb->sibling, skeleton, jointTable, overrideLimbDraw, postLimbDraw, arg,
                                   limbMatricies);
     }
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", 1265);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
 }
 
 /**
@@ -414,7 +412,7 @@ void SkelAnime_DrawFlexOpa(GlobalContext* globalCtx, void** skeleton, Vec3s* joi
         return;
     }
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", 1294);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
 
     gSPSegment(POLY_OPA_DISP++, 0xD, mtx);
 
@@ -453,7 +451,7 @@ void SkelAnime_DrawFlexOpa(GlobalContext* globalCtx, void** skeleton, Vec3s* joi
     }
 
     Matrix_Pop();
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", 1347);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
 }
 
 /**
@@ -525,7 +523,7 @@ Gfx* SkelAnime_DrawLimb(GlobalContext* globalCtx, s32 limbIndex, void** skeleton
     if ((overrideLimbDraw == NULL) || !overrideLimbDraw(globalCtx, limbIndex, &dList, &pos, &rot, arg, &gfx)) {
         Matrix_TranslateRotateZYX(&pos, &rot);
         if (dList != NULL) {
-            gSPMatrix(gfx++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_skelanime.c", 1489), G_MTX_LOAD);
+            gSPMatrix(gfx++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__), G_MTX_LOAD);
             gSPDisplayList(gfx++, dList);
         }
     }
@@ -583,7 +581,7 @@ Gfx* SkelAnime_Draw(GlobalContext* globalCtx, void** skeleton, Vec3s* jointTable
     if ((overrideLimbDraw == NULL) || !overrideLimbDraw(globalCtx, 1, &dList, &pos, &rot, arg, &gfx)) {
         Matrix_TranslateRotateZYX(&pos, &rot);
         if (dList != NULL) {
-            gSPMatrix(gfx++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_skelanime.c", 1558), G_MTX_LOAD);
+            gSPMatrix(gfx++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__), G_MTX_LOAD);
             gSPDisplayList(gfx++, dList);
         }
     }
@@ -1068,10 +1066,10 @@ void SkelAnime_InitLink(GlobalContext* globalCtx, SkelAnime* skelAnime, FlexSkel
     }
 
     if (jointTable == NULL) {
-        skelAnime->jointTable = ZeldaArena_MallocDebug(allocSize, "../z_skelanime.c", 2364);
-        skelAnime->morphTable = ZeldaArena_MallocDebug(allocSize, "../z_skelanime.c", 2365);
+        skelAnime->jointTable = ZeldaArena_MallocDebug(allocSize, "../z_skelanime.c", __LINE__);
+        skelAnime->morphTable = ZeldaArena_MallocDebug(allocSize, "../z_skelanime.c", __LINE__);
     } else {
-        ASSERT(limbBufCount == limbCount, "joint_buff_num == joint_num", "../z_skelanime.c", 2369);
+        ASSERT(limbBufCount == limbCount, "limbBufCount == limbCount", "../z_skelanime.c", __LINE__);
 
         skelAnime->jointTable = (Vec3s*)ALIGN16((u32)jointTable);
         skelAnime->morphTable = (Vec3s*)ALIGN16((u32)morphTable);
@@ -1388,11 +1386,11 @@ s32 SkelAnime_Init(GlobalContext* globalCtx, SkelAnime* skelAnime, SkeletonHeade
     skelAnime->skeleton = SEGMENTED_TO_VIRTUAL(skeletonHeader->segment);
     if (jointTable == NULL) {
         skelAnime->jointTable =
-            ZeldaArena_MallocDebug(skelAnime->limbCount * sizeof(*skelAnime->jointTable), "../z_skelanime.c", 2968);
+            ZeldaArena_MallocDebug(skelAnime->limbCount * sizeof(*skelAnime->jointTable), "../z_skelanime.c", __LINE__);
         skelAnime->morphTable =
-            ZeldaArena_MallocDebug(skelAnime->limbCount * sizeof(*skelAnime->morphTable), "../z_skelanime.c", 2969);
+            ZeldaArena_MallocDebug(skelAnime->limbCount * sizeof(*skelAnime->morphTable), "../z_skelanime.c", __LINE__);
     } else {
-        ASSERT(limbCount == skelAnime->limbCount, "joint_buff_num == this->joint_num", "../z_skelanime.c", 2973);
+        ASSERT(limbCount == skelAnime->limbCount, "limbCount == skelAnime->limbCount", "../z_skelanime.c", __LINE__);
         skelAnime->jointTable = jointTable;
         skelAnime->morphTable = morphTable;
     }
@@ -1420,12 +1418,12 @@ s32 SkelAnime_InitFlex(GlobalContext* globalCtx, SkelAnime* skelAnime, FlexSkele
 
     if (jointTable == NULL) {
         skelAnime->jointTable =
-            ZeldaArena_MallocDebug(skelAnime->limbCount * sizeof(*skelAnime->jointTable), "../z_skelanime.c", 3047);
+            ZeldaArena_MallocDebug(skelAnime->limbCount * sizeof(*skelAnime->jointTable), "../z_skelanime.c", __LINE__);
 
         skelAnime->morphTable =
-            ZeldaArena_MallocDebug(skelAnime->limbCount * sizeof(*skelAnime->morphTable), "../z_skelanime.c", 3048);
+            ZeldaArena_MallocDebug(skelAnime->limbCount * sizeof(*skelAnime->morphTable), "../z_skelanime.c", __LINE__);
     } else {
-        ASSERT(limbCount == skelAnime->limbCount, "joint_buff_num == this->joint_num", "../z_skelanime.c", 3052);
+        ASSERT(limbCount == skelAnime->limbCount, "limbCount == skelAnime->limbCount", "../z_skelanime.c", __LINE__);
         skelAnime->jointTable = jointTable;
         skelAnime->morphTable = morphTable;
     }
@@ -1451,9 +1449,9 @@ s32 SkelAnime_InitSkin(GlobalContext* globalCtx, SkelAnime* skelAnime, SkeletonH
     skelAnime->limbCount = skeletonHeader->limbCount + 1;
     skelAnime->skeleton = SEGMENTED_TO_VIRTUAL(skeletonHeader->segment);
     skelAnime->jointTable =
-        ZeldaArena_MallocDebug(skelAnime->limbCount * sizeof(*skelAnime->jointTable), "../z_skelanime.c", 3120);
+        ZeldaArena_MallocDebug(skelAnime->limbCount * sizeof(*skelAnime->jointTable), "../z_skelanime.c", __LINE__);
     skelAnime->morphTable =
-        ZeldaArena_MallocDebug(skelAnime->limbCount * sizeof(*skelAnime->morphTable), "../z_skelanime.c", 3121);
+        ZeldaArena_MallocDebug(skelAnime->limbCount * sizeof(*skelAnime->morphTable), "../z_skelanime.c", __LINE__);
     if ((skelAnime->jointTable == NULL) || (skelAnime->morphTable == NULL)) {
         osSyncPrintf(VT_FGCOL(RED));
         // "Memory allocation error"

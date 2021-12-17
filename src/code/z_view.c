@@ -18,7 +18,7 @@ void View_ViewportToVp(Vp* dest, Viewport* src) {
 }
 
 View* View_New(GraphicsContext* gfxCtx) {
-    View* view = SystemArena_MallocDebug(sizeof(View), "../z_view.c", 285);
+    View* view = SystemArena_MallocDebug(sizeof(View), "../z_view.c", __LINE__);
 
     if (view != NULL) {
         func_80106860(view, 0, sizeof(View)); // memset
@@ -157,19 +157,19 @@ void func_800AA550(View* view) {
     lrx = view->viewport.rightX - varX;
     lry = view->viewport.bottomY - varY;
 
-    ASSERT(ulx >= 0, "ulx >= 0", "../z_view.c", 454);
-    ASSERT(uly >= 0, "uly >= 0", "../z_view.c", 455);
-    ASSERT(lrx <= SCREEN_WIDTH, "lrx <= SCREEN_WD", "../z_view.c", 456);
-    ASSERT(lry <= SCREEN_HEIGHT, "lry <= SCREEN_HT", "../z_view.c", 457);
+    ASSERT(ulx >= 0, "ulx >= 0", "../z_view.c", __LINE__);
+    ASSERT(uly >= 0, "uly >= 0", "../z_view.c", __LINE__);
+    ASSERT(lrx <= SCREEN_WIDTH, "lrx <= SCREEN_WIDTH", "../z_view.c", __LINE__);
+    ASSERT(lry <= SCREEN_HEIGHT, "lry <= SCREEN_HEIGHT", "../z_view.c", __LINE__);
 
-    OPEN_DISPS(gfxCtx, "../z_view.c", 459);
+    OPEN_DISPS(gfxCtx, "../z_view.c", __LINE__);
 
     gDPPipeSync(POLY_OPA_DISP++);
     gDPSetScissor(POLY_OPA_DISP++, G_SC_NON_INTERLACE, ulx, uly, lrx, lry);
     gDPPipeSync(POLY_XLU_DISP++);
     gDPSetScissor(POLY_XLU_DISP++, G_SC_NON_INTERLACE, ulx, uly, lrx, lry);
 
-    CLOSE_DISPS(gfxCtx, "../z_view.c", 472);
+    CLOSE_DISPS(gfxCtx, "../z_view.c", __LINE__);
 }
 
 void func_800AA76C(View* view, f32 x, f32 y, f32 z) {
@@ -268,7 +268,7 @@ s32 func_800AAA9C(View* view) {
     Mtx* viewing;
     GraphicsContext* gfxCtx = view->gfxCtx;
 
-    OPEN_DISPS(gfxCtx, "../z_view.c", 596);
+    OPEN_DISPS(gfxCtx, "../z_view.c", __LINE__);
 
     vp = Graph_Alloc(gfxCtx, sizeof(Vp));
     LogUtils_CheckNullPointer("vp", vp, "../z_view.c", 601);
@@ -306,7 +306,7 @@ s32 func_800AAA9C(View* view) {
         s32 i;
         MtxF mf;
 
-        osSyncPrintf("fovy %f near %f far %f scale %f aspect %f normal %08x\n", view->fovy, view->zNear, view->zFar,
+        osSyncPrintf("fovy %f near %f far %f scale %f aspect %f normal %08X\n", view->fovy, view->zNear, view->zFar,
                      view->scale, aspect, view->normal);
 
         Matrix_MtxToMtxF(projection, &mf);
@@ -357,7 +357,7 @@ s32 func_800AAA9C(View* view) {
     gSPMatrix(POLY_OPA_DISP++, viewing, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
     gSPMatrix(POLY_XLU_DISP++, viewing, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
 
-    CLOSE_DISPS(gfxCtx, "../z_view.c", 711);
+    CLOSE_DISPS(gfxCtx, "../z_view.c", __LINE__);
 
     return 1;
 }
@@ -367,7 +367,7 @@ s32 func_800AB0A8(View* view) {
     Mtx* projection;
     GraphicsContext* gfxCtx = view->gfxCtx;
 
-    OPEN_DISPS(gfxCtx, "../z_view.c", 726);
+    OPEN_DISPS(gfxCtx, "../z_view.c", __LINE__);
 
     vp = Graph_Alloc(gfxCtx, sizeof(Vp));
     LogUtils_CheckNullPointer("vp", vp, "../z_view.c", 730);
@@ -392,7 +392,7 @@ s32 func_800AB0A8(View* view) {
     gSPMatrix(POLY_OPA_DISP++, projection, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPMatrix(POLY_XLU_DISP++, projection, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
-    CLOSE_DISPS(gfxCtx, "../z_view.c", 762);
+    CLOSE_DISPS(gfxCtx, "../z_view.c", __LINE__);
 
     return 1;
 }
@@ -404,7 +404,7 @@ s32 func_800AB2C4(View* view) {
 
     gfxCtx = view->gfxCtx;
 
-    OPEN_DISPS(gfxCtx, "../z_view.c", 777);
+    OPEN_DISPS(gfxCtx, "../z_view.c", __LINE__);
 
     vp = Graph_Alloc(gfxCtx, sizeof(Vp));
     LogUtils_CheckNullPointer("vp", vp, "../z_view.c", 781);
@@ -427,7 +427,7 @@ s32 func_800AB2C4(View* view) {
 
     gSPMatrix(OVERLAY_DISP++, projection, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
-    CLOSE_DISPS(gfxCtx, "../z_view.c", 801);
+    CLOSE_DISPS(gfxCtx, "../z_view.c", __LINE__);
 
     return 1;
 }
@@ -442,7 +442,7 @@ s32 func_800AB560(View* view) {
     Mtx* viewing;
     GraphicsContext* gfxCtx = view->gfxCtx;
 
-    OPEN_DISPS(gfxCtx, "../z_view.c", 816);
+    OPEN_DISPS(gfxCtx, "../z_view.c", __LINE__);
 
     vp = Graph_Alloc(gfxCtx, sizeof(Vp));
     LogUtils_CheckNullPointer("vp", vp, "../z_view.c", 821);
@@ -487,19 +487,19 @@ s32 func_800AB560(View* view) {
 
     gSPMatrix(OVERLAY_DISP++, viewing, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
 
-    CLOSE_DISPS(gfxCtx, "../z_view.c", 871);
+    CLOSE_DISPS(gfxCtx, "../z_view.c", __LINE__);
 
     return 1;
 }
 
 s32 func_800AB944(View* view) {
-    OPEN_DISPS(view->gfxCtx, "../z_view.c", 878);
+    OPEN_DISPS(view->gfxCtx, "../z_view.c", __LINE__);
 
     func_800ABE74(view->eye.x, view->eye.y, view->eye.z);
     guLookAt(view->viewingPtr, view->eye.x, view->eye.y, view->eye.z, view->lookAt.x, view->lookAt.y, view->lookAt.z,
              view->up.x, view->up.y, view->up.z);
 
-    CLOSE_DISPS(view->gfxCtx, "../z_view.c", 886);
+    CLOSE_DISPS(view->gfxCtx, "../z_view.c", __LINE__);
 
     return 1;
 }

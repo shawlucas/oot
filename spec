@@ -3367,6 +3367,12 @@ beginseg
 endseg
 
 beginseg
+    name "ovl_Menu"
+    include "build/src/overlays/misc/ovl_Menu/z_menu.o"
+    include "build/src/overlays/misc/ovl_Menu/ovl_Menu_reloc.o"
+endseg
+
+beginseg
     name "gameplay_keep"
     romalign 0x1000
     include "build/assets/objects/gameplay_keep/gameplay_keep.o"

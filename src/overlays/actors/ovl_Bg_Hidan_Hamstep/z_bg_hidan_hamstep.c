@@ -396,11 +396,11 @@ void BgHidanHamstep_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgHidanHamstep_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_hidan_hamstep.c", 782);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_hidan_hamstep.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
 
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_hidan_hamstep.c", 787),
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_hidan_hamstep.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     if ((thisx->params & 0xFF) == 0) {
@@ -409,5 +409,5 @@ void BgHidanHamstep_Draw(Actor* thisx, GlobalContext* globalCtx) {
         gSPDisplayList(POLY_OPA_DISP++, gFireTempleStoneStep2DL);
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_hidan_hamstep.c", 796);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_hidan_hamstep.c", __LINE__);
 }

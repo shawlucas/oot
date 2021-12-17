@@ -309,7 +309,7 @@ void EnJj_Draw(Actor* thisx, GlobalContext* globalCtx2) {
     GlobalContext* globalCtx = globalCtx2;
     EnJj* this = (EnJj*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_jj.c", 879);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_jj.c", __LINE__);
 
     func_800943C8(globalCtx->state.gfxCtx);
     Matrix_Translate(0.0f, (cosf(this->skelAnime.curFrame * (M_PI / 41.0f)) * 10.0f) - 10.0f, 0.0f, MTXMODE_APPLY);
@@ -318,5 +318,5 @@ void EnJj_Draw(Actor* thisx, GlobalContext* globalCtx2) {
     SkelAnime_DrawFlexOpa(globalCtx, this->skelAnime.skeleton, this->skelAnime.jointTable, this->skelAnime.dListCount,
                           NULL, NULL, this);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_jj.c", 898);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_jj.c", __LINE__);
 }

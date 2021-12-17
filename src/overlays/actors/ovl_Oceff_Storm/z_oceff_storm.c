@@ -126,7 +126,7 @@ void OceffStorm_Draw2(Actor* thisx, GlobalContext* globalCtx) {
     u32 scroll = globalCtx->state.frames & 0xFFF;
     OceffStorm* this = (OceffStorm*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_oceff_storm.c", 449);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_oceff_storm.c", __LINE__);
 
     gDPPipeSync(POLY_XLU_DISP++);
 
@@ -142,7 +142,7 @@ void OceffStorm_Draw2(Actor* thisx, GlobalContext* globalCtx) {
     gSPTextureRectangle(POLY_XLU_DISP++, 0, 0, (SCREEN_WIDTH << 2), (SCREEN_HEIGHT << 2), G_TX_RENDERTILE, 0, 0, 140,
                         (1 << 15) | (31 << 10) | 884);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_oceff_storm.c", 477);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_oceff_storm.c", __LINE__);
 }
 
 void OceffStorm_Draw(Actor* thisx, GlobalContext* globalCtx) {
@@ -150,7 +150,7 @@ void OceffStorm_Draw(Actor* thisx, GlobalContext* globalCtx) {
     OceffStorm* this = (OceffStorm*)thisx;
     Vtx* vtxPtr = sCylinderVtx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_oceff_storm.c", 486);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_oceff_storm.c", __LINE__);
 
     func_80093D84(globalCtx->state.gfxCtx);
 
@@ -162,7 +162,7 @@ void OceffStorm_Draw(Actor* thisx, GlobalContext* globalCtx) {
     vtxPtr[0].v.cn[3] = vtxPtr[6].v.cn[3] = vtxPtr[16].v.cn[3] = vtxPtr[25].v.cn[3] = this->vtxAlpha >> 1;
     vtxPtr[10].v.cn[3] = vtxPtr[22].v.cn[3] = this->vtxAlpha;
 
-    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_oceff_storm.c", 498),
+    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_oceff_storm.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     gSPDisplayList(POLY_XLU_DISP++, sCylinderMaterialDL);
@@ -170,7 +170,7 @@ void OceffStorm_Draw(Actor* thisx, GlobalContext* globalCtx) {
                                                      1, scroll * 8, (0 - scroll) * 12, 32, 32));
     gSPDisplayList(POLY_XLU_DISP++, sCylinderModelDL);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_oceff_storm.c", 512);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_oceff_storm.c", __LINE__);
 
     OceffStorm_Draw2(&this->actor, globalCtx);
 }

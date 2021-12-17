@@ -394,9 +394,9 @@ void BgHidanSekizou_Draw(Actor* thisx, GlobalContext* globalCtx2) {
     s32 i;
     s32 sp6C[4];
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_hidan_sekizou.c", 827);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_hidan_sekizou.c", __LINE__);
     func_80093D18(globalCtx->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_hidan_sekizou.c", 831),
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_hidan_sekizou.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     if (this->dyna.actor.params == 0) {
         gSPDisplayList(POLY_OPA_DISP++, gFireTempleStationaryFlamethrowerShortDL);
@@ -429,5 +429,5 @@ void BgHidanSekizou_Draw(Actor* thisx, GlobalContext* globalCtx2) {
             }
         }
     }
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_hidan_sekizou.c", 899);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_hidan_sekizou.c", __LINE__);
 }

@@ -1517,7 +1517,7 @@ void BossFd_DrawEffects(BossFdEffect* effect, GlobalContext* globalCtx) {
     s16 i;
     BossFdEffect* firstEffect = effect;
 
-    OPEN_DISPS(gfxCtx, "../z_boss_fd.c", 4023);
+    OPEN_DISPS(gfxCtx, "../z_boss_fd.c", __LINE__);
 
     for (i = 0; i < 180; i++, effect++) {
         if (effect->type == BFD_FX_EMBER) {
@@ -1532,7 +1532,7 @@ void BossFd_DrawEffects(BossFdEffect* effect, GlobalContext* globalCtx) {
             func_800D1FD4(&globalCtx->billboardMtxF);
             Matrix_Scale(effect->scale, effect->scale, 1.0f, MTXMODE_APPLY);
 
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_boss_fd.c", 4046),
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_boss_fd.c", __LINE__),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(POLY_XLU_DISP++, gVolvagiaEmberModelDL);
         }
@@ -1553,7 +1553,7 @@ void BossFd_DrawEffects(BossFdEffect* effect, GlobalContext* globalCtx) {
             Matrix_RotateX(effect->vFdFxRotX, MTXMODE_APPLY);
             Matrix_Scale(effect->scale, effect->scale, 1.0f, MTXMODE_APPLY);
 
-            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_boss_fd.c", 4068),
+            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_boss_fd.c", __LINE__),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(POLY_OPA_DISP++, gVolvagiaDebrisModelDL);
         }
@@ -1575,7 +1575,7 @@ void BossFd_DrawEffects(BossFdEffect* effect, GlobalContext* globalCtx) {
             Matrix_Scale(effect->scale, effect->scale, effect->scale, MTXMODE_APPLY);
             func_800D1FD4(&globalCtx->billboardMtxF);
 
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_boss_fd.c", 4104),
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_boss_fd.c", __LINE__),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPSegment(POLY_XLU_DISP++, 0x08, SEGMENTED_TO_VIRTUAL(dustTex[effect->timer2]));
             gSPDisplayList(POLY_XLU_DISP++, gVolvagiaDustModelDL);
@@ -1598,7 +1598,7 @@ void BossFd_DrawEffects(BossFdEffect* effect, GlobalContext* globalCtx) {
             Matrix_Scale(effect->scale, effect->scale, effect->scale, MTXMODE_APPLY);
             func_800D1FD4(&globalCtx->billboardMtxF);
 
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_boss_fd.c", 4154),
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_boss_fd.c", __LINE__),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPSegment(POLY_XLU_DISP++, 0x08, SEGMENTED_TO_VIRTUAL(dustTex[effect->timer2]));
             gSPDisplayList(POLY_XLU_DISP++, gVolvagiaDustModelDL);
@@ -1620,13 +1620,13 @@ void BossFd_DrawEffects(BossFdEffect* effect, GlobalContext* globalCtx) {
             Matrix_RotateX(effect->vFdFxRotX, MTXMODE_APPLY);
             Matrix_Scale(effect->scale, effect->scale, 1.0f, MTXMODE_APPLY);
 
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_boss_fd.c", 4192),
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_boss_fd.c", __LINE__),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(POLY_XLU_DISP++, gVolvagiaSkullPieceModelDL);
         }
     }
 
-    CLOSE_DISPS(gfxCtx, "../z_boss_fd.c", 4198);
+    CLOSE_DISPS(gfxCtx, "../z_boss_fd.c", __LINE__);
 }
 
 void BossFd_Draw(Actor* thisx, GlobalContext* globalCtx) {
@@ -1635,7 +1635,7 @@ void BossFd_Draw(Actor* thisx, GlobalContext* globalCtx) {
 
     osSyncPrintf("FD DRAW START\n");
     if (this->actionFunc != BossFd_Wait) {
-        OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_fd.c", 4217);
+        OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_fd.c", __LINE__);
         func_80093D18(globalCtx->state.gfxCtx);
         if (this->work[BFD_DAMAGE_FLASH_TIMER] & 2) {
             POLY_OPA_DISP = Gfx_SetFog(POLY_OPA_DISP, 255, 255, 255, 0, 900, 1099);
@@ -1643,7 +1643,7 @@ void BossFd_Draw(Actor* thisx, GlobalContext* globalCtx) {
 
         BossFd_DrawBody(globalCtx, this);
         POLY_OPA_DISP = Gameplay_SetFog(globalCtx, POLY_OPA_DISP);
-        CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_boss_fd.c", 4243);
+        CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_boss_fd.c", __LINE__);
     }
 
     osSyncPrintf("FD DRAW END\n");
@@ -1716,7 +1716,7 @@ void BossFd_DrawMane(GlobalContext* globalCtx, BossFd* this, Vec3f* manePos, Vec
     f32 phi_f20;
     f32 phi_f22;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_fd.c", 4419);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_fd.c", __LINE__);
 
     maneLength = this->skinSegments;
     maneLength = CLAMP_MAX(maneLength, 10);
@@ -1757,12 +1757,12 @@ void BossFd_DrawMane(GlobalContext* globalCtx, BossFd* this, Vec3f* manePos, Vec
         Matrix_Scale(maneScale[maneIndex] * (0.01f - (i * 0.0008f)), maneScale[maneIndex] * (0.01f - (i * 0.0008f)),
                      0.01f, MTXMODE_APPLY);
         Matrix_RotateX(-M_PI / 2.0f, MTXMODE_APPLY);
-        gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_boss_fd.c", 4480),
+        gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_boss_fd.c", __LINE__),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPDisplayList(POLY_XLU_DISP++, gVolvagiaManeModelDL);
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_boss_fd.c", 4483);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_boss_fd.c", __LINE__);
 }
 
 s32 BossFd_OverrideHeadDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* thisx) {
@@ -1822,7 +1822,7 @@ void BossFd_DrawBody(GlobalContext* globalCtx, BossFd* this) {
     f32 temp_float;
     Mtx* tempMat = Graph_Alloc(globalCtx->state.gfxCtx, 18 * sizeof(Mtx));
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_fd.c", 4589);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_fd.c", __LINE__);
     if (this->skinSegments != 0) {
         gSPSegment(POLY_OPA_DISP++, 0x09, SEGMENTED_TO_VIRTUAL(sEyeTextures[this->eyeState]));
     }
@@ -1900,7 +1900,7 @@ void BossFd_DrawBody(GlobalContext* globalCtx, BossFd* this) {
                     temp_float = 0.1f * sp84;
                 }
                 Matrix_Scale(0.1f, 0.1f, 0.1f, MTXMODE_APPLY);
-                gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_boss_fd.c", 4768),
+                gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_boss_fd.c", __LINE__),
                           G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
                 gSPDisplayList(POLY_OPA_DISP++, gVolvagiaRibsDL);
 
@@ -1976,5 +1976,5 @@ void BossFd_DrawBody(GlobalContext* globalCtx, BossFd* this) {
 
     Matrix_Pop();
     osSyncPrintf("END\n");
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_boss_fd.c", 4987);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_boss_fd.c", __LINE__);
 }

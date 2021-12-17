@@ -4650,7 +4650,7 @@ void func_8083AE40(Player* this, s16 objectId) {
         size = gObjectTable[objectId].vromEnd - gObjectTable[objectId].vromStart;
 
         LOG_HEX("size", size, "../z_player.c", 9090);
-        ASSERT(size <= 1024 * 8, "size <= 1024 * 8", "../z_player.c", 9091);
+        ASSERT(size <= 1024 * 8, "size <= 1024 * 8", "../z_player.c", __LINE__);
 
         DmaMgr_SendRequest2(&this->giObjectDmaRequest, (u32)this->giObjectSegment, gObjectTable[objectId].vromStart,
                             size, 0, &this->giObjectLoadQueue, NULL, "../z_player.c", 9099);
@@ -9073,7 +9073,7 @@ void Player_Init(Actor* thisx, GlobalContext* globalCtx2) {
     Player_SetEquipmentData(globalCtx, this);
     this->prevBoots = this->currentBoots;
     Player_InitCommon(this, globalCtx, gPlayerSkelHeaders[((void)0, gSaveContext.linkAge)]);
-    this->giObjectSegment = (void*)(((u32)ZeldaArena_MallocDebug(0x3008, "../z_player.c", 17175) + 8) & ~0xF);
+    this->giObjectSegment = (void*)(((u32)ZeldaArena_MallocDebug(0x3008, "../z_player.c", __LINE__)));
 
     sp50 = gSaveContext.respawnFlag;
 
@@ -10321,7 +10321,7 @@ void func_8084A0E8(GlobalContext* globalCtx, Player* this, s32 lod, Gfx* cullDLi
                    OverrideLimbDrawOpa overrideLimbDraw) {
     static s32 D_8085486C = 255;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_player.c", 19228);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_player.c", __LINE__);
 
     gSPSegment(POLY_OPA_DISP++, 0x0C, cullDList);
     gSPSegment(POLY_XLU_DISP++, 0x0C, cullDList);
@@ -10379,7 +10379,7 @@ void func_8084A0E8(GlobalContext* globalCtx, Player* this, s32 lod, Gfx* cullDLi
                           &D_80854864);
             Matrix_Scale(4.0f, 4.0f, 4.0f, MTXMODE_APPLY);
 
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_player.c", 19317),
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_player.c", __LINE__),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPSegment(POLY_XLU_DISP++, 0x08,
                        Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, 0, 0, 16, 32, 1, 0,
@@ -10390,14 +10390,14 @@ void func_8084A0E8(GlobalContext* globalCtx, Player* this, s32 lod, Gfx* cullDLi
         }
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_player.c", 19328);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_player.c", __LINE__);
 }
 
 void Player_Draw(Actor* thisx, GlobalContext* globalCtx2) {
     GlobalContext* globalCtx = globalCtx2;
     Player* this = (Player*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_player.c", 19346);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_player.c", __LINE__);
 
     if (!(this->stateFlags2 & 0x20000000)) {
         OverrideLimbDrawOpa overrideLimbDraw = func_80090014;
@@ -10473,7 +10473,7 @@ void Player_Draw(Actor* thisx, GlobalContext* globalCtx2) {
                                         0, (globalCtx->gameplayFrames * -2) % 128, 32, 32));
 
             Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_player.c", 19459),
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_player.c", __LINE__),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gDPSetEnvColor(POLY_XLU_DISP++, 0, 50, 100, 255);
             gSPDisplayList(POLY_XLU_DISP++, gEffIceFragment3DL);
@@ -10484,7 +10484,7 @@ void Player_Draw(Actor* thisx, GlobalContext* globalCtx2) {
         }
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_player.c", 19473);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_player.c", __LINE__);
 }
 
 void Player_Destroy(Actor* thisx, GlobalContext* globalCtx) {

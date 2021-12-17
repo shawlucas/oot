@@ -54,11 +54,11 @@ void ActorOverlayTable_LogPrint(void) {
     ActorOverlay* overlayEntry;
     u32 i;
 
-    osSyncPrintf("actor_dlftbls %u\n", gMaxActorId);
+    osSyncPrintf("Actor Overlay Table %u\n", gMaxActorId);
     osSyncPrintf("RomStart RomEnd   SegStart SegEnd   allocp   profile  segname\n");
 
     for (i = 0, overlayEntry = &gActorOverlayTable[0]; i < (u32)gMaxActorId; i++, overlayEntry++) {
-        osSyncPrintf("%08x %08x %08x %08x %08x %08x %s\n", overlayEntry->vromStart, overlayEntry->vromEnd,
+        osSyncPrintf("%08X %08X %08X %08X %08X %08X %s\n", overlayEntry->vromStart, overlayEntry->vromEnd,
                      overlayEntry->vramStart, overlayEntry->vramEnd, overlayEntry->loadedRamAddr,
                      &overlayEntry->initInfo->id, overlayEntry->name != NULL ? overlayEntry->name : "?");
     }
@@ -71,13 +71,13 @@ void ActorOverlayTable_FaultPrint(void* arg0, void* arg1) {
 
     FaultDrawer_SetCharPad(-2, 0);
 
-    FaultDrawer_Printf("actor_dlftbls %u\n", gMaxActorId);
+    FaultDrawer_Printf("Actor Overlay Table %u\n", gMaxActorId);
     FaultDrawer_Printf("No. RamStart- RamEnd cn  Name\n");
 
     for (i = 0, overlayEntry = &gActorOverlayTable[0]; i < gMaxActorId; i++, overlayEntry++) {
         overlaySize = (u32)overlayEntry->vramEnd - (u32)overlayEntry->vramStart;
         if (overlayEntry->loadedRamAddr != NULL) {
-            FaultDrawer_Printf("%3d %08x-%08x %3d %s\n", i, overlayEntry->loadedRamAddr,
+            FaultDrawer_Printf("%3d %08X-%08X %3d %s\n", i, overlayEntry->loadedRamAddr,
                                (u32)overlayEntry->loadedRamAddr + overlaySize, overlayEntry->numLoaded,
                                overlayEntry->name != NULL ? overlayEntry->name : "");
         }

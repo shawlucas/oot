@@ -19,34 +19,34 @@ f32 gViConfigYScale = 1.0;
 void Main_ThreadEntry(void* arg) {
     OSTime time;
 
-    osSyncPrintf("mainx 実行開始\n");
+    osSyncPrintf("Main_ThreadEntry start\n");
     DmaMgr_Init();
-    osSyncPrintf("codeセグメントロード中...");
+    osSyncPrintf("Loading code segment...");
     time = osGetTime();
     DmaMgr_SendRequest1(_codeSegmentStart, (u32)_codeSegmentRomStart, _codeSegmentRomEnd - _codeSegmentRomStart,
-                        "../idle.c", 238);
+                        "../idle.c", __LINE__);
     time -= osGetTime();
-    osSyncPrintf("\rcodeセグメントロード中...完了\n");
-    osSyncPrintf("転送時間 %6.3f\n");
+    osSyncPrintf("\rLoading code segment...Done\n");
+    osSyncPrintf("Transfer time %6.3f\n");
     bzero(_codeSegmentBssStart, _codeSegmentBssEnd - _codeSegmentBssStart);
-    osSyncPrintf("codeセグメントBSSクリア完了\n");
+    osSyncPrintf("Cleared code segment BSS\n");
     Main(arg);
-    osSyncPrintf("mainx 実行終了\n");
+    osSyncPrintf("Main_ThreadEntry end of execution\n");
 }
 
 void Idle_ThreadEntry(void* arg) {
-    osSyncPrintf("アイドルスレッド(idleproc)実行開始\n");
-    osSyncPrintf("作製者    : %s\n", gBuildTeam);
-    osSyncPrintf("作成日時  : %s\n", gBuildDate);
+    osSyncPrintf("Start execution of idle thread (Idle_ThreadEntry)\n");
+    osSyncPrintf("Build Team    : %s\n", gBuildTeam);
+    osSyncPrintf("Build Date  : %s\n", gBuildDate);
     osSyncPrintf("MAKEOPTION: %s\n", gBuildMakeOption);
     osSyncPrintf(VT_FGCOL(GREEN));
-    osSyncPrintf("ＲＡＭサイズは %d キロバイトです(osMemSize/osGetMemSize)\n", (s32)osMemSize / 1024);
-    osSyncPrintf("_bootSegmentEnd(%08x) 以降のＲＡＭ領域はクリアされました(boot)\n", _bootSegmentEnd);
-    osSyncPrintf("Ｚバッファのサイズは %d キロバイトです\n", 0x96);
-    osSyncPrintf("ダイナミックバッファのサイズは %d キロバイトです\n", 0x92);
-    osSyncPrintf("ＦＩＦＯバッファのサイズは %d キロバイトです\n", 0x60);
-    osSyncPrintf("ＹＩＥＬＤバッファのサイズは %d キロバイトです\n", 3);
-    osSyncPrintf("オーディオヒープのサイズは %d キロバイトです\n", ((s32)gSystemHeap - (s32)gAudioHeap) / 1024);
+    osSyncPrintf("RAM size is %d kb\n", (s32)osMemSize / 1024);
+    osSyncPrintf("RAM area after _bootSegmentEnd(0x%08X) has been cleared\n", _bootSegmentEnd);
+    osSyncPrintf("Z-Buffer size is %d kb\n", 0x96);
+    osSyncPrintf("Dynamic buffer size is %d kb\n", 0x92);
+    osSyncPrintf("FIFO buffer size is %d kb\n", 0x60);
+    osSyncPrintf("YIELD buffer size is %d kb\n", 3);
+    osSyncPrintf("Audio Heap size is %d kb\n", ((s32)gSystemHeap - (s32)gAudioHeap) / 1024);
     osSyncPrintf(VT_RST);
 
     osCreateViManager(OS_PRIORITY_VIMGR);

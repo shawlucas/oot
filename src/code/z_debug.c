@@ -37,7 +37,7 @@ char regChar[] = " SOPQMYDUIZCNKXcsiWAVHGmnBdkb";
 void func_800636C0(void) {
     s32 i;
 
-    gGameInfo = (GameInfo*)SystemArena_MallocDebug(sizeof(GameInfo), "../z_debug.c", 260);
+    gGameInfo = (GameInfo*)SystemArena_MallocDebug(sizeof(GameInfo), "../z_debug.c", __LINE__);
     gGameInfo->regPage = 0;
     gGameInfo->regGroup = 0;
     gGameInfo->regCur = 0;
@@ -213,7 +213,7 @@ void func_80063D7C(GraphicsContext* gfxCtx) {
     GfxPrint printer;
     Gfx* tempRet;
 
-    OPEN_DISPS(gfxCtx, "../z_debug.c", 628);
+    OPEN_DISPS(gfxCtx, "../z_debug.c", __LINE__);
 
     GfxPrint_Init(&printer);
     sp78 = POLY_OPA_DISP;
@@ -237,7 +237,7 @@ void func_80063D7C(GraphicsContext* gfxCtx) {
 
     if (1) {}
 
-    CLOSE_DISPS(gfxCtx, "../z_debug.c", 664);
+    CLOSE_DISPS(gfxCtx, "../z_debug.c", __LINE__);
 
     GfxPrint_Destroy(&printer);
 }

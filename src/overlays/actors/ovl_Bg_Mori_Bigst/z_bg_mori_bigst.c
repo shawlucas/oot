@@ -243,14 +243,14 @@ void BgMoriBigst_Draw(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad;
     BgMoriBigst* this = (BgMoriBigst*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_bigst.c", 541);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_bigst.c", __LINE__);
     func_80093D18(globalCtx->state.gfxCtx);
 
     gSPSegment(POLY_OPA_DISP++, 0x08, globalCtx->objectCtx.status[this->moriTexObjIndex].segment);
 
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_mori_bigst.c", 548),
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_mori_bigst.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     gSPDisplayList(POLY_OPA_DISP++, gMoriBigstDL);
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_bigst.c", 553);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_bigst.c", __LINE__);
 }

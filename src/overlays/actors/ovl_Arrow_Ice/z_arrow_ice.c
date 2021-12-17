@@ -202,7 +202,7 @@ void ArrowIce_Draw(Actor* thisx, GlobalContext* globalCtx) {
         if (1) {}
         tranform = (arrow->hitFlags & 2) ? &this->actor : &arrow->actor;
 
-        OPEN_DISPS(globalCtx->state.gfxCtx, "../z_arrow_ice.c", 610);
+        OPEN_DISPS(globalCtx->state.gfxCtx, "../z_arrow_ice.c", __LINE__);
 
         Matrix_Translate(tranform->world.pos.x, tranform->world.pos.y, tranform->world.pos.z, MTXMODE_NEW);
         Matrix_RotateY(tranform->shape.rot.y * (M_PI / 0x8000), MTXMODE_APPLY);
@@ -232,7 +232,7 @@ void ArrowIce_Draw(Actor* thisx, GlobalContext* globalCtx) {
         }
         Matrix_Scale(this->radius * 0.2f, this->unk_160 * 3.0f, this->radius * 0.2f, MTXMODE_APPLY);
         Matrix_Translate(0.0f, -700.0f, 0.0f, MTXMODE_APPLY);
-        gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_arrow_ice.c", 660),
+        gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_arrow_ice.c", __LINE__),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPDisplayList(POLY_XLU_DISP++, sMaterialDL);
         gSPDisplayList(POLY_XLU_DISP++,
@@ -240,6 +240,6 @@ void ArrowIce_Draw(Actor* thisx, GlobalContext* globalCtx) {
                                         511 - (stateFrames * 10) % 512, 511 - (stateFrames * 10) % 512, 4, 16));
         gSPDisplayList(POLY_XLU_DISP++, sModelDL);
 
-        CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_arrow_ice.c", 676);
+        CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_arrow_ice.c", __LINE__);
     }
 }

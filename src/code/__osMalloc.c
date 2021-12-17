@@ -71,7 +71,7 @@ ArenaNode* ArenaImpl_GetNextBlock(ArenaNode* node) {
     ArenaNode* next = node->next;
 
     if (next != NULL && (next == NULL || (next->magic != NODE_MAGIC))) {
-        osSyncPrintf(VT_COL(RED, WHITE) "緊急事態！メモリリーク発見！ (block=%08x)\n" VT_RST, next);
+        osSyncPrintf(VT_COL(RED, WHITE) "Emergency! Memory leak detected! (block=%08X)\n" VT_RST, next);
         next = NULL;
         node->next = NULL;
     }
@@ -82,7 +82,7 @@ ArenaNode* ArenaImpl_GetPrevBlock(ArenaNode* node) {
     ArenaNode* prev = node->prev;
 
     if (prev != NULL && (prev == NULL || (prev->magic != NODE_MAGIC))) {
-        osSyncPrintf(VT_COL(RED, WHITE) "緊急事態！メモリリーク発見！ (block=%08x)\n" VT_RST, prev);
+        osSyncPrintf(VT_COL(RED, WHITE) "Emergency! Memory leak detected！ (block=%08X)\n" VT_RST, prev);
         prev = NULL;
         node->prev = NULL;
     }
@@ -181,7 +181,7 @@ void __osMalloc_FreeBlockTest(Arena* arena, ArenaNode* node) {
         while (iter < end) {
             if (*iter != BLOCK_UNINIT_MAGIC_32 && *iter != BLOCK_FREE_MAGIC_32) {
                 osSyncPrintf(
-                    VT_COL(RED, WHITE) "緊急事態！メモリリーク検出！ (block=%08x s=%08x e=%08x p=%08x)\n" VT_RST, node,
+                    VT_COL(RED, WHITE) "Emergency! Memory leak detected! (block=%08X s=%08X e=%08X p=%08X)\n" VT_RST, node,
                     start, end, iter);
                 __osDisplayArena(arena);
                 return;
@@ -421,17 +421,17 @@ void __osFree_NoLock(Arena* arena, void* ptr) {
 
     node = (ArenaNode*)((u32)ptr - sizeof(ArenaNode));
     if (node == NULL || node->magic != NODE_MAGIC) {
-        // "__osFree: Unauthorized release (%08x)"
-        osSyncPrintf(VT_COL(RED, WHITE) "__osFree:不正解放(%08x)\n" VT_RST, ptr);
+        // "__osFree: Unauthorized release (%08X)"
+        osSyncPrintf(VT_COL(RED, WHITE) "__osFree: unauthorized release (0x%08X)\n" VT_RST, ptr);
         return;
     }
     if (node->isFree) {
-        osSyncPrintf(VT_COL(RED, WHITE) "__osFree:二重解放(%08x)\n" VT_RST, ptr); // "__osFree: Double release (%08x)"
+        osSyncPrintf(VT_COL(RED, WHITE) "__osFree: Double release(0x%08X)\n" VT_RST, ptr); // "__osFree: Double release (%08X)"
         return;
     }
     if (arena != node->arena && arena != NULL) {
-        // "__osFree:Tried to release in a different way than when it was secured (%08x:%08x)"
-        osSyncPrintf(VT_COL(RED, WHITE) "__osFree:確保時と違う方法で解放しようとした (%08x:%08x)\n" VT_RST, arena,
+        // "__osFree:Tried to release in a different way than when it was secured (%08X:%08X)"
+        osSyncPrintf(VT_COL(RED, WHITE) "__osFree: Tried to release in a different way than when it was secured (0x%08X:0x%08X)\n" VT_RST, arena,
                      node->arena);
         return;
     }
@@ -490,18 +490,18 @@ void __osFree_NoLockDebug(Arena* arena, void* ptr, const char* file, s32 line) {
 
     node = (ArenaNode*)((u32)ptr - sizeof(ArenaNode));
     if (node == NULL || node->magic != NODE_MAGIC) {
-        // "__osFree: Unauthorized release (%08x)"
-        osSyncPrintf(VT_COL(RED, WHITE) "__osFree:不正解放(%08x) [%s:%d ]\n" VT_RST, ptr, file, line);
+        // "__osFree: Unauthorized release (%08X)"
+        osSyncPrintf(VT_COL(RED, WHITE) "__osFree: Unauthorized release (0x%08X) [%s:%d ]\n" VT_RST, ptr, file, line);
         return;
     }
     if (node->isFree) {
-        // "__osFree: Double release (%08x)"
-        osSyncPrintf(VT_COL(RED, WHITE) "__osFree:二重解放(%08x) [%s:%d ]\n" VT_RST, ptr, file, line);
+        // "__osFree: Double release (%08X)"
+        osSyncPrintf(VT_COL(RED, WHITE) "__osFree: Double release (0x%08X) [%s:%d ]\n" VT_RST, ptr, file, line);
         return;
     }
     if (arena != node->arena && arena != NULL) {
-        // "__osFree:Tried to release in a different way than when it was secured (%08x:%08x)"
-        osSyncPrintf(VT_COL(RED, WHITE) "__osFree:確保時と違う方法で解放しようとした (%08x:%08x)\n" VT_RST, arena,
+        // "__osFree:Tried to release in a different way than when it was secured (%08X:%08X)"
+        osSyncPrintf(VT_COL(RED, WHITE) "__osFree: Tried to release in a different way than when it was secured (0x%08X:0x%08X)\n" VT_RST, arena,
                      node->arena);
         return;
     }
@@ -563,7 +563,7 @@ void* __osRealloc(Arena* arena, void* ptr, u32 newSize) {
     s32 pad;
 
     newSize = ALIGN16(newSize);
-    osSyncPrintf("__osRealloc(%08x, %d)\n", ptr, newSize);
+    osSyncPrintf("__osRealloc(0x%08X, %d)\n", ptr, newSize);
     ArenaImpl_Lock(arena);
 
     if (ptr == NULL) {
@@ -575,13 +575,13 @@ void* __osRealloc(Arena* arena, void* ptr, u32 newSize) {
         node = (ArenaNode*)((u32)ptr - sizeof(ArenaNode));
         if (newSize == node->size) {
             // "Does nothing because the memory block size does not change"
-            osSyncPrintf("メモリブロックサイズが変わらないためなにもしません\n");
+            osSyncPrintf("Does nothing because the memory block size does not change\n");
         } else if (node->size < newSize) {
             next = ArenaImpl_GetNextBlock(node);
             sizeDiff = newSize - node->size;
             if ((u32)next == ((u32)node + node->size + sizeof(ArenaNode)) && next->isFree && next->size >= sizeDiff) {
                 // "Merge because there is a free block after the current memory block"
-                osSyncPrintf("現メモリブロックの後ろにフリーブロックがあるので結合します\n");
+                osSyncPrintf("Merge because there is a free block after the current memory block\n");
                 next->size -= sizeDiff;
                 overNext = ArenaImpl_GetNextBlock(next);
                 newNext = (ArenaNode*)((u32)next + sizeDiff);
@@ -593,7 +593,7 @@ void* __osRealloc(Arena* arena, void* ptr, u32 newSize) {
                 func_801068B0(newNext, next, sizeof(ArenaNode)); // memcpy
             } else {
                 // "Allocate a new memory block and move the contents"
-                osSyncPrintf("新たにメモリブロックを確保して内容を移動します\n");
+                osSyncPrintf("Allocate a new memory block and move the contents.\n");
                 newAlloc = __osMalloc_NoLock(arena, newSize);
                 if (newAlloc != NULL) {
                     bcopy(ptr, newAlloc, node->size);
@@ -606,7 +606,7 @@ void* __osRealloc(Arena* arena, void* ptr, u32 newSize) {
             if (next2 != NULL && next2->isFree) {
                 blockSize = ALIGN16(newSize) + sizeof(ArenaNode);
                 // "Increased free block behind current memory block"
-                osSyncPrintf("現メモリブロックの後ろのフリーブロックを大きくしました\n");
+                osSyncPrintf("Increase free block behind current memory block\n");
                 newNext2 = (ArenaNode*)((u32)node + blockSize);
                 localCopy = *next2;
                 *newNext2 = localCopy;
@@ -620,7 +620,7 @@ void* __osRealloc(Arena* arena, void* ptr, u32 newSize) {
             } else if (newSize + sizeof(ArenaNode) < node->size) {
                 blockSize = ALIGN16(newSize) + sizeof(ArenaNode);
                 // "Generated because there is no free block after the current memory block"
-                osSyncPrintf("現メモリブロックの後ろにフリーブロックがないので生成します\n");
+                osSyncPrintf("Generated because there is no free block after the current memory block\n");
                 newNext2 = (ArenaNode*)((u32)node + blockSize);
                 newNext2->next = ArenaImpl_GetNextBlock(node);
                 newNext2->prev = node;
@@ -635,7 +635,7 @@ void* __osRealloc(Arena* arena, void* ptr, u32 newSize) {
                 }
             } else {
                 // "There is no room to generate free blocks"
-                osSyncPrintf("フリーブロック生成するだけの空きがありません\n");
+                osSyncPrintf("There is no room to generate free blocks\n");
                 ptr = NULL;
             }
         }
@@ -683,7 +683,7 @@ void __osDisplayArena(Arena* arena) {
     ArenaNode* next;
 
     if (!__osMallocIsInitalized(arena)) {
-        osSyncPrintf("アリーナは初期化されていません\n"); // "Arena is not initalized"
+        osSyncPrintf("Arena has not been initialized.\n"); // "Arena is not initalized"
         return;
     }
 
@@ -693,17 +693,17 @@ void __osDisplayArena(Arena* arena) {
     freeSize = 0;
     allocatedSize = 0;
 
-    osSyncPrintf("アリーナの内容 (0x%08x)\n", arena); // "Arena contents (0x%08x)"
+    osSyncPrintf("Arena contents (0x%08X)\n", arena); // "Arena contents (0x%08X)"
     // "Memory node range status size [time s ms us ns: TID: src: line]"
-    osSyncPrintf("メモリブロック範囲 status サイズ  [時刻  s ms us ns: TID:src:行]\n");
+    osSyncPrintf("Memory block range status size [time s ms us ns: TID:src:line].\n");
 
     iter = arena->head;
     while (iter != NULL) {
         if (iter != NULL && iter->magic == NODE_MAGIC) {
             next = iter->next;
-            osSyncPrintf("%08x-%08x%c %s %08x", iter, ((u32)iter + sizeof(ArenaNode) + iter->size),
+            osSyncPrintf("%08X-%08X%c %s %08X", iter, ((u32)iter + sizeof(ArenaNode) + iter->size),
                          (next == NULL) ? '$' : (iter != next->prev ? '!' : ' '),
-                         iter->isFree ? "空き" : "確保", //? "Free" : "Secure"
+                         iter->isFree ? "Free" : "Secure", //? "Free" : "Secure"
                          iter->size);
 
             if (!iter->isFree) {
@@ -722,18 +722,18 @@ void __osDisplayArena(Arena* arena) {
                 allocatedSize += iter->size;
             }
         } else {
-            osSyncPrintf("%08x Block Invalid\n", iter);
+            osSyncPrintf("0x%08X Block Invalid\n", iter);
             next = NULL;
         }
         iter = next;
     }
 
-    // "Total reserved node size 0x%08x bytes"
-    osSyncPrintf("確保ブロックサイズの合計 0x%08x バイト\n", allocatedSize);
-    // "Total free node size 0x%08x bytes"
-    osSyncPrintf("空きブロックサイズの合計 0x%08x バイト\n", freeSize);
-    // "Maximum free node size 0x%08x bytes"
-    osSyncPrintf("最大空きブロックサイズ   0x%08x バイト\n", maxFree);
+    // "Total reserved node size 0x%08X bytes"
+    osSyncPrintf("Total reserved node size 0x%08X bytes\n", allocatedSize);
+    // "Total free node size 0x%08X bytes"
+    osSyncPrintf("Total free node size 0x%08X bytes\n", freeSize);
+    // "Maximum free node size 0x%08X bytes"
+    osSyncPrintf("Maximum free node size 0x%08X bytes\n", maxFree);
 
     ArenaImpl_Unlock(arena);
 }
@@ -745,7 +745,7 @@ void ArenaImpl_FaultClient(Arena* arena) {
     ArenaNode* iter;
     ArenaNode* next;
 
-    FaultDrawer_Printf("ARENA INFO (0x%08x)\n", arena);
+    FaultDrawer_Printf("ARENA INFO (0x%08X)\n", arena);
     if (!__osMallocIsInitalized(arena)) {
         FaultDrawer_Printf("Arena is uninitalized\n", arena);
         return;
@@ -761,7 +761,7 @@ void ArenaImpl_FaultClient(Arena* arena) {
     while (iter != NULL) {
         if (iter != NULL && iter->magic == NODE_MAGIC) {
             next = iter->next;
-            FaultDrawer_Printf("%08x-%08x%c %s %08x", iter, ((u32)iter + sizeof(ArenaNode) + iter->size),
+            FaultDrawer_Printf("%08X-%08X%c %s %08X", iter, ((u32)iter + sizeof(ArenaNode) + iter->size),
                                (!next) ? '$' : (iter != next->prev ? '!' : ' '), iter->isFree ? "F" : "A", iter->size);
 
             FaultDrawer_Printf("\n");
@@ -776,16 +776,16 @@ void ArenaImpl_FaultClient(Arena* arena) {
             }
         } else {
             FaultDrawer_SetFontColor(0xF801);
-            FaultDrawer_Printf("%08x Block Invalid\n", iter);
+            FaultDrawer_Printf("%08X Block Invalid\n", iter);
             next = NULL;
         }
         iter = next;
     }
 
     FaultDrawer_SetFontColor(0x7F1);
-    FaultDrawer_Printf("Total Alloc Block Size  %08x\n", allocatedSize);
-    FaultDrawer_Printf("Total Free Block Size   %08x\n", freeSize);
-    FaultDrawer_Printf("Largest Free Block Size %08x\n", maxFree);
+    FaultDrawer_Printf("Total Alloc Block Size  %08X\n", allocatedSize);
+    FaultDrawer_Printf("Total Free Block Size   %08X\n", freeSize);
+    FaultDrawer_Printf("Largest Free Block Size %08X\n", maxFree);
 }
 
 u32 __osCheckArena(Arena* arena) {
@@ -793,20 +793,20 @@ u32 __osCheckArena(Arena* arena) {
     u32 error = 0;
 
     ArenaImpl_Lock(arena);
-    // "Checking the contents of the arena. . ． (%08x)"
-    osSyncPrintf("アリーナの内容をチェックしています．．． (%08x)\n", arena);
+    // "Checking the contents of the arena. . ． (%08X)"
+    osSyncPrintf("Checking the contents of the arena... (%08X)\n", arena);
     iter = arena->head;
     while (iter != NULL) {
         if (iter && iter->magic == NODE_MAGIC) {
-            // "Oops!! (%08x %08x)"
-            osSyncPrintf(VT_COL(RED, WHITE) "おおっと！！ (%08x %08x)\n" VT_RST, iter, iter->magic);
+            // "Oops!! (%08X %08X)"
+            osSyncPrintf(VT_COL(RED, WHITE) "Oops!! (%08X %08X)\n" VT_RST, iter, iter->magic);
             error = 1;
             break;
         }
         iter = ArenaImpl_GetNextBlock(iter);
     }
     if (error == 0) {
-        osSyncPrintf("アリーナはまだ、いけそうです\n"); // "The arena is still going well"
+        osSyncPrintf("The arena is still open\n"); // "The arena is still going well"
     }
     ArenaImpl_Unlock(arena);
 

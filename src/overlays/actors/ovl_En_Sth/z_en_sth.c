@@ -127,7 +127,7 @@ void EnSth_Init(Actor* thisx, GlobalContext* globalCtx) {
 
     osSyncPrintf("bank_ID = %d\n", objectBankIdx);
     if (objectBankIdx < 0) {
-        ASSERT(0, "0", "../z_en_sth.c", 1564);
+        ASSERT(0, "0", "../z_en_sth.c", __LINE__);
     }
     this->objectBankIdx = objectBankIdx;
     this->drawFunc = EnSth_Draw;
@@ -368,11 +368,11 @@ void EnSth_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Ve
     if (limbIndex == 15) {
         Matrix_MultVec3f(&D_80B0B49C, &this->actor.focus.pos);
         if (this->actor.params != 0) { // Children
-            OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_sth.c", 2079);
+            OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_sth.c", __LINE__);
 
             gSPDisplayList(POLY_OPA_DISP++, D_80B0A3C0);
 
-            CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_sth.c", 2081);
+            CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_sth.c", __LINE__);
         }
     }
 }
@@ -391,7 +391,7 @@ void EnSth_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnSth* this = (EnSth*)thisx;
     Color_RGB8* envColor1;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_sth.c", 2133);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_sth.c", __LINE__);
 
     gSegments[6] = PHYSICAL_TO_VIRTUAL(globalCtx->objectCtx.status[this->objectBankIdx].segment);
     func_800943C8(globalCtx->state.gfxCtx);
@@ -408,5 +408,5 @@ void EnSth_Draw(Actor* thisx, GlobalContext* globalCtx) {
     SkelAnime_DrawFlexOpa(globalCtx, this->skelAnime.skeleton, this->skelAnime.jointTable, this->skelAnime.dListCount,
                           EnSth_OverrideLimbDraw, EnSth_PostLimbDraw, &this->actor);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_sth.c", 2176);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_sth.c", __LINE__);
 }

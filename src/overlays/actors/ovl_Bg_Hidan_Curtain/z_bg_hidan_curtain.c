@@ -241,7 +241,7 @@ void BgHidanCurtain_Update(Actor* thisx, GlobalContext* globalCtx2) {
 void BgHidanCurtain_Draw(Actor* thisx, GlobalContext* globalCtx) {
     BgHidanCurtain* this = (BgHidanCurtain*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_hidan_curtain.c", 685);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_hidan_curtain.c", __LINE__);
     func_80093D84(globalCtx->state.gfxCtx);
 
     gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, 255, 220, 0, this->alpha);
@@ -252,10 +252,10 @@ void BgHidanCurtain_Draw(Actor* thisx, GlobalContext* globalCtx) {
                Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, this->texScroll & 0x7F, 0, 0x20, 0x40, 1, 0,
                                 (this->texScroll * -0xF) & 0xFF, 0x20, 0x40));
 
-    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_hidan_curtain.c", 698),
+    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_hidan_curtain.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     gSPDisplayList(POLY_XLU_DISP++, gEffFireCircleDL);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_hidan_curtain.c", 702);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_hidan_curtain.c", __LINE__);
 }

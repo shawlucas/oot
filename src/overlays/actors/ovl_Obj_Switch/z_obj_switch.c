@@ -729,15 +729,15 @@ void ObjSwitch_DrawEye(ObjSwitch* this, GlobalContext* globalCtx) {
     s32 pad;
     s32 subType = (this->dyna.actor.params >> 4 & 7);
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_obj_switch.c", 1459);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_obj_switch.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_obj_switch.c", 1462),
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_obj_switch.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_OPA_DISP++, 0x08, SEGMENTED_TO_VIRTUAL(eyeTextures[subType][this->eyeTexIndex]));
     gSPDisplayList(POLY_OPA_DISP++, eyeDlists[subType]);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_obj_switch.c", 1471);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_obj_switch.c", __LINE__);
 }
 
 void ObjSwitch_DrawCrystal(ObjSwitch* this, GlobalContext* globalCtx) {
@@ -754,19 +754,19 @@ void ObjSwitch_DrawCrystal(ObjSwitch* this, GlobalContext* globalCtx) {
 
     if (1) {}
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_obj_switch.c", 1494);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_obj_switch.c", __LINE__);
 
     func_80093D84(globalCtx->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_obj_switch.c", 1497),
+    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_obj_switch.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, xluDLists[subType]);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_obj_switch.c", 1502);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_obj_switch.c", __LINE__);
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_obj_switch.c", 1507);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_obj_switch.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_obj_switch.c", 1511),
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_obj_switch.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     if (subType == OBJSWITCH_SUBTYPE_CRYSTAL_1) {
@@ -779,7 +779,7 @@ void ObjSwitch_DrawCrystal(ObjSwitch* this, GlobalContext* globalCtx) {
                                 this->x2TexScroll, this->y2TexScroll, 0x20, 0x20));
     gSPDisplayList(POLY_OPA_DISP++, opaDLists[subType]);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_obj_switch.c", 1533);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_obj_switch.c", __LINE__);
 }
 
 static ObjSwitchActionFunc sDrawFuncs[] = {

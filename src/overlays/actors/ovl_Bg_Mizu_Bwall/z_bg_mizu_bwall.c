@@ -504,7 +504,7 @@ void BgMizuBwall_Draw(Actor* thisx, GlobalContext* globalCtx2) {
     GlobalContext* globalCtx = globalCtx2;
     u32 frames;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_mizu_bwall.c", 1095);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_mizu_bwall.c", __LINE__);
     if (1) {}
     frames = globalCtx->gameplayFrames;
 
@@ -521,10 +521,10 @@ void BgMizuBwall_Draw(Actor* thisx, GlobalContext* globalCtx2) {
     gSPSegment(POLY_OPA_DISP++, 0x0B,
                Gfx_TwoTexScrollEnvColor(globalCtx->state.gfxCtx, 0, 3 * frames, 0, 0x20, 0x20, 1, 0, 0, 0x20, 0x20, 0,
                                         0, 0, this->scrollAlpha4));
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_mizu_bwall.c", 1129), 2);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_mizu_bwall.c", __LINE__), 2);
 
     if (this->dList != NULL) {
         gSPDisplayList(POLY_OPA_DISP++, this->dList);
     }
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_mizu_bwall.c", 1136);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_mizu_bwall.c", __LINE__);
 }

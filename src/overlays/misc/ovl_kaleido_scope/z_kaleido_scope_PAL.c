@@ -237,7 +237,7 @@ void KaleidoScope_SetupPlayerPreRender(GlobalContext* globalCtx) {
 
     fbuf = globalCtx->state.gfxCtx->curFrameBuffer;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", 496);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__);
 
     gfxRef = POLY_OPA_DISP;
     gfx = Graph_GfxPlusOne(gfxRef);
@@ -253,7 +253,7 @@ void KaleidoScope_SetupPlayerPreRender(GlobalContext* globalCtx) {
 
     SREG(33) |= 1;
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", 509);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__);
 }
 
 void KaleidoScope_ProcessPlayerPreRender(void) {
@@ -319,14 +319,14 @@ void KaleidoScope_MoveCursorToSpecialPos(GlobalContext* globalCtx, u16 specialPo
 }
 
 void KaleidoScope_DrawQuadTextureRGBA32(GraphicsContext* gfxCtx, void* texture, u16 width, u16 height, u16 point) {
-    OPEN_DISPS(gfxCtx, "../z_kaleido_scope_PAL.c", 748);
+    OPEN_DISPS(gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__);
 
     gDPLoadTextureBlock(POLY_OPA_DISP++, texture, G_IM_FMT_RGBA, G_IM_SIZ_32b, width, height, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
     gSP1Quadrangle(POLY_OPA_DISP++, point, point + 2, point + 3, point + 1, 0);
 
-    CLOSE_DISPS(gfxCtx, "../z_kaleido_scope_PAL.c", 758);
+    CLOSE_DISPS(gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__);
 }
 
 void KaleidoScope_SetDefaultCursor(GlobalContext* globalCtx) {
@@ -429,7 +429,7 @@ void KaleidoScope_DrawCursor(GlobalContext* globalCtx, u16 pageIndex) {
     PauseContext* pauseCtx = &globalCtx->pauseCtx;
     u16 temp;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", 955);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__);
 
     temp = pauseCtx->unk_1E4;
 
@@ -461,7 +461,7 @@ void KaleidoScope_DrawCursor(GlobalContext* globalCtx, u16 pageIndex) {
         gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 255);
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", 985);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__);
 }
 
 Gfx* KaleidoScope_DrawPageSections(Gfx* gfx, Vtx* vertices, void** textures) {
@@ -514,7 +514,7 @@ void KaleidoScope_DrawPages(GlobalContext* globalCtx, GraphicsContext* gfxCtx) {
     s16 stepG;
     s16 stepB;
 
-    OPEN_DISPS(gfxCtx, "../z_kaleido_scope_PAL.c", 1100);
+    OPEN_DISPS(gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__);
 
     if ((pauseCtx->state < 8) || (pauseCtx->state > 0x11)) {
         if (pauseCtx->state != 7) {
@@ -610,7 +610,7 @@ void KaleidoScope_DrawPages(GlobalContext* globalCtx, GraphicsContext* gfxCtx) {
             Matrix_Scale(0.78f, 0.78f, 0.78f, MTXMODE_APPLY);
             Matrix_RotateX(-pauseCtx->unk_1F4 / 100.0f, MTXMODE_APPLY);
 
-            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", 1173),
+            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
             POLY_OPA_DISP = KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->itemPageVtx,
@@ -628,7 +628,7 @@ void KaleidoScope_DrawPages(GlobalContext* globalCtx, GraphicsContext* gfxCtx) {
             Matrix_RotateZ(pauseCtx->unk_1F8 / 100.0f, MTXMODE_APPLY);
             Matrix_RotateY(1.57f, MTXMODE_APPLY);
 
-            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", 1196),
+            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
             POLY_OPA_DISP = KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->equipPageVtx,
@@ -647,7 +647,7 @@ void KaleidoScope_DrawPages(GlobalContext* globalCtx, GraphicsContext* gfxCtx) {
             Matrix_RotateX(pauseCtx->unk_200 / 100.0f, MTXMODE_APPLY);
             Matrix_RotateY(3.14f, MTXMODE_APPLY);
 
-            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", 1220),
+            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
             POLY_OPA_DISP = KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->questPageVtx,
@@ -666,7 +666,7 @@ void KaleidoScope_DrawPages(GlobalContext* globalCtx, GraphicsContext* gfxCtx) {
             Matrix_RotateZ(-pauseCtx->unk_1FC / 100.0f, MTXMODE_APPLY);
             Matrix_RotateY(-1.57f, MTXMODE_APPLY);
 
-            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", 1243),
+            gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
             POLY_OPA_DISP =
@@ -695,7 +695,7 @@ void KaleidoScope_DrawPages(GlobalContext* globalCtx, GraphicsContext* gfxCtx) {
                 Matrix_Scale(0.78f, 0.78f, 0.78f, MTXMODE_APPLY);
                 Matrix_RotateX(-pauseCtx->unk_1F4 / 100.0f, MTXMODE_APPLY);
 
-                gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", 1281),
+                gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__),
                           G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
                 POLY_OPA_DISP = KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->itemPageVtx,
@@ -710,7 +710,7 @@ void KaleidoScope_DrawPages(GlobalContext* globalCtx, GraphicsContext* gfxCtx) {
                 Matrix_RotateZ(-pauseCtx->unk_1FC / 100.0f, MTXMODE_APPLY);
                 Matrix_RotateY(-1.57f, MTXMODE_APPLY);
 
-                gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", 1303),
+                gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__),
                           G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
                 POLY_OPA_DISP =
@@ -742,7 +742,7 @@ void KaleidoScope_DrawPages(GlobalContext* globalCtx, GraphicsContext* gfxCtx) {
                 Matrix_RotateX(pauseCtx->unk_200 / 100.0f, MTXMODE_APPLY);
                 Matrix_RotateY(3.14f, MTXMODE_APPLY);
 
-                gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", 1343),
+                gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__),
                           G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
                 POLY_OPA_DISP = KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->questPageVtx,
@@ -761,7 +761,7 @@ void KaleidoScope_DrawPages(GlobalContext* globalCtx, GraphicsContext* gfxCtx) {
                 Matrix_RotateZ(pauseCtx->unk_1F8 / 100.0f, MTXMODE_APPLY);
                 Matrix_RotateY(1.57f, MTXMODE_APPLY);
 
-                gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", 1367),
+                gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__),
                           G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
                 POLY_OPA_DISP = KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->equipPageVtx,
@@ -812,7 +812,7 @@ void KaleidoScope_DrawPages(GlobalContext* globalCtx, GraphicsContext* gfxCtx) {
             Matrix_RotateY(1.57f, MTXMODE_APPLY);
         }
 
-        gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", 1424),
+        gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         if ((pauseCtx->state >= 8) && (pauseCtx->state <= 0x11)) {
@@ -884,7 +884,7 @@ void KaleidoScope_DrawPages(GlobalContext* globalCtx, GraphicsContext* gfxCtx) {
         }
     }
 
-    CLOSE_DISPS(gfxCtx, "../z_kaleido_scope_PAL.c", 1577);
+    CLOSE_DISPS(gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__);
 }
 
 void KaleidoScope_DrawInfoPanel(GlobalContext* globalCtx) {
@@ -943,7 +943,7 @@ void KaleidoScope_DrawInfoPanel(GlobalContext* globalCtx) {
     s16 i;
     s16 j;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", 1676);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__);
 
     stepR = ABS(D_808321A0 - D_8082ADF0[D_8082AE04][0]) / D_8082AE00;
     stepG = ABS(D_808321A2 - D_8082ADF0[D_8082AE04][1]) / D_8082AE00;
@@ -1071,7 +1071,7 @@ void KaleidoScope_DrawInfoPanel(GlobalContext* globalCtx) {
     Matrix_Translate(0.0f, 0.0f, -144.0f, MTXMODE_NEW);
     Matrix_Scale(1.0f, 1.0f, 1.0f, MTXMODE_APPLY);
 
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", 1755),
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 90, 100, 130, 255);
@@ -1321,7 +1321,7 @@ void KaleidoScope_DrawInfoPanel(GlobalContext* globalCtx) {
         }
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", 2032);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__);
 }
 
 void KaleidoScope_UpdateNamePanel(GlobalContext* globalCtx) {
@@ -2209,7 +2209,7 @@ void KaleidoScope_InitVertices(GlobalContext* globalCtx, GraphicsContext* gfxCtx
 void KaleidoScope_DrawGameOver(GlobalContext* globalCtx) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
 
-    OPEN_DISPS(gfxCtx, "../z_kaleido_scope_PAL.c", 3122);
+    OPEN_DISPS(gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__);
 
     func_800944C4(gfxCtx);
 
@@ -2248,7 +2248,7 @@ void KaleidoScope_DrawGameOver(GlobalContext* globalCtx) {
     gSPTextureRectangle(POLY_OPA_DISP++, (VREG(87) + 128) << 2, VREG(88) << 2, (VREG(87) + 192) << 2,
                         (VREG(88) + 32) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
 
-    CLOSE_DISPS(gfxCtx, "../z_kaleido_scope_PAL.c", 3169);
+    CLOSE_DISPS(gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__);
 }
 
 void KaleidoScope_Draw(GlobalContext* globalCtx) {
@@ -2256,7 +2256,7 @@ void KaleidoScope_Draw(GlobalContext* globalCtx) {
     PauseContext* pauseCtx = &globalCtx->pauseCtx;
     InterfaceContext* interfaceCtx = &globalCtx->interfaceCtx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", 3188);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__);
 
     pauseCtx->stickRelX = input->rel.stick_x;
     pauseCtx->stickRelY = input->rel.stick_y;
@@ -2295,7 +2295,7 @@ void KaleidoScope_Draw(GlobalContext* globalCtx) {
         KaleidoScope_DrawDebugEditor(globalCtx);
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", 3254);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_scope_PAL.c", __LINE__);
 }
 
 void KaleidoScope_GrayOutTextureRGBA32(u32* texture, u16 pixelCount) {

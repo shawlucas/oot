@@ -254,7 +254,7 @@ void BgGanonOtyuka_Draw(Actor* thisx, GlobalContext* globalCtx) {
     BossGanon* ganondorf;
     f32 spBC = -30.0f;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_ganon_otyuka.c", 702);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_ganon_otyuka.c", __LINE__);
 
     actor = globalCtx->actorCtx.actorLists[ACTORCAT_BOSS].head;
     while (actor != NULL) {
@@ -299,7 +299,7 @@ void BgGanonOtyuka_Draw(Actor* thisx, GlobalContext* globalCtx) {
                         phi_s1 = sPlatformTopDL;
                     }
                 }
-                gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_ganon_otyuka.c", 766),
+                gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_ganon_otyuka.c", __LINE__),
                           G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
                 gSPDisplayList(POLY_OPA_DISP++, phi_s2);
 
@@ -313,7 +313,7 @@ void BgGanonOtyuka_Draw(Actor* thisx, GlobalContext* globalCtx) {
                         Matrix_Translate(sSideCenters[i].x, 0.0f, sSideCenters[i].z, MTXMODE_APPLY);
                         Matrix_RotateY(sSideAngles[i], MTXMODE_APPLY);
                         gSPMatrix(POLY_OPA_DISP++,
-                                  Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_ganon_otyuka.c", 785),
+                                  Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_ganon_otyuka.c", __LINE__),
                                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
                         gSPDisplayList(POLY_OPA_DISP++, sPlatformSideDL);
                         Matrix_Pop();
@@ -349,7 +349,7 @@ void BgGanonOtyuka_Draw(Actor* thisx, GlobalContext* globalCtx) {
                         Matrix_RotateY(sSideAngles[i], MTXMODE_APPLY);
                         Matrix_Scale(0.3f, platform->flashYScale * 0.3f, 0.3f, MTXMODE_APPLY);
                         gSPMatrix(POLY_XLU_DISP++,
-                                  Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_ganon_otyuka.c", 847),
+                                  Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_ganon_otyuka.c", __LINE__),
                                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
                         gSPDisplayList(POLY_XLU_DISP++, sFlashDL);
                         Matrix_Pop();
@@ -361,5 +361,5 @@ void BgGanonOtyuka_Draw(Actor* thisx, GlobalContext* globalCtx) {
         actor = actor->next;
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_ganon_otyuka.c", 857);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_ganon_otyuka.c", __LINE__);
 }

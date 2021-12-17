@@ -463,7 +463,7 @@ void DemoSa_DrawXlu(DemoSa* this, GlobalContext* globalCtx) {
     void* sp6C = sMouthTextures[mouthIndex];
     SkelAnime* skelAnime = &this->skelAnime;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_sa_inKenjyanomaDemo02.c", 296);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_sa_inKenjyanomaDemo02.c", __LINE__);
 
     func_80093D84(globalCtx->state.gfxCtx);
 
@@ -476,7 +476,7 @@ void DemoSa_DrawXlu(DemoSa* this, GlobalContext* globalCtx) {
     POLY_XLU_DISP = SkelAnime_DrawFlex(globalCtx, skelAnime->skeleton, skelAnime->jointTable, skelAnime->dListCount,
                                        NULL, NULL, NULL, POLY_XLU_DISP);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_demo_sa_inKenjyanomaDemo02.c", 325);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_demo_sa_inKenjyanomaDemo02.c", __LINE__);
 }
 
 void func_8098F390(DemoSa* this, GlobalContext* globalCtx) {
@@ -801,7 +801,7 @@ void DemoSa_DrawOpa(DemoSa* this, GlobalContext* globalCtx) {
     void* mouthTex = sMouthTextures[mouthIndex];
     SkelAnime* skelAnime = &this->skelAnime;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_sa.c", 602);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_sa.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
 
@@ -814,7 +814,7 @@ void DemoSa_DrawOpa(DemoSa* this, GlobalContext* globalCtx) {
     SkelAnime_DrawFlexOpa(globalCtx, skelAnime->skeleton, skelAnime->jointTable, skelAnime->dListCount,
                           DemoSa_OverrideLimbDraw, NULL, &this->actor);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_demo_sa.c", 626);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_demo_sa.c", __LINE__);
 }
 
 void DemoSa_Draw(Actor* thisx, GlobalContext* globalCtx) {

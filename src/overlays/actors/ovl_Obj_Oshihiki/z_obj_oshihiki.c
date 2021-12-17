@@ -653,7 +653,7 @@ void ObjOshihiki_Draw(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad;
     ObjOshihiki* this = (ObjOshihiki*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_obj_oshihiki.c", 1289);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_obj_oshihiki.c", __LINE__);
     if (ObjOshihiki_MoveWithBlockUnder(this, globalCtx)) {
         Matrix_Translate(this->underDistX * 10.0f, 0.0f, this->underDistZ * 10.0f, MTXMODE_APPLY);
     }
@@ -661,7 +661,7 @@ void ObjOshihiki_Draw(Actor* thisx, GlobalContext* globalCtx) {
     func_80093D18(globalCtx->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x08, SEGMENTED_TO_VIRTUAL(this->texture));
 
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_obj_oshihiki.c", 1308),
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_obj_oshihiki.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     switch (globalCtx->sceneNum) {
@@ -681,5 +681,5 @@ void ObjOshihiki_Draw(Actor* thisx, GlobalContext* globalCtx) {
     }
 
     gSPDisplayList(POLY_OPA_DISP++, gPushBlockDL);
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_obj_oshihiki.c", 1334);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_obj_oshihiki.c", __LINE__);
 }

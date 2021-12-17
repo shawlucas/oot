@@ -251,13 +251,13 @@ void BgMoriElevator_Draw(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad;
     BgMoriElevator* this = (BgMoriElevator*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_elevator.c", 575);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_elevator.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x08, globalCtx->objectCtx.status[this->moriTexObjIndex].segment);
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_mori_elevator.c", 580),
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_mori_elevator.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, gMoriElevatorDL);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_elevator.c", 584);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_elevator.c", __LINE__);
 }

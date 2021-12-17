@@ -603,7 +603,7 @@ void func_80A6ABF8(Actor* thisx, GlobalContext* globalCtx, PSkinAwb* skin) {
 s32 func_80A6AD84(Actor* thisx, GlobalContext* globalCtx, s32 arg2, PSkinAwb* arg3) {
     EnHorseLinkChild* this = (EnHorseLinkChild*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_horse_link_child.c", 1467);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_horse_link_child.c", __LINE__);
 
     if (arg2 == 0xD) {
         u8 index = sEyeIndexOrder[this->eyeTexIndex];
@@ -611,7 +611,7 @@ s32 func_80A6AD84(Actor* thisx, GlobalContext* globalCtx, s32 arg2, PSkinAwb* ar
         gSPSegment(POLY_OPA_DISP++, 0x08, SEGMENTED_TO_VIRTUAL(sEyeTextures[index]));
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_horse_link_child.c", 1479);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_horse_link_child.c", __LINE__);
 
     return 1;
 }

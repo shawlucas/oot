@@ -18,8 +18,7 @@ void EffectBlure_AddVertex(EffectBlure* this, Vec3f* p1, Vec3f* p2) {
     if (this != NULL) {
         numElements = this->numElements;
         if (numElements >= 16) {
-            // "Blure vertex addition processing: Table over %d"
-            osSyncPrintf("ブラ─頂点追加処理:テーブルオーバー %d\n", numElements);
+            osSyncPrintf("Blure─Vertex addition process: Table over %d\n", numElements);
             return;
         }
 
@@ -77,7 +76,7 @@ void EffectBlure_AddSpace(EffectBlure* this) {
         numElements = this->numElements;
         if (numElements >= 16) {
             // "Blure space addition processing: Table over %d"
-            osSyncPrintf("ブラ─空白追加処理:テーブルオーバー %d\n", numElements);
+            osSyncPrintf("Blure space addition processing: Table over %d\n", numElements);
             return;
         }
 
@@ -278,8 +277,6 @@ void EffectBlure_UpdateFlags(EffectBlureElement* elem) {
         f32 sp30;
         f32 sp2C;
 
-        if (1) {} // Necessary to match
-
         Math_Vec3s_DiffToVec3f(&sp64, &elem->p1, &prev->p1);
         Math_Vec3s_DiffToVec3f(&sp58, &elem->p2, &prev->p2);
         Math_Vec3s_DiffToVec3f(&sp4C, &next->p1, &elem->p1);
@@ -343,7 +340,6 @@ void EffectBlure_GetComputedValues(EffectBlure* this, s32 index, f32 ratio, Vec3
 
             vec1->x = (sp30.x * 0.5f * mode4Param * ratio) + elem->p1.x;
             vec1->y = (sp30.y * 0.5f * mode4Param * ratio) + elem->p1.y;
-            if (1) {} // Necessary to match
             vec1->z = (sp30.z * 0.5f * mode4Param * ratio) + elem->p1.z;
 
             vec2->x = -(sp30.x * 0.5f * mode4Param * ratio) + elem->p2.x;
@@ -362,8 +358,6 @@ void EffectBlure_GetComputedValues(EffectBlure* this, s32 index, f32 ratio, Vec3
             break;
     }
 
-    sp30 = sp30; // Optimized out but seems necessary to match stack usage
-
     if (this->flags & 0x10) {
         color1->r = color1->g = color1->b = color1->a = 255;
         color2->r = color2->g = color2->b = color2->a = 255;
@@ -380,11 +374,11 @@ void EffectBlure_GetComputedValues(EffectBlure* this, s32 index, f32 ratio, Vec3
 }
 
 void EffectBlure_SetupSmooth(EffectBlure* this, GraphicsContext* gfxCtx) {
-    OPEN_DISPS(gfxCtx, "../z_eff_blure.c", 809);
+    OPEN_DISPS(gfxCtx, "../z_eff_blure.c", __LINE__);
 
     POLY_XLU_DISP = Gfx_CallSetupDL(POLY_XLU_DISP, 0x26);
 
-    CLOSE_DISPS(gfxCtx, "../z_eff_blure.c", 813);
+    CLOSE_DISPS(gfxCtx, "../z_eff_blure.c", __LINE__);
 }
 
 // original name: "SQ_NoInterpolate_disp"
@@ -401,14 +395,14 @@ void EffectBlure_DrawElemNoInterpolation(EffectBlure* this, EffectBlureElement* 
     Vec3f sp60;
     Vec3f sp54;
 
-    OPEN_DISPS(gfxCtx, "../z_eff_blure.c", 838);
+    OPEN_DISPS(gfxCtx, "../z_eff_blure.c", __LINE__);
 
     Math_Vec3s_ToVec3f(&sp6C, &this->elements[0].p2);
 
     vtx = Graph_Alloc(gfxCtx, sizeof(Vtx[4]));
     if (vtx == NULL) {
         // "Vertices cannot be secured."
-        osSyncPrintf("z_eff_blure.c::SQ_NoInterpolate_disp() 頂点確保できず。\n");
+        osSyncPrintf("z_eff_blure.c::EffectBlure_DrawElemNoInterpolation() Vertices cannot be secured. \n");
     } else {
         vtx[0].v = baseVtx;
         vtx[1].v = baseVtx;
@@ -430,9 +424,6 @@ void EffectBlure_DrawElemNoInterpolation(EffectBlure* this, EffectBlureElement* 
         vtx[0].v.cn[1] = sp78.g;
         vtx[0].v.cn[2] = sp78.b;
         vtx[0].v.cn[3] = sp78.a;
-
-        if (1) {} // Necessary to match
-
         sp60.x = sp8C.x;
         sp60.y = sp8C.y;
         sp60.z = sp8C.z;
@@ -462,8 +453,6 @@ void EffectBlure_DrawElemNoInterpolation(EffectBlure* this, EffectBlureElement* 
         vtx[2].v.cn[2] = sp7C.b;
         vtx[2].v.cn[3] = sp7C.a;
 
-        if (1) {} // Necessary to match
-
         sp60.x = sp84.x;
         sp60.y = sp84.y;
         sp60.z = sp84.z;
@@ -481,7 +470,7 @@ void EffectBlure_DrawElemNoInterpolation(EffectBlure* this, EffectBlureElement* 
         gSP2Triangles(POLY_XLU_DISP++, 0, 1, 2, 0, 0, 2, 3, 0);
     }
 
-    CLOSE_DISPS(gfxCtx, "../z_eff_blure.c", 932);
+    CLOSE_DISPS(gfxCtx, "../z_eff_blure.c", __LINE__);
 }
 
 void EffectBlure_DrawElemHermiteInterpolation(EffectBlure* this, EffectBlureElement* elem, s32 index,
@@ -512,7 +501,7 @@ void EffectBlure_DrawElemHermiteInterpolation(EffectBlure* this, EffectBlureElem
     Color_RGBA8 sp144;
     Vec3f sp138;
 
-    OPEN_DISPS(gfxCtx, "../z_eff_blure.c", 971);
+    OPEN_DISPS(gfxCtx, "../z_eff_blure.c", __LINE__);
 
     Math_Vec3s_ToVec3f(&sp138, &this->elements[0].p2);
 
@@ -533,7 +522,7 @@ void EffectBlure_DrawElemHermiteInterpolation(EffectBlure* this, EffectBlureElem
         Vec3f sp118;
         Vec3f sp10C;
 
-        ASSERT(index - 1 >= 0, "index - 1 >= 0", "../z_eff_blure.c", 1005);
+        ASSERT(index - 1 >= 0, "index - 1 >= 0", "../z_eff_blure.c", __LINE__);
 
         ratio = (f32)(elem - 1)->timer / (f32)this->elemDuration;
         EffectBlure_GetComputedValues(this, index - 1, ratio, &sp1EC, &sp1E4, &sp1DC, &sp1D8);
@@ -553,7 +542,7 @@ void EffectBlure_DrawElemHermiteInterpolation(EffectBlure* this, EffectBlureElem
         Vec3f sp100;
         Vec3f spF4;
 
-        ASSERT(index + 2 < this->numElements, "index + 2 < this2->now_edge_num", "../z_eff_blure.c", 1032);
+        ASSERT(index + 2 < this->numElements, "index + 2 < this->numElements", "../z_eff_blure.c", __LINE__);
 
         ratio = (f32)(elem + 2)->timer / (f32)this->elemDuration;
         EffectBlure_GetComputedValues(this, index + 2, ratio, &sp1EC, &sp1E4, &sp1DC, &sp1D8);
@@ -569,7 +558,7 @@ void EffectBlure_DrawElemHermiteInterpolation(EffectBlure* this, EffectBlureElem
     vtx = Graph_Alloc(gfxCtx, sizeof(Vtx[16]));
     if (vtx == NULL) {
         // "Vertices cannot be secured."
-        osSyncPrintf("z_eff_blure.c::SQ_HermiteInterpolate_disp() 頂点確保できず。\n");
+        osSyncPrintf("z_eff_blure.c::EffectBlure_DrawElemHermiteInterpolation() Vertices cannot be secured.\n");
     } else {
         Math_Vec3f_Diff(&sp1CC, &sp138, &sp158);
         Math_Vec3f_Scale(&sp158, 10.0f);
@@ -654,7 +643,7 @@ void EffectBlure_DrawElemHermiteInterpolation(EffectBlure* this, EffectBlureElem
         gSP2Triangles(POLY_XLU_DISP++, 12, 13, 15, 0, 12, 15, 14, 0);
     }
 
-    CLOSE_DISPS(gfxCtx, "../z_eff_blure.c", 1184);
+    CLOSE_DISPS(gfxCtx, "../z_eff_blure.c", __LINE__);
 }
 
 void EffectBlure_DrawSmooth(EffectBlure* this2, GraphicsContext* gfxCtx) {
@@ -666,7 +655,7 @@ void EffectBlure_DrawSmooth(EffectBlure* this2, GraphicsContext* gfxCtx) {
     MtxF sp5C;
     Mtx* mtx;
 
-    OPEN_DISPS(gfxCtx, "../z_eff_blure.c", 1201);
+    OPEN_DISPS(gfxCtx, "../z_eff_blure.c", __LINE__);
 
     if (this->numElements < 2) {
         return;
@@ -708,19 +697,19 @@ void EffectBlure_DrawSmooth(EffectBlure* this2, GraphicsContext* gfxCtx) {
         }
     }
 
-    CLOSE_DISPS(gfxCtx, "../z_eff_blure.c", 1263);
+    CLOSE_DISPS(gfxCtx, "../z_eff_blure.c", __LINE__);
 }
 
 void EffectBlure_SetupSimple(GraphicsContext* gfxCtx, EffectBlure* this, Vtx* vtx) {
-    OPEN_DISPS(gfxCtx, "../z_eff_blure.c", 1280);
+    OPEN_DISPS(gfxCtx, "../z_eff_blure.c", __LINE__);
 
     POLY_XLU_DISP = Gfx_CallSetupDL(POLY_XLU_DISP, 0x26);
 
-    CLOSE_DISPS(gfxCtx, "../z_eff_blure.c", 1285);
+    CLOSE_DISPS(gfxCtx, "../z_eff_blure.c", __LINE__);
 }
 
 void EffectBlure_SetupSimpleAlt(GraphicsContext* gfxCtx, EffectBlure* this, Vtx* vtx) {
-    OPEN_DISPS(gfxCtx, "../z_eff_blure.c", 1294);
+    OPEN_DISPS(gfxCtx, "../z_eff_blure.c", __LINE__);
 
     gDPPipeSync(POLY_XLU_DISP++);
     POLY_XLU_DISP = Gfx_CallSetupDL(POLY_XLU_DISP, 0x26);
@@ -741,7 +730,7 @@ void EffectBlure_SetupSimpleAlt(GraphicsContext* gfxCtx, EffectBlure* this, Vtx*
 
     gDPSetEnvColor(POLY_XLU_DISP++, this->altEnvColor.r, this->altEnvColor.g, this->altEnvColor.b, this->altEnvColor.a);
 
-    CLOSE_DISPS(gfxCtx, "../z_eff_blure.c", 1329);
+    CLOSE_DISPS(gfxCtx, "../z_eff_blure.c", __LINE__);
 }
 
 void (*sSetupHandlers[])(GraphicsContext* gfxCtx, EffectBlure* this, Vtx* vtx) = {
@@ -755,7 +744,7 @@ s32 D_80115788 = 0; // unused
 void EffectBlure_DrawSimpleVertices(GraphicsContext* gfxCtx, EffectBlure* this, Vtx* vtx) {
     Mtx* mtx;
 
-    OPEN_DISPS(gfxCtx, "../z_eff_blure.c", 1356);
+    OPEN_DISPS(gfxCtx, "../z_eff_blure.c", __LINE__);
 
     sSetupHandlers[this->drawMode](gfxCtx, this, vtx);
     gDPPipeSync(POLY_XLU_DISP++);
@@ -782,8 +771,6 @@ void EffectBlure_DrawSimpleVertices(GraphicsContext* gfxCtx, EffectBlure* this, 
                                 this->altPrimColor.b, this->altPrimColor.a * (1.0f - alphaRatio));
                 gDPPipeSync(POLY_XLU_DISP++);
             }
-
-            if (1) {} // Necessary to match
 
             gSPVertex(POLY_XLU_DISP++, &vtx[j], 4, 0);
             gSP2Triangles(POLY_XLU_DISP++, 0, 1, 3, 0, 0, 3, 2, 0);
@@ -812,7 +799,7 @@ void EffectBlure_DrawSimpleVertices(GraphicsContext* gfxCtx, EffectBlure* this, 
                     mtx = SkinMatrix_MtxFToNewMtx(gfxCtx, &sp94);
                     if (mtx == NULL) {
                         // "Forced termination because a matrix cannot be taken"
-                        osSyncPrintf("EffectBlureInfo2_disp_makeDisplayList()マトリックス取れないので,強制終了\n");
+                        osSyncPrintf("EffectBlure_DrawSimpleVertices():Forced termination because a matrix cannot be taken\n");
                         break;
                     }
 
@@ -827,7 +814,7 @@ void EffectBlure_DrawSimpleVertices(GraphicsContext* gfxCtx, EffectBlure* this, 
         }
     }
 
-    CLOSE_DISPS(gfxCtx, "../z_eff_blure.c", 1452);
+    CLOSE_DISPS(gfxCtx, "../z_eff_blure.c", __LINE__);
 }
 
 Vtx_t D_8011578C[] = {
@@ -863,8 +850,7 @@ void EffectBlure_DrawSimple(EffectBlure* this2, GraphicsContext* gfxCtx) {
 
         vtx = Graph_Alloc(gfxCtx, vtxCount * sizeof(Vtx));
         if (vtx == NULL) {
-            // "Vertices cannot be secured. Forced termination"
-            osSyncPrintf("ブラ─表示:頂点確保できず。強制終了\n");
+            osSyncPrintf("Vertices cannot be secured. Forced termination\n");
             return;
         }
 
@@ -946,7 +932,7 @@ void EffectBlure_Draw(void* thisx, GraphicsContext* gfxCtx) {
     s32 j;
     s32 phi_t2;
 
-    OPEN_DISPS(gfxCtx, "../z_eff_blure.c", 1596);
+    OPEN_DISPS(gfxCtx, "../z_eff_blure.c", __LINE__);
 
     gSPMatrix(POLY_XLU_DISP++, &gMtxClear, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
@@ -957,8 +943,7 @@ void EffectBlure_Draw(void* thisx, GraphicsContext* gfxCtx) {
 
             vtx = Graph_Alloc(gfxCtx, sizeof(Vtx[32]));
             if (vtx == NULL) {
-                // "Blure display: Vertex table could not be secured"
-                osSyncPrintf("ブラ─表示:頂点テーブル確保できず\n");
+                osSyncPrintf("Blure display: Vertex table could not be secured\n");
             } else {
                 j = 0;
                 for (i = 0; i < this->numElements; i++) {
@@ -1041,8 +1026,6 @@ void EffectBlure_Draw(void* thisx, GraphicsContext* gfxCtx) {
                         } else {
                             gSP1Quadrangle(POLY_XLU_DISP++, j - 2, j - 1, j + 1, j, 0);
 
-                            if (1) {} // Necessary to match
-
                             if (this->unkFlag == 1) {
                                 phi_t2 = 0;
                             }
@@ -1058,5 +1041,5 @@ void EffectBlure_Draw(void* thisx, GraphicsContext* gfxCtx) {
         }
     }
 
-    CLOSE_DISPS(gfxCtx, "../z_eff_blure.c", 1823);
+    CLOSE_DISPS(gfxCtx, "../z_eff_blure.c", __LINE__);
 }

@@ -20,13 +20,13 @@ void Locale_Init(void) {
             break;
         default:
             osSyncPrintf(VT_COL(RED, WHITE));
-            osSyncPrintf("z_locale_init: 日本用かアメリカ用か判別できません\n");
-            LogUtils_HungupThread("../z_locale.c", 118);
+            osSyncPrintf("Locale_Init: Can't tell if Japan or US\n");
+            LogUtils_HungupThread("../z_locale.c", __LINE__);
             osSyncPrintf(VT_RST);
             break;
     }
 
-    osSyncPrintf("z_locale_init:日本用かアメリカ用か３コンで判断させる\n");
+    osSyncPrintf("Locale_Init: Decide of Japan or US with controller 3\n");
 }
 
 void Locale_ResetRegion(void) {

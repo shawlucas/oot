@@ -169,7 +169,7 @@ void func_800645A0(GlobalContext* globalCtx, CutsceneContext* csCtx) {
     }
 
     if ((gSaveContext.cutsceneTrigger != 0) && (csCtx->state == CS_STATE_IDLE)) {
-        osSyncPrintf("\nデモ開始要求 発令！"); // "Cutscene start request announcement!"
+        osSyncPrintf("\nRequesting initiation of cutscene!"); // "Cutscene start request announcement!"
         gSaveContext.cutsceneIndex = 0xFFFD;
         gSaveContext.cutsceneTrigger = 1;
     }
@@ -506,7 +506,7 @@ void Cutscene_Command_Terminator(GlobalContext* globalCtx, CutsceneContext* csCt
         Audio_SetCutsceneFlag(0);
         gSaveContext.unk_1410 = 1;
 
-        osSyncPrintf("\n分岐先指定！！=[%d]番", cmd->base); // "Future fork designation=No. [%d]"
+        osSyncPrintf("\nSpecify branch destination! =[%d] number", cmd->base); // "Future fork designation=No. [%d]"
 
         if ((gSaveContext.gameMode != 0) && (csCtx->frames != cmd->startFrame)) {
             gSaveContext.unk_13E7 = 1;
@@ -1909,7 +1909,7 @@ void func_80068C3C(GlobalContext* globalCtx, CutsceneContext* csCtx) {
         if (0) {} // Also necessary to match
 
         if (BREG(0) != 0) {
-            OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo.c", 4101);
+            OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo.c", __LINE__);
 
             prevDisplayList = POLY_OPA_DISP;
             displayList = Graph_GfxPlusOne(POLY_OPA_DISP);
@@ -1919,7 +1919,7 @@ void func_80068C3C(GlobalContext* globalCtx, CutsceneContext* csCtx) {
             Graph_BranchDlist(prevDisplayList, displayList);
             POLY_OPA_DISP = displayList;
 
-            CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_demo.c", 4108);
+            CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_demo.c", __LINE__);
         }
 
         csCtx->frames++;
@@ -1948,7 +1948,7 @@ void func_80068DC0(GlobalContext* globalCtx, CutsceneContext* csCtx) {
             csCtx->npcActions[i] = NULL;
         }
 
-        osSyncPrintf("\n\n\n\n\nやっぱりここかいな"); // "Right here, huh"
+        osSyncPrintf("\n\n\n\n\nRight here");
         gSaveContext.cutsceneIndex = 0;
         gSaveContext.gameMode = 0;
 
@@ -2065,7 +2065,7 @@ void Cutscene_HandleEntranceTriggers(GlobalContext* globalCtx) {
 }
 
 void Cutscene_HandleConditionalTriggers(GlobalContext* globalCtx) {
-    osSyncPrintf("\ngame_info.mode=[%d] restart_flag", ((void)0, gSaveContext.respawnFlag));
+    osSyncPrintf("\ngSaveContext.respawnFlag =[%d] respawnFlag", ((void)0, gSaveContext.respawnFlag));
 
     if ((gSaveContext.gameMode == 0) && (gSaveContext.respawnFlag <= 0) && (gSaveContext.cutsceneIndex < 0xFFF0)) {
         if ((gSaveContext.entranceIndex == 0x01E1) && !Flags_GetEventChkInf(0xAC)) {

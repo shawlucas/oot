@@ -18,7 +18,7 @@ void func_800BC450(GlobalContext* globalCtx) {
 }
 
 void func_800BC490(GlobalContext* globalCtx, s16 point) {
-    ASSERT(point == 1 || point == 2, "point == 1 || point == 2", "../z_play.c", 2160);
+    ASSERT(point == 1 || point == 2, "point == 1 || point == 2", "../z_play.c", __LINE__);
 
     globalCtx->unk_1242B = point;
 
@@ -363,7 +363,7 @@ void Gameplay_Init(GameState* thisx) {
     zAllocAligned = (zAlloc + 8) & ~0xF;
     ZeldaArena_Init(zAllocAligned, zAllocSize - zAllocAligned + zAlloc);
     // "Zelda Heap"
-    osSyncPrintf("ゼルダヒープ %08x-%08x\n", zAllocAligned,
+    osSyncPrintf("ゼルダヒープ %08X-%08X\n", zAllocAligned,
                  (s32)(zAllocAligned + zAllocSize) - (s32)(zAllocAligned - zAlloc));
 
     Fault_AddClient(&D_801614B8, ZeldaArena_Display, NULL, NULL);
@@ -427,7 +427,7 @@ void Gameplay_Update(GlobalContext* globalCtx) {
         for (i = 0; i < gObjectTableSize; i++) {
             s32 size = gObjectTable[i].vromEnd - gObjectTable[i].vromStart;
 
-            osSyncPrintf("%08x-%08x %08x(%8.3fKB)\n", gObjectTable[i].vromStart, gObjectTable[i].vromEnd, size,
+            osSyncPrintf("%08X-%08X %08X(%8.3fKB)\n", gObjectTable[i].vromStart, gObjectTable[i].vromEnd, size,
                          size / 1024.0f);
         }
         osSyncPrintf("\n");
@@ -1058,7 +1058,7 @@ void Gameplay_Draw(GlobalContext* globalCtx) {
     Lights* sp228;
     Vec3f sp21C;
 
-    OPEN_DISPS(gfxCtx, "../z_play.c", 3907);
+    OPEN_DISPS(gfxCtx, "../z_play.c", __LINE__);
 
     gSegments[4] = VIRTUAL_TO_PHYSICAL(globalCtx->objectCtx.status[globalCtx->objectCtx.mainKeepIndex].segment);
     gSegments[5] = VIRTUAL_TO_PHYSICAL(globalCtx->objectCtx.status[globalCtx->objectCtx.subKeepIndex].segment);
@@ -1315,7 +1315,7 @@ void Gameplay_Draw(GlobalContext* globalCtx) {
 
     Camera_Finish(GET_ACTIVE_CAM(globalCtx));
 
-    CLOSE_DISPS(gfxCtx, "../z_play.c", 4508);
+    CLOSE_DISPS(gfxCtx, "../z_play.c", __LINE__);
 }
 
 void Gameplay_Main(GameState* thisx) {
@@ -1437,8 +1437,8 @@ void* Gameplay_LoadFile(GlobalContext* globalCtx, RomFile* file) {
     void* allocp;
 
     size = file->vromEnd - file->vromStart;
-    allocp = GameState_Alloc(&globalCtx->state, size, "../z_play.c", 4692);
-    DmaMgr_SendRequest1(allocp, file->vromStart, size, "../z_play.c", 4694);
+    allocp = GameState_Alloc(&globalCtx->state, size, "../z_play.c", __LINE__);
+    DmaMgr_SendRequest1(allocp, file->vromStart, size, "../z_play.c", __LINE__);
 
     return allocp;
 }
@@ -1479,7 +1479,7 @@ void Gameplay_SpawnScene(GlobalContext* globalCtx, s32 sceneNum, s32 spawn) {
 
     globalCtx->sceneSegment = Gameplay_LoadFile(globalCtx, &scene->sceneFile);
     scene->unk_13 = 0;
-    ASSERT(globalCtx->sceneSegment != NULL, "this->sceneSegment != NULL", "../z_play.c", 4960);
+    ASSERT(globalCtx->sceneSegment != NULL, "globalCtx->sceneSegment != NULL", "../z_play.c", __LINE__);
 
     gSegments[2] = VIRTUAL_TO_PHYSICAL(globalCtx->sceneSegment);
 

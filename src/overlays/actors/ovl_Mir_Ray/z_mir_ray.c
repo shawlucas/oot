@@ -491,11 +491,11 @@ void MirRay_Draw(Actor* thisx, GlobalContext* globalCtx) {
         Matrix_Mult(&player->shieldMf, MTXMODE_NEW);
         MirRay_SetIntensity(this, globalCtx);
         if (!(this->reflectIntensity <= 0.0f)) {
-            OPEN_DISPS(globalCtx->state.gfxCtx, "../z_mir_ray.c", 966);
+            OPEN_DISPS(globalCtx->state.gfxCtx, "../z_mir_ray.c", __LINE__);
 
             func_80093D84(globalCtx->state.gfxCtx);
             Matrix_Scale(1.0f, 1.0f, this->reflectIntensity * 5.0f, MTXMODE_APPLY);
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_mir_ray.c", 972),
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_mir_ray.c", __LINE__),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 150, (s16)(temp = this->reflectIntensity * 100.0f));
             gSPDisplayList(POLY_XLU_DISP++, gShieldBeamGlowDL);
@@ -518,7 +518,7 @@ void MirRay_Draw(Actor* thisx, GlobalContext* globalCtx) {
                     Matrix_Translate(reflection[i].pos.x, reflection[i].pos.y, reflection[i].pos.z, MTXMODE_NEW);
                     Matrix_Scale(0.01f, 0.01f, 0.01f, MTXMODE_APPLY);
                     Matrix_Mult(&reflection[i].mtx, MTXMODE_APPLY);
-                    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_mir_ray.c", 1006),
+                    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_mir_ray.c", __LINE__),
                               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
                     gDPSetRenderMode(POLY_XLU_DISP++, G_RM_FOG_SHADE_A, G_RM_AA_ZB_XLU_DECAL2);
                     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 150, reflection[0].opacity);
@@ -528,7 +528,7 @@ void MirRay_Draw(Actor* thisx, GlobalContext* globalCtx) {
 
             D_80B8E670 = 1;
 
-            CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_mir_ray.c", 1027);
+            CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_mir_ray.c", __LINE__);
         }
     }
 }

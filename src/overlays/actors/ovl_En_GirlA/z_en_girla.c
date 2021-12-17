@@ -383,7 +383,7 @@ void EnGirlA_InitItem(EnGirlA* this, GlobalContext* globalCtx) {
         osSyncPrintf(VT_COL(RED, WHITE));
         osSyncPrintf("引数がおかしいよ(arg_data=%d)！！\n", this->actor.params);
         osSyncPrintf(VT_RST);
-        ASSERT(0, "0", "../z_en_girlA.c", 1421);
+        ASSERT(0, "0", "../z_en_girlA.c", __LINE__);
         return;
     }
 
@@ -394,7 +394,7 @@ void EnGirlA_InitItem(EnGirlA* this, GlobalContext* globalCtx) {
         osSyncPrintf(VT_COL(RED, WHITE));
         osSyncPrintf("バンクが無いよ！！(%s)\n", sShopItemDescriptions[params]);
         osSyncPrintf(VT_RST);
-        ASSERT(0, "0", "../z_en_girlA.c", 1434);
+        ASSERT(0, "0", "../z_en_girlA.c", __LINE__);
         return;
     }
 

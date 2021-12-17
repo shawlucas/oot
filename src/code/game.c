@@ -9,12 +9,14 @@ ViMode sViMode;
 FaultClient sGameFaultClient;
 u16 sLastButtonPressed;
 
+static u8 sMenuInitialized = false;
+
 void GameState_FaultPrint(void) {
     static char sBtnChars[] = "ABZSuldr*+LRudlr";
     s32 i;
 
     osSyncPrintf("last_button=%04x\n", sLastButtonPressed);
-    FaultDrawer_DrawText(120, 180, "%08x", sLastButtonPressed);
+    FaultDrawer_DrawText(120, 180, "%08X", sLastButtonPressed);
     for (i = 0; i < ARRAY_COUNT(sBtnChars); i++) {
         if (sLastButtonPressed & (1 << i)) {
             FaultDrawer_DrawText((i * 8) + 0x78, 0xBE, "%c", sBtnChars[i]);
@@ -143,7 +145,7 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
     Gfx* newDList;
     Gfx* polyOpaP;
 
-    OPEN_DISPS(gfxCtx, "../game.c", 746);
+    OPEN_DISPS(gfxCtx, "../game.c", __LINE__);
 
     newDList = Graph_GfxPlusOne(polyOpaP = POLY_OPA_DISP);
     gSPDisplayList(OVERLAY_DISP++, newDList);
@@ -173,8 +175,8 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
 
         DebugArena_Display();
         SystemArena_Display();
-        // "%08x bytes left until the death of Hyrule (game_alloc)"
-        osSyncPrintf("ハイラル滅亡まであと %08x バイト(game_alloc)\n", THA_GetSize(&gameState->tha));
+        // "%08X bytes left until the death of Hyrule (game_alloc)"
+        osSyncPrintf("ハイラル滅亡まであと %08X バイト(game_alloc)\n", THA_GetSize(&gameState->tha));
         R_ENABLE_ARENA_DBG = 0;
     }
 
@@ -184,7 +186,7 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
 
     if (1) {}
 
-    CLOSE_DISPS(gfxCtx, "../game.c", 800);
+    CLOSE_DISPS(gfxCtx, "../game.c", __LINE__);
 
     func_80063D7C(gfxCtx);
 
@@ -195,7 +197,7 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
 }
 
 void GameState_SetFrameBuffer(GraphicsContext* gfxCtx) {
-    OPEN_DISPS(gfxCtx, "../game.c", 814);
+    OPEN_DISPS(gfxCtx, "../game.c", __LINE__);
 
     gSPSegment(POLY_OPA_DISP++, 0, 0);
     gSPSegment(POLY_OPA_DISP++, 0xF, gfxCtx->curFrameBuffer);
@@ -207,14 +209,14 @@ void GameState_SetFrameBuffer(GraphicsContext* gfxCtx) {
     gSPSegment(OVERLAY_DISP++, 0xF, gfxCtx->curFrameBuffer);
     gSPSegment(OVERLAY_DISP++, 0xE, gZBuffer);
 
-    CLOSE_DISPS(gfxCtx, "../game.c", 838);
+    CLOSE_DISPS(gfxCtx, "../game.c", __LINE__);
 }
 
 void func_800C49F4(GraphicsContext* gfxCtx) {
     Gfx* newDlist;
     Gfx* polyOpaP;
 
-    OPEN_DISPS(gfxCtx, "../game.c", 846);
+    OPEN_DISPS(gfxCtx, "../game.c", __LINE__);
 
     newDlist = Graph_GfxPlusOne(polyOpaP = POLY_OPA_DISP);
     gSPDisplayList(OVERLAY_DISP++, newDlist);
@@ -225,7 +227,7 @@ void func_800C49F4(GraphicsContext* gfxCtx) {
 
     if (1) {}
 
-    CLOSE_DISPS(gfxCtx, "../game.c", 865);
+    CLOSE_DISPS(gfxCtx, "../game.c", __LINE__);
 }
 
 void PadMgr_RequestPadData(PadMgr*, Input*, s32);
@@ -315,21 +317,31 @@ void GameState_Update(GameState* gameState) {
         func_800C49F4(gfxCtx);
     }
 
+    if (gActorContextInitialized && CHECK_BTN_ALL(gameState->input[0].cur.button, BTN_R | BTN_L)) {
+        if (sMenuInitialized) {
+            sMenuInitialized = false;
+        } else {
+            GlobalContext* globalCtx = (GlobalContext *)gameState;
+            Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_MENUCONTEXT, 0.0f, 0.0f, 0.0f, 0, 0, 0, 0x0000);      
+            sMenuInitialized = true;   
+        }
+    }
+
     gameState->frames++;
 }
 
 void GameState_InitArena(GameState* gameState, size_t size) {
     void* arena;
 
-    osSyncPrintf("ハイラル確保 サイズ＝%u バイト\n"); // "Hyrule reserved size = %u bytes"
-    arena = GameAlloc_MallocDebug(&gameState->alloc, size, "../game.c", 992);
+    osSyncPrintf("Hyrule reserved size = %u bytes\n"); // "Hyrule reserved size = %u bytes"
+    arena = GameAlloc_MallocDebug(&gameState->alloc, size, "../game.c", __LINE__);
     if (arena != NULL) {
         THA_Ct(&gameState->tha, arena, size);
-        osSyncPrintf("ハイラル確保成功\n"); // "Successful Hyral"
+        osSyncPrintf("Hyrule secured successfully\n"); // "Successful Hyral"
     } else {
         THA_Ct(&gameState->tha, NULL, 0);
-        osSyncPrintf("ハイラル確保失敗\n"); // "Failure to secure Hyrule"
-        Fault_AddHungupAndCrash("../game.c", 999);
+        osSyncPrintf("Failed to secure Hyrule\n"); // "Failure to secure Hyrule"
+        Fault_AddHungupAndCrash("../game.c", __LINE__);
     }
 }
 
@@ -343,29 +355,29 @@ void GameState_Realloc(GameState* gameState, size_t size) {
 
     THA_Dt(&gameState->tha);
     GameAlloc_Free(alloc, thaBufp);
-    osSyncPrintf("ハイラル一時解放!!\n"); // "Hyrule temporarily released!!"
+    osSyncPrintf("Hyrule temporarily released!!\n"); // "Hyrule temporarily released!!"
     SystemArena_GetSizes(&systemMaxFree, &systemFree, &systemAlloc);
     if ((systemMaxFree - 0x10) < size) {
         osSyncPrintf("%c", 7);
         osSyncPrintf(VT_FGCOL(RED));
 
         // "Not enough memory. Change the hyral size to the largest possible value"
-        osSyncPrintf("メモリが足りません。ハイラルサイズを可能な最大値に変更します\n");
-        osSyncPrintf("(hyral=%08x max=%08x free=%08x alloc=%08x)\n", size, systemMaxFree, systemFree, systemAlloc);
+        osSyncPrintf("Not enough memory. Change the hyrule size to the largest possible value\n");
+        osSyncPrintf("(hyral=%08X max=%08X free=%08X alloc=%08X)\n", size, systemMaxFree, systemFree, systemAlloc);
         osSyncPrintf(VT_RST);
         size = systemMaxFree - 0x10;
     }
 
-    osSyncPrintf("ハイラル再確保 サイズ＝%u バイト\n", size); // "Hyral reallocate size = %u bytes"
-    gameArena = GameAlloc_MallocDebug(alloc, size, "../game.c", 1033);
+    osSyncPrintf("Hyrule reallocation size = %u bytes\n", size); // "Hyral reallocate size = %u bytes"
+    gameArena = GameAlloc_MallocDebug(alloc, size, "../game.c", __LINE__);
     if (gameArena != NULL) {
         THA_Ct(&gameState->tha, gameArena, size);
-        osSyncPrintf("ハイラル再確保成功\n"); // "Successful reacquisition of Hyrule"
+        osSyncPrintf("Successfully re-secured Hyrule\n"); // "Successful reacquisition of Hyrule"
     } else {
         THA_Ct(&gameState->tha, NULL, 0);
-        osSyncPrintf("ハイラル再確保失敗\n"); // "Failure to secure Hyral"
+        osSyncPrintf("Failed to re-secure Hyrule\n"); // "Failure to secure Hyral"
         SystemArena_Display();
-        Fault_AddHungupAndCrash("../game.c", 1044);
+        Fault_AddHungupAndCrash("../game.c", __LINE__);
     }
 }
 
@@ -373,7 +385,7 @@ void GameState_Init(GameState* gameState, GameStateFunc init, GraphicsContext* g
     OSTime startTime;
     OSTime endTime;
 
-    osSyncPrintf("game コンストラクタ開始\n"); // "game constructor start"
+    osSyncPrintf("GameState_Init start\n"); // "game constructor start"
     gameState->gfxCtx = gfxCtx;
     gameState->frames = 0;
     gameState->main = NULL;
@@ -385,13 +397,13 @@ void GameState_Init(GameState* gameState, GameStateFunc init, GraphicsContext* g
     endTime = osGetTime();
 
     // "game_set_next_game_null processing time %d us"
-    osSyncPrintf("game_set_next_game_null 処理時間 %d us\n", OS_CYCLES_TO_USEC(endTime - startTime));
+    osSyncPrintf("game_set_next_game_null processing time %d us\n", OS_CYCLES_TO_USEC(endTime - startTime));
     startTime = endTime;
     GameAlloc_Init(&gameState->alloc);
 
     endTime = osGetTime();
     // "gamealloc_init processing time %d us"
-    osSyncPrintf("gamealloc_init 処理時間 %d us\n", OS_CYCLES_TO_USEC(endTime - startTime));
+    osSyncPrintf("GameAlloc_Init processing time %d us\n", OS_CYCLES_TO_USEC(endTime - startTime));
 
     startTime = endTime;
     GameState_InitArena(gameState, 0x100000);
@@ -400,10 +412,10 @@ void GameState_Init(GameState* gameState, GameStateFunc init, GraphicsContext* g
 
     endTime = osGetTime();
     // "init processing time %d us"
-    osSyncPrintf("init 処理時間 %d us\n", OS_CYCLES_TO_USEC(endTime - startTime));
+    osSyncPrintf("init processing time %d us\n", OS_CYCLES_TO_USEC(endTime - startTime));
 
     startTime = endTime;
-    LogUtils_CheckNullPointer("this->cleanup", gameState->destroy, "../game.c", 1088);
+    LogUtils_CheckNullPointer("gameState->destroy", gameState->destroy, "../game.c", __LINE__);
     func_800ACE70(&D_801664F0);
     func_800AD920(&D_80166500);
     VisMono_Init(&sMonoColors);
@@ -416,19 +428,19 @@ void GameState_Init(GameState* gameState, GameStateFunc init, GraphicsContext* g
 
     endTime = osGetTime();
     // "Other initialization processing time %d us"
-    osSyncPrintf("その他初期化 処理時間 %d us\n", OS_CYCLES_TO_USEC(endTime - startTime));
+    osSyncPrintf("Other initialization processing time %d us\n", OS_CYCLES_TO_USEC(endTime - startTime));
 
     Fault_AddClient(&sGameFaultClient, GameState_FaultPrint, NULL, NULL);
 
-    osSyncPrintf("game コンストラクタ終了\n"); // "game constructor end"
+    osSyncPrintf("GameState constructor end\n"); // "game constructor end"
 }
 
 void GameState_Destroy(GameState* gameState) {
-    osSyncPrintf("game デストラクタ開始\n"); // "game destructor start"
+    osSyncPrintf("GameState destructor start\n"); // "game destructor start"
     func_800C3C20();
     func_800F3054();
     osRecvMesg(&gameState->gfxCtx->queue, NULL, OS_MESG_BLOCK);
-    LogUtils_CheckNullPointer("this->cleanup", gameState->destroy, "../game.c", 1139);
+    LogUtils_CheckNullPointer("gameState->destroy", gameState->destroy, "../game.c", __LINE__);
     if (gameState->destroy != NULL) {
         gameState->destroy(gameState);
     }
@@ -445,7 +457,7 @@ void GameState_Destroy(GameState* gameState) {
     SystemArena_Display();
     Fault_RemoveClient(&sGameFaultClient);
 
-    osSyncPrintf("game デストラクタ終了\n"); // "game destructor end"
+    osSyncPrintf("GameState destructor end\n"); // "game destructor end"
 }
 
 GameStateFunc GameState_GetInit(GameState* gameState) {
@@ -464,23 +476,23 @@ void* GameState_Alloc(GameState* gameState, size_t size, char* file, s32 line) {
     void* ret;
 
     if (THA_IsCrash(&gameState->tha)) {
-        osSyncPrintf("ハイラルは滅亡している\n");
+        osSyncPrintf("Hyrule is dying.\n");
         ret = NULL;
     } else if ((u32)THA_GetSize(&gameState->tha) < size) {
         // "Hyral on the verge of extinction does not have %d bytes left (%d bytes until extinction)"
-        osSyncPrintf("滅亡寸前のハイラルには %d バイトの余力もない（滅亡まであと %d バイト）\n", size,
+        osSyncPrintf("Hyrule is on the verge of extinction and has no more than %d bytes to spare (%d bytes to go).\n", size,
                      THA_GetSize(&gameState->tha));
         ret = NULL;
     } else {
         ret = THA_AllocEndAlign16(&gameState->tha, size);
         if (THA_IsCrash(&gameState->tha)) {
-            osSyncPrintf("ハイラルは滅亡してしまった\n"); // "Hyrule has been destroyed"
+            osSyncPrintf("Hyrule has been destroyed.\n"); // "Hyrule has been destroyed"
             ret = NULL;
         }
     }
     if (ret != NULL) {
         osSyncPrintf(VT_FGCOL(GREEN));
-        osSyncPrintf("game_alloc(%08x) %08x-%08x [%s:%d]\n", size, ret, (u32)ret + size, file, line);
+        osSyncPrintf("GameState_Alloc(%08X) %08X-%08X [%s:%d]\n", size, ret, (u32)ret + size, file, line);
         osSyncPrintf(VT_RST);
     }
     return ret;

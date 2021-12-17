@@ -1955,7 +1955,7 @@ s32 BossGoma_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dLi
     BossGoma* this = (BossGoma*)thisx;
     s32 doNotDrawLimb = false;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_goma.c", 4685);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_goma.c", __LINE__);
 
     gDPPipeSync(POLY_OPA_DISP++);
     gDPSetEnvColor(POLY_OPA_DISP++, (s16)this->mainEnvColor[0], (s16)this->mainEnvColor[1], (s16)this->mainEnvColor[2],
@@ -2006,7 +2006,7 @@ s32 BossGoma_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dLi
                 if (*dList != NULL) {
                     Matrix_Push();
                     Matrix_Scale(this->eyeIrisScaleX, this->eyeIrisScaleY, 1.0f, MTXMODE_APPLY);
-                    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_boss_goma.c", 4815),
+                    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_boss_goma.c", __LINE__),
                               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
                     gSPDisplayList(POLY_OPA_DISP++, *dList);
                     Matrix_Pop();
@@ -2027,7 +2027,7 @@ s32 BossGoma_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dLi
                 Matrix_Scale(this->tailLimbsScale[limbIndex - BOSSGOMA_LIMB_TAIL4],
                              this->tailLimbsScale[limbIndex - BOSSGOMA_LIMB_TAIL4],
                              this->tailLimbsScale[limbIndex - BOSSGOMA_LIMB_TAIL4], MTXMODE_APPLY);
-                gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_boss_goma.c", 4836),
+                gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_boss_goma.c", __LINE__),
                           G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
                 gSPDisplayList(POLY_OPA_DISP++, *dList);
                 Matrix_Pop();
@@ -2037,7 +2037,7 @@ s32 BossGoma_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dLi
             break;
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_boss_goma.c", 4858);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_boss_goma.c", __LINE__);
 
     return doNotDrawLimb;
 }
@@ -2120,7 +2120,7 @@ Gfx* BossGoma_NoBackfaceCullingDlist(GraphicsContext* gfxCtx) {
 void BossGoma_Draw(Actor* thisx, GlobalContext* globalCtx) {
     BossGoma* this = (BossGoma*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_goma.c", 4991);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_goma.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
     Matrix_Translate(0.0f, -4000.0f, 0.0f, MTXMODE_APPLY);
@@ -2134,7 +2134,7 @@ void BossGoma_Draw(Actor* thisx, GlobalContext* globalCtx) {
     SkelAnime_DrawOpa(globalCtx, this->skelanime.skeleton, this->skelanime.jointTable, BossGoma_OverrideLimbDraw,
                       BossGoma_PostLimbDraw, this);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_boss_goma.c", 5012);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_boss_goma.c", __LINE__);
 }
 
 void BossGoma_SpawnChildGohma(BossGoma* this, GlobalContext* globalCtx, s16 i) {

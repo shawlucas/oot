@@ -53,7 +53,7 @@ void func_800A598C(GraphicsContext* gfxCtx, PSkinAwb* skin, s32 limbIndex, s32 a
     Vec3f spD0;
     Struct_800A598C_2* phi_s0;
 
-    OPEN_DISPS(gfxCtx, "../z_skin.c", 254);
+    OPEN_DISPS(gfxCtx, "../z_skin.c", __LINE__);
 
     skeleton = (SkinLimb**)SEGMENTED_TO_VIRTUAL(skin->skeletonHeader->segment);
     data = SEGMENTED_TO_VIRTUAL(((SkinLimb*)SEGMENTED_TO_VIRTUAL(skeleton[limbIndex]))->segment);
@@ -115,21 +115,21 @@ void func_800A598C(GraphicsContext* gfxCtx, PSkinAwb* skin, s32 limbIndex, s32 a
 
     avb->unk_0 = (avb->unk_0 == 0) ? 1 : 0;
 
-    CLOSE_DISPS(gfxCtx, "../z_skin.c", 344);
+    CLOSE_DISPS(gfxCtx, "../z_skin.c", __LINE__);
 }
 
 void func_800A5E28(GraphicsContext* gfxCtx, PSkinAwb* skin, s32 limbIndex, s32 arg3, s32 arg4) {
     SkinLimb** skeleton;
     Struct_800A5E28* temp_t9;
 
-    OPEN_DISPS(gfxCtx, "../z_skin.c", 364);
+    OPEN_DISPS(gfxCtx, "../z_skin.c", __LINE__);
     skeleton = SEGMENTED_TO_VIRTUAL(skin->skeletonHeader->segment);
     temp_t9 = SEGMENTED_TO_VIRTUAL(((SkinLimb*)SEGMENTED_TO_VIRTUAL(skeleton[limbIndex]))->segment);
     if (!(arg4 & 1)) {
         func_800A598C(gfxCtx, skin, limbIndex, arg3);
     }
     gSPDisplayList(POLY_OPA_DISP++, temp_t9->unk_8);
-    CLOSE_DISPS(gfxCtx, "../z_skin.c", 377);
+    CLOSE_DISPS(gfxCtx, "../z_skin.c", __LINE__);
 }
 
 void func_800A5F60(GraphicsContext* gfxCtx, PSkinAwb* skin, s32 limbIndex, Gfx* arg3, s32 arg4) {
@@ -137,7 +137,7 @@ void func_800A5F60(GraphicsContext* gfxCtx, PSkinAwb* skin, s32 limbIndex, Gfx* 
     SkinLimb** skeleton;
     s32 pad;
 
-    OPEN_DISPS(gfxCtx, "../z_skin.c", 395);
+    OPEN_DISPS(gfxCtx, "../z_skin.c", __LINE__);
     skeleton = SEGMENTED_TO_VIRTUAL(skin->skeletonHeader->segment);
     if (arg3 == NULL) {
         gfx = ((SkinLimb*)SEGMENTED_TO_VIRTUAL(skeleton[limbIndex]))->segment;
@@ -152,7 +152,7 @@ void func_800A5F60(GraphicsContext* gfxCtx, PSkinAwb* skin, s32 limbIndex, Gfx* 
             gDPPipeSync(POLY_OPA_DISP++);
         }
     }
-    CLOSE_DISPS(gfxCtx, "../z_skin.c", 433);
+    CLOSE_DISPS(gfxCtx, "../z_skin.c", __LINE__);
 }
 
 void func_800A60D8(Actor* actor, GlobalContext* globalCtx, PSkinAwb* skin, SkinCallback callback, SkinCallback2 arg4,
@@ -163,7 +163,7 @@ void func_800A60D8(Actor* actor, GlobalContext* globalCtx, PSkinAwb* skin, SkinC
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
     s32 pad;
 
-    OPEN_DISPS(gfxCtx, "../z_skin.c", 471);
+    OPEN_DISPS(gfxCtx, "../z_skin.c", __LINE__);
     if ((arg7 & 1) == 0) {
         func_800A6AC4(skin, &D_801600C0[0], actor, arg5);
     }
@@ -195,7 +195,7 @@ void func_800A60D8(Actor* actor, GlobalContext* globalCtx, PSkinAwb* skin, SkinC
         callback(actor, globalCtx, skin);
     }
 close_disps:
-    CLOSE_DISPS(gfxCtx, "../z_skin.c", 534);
+    CLOSE_DISPS(gfxCtx, "../z_skin.c", __LINE__);
 }
 
 void func_800A6330(Actor* this, GlobalContext* globalCtx, PSkinAwb* skin, SkinCallback callback, s32 arg4) {

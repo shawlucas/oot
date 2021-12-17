@@ -55,7 +55,7 @@ void Collider_DrawPoly(GraphicsContext* gfxCtx, Vec3f* vA, Vec3f* vB, Vec3f* vC,
     f32 nz;
     f32 originDist;
 
-    OPEN_DISPS(gfxCtx, "../z_collision_check.c", 713);
+    OPEN_DISPS(gfxCtx, "../z_collision_check.c", __LINE__);
 
     gSPMatrix(POLY_OPA_DISP++, &gMtxClear, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0xFF, r, g, b, 50);
@@ -70,7 +70,7 @@ void Collider_DrawPoly(GraphicsContext* gfxCtx, Vec3f* vA, Vec3f* vB, Vec3f* vC,
     gDPPipeSync(POLY_OPA_DISP++);
 
     vtxTbl = Graph_Alloc(gfxCtx, 3 * sizeof(Vtx));
-    ASSERT(vtxTbl != NULL, "vtx_tbl != NULL", "../z_collision_check.c", 726);
+    ASSERT(vtxTbl != NULL, "vtxTbl != NULL", "../z_collision_check.c", __LINE__);
 
     vtxTbl[0].n.ob[0] = vA->x;
     vtxTbl[0].n.ob[1] = vA->y;
@@ -97,7 +97,7 @@ void Collider_DrawPoly(GraphicsContext* gfxCtx, Vec3f* vA, Vec3f* vB, Vec3f* vC,
     gSPVertex(POLY_OPA_DISP++, vtxTbl, 3, 0);
     gSP1Triangle(POLY_OPA_DISP++, 0, 1, 2, 0);
 
-    CLOSE_DISPS(gfxCtx, "../z_collision_check.c", 757);
+    CLOSE_DISPS(gfxCtx, "../z_collision_check.c", __LINE__);
 }
 
 s32 Collider_InitBase(GlobalContext* globalCtx, Collider* collider) {
@@ -336,7 +336,7 @@ s32 Collider_FreeJntSph(GlobalContext* globalCtx, ColliderJntSph* collider) {
 
     collider->count = 0;
     if (collider->elements != NULL) {
-        ZeldaArena_FreeDebug(collider->elements, "../z_collision_check.c", 1393);
+        ZeldaArena_FreeDebug(collider->elements, "../z_collision_check.c", __LINE__);
     }
     collider->elements = NULL;
     return 1;
@@ -367,12 +367,12 @@ s32 Collider_SetJntSphToActor(GlobalContext* globalCtx, ColliderJntSph* dest, Co
 
     Collider_SetBaseToActor(globalCtx, &dest->base, &src->base);
     dest->count = src->count;
-    dest->elements = ZeldaArena_MallocDebug(src->count * sizeof(ColliderJntSphElement), "../z_collision_check.c", 1443);
+    dest->elements = ZeldaArena_MallocDebug(src->count * sizeof(ColliderJntSphElement), "../z_collision_check.c", __LINE__);
 
     if (dest->elements == NULL) {
         dest->count = 0;
         osSyncPrintf(VT_FGCOL(RED));
-        osSyncPrintf("ClObjJntSph_set():zelda_malloc()出来ません。\n"); // "Can not."
+        osSyncPrintf("Collider_SetJntSphToActor():ZeldaArena_Malloc() Can not.\n"); // "Can not."
         osSyncPrintf(VT_RST);
         return 0;
     }
@@ -396,12 +396,12 @@ s32 Collider_SetJntSphAllocType1(GlobalContext* globalCtx, ColliderJntSph* dest,
 
     Collider_SetBaseType1(globalCtx, &dest->base, actor, &src->base);
     dest->count = src->count;
-    dest->elements = ZeldaArena_MallocDebug(src->count * sizeof(ColliderJntSphElement), "../z_collision_check.c", 1490);
+    dest->elements = ZeldaArena_MallocDebug(src->count * sizeof(ColliderJntSphElement), "../z_collision_check.c", __LINE__);
 
     if (dest->elements == NULL) {
         dest->count = 0;
         osSyncPrintf(VT_FGCOL(RED));
-        osSyncPrintf("ClObjJntSph_set3():zelda_malloc_出来ません。\n"); // "Can not."
+        osSyncPrintf("Collider_SetJntSphAllocType1():ZeldaArena_Malloc Can not.\n"); // "Can not."
         osSyncPrintf(VT_RST);
         return 0;
     }
@@ -424,12 +424,12 @@ s32 Collider_SetJntSphAlloc(GlobalContext* globalCtx, ColliderJntSph* dest, Acto
 
     Collider_SetBase(globalCtx, &dest->base, actor, &src->base);
     dest->count = src->count;
-    dest->elements = ZeldaArena_MallocDebug(src->count * sizeof(ColliderJntSphElement), "../z_collision_check.c", 1551);
+    dest->elements = ZeldaArena_MallocDebug(src->count * sizeof(ColliderJntSphElement), "../z_collision_check.c", __LINE__);
 
     if (dest->elements == NULL) {
         dest->count = 0;
         osSyncPrintf(VT_FGCOL(RED));
-        osSyncPrintf("ClObjJntSph_set5():zelda_malloc出来ません\n"); // "Can not."
+        osSyncPrintf("Collider_SetJntSphAlloc():ZeldaArena_Malloc Can not\n"); // "Can not."
         osSyncPrintf(VT_RST);
         return 0;
     }
@@ -452,7 +452,7 @@ s32 Collider_SetJntSph(GlobalContext* globalCtx, ColliderJntSph* dest, Actor* ac
     Collider_SetBase(globalCtx, &dest->base, actor, &src->base);
     dest->count = src->count;
     dest->elements = elements;
-    ASSERT(dest->elements != NULL, "pclobj_jntsph->elem_tbl != NULL", "../z_collision_check.c", 1603);
+    ASSERT(dest->elements != NULL, "dest->elements != NULL", "../z_collision_check.c", __LINE__);
 
     for (destElem = dest->elements, srcElem = src->elements; destElem < dest->elements + dest->count;
          destElem++, srcElem++) {
@@ -734,7 +734,7 @@ s32 Collider_SetTrisAllocType1(GlobalContext* globalCtx, ColliderTris* dest, Act
 
     Collider_SetBaseType1(globalCtx, &dest->base, actor, &src->base);
     dest->count = src->count;
-    dest->elements = ZeldaArena_MallocDebug(dest->count * sizeof(ColliderTrisElement), "../z_collision_check.c", 2156);
+    dest->elements = ZeldaArena_MallocDebug(dest->count * sizeof(ColliderTrisElement), "../z_collision_check.c", __LINE__);
     if (dest->elements == NULL) {
         dest->count = 0;
         osSyncPrintf(VT_FGCOL(RED));
@@ -760,7 +760,7 @@ s32 Collider_SetTrisAlloc(GlobalContext* globalCtx, ColliderTris* dest, Actor* a
 
     Collider_SetBase(globalCtx, &dest->base, actor, &src->base);
     dest->count = src->count;
-    dest->elements = ZeldaArena_MallocDebug(dest->count * sizeof(ColliderTrisElement), "../z_collision_check.c", 2207);
+    dest->elements = ZeldaArena_MallocDebug(dest->count * sizeof(ColliderTrisElement), "../z_collision_check.c", __LINE__);
 
     if (dest->elements == NULL) {
         osSyncPrintf(VT_FGCOL(RED));
@@ -789,7 +789,7 @@ s32 Collider_SetTris(GlobalContext* globalCtx, ColliderTris* dest, Actor* actor,
     Collider_SetBase(globalCtx, &dest->base, actor, &src->base);
     dest->count = src->count;
     dest->elements = elements;
-    ASSERT(dest->elements != NULL, "pclobj_tris->elem_tbl != NULL", "../z_collision_check.c", 2258);
+    ASSERT(dest->elements != NULL, "dest->elements != NULL", "../z_collision_check.c", __LINE__);
 
     for (destElem = dest->elements, srcElem = src->elements; destElem < dest->elements + dest->count;
          destElem++, srcElem++) {
@@ -1180,14 +1180,14 @@ s32 CollisionCheck_SetAT(GlobalContext* globalCtx, CollisionCheckContext* colChk
     if (FrameAdvance_IsEnabled(globalCtx) == true) {
         return -1;
     }
-    ASSERT(collider->shape <= COLSHAPE_QUAD, "pcl_obj->data_type <= CL_DATA_LBL_SWRD", "../z_collision_check.c", 2997);
+    ASSERT(collider->shape <= COLSHAPE_QUAD, "collider->shape <= COLSHAPE_QUAD", "../z_collision_check.c", __LINE__);
     sATResetFuncs[collider->shape](globalCtx, collider);
     if (collider->actor != NULL && collider->actor->update == NULL) {
         return -1;
     }
     if (colChkCtx->colATCount >= COLLISION_CHECK_AT_MAX) {
         // "Index exceeded and cannot add more"
-        osSyncPrintf("CollisionCheck_setAT():インデックスがオーバーして追加不能\n");
+        osSyncPrintf("CollisionCheck_SetAT():Index exceeded and cannot add more\n");
         return -1;
     }
     if (colChkCtx->sacFlags & 1) {
@@ -1205,7 +1205,7 @@ s32 CollisionCheck_SetAT(GlobalContext* globalCtx, CollisionCheckContext* colChk
  */
 s32 CollisionCheck_SetAT_SAC(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* collider,
                              s32 index) {
-    ASSERT(collider->shape <= COLSHAPE_QUAD, "pcl_obj->data_type <= CL_DATA_LBL_SWRD", "../z_collision_check.c", 3037);
+    ASSERT(collider->shape <= COLSHAPE_QUAD, "collider->shape <= COLSHAPE_QUAD", "../z_collision_check.c", __LINE__);
     if (FrameAdvance_IsEnabled(globalCtx) == true) {
         return -1;
     }
@@ -1216,14 +1216,14 @@ s32 CollisionCheck_SetAT_SAC(GlobalContext* globalCtx, CollisionCheckContext* co
     if (colChkCtx->sacFlags & 1) {
         if (!(index < colChkCtx->colATCount)) {
             // "You are trying to register a location that is larger than the total number of data."
-            osSyncPrintf("CollisionCheck_setAT_SAC():全データ数より大きいところに登録しようとしている。\n");
+            osSyncPrintf("CollisionCheck_SetAT_SAC():You are trying to register a location that is larger than the total number of data.\n");
             return -1;
         }
         colChkCtx->colAT[index] = collider;
     } else {
         if (!(colChkCtx->colATCount < COLLISION_CHECK_AT_MAX)) {
             // "Index exceeded and cannot add more"
-            osSyncPrintf("CollisionCheck_setAT():インデックスがオーバーして追加不能\n");
+            osSyncPrintf("CollisionCheck_SetAT():Index exceeded and cannot add more\n");
             return -1;
         }
         index = colChkCtx->colATCount;
@@ -1249,14 +1249,14 @@ s32 CollisionCheck_SetAC(GlobalContext* globalCtx, CollisionCheckContext* colChk
     if (FrameAdvance_IsEnabled(globalCtx) == true) {
         return -1;
     }
-    ASSERT(collider->shape <= COLSHAPE_QUAD, "pcl_obj->data_type <= CL_DATA_LBL_SWRD", "../z_collision_check.c", 3114);
+    ASSERT(collider->shape <= COLSHAPE_QUAD, "collider->shape <= COLSHAPE_QUAD", "../z_collision_check.c", __LINE__);
     sACResetFuncs[collider->shape](globalCtx, collider);
     if (collider->actor != NULL && collider->actor->update == NULL) {
         return -1;
     }
     if (colChkCtx->colACCount >= COLLISION_CHECK_AC_MAX) {
         // "Index exceeded and cannot add more"
-        osSyncPrintf("CollisionCheck_setAC():インデックスがオーバして追加不能\n");
+        osSyncPrintf("CollisionCheck_SetAC():Index exceeded and cannot add more\n");
         return -1;
     }
     if (colChkCtx->sacFlags & 1) {
@@ -1274,7 +1274,7 @@ s32 CollisionCheck_SetAC(GlobalContext* globalCtx, CollisionCheckContext* colChk
  */
 s32 CollisionCheck_SetAC_SAC(GlobalContext* globalCtx, CollisionCheckContext* colChkCtx, Collider* collider,
                              s32 index) {
-    ASSERT(collider->shape <= COLSHAPE_QUAD, "pcl_obj->data_type <= CL_DATA_LBL_SWRD", "../z_collision_check.c", 3153);
+    ASSERT(collider->shape <= COLSHAPE_QUAD, "collider->shape <= COLSHAPE_QUAD", "../z_collision_check.c", __LINE__);
     if (FrameAdvance_IsEnabled(globalCtx) == true) {
         return -1;
     }
@@ -1285,14 +1285,14 @@ s32 CollisionCheck_SetAC_SAC(GlobalContext* globalCtx, CollisionCheckContext* co
     if (colChkCtx->sacFlags & 1) {
         if (!(index < colChkCtx->colACCount)) {
             // "You are trying to register a location that is larger than the total number of data."
-            osSyncPrintf("CollisionCheck_setAC_SAC():全データ数より大きいところに登録しようとしている。\n");
+            osSyncPrintf("CollisionCheck_SetAC_SAC():You are trying to register a location that is larger than the total number of data.\n");
             return -1;
         }
         colChkCtx->colAC[index] = collider;
     } else {
         if (!(colChkCtx->colACCount < COLLISION_CHECK_AC_MAX)) {
             // "Index exceeded and cannot add more"
-            osSyncPrintf("CollisionCheck_setAC():インデックスがオーバして追加不能\n");
+            osSyncPrintf("CollisionCheck_SetAC():Index exceeded and cannot add more\n");
             return -1;
         }
         index = colChkCtx->colACCount;
@@ -1319,7 +1319,7 @@ s32 CollisionCheck_SetOC(GlobalContext* globalCtx, CollisionCheckContext* colChk
         return -1;
     }
 
-    ASSERT(collider->shape <= COLSHAPE_QUAD, "pcl_obj->data_type <= CL_DATA_LBL_SWRD", "../z_collision_check.c", 3229);
+    ASSERT(collider->shape <= COLSHAPE_QUAD, "collider->shape <= COLSHAPE_QUAD", "../z_collision_check.c", __LINE__);
 
     sOCResetFuncs[collider->shape](globalCtx, collider);
     if (collider->actor != NULL && collider->actor->update == NULL) {
@@ -1327,7 +1327,7 @@ s32 CollisionCheck_SetOC(GlobalContext* globalCtx, CollisionCheckContext* colChk
     }
     if (colChkCtx->colOCCount >= COLLISION_CHECK_OC_MAX) {
         // "Index exceeded and cannot add more"
-        osSyncPrintf("CollisionCheck_setOC():インデックスがオーバして追加不能\n");
+        osSyncPrintf("CollisionCheck_SetOC():Index exceeded and cannot add more\n");
         return -1;
     }
     if (colChkCtx->sacFlags & 1) {
@@ -1348,7 +1348,7 @@ s32 CollisionCheck_SetOC_SAC(GlobalContext* globalCtx, CollisionCheckContext* co
     if (FrameAdvance_IsEnabled(globalCtx) == true) {
         return -1;
     }
-    ASSERT(collider->shape <= COLSHAPE_QUAD, "pcl_obj->data_type <= CL_DATA_LBL_SWRD", "../z_collision_check.c", 3274);
+    ASSERT(collider->shape <= COLSHAPE_QUAD, "collider->shape <= COLSHAPE_QUAD", "../z_collision_check.c", __LINE__);
     sOCResetFuncs[collider->shape](globalCtx, collider);
     if (collider->actor != NULL && collider->actor->update == NULL) {
         return -1;
@@ -1356,7 +1356,7 @@ s32 CollisionCheck_SetOC_SAC(GlobalContext* globalCtx, CollisionCheckContext* co
     if (colChkCtx->sacFlags & 1) {
         if (!(index < colChkCtx->colOCCount)) {
             // "You are trying to register a location that is larger than the total number of data."
-            osSyncPrintf("CollisionCheck_setOC_SAC():全データ数より大きいところに登録しようとしている。\n");
+            osSyncPrintf("CollisionCheck_SetOC_SAC():You are trying to register a location that is larger than the total number of data.\n");
             return -1;
         }
         //! @bug Should be colOC
@@ -1364,7 +1364,7 @@ s32 CollisionCheck_SetOC_SAC(GlobalContext* globalCtx, CollisionCheckContext* co
     } else {
         if (!(colChkCtx->colOCCount < COLLISION_CHECK_OC_MAX)) {
             // "Index exceeded and cannot add more"
-            osSyncPrintf("CollisionCheck_setOC():インデックスがオーバして追加不能\n");
+            osSyncPrintf("CollisionCheck_SetOC():Index exceeded and cannot add more\n");
             return -1;
         }
         index = colChkCtx->colOCCount;
@@ -1386,7 +1386,7 @@ s32 CollisionCheck_SetOCLine(GlobalContext* globalCtx, CollisionCheckContext* co
     Collider_ResetLineOC(globalCtx, collider);
     if (!(colChkCtx->colLineCount < COLLISION_CHECK_OC_LINE_MAX)) {
         // "Index exceeded and cannot add more"
-        osSyncPrintf("CollisionCheck_setOCLine():インデックスがオーバして追加不能\n");
+        osSyncPrintf("CollisionCheck_SetOCLine():Index exceeded and cannot add more\n");
         return -1;
     }
     index = colChkCtx->colLineCount;
@@ -2900,7 +2900,7 @@ void CollisionCheck_OC(GlobalContext* globalCtx, CollisionCheckContext* colChkCt
             vsFunc = sOCVsFuncs[(*left)->shape][(*right)->shape];
             if (vsFunc == NULL) {
                 // "Not compatible"
-                osSyncPrintf("CollisionCheck_OC():未対応 %d, %d\n", (*left)->shape, (*right)->shape);
+                osSyncPrintf("CollisionCheck_OC():Not compatible %d, %d\n", (*left)->shape, (*right)->shape);
                 continue;
             }
             vsFunc(globalCtx, colChkCtx, *left, *right);
@@ -2987,7 +2987,7 @@ void CollisionCheck_ApplyDamage(GlobalContext* globalCtx, CollisionCheckContext*
         return;
     }
 
-    ASSERT(info->acHitInfo != NULL, "pclobj_elem->ac_hit_elem != NULL", "../z_collision_check.c", 6493);
+    ASSERT(info->acHitInfo != NULL, "info->acHitInfo != NULL", "../z_collision_check.c", __LINE__);
     tbl = collider->actor->colChkInfo.damageTable;
     if (tbl == NULL) {
         damage = (f32)info->acHitInfo->toucher.damage - info->bumper.defense;
@@ -3159,7 +3159,7 @@ s32 CollisionCheck_LineOC(GlobalContext* globalCtx, CollisionCheckContext* colCh
         lineCheck = sOCLineCheckFuncs[(*col)->shape];
         if (lineCheck == NULL) {
             // "type %d not supported"
-            osSyncPrintf("CollisionCheck_generalLineOcCheck():未対応 %dタイプ\n", (*col)->shape);
+            osSyncPrintf("CollisionCheck_LineOC():type %d not supported\n", (*col)->shape);
         } else {
             result = lineCheck(globalCtx, colChkCtx, (*col), a, b);
             if (result) {

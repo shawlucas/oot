@@ -87,7 +87,7 @@ void EnTkEff_Draw(EnTk* this, GlobalContext* globalCtx) {
     s16 alpha;
     s16 i;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_tk_eff.c", 114);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_tk_eff.c", __LINE__);
 
     gfxSetup = 0;
 
@@ -111,7 +111,7 @@ void EnTkEff_Draw(EnTk* this, GlobalContext* globalCtx) {
             Matrix_Translate(eff->pos.x, eff->pos.y, eff->pos.z, MTXMODE_NEW);
             func_800D1FD4(&globalCtx->billboardMtxF);
             Matrix_Scale(eff->size, eff->size, 1.0f, MTXMODE_APPLY);
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_tk_eff.c", 140),
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_tk_eff.c", __LINE__),
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
             imageIdx = eff->timeLeft * ((f32)ARRAY_COUNT(dustTextures) / eff->timeTotal);
@@ -122,7 +122,7 @@ void EnTkEff_Draw(EnTk* this, GlobalContext* globalCtx) {
         eff++;
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_tk_eff.c", 154);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_tk_eff.c", __LINE__);
 }
 
 s32 EnTkEff_CreateDflt(EnTk* this, Vec3f* pos, u8 duration, f32 size, f32 growth, f32 yAccelMax) {
@@ -672,11 +672,11 @@ void EnTk_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void func_80B1D200(GlobalContext* globalCtx) {
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_tk.c", 1188);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_tk.c", __LINE__);
 
     gSPDisplayList(POLY_OPA_DISP++, gDampeShovelDL);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_tk.c", 1190);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_tk.c", __LINE__);
 }
 
 s32 EnTk_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* thisx) {
@@ -726,7 +726,7 @@ void EnTk_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnTkEff_Draw(this, globalCtx);
     Matrix_Pop();
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_tk.c", 1294);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_tk.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
 
@@ -735,5 +735,5 @@ void EnTk_Draw(Actor* thisx, GlobalContext* globalCtx) {
     SkelAnime_DrawFlexOpa(globalCtx, this->skelAnime.skeleton, this->skelAnime.jointTable, this->skelAnime.dListCount,
                           EnTk_OverrideLimbDraw, EnTk_PostLimbDraw, this);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_tk.c", 1312);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_tk.c", __LINE__);
 }

@@ -39,10 +39,10 @@ void func_800C0F28(PreRender* this, Gfx** gfxp, void* buf, void* bufSave) {
     s32 x2;
     s32 dx;
 
-    LogUtils_CheckNullPointer("this", this, "../PreRender.c", 215);
-    LogUtils_CheckNullPointer("glistpp", gfxp, "../PreRender.c", 216);
+    LogUtils_CheckNullPointer("this", this, "../PreRender.c", __LINE__);
+    LogUtils_CheckNullPointer("glistpp", gfxp, "../PreRender.c", __LINE__);
     gfx = *gfxp;
-    LogUtils_CheckNullPointer("glistp", gfx, "../PreRender.c", 218);
+    LogUtils_CheckNullPointer("glistp", gfx, "../PreRender.c", __LINE__);
 
     gDPPipeSync(gfx++);
     gDPSetOtherMode(gfx++,
@@ -87,10 +87,10 @@ void func_800C1258(PreRender* this, Gfx** gfxp) {
     s32 y2;
     s32 dy;
 
-    LogUtils_CheckNullPointer("this", this, "../PreRender.c", 278);
-    LogUtils_CheckNullPointer("glistpp", gfxp, "../PreRender.c", 279);
+    LogUtils_CheckNullPointer("this", this, "../PreRender.c", __LINE__);
+    LogUtils_CheckNullPointer("glistpp", gfxp, "../PreRender.c", __LINE__);
     gfx = *gfxp;
-    LogUtils_CheckNullPointer("glistp", gfx, "../PreRender.c", 281);
+    LogUtils_CheckNullPointer("glistp", gfx, "../PreRender.c", __LINE__);
 
     gDPPipeSync(gfx++);
     gDPSetOtherMode(gfx++,
@@ -137,10 +137,10 @@ void func_800C170C(PreRender* this, Gfx** gfxp, void* fbuf, void* fbufSave, u32 
     s32 x2;
     s32 dx;
 
-    LogUtils_CheckNullPointer("this", this, "../PreRender.c", 343);
-    LogUtils_CheckNullPointer("glistpp", gfxp, "../PreRender.c", 344);
+    LogUtils_CheckNullPointer("this", this, "../PreRender.c", __LINE__);
+    LogUtils_CheckNullPointer("glistpp", gfxp, "../PreRender.c", __LINE__);
     gfx = *gfxp;
-    LogUtils_CheckNullPointer("glistp", gfx, "../PreRender.c", 346);
+    LogUtils_CheckNullPointer("glistp", gfx, "../PreRender.c", __LINE__);
 
     gDPPipeSync(gfx++);
     gDPSetOtherMode(gfx++,
@@ -193,10 +193,10 @@ void func_800C1B24(PreRender* this, Gfx** gfxp, void* fbuf, void* cvgSave) {
     s32 x2;
     s32 dx;
 
-    LogUtils_CheckNullPointer("this", this, "../PreRender.c", 422);
-    LogUtils_CheckNullPointer("glistpp", gfxp, "../PreRender.c", 423);
+    LogUtils_CheckNullPointer("this", this, "../PreRender.c", __LINE__);
+    LogUtils_CheckNullPointer("glistpp", gfxp, "../PreRender.c", __LINE__);
     gfx = *gfxp;
-    LogUtils_CheckNullPointer("glistp", gfx, "../PreRender.c", 425);
+    LogUtils_CheckNullPointer("glistp", gfx, "../PreRender.c", __LINE__);
 
     gDPPipeSync(gfx++);
     gDPSetOtherMode(gfx++,
@@ -237,8 +237,8 @@ void func_800C1B24(PreRender* this, Gfx** gfxp, void* fbuf, void* cvgSave) {
 }
 
 void func_800C1E9C(PreRender* this, Gfx** gfxp) {
-    LogUtils_CheckNullPointer("this->zbuf_save", this->zbufSave, "../PreRender.c", 481);
-    LogUtils_CheckNullPointer("this->zbuf", this->zbuf, "../PreRender.c", 482);
+    LogUtils_CheckNullPointer("this->zbufSave", this->zbufSave, "../PreRender.c", __LINE__);
+    LogUtils_CheckNullPointer("this->zbuf", this->zbuf, "../PreRender.c", __LINE__);
 
     if ((this->zbufSave != NULL) && (this->zbuf != NULL)) {
         func_800C0F28(this, gfxp, this->zbuf, this->zbufSave);
@@ -246,8 +246,8 @@ void func_800C1E9C(PreRender* this, Gfx** gfxp) {
 }
 
 void func_800C1F20(PreRender* this, Gfx** gfxp) {
-    LogUtils_CheckNullPointer("this->fbuf_save", this->fbufSave, "../PreRender.c", 495);
-    LogUtils_CheckNullPointer("this->fbuf", this->fbuf, "../PreRender.c", 496);
+    LogUtils_CheckNullPointer("this->fbufSave", this->fbufSave, "../PreRender.c", __LINE__);
+    LogUtils_CheckNullPointer("this->fbuf", this->fbuf, "../PreRender.c", __LINE__);
 
     if ((this->fbufSave != NULL) && (this->fbuf != NULL)) {
         func_800C1AE8(this, gfxp, this->fbuf, this->fbufSave);
@@ -273,7 +273,7 @@ void func_800C1FA4(PreRender* this, Gfx** gfxp) {
 
 void func_800C20B4(PreRender* this, Gfx** gfxp) {
     func_800C1FA4(this, gfxp);
-    LogUtils_CheckNullPointer("this->cvg_save", this->cvgSave, "../PreRender.c", 532);
+    LogUtils_CheckNullPointer("this->cvgSave", this->cvgSave, "../PreRender.c", __LINE__);
     if (this->cvgSave != NULL) {
         func_800C1B24(this, gfxp, this->fbuf, this->cvgSave);
     }
@@ -291,10 +291,10 @@ void func_800C213C(PreRender* this, Gfx** gfxp) {
     s32 rtile = 1;
 
     if (this->cvgSave != NULL) {
-        LogUtils_CheckNullPointer("this", this, "../PreRender.c", 563);
-        LogUtils_CheckNullPointer("glistpp", gfxp, "../PreRender.c", 564);
+        LogUtils_CheckNullPointer("this", this, "../PreRender.c", __LINE__);
+        LogUtils_CheckNullPointer("glistpp", gfxp, "../PreRender.c", __LINE__);
         gfx = *gfxp;
-        LogUtils_CheckNullPointer("glistp", gfx, "../PreRender.c", 566);
+        LogUtils_CheckNullPointer("glistp", gfx, "../PreRender.c", __LINE__);
 
         gDPPipeSync(gfx++);
         gDPSetEnvColor(gfx++, 255, 255, 255, 32);

@@ -37,7 +37,7 @@ void func_80095AB4(GlobalContext* globalCtx, Room* room, u32 flags) {
     PolygonType0* polygon0;
     PolygonDlist* polygonDlist;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_room.c", 193);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_room.c", __LINE__);
 
     if (flags & 1) {
         func_800342EC(&D_801270A0, globalCtx);
@@ -67,7 +67,7 @@ void func_80095AB4(GlobalContext* globalCtx, Room* room, u32 flags) {
         polygonDlist++;
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_room.c", 239);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_room.c", __LINE__);
 }
 
 #define SHAPE_SORT_MAX 64
@@ -99,7 +99,7 @@ void func_80095D04(GlobalContext* globalCtx, Room* room, u32 flags) {
     PolygonDlist2* temp;
     f32 temp_f2;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_room.c", 287);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_room.c", __LINE__);
     if (flags & 1) {
         func_800342EC(&D_801270A0, globalCtx);
         gSPSegment(POLY_OPA_DISP++, 0x03, room->segment);
@@ -118,7 +118,7 @@ void func_80095D04(GlobalContext* globalCtx, Room* room, u32 flags) {
     polygonDlist = SEGMENTED_TO_VIRTUAL(polygon2->start);
     spA4 = spB8;
 
-    ASSERT(polygon2->num <= SHAPE_SORT_MAX, "polygon2->num <= SHAPE_SORT_MAX", "../z_room.c", 317);
+    ASSERT(polygon2->num <= SHAPE_SORT_MAX, "polygon2->num <= SHAPE_SORT_MAX", "../z_room.c", __LINE__);
     sp78 = polygonDlist;
 
     for (sp9C = 0; sp9C < polygon2->num; sp9C++, polygonDlist++) {
@@ -212,7 +212,7 @@ void func_80095D04(GlobalContext* globalCtx, Room* room, u32 flags) {
 
     iREG(88) = sp9C - 1;
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_room.c", 430);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_room.c", __LINE__);
 }
 
 #define JPEG_MARKER 0xFFD8FFE0
@@ -222,9 +222,9 @@ s32 func_80096238(void* data) {
 
     if (*(u32*)data == JPEG_MARKER) {
         osSyncPrintf("JPEGデータを展開します\n");        // "Expanding jpeg data"
-        osSyncPrintf("JPEGデータアドレス %08x\n", data); // "Jpeg data address %08x"
-        // "Work buffer address (Z buffer) %08x"
-        osSyncPrintf("ワークバッファアドレス（Ｚバッファ）%08x\n", gZBuffer);
+        osSyncPrintf("JPEGデータアドレス %08X\n", data); // "Jpeg data address %08X"
+        // "Work buffer address (Z buffer) %08X"
+        osSyncPrintf("ワークバッファアドレス（Ｚバッファ）%08X\n", gZBuffer);
 
         time = osGetTime();
         if (!Jpeg_Decode(data, gZBuffer, gGfxSPTaskOutputBuffer, sizeof(gGfxSPTaskOutputBuffer))) {
@@ -317,7 +317,7 @@ void func_80096680(GlobalContext* globalCtx, Room* room, u32 flags) {
     u32 sp94;
     u32 sp90;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_room.c", 628);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_room.c", __LINE__);
 
     camera = GET_ACTIVE_CAM(globalCtx);
     sp9C = (camera->setting == CAM_SET_PREREND_FIXED);
@@ -363,7 +363,7 @@ void func_80096680(GlobalContext* globalCtx, Room* room, u32 flags) {
         gSPDisplayList(POLY_XLU_DISP++, polygonDlist->xlu);
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_room.c", 691);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_room.c", __LINE__);
 }
 
 BgImage* func_80096A74(PolygonType1* polygon1, GlobalContext* globalCtx) {
@@ -412,7 +412,7 @@ void func_80096B6C(GlobalContext* globalCtx, Room* room, u32 flags) {
     u32 sp90;
     u32 sp8C;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_room.c", 752);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_room.c", __LINE__);
 
     camera = GET_ACTIVE_CAM(globalCtx);
     sp98 = (camera->setting == CAM_SET_PREREND_FIXED);
@@ -458,7 +458,7 @@ void func_80096B6C(GlobalContext* globalCtx, Room* room, u32 flags) {
         gSPDisplayList(POLY_XLU_DISP++, polygonDlist->xlu);
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_room.c", 819);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_room.c", __LINE__);
 }
 
 // Room Draw Polygon Type 1
@@ -522,14 +522,14 @@ u32 func_80096FE8(GlobalContext* globalCtx, RoomContext* roomCtx) {
     }
 
     osSyncPrintf(VT_FGCOL(YELLOW));
-    // "Room buffer size=%08x(%5.1fK)"
-    osSyncPrintf("部屋バッファサイズ=%08x(%5.1fK)\n", maxRoomSize, maxRoomSize / 1024.0f);
+    // "Room buffer size=%08X(%5.1fK)"
+    osSyncPrintf("部屋バッファサイズ=%08X(%5.1fK)\n", maxRoomSize, maxRoomSize / 1024.0f);
     roomCtx->bufPtrs[0] = GameState_Alloc(&globalCtx->state, maxRoomSize, "../z_room.c", 946);
-    // "Room buffer initial pointer=%08x"
-    osSyncPrintf("部屋バッファ開始ポインタ=%08x\n", roomCtx->bufPtrs[0]);
+    // "Room buffer initial pointer=%08X"
+    osSyncPrintf("部屋バッファ開始ポインタ=%08X\n", roomCtx->bufPtrs[0]);
     roomCtx->bufPtrs[1] = (void*)((s32)roomCtx->bufPtrs[0] + maxRoomSize);
-    // "Room buffer end pointer=%08x"
-    osSyncPrintf("部屋バッファ終了ポインタ=%08x\n", roomCtx->bufPtrs[1]);
+    // "Room buffer end pointer=%08X"
+    osSyncPrintf("部屋バッファ終了ポインタ=%08X\n", roomCtx->bufPtrs[1]);
     osSyncPrintf(VT_RST);
     roomCtx->unk_30 = 0;
     roomCtx->status = 0;
@@ -550,7 +550,7 @@ s32 func_8009728C(GlobalContext* globalCtx, RoomContext* roomCtx, s32 roomNum) {
         roomCtx->curRoom.segment = NULL;
         roomCtx->status = 1;
 
-        ASSERT(roomNum < globalCtx->numRooms, "read_room_ID < game_play->room_rom_address.num", "../z_room.c", 1009);
+        ASSERT(roomNum < globalCtx->numRooms, "roomNum < globalCtx->numRooms", "../z_room.c", __LINE__);
 
         size = globalCtx->roomList[roomNum].vromEnd - globalCtx->roomList[roomNum].vromStart;
         roomCtx->unk_34 = (void*)ALIGN16((u32)roomCtx->bufPtrs[roomCtx->unk_30] - ((size + 8) * roomCtx->unk_30 + 7));

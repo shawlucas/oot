@@ -30,22 +30,22 @@ void func_801109B0(GlobalContext* globalCtx) {
     parameterSize = (u32)_parameter_staticSegmentRomEnd - (u32)_parameter_staticSegmentRomStart;
 
     // "Permanent PARAMETER Segment = %x"
-    osSyncPrintf("常駐ＰＡＲＡＭＥＴＥＲセグメント=%x\n", parameterSize);
+    osSyncPrintf("Permanent PARAMETER Segment = %X\n", parameterSize);
 
-    interfaceCtx->parameterSegment = GameState_Alloc(&globalCtx->state, parameterSize, "../z_construct.c", 159);
+    interfaceCtx->parameterSegment = GameState_Alloc(&globalCtx->state, parameterSize, "../z_construct.c", __LINE__);
 
-    osSyncPrintf("parameter->parameterSegment=%x\n", interfaceCtx->parameterSegment);
+    osSyncPrintf("interfaceCtx->parameterSegment=%x\n", interfaceCtx->parameterSegment);
 
-    ASSERT(interfaceCtx->parameterSegment != NULL, "parameter->parameterSegment != NULL", "../z_construct.c", 161);
+    ASSERT(interfaceCtx->parameterSegment != NULL, "interfaceCtx->parameterSegment != NULL", "../z_construct.c", __LINE__);
     DmaMgr_SendRequest1(interfaceCtx->parameterSegment, (u32)_parameter_staticSegmentRomStart, parameterSize,
-                        "../z_construct.c", 162);
+                        "../z_construct.c", __LINE__);
 
-    interfaceCtx->doActionSegment = GameState_Alloc(&globalCtx->state, 0x480, "../z_construct.c", 166);
+    interfaceCtx->doActionSegment = GameState_Alloc(&globalCtx->state, 0x480, "../z_construct.c", __LINE__);
 
-    osSyncPrintf("ＤＯアクション テクスチャ初期=%x\n", 0x480); // "DO Action Texture Initialization"
-    osSyncPrintf("parameter->do_actionSegment=%x\n", interfaceCtx->doActionSegment);
+    osSyncPrintf("DO Action Texture Initialization%x\n", 0x480); // "DO Action Texture Initialization"
+    osSyncPrintf("interfaceCtx->doActionSegment=%x\n", interfaceCtx->doActionSegment);
 
-    ASSERT(interfaceCtx->doActionSegment != NULL, "parameter->do_actionSegment != NULL", "../z_construct.c", 169);
+    ASSERT(interfaceCtx->doActionSegment != NULL, "interfaceCtx->doActionSegment != NULL", "../z_construct.c", __LINE__);
 
     if (gSaveContext.language == LANGUAGE_ENG) {
         doActionOffset = 0;
@@ -56,7 +56,7 @@ void func_801109B0(GlobalContext* globalCtx) {
     }
 
     DmaMgr_SendRequest1(interfaceCtx->doActionSegment, (u32)_do_action_staticSegmentRomStart + doActionOffset, 0x300,
-                        "../z_construct.c", 174);
+                        "../z_construct.c", __LINE__);
 
     if (gSaveContext.language == LANGUAGE_ENG) {
         doActionOffset = 0x480;
@@ -67,53 +67,53 @@ void func_801109B0(GlobalContext* globalCtx) {
     }
 
     DmaMgr_SendRequest1(interfaceCtx->doActionSegment + 0x300, (u32)_do_action_staticSegmentRomStart + doActionOffset,
-                        0x180, "../z_construct.c", 178);
+                        0x180, "../z_construct.c", __LINE__);
 
-    interfaceCtx->iconItemSegment = GameState_Alloc(&globalCtx->state, 0x4000, "../z_construct.c", 190);
+    interfaceCtx->iconItemSegment = GameState_Alloc(&globalCtx->state, 0x4000, "../z_construct.c", __LINE__);
 
     // "Icon Item Texture Initialization = %x"
-    osSyncPrintf("アイコンアイテム テクスチャ初期=%x\n", 0x4000);
-    osSyncPrintf("parameter->icon_itemSegment=%x\n", interfaceCtx->iconItemSegment);
+    osSyncPrintf("Icon Item Texture Initialization = %X\n", 0x4000);
+    osSyncPrintf("interfaceCtx->iconItemSegment=%x\n", interfaceCtx->iconItemSegment);
 
-    ASSERT(interfaceCtx->iconItemSegment != NULL, "parameter->icon_itemSegment != NULL", "../z_construct.c", 193);
+    ASSERT(interfaceCtx->iconItemSegment != NULL, "interfaceCtx->iconItemSegment != NULL", "../z_construct.c", __LINE__);
 
-    osSyncPrintf("Register_Item[%x, %x, %x, %x]\n", gSaveContext.equips.buttonItems[0],
+    osSyncPrintf("gSaveContext.equips.buttonItems[%x, %x, %x, %x]\n", gSaveContext.equips.buttonItems[0],
                  gSaveContext.equips.buttonItems[1], gSaveContext.equips.buttonItems[2],
                  gSaveContext.equips.buttonItems[3]);
 
     if (gSaveContext.equips.buttonItems[0] < 0xF0) {
         DmaMgr_SendRequest1(interfaceCtx->iconItemSegment,
                             _icon_item_staticSegmentRomStart + gSaveContext.equips.buttonItems[0] * 0x1000, 0x1000,
-                            "../z_construct.c", 198);
+                            "../z_construct.c", __LINE__);
     } else if (gSaveContext.equips.buttonItems[0] != 0xFF) {
         DmaMgr_SendRequest1(interfaceCtx->iconItemSegment,
                             _icon_item_staticSegmentRomStart + gSaveContext.equips.buttonItems[0] * 0x1000, 0x1000,
-                            "../z_construct.c", 203);
+                            "../z_construct.c", __LINE__);
     }
 
     if (gSaveContext.equips.buttonItems[1] < 0xF0) {
         DmaMgr_SendRequest1(interfaceCtx->iconItemSegment + 0x1000,
                             _icon_item_staticSegmentRomStart + gSaveContext.equips.buttonItems[1] * 0x1000, 0x1000,
-                            "../z_construct.c", 209);
+                            "../z_construct.c", __LINE__);
     }
 
     if (gSaveContext.equips.buttonItems[2] < 0xF0) {
         DmaMgr_SendRequest1(interfaceCtx->iconItemSegment + 0x2000,
                             _icon_item_staticSegmentRomStart + gSaveContext.equips.buttonItems[2] * 0x1000, 0x1000,
-                            "../z_construct.c", 214);
+                            "../z_construct.c", __LINE__);
     }
 
     if (gSaveContext.equips.buttonItems[3] < 0xF0) {
         DmaMgr_SendRequest1(interfaceCtx->iconItemSegment + 0x3000,
                             _icon_item_staticSegmentRomStart + gSaveContext.equips.buttonItems[3] * 0x1000, 0x1000,
-                            "../z_construct.c", 219);
+                            "../z_construct.c", __LINE__);
     }
 
-    osSyncPrintf("ＥＶＥＮＴ＝%d\n", ((void)0, gSaveContext.timer1State));
+    osSyncPrintf("gSaveContext.timer1State ＝%d\n", ((void)0, gSaveContext.timer1State));
 
     if ((gSaveContext.timer1State == 4) || (gSaveContext.timer1State == 8) || (gSaveContext.timer2State == 4) ||
         (gSaveContext.timer2State == 10)) {
-        osSyncPrintf("restart_flag=%d\n", ((void)0, gSaveContext.respawnFlag));
+        osSyncPrintf("gSaveContext.respawnFlag = %d\n", ((void)0, gSaveContext.respawnFlag));
 
         if ((gSaveContext.respawnFlag == -1) || (gSaveContext.respawnFlag == 1)) {
             if (gSaveContext.timer1State == 4) {
@@ -141,10 +141,10 @@ void func_801109B0(GlobalContext* globalCtx) {
     if ((gSaveContext.timer1State >= 11) && (gSaveContext.timer1State < 16)) {
         gSaveContext.timer1State = 0;
         // "Timer Stop!!!!!!!!!!!!!!!!!!!!!!"
-        osSyncPrintf("タイマー停止！！！！！！！！！！！！！！！！！！！！！  = %d\n", gSaveContext.timer1State);
+        osSyncPrintf("Timer stop!!!!!  = %d\n", gSaveContext.timer1State);
     }
 
-    osSyncPrintf("ＰＡＲＡＭＥＴＥＲ領域＝%x\n", parameterSize + 0x5300); // "Parameter Area = %x"
+    osSyncPrintf("PARAMETER area ＝ %X\n", parameterSize + 0x5300); // "Parameter Area = %x"
 
     HealthMeter_Init(globalCtx);
     Map_Init(globalCtx);
@@ -179,12 +179,12 @@ void Message_Init(GlobalContext* globalCtx) {
 
     View_Init(&msgCtx->view, globalCtx->state.gfxCtx);
 
-    msgCtx->textboxSegment = GameState_Alloc(&globalCtx->state, 0x2200, "../z_construct.c", 349);
+    msgCtx->textboxSegment = GameState_Alloc(&globalCtx->state, 0x2200, "../z_construct.c", __LINE__);
 
-    osSyncPrintf("message->fukidashiSegment=%x\n", msgCtx->textboxSegment);
+    osSyncPrintf("msgCtx->textboxSegment = %X\n", msgCtx->textboxSegment);
 
-    osSyncPrintf("吹き出しgame_alloc=%x\n", 0x2200); // "Textbox game_alloc=%x"
-    ASSERT(msgCtx->textboxSegment != NULL, "message->fukidashiSegment != NULL", "../z_construct.c", 352);
+    osSyncPrintf("Textbox GameState_Alloc = %X\n", 0x2200); // "Textbox game_alloc=%x"
+    ASSERT(msgCtx->textboxSegment != NULL, "msgCtx->textboxSegment != NULL", "../z_construct.c", __LINE__);
 
     Font_LoadOrderedFont(&globalCtx->msgCtx.font);
 

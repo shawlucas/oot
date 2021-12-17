@@ -23,7 +23,7 @@ void KaleidoManager_LoadOvl(KaleidoMgrOverlay* ovl) {
     Overlay_Load(ovl->vromStart, ovl->vromEnd, ovl->vramStart, ovl->vramEnd, ovl->loadedRamAddr);
 
     osSyncPrintf(VT_FGCOL(GREEN));
-    osSyncPrintf("OVL(k):Seg:%08x-%08x Ram:%08x-%08x Off:%08x %s\n", ovl->vramStart, ovl->vramEnd, ovl->loadedRamAddr,
+    osSyncPrintf("OVL(k):Seg:%08X-%08X Ram:%08X-%08X Off:%08X %s\n", ovl->vramStart, ovl->vramEnd, ovl->loadedRamAddr,
                  (u32)ovl->loadedRamAddr + (u32)ovl->vramEnd - (u32)ovl->vramStart,
                  (u32)ovl->vramStart - (u32)ovl->loadedRamAddr, ovl->name);
     osSyncPrintf(VT_RST);
@@ -61,7 +61,7 @@ void KaleidoManager_Init(GlobalContext* globalCtx) {
     LogUtils_CheckNullPointer("KaleidoArea_allocp", sKaleidoAreaPtr, "../z_kaleido_manager.c", 151);
 
     osSyncPrintf(VT_FGCOL(GREEN));
-    osSyncPrintf("KaleidoArea %08x - %08x\n", sKaleidoAreaPtr, (u32)sKaleidoAreaPtr + largestSize);
+    osSyncPrintf("KaleidoArea %08X - %08X\n", sKaleidoAreaPtr, (u32)sKaleidoAreaPtr + largestSize);
     osSyncPrintf(VT_RST);
 
     gKaleidoMgrCurOvl = 0;

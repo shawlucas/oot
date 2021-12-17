@@ -54,8 +54,7 @@ void TransitionFade_Update(void* thisx, s32 updateRate) {
                 this->isDone = 1;
             }
             if (!gSaveContext.fadeDuration) {
-                // "Divide by 0! Zero is included in ZCommonGet fade_speed"
-                osSyncPrintf(VT_COL(RED, WHITE) "０除算! ZCommonGet fade_speed に０がはいってる" VT_RST);
+                osSyncPrintf(VT_COL(RED, WHITE) "Divide by 0! gSaveContext.fadeDuration has 0 in it!" VT_RST);
             }
 
             alpha = (255.0f * this->fadeTimer) / ((void)0, gSaveContext.fadeDuration);

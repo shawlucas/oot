@@ -387,11 +387,11 @@ void BgIceShelter_Draw(Actor* thisx, GlobalContext* globalCtx2) {
     GlobalContext* globalCtx = globalCtx2;
     BgIceShelter* this = (BgIceShelter*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_ice_shelter.c", 748);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_ice_shelter.c", __LINE__);
 
     func_80093D84(globalCtx->state.gfxCtx);
 
-    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_ice_shelter.c", 751),
+    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_ice_shelter.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     switch ((this->dyna.actor.params >> 8) & 7) {
@@ -434,5 +434,5 @@ void BgIceShelter_Draw(Actor* thisx, GlobalContext* globalCtx2) {
             break;
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_ice_shelter.c", 815);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_ice_shelter.c", __LINE__);
 }

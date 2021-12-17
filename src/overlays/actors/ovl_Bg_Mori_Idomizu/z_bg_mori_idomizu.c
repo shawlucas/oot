@@ -162,11 +162,11 @@ void BgMoriIdomizu_Draw(Actor* thisx, GlobalContext* globalCtx) {
     BgMoriIdomizu* this = (BgMoriIdomizu*)thisx;
     u32 gameplayFrames = globalCtx->gameplayFrames;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_idomizu.c", 356);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_idomizu.c", __LINE__);
 
     func_80093D84(globalCtx->state.gfxCtx);
 
-    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_mori_idomizu.c", 360),
+    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_mori_idomizu.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     gSPSegment(POLY_XLU_DISP++, 0x08, globalCtx->objectCtx.status[this->moriTexObjIndex].segment);
@@ -179,5 +179,5 @@ void BgMoriIdomizu_Draw(Actor* thisx, GlobalContext* globalCtx) {
 
     gSPDisplayList(POLY_XLU_DISP++, gMoriIdomizuWaterDL);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_idomizu.c", 382);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_idomizu.c", __LINE__);
 }

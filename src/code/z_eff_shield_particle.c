@@ -19,7 +19,7 @@ void EffectShieldParticle_Init(void* thisx, void* initParamsx) {
         this->numElements = initParams->numElements;
         if (this->numElements > ARRAY_COUNT(this->elements)) {
             osSyncPrintf(VT_FGCOL(RED));
-            osSyncPrintf("EffectShieldParticle_ct():パーティクル数がオーバしてます。\n");
+            osSyncPrintf("EffectShieldParticle_Init():The particle count is over.\n");
             osSyncPrintf(VT_RST);
             return;
         }
@@ -154,7 +154,7 @@ void EffectShieldParticle_Draw(void* thisx, GraphicsContext* gfxCtx) {
     Color_RGBA8 primColor;
     Color_RGBA8 envColor;
 
-    OPEN_DISPS(gfxCtx, "../z_eff_shield_particle.c", 272);
+    OPEN_DISPS(gfxCtx, "../z_eff_shield_particle.c", __LINE__);
 
     if (this != NULL) {
         POLY_XLU_DISP = Gfx_CallSetupDL(POLY_XLU_DISP, 0x26);
@@ -212,5 +212,5 @@ void EffectShieldParticle_Draw(void* thisx, GraphicsContext* gfxCtx) {
         }
     }
 
-    CLOSE_DISPS(gfxCtx, "../z_eff_shield_particle.c", 359);
+    CLOSE_DISPS(gfxCtx, "../z_eff_shield_particle.c", __LINE__);
 }

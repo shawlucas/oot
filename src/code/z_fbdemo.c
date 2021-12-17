@@ -90,7 +90,7 @@ void TransitionUnk_InitGraphics(TransitionUnk* this) {
 
     LOG_NUM("this->col * (1 + this->row * (1 + 7 + 1)) + 1 + 1", this->col * (1 + this->row * 9) + 2, "../z_fbdemo.c",
             144);
-    LOG_NUM("gp - this->gfxtbl", gfx - this->gfx, "../z_fbdemo.c", 145);
+    LOG_NUM("gp - this->gfxtbl", gfx - this->gfx, "../z_fbdemo.c", __LINE__);
 }
 
 void TransitionUnk_InitData(TransitionUnk* this) {
@@ -106,16 +106,16 @@ void TransitionUnk_InitData(TransitionUnk* this) {
 }
 
 void TransitionUnk_Destroy(TransitionUnk* this) {
-    osSyncPrintf("fbdemo_cleanup(%08x)\n", this);
-    osSyncPrintf("msleep(100);\n");
+    osSyncPrintf("TransitionUnk_Destroy(%08Xs)\n", this);
+    osSyncPrintf("Sleep_Msec(100);\n");
     Sleep_Msec(100);
 
     if (this->unk_0C != NULL) {
-        SystemArena_FreeDebug(this->unk_0C, "../z_fbdemo.c", 180);
+        SystemArena_FreeDebug(this->unk_0C, "../z_fbdemo.c", __LINE__);
         this->unk_0C = NULL;
     }
     if (this->vtxFrame1 != NULL) {
-        SystemArena_FreeDebug(this->vtxFrame1, "../z_fbdemo.c", 181);
+        SystemArena_FreeDebug(this->vtxFrame1, "../z_fbdemo.c", __LINE__);
         this->vtxFrame1 = NULL;
     }
     if (this->vtxFrame2 != NULL) {
@@ -129,32 +129,32 @@ void TransitionUnk_Destroy(TransitionUnk* this) {
 }
 
 TransitionUnk* TransitionUnk_Init(TransitionUnk* this, s32 row, s32 col) {
-    osSyncPrintf("fbdemo_init(%08x, %d, %d)\n", this, row, col);
+    osSyncPrintf("TransitionUnk_Init(%08X, %d, %d)\n", this, row, col);
     bzero(this, sizeof(*this));
     this->frame = 0;
     this->row = row;
     this->col = col;
-    this->unk_0C = SystemArena_MallocDebug((row + 1) * sizeof(TransitionUnkData) * (col + 1), "../z_fbdemo.c", 195);
-    this->vtxFrame1 = SystemArena_MallocDebug((row + 1) * sizeof(Vtx) * (col + 1), "../z_fbdemo.c", 196);
-    this->vtxFrame2 = SystemArena_MallocDebug((row + 1) * sizeof(Vtx) * (col + 1), "../z_fbdemo.c", 197);
-    this->gfx = SystemArena_MallocDebug((this->col * (1 + this->row * 9) + 2) * sizeof(Gfx), "../z_fbdemo.c", 198);
+    this->unk_0C = SystemArena_MallocDebug((row + 1) * sizeof(TransitionUnkData) * (col + 1), "../z_fbdemo.c", __LINE__);
+    this->vtxFrame1 = SystemArena_MallocDebug((row + 1) * sizeof(Vtx) * (col + 1), "../z_fbdemo.c", __LINE__);
+    this->vtxFrame2 = SystemArena_MallocDebug((row + 1) * sizeof(Vtx) * (col + 1), "../z_fbdemo.c", __LINE__);
+    this->gfx = SystemArena_MallocDebug((this->col * (1 + this->row * 9) + 2) * sizeof(Gfx), "../z_fbdemo.c", __LINE__);
 
     if (this->unk_0C == NULL || this->vtxFrame1 == NULL || this->vtxFrame2 == NULL || this->gfx == NULL) {
         osSyncPrintf("fbdemo_init allocation error\n");
         if (this->unk_0C != NULL) {
-            SystemArena_FreeDebug(this->unk_0C, "../z_fbdemo.c", 202);
+            SystemArena_FreeDebug(this->unk_0C, "../z_fbdemo.c", __LINE__);
             this->unk_0C = NULL;
         }
         if (this->vtxFrame1 != NULL) {
-            SystemArena_FreeDebug(this->vtxFrame1, "../z_fbdemo.c", 203);
+            SystemArena_FreeDebug(this->vtxFrame1, "../z_fbdemo.c", __LINE__);
             this->vtxFrame1 = NULL;
         }
         if (this->vtxFrame2 != NULL) {
-            SystemArena_FreeDebug(this->vtxFrame2, "../z_fbdemo.c", 204);
+            SystemArena_FreeDebug(this->vtxFrame2, "../z_fbdemo.c", __LINE__);
             this->vtxFrame2 = NULL;
         }
         if (this->gfx != NULL) {
-            SystemArena_FreeDebug(this->gfx, "../z_fbdemo.c", 205);
+            SystemArena_FreeDebug(this->gfx, "../z_fbdemo.c", __LINE__);
             this->gfx = NULL;
         }
         return NULL;

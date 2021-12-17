@@ -319,12 +319,12 @@ void EnMm2_Draw(Actor* thisx, GlobalContext* globalCtx) {
     static void* mouthTextures[] = { gRunningManMouthOpenTex, gRunningManMouthClosedTex };
     EnMm2* this = (EnMm2*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_mm2.c", 634);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_mm2.c", __LINE__);
     func_80093D18(globalCtx->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x08, SEGMENTED_TO_VIRTUAL(mouthTextures[this->mouthTexIndex]));
     SkelAnime_DrawFlexOpa(globalCtx, this->skelAnime.skeleton, this->skelAnime.jointTable, this->skelAnime.dListCount,
                           EnMm2_OverrideLimbDraw, EnMm2_PostLimbDraw, this);
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_mm2.c", 654);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_mm2.c", __LINE__);
 }
 
 s32 EnMm2_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* thisx) {

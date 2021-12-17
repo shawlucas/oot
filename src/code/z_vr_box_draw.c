@@ -12,7 +12,7 @@ Mtx* SkyboxDraw_UpdateMatrix(SkyboxContext* skyboxCtx, f32 x, f32 y, f32 z) {
 }
 
 void SkyboxDraw_Draw(SkyboxContext* skyboxCtx, GraphicsContext* gfxCtx, s16 skyboxId, s16 blend, f32 x, f32 y, f32 z) {
-    OPEN_DISPS(gfxCtx, "../z_vr_box_draw.c", 52);
+    OPEN_DISPS(gfxCtx, "../z_vr_box_draw.c", __LINE__);
 
     func_800945A0(gfxCtx);
 
@@ -77,7 +77,7 @@ void SkyboxDraw_Draw(SkyboxContext* skyboxCtx, GraphicsContext* gfxCtx, s16 skyb
 
     gDPPipeSync(POLY_OPA_DISP++);
 
-    CLOSE_DISPS(gfxCtx, "../z_vr_box_draw.c", 125);
+    CLOSE_DISPS(gfxCtx, "../z_vr_box_draw.c", __LINE__);
 }
 
 void SkyboxDraw_Update(SkyboxContext* skyboxCtx) {

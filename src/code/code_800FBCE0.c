@@ -11,7 +11,7 @@ void func_800FBCE0() {
     u32 spStatus = __osSpGetStatus();
     u32 dpStatus = osDpGetStatus();
 
-    osSyncPrintf("osSpGetStatus=%08x: ", spStatus);
+    osSyncPrintf("osSpGetStatus=%08X: ", spStatus);
     printSpStatus(spStatus, HALT);
     printSpStatus(spStatus, BROKE);
     printSpStatus(spStatus, DMA_BUSY);
@@ -29,7 +29,7 @@ void func_800FBCE0() {
     printSpStatus(spStatus, SIG7);
     osSyncPrintf("\n");
 
-    osSyncPrintf("osDpGetStatus=%08x:", dpStatus);
+    osSyncPrintf("osDpGetStatus=%08X:", dpStatus);
     printDpStatus(dpStatus, XBUS_DMEM_DMA);
     printDpStatus(dpStatus, FREEZE);
     printDpStatus(dpStatus, FLUSH);

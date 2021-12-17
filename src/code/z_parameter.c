@@ -2531,7 +2531,7 @@ void Interface_DrawMagicBar(GlobalContext* globalCtx) {
     InterfaceContext* interfaceCtx = &globalCtx->interfaceCtx;
     s16 magicBarY;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", 2650);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", __LINE__);
 
     if (gSaveContext.magicLevel != 0) {
         if (gSaveContext.healthCapacity > 0xA0) {
@@ -2598,7 +2598,7 @@ void Interface_DrawMagicBar(GlobalContext* globalCtx) {
         }
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", 2731);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", __LINE__);
 }
 
 void func_80088AA0(s16 arg0) {
@@ -2638,7 +2638,7 @@ void func_80088B34(s16 arg0) {
 }
 
 void Interface_DrawActionLabel(GraphicsContext* gfxCtx, void* texture) {
-    OPEN_DISPS(gfxCtx, "../z_parameter.c", 2820);
+    OPEN_DISPS(gfxCtx, "../z_parameter.c", __LINE__);
 
     gDPLoadTextureBlock_4b(OVERLAY_DISP++, texture, G_IM_FMT_IA, DO_ACTION_TEX_WIDTH, DO_ACTION_TEX_HEIGHT, 0,
                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
@@ -2646,7 +2646,7 @@ void Interface_DrawActionLabel(GraphicsContext* gfxCtx, void* texture) {
 
     gSP1Quadrangle(OVERLAY_DISP++, 0, 2, 3, 1, 0);
 
-    CLOSE_DISPS(gfxCtx, "../z_parameter.c", 2829);
+    CLOSE_DISPS(gfxCtx, "../z_parameter.c", __LINE__);
 }
 
 void Interface_DrawItemButtons(GlobalContext* globalCtx) {
@@ -2660,7 +2660,7 @@ void Interface_DrawItemButtons(GlobalContext* globalCtx) {
     s16 width;
     s16 height;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", 2900);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", __LINE__);
 
     // B Button Color & Texture
     // Also loads the Item Button Texture reused by other buttons afterwards
@@ -2784,11 +2784,11 @@ void Interface_DrawItemButtons(GlobalContext* globalCtx) {
         }
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", 3071);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", __LINE__);
 }
 
 void Interface_DrawItemIconTexture(GlobalContext* globalCtx, void* texture, s16 button) {
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", 3079);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", __LINE__);
 
     gDPLoadTextureBlock(OVERLAY_DISP++, texture, G_IM_FMT_RGBA, G_IM_SIZ_32b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -2798,14 +2798,14 @@ void Interface_DrawItemIconTexture(GlobalContext* globalCtx, void* texture, s16 
                         (R_ITEM_ICON_Y(button) + R_ITEM_ICON_WIDTH(button)) << 2, G_TX_RENDERTILE, 0, 0,
                         R_ITEM_ICON_DD(button) << 1, R_ITEM_ICON_DD(button) << 1);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", 3094);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", __LINE__);
 }
 
 void Interface_DrawAmmoCount(GlobalContext* globalCtx, s16 button, s16 alpha) {
     s16 i;
     s16 ammo;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", 3105);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", __LINE__);
 
     i = gSaveContext.equips.buttonItems[button];
 
@@ -2856,19 +2856,19 @@ void Interface_DrawAmmoCount(GlobalContext* globalCtx, s16 button, s16 alpha) {
                                       R_ITEM_AMMO_X(button) + 6, R_ITEM_AMMO_Y(button), 8, 8, 1 << 10, 1 << 10);
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", 3158);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", __LINE__);
 }
 
 void Interface_DrawActionButton(GlobalContext* globalCtx) {
     InterfaceContext* interfaceCtx = &globalCtx->interfaceCtx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", 3172);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", __LINE__);
 
     Matrix_Translate(0.0f, 0.0f, XREG(18) / 10.0f, MTXMODE_NEW);
     Matrix_Scale(1.0f, 1.0f, 1.0f, MTXMODE_APPLY);
     Matrix_RotateX(interfaceCtx->unk_1F4 / 10000.0f, MTXMODE_APPLY);
 
-    gSPMatrix(OVERLAY_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_parameter.c", 3177),
+    gSPMatrix(OVERLAY_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_parameter.c", __LINE__),
               G_MTX_MODELVIEW | G_MTX_LOAD);
     gSPVertex(OVERLAY_DISP++, &interfaceCtx->actionVtx[0], 4, 0);
 
@@ -2878,7 +2878,7 @@ void Interface_DrawActionButton(GlobalContext* globalCtx) {
 
     gSP1Quadrangle(OVERLAY_DISP++, 0, 2, 3, 1, 0);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", 3187);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", __LINE__);
 }
 
 void Interface_InitVertices(GlobalContext* globalCtx) {
@@ -3023,7 +3023,7 @@ void Interface_Draw(GlobalContext* globalCtx) {
     s16 svar5;
     s16 svar6;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", 3405);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", __LINE__);
 
     gSPSegment(OVERLAY_DISP++, 0x02, interfaceCtx->parameterSegment);
     gSPSegment(OVERLAY_DISP++, 0x07, interfaceCtx->doActionSegment);
@@ -3241,7 +3241,7 @@ void Interface_Draw(GlobalContext* globalCtx) {
         Matrix_Translate(0.0f, 0.0f, WREG(46 + gSaveContext.language) / 10.0f, MTXMODE_NEW);
         Matrix_Scale(1.0f, 1.0f, 1.0f, MTXMODE_APPLY);
         Matrix_RotateX(interfaceCtx->unk_1F4 / 10000.0f, MTXMODE_APPLY);
-        gSPMatrix(OVERLAY_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_parameter.c", 3701),
+        gSPMatrix(OVERLAY_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_parameter.c", __LINE__),
                   G_MTX_MODELVIEW | G_MTX_LOAD);
         gSPVertex(OVERLAY_DISP++, &interfaceCtx->actionVtx[4], 4, 0);
 
@@ -3793,7 +3793,7 @@ void Interface_Draw(GlobalContext* globalCtx) {
         gDPFillRectangle(OVERLAY_DISP++, 0, 0, gScreenWidth - 1, gScreenHeight - 1);
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", 4269);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_parameter.c", __LINE__);
 }
 
 void Interface_Update(GlobalContext* globalCtx) {

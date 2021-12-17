@@ -28,7 +28,7 @@ OSMesg sSiIntMsgBuf[1];
 void Main_LogSystemHeap(void) {
     osSyncPrintf(VT_FGCOL(GREEN));
     // "System heap size% 08x (% dKB) Start address% 08x"
-    osSyncPrintf("システムヒープサイズ %08x(%dKB) 開始アドレス %08x\n", gSystemHeapSize, gSystemHeapSize / 1024,
+    osSyncPrintf("System heap size 0x%08X(%d KB) Start address 0x%08X\n", gSystemHeapSize, gSystemHeapSize / 1024,
                  gSystemHeap);
     osSyncPrintf(VT_RST);
 }
@@ -43,7 +43,7 @@ void Main(void* arg) {
     s32 debugHeapSize;
     s16* msg;
 
-    osSyncPrintf("mainproc 実行開始\n"); // "Start running"
+    osSyncPrintf("Start execution of Main\n"); // "Start running"
     gScreenWidth = SCREEN_WIDTH;
     gScreenHeight = SCREEN_HEIGHT;
     gAppNmiBufferPtr = (PreNmiBuff*)osAppNmiBuffer;
@@ -54,16 +54,16 @@ void Main(void* arg) {
     fb = SysCfb_GetFbPtr(0);
     gSystemHeapSize = (fb - sysHeap);
     // "System heap initalization"
-    osSyncPrintf("システムヒープ初期化 %08x-%08x %08x\n", sysHeap, fb, gSystemHeapSize);
+    osSyncPrintf("System heap initialization %08X-%08X %08X\n", sysHeap, fb, gSystemHeapSize);
     SystemHeap_Init(sysHeap, gSystemHeapSize); // initializes the system heap
     if (osMemSize >= 0x800000) {
         debugHeap = SysCfb_GetFbEnd();
         debugHeapSize = (s32)(0x80600000 - debugHeap);
     } else {
         debugHeapSize = 0x400;
-        debugHeap = SystemArena_MallocDebug(debugHeapSize, "../main.c", 565);
+        debugHeap = SystemArena_MallocDebug(debugHeapSize, "../main.c", __LINE__);
     }
-    osSyncPrintf("debug_InitArena(%08x, %08x)\n", debugHeap, debugHeapSize);
+    osSyncPrintf("DebugArena_Init(%08X, %08X)\n", debugHeap, debugHeapSize);
     DebugArena_Init(debugHeap, debugHeapSize);
     func_800636C0();
 
@@ -78,7 +78,7 @@ void Main(void* arg) {
     StackCheck_Init(&sIrqMgrStackInfo, sIrqMgrStack, sIrqMgrStack + sizeof(sIrqMgrStack), 0, 0x100, "irqmgr");
     IrqMgr_Init(&gIrqMgr, &sGraphStackInfo, Z_PRIORITY_IRQMGR, 1);
 
-    osSyncPrintf("タスクスケジューラの初期化\n"); // "Initialize the task scheduler"
+    osSyncPrintf("Initialize the task scheduler\n"); // "Initialize the task scheduler"
     StackCheck_Init(&sSchedStackInfo, sSchedStack, sSchedStack + sizeof(sSchedStack), 0, 0x100, "sched");
     Sched_Init(&gSchedContext, &sAudioStack, Z_PRIORITY_SCHED, D_80013960, 1, &gIrqMgr);
 
@@ -104,13 +104,13 @@ void Main(void* arg) {
             break;
         }
         if (*msg == OS_SC_PRE_NMI_MSG) {
-            osSyncPrintf("main.c: リセットされたみたいだよ\n"); // "Looks like it's been reset"
+            osSyncPrintf("main.c: Looks like it's been reset.\n"); // "Looks like it's been reset"
             PreNmiBuff_SetReset(gAppNmiBufferPtr);
         }
     }
 
-    osSyncPrintf("mainproc 後始末\n"); // "Cleanup"
+    osSyncPrintf("Main cleanup\n"); // "Cleanup"
     osDestroyThread(&sGraphThread);
     func_800FBFD8();
-    osSyncPrintf("mainproc 実行終了\n"); // "End of execution"
+    osSyncPrintf("End of Main execution\n"); // "End of execution"
 }

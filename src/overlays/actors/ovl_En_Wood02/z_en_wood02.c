@@ -419,7 +419,7 @@ void EnWood02_Draw(Actor* thisx, GlobalContext* globalCtx) {
     u8 green;
     u8 blue;
 
-    OPEN_DISPS(gfxCtx, "../z_en_wood02.c", 775);
+    OPEN_DISPS(gfxCtx, "../z_en_wood02.c", __LINE__);
     type = this->actor.params;
 
     if ((type == WOOD_TREE_OVAL_GREEN_SPAWNER) || (type == WOOD_TREE_OVAL_GREEN_SPAWNED) ||
@@ -445,15 +445,15 @@ void EnWood02_Draw(Actor* thisx, GlobalContext* globalCtx) {
     } else if (D_80B3BF70[this->drawType & 0xF] != NULL) {
         Gfx_DrawDListOpa(globalCtx, D_80B3BF54[this->drawType & 0xF]);
         gDPSetEnvColor(POLY_XLU_DISP++, red, green, blue, 0);
-        gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_en_wood02.c", 808),
+        gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_en_wood02.c", __LINE__),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPDisplayList(POLY_XLU_DISP++, D_80B3BF70[this->drawType & 0xF]);
     } else {
         func_80093D84(gfxCtx);
-        gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_en_wood02.c", 814),
+        gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(gfxCtx, "../z_en_wood02.c", __LINE__),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPDisplayList(POLY_XLU_DISP++, D_80B3BF54[this->drawType & 0xF]);
     }
 
-    CLOSE_DISPS(gfxCtx, "../z_en_wood02.c", 840);
+    CLOSE_DISPS(gfxCtx, "../z_en_wood02.c", __LINE__);
 }

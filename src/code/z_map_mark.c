@@ -95,7 +95,7 @@ void MapMark_DrawForDungeon(GlobalContext* globalCtx) {
 
     mapMarkIconData = &sLoadedMarkDataTable[dungeon][interfaceCtx->mapRoomNum][0];
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_map_mark.c", 303);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_map_mark.c", __LINE__);
 
     while (true) {
         if (mapMarkIconData->markType == MAP_MARK_NONE) {
@@ -128,7 +128,7 @@ void MapMark_DrawForDungeon(GlobalContext* globalCtx) {
         mapMarkIconData++;
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_map_mark.c", 339);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_map_mark.c", __LINE__);
 }
 
 void MapMark_Draw(GlobalContext* globalCtx) {

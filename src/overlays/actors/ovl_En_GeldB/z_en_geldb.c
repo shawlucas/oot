@@ -1429,7 +1429,7 @@ s32 EnGeldB_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dLis
                              void* thisx) {
     EnGeldB* this = (EnGeldB*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_geldB.c", 2507);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_geldB.c", __LINE__);
     if (limbIndex == GELDB_LIMB_NECK) {
         rot->z += this->headRot.x;
         rot->x += this->headRot.y;
@@ -1445,7 +1445,7 @@ s32 EnGeldB_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dLis
         gDPPipeSync(POLY_OPA_DISP++);
         gDPSetEnvColor(POLY_OPA_DISP++, 140, 0, 0, 255);
     }
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_geldB.c", 2529);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_geldB.c", __LINE__);
     return false;
 }
 
@@ -1550,7 +1550,7 @@ void EnGeldB_Draw(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad;
     EnGeldB* this = (EnGeldB*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_geldB.c", 2672);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_geldB.c", __LINE__);
     if (1) {}
 
     if ((this->spinAttackState >= 2) && SkelAnime_Update(&this->skelAnime)) {
@@ -1604,7 +1604,7 @@ void EnGeldB_Draw(Actor* thisx, GlobalContext* globalCtx) {
             }
         }
     }
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_geldB.c", 2744);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_geldB.c", __LINE__);
 }
 
 s32 EnGeldB_DodgeRanged(GlobalContext* globalCtx, EnGeldB* this) {

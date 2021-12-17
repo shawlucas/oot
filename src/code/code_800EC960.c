@@ -1031,23 +1031,23 @@ void func_800ED458(s32 arg0) {
         }
 
         if (D_8016BA18 & sOcarinaABtnMap) {
-            osSyncPrintf("Presss NA_KEY_D4 %08x\n", sOcarinaABtnMap);
+            osSyncPrintf("Presss NA_KEY_D4 %08X\n", sOcarinaABtnMap);
             sCurOcarinaBtnVal = 2;
             sCurOcarinaBtnIdx = 0;
         } else if (D_8016BA18 & sOcarinaCDownBtnMap) {
-            osSyncPrintf("Presss NA_KEY_F4 %08x\n", sOcarinaCDownBtnMap);
+            osSyncPrintf("Presss NA_KEY_F4 %08X\n", sOcarinaCDownBtnMap);
             sCurOcarinaBtnVal = 5;
             sCurOcarinaBtnIdx = 1;
         } else if (D_8016BA18 & 1) {
-            osSyncPrintf("Presss NA_KEY_A4 %08x\n", 1);
+            osSyncPrintf("Presss NA_KEY_A4 %08X\n", 1);
             sCurOcarinaBtnVal = 9;
             sCurOcarinaBtnIdx = 2;
         } else if (D_8016BA18 & 2) {
-            osSyncPrintf("Presss NA_KEY_B4 %08x\n", 2);
+            osSyncPrintf("Presss NA_KEY_B4 %08X\n", 2);
             sCurOcarinaBtnVal = 0xB;
             sCurOcarinaBtnIdx = 3;
         } else if (D_8016BA18 & sOcarinaCUPBtnMap) {
-            osSyncPrintf("Presss NA_KEY_D5 %08x\n", sOcarinaCUPBtnMap);
+            osSyncPrintf("Presss NA_KEY_D5 %08X\n", sOcarinaCUPBtnMap);
             sCurOcarinaBtnVal = 0xE;
             sCurOcarinaBtnIdx = 4;
         }
@@ -1758,7 +1758,7 @@ void AudioDebug_Draw(GfxPrint* printer) {
 
             while (i != 0xFF) {
                 GfxPrint_SetPos(printer, 3, 7 + j++);
-                GfxPrint_Printf(printer, "%02x %04x %02x %08x", i, gSoundBanks[ind][i].sfxId, gSoundBanks[ind][i].state,
+                GfxPrint_Printf(printer, "%02x %04x %02x %08X", i, gSoundBanks[ind][i].sfxId, gSoundBanks[ind][i].state,
                                 gSoundBanks[ind][i].priority);
                 i = gSoundBanks[ind][i].next;
             }
@@ -2245,7 +2245,7 @@ void AudioDebug_Draw(GfxPrint* printer) {
                             sPlayingStaff.pos);
 
             GfxPrint_SetPos(printer, 3, 6);
-            GfxPrint_Printf(printer, "8note REC POINTER : %08x", gScarecrowSpawnSongPtr);
+            GfxPrint_Printf(printer, "8note REC POINTER : %08X", gScarecrowSpawnSongPtr);
 
             ctr = 0;
             for (j = 0; j < 4; j++) {
@@ -2339,7 +2339,7 @@ void AudioDebug_Draw(GfxPrint* printer) {
 
             GfxPrint_SetPos(printer, 3, 24);
             if (sSariaBgmPtr != 0) {
-                GfxPrint_Printf(printer, "SARIA BGM PTR %08x", sSariaBgmPtr);
+                GfxPrint_Printf(printer, "SARIA BGM PTR %08X", sSariaBgmPtr);
             }
 
             GfxPrint_SetPos(printer, 3, 25);

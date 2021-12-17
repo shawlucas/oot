@@ -7,7 +7,7 @@ ListAlloc* ListAlloc_Init(ListAlloc* this) {
 }
 
 void* ListAlloc_Alloc(ListAlloc* this, u32 size) {
-    ListAlloc* ptr = SystemArena_MallocDebug(size + sizeof(ListAlloc), "../listalloc.c", 40);
+    ListAlloc* ptr = SystemArena_MallocDebug(size + sizeof(ListAlloc), "../listalloc.c", __LINE__);
     ListAlloc* next;
 
     if (ptr == NULL) {
@@ -49,7 +49,7 @@ void ListAlloc_Free(ListAlloc* this, void* data) {
         this->next = ptr->prev;
     }
 
-    SystemArena_FreeDebug(ptr, "../listalloc.c", 72);
+    SystemArena_FreeDebug(ptr, "../listalloc.c", __LINE__);
 }
 
 void ListAlloc_FreeAll(ListAlloc* this) {

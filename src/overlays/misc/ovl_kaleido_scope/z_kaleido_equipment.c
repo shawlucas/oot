@@ -27,7 +27,7 @@ void KaleidoScope_DrawEquipmentImage(GlobalContext* globalCtx, void* source, u32
     s32 pad;
     s32 i;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_equipment.c", 68);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_equipment.c", __LINE__);
 
     gDPPipeSync(POLY_OPA_DISP++);
     gDPSetCombineMode(POLY_OPA_DISP++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
@@ -78,7 +78,7 @@ void KaleidoScope_DrawEquipmentImage(GlobalContext* globalCtx, void* source, u32
         vtxIndex += 4;
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_equipment.c", 122);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_equipment.c", __LINE__);
 }
 
 void KaleidoScope_DrawPlayerWork(GlobalContext* globalCtx) {
@@ -130,7 +130,7 @@ void KaleidoScope_DrawEquipment(GlobalContext* globalCtx) {
     s16 cursorY;
     volatile s16 oldCursorPoint;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_equipment.c", 219);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_equipment.c", __LINE__);
 
     gDPPipeSync(POLY_OPA_DISP++);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, ZREG(39), ZREG(40), ZREG(41), pauseCtx->alpha);
@@ -592,5 +592,5 @@ void KaleidoScope_DrawEquipment(GlobalContext* globalCtx) {
 
     if (gUpgradeMasks[0]) {}
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_equipment.c", 609);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_equipment.c", __LINE__);
 }

@@ -18,7 +18,7 @@ void KaleidoScope_DrawAmmoCount(PauseContext* pauseCtx, GraphicsContext* gfxCtx,
     s16 ammo;
     s16 i;
 
-    OPEN_DISPS(gfxCtx, "../z_kaleido_item.c", 69);
+    OPEN_DISPS(gfxCtx, "../z_kaleido_item.c", __LINE__);
 
     ammo = AMMO(item);
 
@@ -65,7 +65,7 @@ void KaleidoScope_DrawAmmoCount(PauseContext* pauseCtx, GraphicsContext* gfxCtx,
 
     gSP1Quadrangle(POLY_OPA_DISP++, 0, 2, 3, 1, 0);
 
-    CLOSE_DISPS(gfxCtx, "../z_kaleido_item.c", 116);
+    CLOSE_DISPS(gfxCtx, "../z_kaleido_item.c", __LINE__);
 }
 
 void KaleidoScope_SetCursorVtx(PauseContext* pauseCtx, u16 index, Vtx* vtx) {
@@ -94,7 +94,7 @@ void KaleidoScope_DrawItemSelect(GlobalContext* globalCtx) {
     s16 oldCursorPoint;
     s16 moveCursorResult;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_item.c", 234);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_item.c", __LINE__);
 
     func_800949A8(globalCtx->state.gfxCtx);
 
@@ -482,7 +482,7 @@ void KaleidoScope_DrawItemSelect(GlobalContext* globalCtx) {
         }
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_item.c", 516);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_item.c", __LINE__);
 }
 
 static s16 sCButtonPosX[] = { 660, 900, 1140 };

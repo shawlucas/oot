@@ -549,7 +549,7 @@ void EnZl2_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Ve
                 Matrix_Translate(180.0f, 979.0f, -375.0f, MTXMODE_APPLY);
                 Matrix_RotateZYX(-0x5DE7, -0x53E9, 0x3333, MTXMODE_APPLY);
                 Matrix_Scale(1.2f, 1.2f, 1.2f, MTXMODE_APPLY);
-                gSPMatrix((*gfx)++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_zl2.c", 1253),
+                gSPMatrix((*gfx)++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_zl2.c", __LINE__),
                           G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
                 gSPDisplayList((*gfx)++, gZelda2OcarinaDL);
             }
@@ -1640,7 +1640,7 @@ void func_80B523C8(EnZl2* this, GlobalContext* globalCtx) {
     void* mouthTex = sMouthTextures[mouthTexIndex];
     s32 pad1;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_zl2.c", 1623);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_zl2.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
 
@@ -1653,7 +1653,7 @@ void func_80B523C8(EnZl2* this, GlobalContext* globalCtx) {
     POLY_OPA_DISP = SkelAnime_DrawFlex(globalCtx, skelAnime->skeleton, skelAnime->jointTable, skelAnime->dListCount,
                                        EnZl2_OverrideLimbDraw, EnZl2_PostLimbDraw, this, POLY_OPA_DISP);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_zl2.c", 1648);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_zl2.c", __LINE__);
 }
 
 void func_80B525D4(EnZl2* this, GlobalContext* globalCtx) {
@@ -1665,7 +1665,7 @@ void func_80B525D4(EnZl2* this, GlobalContext* globalCtx) {
     void* mouthTex = sMouthTextures[mouthTexIndex];
     s32 pad1;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_zl2.c", 1663);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_zl2.c", __LINE__);
 
     func_80093D84(globalCtx->state.gfxCtx);
 
@@ -1678,7 +1678,7 @@ void func_80B525D4(EnZl2* this, GlobalContext* globalCtx) {
     POLY_XLU_DISP = SkelAnime_DrawFlex(globalCtx, skelAnime->skeleton, skelAnime->jointTable, skelAnime->dListCount,
                                        EnZl2_OverrideLimbDraw, NULL, this, POLY_XLU_DISP);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_zl2.c", 1692);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_zl2.c", __LINE__);
 }
 
 void EnZl2_Draw(Actor* thisx, GlobalContext* globalCtx) {

@@ -88,7 +88,7 @@ void Object_UpdateBank(ObjectContext* objectCtx) {
                 osCreateMesgQueue(&status->loadQueue, &status->loadMsg, 1);
                 objectFile = &gObjectTable[-status->id];
                 size = objectFile->vromEnd - objectFile->vromStart;
-                osSyncPrintf("OBJECT EXCHANGE BANK-%2d SIZE %8.3fK SEG=%08x\n", i, size / 1024.0f, status->segment);
+                osSyncPrintf("OBJECT EXCHANGE BANK-%2d SIZE %8.3fK SEG=%08X\n", i, size / 1024.0f, status->segment);
                 DmaMgr_SendRequest2(&status->dmaRequest, status->segment, objectFile->vromStart, size, 0,
                                     &status->loadQueue, NULL, "../z_scene.c", 266);
             } else if (!osRecvMesg(&status->loadQueue, NULL, OS_MESG_NOBLOCK)) {
@@ -150,10 +150,10 @@ void* func_800982FC(ObjectContext* objectCtx, s32 bankIndex, s16 objectId) {
     nextPtr = (void*)ALIGN16((s32)status->segment + size);
     if (1) {} // Necessary to match
 
-    ASSERT(nextPtr < objectCtx->spaceEnd, "nextptr < this->endSegment", "../z_scene.c", 381);
+    ASSERT(nextPtr < objectCtx->spaceEnd, "nextPtr < objectCtx->spaceEnd", "../z_scene.c", __LINE__);
 
-    // "Object exchange free size=%08x"
-    osSyncPrintf("オブジェクト入れ替え空きサイズ=%08x\n", (s32)objectCtx->spaceEnd - (s32)nextPtr);
+    // "Object exchange free size=%08X"
+    osSyncPrintf("オブジェクト入れ替え空きサイズ=%08X\n", (s32)objectCtx->spaceEnd - (s32)nextPtr);
 
     return nextPtr;
 }

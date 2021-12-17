@@ -44,7 +44,7 @@ void KaleidoScope_DrawDungeonMap(GlobalContext* globalCtx, GraphicsContext* gfxC
     s16 stepB;
     u16 rgba16;
 
-    OPEN_DISPS(gfxCtx, "../z_kaleido_map_PAL.c", 123);
+    OPEN_DISPS(gfxCtx, "../z_kaleido_map_PAL.c", __LINE__);
 
     if ((pauseCtx->state == 6) && (pauseCtx->unk_1E4 == 0) && (pauseCtx->pageIndex == PAUSE_MAP)) {
         pauseCtx->cursorColorSet = 0;
@@ -344,7 +344,7 @@ void KaleidoScope_DrawDungeonMap(GlobalContext* globalCtx, GraphicsContext* gfxC
     gDPPipeSync(POLY_OPA_DISP++);
     gDPSetTextureFilter(POLY_OPA_DISP++, G_TF_BILERP);
 
-    CLOSE_DISPS(gfxCtx, "../z_kaleido_map_PAL.c", 388);
+    CLOSE_DISPS(gfxCtx, "../z_kaleido_map_PAL.c", __LINE__);
 }
 
 void KaleidoScope_DrawWorldMap(GlobalContext* globalCtx, GraphicsContext* gfxCtx) {
@@ -405,7 +405,7 @@ void KaleidoScope_DrawWorldMap(GlobalContext* globalCtx, GraphicsContext* gfxCtx
     s16 stepG;
     s16 stepB;
 
-    OPEN_DISPS(gfxCtx, "../z_kaleido_map_PAL.c", 556);
+    OPEN_DISPS(gfxCtx, "../z_kaleido_map_PAL.c", __LINE__);
 
     if ((pauseCtx->state == 6) && (pauseCtx->unk_1E4 == 0) && (pauseCtx->pageIndex == PAUSE_MAP)) {
         pauseCtx->cursorColorSet = 0;
@@ -723,5 +723,5 @@ void KaleidoScope_DrawWorldMap(GlobalContext* globalCtx, GraphicsContext* gfxCtx
 
     gDPPipeSync(POLY_OPA_DISP++);
 
-    CLOSE_DISPS(gfxCtx, "../z_kaleido_map_PAL.c", 874);
+    CLOSE_DISPS(gfxCtx, "../z_kaleido_map_PAL.c", __LINE__);
 }

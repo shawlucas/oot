@@ -192,7 +192,7 @@ void DemoExt_DrawVortex(Actor* thisx, GlobalContext* globalCtx) {
     gfxCtx = globalCtx->state.gfxCtx;
     mtx = Graph_Alloc(gfxCtx, sizeof(Mtx));
 
-    OPEN_DISPS(gfxCtx, "../z_demo_ext.c", 460);
+    OPEN_DISPS(gfxCtx, "../z_demo_ext.c", __LINE__);
     Matrix_Push();
     Matrix_Scale(scale->x, scale->y, scale->z, MTXMODE_APPLY);
     Matrix_RotateZYX((s16)(kREG(16) + 0x4000), this->rotationPitch, kREG(18), MTXMODE_APPLY);
@@ -213,7 +213,7 @@ void DemoExt_DrawVortex(Actor* thisx, GlobalContext* globalCtx) {
     gSPDisplayList(POLY_XLU_DISP++, gPhantomWarpDL);
     gSPPopMatrix(POLY_XLU_DISP++, G_MTX_MODELVIEW);
 
-    CLOSE_DISPS(gfxCtx, "../z_demo_ext.c", 512);
+    CLOSE_DISPS(gfxCtx, "../z_demo_ext.c", __LINE__);
 }
 
 static DemoExtDrawFunc sDrawFuncs[] = {

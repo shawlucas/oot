@@ -69,7 +69,7 @@ s32 DmaMgr_DmaRomToRam(u32 rom, u32 ram, u32 size) {
         ioMsg.size = buffSize;
 
         if (D_80009460 == 10) {
-            osSyncPrintf("%10lld ノーマルＤＭＡ %08x %08x %08x (%d)\n", OS_CYCLES_TO_USEC(osGetTime()), ioMsg.dramAddr,
+            osSyncPrintf("%10lld Normal DMA %08X %08X %08X (%d)\n", OS_CYCLES_TO_USEC(osGetTime()), ioMsg.dramAddr,
                          ioMsg.devAddr, ioMsg.size, gPiMgrCmdQ.validCount);
         }
 
@@ -79,12 +79,12 @@ s32 DmaMgr_DmaRomToRam(u32 rom, u32 ram, u32 size) {
         }
 
         if (D_80009460 == 10) {
-            osSyncPrintf("%10lld ノーマルＤＭＡ START (%d)\n", OS_CYCLES_TO_USEC(osGetTime()), gPiMgrCmdQ.validCount);
+            osSyncPrintf("%10lld Normal DMA START (%d)\n", OS_CYCLES_TO_USEC(osGetTime()), gPiMgrCmdQ.validCount);
         }
 
         osRecvMesg(&queue, NULL, OS_MESG_BLOCK);
         if (D_80009460 == 10) {
-            osSyncPrintf("%10lld ノーマルＤＭＡ END (%d)\n", OS_CYCLES_TO_USEC(osGetTime()), gPiMgrCmdQ.validCount);
+            osSyncPrintf("%10lld Normal DMA END (%d)\n", OS_CYCLES_TO_USEC(osGetTime()), gPiMgrCmdQ.validCount);
         }
 
         size -= buffSize;
@@ -101,7 +101,7 @@ s32 DmaMgr_DmaRomToRam(u32 rom, u32 ram, u32 size) {
     ioMsg.size = size;
 
     if (D_80009460 == 10) {
-        osSyncPrintf("%10lld ノーマルＤＭＡ %08x %08x %08x (%d)\n", OS_CYCLES_TO_USEC(osGetTime()), ioMsg.dramAddr,
+        osSyncPrintf("%10lld Normal DMA %08X %08X %08X (%d)\n", OS_CYCLES_TO_USEC(osGetTime()), ioMsg.dramAddr,
                      ioMsg.devAddr, ioMsg.size, gPiMgrCmdQ.validCount);
     }
 
@@ -112,7 +112,7 @@ s32 DmaMgr_DmaRomToRam(u32 rom, u32 ram, u32 size) {
 
     osRecvMesg(&queue, NULL, OS_MESG_BLOCK);
     if (D_80009460 == 10) {
-        osSyncPrintf("%10lld ノーマルＤＭＡ END (%d)\n", OS_CYCLES_TO_USEC(osGetTime()), gPiMgrCmdQ.validCount);
+        osSyncPrintf("%10lld Normal DMA END (%d)\n", OS_CYCLES_TO_USEC(osGetTime()), gPiMgrCmdQ.validCount);
     }
 
 end:
@@ -125,12 +125,12 @@ end:
 s32 DmaMgr_DmaHandler(OSPiHandle* pihandle, OSIoMesg* mb, s32 direction) {
     s32 ret;
 
-    ASSERT(pihandle == gCartHandle, "pihandle == carthandle", "../z_std_dma.c", 530);
-    ASSERT(direction == OS_READ, "direction == OS_READ", "../z_std_dma.c", 531);
-    ASSERT(mb != NULL, "mb != NULL", "../z_std_dma.c", 532);
+    ASSERT(pihandle == gCartHandle, "pihandle == gCartHandle", "../z_std_dma.c", __LINE__);
+    ASSERT(direction == OS_READ, "direction == OS_READ", "../z_std_dma.c", __LINE__);
+    ASSERT(mb != NULL, "mb != NULL", "../z_std_dma.c", __LINE__);
 
     if (D_80009460 == 10) {
-        osSyncPrintf("%10lld サウンドＤＭＡ %08x %08x %08x (%d)\n", OS_CYCLES_TO_USEC(osGetTime()), mb->dramAddr,
+        osSyncPrintf("%10lld Sound DMA %08X %08X %08X (%d)\n", OS_CYCLES_TO_USEC(osGetTime()), mb->dramAddr,
                      mb->devAddr, mb->size, gPiMgrCmdQ.validCount);
     }
 
@@ -172,7 +172,7 @@ void DmaMgr_Error(DmaRequest* req, const char* file, const char* errorName, cons
 
     osSyncPrintf("%c", 7);
     osSyncPrintf(VT_FGCOL(RED));
-    osSyncPrintf("DMA致命的エラー(%s)\nROM:%X RAM:%X SIZE:%X %s\n",
+    osSyncPrintf("DMA fatal error(%s)\nROM:%X RAM:%X SIZE:%X %s\n",
                  errorDesc != NULL ? errorDesc : (errorName != NULL ? errorName : "???"), vrom, ram, size,
                  file != NULL ? file : "???");
 
@@ -254,7 +254,7 @@ void DmaMgr_ProcessMsg(DmaRequest* req) {
             if (iter->romEnd == 0) {
                 if (iter->vromEnd < vrom + size) {
                     DmaMgr_Error(req, filename, "Segment Alignment Error",
-                                 "セグメント境界をまたがってＤＭＡ転送することはできません");
+                                 "DMA transfers across segment boundaries are not allowed.");
                 }
 
                 DmaMgr_DmaRomToRam(iter->romStart + (vrom - iter->vromStart), (u32)ram, size);
@@ -269,12 +269,12 @@ void DmaMgr_ProcessMsg(DmaRequest* req) {
 
                 if (vrom != iter->vromStart) {
                     DmaMgr_Error(req, filename, "Can't Transfer Segment",
-                                 "圧縮されたセグメントの途中からはＤＭＡ転送することはできません");
+                                 "DMA transfer from the middle of a compressed segment is not possible.");
                 }
 
                 if (size != iter->vromEnd - iter->vromStart) {
                     DmaMgr_Error(req, filename, "Can't Transfer Segment",
-                                 "圧縮されたセグメントの一部だけをＤＭＡ転送することはできません");
+                                 "It is not possible to transfer only a part of a compressed segment through DMA");
                 }
 
                 osSetThreadPri(NULL, Z_PRIORITY_MAIN);
@@ -293,14 +293,14 @@ void DmaMgr_ProcessMsg(DmaRequest* req) {
 
     if (!found) {
         if (sDmaMgrDataExistError) {
-            DmaMgr_Error(req, NULL, "DATA DON'T EXIST", "該当するデータが存在しません");
+            DmaMgr_Error(req, NULL, "DATA DOESN'T EXIST", "No applicable data exists.");
             return;
         }
 
         DmaMgr_DmaRomToRam(vrom, (u32)ram, size);
 
         if (0) {
-            osSyncPrintf("No Press ROM:%08X RAM:%08X SIZE:%08X (非公式)\n", vrom, ram, size);
+            osSyncPrintf("No Press ROM:%08X RAM:%08X SIZE:%08X (informal)\n", vrom, ram, size);
         }
     }
 }
@@ -309,7 +309,7 @@ void DmaMgr_ThreadEntry(void* arg0) {
     OSMesg msg;
     DmaRequest* req;
 
-    osSyncPrintf("ＤＭＡマネージャスレッド実行開始\n");
+    osSyncPrintf("Start execution of DMA manager thread\n");
     while (true) {
         osRecvMesg(&sDmaMgrMsgQueue, &msg, OS_MESG_BLOCK);
         req = (DmaRequest*)msg;
@@ -318,18 +318,18 @@ void DmaMgr_ThreadEntry(void* arg0) {
         }
 
         if (0) {
-            osSyncPrintf("ＤＭＡ登録受付 dmap=%08x\n", req);
+            osSyncPrintf("DMA registration accepted req=%08X\n", req);
         }
 
         DmaMgr_ProcessMsg(req);
         if (req->notifyQueue) {
             osSendMesg(req->notifyQueue, req->notifyMsg, OS_MESG_NOBLOCK);
             if (0) {
-                osSyncPrintf("osSendMesg: dmap=%08x, mq=%08x, m=%08x \n", req, req->notifyQueue, req->notifyMsg);
+                osSyncPrintf("osSendMesg: req=%08X, req->notifyQueue=%08x, req->notifyMsg=%08X \n", req, req->notifyQueue, req->notifyMsg);
             }
         }
     }
-    osSyncPrintf("ＤＭＡマネージャスレッド実行終了\n");
+    osSyncPrintf("End of DMA manager thread execution\n");
 }
 
 s32 DmaMgr_SendRequestImpl(DmaRequest* req, u32 ram, u32 vrom, u32 size, u32 unk, OSMesgQueue* queue, OSMesg msg) {
@@ -337,7 +337,7 @@ s32 DmaMgr_SendRequestImpl(DmaRequest* req, u32 ram, u32 vrom, u32 size, u32 unk
 
     if ((1 && (ram == 0)) || (osMemSize < ram + size + 0x80000000) || (vrom & 1) || (vrom > 0x4000000) || (size == 0) ||
         (size & 1)) {
-        DmaMgr_Error(req, NULL, "ILLIGAL DMA-FUNCTION CALL", "パラメータ異常です");
+        DmaMgr_Error(req, NULL, "ILLEGAL DMA-FUNCTION CALL", "Parameter error");
     }
 
     req->vromAddr = vrom;
@@ -352,9 +352,9 @@ s32 DmaMgr_SendRequestImpl(DmaRequest* req, u32 ram, u32 vrom, u32 size, u32 unk
             sDmaMgrQueueFullLogged++;
             osSyncPrintf("%c", 7);
             osSyncPrintf(VT_FGCOL(RED));
-            osSyncPrintf("dmaEntryMsgQが一杯です。キューサイズの再検討をおすすめします。");
-            LOG_NUM("(sizeof(dmaEntryMsgBufs) / sizeof(dmaEntryMsgBufs[0]))", ARRAY_COUNT(sDmaMgrMsgs),
-                    "../z_std_dma.c", 952);
+            osSyncPrintf("sDmaMgrMsgQueue is full. We recommend that you reconsider the queue size.");
+            LOG_NUM("(sizeof(sDmaMgrMsgs) / sizeof(sDmaMgrMsgs[0]))", ARRAY_COUNT(sDmaMgrMsgs),
+                    "../z_std_dma.c", __LINE__);
             osSyncPrintf(VT_RST);
         }
     }
@@ -386,7 +386,7 @@ void DmaMgr_Init(void) {
 
     DmaMgr_DmaRomToRam((u32)_dmadataSegmentRomStart, (u32)_dmadataSegmentStart,
                        (u32)(_dmadataSegmentRomEnd - _dmadataSegmentRomStart));
-    osSyncPrintf("dma_rom_ad[]\n");
+    osSyncPrintf("gDmaDataTable[]\n");
 
     sDmaMgrDataExistError = 0;
     name = sDmaMgrFileNames;

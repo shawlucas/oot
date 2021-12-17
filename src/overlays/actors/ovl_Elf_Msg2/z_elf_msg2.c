@@ -150,7 +150,7 @@ void ElfMsg2_Update(Actor* thisx, GlobalContext* globalCtx) {
 #include "overlays/ovl_Elf_Msg2/ovl_Elf_Msg2.c"
 
 void ElfMsg2_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_elf_msg2.c", 355);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_elf_msg2.c", __LINE__);
 
     if (R_NAVI_MSG_REGION_ALPHA == 0) {
         return;
@@ -158,10 +158,10 @@ void ElfMsg2_Draw(Actor* thisx, GlobalContext* globalCtx) {
 
     func_80093D18(globalCtx->state.gfxCtx);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 100, 100, 255, R_NAVI_MSG_REGION_ALPHA);
-    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_elf_msg2.c", 362),
+    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_elf_msg2.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, D_809ADC38);
     gSPDisplayList(POLY_XLU_DISP++, sCubeDL);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_elf_msg2.c", 367);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_elf_msg2.c", __LINE__);
 }

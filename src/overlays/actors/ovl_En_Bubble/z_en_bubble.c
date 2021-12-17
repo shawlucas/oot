@@ -408,7 +408,7 @@ void EnBubble_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnBubble* this = (EnBubble*)thisx;
     u32 pad;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_bubble.c", 1175);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_bubble.c", __LINE__);
 
     if (this->actionFunc != EnBubble_Disappear) {
         func_80093D84(globalCtx->state.gfxCtx);
@@ -421,12 +421,12 @@ void EnBubble_Draw(Actor* thisx, GlobalContext* globalCtx) {
         Matrix_Scale(this->graphicEccentricity + 1.0f, 1.0f, 1.0f, MTXMODE_APPLY);
         Matrix_RotateZ((-(f32)globalCtx->state.frames * (M_PI / 180.0f)) * this->graphicRotSpeed, MTXMODE_APPLY);
 
-        gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_bubble.c", 1220),
+        gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_bubble.c", __LINE__),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPDisplayList(POLY_XLU_DISP++, gBubbleDL);
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_bubble.c", 1226);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_bubble.c", __LINE__);
 
     if (this->actionFunc != EnBubble_Disappear) {
         this->actor.shape.shadowScale = (f32)((this->expansionWidth + 1.0f) * 0.2f);

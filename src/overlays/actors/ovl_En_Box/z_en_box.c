@@ -545,7 +545,7 @@ void EnBox_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Ve
     s32 pad;
 
     if (limbIndex == 1) {
-        gSPMatrix((*gfx)++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_box.c", 1492),
+        gSPMatrix((*gfx)++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_box.c", __LINE__),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         if (this->type != ENBOX_TYPE_DECORATED_BIG) {
             gSPDisplayList((*gfx)++, gTreasureChestChestFrontDL);
@@ -553,7 +553,7 @@ void EnBox_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Ve
             gSPDisplayList((*gfx)++, gTreasureChestBossKeyChestFrontDL);
         }
     } else if (limbIndex == 3) {
-        gSPMatrix((*gfx)++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_box.c", 1502),
+        gSPMatrix((*gfx)++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_box.c", __LINE__),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         if (this->type != ENBOX_TYPE_DECORATED_BIG) {
             gSPDisplayList((*gfx)++, gTreasureChestChestSideAndLidDL);
@@ -568,7 +568,7 @@ Gfx* EnBox_EmptyDList(GraphicsContext* gfxCtx) {
     Gfx* dList;
 
     dList = Graph_Alloc(gfxCtx, sizeof(Gfx));
-    ASSERT(dList != NULL, "gfxp != NULL", "../z_en_box.c", 1528);
+    ASSERT(dList != NULL, "dList != NULL", "../z_en_box.c", __LINE__);
 
     dListHead = dList;
     gSPEndDisplayList(dListHead++);
@@ -582,7 +582,7 @@ Gfx* func_809CA4A0(GraphicsContext* gfxCtx) {
     Gfx* dListHead;
 
     dListHead = Graph_Alloc(gfxCtx, 2 * sizeof(Gfx));
-    ASSERT(dListHead != NULL, "gfxp != NULL", "../z_en_box.c", 1546);
+    ASSERT(dListHead != NULL, "dListHead != NULL", "../z_en_box.c", __LINE__);
 
     dList = dListHead;
     gDPSetRenderMode(dListHead++,
@@ -600,7 +600,7 @@ Gfx* func_809CA518(GraphicsContext* gfxCtx) {
     Gfx* dListHead;
 
     dListHead = Graph_Alloc(gfxCtx, 2 * sizeof(Gfx));
-    ASSERT(dListHead != NULL, "gfxp != NULL", "../z_en_box.c", 1564);
+    ASSERT(dListHead != NULL, "dListHead != NULL", "../z_en_box.c", __LINE__);
 
     dList = dListHead;
     gDPSetRenderMode(dListHead++,
@@ -615,7 +615,7 @@ Gfx* func_809CA518(GraphicsContext* gfxCtx) {
 void EnBox_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnBox* this = (EnBox*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_box.c", 1581);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_box.c", __LINE__);
 
     /*
     this->dyna.actor.flags & ACTOR_FLAG_7 is set by Init (if type is 4 or 6)
@@ -643,5 +643,5 @@ void EnBox_Draw(Actor* thisx, GlobalContext* globalCtx) {
                                        EnBox_PostLimbDraw, this, POLY_XLU_DISP);
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_box.c", 1639);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_box.c", __LINE__);
 }

@@ -788,26 +788,26 @@ s32 EnGe1_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList,
 void EnGe1_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3s* rot, void* thisx) {
     EnGe1* this = (EnGe1*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ge1.c", 1419);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ge1.c", __LINE__);
 
     if (limbIndex == GE1_LIMB_HEAD) {
         gSPDisplayList(POLY_OPA_DISP++, sHairstyleDLists[this->hairstyle]);
         Matrix_MultVec3f(&D_80A327A8, &this->actor.focus.pos);
     }
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_ge1.c", 1427);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_ge1.c", __LINE__);
 }
 
 void EnGe1_Draw(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad;
     EnGe1* this = (EnGe1*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ge1.c", 1442);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ge1.c", __LINE__);
 
     func_800943C8(globalCtx->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x08, SEGMENTED_TO_VIRTUAL(sEyeTextures[this->eyeIndex]));
     SkelAnime_DrawFlexOpa(globalCtx, this->skelAnime.skeleton, this->skelAnime.jointTable, this->skelAnime.dListCount,
                           EnGe1_OverrideLimbDraw, EnGe1_PostLimbDraw, this);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_ge1.c", 1459);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_ge1.c", __LINE__);
 }

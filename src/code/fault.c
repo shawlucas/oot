@@ -139,7 +139,7 @@ void Fault_AddClient(FaultClient* client, void* callback, void* param0, void* pa
 end:
     osSetIntMask(mask);
     if (alreadyExists) {
-        osSyncPrintf(VT_COL(RED, WHITE) "fault_AddClient: %08x は既にリスト中にある\n" VT_RST, client);
+        osSyncPrintf(VT_COL(RED, WHITE) "fault_AddClient: %08X は既にリスト中にある\n" VT_RST, client);
     }
 }
 
@@ -177,7 +177,7 @@ void Fault_RemoveClient(FaultClient* client) {
     osSetIntMask(mask);
 
     if (listIsEmpty) {
-        osSyncPrintf(VT_COL(RED, WHITE) "fault_RemoveClient: %08x リスト不整合です\n" VT_RST, client);
+        osSyncPrintf(VT_COL(RED, WHITE) "fault_RemoveClient: %08X リスト不整合です\n" VT_RST, client);
     }
 }
 
@@ -207,7 +207,7 @@ void Fault_AddAddrConvClient(FaultAddrConvClient* client, void* callback, void* 
 end:
     osSetIntMask(mask);
     if (alreadyExists) {
-        osSyncPrintf(VT_COL(RED, WHITE) "fault_AddressConverterAddClient: %08x は既にリスト中にある\n" VT_RST, client);
+        osSyncPrintf(VT_COL(RED, WHITE) "fault_AddressConverterAddClient: %08X は既にリスト中にある\n" VT_RST, client);
     }
 }
 
@@ -245,7 +245,7 @@ void Fault_RemoveAddrConvClient(FaultAddrConvClient* client) {
     osSetIntMask(mask);
 
     if (listIsEmpty) {
-        osSyncPrintf(VT_COL(RED, WHITE) "fault_AddressConverterRemoveClient: %08x は既にリスト中にある\n" VT_RST,
+        osSyncPrintf(VT_COL(RED, WHITE) "fault_AddressConverterRemoveClient: %08X は既にリスト中にある\n" VT_RST,
                      client);
     }
 }
@@ -356,7 +356,7 @@ void Fault_PrintFReg(s32 idx, f32* value) {
     if ((v0 >= -0x7E && v0 < 0x80) || raw == 0) {
         FaultDrawer_Printf("F%02d:%14.7e ", idx, *value);
     } else {
-        FaultDrawer_Printf("F%02d:  %08x(16) ", idx, raw);
+        FaultDrawer_Printf("F%02d:  %08X(16) ", idx, raw);
     }
 }
 
@@ -367,7 +367,7 @@ void Fault_LogFReg(s32 idx, f32* value) {
     if ((v0 >= -0x7E && v0 < 0x80) || raw == 0) {
         osSyncPrintf("F%02d:%14.7e ", idx, *value);
     } else {
-        osSyncPrintf("F%02d:  %08x(16) ", idx, *(u32*)value);
+        osSyncPrintf("F%02d:  %08X(16) ", idx, *(u32*)value);
     }
 }
 
@@ -375,7 +375,7 @@ void Fault_PrintFPCR(u32 value) {
     s32 i;
     u32 flag = 0x20000;
 
-    FaultDrawer_Printf("FPCSR:%08xH ", value);
+    FaultDrawer_Printf("FPCSR:%08XH ", value);
     for (i = 0; i < 6; i++) {
         if (value & flag) {
             FaultDrawer_Printf("(%s)", sExceptionNames[i + 18]);
@@ -390,7 +390,7 @@ void Fault_LogFPCR(u32 value) {
     s32 i;
     u32 flag = 0x20000;
 
-    osSyncPrintf("FPCSR:%08xH  ", value);
+    osSyncPrintf("FPCSR:%08XH  ", value);
     for (i = 0; i < 6; i++) {
         if (value & flag) {
             osSyncPrintf("(%s)\n", sExceptionNames[i + 18]);
@@ -419,17 +419,17 @@ void Fault_PrintThreadContext(OSThread* t) {
     FaultDrawer_Printf("THREAD:%d (%d:%s)\n", t->id, causeStrIdx, sExceptionNames[causeStrIdx]);
     FaultDrawer_SetCharPad(-1, 0);
 
-    FaultDrawer_Printf("PC:%08xH SR:%08xH VA:%08xH\n", (u32)ctx->pc, (u32)ctx->sr, (u32)ctx->badvaddr);
-    FaultDrawer_Printf("AT:%08xH V0:%08xH V1:%08xH\n", (u32)ctx->at, (u32)ctx->v0, (u32)ctx->v1);
-    FaultDrawer_Printf("A0:%08xH A1:%08xH A2:%08xH\n", (u32)ctx->a0, (u32)ctx->a1, (u32)ctx->a2);
-    FaultDrawer_Printf("A3:%08xH T0:%08xH T1:%08xH\n", (u32)ctx->a3, (u32)ctx->t0, (u32)ctx->t1);
-    FaultDrawer_Printf("T2:%08xH T3:%08xH T4:%08xH\n", (u32)ctx->t2, (u32)ctx->t3, (u32)ctx->t4);
-    FaultDrawer_Printf("T5:%08xH T6:%08xH T7:%08xH\n", (u32)ctx->t5, (u32)ctx->t6, (u32)ctx->t7);
-    FaultDrawer_Printf("S0:%08xH S1:%08xH S2:%08xH\n", (u32)ctx->s0, (u32)ctx->s1, (u32)ctx->s2);
-    FaultDrawer_Printf("S3:%08xH S4:%08xH S5:%08xH\n", (u32)ctx->s3, (u32)ctx->s4, (u32)ctx->s5);
-    FaultDrawer_Printf("S6:%08xH S7:%08xH T8:%08xH\n", (u32)ctx->s6, (u32)ctx->s7, (u32)ctx->t8);
-    FaultDrawer_Printf("T9:%08xH GP:%08xH SP:%08xH\n", (u32)ctx->t9, (u32)ctx->gp, (u32)ctx->sp);
-    FaultDrawer_Printf("S8:%08xH RA:%08xH LO:%08xH\n\n", (u32)ctx->s8, (u32)ctx->ra, (u32)ctx->lo);
+    FaultDrawer_Printf("PC:%08XH SR:%08XH VA:%08XH\n", (u32)ctx->pc, (u32)ctx->sr, (u32)ctx->badvaddr);
+    FaultDrawer_Printf("AT:%08XH V0:%08XH V1:%08XH\n", (u32)ctx->at, (u32)ctx->v0, (u32)ctx->v1);
+    FaultDrawer_Printf("A0:%08XH A1:%08XH A2:%08XH\n", (u32)ctx->a0, (u32)ctx->a1, (u32)ctx->a2);
+    FaultDrawer_Printf("A3:%08XH T0:%08XH T1:%08XH\n", (u32)ctx->a3, (u32)ctx->t0, (u32)ctx->t1);
+    FaultDrawer_Printf("T2:%08XH T3:%08XH T4:%08XH\n", (u32)ctx->t2, (u32)ctx->t3, (u32)ctx->t4);
+    FaultDrawer_Printf("T5:%08XH T6:%08XH T7:%08XH\n", (u32)ctx->t5, (u32)ctx->t6, (u32)ctx->t7);
+    FaultDrawer_Printf("S0:%08XH S1:%08XH S2:%08XH\n", (u32)ctx->s0, (u32)ctx->s1, (u32)ctx->s2);
+    FaultDrawer_Printf("S3:%08XH S4:%08XH S5:%08XH\n", (u32)ctx->s3, (u32)ctx->s4, (u32)ctx->s5);
+    FaultDrawer_Printf("S6:%08XH S7:%08XH T8:%08XH\n", (u32)ctx->s6, (u32)ctx->s7, (u32)ctx->t8);
+    FaultDrawer_Printf("T9:%08XH GP:%08XH SP:%08XH\n", (u32)ctx->t9, (u32)ctx->gp, (u32)ctx->sp);
+    FaultDrawer_Printf("S8:%08XH RA:%08XH LO:%08XH\n\n", (u32)ctx->s8, (u32)ctx->ra, (u32)ctx->lo);
 
     Fault_PrintFPCR(ctx->fpcsr);
     FaultDrawer_Printf("\n");
@@ -475,17 +475,17 @@ void Fault_LogThreadContext(OSThread* t) {
     osSyncPrintf("\n");
     osSyncPrintf("THREAD ID:%d (%d:%s)\n", t->id, causeStrIdx, sExceptionNames[causeStrIdx]);
 
-    osSyncPrintf("PC:%08xH   SR:%08xH   VA:%08xH\n", (u32)ctx->pc, (u32)ctx->sr, (u32)ctx->badvaddr);
-    osSyncPrintf("AT:%08xH   V0:%08xH   V1:%08xH\n", (u32)ctx->at, (u32)ctx->v0, (u32)ctx->v1);
-    osSyncPrintf("A0:%08xH   A1:%08xH   A2:%08xH\n", (u32)ctx->a0, (u32)ctx->a1, (u32)ctx->a2);
-    osSyncPrintf("A3:%08xH   T0:%08xH   T1:%08xH\n", (u32)ctx->a3, (u32)ctx->t0, (u32)ctx->t1);
-    osSyncPrintf("T2:%08xH   T3:%08xH   T4:%08xH\n", (u32)ctx->t2, (u32)ctx->t3, (u32)ctx->t4);
-    osSyncPrintf("T5:%08xH   T6:%08xH   T7:%08xH\n", (u32)ctx->t5, (u32)ctx->t6, (u32)ctx->t7);
-    osSyncPrintf("S0:%08xH   S1:%08xH   S2:%08xH\n", (u32)ctx->s0, (u32)ctx->s1, (u32)ctx->s2);
-    osSyncPrintf("S3:%08xH   S4:%08xH   S5:%08xH\n", (u32)ctx->s3, (u32)ctx->s4, (u32)ctx->s5);
-    osSyncPrintf("S6:%08xH   S7:%08xH   T8:%08xH\n", (u32)ctx->s6, (u32)ctx->s7, (u32)ctx->t8);
-    osSyncPrintf("T9:%08xH   GP:%08xH   SP:%08xH\n", (u32)ctx->t9, (u32)ctx->gp, (u32)ctx->sp);
-    osSyncPrintf("S8:%08xH   RA:%08xH   LO:%08xH\n", (u32)ctx->s8, (u32)ctx->ra, (u32)ctx->lo);
+    osSyncPrintf("PC:%08XH   SR:%08XH   VA:%08XH\n", (u32)ctx->pc, (u32)ctx->sr, (u32)ctx->badvaddr);
+    osSyncPrintf("AT:%08XH   V0:%08XH   V1:%08XH\n", (u32)ctx->at, (u32)ctx->v0, (u32)ctx->v1);
+    osSyncPrintf("A0:%08XH   A1:%08XH   A2:%08XH\n", (u32)ctx->a0, (u32)ctx->a1, (u32)ctx->a2);
+    osSyncPrintf("A3:%08XH   T0:%08XH   T1:%08XH\n", (u32)ctx->a3, (u32)ctx->t0, (u32)ctx->t1);
+    osSyncPrintf("T2:%08XH   T3:%08XH   T4:%08XH\n", (u32)ctx->t2, (u32)ctx->t3, (u32)ctx->t4);
+    osSyncPrintf("T5:%08XH   T6:%08XH   T7:%08XH\n", (u32)ctx->t5, (u32)ctx->t6, (u32)ctx->t7);
+    osSyncPrintf("S0:%08XH   S1:%08XH   S2:%08XH\n", (u32)ctx->s0, (u32)ctx->s1, (u32)ctx->s2);
+    osSyncPrintf("S3:%08XH   S4:%08XH   S5:%08XH\n", (u32)ctx->s3, (u32)ctx->s4, (u32)ctx->s5);
+    osSyncPrintf("S6:%08XH   S7:%08XH   T8:%08XH\n", (u32)ctx->s6, (u32)ctx->s7, (u32)ctx->t8);
+    osSyncPrintf("T9:%08XH   GP:%08XH   SP:%08XH\n", (u32)ctx->t9, (u32)ctx->gp, (u32)ctx->sp);
+    osSyncPrintf("S8:%08XH   RA:%08XH   LO:%08XH\n", (u32)ctx->s8, (u32)ctx->ra, (u32)ctx->lo);
     osSyncPrintf("\n");
     Fault_LogFPCR(ctx->fpcsr);
     osSyncPrintf("\n");
@@ -550,10 +550,10 @@ void Fault_WaitForButtonCombo() {
     if (1) {}
 
     osSyncPrintf(
-        VT_FGCOL(WHITE) "KeyWaitB (ＬＲＺ " VT_FGCOL(WHITE) "上" VT_FGCOL(YELLOW) "下 " VT_FGCOL(YELLOW) "上" VT_FGCOL(WHITE) "下 " VT_FGCOL(WHITE) "左" VT_FGCOL(
-            YELLOW) "左 " VT_FGCOL(YELLOW) "右" VT_FGCOL(WHITE) "右 " VT_FGCOL(GREEN) "Ｂ" VT_FGCOL(BLUE) "Ａ" VT_FGCOL(RED) "START" VT_FGCOL(WHITE) ")" VT_RST
+        VT_FGCOL(WHITE) "Fault_WaitForButtonCombo (LRZ " VT_FGCOL(WHITE) "UP" VT_FGCOL(YELLOW) "DOWN " VT_FGCOL(YELLOW) "UP" VT_FGCOL(WHITE) "DOWN " VT_FGCOL(WHITE) "LEFT" VT_FGCOL(
+            YELLOW) "LEFT " VT_FGCOL(YELLOW) "RIGHT" VT_FGCOL(WHITE) "RIGHT " VT_FGCOL(GREEN) "B" VT_FGCOL(BLUE) "A" VT_FGCOL(RED) "START" VT_FGCOL(WHITE) ")" VT_RST
                                                                                                                                                      "\n");
-    osSyncPrintf(VT_FGCOL(WHITE) "KeyWaitB'(ＬＲ左" VT_FGCOL(YELLOW) "右 +" VT_FGCOL(RED) "START" VT_FGCOL(
+    osSyncPrintf(VT_FGCOL(WHITE) "Fault_WaitForButtonCombo'(LR Left" VT_FGCOL(YELLOW) "right +" VT_FGCOL(RED) "START" VT_FGCOL(
         WHITE) ")" VT_RST "\n");
 
     FaultDrawer_SetForeColor(0xFFFF);
@@ -703,12 +703,12 @@ void Fault_DrawMemDumpPage(const char* title, u32* addr, u32 param_3) {
     Fault_FillScreenBlack();
     FaultDrawer_SetCharPad(-2, 0);
 
-    FaultDrawer_DrawText(0x24, 0x12, "%s %08x", title != NULL ? title : "PrintDump", alignedAddr);
+    FaultDrawer_DrawText(0x24, 0x12, "%s %08X", title != NULL ? title : "PrintDump", alignedAddr);
     if (alignedAddr >= (u32*)0x80000000 && alignedAddr < (u32*)0xC0000000) {
         for (y = 0x1C; y != 0xE2; y += 9) {
             FaultDrawer_DrawText(0x18, y, "%06x", writeAddr);
             for (x = 0x52; x != 0x122; x += 0x34) {
-                FaultDrawer_DrawText(x, y, "%08x", *writeAddr++);
+                FaultDrawer_DrawText(x, y, "%08X", *writeAddr++);
             }
         }
     }
@@ -861,10 +861,10 @@ void Fault_DrawStackTrace(OSThread* thread, s32 x, s32 y, s32 height) {
 
     FaultDrawer_DrawText(x, y, "SP       PC       (VPC)");
     for (line = 1; line < height && (ra != 0 || sp != 0) && pc != (u32)__osCleanupThread; line++) {
-        FaultDrawer_DrawText(x, y + line * 8, "%08x %08x", sp, pc);
+        FaultDrawer_DrawText(x, y + line * 8, "%08X %08X", sp, pc);
         addr = Fault_ConvertAddress(pc);
         if (addr != 0) {
-            FaultDrawer_Printf(" -> %08x", addr);
+            FaultDrawer_Printf(" -> %08X", addr);
         }
         Fault_WalkStack(&sp, &pc, &ra);
     }
@@ -880,10 +880,10 @@ void Fault_LogStackTrace(OSThread* thread, s32 height) {
 
     osSyncPrintf("STACK TRACE\nSP       PC       (VPC)\n");
     for (line = 1; line < height && (ra != 0 || sp != 0) && pc != (u32)__osCleanupThread; line++) {
-        osSyncPrintf("%08x %08x", sp, pc);
+        osSyncPrintf("%08X %08X", sp, pc);
         addr = Fault_ConvertAddress(pc);
         if (addr != 0) {
-            osSyncPrintf(" -> %08x", addr);
+            osSyncPrintf(" -> %08X", addr);
         }
         osSyncPrintf("\n");
         Fault_WalkStack(&sp, &pc, &ra);
@@ -930,7 +930,7 @@ void Fault_ProcessClients(void) {
             Fault_FillScreenBlack();
             FaultDrawer_SetCharPad(-2, 0);
             FaultDrawer_Printf("\x1a"
-                               "8CallBack (%d) %08x %08x %08x\n"
+                               "8CallBack (%d) %08X %08X %08X\n"
                                "\x1a"
                                "7",
                                idx++, iter, iter->param1, iter->param2);
@@ -961,25 +961,25 @@ void Fault_ThreadEntry(void* arg) {
 
             if (msg == (OSMesg)1) {
                 sFaultStructPtr->msgId = 1;
-                osSyncPrintf("フォルトマネージャ:OS_EVENT_CPU_BREAKを受信しました\n");
+                osSyncPrintf("Fault Manager:OS_EVENT_CPU_BREAK was received\n");
             } else if (1 && msg == (OSMesg)2) {
                 sFaultStructPtr->msgId = 2;
-                osSyncPrintf("フォルトマネージャ:OS_EVENT_FAULTを受信しました\n");
+                osSyncPrintf("Fault Manager:OS_EVENT_FAULT was received.\n");
             } else if (msg == (OSMesg)3) {
                 Fault_UpdatePad();
                 faultedThread = NULL;
                 continue;
             } else {
                 sFaultStructPtr->msgId = 3;
-                osSyncPrintf("フォルトマネージャ:不明なメッセージを受信しました\n");
+                osSyncPrintf("Fault Manager:Unknown message received.\n");
             }
 
             faultedThread = __osGetCurrFaultedThread();
-            osSyncPrintf("__osGetCurrFaultedThread()=%08x\n", faultedThread);
+            osSyncPrintf("__osGetCurrFaultedThread()=0x%08X\n", faultedThread);
 
             if (faultedThread == NULL) {
                 faultedThread = Fault_FindFaultedThread();
-                osSyncPrintf("FindFaultedThread()=%08x\n", faultedThread);
+                osSyncPrintf("Fault_FindFaultedThread()=0x%08X\n", faultedThread);
             }
         } while (faultedThread == NULL);
 
@@ -1016,7 +1016,7 @@ void Fault_ThreadEntry(void* arg) {
             Fault_ProcessClients();
             Fault_DrawMemDump(faultedThread->context.pc - 0x100, (u32)faultedThread->context.sp, 0, 0);
             Fault_FillScreenRed();
-            FaultDrawer_DrawText(0x40, 0x50, "    CONGRATURATIONS!    ");
+            FaultDrawer_DrawText(0x40, 0x50, "    CONGRATULATIONS!    ");
             FaultDrawer_DrawText(0x40, 0x5A, "All Pages are displayed.");
             FaultDrawer_DrawText(0x40, 0x64, "       THANK YOU!       ");
             FaultDrawer_DrawText(0x40, 0x6E, " You are great debugger!");

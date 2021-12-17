@@ -161,14 +161,14 @@ void BgMoriHashira4_Draw(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad;
     BgMoriHashira4* this = (BgMoriHashira4*)thisx;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_hashira4.c", 339);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_hashira4.c", __LINE__);
     func_80093D18(globalCtx->state.gfxCtx);
 
     gSPSegment(POLY_OPA_DISP++, 0x08, globalCtx->objectCtx.status[this->moriTexObjIndex].segment);
 
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_mori_hashira4.c", 344),
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_mori_hashira4.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     gSPDisplayList(POLY_OPA_DISP++, sDisplayLists[this->dyna.actor.params]);
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_hashira4.c", 348);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_hashira4.c", __LINE__);
 }

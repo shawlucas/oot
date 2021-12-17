@@ -54,7 +54,7 @@ void EndTitle_DrawFull(Actor* thisx, GlobalContext* globalCtx) {
 
     mf = &player->mf_9E0;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_end_title.c", 403);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_end_title.c", __LINE__);
 
     // Draw the Triforce on Link's left hand
     func_80093D84(globalCtx->state.gfxCtx);
@@ -64,12 +64,12 @@ void EndTitle_DrawFull(Actor* thisx, GlobalContext* globalCtx) {
     Matrix_RotateX(0xBB8 * M_PI / 0x8000, MTXMODE_APPLY);
     Matrix_RotateY(0.0f, MTXMODE_APPLY);
     Matrix_RotateZ(0.0f, MTXMODE_APPLY);
-    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_end_title.c", 412), G_MTX_LOAD);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_end_title.c", __LINE__), G_MTX_LOAD);
     gSPDisplayList(POLY_XLU_DISP++, sTriforceDL);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_end_title.c", 417);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_end_title.c", __LINE__);
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_end_title.c", 419);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_end_title.c", __LINE__);
 
     // Draw title cards on the screen
     if ((frameCount > 890) && (this->endAlpha < 200)) {
@@ -107,7 +107,7 @@ void EndTitle_DrawFull(Actor* thisx, GlobalContext* globalCtx) {
     gSPTextureRectangle(OVERLAY_DISP++, 104 << 2, 177 << 2, 216 << 2, 192 << 2, G_TX_RENDERTILE, 0, 0, 1 << 10,
                         1 << 10);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_end_title.c", 515);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_end_title.c", __LINE__);
 }
 
 // Used in the Temple of Time
@@ -120,11 +120,11 @@ void EndTitle_DrawNintendoLogo(Actor* thisx, GlobalContext* globalCtx) {
         this->endAlpha += 3;
     }
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_end_title.c", 594);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_end_title.c", __LINE__);
 
     OVERLAY_DISP = func_80093F34(OVERLAY_DISP);
     gDPSetPrimColor(OVERLAY_DISP++, 0, 0x80, 0, 0, 0, this->endAlpha);
     gSPDisplayList(OVERLAY_DISP++, sPresentedByNintendoDL);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_end_title.c", 600);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_end_title.c", __LINE__);
 }

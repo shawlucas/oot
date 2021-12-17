@@ -205,7 +205,7 @@ void EnBx_Draw(Actor* thisx, GlobalContext* globalCtx) {
     Mtx* mtx = Graph_Alloc(globalCtx->state.gfxCtx, 4 * sizeof(Mtx));
     s16 i;
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_bx.c", 464);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_bx.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
 
@@ -214,7 +214,7 @@ void EnBx_Draw(Actor* thisx, GlobalContext* globalCtx) {
     gSPSegment(POLY_OPA_DISP++, 0x09,
                Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, 0, 0, 16, 16, 1, 0, (globalCtx->gameplayFrames * -10) % 128,
                                 32, 32));
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_bx.c", 478),
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_bx.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     if (this->actor.params & 0x80) {
@@ -242,5 +242,5 @@ void EnBx_Draw(Actor* thisx, GlobalContext* globalCtx) {
 
     gSPDisplayList(POLY_OPA_DISP++, object_bxa_DL_0022F0);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_bx.c", 511);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_bx.c", __LINE__);
 }

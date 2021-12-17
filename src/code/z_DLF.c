@@ -3,7 +3,7 @@
 
 void Overlay_LoadGameState(GameStateOverlay* overlayEntry) {
     if (overlayEntry->loadedRamAddr != NULL) {
-        osSyncPrintf("既にリンクされています\n"); // "Already linked"
+        osSyncPrintf("GameState already loaded\n"); // "Already linked"
         return;
     }
 
@@ -14,12 +14,12 @@ void Overlay_LoadGameState(GameStateOverlay* overlayEntry) {
                                                               overlayEntry->vramStart, overlayEntry->vramEnd);
 
         if (overlayEntry->loadedRamAddr == NULL) {
-            osSyncPrintf("ロードに失敗しました\n"); // "Loading failed"
+            osSyncPrintf("Failed to load gameState\n"); // "Loading failed"
             return;
         }
 
         osSyncPrintf(VT_FGCOL(GREEN));
-        osSyncPrintf("OVL(d):Seg:%08x-%08x Ram:%08x-%08x Off:%08x %s\n", overlayEntry->vramStart, overlayEntry->vramEnd,
+        osSyncPrintf("OVL(d):Seg:%08X-%08X Ram:%08X-%08X Off:%08X %s\n", overlayEntry->vramStart, overlayEntry->vramEnd,
                      overlayEntry->loadedRamAddr,
                      (u32)overlayEntry->loadedRamAddr + (u32)overlayEntry->vramEnd - (u32)overlayEntry->vramStart,
                      (u32)overlayEntry->vramStart - (u32)overlayEntry->loadedRamAddr, "");
@@ -104,7 +104,7 @@ void Overlay_FreeGameState(GameStateOverlay* overlayEntry) {
                 overlayEntry->unk_24 = NULL;
             }
 
-            SystemArena_FreeDebug(overlayEntry->loadedRamAddr, "../z_DLF.c", 149);
+            SystemArena_FreeDebug(overlayEntry->loadedRamAddr, "../z_DLF.c", __LINE__);
             overlayEntry->loadedRamAddr = NULL;
         }
     }

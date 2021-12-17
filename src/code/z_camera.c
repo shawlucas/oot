@@ -6757,7 +6757,7 @@ s32 Camera_Special9(Camera* camera) {
 }
 
 Camera* Camera_Create(View* view, CollisionContext* colCtx, GlobalContext* globalCtx) {
-    Camera* newCamera = ZeldaArena_MallocDebug(sizeof(*newCamera), "../z_camera.c", 9370);
+    Camera* newCamera = ZeldaArena_MallocDebug(sizeof(*newCamera), "../z_camera.c", __LINE__);
 
     if (newCamera != NULL) {
         osSyncPrintf(VT_FGCOL(BLUE) "camera: create --- allocate %d byte" VT_RST "\n", sizeof(*newCamera) * 4);

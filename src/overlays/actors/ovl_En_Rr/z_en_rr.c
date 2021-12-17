@@ -787,7 +787,7 @@ void EnRr_Update(Actor* thisx, GlobalContext* globalCtx) {
 
     this->actionFunc(this, globalCtx);
     if (this->hasPlayer == 0x3F80) { // checks if 1.0f has been stored to hasPlayer's address
-        ASSERT(0, "0", "../z_en_rr.c", 1355);
+        ASSERT(0, "0", "../z_en_rr.c", __LINE__);
     }
 
     Math_StepToF(&this->actor.speedXZ, 0.0f, 0.1f);
@@ -844,7 +844,7 @@ void EnRr_Draw(Actor* thisx, GlobalContext* globalCtx) {
     s32 i;
     Mtx* segMtx = Graph_Alloc(globalCtx->state.gfxCtx, 4 * sizeof(Mtx));
 
-    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_rr.c", 1478);
+    OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_rr.c", __LINE__);
     if (1) {}
     func_80093D84(globalCtx->state.gfxCtx);
     gSPSegment(POLY_XLU_DISP++, 0x0C, segMtx);
@@ -857,7 +857,7 @@ void EnRr_Draw(Actor* thisx, GlobalContext* globalCtx) {
     Matrix_Scale((1.0f + this->bodySegs[RR_BASE].scaleMod.x) * this->bodySegs[RR_BASE].scale.x,
                  (1.0f + this->bodySegs[RR_BASE].scaleMod.y) * this->bodySegs[RR_BASE].scale.y,
                  (1.0f + this->bodySegs[RR_BASE].scaleMod.z) * this->bodySegs[RR_BASE].scale.z, MTXMODE_APPLY);
-    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_rr.c", 1501),
+    gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_rr.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     Matrix_Pop();
     zeroVec.x = 0.0f;
@@ -880,7 +880,7 @@ void EnRr_Draw(Actor* thisx, GlobalContext* globalCtx) {
     Matrix_MultVec3f(&zeroVec, &this->mouthPos);
     gSPDisplayList(POLY_XLU_DISP++, gLikeLikeDL);
 
-    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_rr.c", 1551);
+    CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_rr.c", __LINE__);
     if (this->effectTimer != 0) {
         Vec3f effectPos;
         s16 effectTimer = this->effectTimer - 1;

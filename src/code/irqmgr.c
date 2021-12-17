@@ -19,9 +19,9 @@ u32 sIrqMgrRetraceCount = 0;
 void IrqMgr_AddClient(IrqMgr* this, IrqMgrClient* c, OSMesgQueue* msgQ) {
     OSIntMask prevInt;
 
-    LogUtils_CheckNullPointer("this", this, "../irqmgr.c", 96);
-    LogUtils_CheckNullPointer("c", c, "../irqmgr.c", 97);
-    LogUtils_CheckNullPointer("msgQ", msgQ, "../irqmgr.c", 98);
+    LogUtils_CheckNullPointer("this", this, "../irqmgr.c", __LINE__);
+    LogUtils_CheckNullPointer("c", c, "../irqmgr.c", __LINE__);
+    LogUtils_CheckNullPointer("msgQ", msgQ, "../irqmgr.c", __LINE__);
 
     prevInt = osSetIntMask(1);
 
@@ -45,8 +45,8 @@ void IrqMgr_RemoveClient(IrqMgr* this, IrqMgrClient* c) {
     IrqMgrClient* lastIter = NULL;
     OSIntMask prevInt;
 
-    LogUtils_CheckNullPointer("this", this, "../irqmgr.c", 129);
-    LogUtils_CheckNullPointer("c", c, "../irqmgr.c", 130);
+    LogUtils_CheckNullPointer("this", this, "../irqmgr.c", __LINE__);
+    LogUtils_CheckNullPointer("c", c, "../irqmgr.c", __LINE__);
 
     prevInt = osSetIntMask(1);
 
@@ -71,9 +71,9 @@ void IrqMgr_SendMesgForClient(IrqMgr* this, OSMesg msg) {
 
     while (iter != NULL) {
         if (iter->queue->validCount >= iter->queue->msgCount) {
-            // "irqmgr_SendMesgForClient: Message queue is overflowing mq=%08x cnt=%d"
+            // "irqmgr_SendMesgForClient: Message queue is overflowing mq=%08X cnt=%d"
             osSyncPrintf(
-                VT_COL(RED, WHITE) "irqmgr_SendMesgForClient:メッセージキューがあふれています mq=%08x cnt=%d\n" VT_RST,
+                VT_COL(RED, WHITE) "IrqMgr_SendMesgForClient: Message queue is overflowing mq=%08X cnt=%d\n" VT_RST,
                 iter->queue, iter->queue->validCount);
         } else {
             osSendMesg(iter->queue, msg, OS_MESG_NOBLOCK);
@@ -88,9 +88,9 @@ void IrqMgr_JamMesgForClient(IrqMgr* this, OSMesg msg) {
 
     while (iter != NULL) {
         if (iter->queue->validCount >= iter->queue->msgCount) {
-            // "irqmgr_JamMesgForClient: Message queue is overflowing mq=%08x cnt=%d"
+            // "irqmgr_JamMesgForClient: Message queue is overflowing mq=%08X cnt=%d"
             osSyncPrintf(
-                VT_COL(RED, WHITE) "irqmgr_JamMesgForClient:メッセージキューがあふれています mq=%08x cnt=%d\n" VT_RST,
+                VT_COL(RED, WHITE) "IrqMgr_JamMesgForClient: Message queue is overflowing mq=%08X cnt=%d\n" VT_RST,
                 iter->queue, iter->queue->validCount);
         } else {
             // mistake? the function's name suggests it would use osJamMesg
@@ -112,16 +112,16 @@ void IrqMgr_HandlePreNMI(IrqMgr* this) {
 }
 
 void IrqMgr_CheckStack() {
-    osSyncPrintf("irqmgr.c: PRENMIから0.5秒経過\n"); // "0.5 seconds after PRENMI"
+    osSyncPrintf("irqmgr.c: 0.5 seconds after PRENMI\n"); // "0.5 seconds after PRENMI"
     if (StackCheck_Check(NULL) == 0) {
-        osSyncPrintf("スタックは大丈夫みたいです\n"); // "The stack looks ok"
+        osSyncPrintf("The stack looks ok\n"); // "The stack looks ok"
     } else {
         osSyncPrintf("%c", 7);
         osSyncPrintf(VT_FGCOL(RED));
         // "Stack overflow or dangerous"
-        osSyncPrintf("スタックがオーバーフローしたか危険な状態です\n");
+        osSyncPrintf("Statck overflow or dangerous\n");
         // "Increase stack size early or don't consume stack"
-        osSyncPrintf("早々にスタックサイズを増やすか、スタックを消費しないようにしてください\n");
+        osSyncPrintf("Increase the stack size as soon as possible or do not consume the stack!\n");
         osSyncPrintf(VT_RST);
     }
 }
@@ -142,7 +142,7 @@ void IrqMgr_HandlePRENMI480(IrqMgr* this) {
     ret = osAfterPreNMI();
     if (ret) {
         // "osAfterPreNMI returned %d !?"
-        osSyncPrintf("osAfterPreNMIが %d を返しました！？\n", ret);
+        osSyncPrintf("osAfterPreNMIが %d!?\n", ret);
         osSetTimer(&this->timer, OS_USEC_TO_CYCLES(1000), 0ull, &this->queue, (OSMesg)PRENMI480_MSG);
     }
 }
@@ -169,7 +169,7 @@ void IrqMgr_ThreadEntry(void* arg0) {
     u8 exit;
 
     msg = 0;
-    osSyncPrintf("ＩＲＱマネージャスレッド実行開始\n"); // "Start IRQ manager thread execution"
+    osSyncPrintf("Start IRQ manager thread execution\n"); // "Start IRQ manager thread execution"
     exit = false;
 
     while (!exit) {
@@ -181,41 +181,41 @@ void IrqMgr_ThreadEntry(void* arg0) {
             case PRE_NMI_MSG:
                 osSyncPrintf("PRE_NMI_MSG\n");
                 // "Scheduler: Receives PRE_NMI message"
-                osSyncPrintf("スケジューラ：PRE_NMIメッセージを受信\n");
+                osSyncPrintf("Scheduler: Received PRE_NMI message\n");
                 IrqMgr_HandlePreNMI(this);
                 break;
             case PRENMI450_MSG:
                 osSyncPrintf("PRENMI450_MSG\n");
                 // "Scheduler: Receives PRENMI450 message"
-                osSyncPrintf("スケジューラ：PRENMI450メッセージを受信\n");
+                osSyncPrintf("Scheduler: Received PRENMI450 message\n");
                 IrqMgr_HandlePRENMI450(this);
                 break;
             case PRENMI480_MSG:
                 osSyncPrintf("PRENMI480_MSG\n");
                 // "Scheduler: Receives PRENMI480 message"
-                osSyncPrintf("スケジューラ：PRENMI480メッセージを受信\n");
+                osSyncPrintf("Scheduler: Received PRENMI480 message\n");
                 IrqMgr_HandlePRENMI480(this);
                 break;
             case PRENMI500_MSG:
                 osSyncPrintf("PRENMI500_MSG\n");
                 // "Scheduler: Receives PRENMI500 message"
-                osSyncPrintf("スケジューラ：PRENMI500メッセージを受信\n");
+                osSyncPrintf("Scheduler: Received PRENMI500 message\n");
                 exit = true;
                 IrqMgr_HandlePRENMI500(this);
                 break;
             default:
                 // "Unexpected message received"
-                osSyncPrintf("irqmgr.c:予期しないメッセージを受け取りました(%08x)\n", msg);
+                osSyncPrintf("irqmgr.c: Unexpected message received (0x%08X)\n", msg);
                 break;
         }
     }
 
-    osSyncPrintf("ＩＲＱマネージャスレッド実行終了\n"); // "End of IRQ manager thread execution"
+    osSyncPrintf("End of IRQ manager thread execution\n"); // "End of IRQ manager thread execution"
 }
 
 void IrqMgr_Init(IrqMgr* this, void* stack, OSPri pri, u8 retraceCount) {
-    LogUtils_CheckNullPointer("this", this, "../irqmgr.c", 346);
-    LogUtils_CheckNullPointer("stack", stack, "../irqmgr.c", 347);
+    LogUtils_CheckNullPointer("this", this, "../irqmgr.c", __LINE__);
+    LogUtils_CheckNullPointer("stack", stack, "../irqmgr.c", __LINE__);
 
     this->clients = NULL;
     this->retraceMsg.type = OS_SC_RETRACE_MSG;

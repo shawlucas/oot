@@ -802,7 +802,7 @@ void FileChoose_DrawFileInfo(GameState* thisx, s16 fileIndex, s16 isActive) {
 
     if (1) {}
 
-    OPEN_DISPS(this->state.gfxCtx, "../z_file_choose.c", 1709);
+    OPEN_DISPS(this->state.gfxCtx, "../z_file_choose.c", __LINE__);
 
     gDPPipeSync(POLY_OPA_DISP++);
     gDPSetCombineLERP(POLY_OPA_DISP++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0,
@@ -880,7 +880,7 @@ void FileChoose_DrawFileInfo(GameState* thisx, s16 fileIndex, s16 isActive) {
         }
     }
 
-    CLOSE_DISPS(this->state.gfxCtx, "../z_file_choose.c", 1797);
+    CLOSE_DISPS(this->state.gfxCtx, "../z_file_choose.c", __LINE__);
 }
 
 static void* sFileInfoBoxTextures[] = {
@@ -940,7 +940,7 @@ void FileChoose_DrawWindowContents(GameState* thisx) {
     s16 isActive;
     s16 pad;
 
-    OPEN_DISPS(this->state.gfxCtx, "../z_file_choose.c", 1940);
+    OPEN_DISPS(this->state.gfxCtx, "../z_file_choose.c", __LINE__);
 
     // draw title label
     gDPPipeSync(POLY_OPA_DISP++);
@@ -1104,7 +1104,7 @@ void FileChoose_DrawWindowContents(GameState* thisx) {
     gDPPipeSync(POLY_OPA_DISP++);
     gDPSetCombineMode(POLY_OPA_DISP++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
 
-    CLOSE_DISPS(this->state.gfxCtx, "../z_file_choose.c", 2198);
+    CLOSE_DISPS(this->state.gfxCtx, "../z_file_choose.c", __LINE__);
 }
 
 void FileChoose_ConfigModeDraw(GameState* thisx) {
@@ -1113,7 +1113,7 @@ void FileChoose_ConfigModeDraw(GameState* thisx) {
     f32 eyeY;
     f32 eyeZ;
 
-    OPEN_DISPS(this->state.gfxCtx, "../z_file_choose.c", 2218);
+    OPEN_DISPS(this->state.gfxCtx, "../z_file_choose.c", __LINE__);
     gDPPipeSync(POLY_OPA_DISP++);
 
     eyeX = 1000.0f * Math_CosS(ZREG(11)) - 1000.0f * Math_SinS(ZREG(11));
@@ -1145,7 +1145,7 @@ void FileChoose_ConfigModeDraw(GameState* thisx) {
             Matrix_RotateX(this->windowRot / 100.0f, MTXMODE_APPLY);
         }
 
-        gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(this->state.gfxCtx, "../z_file_choose.c", 2282),
+        gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(this->state.gfxCtx, "../z_file_choose.c", __LINE__),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         gSPVertex(POLY_OPA_DISP++, &this->windowVtx[0], 32, 0);
@@ -1173,7 +1173,7 @@ void FileChoose_ConfigModeDraw(GameState* thisx) {
         Matrix_Translate(0.0f, 0.0f, -93.6f, MTXMODE_NEW);
         Matrix_Scale(0.78f, 0.78f, 0.78f, MTXMODE_APPLY);
         Matrix_RotateX((this->windowRot - 314.0f) / 100.0f, MTXMODE_APPLY);
-        gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(this->state.gfxCtx, "../z_file_choose.c", 2316),
+        gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(this->state.gfxCtx, "../z_file_choose.c", __LINE__),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         gSPVertex(POLY_OPA_DISP++, &this->windowVtx[0], 32, 0);
@@ -1202,7 +1202,7 @@ void FileChoose_ConfigModeDraw(GameState* thisx) {
         Matrix_Scale(0.78f, 0.78f, 0.78f, MTXMODE_APPLY);
         Matrix_RotateX((this->windowRot - 314.0f) / 100.0f, MTXMODE_APPLY);
 
-        gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(this->state.gfxCtx, "../z_file_choose.c", 2337),
+        gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(this->state.gfxCtx, "../z_file_choose.c", __LINE__),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         gSPVertex(POLY_OPA_DISP++, &this->windowVtx[0], 32, 0);
@@ -1222,7 +1222,7 @@ void FileChoose_ConfigModeDraw(GameState* thisx) {
     gDPPipeSync(POLY_OPA_DISP++);
     FileChoose_SetView(this, 0.0f, 0.0f, 64.0f);
 
-    CLOSE_DISPS(this->state.gfxCtx, "../z_file_choose.c", 2352);
+    CLOSE_DISPS(this->state.gfxCtx, "../z_file_choose.c", __LINE__);
 }
 
 /**
@@ -1519,7 +1519,7 @@ void FileChoose_SelectModeDraw(GameState* thisx) {
     f32 eyeY;
     f32 eyeZ;
 
-    OPEN_DISPS(this->state.gfxCtx, "../z_file_choose.c", 2753);
+    OPEN_DISPS(this->state.gfxCtx, "../z_file_choose.c", __LINE__);
 
     gDPPipeSync(POLY_OPA_DISP++);
 
@@ -1546,7 +1546,7 @@ void FileChoose_SelectModeDraw(GameState* thisx) {
     Matrix_Translate(0.0f, 0.0f, -93.6f, MTXMODE_NEW);
     Matrix_Scale(0.78f, 0.78f, 0.78f, MTXMODE_APPLY);
     Matrix_RotateX(this->windowRot / 100.0f, MTXMODE_APPLY);
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(this->state.gfxCtx, "../z_file_choose.c", 2810),
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(this->state.gfxCtx, "../z_file_choose.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     gSPVertex(POLY_OPA_DISP++, &this->windowVtx[0], 32, 0);
@@ -1562,7 +1562,7 @@ void FileChoose_SelectModeDraw(GameState* thisx) {
     gDPPipeSync(POLY_OPA_DISP++);
     FileChoose_SetView(this, 0.0f, 0.0f, 64.0f);
 
-    CLOSE_DISPS(this->state.gfxCtx, "../z_file_choose.c", 2834);
+    CLOSE_DISPS(this->state.gfxCtx, "../z_file_choose.c", __LINE__);
 }
 
 static void (*gFileSelectDrawFuncs[])(GameState*) = {
@@ -1586,7 +1586,7 @@ void FileChoose_Main(GameState* thisx) {
     FileChooseContext* this = (FileChooseContext*)thisx;
     Input* input = &this->state.input[0];
 
-    OPEN_DISPS(this->state.gfxCtx, "../z_file_choose.c", 2898);
+    OPEN_DISPS(this->state.gfxCtx, "../z_file_choose.c", __LINE__);
 
     this->n64ddFlag = 0;
 
@@ -1680,7 +1680,7 @@ void FileChoose_Main(GameState* thisx) {
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 0, sScreenFillAlpha);
     gDPFillRectangle(POLY_OPA_DISP++, 0, 0, gScreenWidth - 1, gScreenHeight - 1);
 
-    CLOSE_DISPS(this->state.gfxCtx, "../z_file_choose.c", 3035);
+    CLOSE_DISPS(this->state.gfxCtx, "../z_file_choose.c", __LINE__);
 }
 
 void FileChoose_InitContext(GameState* thisx) {
@@ -1866,12 +1866,12 @@ void FileChoose_Init(GameState* thisx) {
     osSyncPrintf("SIZE=%x\n", size);
 
     this->staticSegment = GameState_Alloc(&this->state, size, "../z_file_choose.c", 3392);
-    ASSERT(this->staticSegment != NULL, "this->staticSegment != NULL", "../z_file_choose.c", 3393);
+    ASSERT(this->staticSegment != NULL, "this->staticSegment != NULL", "../z_file_choose.c", __LINE__);
     DmaMgr_SendRequest1(this->staticSegment, (u32)_title_staticSegmentRomStart, size, "../z_file_choose.c", 3394);
 
     size = (u32)_parameter_staticSegmentRomEnd - (u32)_parameter_staticSegmentRomStart;
     this->parameterSegment = GameState_Alloc(&this->state, size, "../z_file_choose.c", 3398);
-    ASSERT(this->parameterSegment != NULL, "this->parameterSegment != NULL", "../z_file_choose.c", 3399);
+    ASSERT(this->parameterSegment != NULL, "this->parameterSegment != NULL", "../z_file_choose.c", __LINE__);
     DmaMgr_SendRequest1(this->parameterSegment, (u32)_parameter_staticSegmentRomStart, size, "../z_file_choose.c",
                         3400);
 
