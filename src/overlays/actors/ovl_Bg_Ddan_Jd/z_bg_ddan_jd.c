@@ -51,7 +51,6 @@ typedef enum {
 #define SHORTCUT_Y_SPEED 5
 
 void BgDdanJd_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgDdanJd* this = (BgDdanJd*)thisx;
     CollisionHeader* colHeader = NULL;
 

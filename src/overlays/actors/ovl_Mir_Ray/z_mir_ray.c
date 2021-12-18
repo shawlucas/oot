@@ -439,10 +439,10 @@ void MirRay_ReflectedBeam(MirRay* this, GlobalContext* globalCtx, MirRayShieldRe
 
                 currentReflection->mtx.zw = 0.0f;
 
-                if (1) {}
-                if (1) {}
-                if (1) {}
-                if (1) {} // All four required to match
+                
+                
+                
+                 // All four required to match
 
                 currentReflection->mtx.xx = currentReflection->mtx.yy = currentReflection->mtx.zz =
                     currentReflection->mtx.ww = 1.0f;
@@ -549,7 +549,7 @@ s32 MirRay_CheckInFrustum(Vec3f* vecA, Vec3f* vecB, f32 pointx, f32 pointy, f32 
     vecdiff.x = vecB->x - vecA->x;
     vecdiff.y = vecB->y - vecA->y;
     vecdiff.z = vecB->z - vecA->z;
-    if (1) {}
+    
     dist = SQ(vecdiff.x) + SQ(vecdiff.y) + SQ(vecdiff.z);
 
     if (dist == 0.0f) {
@@ -570,7 +570,7 @@ s32 MirRay_CheckInFrustum(Vec3f* vecA, Vec3f* vecB, f32 pointx, f32 pointy, f32 
     // If the Point is within the bounding double cone, check if it is in the frustum by checking whether it is between
     // the bounding planes
     if ((SQ(closestPtx - pointx) + SQ(closestPty - pointy) + SQ(closestPtz - pointz)) <= SQ(coneRadius)) {
-        if (1) {}
+        
 
         // Stores the vector difference again
         Math_Vec3f_Diff(vecB, vecA, &sp5C);

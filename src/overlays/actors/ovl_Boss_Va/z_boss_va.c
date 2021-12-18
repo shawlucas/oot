@@ -3452,7 +3452,7 @@ void BossVa_UpdateEffects(GlobalContext* globalCtx) {
                 } else if (effect->mode == GORE_FADING) {
                     if (effect->timer == 0) {
                         effect->type = VA_NONE;
-                        if (1) {}
+                        
                     }
 
                 } else {
@@ -3494,7 +3494,7 @@ void BossVa_UpdateEffects(GlobalContext* globalCtx) {
                         }
                         break;
                 }
-                if (1) {}
+                
             }
         }
     }

@@ -471,7 +471,7 @@ void EnGSwitch_DrawRupee(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad;
     EnGSwitch* this = (EnGSwitch*)thisx;
 
-    if (1) {}
+    
     if (!this->broken) {
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_g_switch.c", __LINE__);
         func_80093D18(globalCtx->state.gfxCtx);

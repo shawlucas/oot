@@ -93,7 +93,7 @@ void EnTkEff_Draw(EnTk* this, GlobalContext* globalCtx) {
 
     func_80093D84(globalCtx->state.gfxCtx);
 
-    if (1) {}
+    
 
     for (i = 0; i < ARRAY_COUNT(this->eff); i++) {
         if (eff->active != 0) {

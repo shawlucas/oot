@@ -70,14 +70,13 @@ void SkelAnime_DrawLimbLod(GlobalContext* globalCtx, s32 limbIndex, void** skele
 void SkelAnime_DrawLod(GlobalContext* globalCtx, void** skeleton, Vec3s* jointTable,
                        OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, void* arg, s32 lod) {
     LodLimb* rootLimb;
-    s32 pad;
     Gfx* dList;
     Vec3f pos;
     Vec3s rot;
 
     if (skeleton == NULL) {
         osSyncPrintf(VT_FGCOL(RED));
-        osSyncPrintf("Si2_Lod_draw():skelがNULLです。\n"); // "skel is NULL."
+        osSyncPrintf("SkelAnime_DrawLod():skeleton is NULL\n"); 
         osSyncPrintf(VT_RST);
         return;
     }
@@ -144,7 +143,7 @@ void SkelAnime_DrawFlexLimbLod(GlobalContext* globalCtx, s32 limbIndex, void** s
     if ((overrideLimbDraw == NULL) || !overrideLimbDraw(globalCtx, limbIndex, &newDList, &pos, &rot, arg)) {
         Matrix_TranslateRotateZYX(&pos, &rot);
         if (newDList != NULL) {
-            Matrix_ToMtx(*mtx, "../z_skelanime.c", 945);
+            Matrix_ToMtx(*mtx, "../z_skelanime.c", __LINE__);
             {
                 OPEN_DISPS(globalCtx->state.gfxCtx, "../z_skelanime.c", __LINE__);
                 gSPMatrix(POLY_OPA_DISP++, *mtx, G_MTX_LOAD);
@@ -153,7 +152,7 @@ void SkelAnime_DrawFlexLimbLod(GlobalContext* globalCtx, s32 limbIndex, void** s
             }
             (*mtx)++;
         } else if (limbDList != NULL) {
-            Matrix_ToMtx(*mtx, "../z_skelanime.c", 954);
+            Matrix_ToMtx(*mtx, "../z_skelanime.c", __LINE__);
             (*mtx)++;
         }
     }
@@ -181,7 +180,6 @@ void SkelAnime_DrawFlexLimbLod(GlobalContext* globalCtx, s32 limbIndex, void** s
 void SkelAnime_DrawFlexLod(GlobalContext* globalCtx, void** skeleton, Vec3s* jointTable, s32 dListCount,
                            OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, void* arg, s32 lod) {
     LodLimb* rootLimb;
-    s32 pad;
     Gfx* newDList;
     Gfx* limbDList;
     Vec3f pos;
@@ -190,7 +188,7 @@ void SkelAnime_DrawFlexLod(GlobalContext* globalCtx, void** skeleton, Vec3s* joi
 
     if (skeleton == NULL) {
         osSyncPrintf(VT_FGCOL(RED));
-        osSyncPrintf("Si2_Lod_draw_SV():skelがNULLです。\n"); // "skel is NULL."
+        osSyncPrintf("SkelAnime_DrawFlexLod():skeleton is NULL\n"); 
         osSyncPrintf(VT_RST);
         return;
     }
@@ -209,15 +207,15 @@ void SkelAnime_DrawFlexLod(GlobalContext* globalCtx, void** skeleton, Vec3s* joi
 
     newDList = limbDList = rootLimb->dLists[lod];
 
-    if ((overrideLimbDraw == 0) || !overrideLimbDraw(globalCtx, 1, &newDList, &pos, &rot, arg)) {
+    if ((overrideLimbDraw == NULL) || !overrideLimbDraw(globalCtx, 1, &newDList, &pos, &rot, arg)) {
         Matrix_TranslateRotateZYX(&pos, &rot);
         if (newDList != NULL) {
-            Matrix_ToMtx(mtx, "../z_skelanime.c", 1033);
+            Matrix_ToMtx(mtx, "../z_skelanime.c", __LINE__);
             gSPMatrix(POLY_OPA_DISP++, mtx, G_MTX_LOAD);
             gSPDisplayList(POLY_OPA_DISP++, newDList);
             mtx++;
         } else if (limbDList != NULL) {
-            Matrix_ToMtx(mtx, "../z_skelanime.c", 1040);
+            Matrix_ToMtx(mtx, "../z_skelanime.c", __LINE__);
             mtx++;
         }
     }
@@ -264,8 +262,6 @@ void SkelAnime_DrawLimbOpa(GlobalContext* globalCtx, s32 limbIndex, void** skele
         }
     }
 
-    if (1) {}
-
     if (postLimbDraw != NULL) {
         postLimbDraw(globalCtx, limbIndex, &dList, &rot, arg);
     }
@@ -288,14 +284,13 @@ void SkelAnime_DrawLimbOpa(GlobalContext* globalCtx, s32 limbIndex, void** skele
 void SkelAnime_DrawOpa(GlobalContext* globalCtx, void** skeleton, Vec3s* jointTable,
                        OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, void* arg) {
     StandardLimb* rootLimb;
-    s32 pad;
     Gfx* dList;
     Vec3f pos;
     Vec3s rot;
 
     if (skeleton == NULL) {
         osSyncPrintf(VT_FGCOL(RED));
-        osSyncPrintf("Si2_draw():skelがNULLです。\n"); // "skel is NULL."
+        osSyncPrintf("SkelAnime_DrawOpa():skeleton is NULL\n"); 
         osSyncPrintf(VT_RST);
         return;
     }
@@ -362,12 +357,12 @@ void SkelAnime_DrawFlexLimbOpa(GlobalContext* globalCtx, s32 limbIndex, void** s
     if ((overrideLimbDraw == NULL) || !overrideLimbDraw(globalCtx, limbIndex, &newDList, &pos, &rot, arg)) {
         Matrix_TranslateRotateZYX(&pos, &rot);
         if (newDList != NULL) {
-            Matrix_ToMtx(*limbMatricies, "../z_skelanime.c", 1242);
+            Matrix_ToMtx(*limbMatricies, "../z_skelanime.c", __LINE__);
             gSPMatrix(POLY_OPA_DISP++, *limbMatricies, G_MTX_LOAD);
             gSPDisplayList(POLY_OPA_DISP++, newDList);
             (*limbMatricies)++;
         } else if (limbDList != NULL) {
-            Matrix_ToMtx(*limbMatricies, "../z_skelanime.c", 1249);
+            Matrix_ToMtx(*limbMatricies, "../z_skelanime.c", __LINE__);
             (*limbMatricies)++;
         }
     }
@@ -398,7 +393,6 @@ void SkelAnime_DrawFlexLimbOpa(GlobalContext* globalCtx, s32 limbIndex, void** s
 void SkelAnime_DrawFlexOpa(GlobalContext* globalCtx, void** skeleton, Vec3s* jointTable, s32 dListCount,
                            OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, void* arg) {
     StandardLimb* rootLimb;
-    s32 pad;
     Gfx* newDList;
     Gfx* limbDList;
     Vec3f pos;
@@ -407,7 +401,7 @@ void SkelAnime_DrawFlexOpa(GlobalContext* globalCtx, void** skeleton, Vec3s* joi
 
     if (skeleton == NULL) {
         osSyncPrintf(VT_FGCOL(RED));
-        osSyncPrintf("Si2_draw_SV():skelがNULLです。\n"); // "skel is NULL."
+        osSyncPrintf("SkelAnime_DrawFlexOpa():skeleton is NULL\n"); 
         osSyncPrintf(VT_RST);
         return;
     }
@@ -431,12 +425,12 @@ void SkelAnime_DrawFlexOpa(GlobalContext* globalCtx, void** skeleton, Vec3s* joi
     if ((overrideLimbDraw == NULL) || !overrideLimbDraw(globalCtx, 1, &newDList, &pos, &rot, arg)) {
         Matrix_TranslateRotateZYX(&pos, &rot);
         if (newDList != NULL) {
-            Matrix_ToMtx(mtx, "../z_skelanime.c", 1327);
+            Matrix_ToMtx(mtx, "../z_skelanime.c", __LINE__);
             gSPMatrix(POLY_OPA_DISP++, mtx, G_MTX_LOAD);
             gSPDisplayList(POLY_OPA_DISP++, newDList);
             mtx++;
         } else if (limbDList != NULL) {
-            Matrix_ToMtx(mtx, "../z_skelanime.c", 1334);
+            Matrix_ToMtx(mtx, "../z_skelanime.c", __LINE__);
             mtx++;
         }
     }
@@ -470,10 +464,10 @@ void SkelAnime_GetFrameData(AnimationHeader* animation, s32 frame, s32 limbCount
 
     for (i = 0; i < limbCount; i++, frameTable++, jointIndices++) {
         if ((frameTable == NULL) || (jointIndices == NULL) || (dynamicData == NULL) || (staticData == NULL)) {
-            LOG_ADDRESS("out", frameTable, "../z_skelanime.c", 1392);
-            LOG_ADDRESS("ref_tbl", jointIndices, "../z_skelanime.c", 1393);
-            LOG_ADDRESS("frame_tbl", dynamicData, "../z_skelanime.c", 1394);
-            LOG_ADDRESS("tbl", staticData, "../z_skelanime.c", 1395);
+            LOG_ADDRESS("out", frameTable, "../z_skelanime.c", __LINE__);
+            LOG_ADDRESS("ref_tbl", jointIndices, "../z_skelanime.c", __LINE__);
+            LOG_ADDRESS("frame_tbl", dynamicData, "../z_skelanime.c", __LINE__);
+            LOG_ADDRESS("tbl", staticData, "../z_skelanime.c", __LINE__);
         }
 
         frameTable->x =
@@ -553,15 +547,13 @@ Gfx* SkelAnime_DrawLimb(GlobalContext* globalCtx, s32 limbIndex, void** skeleton
 Gfx* SkelAnime_Draw(GlobalContext* globalCtx, void** skeleton, Vec3s* jointTable, OverrideLimbDraw overrideLimbDraw,
                     PostLimbDraw postLimbDraw, void* arg, Gfx* gfx) {
     StandardLimb* rootLimb;
-    s32 pad;
     Gfx* dList;
     Vec3f pos;
     Vec3s rot;
 
     if (skeleton == NULL) {
         osSyncPrintf(VT_FGCOL(RED));
-        // "skel is NULL. Returns NULL."
-        osSyncPrintf("Si2_draw2():skelがNULLです。NULLを返します。\n");
+        osSyncPrintf("SkelAnime_Draw():skeleton is NULL. Returns NULL.\n");
         osSyncPrintf(VT_RST);
         return NULL;
     }
@@ -626,12 +618,12 @@ Gfx* SkelAnime_DrawFlexLimb(GlobalContext* globalCtx, s32 limbIndex, void** skel
     if ((overrideLimbDraw == NULL) || !overrideLimbDraw(globalCtx, limbIndex, &newDList, &pos, &rot, arg, &gfx)) {
         Matrix_TranslateRotateZYX(&pos, &rot);
         if (newDList != NULL) {
-            Matrix_ToMtx(*mtx, "../z_skelanime.c", 1623);
+            Matrix_ToMtx(*mtx, "../z_skelanime.c", __LINE__);
             gSPMatrix(gfx++, *mtx, G_MTX_LOAD);
             gSPDisplayList(gfx++, newDList);
             (*mtx)++;
         } else if (limbDList != NULL) {
-            Matrix_ToMtx(*mtx, "../z_skelanime.c", 1630);
+            Matrix_ToMtx(*mtx, "../z_skelanime.c", __LINE__);
             (*mtx)++;
         }
     }
@@ -661,7 +653,6 @@ Gfx* SkelAnime_DrawFlexLimb(GlobalContext* globalCtx, s32 limbIndex, void** skel
 Gfx* SkelAnime_DrawFlex(GlobalContext* globalCtx, void** skeleton, Vec3s* jointTable, s32 dListCount,
                         OverrideLimbDraw overrideLimbDraw, PostLimbDraw postLimbDraw, void* arg, Gfx* gfx) {
     StandardLimb* rootLimb;
-    s32 pad;
     Gfx* newDList;
     Gfx* limbDList;
     Vec3f pos;
@@ -670,8 +661,7 @@ Gfx* SkelAnime_DrawFlex(GlobalContext* globalCtx, void** skeleton, Vec3s* jointT
 
     if (skeleton == NULL) {
         osSyncPrintf(VT_FGCOL(RED));
-        // "skel is NULL. Returns NULL."
-        osSyncPrintf("Si2_draw2_SV():skelがNULLです。NULLを返します。\n");
+        osSyncPrintf("SkelAnime_DrawFlex():skeleton is NULL. Returns NULL.\n");
         osSyncPrintf(VT_RST);
         return NULL;
     }
@@ -691,12 +681,12 @@ Gfx* SkelAnime_DrawFlex(GlobalContext* globalCtx, void** skeleton, Vec3s* jointT
     if ((overrideLimbDraw == NULL) || !overrideLimbDraw(globalCtx, 1, &newDList, &pos, &rot, arg, &gfx)) {
         Matrix_TranslateRotateZYX(&pos, &rot);
         if (newDList != NULL) {
-            Matrix_ToMtx(mtx, "../z_skelanime.c", 1710);
+            Matrix_ToMtx(mtx, "../z_skelanime.c", __LINE__);
             gSPMatrix(gfx++, mtx, G_MTX_LOAD);
             gSPDisplayList(gfx++, newDList);
             mtx++;
         } else if (limbDList != NULL) {
-            Matrix_ToMtx(mtx, "../z_skelanime.c", 1717);
+            Matrix_ToMtx(mtx, "../z_skelanime.c", __LINE__);
             mtx++;
         }
     }
@@ -848,7 +838,7 @@ void AnimationContext_SetLoadFrame(GlobalContext* globalCtx, LinkAnimationHeader
         DmaMgr_SendRequest2(&entry->data.load.req, ram,
                             LINK_ANIMATION_OFFSET(linkAnimHeader->segment, ((sizeof(Vec3s) * limbCount + 2) * frame)),
                             sizeof(Vec3s) * limbCount + 2, 0, &entry->data.load.msgQueue, NULL, "../z_skelanime.c",
-                            2004);
+                            __LINE__);
     }
 }
 
@@ -1077,8 +1067,7 @@ void SkelAnime_InitLink(GlobalContext* globalCtx, SkelAnime* skelAnime, FlexSkel
 
     if ((skelAnime->jointTable == NULL) || (skelAnime->morphTable == NULL)) {
         osSyncPrintf(VT_FGCOL(RED));
-        // "Memory allocation error"
-        osSyncPrintf("Skeleton_Info_Rom_SV_ct メモリアロケーションエラー\n");
+        osSyncPrintf("SkelAnime_InitLink: Memory allocation error\n");
         osSyncPrintf(VT_RST);
     }
 
@@ -1396,7 +1385,7 @@ s32 SkelAnime_Init(GlobalContext* globalCtx, SkelAnime* skelAnime, SkeletonHeade
     }
     if ((skelAnime->jointTable == NULL) || (skelAnime->morphTable == NULL)) {
         osSyncPrintf(VT_FGCOL(RED));
-        osSyncPrintf("Skeleton_Info2_ct メモリアロケーションエラー\n"); // "Memory allocation error"
+        osSyncPrintf("SkelAnime_Init Memory allocation error\n");
         osSyncPrintf(VT_RST);
     }
 
@@ -1429,8 +1418,7 @@ s32 SkelAnime_InitFlex(GlobalContext* globalCtx, SkelAnime* skelAnime, FlexSkele
     }
     if ((skelAnime->jointTable == NULL) || (skelAnime->morphTable == NULL)) {
         osSyncPrintf(VT_FGCOL(RED));
-        // "Memory allocation error"
-        osSyncPrintf("Skeleton_Info_Rom_SV_ct メモリアロケーションエラー\n");
+        osSyncPrintf("SkelAnime_InitFlex: Memory allocation error\n");
         osSyncPrintf(VT_RST);
     }
 
@@ -1454,8 +1442,7 @@ s32 SkelAnime_InitSkin(GlobalContext* globalCtx, SkelAnime* skelAnime, SkeletonH
         ZeldaArena_MallocDebug(skelAnime->limbCount * sizeof(*skelAnime->morphTable), "../z_skelanime.c", __LINE__);
     if ((skelAnime->jointTable == NULL) || (skelAnime->morphTable == NULL)) {
         osSyncPrintf(VT_FGCOL(RED));
-        // "Memory allocation error"
-        osSyncPrintf("Skeleton_Info2_skin2_ct メモリアロケーションエラー\n");
+        osSyncPrintf("SkelAnime_InitSkin: Memory allocation error\n");
         osSyncPrintf(VT_RST);
     }
 
@@ -1839,15 +1826,15 @@ s32 Animation_OnFrame(SkelAnime* skelAnime, f32 frame) {
  */
 void SkelAnime_Free(SkelAnime* skelAnime, GlobalContext* globalCtx) {
     if (skelAnime->jointTable != NULL) {
-        ZeldaArena_FreeDebug(skelAnime->jointTable, "../z_skelanime.c", 3729);
+        ZeldaArena_FreeDebug(skelAnime->jointTable, "../z_skelanime.c", __LINE__);
     } else {
-        osSyncPrintf("now_joint あきまへん！！\n"); // "now_joint is freed! !"
+        osSyncPrintf("skelAnime->jointTable: jointTable is freed!\n");
     }
 
     if (skelAnime->morphTable != NULL) {
-        ZeldaArena_FreeDebug(skelAnime->morphTable, "../z_skelanime.c", 3731);
+        ZeldaArena_FreeDebug(skelAnime->morphTable, "../z_skelanime.c", __LINE__);
     } else {
-        osSyncPrintf("morf_joint あきまへん！！\n"); // "morf_joint is freed !!"
+        osSyncPrintf("skelAnime->morphTable: morphTable is freed!\n");
     }
 }
 

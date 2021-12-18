@@ -64,17 +64,16 @@ void BgHidanKousi_SetupAction(BgHidanKousi* this, BgHidanKousiActionFunc actionF
 
 void BgHidanKousi_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgHidanKousi* this = (BgHidanKousi*)thisx;
-    s32 pad;
     CollisionHeader* colHeader = NULL;
 
     DynaPolyActor_Init(&this->dyna, DPM_UNK);
     Actor_SetFocus(thisx, 50.0f);
-    osSyncPrintf("◯◯◯炎の神殿オブジェクト【格子(arg_data : %0x)】出現 (%d %d)\n", thisx->params, thisx->params & 0xFF,
+    osSyncPrintf("◯◯◯Fire Temple Object [Lattice(params: %0X)] Appearance (%d %d)\n", thisx->params, thisx->params & 0xFF,
                  ((s32)thisx->params >> 8) & 0xFF);
 
     Actor_ProcessInitChain(thisx, sInitChain);
     if (((thisx->params & 0xFF) < 0) || ((thisx->params & 0xFF) >= 3)) {
-        osSyncPrintf("arg_data おかしい 【格子】\n");
+        osSyncPrintf("stange params [Lattice] \n");
     }
 
     CollisionHeader_GetVirtual(sMetalFencesCollisions[thisx->params & 0xFF], &colHeader);
@@ -94,7 +93,6 @@ void BgHidanKousi_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void func_80889ACC(BgHidanKousi* this) {
-    s32 pad[2];
     Vec3s* rot = &this->dyna.actor.world.rot;
     f32 temp1 = D_80889E40[this->dyna.actor.params & 0xFF] * Math_SinS(rot->y);
     f32 temp2 = D_80889E40[this->dyna.actor.params & 0xFF] * Math_CosS(rot->y);

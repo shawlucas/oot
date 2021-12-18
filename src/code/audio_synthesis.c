@@ -787,9 +787,9 @@ Acmd* AudioSynth_ProcessNote(s32 noteIndex, NoteSubEu* noteSubEu, NoteSynthesisS
                             gAudioContext.curLoadedBook = audioFontSample->book->book;
                             break;
                     }
-                    if (1) {}
-                    if (1) {}
-                    if (1) {}
+                    
+                    
+                    
                     nEntries = 16 * audioFontSample->book->order * audioFontSample->book->npredictors;
                     aLoadADPCM(cmd++, nEntries, gAudioContext.curLoadedBook);
                 }
@@ -897,7 +897,7 @@ Acmd* AudioSynth_ProcessNote(s32 noteIndex, NoteSubEu* noteSubEu, NoteSynthesisS
 
                 nSamplesInThisIteration = nSamplesToDecode + nSamplesInFirstFrame - nTrailingSamplesToIgnore;
                 if (nSamplesProcessed == 0) {
-                    if (1) {}
+                    
                     skipBytes = nFirstFrameSamplesToIgnore * 2;
                 } else {
                     phi_s4 = ALIGN16(s5 + 16);

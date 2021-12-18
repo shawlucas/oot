@@ -403,8 +403,7 @@ void Environment_Init(GlobalContext* globalCtx2, EnvironmentContext* envCtx, s32
 
     if (Object_GetIndex(&globalCtx->objectCtx, OBJECT_GAMEPLAY_FIELD_KEEP) < 0 && !globalCtx->envCtx.sunMoonDisabled) {
         globalCtx->envCtx.sunMoonDisabled = true;
-        // "Sun setting other than field keep! So forced release!"
-        osSyncPrintf(VT_COL(YELLOW, BLACK) "\n\nフィールド常駐以外、太陽設定！よって強制解除！\n" VT_RST);
+        osSyncPrintf(VT_COL(YELLOW, BLACK) "\n\nSun setting other than field keep! So forced release!\n" VT_RST);
     }
 
     gCustomLensFlareOn = false;
@@ -522,9 +521,8 @@ f32 Environment_LerpWeightAccelDecel(u16 endFrame, u16 startFrame, u16 curFrame,
     decelDurationF = (s32)decelDuration;
 
     if ((startFrameF >= endFrameF) || (accelDurationF + decelDurationF > totalFrames)) {
-        // "The frame relation between end_frame and start_frame is wrong!!!"
-        osSyncPrintf(VT_COL(RED, WHITE) "\nend_frameとstart_frameのフレーム関係がおかしい!!!" VT_RST);
-        osSyncPrintf(VT_COL(RED, WHITE) "\nby get_parcent_forAccelBrake!!!!!!!!!" VT_RST);
+        osSyncPrintf(VT_COL(RED, WHITE) "\The frame relationship between startFrame and endFrame is wrong!!!" VT_RST);
+        osSyncPrintf(VT_COL(RED, WHITE) "\nby Environment_LerpWeightAccelDecel()!!!!!!!!!" VT_RST);
 
         return 0.0f;
     }
@@ -667,7 +665,7 @@ void Environment_UpdateSkybox(u8 skyboxId, EnvironmentContext* envCtx, SkyboxCon
 
         if (newSkybox1Index == 0xFF) {
             // "Environment VR data acquisition failed! Report to Sasaki!"
-            osSyncPrintf(VT_COL(RED, WHITE) "\n環境ＶＲデータ取得失敗！ ささきまでご報告を！" VT_RST);
+            osSyncPrintf(VT_COL(RED, WHITE) "\nEnvironment VR data acquisition failed! Report to Sasaki!" VT_RST);
         }
 
         if ((envCtx->skybox1Index != newSkybox1Index) && (envCtx->skyboxDmaState == SKYBOX_DMA_INACTIVE)) {
@@ -677,7 +675,7 @@ void Environment_UpdateSkybox(u8 skyboxId, EnvironmentContext* envCtx, SkyboxCon
             osCreateMesgQueue(&envCtx->loadQueue, &envCtx->loadMsg, 1);
             DmaMgr_SendRequest2(&envCtx->dmaRequest, (u32)skyboxCtx->staticSegments[0],
                                 gSkyboxFiles[newSkybox1Index].file.vromStart, size, 0, &envCtx->loadQueue, NULL,
-                                "../z_kankyo.c", 1264);
+                                "../z_kankyo.c", __LINE__);
             envCtx->skybox1Index = newSkybox1Index;
         }
 
@@ -688,7 +686,7 @@ void Environment_UpdateSkybox(u8 skyboxId, EnvironmentContext* envCtx, SkyboxCon
             osCreateMesgQueue(&envCtx->loadQueue, &envCtx->loadMsg, 1);
             DmaMgr_SendRequest2(&envCtx->dmaRequest, (u32)skyboxCtx->staticSegments[1],
                                 gSkyboxFiles[newSkybox2Index].file.vromStart, size, 0, &envCtx->loadQueue, NULL,
-                                "../z_kankyo.c", 1281);
+                                "../z_kankyo.c", __LINE__);
             envCtx->skybox2Index = newSkybox2Index;
         }
 
@@ -701,13 +699,13 @@ void Environment_UpdateSkybox(u8 skyboxId, EnvironmentContext* envCtx, SkyboxCon
                 osCreateMesgQueue(&envCtx->loadQueue, &envCtx->loadMsg, 1);
                 DmaMgr_SendRequest2(&envCtx->dmaRequest, (u32)skyboxCtx->palettes,
                                     gSkyboxFiles[newSkybox1Index].palette.vromStart, size, 0, &envCtx->loadQueue, NULL,
-                                    "../z_kankyo.c", 1307);
+                                    "../z_kankyo.c", __LINE__);
             } else {
                 size = gSkyboxFiles[newSkybox1Index].palette.vromEnd - gSkyboxFiles[newSkybox1Index].palette.vromStart;
                 osCreateMesgQueue(&envCtx->loadQueue, &envCtx->loadMsg, 1);
                 DmaMgr_SendRequest2(&envCtx->dmaRequest, (u32)skyboxCtx->palettes + size,
                                     gSkyboxFiles[newSkybox1Index].palette.vromStart, size, 0, &envCtx->loadQueue, NULL,
-                                    "../z_kankyo.c", 1320);
+                                    "../z_kankyo.c", __LINE__);
             }
         }
 
@@ -720,13 +718,13 @@ void Environment_UpdateSkybox(u8 skyboxId, EnvironmentContext* envCtx, SkyboxCon
                 osCreateMesgQueue(&envCtx->loadQueue, &envCtx->loadMsg, 1);
                 DmaMgr_SendRequest2(&envCtx->dmaRequest, (u32)skyboxCtx->palettes,
                                     gSkyboxFiles[newSkybox2Index].palette.vromStart, size, 0, &envCtx->loadQueue, NULL,
-                                    "../z_kankyo.c", 1342);
+                                    "../z_kankyo.c", __LINE__);
             } else {
                 size = gSkyboxFiles[newSkybox2Index].palette.vromEnd - gSkyboxFiles[newSkybox2Index].palette.vromStart;
                 osCreateMesgQueue(&envCtx->loadQueue, &envCtx->loadMsg, 1);
                 DmaMgr_SendRequest2(&envCtx->dmaRequest, (u32)skyboxCtx->palettes + size,
                                     gSkyboxFiles[newSkybox2Index].palette.vromStart, size, 0, &envCtx->loadQueue, NULL,
-                                    "../z_kankyo.c", 1355);
+                                    "../z_kankyo.c", __LINE__);
             }
         }
 
@@ -747,8 +745,7 @@ void Environment_UpdateSkybox(u8 skyboxId, EnvironmentContext* envCtx, SkyboxCon
 void Environment_EnableUnderwaterLights(GlobalContext* globalCtx, s32 waterLightsIndex) {
     if (waterLightsIndex == 0x1F) {
         waterLightsIndex = 0;
-        // "Underwater color is not set in the water poly data!"
-        osSyncPrintf(VT_COL(YELLOW, BLACK) "\n水ポリゴンデータに水中カラーが設定されておりません!" VT_RST);
+        osSyncPrintf(VT_COL(YELLOW, BLACK) "\nUnderwater color is not set in the water poly data!" VT_RST);
     }
 
     if (!globalCtx->envCtx.indoors) {
@@ -821,9 +818,9 @@ void Environment_PrintDebugInfo(GlobalContext* globalCtx, Gfx** gfx) {
     GfxPrint_SetPos(&printer, 22, 6);
 
     if (gSaveContext.nightFlag) {
-        GfxPrint_Printf(&printer, "%s", "YORU"); // "night"
+        GfxPrint_Printf(&printer, "%s", "NIGHT");
     } else {
-        GfxPrint_Printf(&printer, "%s", "HIRU"); // "day"
+        GfxPrint_Printf(&printer, "%s", "DAY");
     }
 
     *gfx = GfxPrint_Close(&printer);
@@ -865,7 +862,7 @@ void Environment_Update(GlobalContext* globalCtx, EnvironmentContext* envCtx, Li
 
         if (((void)0, gSaveContext.nextDayTime) >= 0xFF00 && ((void)0, gSaveContext.nextDayTime) != 0xFFFF) {
             gSaveContext.nextDayTime -= 0x10;
-            osSyncPrintf("\nnext_zelda_time=[%x]", ((void)0, gSaveContext.nextDayTime));
+            osSyncPrintf("\ngSaveContext.nextDayTime = [%x]", ((void)0, gSaveContext.nextDayTime));
 
             if (((void)0, gSaveContext.nextDayTime) == 0xFF0E) {
                 func_80078884(NA_SE_EV_CHICKEN_CRY_M);
@@ -918,7 +915,6 @@ void Environment_Update(GlobalContext* globalCtx, EnvironmentContext* envCtx, Li
             gSPEndDisplayList(displayList++);
             Graph_BranchDlist(prevDisplayList, displayList);
             POLY_OPA_DISP = displayList;
-            if (1) {}
             CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_kankyo.c", __LINE__);
         }
 
@@ -1016,11 +1012,10 @@ void Environment_Update(GlobalContext* globalCtx, EnvironmentContext* envCtx, Li
                         envCtx->lightSettings.fogFar = LERP16(blend16[0], blend16[1], sp88);
 
                         if (TIME_ENTRY_20.unk_05 >= envCtx->numLightSettings) {
-                            // "The color palette setting seems to be wrong!"
-                            osSyncPrintf(VT_COL(RED, WHITE) "\nカラーパレットの設定がおかしいようです！" VT_RST);
+                            osSyncPrintf(VT_COL(RED, WHITE) "\nThe color palette setting seems to be wrong!" VT_RST);
 
                             // "Palette setting = [] Last palette number = []"
-                            osSyncPrintf(VT_COL(RED, WHITE) "\n設定パレット＝[%d] 最後パレット番号＝[%d]\n" VT_RST,
+                            osSyncPrintf(VT_COL(RED, WHITE) "\nPalette setting = [%d] Last palette number = [%d]\n" VT_RST,
                                          TIME_ENTRY_20.unk_05, envCtx->numLightSettings - 1);
                         }
                         break;
@@ -1088,10 +1083,10 @@ void Environment_Update(GlobalContext* globalCtx, EnvironmentContext* envCtx, Li
 
                 if (envCtx->unk_BD >= envCtx->numLightSettings) {
                     // "The color palette seems to be wrong!"
-                    osSyncPrintf("\n" VT_FGCOL(RED) "カラーパレットがおかしいようです！");
+                    osSyncPrintf("\n" VT_FGCOL(RED) "The color palette seems to be wrong!");
 
                     // "Palette setting = [] Last palette number = []"
-                    osSyncPrintf("\n" VT_FGCOL(YELLOW) "設定パレット＝[%d] パレット数＝[%d]\n" VT_RST, envCtx->unk_BD,
+                    osSyncPrintf("\n" VT_FGCOL(YELLOW) "Palette setting = [%d] Last palette number = [%d]\n" VT_RST, envCtx->unk_BD,
                                  envCtx->numLightSettings);
                 }
             }
@@ -1486,8 +1481,6 @@ void Environment_DrawLensFlare(GlobalContext* globalCtx, EnvironmentContext* env
             fogInfluence = CLAMP_MAX(fogInfluence, 1.0f);
 
             alpha *= 1.0f - fogInfluence;
-
-            if (1) {}
 
             if (!(isOffScreen ^ 0)) {
                 Math_SmoothStepToF(&envCtx->unk_88, unk88Target, 0.5f, 0.05f, 0.001f);
@@ -1936,7 +1929,7 @@ void func_800758AC(GlobalContext* globalCtx) {
         }
     } else if (globalCtx->sequenceCtx.natureAmbienceId == 0x13) {
         // "BGM Configuration"
-        osSyncPrintf("\n\n\nBGM設定game_play->sound_info.BGM=[%d] old_bgm=[%d]\n\n", globalCtx->sequenceCtx.seqId,
+        osSyncPrintf("\n\n\nBGM Configuration: globalCtx->sequenceCtx.seqId=[%d] gSaveContext.seqId=[%d]\n\n", globalCtx->sequenceCtx.seqId,
                      ((void)0, gSaveContext.seqId));
         if (((void)0, gSaveContext.seqId) != globalCtx->sequenceCtx.seqId) {
             func_800F5550(globalCtx->sequenceCtx.seqId);
@@ -1962,9 +1955,9 @@ void func_800758AC(GlobalContext* globalCtx) {
     }
 
     osSyncPrintf("\n-----------------\n", ((void)0, gSaveContext.forcedSeqId));
-    osSyncPrintf("\n 強制ＢＧＭ=[%d]", ((void)0, gSaveContext.forcedSeqId)); // "Forced BGM"
-    osSyncPrintf("\n     ＢＧＭ=[%d]", globalCtx->sequenceCtx.seqId);
-    osSyncPrintf("\n     エンブ=[%d]", globalCtx->sequenceCtx.natureAmbienceId);
+    osSyncPrintf("\n gSaveContext.forcedSeqId=[%d]", ((void)0, gSaveContext.forcedSeqId));
+    osSyncPrintf("\n     sequenceCtx.seqId=[%d]", globalCtx->sequenceCtx.seqId);
+    osSyncPrintf("\n     sequenceCtx.natureAmbienceId=[%d]", globalCtx->sequenceCtx.natureAmbienceId);
     osSyncPrintf("\n     status=[%d]", globalCtx->envCtx.unk_E0);
 
     Audio_SetEnvReverb(globalCtx->roomCtx.curRoom.echo);

@@ -107,9 +107,7 @@ void BgHakaWater_Update(Actor* thisx, GlobalContext* globalCtx) {
 
 void BgHakaWater_Draw(Actor* thisx, GlobalContext* globalCtx) {
     BgHakaWater* this = (BgHakaWater*)thisx;
-    s32 pad;
     f32 temp;
-    s32 pad2;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_haka_water.c", __LINE__);
     func_80093D84(globalCtx->state.gfxCtx);

@@ -155,7 +155,7 @@ void EnLight_Draw(Actor* thisx, GlobalContext* globalCtx) {
     FlameParams* flameParams;
     Gfx* dList;
 
-    if (1) {}
+    
 
     flameParams = &D_80A9E840[this->actor.params & 0xF];
 

@@ -16,11 +16,11 @@ s32 Object_Spawn(ObjectContext* objectCtx, s16 objectId) {
 
     ASSERT(((objectCtx->num < OBJECT_EXCHANGE_BANK_MAX) &&
             (((s32)objectCtx->status[objectCtx->num].segment + size) < (u32)objectCtx->spaceEnd)),
-           "this->num < OBJECT_EXCHANGE_BANK_MAX && (this->status[this->num].Segment + size) < this->endSegment",
-           "../z_scene.c", 142);
+           "objectCtx->num < OBJECT_EXCHANGE_BANK_MAX && (objectCtx->status[objectCtx->num].segment + size) < objectCtx->spaceEnd",
+           "../z_scene.c", __LINE__);
 
     DmaMgr_SendRequest1(objectCtx->status[objectCtx->num].segment, gObjectTable[objectId].vromStart, size,
-                        "../z_scene.c", 145);
+                        "../z_scene.c", __LINE__);
 
     if (objectCtx->num < OBJECT_EXCHANGE_BANK_MAX - 1) {
         objectCtx->status[objectCtx->num + 1].segment =
@@ -64,12 +64,11 @@ void Object_InitBank(GlobalContext* globalCtx, ObjectContext* objectCtx) {
     }
 
     osSyncPrintf(VT_FGCOL(GREEN));
-    // "Object exchange bank data %8.3fKB"
-    osSyncPrintf("オブジェクト入れ替えバンク情報 %8.3fKB\n", spaceSize / 1024.0f);
+    osSyncPrintf("Object exchange bank data: %8.3fKB\n", spaceSize / 1024.0f);
     osSyncPrintf(VT_RST);
 
     objectCtx->spaceStart = objectCtx->status[0].segment =
-        GameState_Alloc(&globalCtx->state, spaceSize, "../z_scene.c", 219);
+        GameState_Alloc(&globalCtx->state, spaceSize, "../z_scene.c", __LINE__);
     objectCtx->spaceEnd = (void*)((s32)objectCtx->spaceStart + spaceSize);
 
     objectCtx->mainKeepIndex = Object_Spawn(objectCtx, OBJECT_GAMEPLAY_KEEP);
@@ -90,7 +89,7 @@ void Object_UpdateBank(ObjectContext* objectCtx) {
                 size = objectFile->vromEnd - objectFile->vromStart;
                 osSyncPrintf("OBJECT EXCHANGE BANK-%2d SIZE %8.3fK SEG=%08X\n", i, size / 1024.0f, status->segment);
                 DmaMgr_SendRequest2(&status->dmaRequest, status->segment, objectFile->vromStart, size, 0,
-                                    &status->loadQueue, NULL, "../z_scene.c", 266);
+                                    &status->loadQueue, NULL, "../z_scene.c", __LINE__);
             } else if (!osRecvMesg(&status->loadQueue, NULL, OS_MESG_NOBLOCK)) {
                 status->id = -status->id;
             }
@@ -131,7 +130,7 @@ void func_800981B8(ObjectContext* objectCtx) {
                      objectCtx->status[i].segment);
         osSyncPrintf("num=%d adrs=%x end=%x\n", objectCtx->num, (s32)objectCtx->status[i].segment + size,
                      objectCtx->spaceEnd);
-        DmaMgr_SendRequest1(objectCtx->status[i].segment, gObjectTable[id].vromStart, size, "../z_scene.c", 342);
+        DmaMgr_SendRequest1(objectCtx->status[i].segment, gObjectTable[id].vromStart, size, "../z_scene.c", __LINE__);
     }
 }
 
@@ -148,12 +147,10 @@ void* func_800982FC(ObjectContext* objectCtx, s32 bankIndex, s16 objectId) {
     osSyncPrintf("OBJECT EXCHANGE NO=%2d BANK=%3d SIZE=%8.3fK\n", bankIndex, objectId, size / 1024.0f);
 
     nextPtr = (void*)ALIGN16((s32)status->segment + size);
-    if (1) {} // Necessary to match
 
     ASSERT(nextPtr < objectCtx->spaceEnd, "nextPtr < objectCtx->spaceEnd", "../z_scene.c", __LINE__);
 
-    // "Object exchange free size=%08X"
-    osSyncPrintf("オブジェクト入れ替え空きサイズ=%08X\n", (s32)objectCtx->spaceEnd - (s32)nextPtr);
+    osSyncPrintf("Object exchange free size = %08X\n", (s32)objectCtx->spaceEnd - (s32)nextPtr);
 
     return nextPtr;
 }
@@ -174,7 +171,7 @@ s32 Scene_ExecuteCommands(GlobalContext* globalCtx, SceneCmd* sceneCmd) {
             gSceneCmdHandlers[cmdCode](globalCtx, sceneCmd);
         } else {
             osSyncPrintf(VT_FGCOL(RED));
-            osSyncPrintf("code の値が異常です\n"); // "code variable is abnormal"
+            osSyncPrintf("code values is abnormal\n");
             osSyncPrintf(VT_RST);
         }
         sceneCmd++;
@@ -290,10 +287,8 @@ void func_8009899C(GlobalContext* globalCtx, SceneCmd* cmd) {
         status++;
     }
 
-    ASSERT(cmd->objectList.num <= OBJECT_EXCHANGE_BANK_MAX, "scene_info->object_bank.num <= OBJECT_EXCHANGE_BANK_MAX",
-           "../z_scene.c", 705);
-
-    if (1) {}
+    ASSERT(cmd->objectList.num <= OBJECT_EXCHANGE_BANK_MAX, "cmd->objectList.num <= OBJECT_EXCHANGE_BANK_MAX",
+           "../z_scene.c", __LINE__);
 
     while (k < cmd->objectList.num) {
         nextPtr = func_800982FC(&globalCtx->objectCtx, i, *objectEntry);
@@ -428,31 +423,26 @@ void func_8009918C(GlobalContext* globalCtx, SceneCmd* cmd) {
 
 // Scene Command 0x18: Alternate Headers
 void func_800991A0(GlobalContext* globalCtx, SceneCmd* cmd) {
-    s32 pad;
     SceneCmd* altHeader;
 
-    osSyncPrintf("\n[ZU]sceneset age    =[%X]", ((void)0, gSaveContext.linkAge));
-    osSyncPrintf("\n[ZU]sceneset time   =[%X]", ((void)0, gSaveContext.cutsceneIndex));
-    osSyncPrintf("\n[ZU]sceneset counter=[%X]", ((void)0, gSaveContext.sceneSetupIndex));
+    osSyncPrintf("\n[ZU]sceneset AGE    = [%X]", ((void)0, gSaveContext.linkAge));
+    osSyncPrintf("\n[ZU]sceneset CUTSCENE INDEX   = [%X]", ((void)0, gSaveContext.cutsceneIndex));
+    osSyncPrintf("\n[ZU]sceneset SCENE SETUP INDEX = [%X]", ((void)0, gSaveContext.sceneSetupIndex));
 
     if (gSaveContext.sceneSetupIndex != 0) {
         altHeader = ((SceneCmd**)SEGMENTED_TO_VIRTUAL(cmd->altHeaders.segment))[gSaveContext.sceneSetupIndex - 1];
-
-        if (1) {}
 
         if (altHeader != NULL) {
             Scene_ExecuteCommands(globalCtx, SEGMENTED_TO_VIRTUAL(altHeader));
             (cmd + 1)->base.code = 0x14;
         } else {
-            // "Coughh! There is no specified dataaaaa!"
-            osSyncPrintf("\nげぼはっ！ 指定されたデータがないでええっす！");
+            osSyncPrintf("\nCough!! The specified data is missing!");
 
             if (gSaveContext.sceneSetupIndex == 3) {
                 altHeader =
                     ((SceneCmd**)SEGMENTED_TO_VIRTUAL(cmd->altHeaders.segment))[gSaveContext.sceneSetupIndex - 2];
 
-                // "Using adult day data there!"
-                osSyncPrintf("\nそこで、大人の昼データを使用するでええっす！！");
+                osSyncPrintf("\nUsing adult daytime data!");
 
                 if (altHeader != NULL) {
                     Scene_ExecuteCommands(globalCtx, SEGMENTED_TO_VIRTUAL(altHeader));
@@ -465,7 +455,7 @@ void func_800991A0(GlobalContext* globalCtx, SceneCmd* cmd) {
 
 // Scene Command 0x17: Cutscene Data
 void func_8009934C(GlobalContext* globalCtx, SceneCmd* cmd) {
-    osSyncPrintf("\ngame_play->demo_play.data=[%x]", globalCtx->csCtx.segment);
+    osSyncPrintf("\nglobalCtx->csCtx.segment = [%X]", globalCtx->csCtx.segment);
     globalCtx->csCtx.segment = SEGMENTED_TO_VIRTUAL(cmd->cutsceneData.segment);
 }
 
@@ -484,7 +474,7 @@ void func_800993C0(GlobalContext* globalCtx, SceneCmd* cmd) {
         ((globalCtx->sceneNum >= SCENE_ENTRA) && (globalCtx->sceneNum <= SCENE_SHRINE_R))) {
         if (gSaveContext.cutsceneIndex < 0xFFF0) {
             gSaveContext.worldMapAreaData |= gBitFlags[gSaveContext.worldMapArea];
-            osSyncPrintf("０００  ａｒｅａ＿ａｒｒｉｖａｌ＝%x (%d)\n", gSaveContext.worldMapAreaData,
+            osSyncPrintf("000 WORLD MAP AREA = %X (%d)\n", gSaveContext.worldMapAreaData,
                          gSaveContext.worldMapArea);
         }
     }

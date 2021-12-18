@@ -38,7 +38,6 @@ static InitChainEntry sInitChain[] = {
 
 void BgGjyoBridge_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgGjyoBridge* this = (BgGjyoBridge*)thisx;
-    s32 pad;
     CollisionHeader* colHeader;
 
     colHeader = NULL;

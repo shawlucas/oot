@@ -105,7 +105,6 @@ void BgHidanFwbig_Init(Actor* thisx, GlobalContext* globalCtx2) {
 }
 
 void BgHidanFwbig_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgHidanFwbig* this = (BgHidanFwbig*)thisx;
 
     Collider_DestroyCylinder(globalCtx, &this->collider);
@@ -217,7 +216,6 @@ void BgHidanFwbig_MoveCollider(BgHidanFwbig* this, GlobalContext* globalCtx) {
 }
 
 void BgHidanFwbig_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgHidanFwbig* this = (BgHidanFwbig*)thisx;
 
     if (this->collider.base.atFlags & AT_HIT) {
@@ -247,7 +245,6 @@ void BgHidanFwbig_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgHidanFwbig_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     f32 height;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_hidan_fwbig.c", __LINE__);

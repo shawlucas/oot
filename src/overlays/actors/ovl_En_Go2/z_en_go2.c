@@ -161,7 +161,7 @@ void EnGo2_AddDust(EnGo2* this, Vec3f* pos, Vec3f* velocity, Vec3f* accel, u8 in
         if (dustEffect->type != 1) {
             dustEffect->scale = scale;
             dustEffect->scaleStep = scaleStep;
-            if (1) {}
+            
             timer = initialTimer;
             dustEffect->timer = timer;
             dustEffect->type = 1;
@@ -210,7 +210,7 @@ void EnGo2_DrawDust(EnGo2* this, GlobalContext* globalCtx) {
 
     firstDone = false;
     func_80093D84(globalCtx->state.gfxCtx);
-    if (1) {}
+    
 
     for (i = 0; i < ARRAY_COUNT(this->dustEffects); i++, dustEffect++) {
         if (dustEffect->type) {
@@ -2031,7 +2031,7 @@ void EnGo2_Draw(Actor* thisx, GlobalContext* globalCtx) {
 
     if ((this->actionFunc == EnGo2_CurledUp) && (this->skelAnime.playSpeed == 0.0f) &&
         (this->skelAnime.curFrame == 0.0f)) {
-        if (1) {}
+        
         EnGo2_DrawCurledUp(this, globalCtx);
     } else if (this->actionFunc == EnGo2_SlowRolling || this->actionFunc == EnGo2_ReverseRolling ||
                this->actionFunc == EnGo2_ContinueRolling) {

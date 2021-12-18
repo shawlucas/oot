@@ -58,7 +58,7 @@ s32 osPfsInitPak(OSMesgQueue* queue, OSPfs* pfs, s32 channel) {
 
     bcopy(id, pfs->id, BLOCKSIZE);
 
-    if (1) {}
+    
 
     pfs->version = id->version;
     pfs->banks = id->banks;

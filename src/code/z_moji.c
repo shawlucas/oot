@@ -65,7 +65,7 @@ void Moji_DrawChar(GraphicsContext* gfxCtx, char c) {
     OPEN_DISPS(gfxCtx, "../z_moji.c", __LINE__);
 
     if ((u32)gMojiFontTLUTs & 0xF) {
-        osSyncPrintf("moji_tlut --> %X\n", gMojiFontTLUTs);
+        osSyncPrintf("gMojiFontTLUTS --> %X\n", gMojiFontTLUTs);
     }
 
     if (sCurTLUTIndex != GET_CHAR_TLUT_INDEX(c)) {
@@ -91,7 +91,7 @@ void Moji_DrawString(GraphicsContext* gfxCtx, const char* str) {
     OPEN_DISPS(gfxCtx, "../z_moji.c", __LINE__);
 
     if ((u32)gMojiFontTex & 0xF) {
-        osSyncPrintf("font_ff --> %X\n", gMojiFontTex);
+        osSyncPrintf("gMojiFontTex --> %X\n", gMojiFontTex);
     }
 
     gDPPipeSync(POLY_OPA_DISP++);

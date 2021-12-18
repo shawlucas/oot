@@ -90,15 +90,13 @@ static InitChainEntry sInitChain[] = {
 static Vec3f D_8086E0E0 = { 0.0f, 140.0f, 0.0f };
 
 void BgBdanSwitch_InitDynaPoly(BgBdanSwitch* this, GlobalContext* globalCtx, CollisionHeader* collision, s32 flag) {
-    s16 pad1;
     CollisionHeader* colHeader = NULL;
-    s16 pad2;
 
     DynaPolyActor_Init(&this->dyna, flag);
     CollisionHeader_GetVirtual(collision, &colHeader);
     this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, colHeader);
     if (this->dyna.bgId == BG_ACTOR_MAX) {
-        osSyncPrintf("Warning : move BG 登録失敗(%s %d)(name %d)(arg_data 0x%04x)\n", "../z_bg_bdan_switch.c", 325,
+        osSyncPrintf("Warning : move BG registration failure (%s %d)(name %d)(params 0x%04X)\n", "../z_bg_bdan_switch.c", __LINE__,
                      this->dyna.actor.id, this->dyna.actor.params);
     }
 }
@@ -135,7 +133,6 @@ void func_8086D0EC(BgBdanSwitch* this) {
 
 void BgBdanSwitch_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgBdanSwitch* this = (BgBdanSwitch*)thisx;
-    s32 pad;
     s16 type;
     s32 flag;
 
@@ -192,12 +189,12 @@ void BgBdanSwitch_Init(Actor* thisx, GlobalContext* globalCtx) {
             }
             break;
         default:
-            osSyncPrintf("不正な ARG_DATA(arg_data 0x%04x)(%s %d)\n", this->dyna.actor.params, "../z_bg_bdan_switch.c",
-                         454);
+            osSyncPrintf("Unauthorized PARAMS(params 0x%04X)(%s %d)\n", this->dyna.actor.params, "../z_bg_bdan_switch.c",
+                         __LINE__);
             Actor_Kill(&this->dyna.actor);
             return;
     }
-    osSyncPrintf("(巨大魚ダンジョン 専用スイッチ)(arg_data 0x%04x)\n", this->dyna.actor.params);
+    osSyncPrintf("(Jabu-Jabu Dedicated Switch)(params 0x%04X)\n", this->dyna.actor.params);
 }
 
 void BgBdanSwitch_Destroy(Actor* thisx, GlobalContext* globalCtx) {
@@ -217,7 +214,6 @@ void BgBdanSwitch_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void func_8086D4B4(BgBdanSwitch* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 type;
 
     if (!Flags_GetSwitch(globalCtx, (this->dyna.actor.params >> 8) & 0x3F)) {
@@ -481,7 +477,6 @@ void func_8086DDC0(BgBdanSwitch* this, GlobalContext* globalCtx) {
 }
 
 void BgBdanSwitch_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgBdanSwitch* this = (BgBdanSwitch*)thisx;
     s32 type;
 

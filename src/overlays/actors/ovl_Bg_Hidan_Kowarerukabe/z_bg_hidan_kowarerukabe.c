@@ -117,9 +117,8 @@ void BgHidanKowarerukabe_Init(Actor* thisx, GlobalContext* globalCtx) {
 
     if (((this->dyna.actor.params & 0xFF) < CRACKED_STONE_FLOOR) ||
         ((this->dyna.actor.params & 0xFF) > LARGE_BOMBABLE_WALL)) {
-        // "Error: Fire Temple Breakable Walls. arg_data I can't determine the (%s %d)(arg_data 0x%04x)"
-        osSyncPrintf("Error : 炎の神殿 壊れる壁 の arg_data が判別出来ない(%s %d)(arg_data 0x%04x)\n",
-                     "../z_bg_hidan_kowarerukabe.c", 254, this->dyna.actor.params);
+        osSyncPrintf("Error: Fire Temple's param data for broken wall cannot be determined(%s %d)(params 0x%04X)\n",
+                     "../z_bg_hidan_kowarerukabe.c", __LINE__, this->dyna.actor.params);
         Actor_Kill(&this->dyna.actor);
         return;
     }
@@ -133,8 +132,7 @@ void BgHidanKowarerukabe_Init(Actor* thisx, GlobalContext* globalCtx) {
     Actor_SetScale(&this->dyna.actor, 0.1f);
     BgHidanKowarerukabe_InitColliderSphere(this, globalCtx);
     BgHidanKowarerukabe_OffsetActorYPos(this);
-    // "(fire walls, floors, destroyed by bombs)(arg_data 0x%04x)"
-    osSyncPrintf("(hidan 爆弾で壊れる 壁 床)(arg_data 0x%04x)\n", this->dyna.actor.params);
+    osSyncPrintf("(Wall floor broken with hidan bomb)(params 0x%04X)\n", this->dyna.actor.params);
 }
 
 void BgHidanKowarerukabe_Destroy(Actor* thisx, GlobalContext* globalCtx) {
@@ -145,7 +143,6 @@ void BgHidanKowarerukabe_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgHidanKowarerukabe_SpawnDust(BgHidanKowarerukabe* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f pos;
 
     pos = this->dyna.actor.world.pos;
@@ -300,7 +297,6 @@ void BgHidanKowarerukabe_Break(BgHidanKowarerukabe* this, GlobalContext* globalC
 
 void BgHidanKowarerukabe_Update(Actor* thisx, GlobalContext* globalCtx) {
     BgHidanKowarerukabe* this = (BgHidanKowarerukabe*)thisx;
-    s32 pad;
 
     if (Actor_GetCollidedExplosive(globalCtx, &this->collider.base) != NULL) {
         BgHidanKowarerukabe_Break(this, globalCtx);

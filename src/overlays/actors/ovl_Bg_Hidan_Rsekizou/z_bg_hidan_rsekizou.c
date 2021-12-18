@@ -122,7 +122,6 @@ static void* sFireballsTexs[] = {
 void BgHidanRsekizou_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgHidanRsekizou* this = (BgHidanRsekizou*)thisx;
     s32 i;
-    s32 pad;
     CollisionHeader* colHeader;
 
     colHeader = NULL;
@@ -150,7 +149,6 @@ void BgHidanRsekizou_Update(Actor* thisx, GlobalContext* globalCtx) {
     BgHidanRsekizou* this = (BgHidanRsekizou*)thisx;
     s32 i;
     ColliderJntSphElement* sphere;
-    s32 pad;
     f32 yawSine;
     f32 yawCosine;
 
@@ -225,7 +223,6 @@ Gfx* BgHidanRsekizou_DrawFireball(GlobalContext* globalCtx, BgHidanRsekizou* thi
 void BgHidanRsekizou_Draw(Actor* thisx, GlobalContext* globalCtx) {
     BgHidanRsekizou* this = (BgHidanRsekizou*)thisx;
     s32 i;
-    s32 pad;
     MtxF mf;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_hidan_rsekizou.c", __LINE__);

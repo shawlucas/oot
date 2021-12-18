@@ -599,8 +599,6 @@ s32 func_8008F2F8(GlobalContext* globalCtx) {
     if (!Player_InCsMode(globalCtx)) {
         triggerEntry = &sTextTriggers[var];
 
-        if (0) {}
-
         if ((triggerEntry->flag != 0) && !(gSaveContext.textTriggerFlags & triggerEntry->flag) &&
             (((var == 0) && (this->currentTunic != PLAYER_TUNIC_GORON)) ||
              (((var == 1) || (var == 3)) && (this->currentBoots == PLAYER_BOOTS_IRON) &&
@@ -751,7 +749,6 @@ void func_8008F87C(GlobalContext* globalCtx, Player* this, SkelAnime* skelAnime,
 
     if ((this->actor.scale.y >= 0.0f) && !(this->stateFlags1 & 0x80) &&
         (Player_ActionToMagicSpell(this, this->itemActionParam) < 0)) {
-        s32 pad;
 
         sp7C = D_80126058[(void)0, gSaveContext.linkAge];
         sp78 = D_80126060[(void)0, gSaveContext.linkAge];
@@ -1109,8 +1106,6 @@ void func_80090AFC(GlobalContext* globalCtx, Player* this, f32 arg2) {
     D_801260C8.z = arg2;
     Matrix_MultVec3f(&D_801260C8, &sp80);
 
-    if (1) {}
-
     if (BgCheck_AnyLineTest3(&globalCtx->colCtx, &sp8C, &sp80, &sp74, &sp9C, 1, 1, 1, 1, &bgId)) {
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_player_lib.c", __LINE__);
 
@@ -1322,7 +1317,6 @@ void func_80090D20(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3s* 
 
                 if (heldActor != NULL) {
                     MtxF sp44;
-                    s32 pad;
 
                     Matrix_MultVec3f(&D_80126190, &heldActor->world.pos);
                     Matrix_RotateZYX(0, -0x4000, -0x4000, MTXMODE_APPLY);
@@ -1379,11 +1373,11 @@ u32 func_80091738(GlobalContext* globalCtx, u8* segment, SkelAnime* skelAnime) {
 
     size = gObjectTable[OBJECT_GAMEPLAY_KEEP].vromEnd - gObjectTable[OBJECT_GAMEPLAY_KEEP].vromStart;
     ptr = segment + 0x3800;
-    DmaMgr_SendRequest1(ptr, gObjectTable[OBJECT_GAMEPLAY_KEEP].vromStart, size, "../z_player_lib.c", 2982);
+    DmaMgr_SendRequest1(ptr, gObjectTable[OBJECT_GAMEPLAY_KEEP].vromStart, size, "../z_player_lib.c", __LINE__);
 
     size = gObjectTable[linkObjectId].vromEnd - gObjectTable[linkObjectId].vromStart;
     ptr = segment + 0x8800;
-    DmaMgr_SendRequest1(ptr, gObjectTable[linkObjectId].vromStart, size, "../z_player_lib.c", 2988);
+    DmaMgr_SendRequest1(ptr, gObjectTable[linkObjectId].vromStart, size, "../z_player_lib.c", __LINE__);
 
     ptr = (void*)ALIGN16((u32)ptr + size);
 
@@ -1452,8 +1446,6 @@ void func_80091A24(GlobalContext* globalCtx, void* seg04, void* seg06, SkelAnime
     Mtx* lookAtMtx = Graph_Alloc(globalCtx->state.gfxCtx, sizeof(Mtx));
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_player_lib.c", __LINE__);
-
-    { s32 pad[2]; }
 
     opaRef = POLY_OPA_DISP;
     POLY_OPA_DISP++;

@@ -38,10 +38,8 @@ static InitChainEntry sInitChain[] = {
 };
 
 void BgHidanFslift_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad1;
     BgHidanFslift* this = (BgHidanFslift*)thisx;
     CollisionHeader* colHeader = NULL;
-    s32 pad2;
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
     DynaPolyActor_Init(&this->dyna, DPM_PLAYER);

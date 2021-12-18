@@ -799,7 +799,7 @@ void AudioLoad_RelocateFont(s32 fontId, SoundFontData* mem, RelocInfo* relocInfo
 #define BASE_OFFSET(x) (void*)((u32)(x) + (u32)(mem))
 
     reloc2 = ptrs[0];
-    if (1) {}
+    
     if ((reloc2 != 0) && (numDrums != 0)) {
         ptrs[0] = BASE_OFFSET(reloc2);
         for (i = 0; i < numDrums; i++) {
@@ -818,7 +818,7 @@ void AudioLoad_RelocateFont(s32 fontId, SoundFontData* mem, RelocInfo* relocInfo
     }
 
     reloc2 = ptrs[1];
-    if (1) {}
+    
     if ((reloc2 != 0) && (numSfx != 0)) {
         ptrs[1] = BASE_OFFSET(reloc2);
         for (i = 0; i < numSfx; i++) {
@@ -1469,7 +1469,7 @@ void AudioLoad_FinishAsyncLoad(AudioAsyncLoad* asyncLoad) {
     u32 sampleBankId2;
     RelocInfo relocInfo;
 
-    if (1) {}
+    
     switch (ASYNC_TBLTYPE(retMsg)) {
         case SEQUENCE_TABLE:
             AudioLoad_SetSeqLoadStatus(ASYNC_ID(retMsg), ASYNC_STATUS(retMsg));
@@ -1493,7 +1493,7 @@ void AudioLoad_FinishAsyncLoad(AudioAsyncLoad* asyncLoad) {
     }
 
     doneMsg = asyncLoad->retMsg;
-    if (1) {}
+    
     asyncLoad->status = LOAD_STATUS_WAITING;
     osSendMesg(asyncLoad->retQueue, doneMsg, OS_MESG_NOBLOCK);
 }
@@ -1787,7 +1787,7 @@ s32 AudioLoad_GetSamplesForFont(s32 fontId, SoundFontSample** sampleSet) {
 
     for (i = 0; i < numDrums; i++) {
         Drum* drum = Audio_GetDrum(fontId, i);
-        if (1) {}
+        
         if (drum != NULL) {
             numSamples = AudioLoad_AddToSampleSet(drum->sound.sample, numSamples, sampleSet);
         }

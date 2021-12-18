@@ -82,7 +82,6 @@ static void* sFireballsTexs[] = {
 
 void BgHidanSima_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgHidanSima* this = (BgHidanSima*)thisx;
-    s32 pad;
     CollisionHeader* colHeader = NULL;
     s32 i;
 

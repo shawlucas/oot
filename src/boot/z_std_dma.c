@@ -60,8 +60,7 @@ s32 DmaMgr_DmaRomToRam(u32 rom, u32 ram, u32 size) {
     osCreateMesgQueue(&queue, &msg, 1);
 
     while (size > buffSize) {
-        if (1) {} // Necessary to match
-
+         
         ioMsg.hdr.pri = OS_MESG_PRI_NORMAL;
         ioMsg.hdr.retQueue = &queue;
         ioMsg.devAddr = rom;
@@ -92,7 +91,7 @@ s32 DmaMgr_DmaRomToRam(u32 rom, u32 ram, u32 size) {
         ram += buffSize;
     }
 
-    if (1) {} // Also necessary to match
+     // Also necessary to match
 
     ioMsg.hdr.pri = OS_MESG_PRI_NORMAL;
     ioMsg.hdr.retQueue = &queue;
@@ -249,8 +248,7 @@ void DmaMgr_ProcessMsg(DmaRequest* req) {
 
     while (iter->vromEnd) {
         if (vrom >= iter->vromStart && vrom < iter->vromEnd) {
-            if (1) {} // Necessary to match
-
+             
             if (iter->romEnd == 0) {
                 if (iter->vromEnd < vrom + size) {
                     DmaMgr_Error(req, filename, "Segment Alignment Error",

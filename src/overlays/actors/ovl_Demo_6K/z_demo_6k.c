@@ -724,7 +724,7 @@ void func_80968B70(Actor* thisx, GlobalContext* globalCtx) {
     u8 primColor[4];
     u8 envColor[3];
 
-    if (1) {}
+    
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_6k.c", __LINE__);
 
@@ -774,7 +774,7 @@ void func_80968FB0(Actor* thisx, GlobalContext* globalCtx) {
     f32 scaleFactor;
     s32 pad;
 
-    if (1) {}
+    
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_6k.c", __LINE__);
 

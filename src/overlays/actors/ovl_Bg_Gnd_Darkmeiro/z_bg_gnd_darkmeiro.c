@@ -101,7 +101,7 @@ void BgGndDarkmeiro_Destroy(Actor* thisx, GlobalContext* globalCtx2) {
     BgGndDarkmeiro* this = (BgGndDarkmeiro*)thisx;
 
     if ((this->dyna.actor.params & 0xFF) == 1) {
-        if (1) {}
+        
         DynaPoly_DeleteBgActor(globalCtx, &globalCtx->colCtx.dyna, this->dyna.bgId);
     }
 }

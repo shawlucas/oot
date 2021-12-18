@@ -1903,10 +1903,9 @@ void func_80068C3C(GlobalContext* globalCtx, CutsceneContext* csCtx) {
     Gfx* displayList;
     Gfx* prevDisplayList;
 
-    if (0) {} // Necessary to match
-
+     
     if (gSaveContext.cutsceneIndex >= 0xFFF0) {
-        if (0) {} // Also necessary to match
+         // Also necessary to match
 
         if (BREG(0) != 0) {
             OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo.c", __LINE__);

@@ -142,7 +142,7 @@ void BgMizuWater_Init(Actor* thisx, GlobalContext* globalCtx) {
         case 3:
             if (Flags_GetSwitch(globalCtx, this->switchFlag)) {
                 this->actor.world.pos.y = this->baseY + 110.0f;
-                if (1) {}
+                
                 this->targetY = this->actor.world.pos.y;
             }
             waterBoxes[8].ySurface = this->actor.world.pos.y;
@@ -150,7 +150,7 @@ void BgMizuWater_Init(Actor* thisx, GlobalContext* globalCtx) {
         case 4:
             if (Flags_GetSwitch(globalCtx, this->switchFlag)) {
                 this->actor.world.pos.y = this->baseY + 160.0f;
-                if (1) {}
+                
                 this->targetY = this->actor.world.pos.y;
             }
             waterBoxes[16].ySurface = this->actor.world.pos.y;

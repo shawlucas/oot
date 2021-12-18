@@ -353,7 +353,7 @@ void EnBombf_Update(Actor* thisx, GlobalContext* globalCtx) {
         if ((thisx->speedXZ != 0.0f) && (thisx->bgCheckFlags & 8)) {
 
             if (ABS((s16)(thisx->wallYaw - thisx->world.rot.y)) > 0x4000) {
-                if (1) {}
+                
                 thisx->world.rot.y = ((thisx->wallYaw - thisx->world.rot.y) + thisx->wallYaw) - 0x8000;
             }
             Audio_PlayActorSound2(thisx, NA_SE_EV_BOMB_BOUND);
@@ -481,7 +481,7 @@ void EnBombf_Draw(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad;
     EnBombf* this = (EnBombf*)thisx;
 
-    if (1) {}
+    
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_bombf.c", __LINE__);
 

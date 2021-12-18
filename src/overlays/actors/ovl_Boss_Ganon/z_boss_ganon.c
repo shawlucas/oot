@@ -420,7 +420,7 @@ void BossGanon_Init(Actor* thisx, GlobalContext* globalCtx2) {
             } else {
                 thisx->update = func_808E1EB4;
                 thisx->draw = func_808E229C;
-                if (1) {}
+                
                 thisx->speedXZ = 11.0f;
 
                 if (thisx->params == 0xC8) {
@@ -4207,7 +4207,7 @@ void func_808E1EB4(Actor* thisx, GlobalContext* globalCtx2) {
     this->unk_2EC[this->unk_1A6] = this->actor.world.pos;
 
     if (this->unk_1C2 == 0) {
-        if (1) {}
+        
         if (this->timers[0] == 0) {
             this->unk_1C2 = 1;
         }
@@ -4336,7 +4336,7 @@ void func_808E2544(Actor* thisx, GlobalContext* globalCtx) {
     this->unk_3C4[this->unk_1A6].y = BINANG_TO_RAD(this->actor.world.rot.y);
 
     switch (this->unk_1C2) {
-        if (1) {}
+        
         case 0:
             this->actor.speedXZ = 40.0f;
             Math_ApproachF(&this->fwork[1], 255.0f, 1.0f, 40.0f);

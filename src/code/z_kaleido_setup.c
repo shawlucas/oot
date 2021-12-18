@@ -44,7 +44,7 @@ void KaleidoSetup_Update(GlobalContext* globalCtx) {
             pauseCtx->mode = (u16)(pauseCtx->pageIndex * 2) + 1;
             pauseCtx->state = 1;
 
-            osSyncPrintf("Ｍｏｄｅ=%d  eye.x=%f,  eye.z=%f  kscp_pos=%d\n", pauseCtx->mode, pauseCtx->eye.x,
+            osSyncPrintf("pauseCtx->mode=%d  eye.x=%f,  eye.z=%f  pageIndex=%d\n", pauseCtx->mode, pauseCtx->eye.x,
                          pauseCtx->eye.z, pauseCtx->pageIndex);
         }
 
@@ -63,8 +63,7 @@ void KaleidoSetup_Update(GlobalContext* globalCtx) {
 
 void KaleidoSetup_Init(GlobalContext* globalCtx) {
     PauseContext* pauseCtx = &globalCtx->pauseCtx;
-    u64 temp = 0; // Necessary to match
-
+    u64 temp = 0; 
     pauseCtx->state = 0;
     pauseCtx->debugState = 0;
     pauseCtx->alpha = 0;

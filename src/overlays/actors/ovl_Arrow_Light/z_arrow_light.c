@@ -56,7 +56,7 @@ void ArrowLight_Init(Actor* thisx, GlobalContext* globalCtx) {
 
 void ArrowLight_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     func_800876C8(globalCtx);
-    LOG_STRING("消滅", "../z_arrow_light.c", 403); // "Disappearance"
+    LOG_STRING("Disappearance", "../z_arrow_light.c", __LINE__);
 }
 
 void ArrowLight_Charge(ArrowLight* this, GlobalContext* globalCtx) {
@@ -117,7 +117,7 @@ void ArrowLight_Hit(ArrowLight* this, GlobalContext* globalCtx) {
             this->radius = (((1.0f - offset) * scale) + 10.0f);
             this->unk_160 += ((2.0f - this->unk_160) * 0.1f);
             if (this->timer < 16) {
-                if (1) {}
+                
                 this->alpha = ((this->timer * 0x23) - 0x118);
             }
         }
@@ -146,7 +146,6 @@ void ArrowLight_Hit(ArrowLight* this, GlobalContext* globalCtx) {
 void ArrowLight_Fly(ArrowLight* this, GlobalContext* globalCtx) {
     EnArrow* arrow = (EnArrow*)this->actor.parent;
     f32 distanceScaled;
-    s32 pad;
 
     if ((arrow == NULL) || (arrow->actor.update == NULL)) {
         Actor_Kill(&this->actor);
@@ -189,15 +188,12 @@ void ArrowLight_Update(Actor* thisx, GlobalContext* globalCtx) {
 
 void ArrowLight_Draw(Actor* thisx, GlobalContext* globalCtx) {
     ArrowLight* this = (ArrowLight*)thisx;
-    s32 pad;
     u32 stateFrames = globalCtx->state.frames;
     EnArrow* arrow = (EnArrow*)this->actor.parent;
-    Actor* tranform;
-
-    if (1) {}
+    Actor* tranform;  
 
     if ((arrow != NULL) && (arrow->actor.update != NULL) && (this->timer < 255)) {
-        if (1) {}
+        
         tranform = (arrow->hitFlags & 2) ? &this->actor : &arrow->actor;
 
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_arrow_light.c", __LINE__);

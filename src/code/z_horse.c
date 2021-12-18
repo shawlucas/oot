@@ -87,7 +87,7 @@ void func_8006D0EC(GlobalContext* globalCtx, Player* player) {
         } else {
             osSyncPrintf(VT_COL(RED, WHITE));
             // "Horse_SetNormal():%d set spot is no good."
-            osSyncPrintf("Horse_SetNormal():%d セットスポットまずいです。\n", gSaveContext.horseData.scene);
+            osSyncPrintf("Horse_SetNormal():%d set spot is no good\n", gSaveContext.horseData.scene);
             osSyncPrintf(VT_RST);
             func_8006D074(globalCtx);
         }
@@ -238,7 +238,7 @@ void func_8006DC68(GlobalContext* globalCtx, Player* player) {
         if (!func_8006CFC0(gSaveContext.horseData.scene)) {
             osSyncPrintf(VT_COL(RED, WHITE));
             // "Horse_Set_Check():%d set spot is no good."
-            osSyncPrintf("Horse_Set_Check():%d セットスポットまずいです。\n", gSaveContext.horseData.scene);
+            osSyncPrintf("Horse_Set_Check():%d set spot is no good\n", gSaveContext.horseData.scene);
             osSyncPrintf(VT_RST);
             func_8006D074(globalCtx);
         }

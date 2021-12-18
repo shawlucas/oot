@@ -56,7 +56,7 @@ void ArrowIce_Init(Actor* thisx, GlobalContext* globalCtx) {
 
 void ArrowIce_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     func_800876C8(globalCtx);
-    LOG_STRING("消滅", "../z_arrow_ice.c", 415); // "Disappearance"
+    LOG_STRING("Disappearance", "../z_arrow_ice.c", __LINE__); // "Disappearance"
 }
 
 void ArrowIce_Charge(ArrowIce* this, GlobalContext* globalCtx) {
@@ -118,7 +118,7 @@ void ArrowIce_Hit(ArrowIce* this, GlobalContext* globalCtx) {
             this->radius = (((1.0f - offset) * scale) + 10.0f);
             this->unk_160 += ((2.0f - this->unk_160) * 0.1f);
             if (this->timer < 16) {
-                if (1) {}
+                
                 this->alpha = ((this->timer * 0x23) - 0x118);
             }
         }
@@ -147,7 +147,6 @@ void ArrowIce_Hit(ArrowIce* this, GlobalContext* globalCtx) {
 void ArrowIce_Fly(ArrowIce* this, GlobalContext* globalCtx) {
     EnArrow* arrow;
     f32 distanceScaled;
-    s32 pad;
 
     arrow = (EnArrow*)this->actor.parent;
     if ((arrow == NULL) || (arrow->actor.update == NULL)) {
@@ -191,15 +190,11 @@ void ArrowIce_Update(Actor* thisx, GlobalContext* globalCtx) {
 
 void ArrowIce_Draw(Actor* thisx, GlobalContext* globalCtx) {
     ArrowIce* this = (ArrowIce*)thisx;
-    s32 pad;
     Actor* tranform;
     u32 stateFrames = globalCtx->state.frames;
     EnArrow* arrow = (EnArrow*)this->actor.parent;
 
-    if (1) {}
-
     if ((arrow != NULL) && (arrow->actor.update != NULL) && (this->timer < 255)) {
-        if (1) {}
         tranform = (arrow->hitFlags & 2) ? &this->actor : &arrow->actor;
 
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_arrow_ice.c", __LINE__);

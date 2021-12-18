@@ -93,8 +93,8 @@ void EffectSsBomb2_DrawFade(GlobalContext* globalCtx, u32 index, EffectSs* this)
         gSPDisplayList(POLY_XLU_DISP++, this->gfx);
     }
 
-    if (1) {}
-    if (1) {}
+    
+    
 
     CLOSE_DISPS(gfxCtx, "../z_eff_ss_bomb2.c", __LINE__);
 }
@@ -158,8 +158,8 @@ void EffectSsBomb2_DrawLayered(GlobalContext* globalCtx, u32 index, EffectSs* th
         }
     }
 
-    if (1) {}
-    if (1) {}
+    
+    
 
     CLOSE_DISPS(gfxCtx, "../z_eff_ss_bomb2.c", __LINE__);
 }

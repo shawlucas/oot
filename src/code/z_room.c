@@ -87,14 +87,12 @@ void func_80095D04(GlobalContext* globalCtx, Room* room, u32 flags) {
     struct_80095D04* spB4 = NULL;
     struct_80095D04* spB0 = NULL;
     struct_80095D04* phi_v0;
-    s32 pad;
     struct_80095D04* spA4;
     s32 phi_v1;
     s32 sp9C;
     Vec3f sp90;
     Vec3f sp84;
     f32 sp80;
-    s32 pad2;
     PolygonDlist2* sp78;
     PolygonDlist2* temp;
     f32 temp_f2;
@@ -106,7 +104,7 @@ void func_80095D04(GlobalContext* globalCtx, Room* room, u32 flags) {
         func_80093C80(globalCtx);
         gSPMatrix(POLY_OPA_DISP++, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
     }
-    if (1) {}
+
     if (flags & 2) {
         func_8003435C(&D_801270A0, globalCtx);
         gSPSegment(POLY_XLU_DISP++, 0x03, room->segment);
@@ -221,25 +219,21 @@ s32 func_80096238(void* data) {
     OSTime time;
 
     if (*(u32*)data == JPEG_MARKER) {
-        osSyncPrintf("JPEGデータを展開します\n");        // "Expanding jpeg data"
-        osSyncPrintf("JPEGデータアドレス %08X\n", data); // "Jpeg data address %08X"
-        // "Work buffer address (Z buffer) %08X"
-        osSyncPrintf("ワークバッファアドレス（Ｚバッファ）%08X\n", gZBuffer);
+        osSyncPrintf("Extracting JPEG data\n");
+        osSyncPrintf("JPEG data address: %08X\n", data);
+        osSyncPrintf("Work Buffer address (Z buffer): %08X\n", gZBuffer);
 
         time = osGetTime();
         if (!Jpeg_Decode(data, gZBuffer, gGfxSPTaskOutputBuffer, sizeof(gGfxSPTaskOutputBuffer))) {
             time = osGetTime() - time;
 
-            // "Success... I think. time = %6.3f ms"
-            osSyncPrintf("成功…だと思う。 time = %6.3f ms \n", OS_CYCLES_TO_USEC(time) / 1000.0f);
-            // "Writing back to original address from work buffer."
-            osSyncPrintf("ワークバッファから元のアドレスに書き戻します。\n");
-            // "If the original buffer size isn't at least 150kb, it will be out of control."
-            osSyncPrintf("元のバッファのサイズが150キロバイト無いと暴走するでしょう。\n");
+            osSyncPrintf("Success...I think. time = %6.3f ms \n", OS_CYCLES_TO_USEC(time) / 1000.0f);
+            osSyncPrintf("Writing back to original address from work buffer.\n");
+            osSyncPrintf("If the original buffer size isn't at least 150kb, it will run out of control.\n");
 
             bcopy(gZBuffer, data, sizeof(gZBuffer));
         } else {
-            osSyncPrintf("失敗！なんで〜\n"); // "Failure! Why is it 〜"
+            osSyncPrintf("Failure! Why?\n");
         }
     }
 
@@ -393,9 +387,8 @@ BgImage* func_80096A74(PolygonType1* polygon1, GlobalContext* globalCtx) {
         bgImage++;
     }
 
-    // "z_room.c: Data consistent with camera id does not exist camid=%d"
-    osSyncPrintf(VT_COL(RED, WHITE) "z_room.c:カメラＩＤに一致するデータが存在しません camid=%d\n" VT_RST, camId);
-    LogUtils_HungupThread("../z_room.c", 726);
+    osSyncPrintf(VT_COL(RED, WHITE) "z_room.c: There is no data matching the camera id camId=%d\n" VT_RST, camId);
+    LogUtils_HungupThread("../z_room.c", __LINE__);
 
     return NULL;
 }
@@ -470,7 +463,7 @@ void func_80096F6C(GlobalContext* globalCtx, Room* room, u32 flags) {
     } else if (polygon1->format == 2) {
         func_80096B6C(globalCtx, room, flags);
     } else {
-        LogUtils_HungupThread("../z_room.c", 841);
+        LogUtils_HungupThread("../z_room.c", __LINE__);
     }
 }
 
@@ -503,7 +496,7 @@ u32 func_80096FE8(GlobalContext* globalCtx, RoomContext* roomCtx) {
         RomFile* roomList = globalCtx->roomList;
         TransitionActorEntry* transitionActor = &globalCtx->transiActorCtx.list[0];
 
-        LOG_NUM("game_play->room_rom_address.num", globalCtx->numRooms, "../z_room.c", 912);
+        LOG_NUM("globalCtx->numRooms", globalCtx->numRooms, "../z_room.c", __LINE__);
 
         for (j = 0; j < globalCtx->transiActorCtx.numActors; j++) {
             frontRoom = transitionActor->sides[0].room;
@@ -522,14 +515,11 @@ u32 func_80096FE8(GlobalContext* globalCtx, RoomContext* roomCtx) {
     }
 
     osSyncPrintf(VT_FGCOL(YELLOW));
-    // "Room buffer size=%08X(%5.1fK)"
-    osSyncPrintf("部屋バッファサイズ=%08X(%5.1fK)\n", maxRoomSize, maxRoomSize / 1024.0f);
-    roomCtx->bufPtrs[0] = GameState_Alloc(&globalCtx->state, maxRoomSize, "../z_room.c", 946);
-    // "Room buffer initial pointer=%08X"
-    osSyncPrintf("部屋バッファ開始ポインタ=%08X\n", roomCtx->bufPtrs[0]);
+    osSyncPrintf("Room buffer size = %08X(%5.1fK)\n", maxRoomSize, maxRoomSize / 1024.0f);
+    roomCtx->bufPtrs[0] = GameState_Alloc(&globalCtx->state, maxRoomSize, "../z_room.c", __LINE__);
+    osSyncPrintf("Room buffer start pointer = %08X\n", roomCtx->bufPtrs[0]);
     roomCtx->bufPtrs[1] = (void*)((s32)roomCtx->bufPtrs[0] + maxRoomSize);
-    // "Room buffer end pointer=%08X"
-    osSyncPrintf("部屋バッファ終了ポインタ=%08X\n", roomCtx->bufPtrs[1]);
+    osSyncPrintf("Room buffer end pointer = %08X\n", roomCtx->bufPtrs[1]);
     osSyncPrintf(VT_RST);
     roomCtx->unk_30 = 0;
     roomCtx->status = 0;
@@ -557,7 +547,7 @@ s32 func_8009728C(GlobalContext* globalCtx, RoomContext* roomCtx, s32 roomNum) {
 
         osCreateMesgQueue(&roomCtx->loadQueue, &roomCtx->loadMsg, 1);
         DmaMgr_SendRequest2(&roomCtx->dmaRequest, roomCtx->unk_34, globalCtx->roomList[roomNum].vromStart, size, 0,
-                            &roomCtx->loadQueue, NULL, "../z_room.c", 1036);
+                            &roomCtx->loadQueue, NULL, "../z_room.c", __LINE__);
         roomCtx->unk_30 ^= 1;
 
         return 1;
@@ -590,7 +580,7 @@ void Room_Draw(GlobalContext* globalCtx, Room* room, u32 flags) {
     if (room->segment != NULL) {
         gSegments[3] = VIRTUAL_TO_PHYSICAL(room->segment);
         ASSERT(room->mesh->polygon.type < ARRAY_COUNTU(sRoomDrawHandlers),
-               "this->ground_shape->polygon.type < number(Room_Draw_Proc)", "../z_room.c", 1125);
+               "room->mesh->polygon.type < ARRAY_COUNTU(sRoomDrawHandlers)", "../z_room.c", __LINE__);
         sRoomDrawHandlers[room->mesh->polygon.type](globalCtx, room, flags);
     }
 }

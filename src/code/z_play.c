@@ -125,7 +125,7 @@ void func_800BC5E0(GlobalContext* globalCtx, s32 transitionType) {
                 globalCtx->transitionMode = 16;
                 break;
             default:
-                Fault_AddHungupAndCrash("../z_play.c", 2290);
+                Fault_AddHungupAndCrash("../z_play.c", __LINE__);
                 break;
         }
     }
@@ -192,7 +192,6 @@ void Gameplay_Init(GameState* thisx) {
     s32 playerStartCamId;
     s32 i;
     u8 tempSetupIndex;
-    s32 pad[2];
 
     if (gSaveContext.entranceIndex == -1) {
         gSaveContext.entranceIndex = 0;
@@ -289,15 +288,15 @@ void Gameplay_Init(GameState* thisx) {
         globalCtx,
         gEntranceTable[((void)0, gSaveContext.entranceIndex) + ((void)0, gSaveContext.sceneSetupIndex)].scene,
         gEntranceTable[((void)0, gSaveContext.sceneSetupIndex) + ((void)0, gSaveContext.entranceIndex)].spawn);
-    osSyncPrintf("\nSCENE_NO=%d COUNTER=%d\n", ((void)0, gSaveContext.entranceIndex), gSaveContext.sceneSetupIndex);
+    osSyncPrintf("\nENTRANCE INDEX = %d SCENE SETUP INDEX = %d\n", ((void)0, gSaveContext.entranceIndex), gSaveContext.sceneSetupIndex);
 
     // When entering Gerudo Valley in the right setup, trigger the GC emulator to play the ending movie.
     // The emulator constantly checks whether PC is 0x81000000, so this works even though it's not a valid address.
     if ((gEntranceTable[((void)0, gSaveContext.entranceIndex)].scene == SCENE_SPOT09) &&
         gSaveContext.sceneSetupIndex == 6) {
-        osSyncPrintf("エンディングはじまるよー\n"); // "The ending starts"
+        osSyncPrintf("The ending is starting!\n");
         ((void (*)())0x81000000)();
-        osSyncPrintf("出戻り？\n"); // "Return?"
+        osSyncPrintf("Return?\n");
     }
 
     Cutscene_HandleEntranceTriggers(globalCtx);
@@ -359,11 +358,10 @@ void Gameplay_Init(GameState* thisx) {
 
     osSyncPrintf("ZELDA ALLOC SIZE=%x\n", THA_GetSize(&globalCtx->state.tha));
     zAllocSize = THA_GetSize(&globalCtx->state.tha);
-    zAlloc = GameState_Alloc(&globalCtx->state, zAllocSize, "../z_play.c", 2918);
+    zAlloc = GameState_Alloc(&globalCtx->state, zAllocSize, "../z_play.c", __LINE__);
     zAllocAligned = (zAlloc + 8) & ~0xF;
     ZeldaArena_Init(zAllocAligned, zAllocSize - zAllocAligned + zAlloc);
-    // "Zelda Heap"
-    osSyncPrintf("ゼルダヒープ %08X-%08X\n", zAllocAligned,
+    osSyncPrintf("Zelda Heap %08X-%08X\n", zAllocAligned,
                  (s32)(zAllocAligned + zAllocSize) - (s32)(zAllocAligned - zAlloc));
 
     Fault_AddClient(&D_801614B8, ZeldaArena_Display, NULL, NULL);
@@ -422,7 +420,7 @@ void Gameplay_Update(GlobalContext* globalCtx) {
 
     if ((HREG(80) == 18) && (HREG(81) < 0)) {
         HREG(81) = 0;
-        osSyncPrintf("object_exchange_rom_address %u\n", gObjectTableSize);
+        osSyncPrintf("gObjectTableSize %u\n", gObjectTableSize);
         osSyncPrintf("RomStart RomEnd   Size\n");
         for (i = 0; i < gObjectTableSize; i++) {
             s32 size = gObjectTable[i].vromEnd - gObjectTable[i].vromStart;
@@ -451,7 +449,7 @@ void Gameplay_Update(GlobalContext* globalCtx) {
             switch (gTrnsnUnkState) {
                 case 2:
                     if (TransitionUnk_Init(&sTrnsnUnk, 10, 7) == NULL) {
-                        osSyncPrintf("fbdemo_init呼出し失敗！\n"); // "fbdemo_init call failed!"
+                        osSyncPrintf("TransitionUnk_Init call failed!\n");
                         gTrnsnUnkState = 0;
                     } else {
                         sTrnsnUnk.zBuffer = (u16*)gZBuffer;
@@ -477,11 +475,9 @@ void Gameplay_Update(GlobalContext* globalCtx) {
                         }
 
                         if (!(gEntranceTable[globalCtx->nextEntranceIndex + sp6E].field & 0x8000)) { // Continue BGM Off
-                            // "Sound initalized. 111"
-                            osSyncPrintf("\n\n\nサウンドイニシャル来ました。111");
+                            osSyncPrintf("\n\n\nSound initialized. 111");
                             if ((globalCtx->fadeTransition < 56) && !Environment_IsForcedSequenceDisabled()) {
-                                // "Sound initalized. 222"
-                                osSyncPrintf("\n\n\nサウンドイニシャル来ました。222");
+                                osSyncPrintf("\n\n\nSound initialized. 222");
                                 func_800F6964(0x14);
                                 gSaveContext.seqId = (u8)NA_BGM_DISABLED;
                                 gSaveContext.natureAmbienceId = 0xFF;
@@ -720,8 +716,7 @@ void Gameplay_Update(GlobalContext* globalCtx) {
                         globalCtx->envCtx.sandstormState = 4;
                         globalCtx->envCtx.sandstormPrimA = 255;
                         globalCtx->envCtx.sandstormEnvA = 255;
-                        // "It's here!!!!!!!!!"
-                        LOG_STRING("来た!!!!!!!!!!!!!!!!!!!!!", "../z_play.c", 3471);
+                        LOG_STRING("It's here!!!!!!!", "../z_play.c", __LINE__);
                         globalCtx->transitionMode = 15;
                     } else {
                         globalCtx->transitionMode = 12;
@@ -766,12 +761,12 @@ void Gameplay_Update(GlobalContext* globalCtx) {
         }
 
         if (1 && HREG(63)) {
-            LOG_NUM("1", 1, "../z_play.c", 3533);
+            LOG_NUM("1", 1, "../z_play.c", __LINE__);
         }
 
         if (1 && (gTrnsnUnkState != 3)) {
             if (1 && HREG(63)) {
-                LOG_NUM("1", 1, "../z_play.c", 3542);
+                LOG_NUM("1", 1, "../z_play.c", __LINE__);
             }
 
             if ((gSaveContext.gameMode == 0) && (globalCtx->msgCtx.msgMode == MSGMODE_NONE) &&
@@ -780,30 +775,30 @@ void Gameplay_Update(GlobalContext* globalCtx) {
             }
 
             if (1 && HREG(63)) {
-                LOG_NUM("1", 1, "../z_play.c", 3551);
+                LOG_NUM("1", 1, "../z_play.c", __LINE__);
             }
 
             sp80 = (globalCtx->pauseCtx.state != 0) || (globalCtx->pauseCtx.debugState != 0);
 
             if (1 && HREG(63)) {
-                LOG_NUM("1", 1, "../z_play.c", 3555);
+                LOG_NUM("1", 1, "../z_play.c", __LINE__);
             }
 
             AnimationContext_Reset(&globalCtx->animationCtx);
 
             if (1 && HREG(63)) {
-                LOG_NUM("1", 1, "../z_play.c", 3561);
+                LOG_NUM("1", 1, "../z_play.c", __LINE__);
             }
 
             Object_UpdateBank(&globalCtx->objectCtx);
 
             if (1 && HREG(63)) {
-                LOG_NUM("1", 1, "../z_play.c", 3577);
+                LOG_NUM("1", 1, "../z_play.c", __LINE__);
             }
 
             if ((sp80 == 0) && (IREG(72) == 0)) {
                 if (1 && HREG(63)) {
-                    LOG_NUM("1", 1, "../z_play.c", 3580);
+                    LOG_NUM("1", 1, "../z_play.c", __LINE__);
                 }
 
                 globalCtx->gameplayFrames++;
@@ -811,7 +806,7 @@ void Gameplay_Update(GlobalContext* globalCtx) {
                 func_800AA178(1);
 
                 if (globalCtx->actorCtx.freezeFlashTimer && (globalCtx->actorCtx.freezeFlashTimer-- < 5)) {
-                    osSyncPrintf("FINISH=%d\n", globalCtx->actorCtx.freezeFlashTimer);
+                    osSyncPrintf("FREEZE FLASH TIMER = %d\n", globalCtx->actorCtx.freezeFlashTimer);
                     if ((globalCtx->actorCtx.freezeFlashTimer > 0) &&
                         ((globalCtx->actorCtx.freezeFlashTimer % 2) != 0)) {
                         globalCtx->envCtx.fillScreen = true;
@@ -823,37 +818,37 @@ void Gameplay_Update(GlobalContext* globalCtx) {
                     }
                 } else {
                     if (1 && HREG(63)) {
-                        LOG_NUM("1", 1, "../z_play.c", 3606);
+                        LOG_NUM("1", 1, "../z_play.c", __LINE__);
                     }
 
                     func_800973FC(globalCtx, &globalCtx->roomCtx);
 
                     if (1 && HREG(63)) {
-                        LOG_NUM("1", 1, "../z_play.c", 3612);
+                        LOG_NUM("1", 1, "../z_play.c", __LINE__);
                     }
 
                     CollisionCheck_AT(globalCtx, &globalCtx->colChkCtx);
 
                     if (1 && HREG(63)) {
-                        LOG_NUM("1", 1, "../z_play.c", 3618);
+                        LOG_NUM("1", 1, "../z_play.c", __LINE__);
                     }
 
                     CollisionCheck_OC(globalCtx, &globalCtx->colChkCtx);
 
                     if (1 && HREG(63)) {
-                        LOG_NUM("1", 1, "../z_play.c", 3624);
+                        LOG_NUM("1", 1, "../z_play.c", __LINE__);
                     }
 
                     CollisionCheck_Damage(globalCtx, &globalCtx->colChkCtx);
 
                     if (1 && HREG(63)) {
-                        LOG_NUM("1", 1, "../z_play.c", 3631);
+                        LOG_NUM("1", 1, "../z_play.c", __LINE__);
                     }
 
                     CollisionCheck_ClearContext(globalCtx, &globalCtx->colChkCtx);
 
                     if (1 && HREG(63)) {
-                        LOG_NUM("1", 1, "../z_play.c", 3637);
+                        LOG_NUM("1", 1, "../z_play.c", __LINE__);
                     }
 
                     if (globalCtx->unk_11DE9 == 0) {
@@ -861,31 +856,31 @@ void Gameplay_Update(GlobalContext* globalCtx) {
                     }
 
                     if (1 && HREG(63)) {
-                        LOG_NUM("1", 1, "../z_play.c", 3643);
+                        LOG_NUM("1", 1, "../z_play.c", __LINE__);
                     }
 
                     func_80064558(globalCtx, &globalCtx->csCtx);
 
                     if (1 && HREG(63)) {
-                        LOG_NUM("1", 1, "../z_play.c", 3648);
+                        LOG_NUM("1", 1, "../z_play.c", __LINE__);
                     }
 
                     func_800645A0(globalCtx, &globalCtx->csCtx);
 
                     if (1 && HREG(63)) {
-                        LOG_NUM("1", 1, "../z_play.c", 3651);
+                        LOG_NUM("1", 1, "../z_play.c", __LINE__);
                     }
 
                     Effect_UpdateAll(globalCtx);
 
                     if (1 && HREG(63)) {
-                        LOG_NUM("1", 1, "../z_play.c", 3657);
+                        LOG_NUM("1", 1, "../z_play.c", __LINE__);
                     }
 
                     EffectSs_UpdateAll(globalCtx);
 
                     if (1 && HREG(63)) {
-                        LOG_NUM("1", 1, "../z_play.c", 3662);
+                        LOG_NUM("1", 1, "../z_play.c", __LINE__);
                     }
                 }
             } else {
@@ -893,29 +888,27 @@ void Gameplay_Update(GlobalContext* globalCtx) {
             }
 
             if (1 && HREG(63)) {
-                LOG_NUM("1", 1, "../z_play.c", 3672);
+                LOG_NUM("1", 1, "../z_play.c", __LINE__);
             }
 
             func_80095AA0(globalCtx, &globalCtx->roomCtx.curRoom, &input[1], 0);
 
             if (1 && HREG(63)) {
-                LOG_NUM("1", 1, "../z_play.c", 3675);
+                LOG_NUM("1", 1, "../z_play.c", __LINE__);
             }
 
             func_80095AA0(globalCtx, &globalCtx->roomCtx.prevRoom, &input[1], 1);
 
             if (1 && HREG(63)) {
-                LOG_NUM("1", 1, "../z_play.c", 3677);
+                LOG_NUM("1", 1, "../z_play.c", __LINE__);
             }
 
             if (globalCtx->unk_1242B != 0) {
                 if (CHECK_BTN_ALL(input[0].press.button, BTN_CUP)) {
                     if ((globalCtx->pauseCtx.state != 0) || (globalCtx->pauseCtx.debugState != 0)) {
-                        // "Changing viewpoint is prohibited due to the kaleidoscope"
-                        osSyncPrintf(VT_FGCOL(CYAN) "カレイドスコープ中につき視点変更を禁止しております\n" VT_RST);
+                        osSyncPrintf(VT_FGCOL(CYAN) "Changing viewpoint is prohibited when paused\n" VT_RST);
                     } else if (Player_InCsMode(globalCtx)) {
-                        // "Changing viewpoint is prohibited during the cutscene"
-                        osSyncPrintf(VT_FGCOL(CYAN) "デモ中につき視点変更を禁止しております\n" VT_RST);
+                        osSyncPrintf(VT_FGCOL(CYAN) "Changing viewpoint is prohibited during a cutscene\n" VT_RST);
                     } else if (YREG(15) == 0x10) {
                         Audio_PlaySoundGeneral(NA_SE_SY_ERROR, &D_801333D4, 4, &D_801333E0, &D_801333E0, &D_801333E8);
                     } else {
@@ -926,65 +919,65 @@ void Gameplay_Update(GlobalContext* globalCtx) {
             }
 
             if (1 && HREG(63)) {
-                LOG_NUM("1", 1, "../z_play.c", 3708);
+                LOG_NUM("1", 1, "../z_play.c", __LINE__);
             }
 
             SkyboxDraw_Update(&globalCtx->skyboxCtx);
 
             if (1 && HREG(63)) {
-                LOG_NUM("1", 1, "../z_play.c", 3716);
+                LOG_NUM("1", 1, "../z_play.c", __LINE__);
             }
 
             if ((globalCtx->pauseCtx.state != 0) || (globalCtx->pauseCtx.debugState != 0)) {
                 if (1 && HREG(63)) {
-                    LOG_NUM("1", 1, "../z_play.c", 3721);
+                    LOG_NUM("1", 1, "../z_play.c", __LINE__);
                 }
 
                 KaleidoScopeCall_Update(globalCtx);
             } else if (globalCtx->gameOverCtx.state != GAMEOVER_INACTIVE) {
                 if (1 && HREG(63)) {
-                    LOG_NUM("1", 1, "../z_play.c", 3727);
+                    LOG_NUM("1", 1, "../z_play.c", __LINE__);
                 }
 
                 GameOver_Update(globalCtx);
             } else {
                 if (1 && HREG(63)) {
-                    LOG_NUM("1", 1, "../z_play.c", 3733);
+                    LOG_NUM("1", 1, "../z_play.c", __LINE__);
                 }
 
                 Message_Update(globalCtx);
             }
 
             if (1 && HREG(63)) {
-                LOG_NUM("1", 1, "../z_play.c", 3737);
+                LOG_NUM("1", 1, "../z_play.c", __LINE__);
             }
 
             if (1 && HREG(63)) {
-                LOG_NUM("1", 1, "../z_play.c", 3742);
+                LOG_NUM("1", 1, "../z_play.c", __LINE__);
             }
 
             Interface_Update(globalCtx);
 
             if (1 && HREG(63)) {
-                LOG_NUM("1", 1, "../z_play.c", 3765);
+                LOG_NUM("1", 1, "../z_play.c", __LINE__);
             }
 
             AnimationContext_Update(globalCtx, &globalCtx->animationCtx);
 
             if (1 && HREG(63)) {
-                LOG_NUM("1", 1, "../z_play.c", 3771);
+                LOG_NUM("1", 1, "../z_play.c", __LINE__);
             }
 
             func_8006BA30(globalCtx);
 
             if (1 && HREG(63)) {
-                LOG_NUM("1", 1, "../z_play.c", 3777);
+                LOG_NUM("1", 1, "../z_play.c", __LINE__);
             }
 
             ShrinkWindow_Update(R_UPDATE_RATE);
 
             if (1 && HREG(63)) {
-                LOG_NUM("1", 1, "../z_play.c", 3783);
+                LOG_NUM("1", 1, "../z_play.c", __LINE__);
             }
 
             TransitionFade_Update(&globalCtx->transitionFade, R_UPDATE_RATE);
@@ -994,28 +987,27 @@ void Gameplay_Update(GlobalContext* globalCtx) {
     }
 
     if (1 && HREG(63)) {
-        LOG_NUM("1", 1, "../z_play.c", 3799);
+        LOG_NUM("1", 1, "../z_play.c", __LINE__);
     }
 
 skip:
     if (1 && HREG(63)) {
-        LOG_NUM("1", 1, "../z_play.c", 3801);
+        LOG_NUM("1", 1, "../z_play.c", __LINE__);
     }
 
     if ((sp80 == 0) || (gDbgCamEnabled)) {
-        s32 pad3[5];
         s32 i;
 
         globalCtx->nextCamera = globalCtx->activeCamera;
 
         if (1 && HREG(63)) {
-            LOG_NUM("1", 1, "../z_play.c", 3806);
+            LOG_NUM("1", 1, "../z_play.c", __LINE__);
         }
 
         for (i = 0; i < NUM_CAMS; i++) {
             if ((i != globalCtx->nextCamera) && (globalCtx->cameraPtrs[i] != NULL)) {
                 if (1 && HREG(63)) {
-                    LOG_NUM("1", 1, "../z_play.c", 3809);
+                    LOG_NUM("1", 1, "../z_play.c", __LINE__);
                 }
 
                 Camera_Update(globalCtx->cameraPtrs[i]);
@@ -1025,12 +1017,12 @@ skip:
         Camera_Update(globalCtx->cameraPtrs[globalCtx->nextCamera]);
 
         if (1 && HREG(63)) {
-            LOG_NUM("1", 1, "../z_play.c", 3814);
+            LOG_NUM("1", 1, "../z_play.c", __LINE__);
         }
     }
 
     if (1 && HREG(63)) {
-        LOG_NUM("1", 1, "../z_play.c", 3816);
+        LOG_NUM("1", 1, "../z_play.c", __LINE__);
     }
 
     Environment_Update(globalCtx, &globalCtx->envCtx, &globalCtx->lightCtx, &globalCtx->pauseCtx, &globalCtx->msgCtx,
@@ -1101,7 +1093,7 @@ void Gameplay_Draw(GlobalContext* globalCtx) {
                 0.0f;
         // This transpose is where the viewing matrix is properly converted into a billboard matrix
         Matrix_Transpose(&globalCtx->billboardMtxF);
-        globalCtx->billboardMtx = Matrix_MtxFToMtx(Matrix_CheckFloats(&globalCtx->billboardMtxF, "../z_play.c", 4005),
+        globalCtx->billboardMtx = Matrix_MtxFToMtx(Matrix_CheckFloats(&globalCtx->billboardMtxF, "../z_play.c", __LINE__),
                                                    Graph_Alloc(gfxCtx, sizeof(Mtx)));
 
         gSPSegment(POLY_OPA_DISP++, 0x01, globalCtx->billboardMtx);
@@ -1326,7 +1318,7 @@ void Gameplay_Main(GameState* thisx) {
     DebugDisplay_Init();
 
     if (1 && HREG(63)) {
-        LOG_NUM("1", 1, "../z_play.c", 4556);
+        LOG_NUM("1", 1, "../z_play.c", __LINE__);
     }
 
     if ((HREG(80) == 10) && (HREG(94) != 10)) {
@@ -1351,7 +1343,7 @@ void Gameplay_Main(GameState* thisx) {
     }
 
     if (1 && HREG(63)) {
-        LOG_NUM("1", 1, "../z_play.c", 4583);
+        LOG_NUM("1", 1, "../z_play.c", __LINE__);
     }
 
     Gameplay_Draw(globalCtx);
@@ -1632,10 +1624,7 @@ s32 Gameplay_CameraSetAtEyeUp(GlobalContext* globalCtx, s16 camId, Vec3f* at, Ve
 }
 
 s32 Gameplay_CameraSetFov(GlobalContext* globalCtx, s16 camId, f32 fov) {
-    s32 ret = Camera_SetParam(globalCtx->cameraPtrs[camId], 0x20, &fov) & 1;
-
-    if (1) {}
-    return ret;
+    return Camera_SetParam(globalCtx->cameraPtrs[camId], 0x20, &fov) & 1;
 }
 
 s32 Gameplay_SetCameraRoll(GlobalContext* globalCtx, s16 camId, s16 roll) {

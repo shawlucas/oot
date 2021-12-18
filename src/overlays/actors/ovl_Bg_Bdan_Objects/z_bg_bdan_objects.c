@@ -83,7 +83,7 @@ s32 BgBdanObjects_GetContactRu1(BgBdanObjects* this, s32 arg1) {
         case 3:
             return this->cameraSetting == CAM_SET_DUNGEON1;
         default:
-            osSyncPrintf("Bg_Bdan_Objects_Get_Contact_Ru1\nそんな受信モードは無い%d!!!!!!!!\n");
+            osSyncPrintf("BgBdanObjects_GetContactRu1\nThere is no such receiving mode %d!!!!!!!!\n");
             return -1;
     }
 }
@@ -100,12 +100,11 @@ void BgBdanObjects_SetContactRu1(BgBdanObjects* this, s32 arg1) {
             gSaveContext.infTable[20] |= 0x40;
             break;
         default:
-            osSyncPrintf("Bg_Bdan_Objects_Set_Contact_Ru1\nそんな送信モードは無い%d!!!!!!!!\n");
+            osSyncPrintf("BgBdanObjects_SetContactRu1\nThere is no such transmission mode %d!!!!!!!!\n");
     }
 }
 
 void BgBdanObjects_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgBdanObjects* this = (BgBdanObjects*)thisx;
     CollisionHeader* colHeader = NULL;
 
@@ -365,7 +364,7 @@ void func_8086C874(BgBdanObjects* this, GlobalContext* globalCtx) {
             }
         }
         if (this->switchFlag == 0) {
-            if (1) {}
+            
             Camera_ChangeSetting(globalCtx->cameraPtrs[MAIN_CAM], this->cameraSetting);
             func_8005ACFC(globalCtx->cameraPtrs[MAIN_CAM], 4);
         }

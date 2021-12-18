@@ -101,15 +101,14 @@ void BgHidanHrock_Init(Actor* thisx, GlobalContext* globalCtx) {
     for (i = 0; i < 2; i++) {
         colliderElementInit = &sTrisInit.elements[i];
 
-        if (1) {
-            for (j = 0; j < 3; j++) {
-                Vec3f* vtx = &colliderElementInit->dim.vtx[j];
+        for (j = 0; j < 3; j++) {
+            Vec3f* vtx = &colliderElementInit->dim.vtx[j];
 
-                vertices[j].x = vtx->z * sinRotY + (thisx->home.pos.x + vtx->x * cosRotY);
-                vertices[j].y = vtx->y + thisx->home.pos.y;
-                vertices[j].z = vtx->z * cosRotY + (thisx->home.pos.z - vtx->x * sinRotY);
-            }
+            vertices[j].x = vtx->z * sinRotY + (thisx->home.pos.x + vtx->x * cosRotY);
+            vertices[j].y = vtx->y + thisx->home.pos.y;
+            vertices[j].z = vtx->z * cosRotY + (thisx->home.pos.z - vtx->x * sinRotY);
         }
+        
         Collider_SetTrisVertices(&this->collider, i, &vertices[0], &vertices[1], &vertices[2]);
     }
 

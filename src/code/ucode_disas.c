@@ -247,7 +247,7 @@ void UCodeDisas_PrintVertices(UCodeDisas* this, Vtx* vtx, s32 count, s32 start) 
         }
         vtx++;
 
-        if (1) {}
+        
     }
 }
 
@@ -716,7 +716,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, GfxMod* ptr) {
                                                                     : "???";
 
                 if ((setscissor.x0frac | setscissor.y0frac | setscissor.x1frac | setscissor.y1frac)) {
-                    if (1) {}
+                    
                     DISAS_LOG("gsDPSetScissorFrac(%s, %d, %d, %d, %d),", modeStr,
                               (setscissor.x0 << 2) + setscissor.x0frac, (setscissor.y0 << 2) + setscissor.y0frac,
                               (setscissor.x1 << 2) + setscissor.x1frac, (setscissor.y1 << 2) + setscissor.y1frac);

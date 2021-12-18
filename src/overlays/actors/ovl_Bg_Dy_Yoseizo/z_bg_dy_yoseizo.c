@@ -81,15 +81,13 @@ void BgDyYoseizo_Init(Actor* thisx, GlobalContext* globalCtx2) {
     this->actor.focus.pos = this->actor.world.pos;
 
     if (globalCtx->sceneNum == SCENE_DAIYOUSEI_IZUMI) {
-        // "Great Fairy Fountain"
-        osSyncPrintf(VT_FGCOL(GREEN) "☆☆☆☆☆ 大妖精の泉 ☆☆☆☆☆ %d\n" VT_RST, globalCtx->curSpawn);
+        osSyncPrintf(VT_FGCOL(GREEN) "☆☆☆☆☆ Great Fairy Fountain ☆☆☆☆☆ %d\n" VT_RST, globalCtx->curSpawn);
         SkelAnime_InitFlex(globalCtx, &this->skelAnime, &gGreatFairySkel, &gGreatFairySittingTransitionAnim,
-                           this->jointTable, this->morphTable, 28);
+                           this->jointTable, this->morphTable, __LINE__);
     } else {
-        // "Stone/Jewel Fairy Fountain"
-        osSyncPrintf(VT_FGCOL(GREEN) "☆☆☆☆☆ 石妖精の泉 ☆☆☆☆☆ %d\n" VT_RST, globalCtx->curSpawn);
+        osSyncPrintf(VT_FGCOL(GREEN) "☆☆☆☆☆ Stone/Jewel Fairy Fountain ☆☆☆☆☆ %d\n" VT_RST, globalCtx->curSpawn);
         SkelAnime_InitFlex(globalCtx, &this->skelAnime, &gGreatFairySkel, &gGreatFairyLayingDownTransitionAnim,
-                           this->jointTable, this->morphTable, 28);
+                           this->jointTable, this->morphTable, __LINE__);
     }
     this->actionFunc = BgDyYoseizo_CheckMagicAcquired;
 }
@@ -201,8 +199,7 @@ void BgDyYoseizo_ChooseType(BgDyYoseizo* this, GlobalContext* globalCtx) {
     s32 givingReward;
 
     func_8002DF54(globalCtx, &this->actor, 1);
-    // "Mode"
-    osSyncPrintf(VT_FGCOL(YELLOW) "☆☆☆☆☆ もうど ☆☆☆☆☆ %d\n" VT_RST, globalCtx->msgCtx.ocarinaMode);
+    osSyncPrintf(VT_FGCOL(YELLOW) "☆☆☆☆☆ Ocarina Mode ☆☆☆☆☆ %d\n" VT_RST, globalCtx->msgCtx.ocarinaMode);
     givingReward = false;
 
     if (globalCtx->sceneNum != SCENE_DAIYOUSEI_IZUMI) {
@@ -227,24 +224,21 @@ void BgDyYoseizo_ChooseType(BgDyYoseizo* this, GlobalContext* globalCtx) {
         switch (this->fountainType) {
             case FAIRY_UPGRADE_MAGIC:
                 if (!gSaveContext.magicAcquired || BREG(2)) {
-                    // "Spin Attack speed UP"
-                    osSyncPrintf(VT_FGCOL(GREEN) " ☆☆☆☆☆ 回転切り速度ＵＰ ☆☆☆☆☆ \n" VT_RST);
+                    osSyncPrintf(VT_FGCOL(GREEN) " ☆☆☆☆☆ Spin Attack Upgrade ☆☆☆☆☆ \n" VT_RST);
                     this->givingSpell = true;
                     givingReward = true;
                 }
                 break;
             case FAIRY_UPGRADE_DOUBLE_MAGIC:
                 if (!gSaveContext.doubleMagic) {
-                    // "Magic Meter doubled"
-                    osSyncPrintf(VT_FGCOL(YELLOW) " ☆☆☆☆☆ 魔法ゲージメーター倍増 ☆☆☆☆☆ \n" VT_RST);
+                    osSyncPrintf(VT_FGCOL(YELLOW) " ☆☆☆☆☆ Magic Meter doubled ☆☆☆☆☆ \n" VT_RST);
                     this->givingSpell = true;
                     givingReward = true;
                 }
                 break;
             case FAIRY_UPGRADE_HALF_DAMAGE:
                 if (!gSaveContext.doubleDefense) {
-                    // "Damage halved"
-                    osSyncPrintf(VT_FGCOL(PURPLE) " ☆☆☆☆☆ ダメージ半減 ☆☆☆☆☆ \n" VT_RST);
+                    osSyncPrintf(VT_FGCOL(PURPLE) " ☆☆☆☆☆ Double Defense ☆☆☆☆☆ \n" VT_RST);
                     this->givingSpell = true;
                     givingReward = true;
                 }

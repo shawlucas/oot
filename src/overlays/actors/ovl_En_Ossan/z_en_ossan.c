@@ -448,7 +448,7 @@ void EnOssan_UpdateShopOfferings(EnOssan* this, GlobalContext* globalCtx) {
 
     if (this->actor.params == OSSAN_TYPE_MASK) {
         storeItems = sShopkeeperStores[this->actor.params];
-        if (1) {}
+        
         for (i = 0; i < 8; i++) {
             shopItem = &storeItems[i];
             if (shopItem->shopItemIndex >= 0 && this->shelfSlots[i] == NULL) {
@@ -930,7 +930,7 @@ void EnOssan_State_StartConversation(EnOssan* this, GlobalContext* globalCtx, Pl
         }
     }
 
-    if (1) {}
+    
 }
 
 s32 EnOssan_FacingShopkeeperDialogResult(EnOssan* this, GlobalContext* globalCtx) {

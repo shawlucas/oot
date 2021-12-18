@@ -359,7 +359,7 @@ void EnBom_Draw(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad;
     EnBom* this = (EnBom*)thisx;
 
-    if (1) {}
+    
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_bom.c", __LINE__);
 

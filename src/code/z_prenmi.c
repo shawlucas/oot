@@ -10,12 +10,6 @@ void func_80092320(PreNMIContext* this) {
 void PreNMI_Update(PreNMIContext* this) {
     osSyncPrintf(VT_COL(YELLOW, BLACK) "prenmi_move\n" VT_RST);
 
-    // Strings existing only in rodata
-    if (0) {
-        osSyncPrintf("../z_prenmi.c");
-        osSyncPrintf("(int)volume = %d\n");
-    }
-
     if (this->timer == 0) {
         ViConfig_UpdateVi(1);
         func_80092320(this);
@@ -28,7 +22,7 @@ void PreNMI_Update(PreNMIContext* this) {
 void PreNMI_Draw(PreNMIContext* this) {
     GraphicsContext* gfxCtx = this->state.gfxCtx;
 
-    osSyncPrintf(VT_COL(YELLOW, BLACK) "prenmi_draw\n" VT_RST);
+    osSyncPrintf(VT_COL(YELLOW, BLACK) "PreNMI_Draw\n" VT_RST);
 
     OPEN_DISPS(gfxCtx, "../z_prenmi.c", __LINE__);
 

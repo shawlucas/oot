@@ -39,11 +39,10 @@ static InitChainEntry sInitChain[] = {
 
 void BgHakaShip_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgHakaShip* this = (BgHakaShip*)thisx;
-    s32 pad;
     CollisionHeader* colHeader = NULL;
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
-    DynaPolyActor_Init(&this->dyna, 1);
+    DynaPolyActor_Init(&this->dyna, DPM_PLAYER);
     this->switchFlag = (thisx->params >> 8) & 0xFF;
     this->dyna.actor.params &= 0xFF;
 
@@ -93,7 +92,7 @@ void BgHakaShip_WaitForSong(BgHakaShip* this, GlobalContext* globalCtx) {
         if (this->counter == 0) {
             this->counter = 130;
             this->actionFunc = BgHakaShip_CutsceneStationary;
-            osSyncPrintf("シーン 外輪船 ...  アァクション！！\n");
+            osSyncPrintf("Scene Outer Ringer... ACTION!!\n");
             OnePointCutscene_Init(globalCtx, 3390, 999, &this->dyna.actor, MAIN_CAM);
         }
     }
@@ -221,7 +220,6 @@ void BgHakaShip_Draw(Actor* thisx, GlobalContext* globalCtx) {
     }
     CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_haka_ship.c", __LINE__);
     if (this->actionFunc == BgHakaShip_CutsceneStationary || this->actionFunc == BgHakaShip_Move) {
-        s32 pad;
         Vec3f sp2C;
 
         sp2C.x = this->dyna.actor.world.pos.x + -367.0f;

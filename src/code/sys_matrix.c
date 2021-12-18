@@ -902,7 +902,7 @@ void Matrix_RotateAxis(f32 f, Vec3f* vec, u8 mode) {
             cmf->yy = vec->y * vec->y * rCos + cos;
             cmf->zz = vec->z * vec->z * rCos + cos;
 
-            if (0) {}
+            
 
             temp2 = vec->x * rCos * vec->y;
             temp3 = vec->z * sin;

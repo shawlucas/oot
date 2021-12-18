@@ -150,7 +150,6 @@ void ArmsHook_Shoot(ArmsHook* this, GlobalContext* globalCtx) {
     DynaPolyActor* dynaPolyActor;
     f32 sp94;
     f32 sp90;
-    s32 pad;
     CollisionPoly* poly;
     s32 bgId;
     Vec3f sp78;
@@ -159,7 +158,6 @@ void ArmsHook_Shoot(ArmsHook* this, GlobalContext* globalCtx) {
     f32 sp5C;
     f32 sp58;
     f32 velocity;
-    s32 pad1;
 
     if ((this->actor.parent == NULL) || (!Player_HoldsHookshot(player))) {
         ArmsHook_DetachHookFromActor(this);
@@ -297,7 +295,6 @@ void ArmsHook_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void ArmsHook_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     ArmsHook* this = (ArmsHook*)thisx;
     Player* player = GET_PLAYER(globalCtx);
     Vec3f sp78;

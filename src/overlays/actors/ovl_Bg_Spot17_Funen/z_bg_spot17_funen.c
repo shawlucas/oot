@@ -68,7 +68,7 @@ void func_808B7478(Actor* thisx, GlobalContext* globalCtx) {
                                 (0 - globalCtx->gameplayFrames) & 0x7F, 0x20, 0x20));
     gSPDisplayList(POLY_XLU_DISP++, gCraterSmokeConeDL);
 
-    if (1) {}
+    
 
     CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_spot17_funen.c", __LINE__);
 }

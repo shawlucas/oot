@@ -73,7 +73,6 @@ void BgHeavyBlock_InitPiece(BgHeavyBlock* this, f32 scale) {
 }
 
 void BgHeavyBlock_SetupDynapoly(BgHeavyBlock* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     CollisionHeader* colHeader = NULL;
     this->dyna.actor.flags |= ACTOR_FLAG_4 | ACTOR_FLAG_5 | ACTOR_FLAG_17;
     DynaPolyActor_Init(&this->dyna, DPM_UNK);
@@ -144,8 +143,7 @@ void BgHeavyBlock_Init(Actor* thisx, GlobalContext* globalCtx) {
             this->actionFunc = BgHeavyBlock_Wait;
             break;
     }
-    // "Largest Block Save Bit %x"
-    osSyncPrintf(VT_FGCOL(CYAN) " 最大 ブロック セーブビット %x\n" VT_RST, thisx->params);
+    osSyncPrintf(VT_FGCOL(CYAN) "Largest Block Save Bit %X\n" VT_RST, thisx->params);
 }
 
 void BgHeavyBlock_Destroy(Actor* thisx, GlobalContext* globalCtx) {
@@ -284,7 +282,6 @@ void BgHeavyBlock_SpawnPieces(BgHeavyBlock* this, GlobalContext* globalCtx) {
         { 0.0f, 300.0f, -20.0f }, { 50.0f, 200.0f, -20.0f }, { -50.0f, 200.0f, -20.0f },
         { 0.0f, 100.0f, 30.0f },  { 0.0f, 100.0f, -70.0f },  { 0.0f, 0.0f, -20.0f },
     };
-    s32 pad;
     Vec3f pos;
     f32 sinPitch;
     f32 cosPitch;
@@ -341,7 +338,6 @@ void BgHeavyBlock_Wait(BgHeavyBlock* this, GlobalContext* globalCtx) {
 
 void BgHeavyBlock_LiftedUp(BgHeavyBlock* this, GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
     f32 cosYaw;
     f32 zOffset;
     f32 sinYaw;
@@ -350,7 +346,7 @@ void BgHeavyBlock_LiftedUp(BgHeavyBlock* this, GlobalContext* globalCtx) {
     if (this->timer == 11) {
         func_800AA000(0.0f, 0xFF, 0x14, 0x14);
         func_8002F7DC(&player->actor, NA_SE_PL_PULL_UP_BIGROCK);
-        LOG_STRING("NA_SE_PL_PULL_UP_BIGROCK", "../z_bg_heavy_block.c", 691);
+        LOG_STRING("NA_SE_PL_PULL_UP_BIGROCK", "../z_bg_heavy_block.c", __LINE__);
     }
 
     if (this->timer < 40) {
@@ -447,8 +443,6 @@ void BgHeavyBlock_DoNothing(BgHeavyBlock* this, GlobalContext* globalCtx) {
 }
 
 void BgHeavyBlock_Land(BgHeavyBlock* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     if (Math_SmoothStepToS(&this->dyna.actor.shape.rot.x, 0x8AD0, 6, 2000, 100) != 0) {
         Math_StepToF(&this->dyna.actor.speedXZ, 0.0f, 20.0f);
         Math_StepToF(&this->dyna.actor.velocity.y, 0.0f, 3.0f);
@@ -484,7 +478,6 @@ void BgHeavyBlock_Draw(Actor* thisx, GlobalContext* globalCtx) {
     static Vec3f D_80884EC8 = { 0.0f, 0.0f, 0.0f };
     static Vec3f D_80884ED4 = { 0.0f, 400.0f, 0.0f };
     BgHeavyBlock* this = (BgHeavyBlock*)thisx;
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_heavy_block.c", __LINE__);

@@ -523,7 +523,7 @@ void EnMm_Draw(Actor* thisx, GlobalContext* globalCtx) {
     s32 pad;
     EnMm* this = (EnMm*)thisx;
 
-    if (0) {}
+    
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_mm.c", __LINE__);
 

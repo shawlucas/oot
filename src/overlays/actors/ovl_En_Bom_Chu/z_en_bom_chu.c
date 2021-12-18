@@ -171,7 +171,7 @@ void EnBomChu_UpdateFloorPoly(EnBomChu* this, CollisionPoly* floorPoly, GlobalCo
 
             this->axisUp = normal;
 
-            if (1) {}
+            
 
             // mf = (axisLeft | axisUp | axisForwards)
 

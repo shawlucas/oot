@@ -94,8 +94,7 @@ void func_80977F80(DemoGeff* this, GlobalContext* globalCtx) {
     gSPSegment(POLY_OPA_DISP++, 0x06, globalCtx->objectCtx.status[objBankIndex].segment);
     gSegments[6] = VIRTUAL_TO_PHYSICAL(globalCtx->objectCtx.status[objBankIndex].segment);
 
-    // Necessary to match
-    if (!globalCtx) {}
+        if (!globalCtx) {}
 
     CLOSE_DISPS(gfxCtx, "../z_demo_geff.c", __LINE__);
 }

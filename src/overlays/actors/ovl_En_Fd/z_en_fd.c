@@ -764,7 +764,7 @@ void EnFd_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnFd_DrawFlames(this, globalCtx);
     Matrix_Pop();
     if (this->actionFunc != EnFd_Reappear && !(this->fadeAlpha < 0.9f)) {
-        if (1) {}
+        
         func_80093D84(globalCtx->state.gfxCtx);
         clampedHealth = CLAMP(thisx->colChkInfo.health - 1, 0, 23);
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 128, primColors[clampedHealth / 8].r, primColors[clampedHealth / 8].g,
@@ -875,7 +875,7 @@ void EnFd_DrawFlames(EnFd* this, GlobalContext* globalCtx) {
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_fd.c", __LINE__);
     firstDone = false;
-    if (1) {}
+    
     func_80093D84(globalCtx->state.gfxCtx);
     for (i = 0; i < ARRAY_COUNT(this->effects); i++, eff++) {
         if (eff->type == FD_EFFECT_FLAME) {
@@ -920,7 +920,7 @@ void EnFd_DrawDots(EnFd* this, GlobalContext* globalCtx) {
             gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, eff->color.r, eff->color.g, eff->color.b,
                             (u8)(eff->color.a * (this->fadeAlpha / 255.0f)));
             gDPPipeSync(POLY_XLU_DISP++);
-            if (1) {}
+            
             Matrix_Translate(eff->pos.x, eff->pos.y, eff->pos.z, MTXMODE_NEW);
             func_800D1FD4(&globalCtx->billboardMtxF);
             Matrix_Scale(eff->scale, eff->scale, 1.0f, MTXMODE_APPLY);

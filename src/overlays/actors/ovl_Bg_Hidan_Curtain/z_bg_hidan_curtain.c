@@ -66,17 +66,16 @@ const ActorInit Bg_Hidan_Curtain_InitVars = {
 };
 
 void BgHidanCurtain_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgHidanCurtain* this = (BgHidanCurtain*)thisx;
     BgHidanCurtainParams* hcParams;
 
-    osSyncPrintf("Curtain (arg_data 0x%04x)\n", this->actor.params);
+    osSyncPrintf("Curtain (params 0x%04X)\n", this->actor.params);
     Actor_SetFocus(&this->actor, 20.0f);
     this->type = (thisx->params >> 0xC) & 0xF;
     if (this->type > 6) {
         // "Type is not set"
-        osSyncPrintf("Error : object のタイプが設定されていない(%s %d)(arg_data 0x%04x)\n", "../z_bg_hidan_curtain.c",
-                     352, this->actor.params);
+        osSyncPrintf("Error : object type is not set(%s %d)(params 0x%04x)\n", "../z_bg_hidan_curtain.c",
+                     __LINE__, this->actor.params);
         Actor_Kill(&this->actor);
         return;
     }
@@ -87,9 +86,8 @@ void BgHidanCurtain_Init(Actor* thisx, GlobalContext* globalCtx) {
     thisx->params &= 0x3F;
 
     if ((this->actor.params < 0) || (this->actor.params > 0x3F)) {
-        // "Save bit is not set"
-        osSyncPrintf("Warning : object のセーブビットが設定されていない(%s %d)(arg_data 0x%04x)\n",
-                     "../z_bg_hidan_curtain.c", 373, this->actor.params);
+        osSyncPrintf("Warning : object's save bit is not set(%s %d)(params 0x%04X)\n",
+                     "../z_bg_hidan_curtain.c", __LINE__, this->actor.params);
     }
     Actor_SetScale(&this->actor, hcParams->scale);
     Collider_InitCylinder(globalCtx, &this->collider);
@@ -117,7 +115,6 @@ void BgHidanCurtain_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgHidanCurtain_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgHidanCurtain* this = (BgHidanCurtain*)thisx;
 
     Collider_DestroyCylinder(globalCtx, &this->collider);

@@ -1276,7 +1276,7 @@ void EnDekubaba_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnDekubaba* this = (EnDekubaba*)thisx;
     f32 scale;
 
-    if (1) {}
+    
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_dekubaba.c", __LINE__);
     func_80093D18(globalCtx->state.gfxCtx);
 

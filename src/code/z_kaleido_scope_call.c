@@ -16,14 +16,14 @@ void KaleidoScopeCall_LoadPlayer() {
     if (gKaleidoMgrCurOvl != playerActorOvl) {
         if (gKaleidoMgrCurOvl != NULL) {
             osSyncPrintf(VT_FGCOL(GREEN));
-            osSyncPrintf("カレイド領域 強制排除\n"); // "Kaleido area forced exclusion"
+            osSyncPrintf("Kaleido area forced removal\n");
             osSyncPrintf(VT_RST);
 
             KaleidoManager_ClearOvl(gKaleidoMgrCurOvl);
         }
 
         osSyncPrintf(VT_FGCOL(GREEN));
-        osSyncPrintf("プレイヤーアクター搬入\n"); // "Player actor import"
+        osSyncPrintf("Player actor import\n");
         osSyncPrintf(VT_RST);
 
         KaleidoManager_LoadOvl(playerActorOvl);
@@ -31,23 +31,21 @@ void KaleidoScopeCall_LoadPlayer() {
 }
 
 void KaleidoScopeCall_Init(GlobalContext* globalCtx) {
-    // "Kaleidoscope replacement construction"
-    osSyncPrintf("カレイド・スコープ入れ替え コンストラクト \n");
+    osSyncPrintf("Kaleidoscope replacement construction \n");
 
     sKaleidoScopeUpdateFunc = KaleidoManager_GetRamAddr(KaleidoScope_Update);
     sKaleidoScopeDrawFunc = KaleidoManager_GetRamAddr(KaleidoScope_Draw);
 
-    LOG_ADDRESS("kaleido_scope_move", KaleidoScope_Update, "../z_kaleido_scope_call.c", 98);
-    LOG_ADDRESS("kaleido_scope_move_func", sKaleidoScopeUpdateFunc, "../z_kaleido_scope_call.c", 99);
-    LOG_ADDRESS("kaleido_scope_draw", KaleidoScope_Draw, "../z_kaleido_scope_call.c", 100);
-    LOG_ADDRESS("kaleido_scope_draw_func", sKaleidoScopeDrawFunc, "../z_kaleido_scope_call.c", 101);
+    LOG_ADDRESS("KaleidoScope_Update", KaleidoScope_Update, "../z_kaleido_scope_call.c", __LINE__);
+    LOG_ADDRESS("sKaleidoScopeUpdateFunc", sKaleidoScopeUpdateFunc, "../z_kaleido_scope_call.c", __LINE__);
+    LOG_ADDRESS("KaleidoScope_Draw", KaleidoScope_Draw, "../z_kaleido_scope_call.c", __LINE__);
+    LOG_ADDRESS("sKaleidoScopeDrawFunc", sKaleidoScopeDrawFunc, "../z_kaleido_scope_call.c", __LINE__);
 
     KaleidoSetup_Init(globalCtx);
 }
 
 void KaleidoScopeCall_Destroy(GlobalContext* globalCtx) {
-    // "Kaleidoscope replacement destruction"
-    osSyncPrintf("カレイド・スコープ入れ替え デストラクト \n");
+    osSyncPrintf("Kaleidoscope replacement destruction\n");
 
     KaleidoSetup_Destroy(globalCtx);
 }
@@ -74,7 +72,7 @@ void KaleidoScopeCall_Update(GlobalContext* globalCtx) {
             pauseCtx->unk_1EC = 0;
             pauseCtx->state = (pauseCtx->state & 0xFFFF) + 1;
         } else if ((pauseCtx->state == 2) || (pauseCtx->state == 9)) {
-            osSyncPrintf("PR_KAREIDOSCOPE_MODE=%d\n", R_PAUSE_MENU_MODE);
+            osSyncPrintf("R_PAUSE_MENU_MODE = %d\n", R_PAUSE_MENU_MODE);
 
             if (R_PAUSE_MENU_MODE >= 3) {
                 pauseCtx->state++;
@@ -83,16 +81,14 @@ void KaleidoScopeCall_Update(GlobalContext* globalCtx) {
             if (gKaleidoMgrCurOvl != kaleidoScopeOvl) {
                 if (gKaleidoMgrCurOvl != NULL) {
                     osSyncPrintf(VT_FGCOL(GREEN));
-                    // "Kaleido area Player Forced Elimination"
-                    osSyncPrintf("カレイド領域 プレイヤー 強制排除\n");
+                    osSyncPrintf("Kaleido area Player Forced Elimination\n");
                     osSyncPrintf(VT_RST);
 
                     KaleidoManager_ClearOvl(gKaleidoMgrCurOvl);
                 }
 
                 osSyncPrintf(VT_FGCOL(GREEN));
-                // "Kaleido area Kaleidoscope loading"
-                osSyncPrintf("カレイド領域 カレイドスコープ搬入\n");
+                osSyncPrintf("Kaleido area Kaleidoscope loading\n");
                 osSyncPrintf(VT_RST);
 
                 KaleidoManager_LoadOvl(kaleidoScopeOvl);
@@ -103,8 +99,7 @@ void KaleidoScopeCall_Update(GlobalContext* globalCtx) {
 
                 if ((globalCtx->pauseCtx.state == 0) && (globalCtx->pauseCtx.debugState == 0)) {
                     osSyncPrintf(VT_FGCOL(GREEN));
-                    // "Kaleido area Kaleidoscope Emission"
-                    osSyncPrintf("カレイド領域 カレイドスコープ排出\n");
+                    osSyncPrintf("Kaleido area Kaleidoscope Emission\n");
                     osSyncPrintf(VT_RST);
 
                     KaleidoManager_ClearOvl(kaleidoScopeOvl);

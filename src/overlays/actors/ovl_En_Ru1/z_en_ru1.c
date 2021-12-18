@@ -1444,8 +1444,7 @@ void func_80AEE050(EnRu1* this) {
     f32 sp28;
     f32 sp24;
     f32 temp_f10;
-    EnRu1* thisx = this; // necessary to match
-
+    EnRu1* thisx = this; 
     if (this->unk_350 == 0) {
         if ((this->actor.minVelocityY == 0.0f) && (this->actor.speedXZ == 0.0f)) {
             this->unk_350 = 1;

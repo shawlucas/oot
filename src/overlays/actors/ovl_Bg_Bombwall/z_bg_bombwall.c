@@ -82,8 +82,6 @@ const ActorInit Bg_Bombwall_InitVars = {
 };
 
 void BgBombwall_InitDynapoly(BgBombwall* this, GlobalContext* globalCtx) {
-    s32 pad;
-    s32 pad2;
     CollisionHeader* colHeader = NULL;
 
     DynaPolyActor_Init(&this->dyna, DPM_UNK);
@@ -91,8 +89,7 @@ void BgBombwall_InitDynapoly(BgBombwall* this, GlobalContext* globalCtx) {
     this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, colHeader);
 
     if (this->dyna.bgId == BG_ACTOR_MAX) {
-        // "Warning : move BG login failed"
-        osSyncPrintf("Warning : move BG 登録失敗(%s %d)(arg_data 0x%04x)\n", "../z_bg_bombwall.c", 243,
+        osSyncPrintf("Warning : move BG registration failed(%s %d)(params 0x%04X)\n", "../z_bg_bombwall.c", __LINE__,
                      this->dyna.actor.params);
     }
 }
@@ -114,7 +111,6 @@ void BgBombwall_Init(Actor* thisx, GlobalContext* globalCtx) {
     s32 j;
     Vec3f vecs[3];
     Vec3f sp80;
-    s32 pad;
     BgBombwall* this = (BgBombwall*)thisx;
     f32 sin = Math_SinS(this->dyna.actor.shape.rot.y);
     f32 cos = Math_CosS(this->dyna.actor.shape.rot.y);
@@ -149,7 +145,7 @@ void BgBombwall_Init(Actor* thisx, GlobalContext* globalCtx) {
         func_8086ED50(this, globalCtx);
     }
 
-    osSyncPrintf("(field keep 汎用爆弾壁)(arg_data 0x%04x)(angY %d)\n", this->dyna.actor.params,
+    osSyncPrintf("(field keep generic bomb wall)(params 0x%04X)(actor.shape.rot.y %d)\n", this->dyna.actor.params,
                  this->dyna.actor.shape.rot.y);
 }
 

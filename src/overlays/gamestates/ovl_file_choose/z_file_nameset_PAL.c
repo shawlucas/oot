@@ -114,8 +114,8 @@ void FileChoose_SetNameEntryVtx(GameState* thisx) {
     u8 temp;
     s16 phi_v0;
 
-    if (1) {}
-    if (1) {}
+    
+    
 
     OPEN_DISPS(this->state.gfxCtx, "../z_file_nameset_PAL.c", __LINE__);
 

@@ -1158,7 +1158,7 @@ void EnGo_AddDust(EnGo* this, Vec3f* pos, Vec3f* velocity, Vec3f* accel, u8 init
         if (dustEffect->type != 1) {
             dustEffect->scale = scale;
             dustEffect->scaleStep = scaleStep;
-            if (1) {}
+            
             timer = initialTimer;
             dustEffect->timer = timer;
             dustEffect->type = 1;
@@ -1208,7 +1208,7 @@ void EnGo_DrawDust(EnGo* this, GlobalContext* globalCtx) {
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_go.c", __LINE__);
     firstDone = false;
     func_80093D84(globalCtx->state.gfxCtx);
-    if (1) {}
+    
     for (i = 0; i < ARRAY_COUNT(this->dustEffects); i++, dustEffect++) {
         if (dustEffect->type) {
             if (!firstDone) {

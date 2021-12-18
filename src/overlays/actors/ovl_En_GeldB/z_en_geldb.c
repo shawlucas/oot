@@ -1551,7 +1551,7 @@ void EnGeldB_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnGeldB* this = (EnGeldB*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_geldB.c", __LINE__);
-    if (1) {}
+    
 
     if ((this->spinAttackState >= 2) && SkelAnime_Update(&this->skelAnime)) {
         if (this->spinAttackState == 2) {

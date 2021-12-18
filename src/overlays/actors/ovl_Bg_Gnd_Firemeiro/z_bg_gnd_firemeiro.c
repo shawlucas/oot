@@ -31,7 +31,6 @@ const ActorInit Bg_Gnd_Firemeiro_InitVars = {
 };
 
 void BgGndFiremeiro_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgGndFiremeiro* this = (BgGndFiremeiro*)thisx;
     CollisionHeader* colHeader = NULL;
 
@@ -52,7 +51,7 @@ void BgGndFiremeiro_Destroy(Actor* thisx, GlobalContext* globalCtx2) {
     BgGndFiremeiro* this = (BgGndFiremeiro*)thisx;
 
     if (this->dyna.actor.params == 0) {
-        if (1) {}
+        
         DynaPoly_DeleteBgActor(globalCtx, &globalCtx->colCtx.dyna, this->dyna.bgId);
     }
 }
@@ -82,7 +81,6 @@ void BgGndFiremeiro_Sink(BgGndFiremeiro* this, GlobalContext* globalCtx) {
 }
 
 void BgGndFiremeiro_Shake(BgGndFiremeiro* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 randSign;
 
     if (func_8004356C(&this->dyna)) { // Player standing on it

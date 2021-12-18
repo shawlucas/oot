@@ -40,7 +40,6 @@ static InitChainEntry sInitChain[] = {
 
 void BgHakaHuta_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgHakaHuta* this = (BgHakaHuta*)thisx;
-    s16 pad;
     CollisionHeader* colHeader = NULL;
 
     Actor_ProcessInitChain(thisx, sInitChain);

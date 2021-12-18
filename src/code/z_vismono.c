@@ -22,7 +22,7 @@ void VisMono_Init(VisMono* this) {
 }
 
 void VisMono_Destroy(VisMono* this) {
-    SystemArena_FreeDebug(this->monoDl, "../z_vismono.c", 137);
+    SystemArena_FreeDebug(this->monoDl, "../z_vismono.c", __LINE__);
 }
 
 void VisMono_UpdateTexture(VisMono* this, u16* tex) {
@@ -90,10 +90,10 @@ void VisMono_Draw(VisMono* this, Gfx** gfxp) {
         glistpEnd = VisMono_DrawTexture(this, monoDL);
 
         if (!(glistpEnd <= monoDL + DLSIZE)) {
-            LOG_ADDRESS("glistp_end", glistpEnd, "../z_vismono.c", 257);
-            LOG_ADDRESS("mono_dl", monoDL, "../z_vismono.c", 258);
-            LOG_ADDRESS("mono_dl + (1+3+1+1+80*(7+2+2+3)+1)", monoDL + DLSIZE, "../z_vismono.c", 259);
-            LOG_ADDRESS("(1+3+1+1+80*(7+2+2+3)+1)", DLSIZE, "../z_vismono.c", 260);
+            LOG_ADDRESS("glistpEnd", glistpEnd, "../z_vismono.c", __LINE__);
+            LOG_ADDRESS("monoDL", monoDL, "../z_vismono.c", __LINE__);
+            LOG_ADDRESS("monoDL + (1+3+1+1+80*(7+2+2+3)+1)", monoDL + DLSIZE, "../z_vismono.c", __LINE__);
+            LOG_ADDRESS("(1+3+1+1+80*(7+2+2+3)+1)", DLSIZE, "../z_vismono.c", __LINE__);
         }
         ASSERT(glistpEnd <= monoDL + DLSIZE, "glistpEnd <= monoDL + DLSIZE", "../z_vismono.c", __LINE__);
     }

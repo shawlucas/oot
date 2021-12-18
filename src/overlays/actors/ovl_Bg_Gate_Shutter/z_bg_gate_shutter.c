@@ -34,7 +34,6 @@ const ActorInit Bg_Gate_Shutter_InitVars = {
 
 void BgGateShutter_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgGateShutter* this = (BgGateShutter*)thisx;
-    s32 pad[2];
     CollisionHeader* colHeader = NULL;
 
     DynaPolyActor_Init(&this->dyna, DPM_UNK);
@@ -52,7 +51,7 @@ void BgGateShutter_Init(Actor* thisx, GlobalContext* globalCtx) {
     thisx->scale.y = 1.0f;
     thisx->scale.z = 1.0f;
     osSyncPrintf("\n\n");
-    osSyncPrintf(VT_FGCOL(GREEN) " ☆☆☆☆☆ 柵でたなぁ ☆☆☆☆☆ \n" VT_RST);
+    osSyncPrintf(VT_FGCOL(GREEN) " ☆☆☆☆☆ It's a fence ☆☆☆☆☆ \n" VT_RST);
     this->actionFunc = func_8087828C;
 }
 

@@ -845,7 +845,7 @@ void EnRr_Draw(Actor* thisx, GlobalContext* globalCtx) {
     Mtx* segMtx = Graph_Alloc(globalCtx->state.gfxCtx, 4 * sizeof(Mtx));
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_rr.c", __LINE__);
-    if (1) {}
+    
     func_80093D84(globalCtx->state.gfxCtx);
     gSPSegment(POLY_XLU_DISP++, 0x0C, segMtx);
     gSPSegment(POLY_XLU_DISP++, 0x08,

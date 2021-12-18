@@ -166,7 +166,7 @@ void func_808BF108(BgYdanMaruta* this, GlobalContext* globalCtx) {
         this->actionFunc = func_808BF1EC;
     }
 
-    if (1) {}
+    
 
     temp = (this->unk_16A % 4) - 2;
     if (temp == -2) {

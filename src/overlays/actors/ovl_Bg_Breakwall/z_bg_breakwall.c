@@ -78,7 +78,6 @@ void BgBreakwall_SetupAction(BgBreakwall* this, BgBreakwallActionFunc actionFunc
 
 void BgBreakwall_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgBreakwall* this = (BgBreakwall*)thisx;
-    s32 pad;
     s32 wallType = ((this->dyna.actor.params >> 13) & 3) & 0xFF;
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
@@ -146,7 +145,6 @@ Actor* BgBreakwall_SpawnFragments(GlobalContext* globalCtx, BgBreakwall* this, V
         { { -40.0f, 14.0f, 0.0f }, { -50.0f, 57.0f, 0.0f }, { -30.0f, 57.0f, 0.0f }, { -40.0f, 70.0f, 0.0f } },
         { { -55.0f, -15.0f, 0.0f }, { -55.0f, -32.0f, 0.0f }, { -30.0f, -32.0f, 0.0f }, { -20.0f, -10.0f, 0.0f } },
     };
-    s32 pad;
 
     for (k = 3; k >= 0; k--) {
         if ((k == 0) || (k == 3)) {

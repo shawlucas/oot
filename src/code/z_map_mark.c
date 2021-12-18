@@ -57,8 +57,8 @@ void MapMark_Init(GlobalContext* globalCtx) {
     MapMarkDataOverlay* overlay = &sMapMarkDataOvl;
     u32 overlaySize = (u32)overlay->vramEnd - (u32)overlay->vramStart;
 
-    overlay->loadedRamAddr = GameState_Alloc(&globalCtx->state, overlaySize, "../z_map_mark.c", 235);
-    LogUtils_CheckNullPointer("dlftbl->allocp", overlay->loadedRamAddr, "../z_map_mark.c", 236);
+    overlay->loadedRamAddr = GameState_Alloc(&globalCtx->state, overlaySize, "../z_map_mark.c", __LINE__);
+    LogUtils_CheckNullPointer("overlay->loadedRamAddr", overlay->loadedRamAddr, "../z_map_mark.c", __LINE__);
 
     Overlay_Load(overlay->vromStart, overlay->vromEnd, overlay->vramStart, overlay->vramEnd, overlay->loadedRamAddr);
 
@@ -87,8 +87,7 @@ void MapMark_DrawForDungeon(GlobalContext* globalCtx) {
     interfaceCtx = &globalCtx->interfaceCtx;
 
     if ((gMapData != NULL) && (globalCtx->interfaceCtx.mapRoomNum >= gMapData->dgnMinimapCount[dungeon])) {
-        // "Room number exceeded, yikes %d/%d  MapMarkDraw processing interrupted"
-        osSyncPrintf(VT_COL(RED, WHITE) "部屋番号がオーバーしてるで,ヤバイで %d/%d  \nMapMarkDraw の処理を中断します\n",
+        osSyncPrintf(VT_COL(RED, WHITE) "Room number exceeded, yikes %d/%d  \nMapMarkDraw processing interrupted\n",
                      VT_RST, globalCtx->interfaceCtx.mapRoomNum, gMapData->dgnMinimapCount[dungeon]);
         return;
     }

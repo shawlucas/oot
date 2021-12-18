@@ -1086,7 +1086,7 @@ void BossSst_HeadDarken(BossSst* this, GlobalContext* globalCtx) {
     if (this->timer != 0) {
         this->timer--;
     }
-    if (1) {}
+    
 
     if (this->timer >= 80) {
         if (this->timer == 80) {

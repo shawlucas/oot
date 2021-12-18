@@ -546,8 +546,8 @@ void Fault_WaitForButtonCombo() {
     u32 kDown;
     u32 kCur;
 
-    if (1) {}
-    if (1) {}
+    
+    
 
     osSyncPrintf(
         VT_FGCOL(WHITE) "Fault_WaitForButtonCombo (LRZ " VT_FGCOL(WHITE) "UP" VT_FGCOL(YELLOW) "DOWN " VT_FGCOL(YELLOW) "UP" VT_FGCOL(WHITE) "DOWN " VT_FGCOL(WHITE) "LEFT" VT_FGCOL(

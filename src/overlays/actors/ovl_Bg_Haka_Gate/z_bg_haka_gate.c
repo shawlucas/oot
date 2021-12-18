@@ -69,7 +69,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void BgHakaGate_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgHakaGate* this = (BgHakaGate*)thisx;
     CollisionHeader* colHeader = NULL;
 
@@ -134,7 +133,6 @@ void BgHakaGate_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgHakaGate_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgHakaGate* this = (BgHakaGate*)thisx;
 
     DynaPoly_DeleteBgActor(globalCtx, &globalCtx->colCtx.dyna, this->dyna.bgId);
@@ -299,7 +297,6 @@ void BgHakaGate_FalseSkull(BgHakaGate* this, GlobalContext* globalCtx) {
 }
 
 void BgHakaGate_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgHakaGate* this = (BgHakaGate*)thisx;
 
     this->actionFunc(this, globalCtx);
@@ -315,7 +312,7 @@ void BgHakaGate_DrawFlame(BgHakaGate* this, GlobalContext* globalCtx) {
     if (this->vFlameScale > 0) {
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_haka_gate.c", __LINE__);
 
-        if (1) {}
+        
 
         func_80093D84(globalCtx->state.gfxCtx);
         gSPSegment(POLY_XLU_DISP++, 0x08,

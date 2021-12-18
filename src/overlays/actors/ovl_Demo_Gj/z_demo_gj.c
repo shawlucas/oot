@@ -147,7 +147,7 @@ void DemoGj_SpawnSmoke(GlobalContext* globalCtx, Vec3f* pos, f32 arg2) {
     static Color_RGBA8 envColor = { 0, 0, 0, 0 };
     f32 temp = arg2 * 0.2f;
 
-    if (1) {}
+    
     func_800283D4(globalCtx, pos, &velocity, &accel, &primColor, &envColor, temp * Rand_ZeroOne() + arg2, 15, 90);
 }
 
@@ -585,7 +585,7 @@ void DemoGj_SpawnSmokePreBattle1(DemoGj* this, GlobalContext* globalCtx) {
     if (!this->isTransformedIntoGanon) {
         gameplayFrames = globalCtx->gameplayFrames % 3;
 
-        if (1) {}
+        
         if (gameplayFrames == 0) {
             if (!globalCtx->gameplayFrames) {}
             DemoGj_SpawnSmoke(globalCtx, &pos, 300.0f);
@@ -650,7 +650,7 @@ void DemoGj_SpawnSmokePreBattle2(DemoGj* this, GlobalContext* globalCtx) {
     if (!this->isTransformedIntoGanon) {
         gameplayFrames = globalCtx->gameplayFrames % 3;
 
-        if (1) {}
+        
         if (gameplayFrames == 1) {
             if (!globalCtx->gameplayFrames) {}
             DemoGj_SpawnSmoke(globalCtx, &pos, 300.0f);
@@ -907,7 +907,7 @@ void DemoGj_SpawnSmokePreBattle3(DemoGj* this, GlobalContext* globalCtx) {
     if (!this->isTransformedIntoGanon) {
         gameplayFrames = globalCtx->gameplayFrames % 3;
 
-        if (1) {}
+        
         if (gameplayFrames == 2) {
             if (!globalCtx->gameplayFrames) {}
             DemoGj_SpawnSmoke(globalCtx, &pos, 300.0f);

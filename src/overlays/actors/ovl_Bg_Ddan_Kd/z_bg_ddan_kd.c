@@ -63,7 +63,6 @@ void BgDdanKd_SetupAction(BgDdanKd* this, BgDdanKdActionFunc actionFunc) {
 
 void BgDdanKd_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgDdanKd* this = (BgDdanKd*)thisx;
-    s32 pad;
     CollisionHeader* colHeader = NULL;
 
     this->prevExplosive = NULL;
@@ -96,7 +95,7 @@ void BgDdanKd_CheckForExplosions(BgDdanKd* this, GlobalContext* globalCtx) {
 
     explosive = Actor_GetCollidedExplosive(globalCtx, &this->collider.base);
     if (explosive != NULL) {
-        osSyncPrintf("dam    %d\n", this->dyna.actor.colChkInfo.damage);
+        osSyncPrintf("colChkInfo.damage    %d\n", this->dyna.actor.colChkInfo.damage);
         explosive->params = 2;
     }
 

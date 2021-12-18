@@ -58,7 +58,7 @@ void BgSstFloor_Update(BgSstFloor* thisx, GlobalContext* globalCtx) {
 
     colHeader->vtxList = SEGMENTED_TO_VIRTUAL(colHeader->vtxList);
 
-    if (1) {}
+    
 
     if (func_80043590(&this->dyna) && (this->dyna.actor.yDistToPlayer < 1000.0f)) {
         Camera_ChangeSetting(globalCtx->cameraPtrs[MAIN_CAM], CAM_SET_BOSS_BONGO);
@@ -116,7 +116,7 @@ void BgSstFloor_Update(BgSstFloor* thisx, GlobalContext* globalCtx) {
     if (this->drumPhase != 0) {
         this->drumPhase--;
     }
-    if (1) {}
+    
     func_8003EE6C(globalCtx, &globalCtx->colCtx.dyna);
 }
 

@@ -1081,7 +1081,7 @@ void DemoEffect_UpdateLightEffect(DemoEffect* this, GlobalContext* globalCtx) {
                 Audio_PlayActorSound2(&this->actor, NA_SE_EV_WHITE_OUT);
             }
 
-            if (0) {}
+            
         }
 
         if (globalCtx->sceneNum == SCENE_SPOT08 && gSaveContext.sceneSetupIndex == 4) {
@@ -1092,12 +1092,11 @@ void DemoEffect_UpdateLightEffect(DemoEffect* this, GlobalContext* globalCtx) {
                 Audio_PlayActorSound2(&this->actor, NA_SE_EV_WHITE_OUT);
             }
 
-            // Necessary to match
-            if (0) {}
+                        
         }
 
         if (globalCtx->sceneNum == SCENE_TOKINOMA && gSaveContext.sceneSetupIndex == 14) {
-            if (1) {}
+            
 
             if (globalCtx->csCtx.npcActions[this->csActionId]->action == 2) {
                 Audio_PlayActorSound2(&this->actor, NA_SE_EV_LIGHT_GATHER - SFX_FLAG);
@@ -1671,7 +1670,7 @@ void DemoEffect_DrawJewel(Actor* thisx, GlobalContext* globalCtx2) {
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_effect.c", __LINE__);
 
     if (!DemoEffect_CheckCsAction(this, globalCtx, 1)) {
-        if (1) {}
+        
 
         if (!(this->effectFlags & 0x1)) {
             switch (this->jewel.type) {
@@ -1836,7 +1835,7 @@ void DemoEffect_DrawGodLgt(Actor* thisx, GlobalContext* globalCtx) {
         this->godLgt.rotation++;
         if (this->godLgt.rotation > 120) {
             this->godLgt.rotation = 0;
-            if (1) {}
+            
         }
 
         Matrix_RotateZ((((s32)this->godLgt.rotation) * 3.0f) * (M_PI / 180.0f), MTXMODE_APPLY);

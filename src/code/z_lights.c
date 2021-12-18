@@ -74,7 +74,7 @@ void Lights_Draw(Lights* lights, GraphicsContext* gfxCtx) {
         light++;
     }
 
-    if (0) {}
+    
 
     i++; // abmient light is total number of lights + 1
     gSPLight(POLY_OPA_DISP++, &lights->l.a, i);
@@ -111,7 +111,7 @@ void Lights_BindPoint(Lights* lights, LightParams* params, Vec3f* vec) {
 
             if (light != NULL) {
                 posDiff = sqrtf(posDiff);
-                if (1) {}
+                
                 scale = posDiff / scale;
                 scale = 1 - SQ(scale);
 
@@ -344,8 +344,6 @@ void Lights_GlowCheck(GlobalContext* globalCtx) {
             if ((multDest.z > 1.0f) && (fabsf(wX) < 1.0f) && (fabsf(wY) < 1.0f)) {
                 wZ = (s32)((multDest.z * wDest) * 16352.0f) + 16352;
                 zBuf = gZBuffer[(s32)((wY * -120.0f) + 120.0f)][(s32)((wX * 160.0f) + 160.0f)] * 4;
-                if (1) {}
-                if (1) {}
 
                 if (wZ < (func_8006F0A0(zBuf) >> 3)) {
                     params->drawGlow = true;

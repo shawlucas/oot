@@ -45,7 +45,6 @@ static InitChainEntry sInitChain[] = {
 static u8 sBlockPositions[2];
 
 void BgGndIceblock_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgGndIceblock* this = (BgGndIceblock*)thisx;
     CollisionHeader* colHeader = NULL;
 
@@ -62,13 +61,12 @@ void BgGndIceblock_Init(Actor* thisx, GlobalContext* globalCtx) {
         this->dyna.actor.params = 1;
         sBlockPositions[1] = 14;
     } else {
-        LOG_FLOAT("thisx->world.position.x", this->dyna.actor.world.pos.x, "../z_bg_gnd_iceblock.c", 138);
+        LOG_FLOAT("this->dyna.actor.world.pos.x", this->dyna.actor.world.pos.x, "../z_bg_gnd_iceblock.c", __LINE__);
         ASSERT(0, "0", "../z_bg_gnd_iceblock.c", __LINE__);
     }
 }
 
 void BgGndIceblock_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgGndIceblock* this = (BgGndIceblock*)thisx;
 
     DynaPoly_DeleteBgActor(globalCtx, &globalCtx->colCtx.dyna, this->dyna.bgId);
@@ -344,14 +342,12 @@ void BgGndIceblock_Slide(BgGndIceblock* this, GlobalContext* globalCtx) {
 }
 
 void BgGndIceblock_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgGndIceblock* this = (BgGndIceblock*)thisx;
 
     this->actionFunc(this, globalCtx);
 }
 
 void BgGndIceblock_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgGndIceblock* this = (BgGndIceblock*)thisx;
 
     Gfx_DrawDListOpa(globalCtx, gWaterTrialIceBlockDL);

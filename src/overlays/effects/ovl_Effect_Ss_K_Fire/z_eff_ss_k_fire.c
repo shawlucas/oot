@@ -66,7 +66,7 @@ void EffectSsKFire_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
         gDPSetEnvColor(POLY_XLU_DISP++, 0, 255, 255, 0);
     }
 
-    if (1) {}
+    
 
     gDPPipeSync(POLY_XLU_DISP++);
     func_800D1FD4(&globalCtx->billboardMtxF);

@@ -68,9 +68,7 @@ static InitChainEntry sInitChain[] = {
 
 void BgHidanRock_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgHidanRock* this = (BgHidanRock*)thisx;
-    s32 pad;
     CollisionHeader* colHeader = NULL;
-
     Actor_ProcessInitChain(thisx, sInitChain);
     DynaPolyActor_Init(&this->dyna, DPM_PLAYER);
 
@@ -349,8 +347,6 @@ static void* sVerticalFlamesTexs[] = {
 };
 
 void func_8088BC40(GlobalContext* globalCtx, BgHidanRock* this) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_hidan_rock.c", __LINE__);
 
     POLY_XLU_DISP = Gfx_CallSetupDL(POLY_XLU_DISP, 0x14);
@@ -378,7 +374,6 @@ void func_8088BC40(GlobalContext* globalCtx, BgHidanRock* this) {
 
 void BgHidanRock_Draw(Actor* thisx, GlobalContext* globalCtx) {
     BgHidanRock* this = (BgHidanRock*)thisx;
-    s32 pad;
 
     if (this->type == 0) {
         Gfx_DrawDListOpa(globalCtx, gFireTempleStoneBlock1DL);

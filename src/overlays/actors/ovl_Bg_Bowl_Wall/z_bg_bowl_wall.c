@@ -46,8 +46,6 @@ static s16 sTargetRot[] = { 0x0000, 0x0000, 0x3FFF, -0x3FFF };
 
 void BgBowlWall_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgBowlWall* this = (BgBowlWall*)thisx;
-    s32 pad1;
-    s32 pad2;
     CollisionHeader* colHeader = NULL;
 
     DynaPolyActor_Init(&this->dyna, DPM_UNK);
@@ -61,7 +59,7 @@ void BgBowlWall_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, colHeader);
     this->initPos = this->dyna.actor.world.pos;
     osSyncPrintf("\n\n");
-    osSyncPrintf(VT_FGCOL(GREEN) " ☆☆☆☆☆ ボーリングおじゃま壁発生 ☆☆☆☆☆ %d\n" VT_RST, this->dyna.actor.params);
+    osSyncPrintf(VT_FGCOL(GREEN) " ☆☆☆☆☆ Bowling Alley Wall Init ☆☆☆☆☆ %d\n" VT_RST, this->dyna.actor.params);
     this->actionFunc = BgBowlWall_SpawnBullseyes;
     this->dyna.actor.scale.x = this->dyna.actor.scale.y = this->dyna.actor.scale.z = 1.0f;
 }
@@ -73,7 +71,6 @@ void BgBowlWall_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgBowlWall_SpawnBullseyes(BgBowlWall* this, GlobalContext* globalCtx) {
-    s32 pad;
     EnWallTubo* bullseye;
     Actor* lookForGirl;
     s16 type;
@@ -87,7 +84,7 @@ void BgBowlWall_SpawnBullseyes(BgBowlWall* this, GlobalContext* globalCtx) {
     this->bullseyeCenter.x = sBullseyeOffset[type].x + this->dyna.actor.world.pos.x;
     this->bullseyeCenter.y = sBullseyeOffset[type].y + this->dyna.actor.world.pos.y;
     this->bullseyeCenter.z = sBullseyeOffset[type].z + this->dyna.actor.world.pos.z;
-    if (1) {}
+    
     bullseye = (EnWallTubo*)Actor_SpawnAsChild(&globalCtx->actorCtx, &this->dyna.actor, globalCtx, ACTOR_EN_WALL_TUBO,
                                                this->bullseyeCenter.x, this->bullseyeCenter.y, this->bullseyeCenter.z,
                                                0, 0, 0, this->dyna.actor.params);
@@ -118,7 +115,6 @@ void BgBowlWall_WaitForHit(BgBowlWall* this, GlobalContext* globalCtx) {
 }
 
 void BgBowlWall_FallDoEffects(BgBowlWall* this, GlobalContext* globalCtx) {
-    s16 pad;
     Vec3f effectAccel = { 0.0f, 0.1f, 0.0f };
     Vec3f effectVelocity = { 0.0f, 0.0f, 0.0f };
     Vec3f effectPos;

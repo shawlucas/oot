@@ -61,7 +61,6 @@ void func_800A663C(GlobalContext* globalCtx, PSkinAwb* skin, SkeletonHeader* ske
             ASSERT(avbEntry->buf[1] != NULL, "avbEntry->buf[1] != NULL", "../z_skin_awb.c", __LINE__);
             func_800A6460(globalCtx, skin, i);
         }
-        if (1) {}
     }
     SkelAnime_InitSkin(globalCtx, &skin->skelAnime, skeletonHeader, animationHeader);
 }
@@ -72,23 +71,22 @@ void func_800A6888(GlobalContext* globalCtx, PSkinAwb* arg1) {
 
         for (i = 0; i < arg1->avbCount; i++) {
             if (arg1->avbTbl[i].buf[0] != 0) {
-                ZeldaArena_FreeDebug(arg1->avbTbl[i].buf[0], "../z_skin_awb.c", 276);
+                ZeldaArena_FreeDebug(arg1->avbTbl[i].buf[0], "../z_skin_awb.c", __LINE__);
                 arg1->avbTbl[i].buf[0] = 0;
             }
             if (arg1->avbTbl[i].buf[1] != 0) {
-                ZeldaArena_FreeDebug(arg1->avbTbl[i].buf[1], "../z_skin_awb.c", 280);
+                ZeldaArena_FreeDebug(arg1->avbTbl[i].buf[1], "../z_skin_awb.c", __LINE__);
                 arg1->avbTbl[i].buf[1] = 0;
             }
         }
         if (arg1->avbTbl != NULL) {
-            ZeldaArena_FreeDebug(arg1->avbTbl, "../z_skin_awb.c", 286);
+            ZeldaArena_FreeDebug(arg1->avbTbl, "../z_skin_awb.c", __LINE__);
         }
         SkelAnime_Free(&arg1->skelAnime, globalCtx);
     }
 }
 
 s32 func_800A698C(PSkinAwb* skin, SkinLimb** skeleton, MtxF* mf, u8 parentIndex, u8 limbIndex) {
-    s32 pad;
     SkinLimb* limb = SEGMENTED_TO_VIRTUAL(skeleton[limbIndex]);
     MtxF* mtx;
     s32 temp_ret;

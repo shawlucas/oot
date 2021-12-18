@@ -76,8 +76,6 @@ static s16 sFirstExplosiveFlag = false;
 
 static u8 sDisableBombCatcher;
 
-static u8 sUnused[90]; // unknown length
-
 static s32 sTimer;
 
 void BgDodoago_SetupAction(BgDodoago* this, BgDodoagoActionFunc actionFunc) {
@@ -109,7 +107,6 @@ static InitChainEntry sInitChain[] = {
 
 void BgDodoago_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgDodoago* this = (BgDodoago*)thisx;
-    s32 pad;
     CollisionHeader* colHeader = NULL;
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);

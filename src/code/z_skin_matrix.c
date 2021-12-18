@@ -255,7 +255,7 @@ s32 SkinMatrix_Invert(MtxF* src, MtxF* dest) {
             // Therefore src is a singular matrix (0 determinant).
 
             osSyncPrintf(VT_COL(YELLOW, BLACK));
-            osSyncPrintf("Skin_Matrix_InverseMatrix():逆行列つくれません\n");
+            osSyncPrintf("SkinMatrix_Invert(): Can't invert this matrix\n");
             osSyncPrintf(VT_RST);
             return 2;
         }
@@ -349,9 +349,7 @@ void SkinMatrix_SetRotateZYX(MtxF* mf, s16 x, s16 y, s16 z) {
 
     } else {
         mf->xx = cosZ;
-        if (1) {}
-        if (1) {}
-        xz = sinZ; // required to match
+        xz = sinZ;
         mf->yx = sinZ;
         mf->zx = mf->xz = mf->yz = 0;
         mf->zz = 1;
@@ -366,13 +364,11 @@ void SkinMatrix_SetRotateZYX(MtxF* mf, s16 x, s16 y, s16 z) {
         mf->xy = (xy * cos) + (xz * sin);
         mf->xz = (xz * cos) - (xy * sin);
 
-        if (1) {}
         yz = mf->yz;
         yy = mf->yy;
         mf->yy = (yy * cos) + (yz * sin);
         mf->yz = (yz * cos) - (yy * sin);
 
-        if (cos) {}
         mf->zy = mf->zz * sin;
         mf->zz = mf->zz * cos;
     } else {
@@ -417,9 +413,7 @@ void SkinMatrix_SetRotateYXZ(MtxF* mf, s16 x, s16 y, s16 z) {
 
     } else {
         mf->zz = cosY;
-        if (1) {}
-        if (1) {}
-        xy = sinY; // required to match
+        xy = sinY;
         mf->xz = sinY;
         mf->xy = mf->zy = mf->yz = 0;
         mf->yy = 1;
@@ -432,12 +426,10 @@ void SkinMatrix_SetRotateYXZ(MtxF* mf, s16 x, s16 y, s16 z) {
         xy = mf->xy;
         mf->xx = (xx * cos) + (xy * sin);
         mf->xy = xy * cos - (xx * sin);
-        if (1) {}
         zy = mf->zy;
         zx = mf->zx;
         mf->zx = (zx * cos) + (zy * sin);
         mf->zy = (zy * cos) - (zx * sin);
-        if (cos) {}
         mf->yx = mf->yy * sin;
         mf->yy = mf->yy * cos;
     } else {
@@ -596,7 +588,7 @@ Mtx* SkinMatrix_MtxFToNewMtx(GraphicsContext* gfxCtx, MtxF* src) {
     Mtx* mtx = Graph_Alloc(gfxCtx, sizeof(Mtx));
 
     if (mtx == NULL) {
-        osSyncPrintf("Skin_Matrix_to_Mtx_new() 確保失敗:NULLを返して終了\n", mtx);
+        osSyncPrintf("SkinMatrix_MtxFToNewMtx(): Failed to allocate:Return NULL and exit\n", mtx);
         return NULL;
     }
     SkinMatrix_MtxFToMtx(src, mtx);

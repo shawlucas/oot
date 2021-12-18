@@ -531,7 +531,7 @@ void EnNiwLady_Update(Actor* thisx, GlobalContext* globalCtx) {
             }
             Actor_UpdateBgCheckInfo(globalCtx, thisx, 20.0f, 20.0f, 60.0f, 0x1D);
             Collider_UpdateCylinder(thisx, &this->collider);
-            if (1) {}
+            
             CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);
         }
     }

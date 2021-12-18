@@ -11,7 +11,7 @@ void func_8006EE50(Font* font, u16 arg1, u16 arg2) {
 void Font_LoadChar(Font* font, u8 character, u16 codePointIndex) {
     DmaMgr_SendRequest1(&font->charTexBuf[codePointIndex],
                         &_nes_font_staticSegmentRomStart[character * FONT_CHAR_TEX_SIZE], FONT_CHAR_TEX_SIZE,
-                        "../z_kanfont.c", 93);
+                        "../z_kanfont.c", __LINE__);
 }
 
 /**
@@ -22,7 +22,7 @@ void Font_LoadChar(Font* font, u8 character, u16 codePointIndex) {
 void Font_LoadMessageBoxIcon(Font* font, u16 icon) {
     DmaMgr_SendRequest1(font->iconBuf,
                         &_message_staticSegmentRomStart[4 * MESSAGE_STATIC_TEX_SIZE + icon * FONT_CHAR_TEX_SIZE],
-                        FONT_CHAR_TEX_SIZE, "../z_kanfont.c", 100);
+                        FONT_CHAR_TEX_SIZE, "../z_kanfont.c", __LINE__);
 }
 
 /**
@@ -43,12 +43,12 @@ void Font_LoadOrderedFont(Font* font) {
 
     DmaMgr_SendRequest1(font->msgBuf, &_nes_message_data_staticSegmentRomStart[font->msgOffset], len, "../z_kanfont.c",
                         122);
-    osSyncPrintf("msg_data=%x,  msg_data0=%x   jj=%x\n", font->msgOffset, font->msgLength, jj = len);
+    osSyncPrintf("font->msgOffset=%x,  font->msgLength=%x   jj=%x\n", font->msgOffset, font->msgLength, jj = len);
 
     len = jj;
     for (fontBufIndex = 0, codePointIndex = 0; font->msgBuf[codePointIndex] != MESSAGE_END; codePointIndex++) {
         if (codePointIndex > len) {
-            osSyncPrintf("ＥＲＲＯＲ！！  エラー！！！  error───！！！！\n");
+            osSyncPrintf("ERROR! error! ERROR!\n");
             return;
         }
 
@@ -56,10 +56,10 @@ void Font_LoadOrderedFont(Font* font) {
             fontBuf = font->fontBuf + fontBufIndex * 8;
             fontStatic = _nes_font_staticSegmentRomStart;
 
-            osSyncPrintf("nes_mes_buf[%d]=%d\n", codePointIndex, font->msgBuf[codePointIndex]);
+            osSyncPrintf("font->msgBuf[%d]=%d\n", codePointIndex, font->msgBuf[codePointIndex]);
 
             offset = (font->msgBuf[codePointIndex] - '\x20') * FONT_CHAR_TEX_SIZE;
-            DmaMgr_SendRequest1(fontBuf, fontStatic + offset, FONT_CHAR_TEX_SIZE, "../z_kanfont.c", 134);
+            DmaMgr_SendRequest1(fontBuf, fontStatic + offset, FONT_CHAR_TEX_SIZE, "../z_kanfont.c", __LINE__);
             fontBufIndex += FONT_CHAR_TEX_SIZE / 8;
         }
     }

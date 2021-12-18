@@ -96,7 +96,6 @@ static InitChainEntry sInitChain[] = {
 
 void BgHidanDalm_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgHidanDalm* this = (BgHidanDalm*)thisx;
-    s32 pad;
     CollisionHeader* colHeader = NULL;
 
     Actor_ProcessInitChain(thisx, sInitChain);

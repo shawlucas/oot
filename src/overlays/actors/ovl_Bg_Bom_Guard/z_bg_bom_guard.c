@@ -35,7 +35,6 @@ void BgBomGuard_SetupAction(BgBomGuard* this, BgBomGuardActionFunc actionFunc) {
 
 void BgBomGuard_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgBomGuard* this = (BgBomGuard*)thisx;
-    s32 pad[2];
     CollisionHeader* colHeader = NULL;
 
     DynaPolyActor_Init(&this->dyna, DPM_UNK);
@@ -43,7 +42,7 @@ void BgBomGuard_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, thisx, colHeader);
 
     osSyncPrintf("\n\n");
-    osSyncPrintf(VT_FGCOL(GREEN) " ☆☆☆☆☆ 透明ガード出現 ☆☆☆☆☆ \n" VT_RST);
+    osSyncPrintf(VT_FGCOL(GREEN) " ☆☆☆☆☆ Invisible Guard Appears ☆☆☆☆☆ \n" VT_RST);
 
     thisx->scale.x = 1.0f;
     thisx->scale.y = 1.0f;

@@ -108,7 +108,6 @@ static InitChainEntry sInitChain[] = {
 void BgHakaTrap_Init(Actor* thisx, GlobalContext* globalCtx) {
     static UNK_TYPE D_80881014 = 0;
     BgHakaTrap* this = (BgHakaTrap*)thisx;
-    s32 pad;
     CollisionHeader* colHeader = NULL;
 
     Actor_ProcessInitChain(thisx, sInitChain);
@@ -521,7 +520,6 @@ void BgHakaTrap_Draw(Actor* thisx, GlobalContext* globalCtx) {
     };
     static Color_RGBA8 D_8088103C = { 0, 0, 0, 0 };
     BgHakaTrap* this = (BgHakaTrap*)thisx;
-    s32 pad;
     Vec3f sp2C;
 
     if (this->actionFunc == func_808802D8) {

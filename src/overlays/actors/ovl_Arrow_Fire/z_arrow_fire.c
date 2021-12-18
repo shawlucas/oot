@@ -55,7 +55,7 @@ void ArrowFire_Init(Actor* thisx, GlobalContext* globalCtx) {
 
 void ArrowFire_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     func_800876C8(globalCtx);
-    LOG_STRING("消滅", "../z_arrow_fire.c", 421); // "Disappearance"
+    LOG_STRING("Disappearance", "../z_arrow_fire.c", __LINE__);
 }
 
 void ArrowFire_Charge(ArrowFire* this, GlobalContext* globalCtx) {
@@ -117,7 +117,6 @@ void ArrowFire_Hit(ArrowFire* this, GlobalContext* globalCtx) {
             this->radius = (((1.0f - offset) * scale) + 10.0f);
             this->unk_158 += ((2.0f - this->unk_158) * 0.1f);
             if (this->timer < 16) {
-                if (1) {}
                 this->alpha = ((this->timer * 0x23) - 0x118);
             }
         }
@@ -146,7 +145,6 @@ void ArrowFire_Hit(ArrowFire* this, GlobalContext* globalCtx) {
 void ArrowFire_Fly(ArrowFire* this, GlobalContext* globalCtx) {
     EnArrow* arrow;
     f32 distanceScaled;
-    s32 pad;
 
     arrow = (EnArrow*)this->actor.parent;
     if ((arrow == NULL) || (arrow->actor.update == NULL)) {
@@ -197,10 +195,8 @@ void ArrowFire_Draw(Actor* thisx, GlobalContext* globalCtx2) {
 
     stateFrames = globalCtx->state.frames;
     arrow = (EnArrow*)this->actor.parent;
-    if (1) {}
 
     if ((arrow != NULL) && (arrow->actor.update != NULL) && (this->timer < 255)) {
-        if (1) {}
         tranform = (arrow->hitFlags & 2) ? &this->actor : &arrow->actor;
 
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_arrow_fire.c", __LINE__);

@@ -537,10 +537,10 @@ void func_80AB6570(EnNiw* this, GlobalContext* globalCtx) {
                     posY += 20.0f;
                 }
                 if (posZ < 0.0f) {
-                    if (1) {} // Required to match
-                    if (1) {}
-                    if (1) {}
-                    if (1) {}
+                     // Required to match
+                    
+                    
+                    
                     posZ -= 20.0f;
                 } else {
                     posZ += 20.0f;
@@ -888,9 +888,9 @@ void EnNiw_Update(Actor* thisx, GlobalContext* globalCtx) {
     f32 camResult;
     s32 pad3[10];
 
-    if (1) {} // Required to match
-    if (1) {}
-    if (1) {}
+     // Required to match
+    
+    
 
     this->unk_294++;
 

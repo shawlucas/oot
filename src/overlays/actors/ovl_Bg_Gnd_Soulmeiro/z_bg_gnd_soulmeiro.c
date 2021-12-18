@@ -59,7 +59,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void BgGndSoulmeiro_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgGndSoulmeiro* this = (BgGndSoulmeiro*)thisx;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
@@ -157,8 +156,6 @@ void func_8087AF38(BgGndSoulmeiro* this, GlobalContext* globalCtx) {
 }
 
 void func_8087B284(BgGndSoulmeiro* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     if (!Flags_GetSwitch(globalCtx, (this->actor.params >> 8) & 0x3F)) {
         this->actor.draw = BgGndSoulmeiro_Draw;
         if (this->collider.base.acFlags & AC_HIT) {
@@ -195,8 +192,6 @@ void BgGndSoulmeiro_Draw(Actor* thisx, GlobalContext* globalCtx) {
         gSpiritTrialLightFloorDL,
     };
     s32 params = thisx->params & 0xFF;
-
-    if (1) {}
 
     switch (params) {
         case 0:

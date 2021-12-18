@@ -246,7 +246,7 @@ s32 OnePointCutscene_SetInfo(GlobalContext* globalCtx, s16 camIdx, s16 csId, Act
                 D_801211D4[0].atTargetInit.y = actor->focus.pos.y - 5.0f;
                 D_801211D4[0].atTargetInit.z = actor->focus.pos.z;
                 spC0 = ((EnSw*)actor)->unk_364;
-                osSyncPrintf("%s(%d): xyz_t: %s (%f %f %f)\n", "../z_onepointdemo.c", 1671, "&cp", spC0.x, spC0.y,
+                osSyncPrintf("%s(%d): Vec3f: %s (%f %f %f)\n", "../z_onepointdemo.c", __LINE__, "&cp", spC0.x, spC0.y,
                              spC0.z);
                 D_801211D4[0].eyeTargetInit.x = (actor->focus.pos.x + (120.0f * spC0.x)) - (Rand_ZeroOne() * 20.0f);
                 D_801211D4[0].eyeTargetInit.y = actor->focus.pos.y + (120.0f * spC0.y) + 20.0f;
@@ -1157,7 +1157,7 @@ s16 OnePointCutscene_Init(GlobalContext* globalCtx, s16 csId, s16 timer, Actor* 
     }
     csCamIdx = Gameplay_CreateSubCamera(globalCtx);
     if (csCamIdx == SUBCAM_NONE) {
-        osSyncPrintf(VT_COL(RED, WHITE) "onepoint demo: error: too many cameras ... give up! type=%d\n" VT_RST, csId);
+        osSyncPrintf(VT_COL(RED, WHITE) "onepoint demo: error: too many cameras ... give up! csId = %d\n" VT_RST, csId);
         return SUBCAM_NONE;
     }
 
