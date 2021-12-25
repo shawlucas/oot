@@ -91,7 +91,6 @@ void EnDntJiji_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnDntJiji_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnDntJiji* this = (EnDntJiji*)thisx;
 
     Collider_DestroyCylinder(globalCtx, &this->collider);
@@ -369,7 +368,6 @@ void EnDntJiji_Return(EnDntJiji* this, GlobalContext* globalCtx) {
 }
 
 void EnDntJiji_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnDntJiji* this = (EnDntJiji*)thisx;
 
     Actor_SetScale(&this->actor, 0.015f);

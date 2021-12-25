@@ -104,7 +104,6 @@ void DemoSa_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void func_8098E480(DemoSa* this) {
-    s32 pad[2];
     s16* eyeIndex = &this->eyeIndex;
     s16* blinkTimer = &this->blinkTimer;
 
@@ -195,7 +194,6 @@ void func_8098E6EC(DemoSa* this, GlobalContext* globalCtx, s32 actionIdx) {
 }
 
 void func_8098E76C(DemoSa* this, AnimationHeader* animHeaderSeg, u8 arg2, f32 transitionRate, s32 arg4) {
-    s32 pad[2];
     f32 frameCount = Animation_GetLastFrame(animHeaderSeg);
     f32 playbackSpeed;
     f32 unk0;
@@ -247,7 +245,6 @@ void func_8098E944(DemoSa* this, GlobalContext* globalCtx) {
 }
 
 void func_8098E960(DemoSa* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     Player* player;
 
     if ((gSaveContext.chamberCutsceneNum == 0) && (gSaveContext.sceneSetupIndex < 4)) {
@@ -350,7 +347,6 @@ void func_8098ECCC(DemoSa* this, GlobalContext* globalCtx) {
 }
 
 void func_8098ECF4(DemoSa* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     SkelAnime* skelAnime = &this->skelAnime;
     f32 frameCount = Animation_GetLastFrame(&gSariaSealGanonAnim);
 
@@ -455,7 +451,6 @@ void func_8098F16C(DemoSa* this, GlobalContext* globalCtx) {
 }
 
 void DemoSa_DrawXlu(DemoSa* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s16 eyeIndex = this->eyeIndex;
     void* sp78 = sEyeTextures[eyeIndex];
     s16 mouthIndex = this->mouthIndex;
@@ -793,7 +788,6 @@ void DemoSa_DrawNothing(DemoSa* this, GlobalContext* globalCtx) {
 }
 
 void DemoSa_DrawOpa(DemoSa* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s16 eyeIndex = this->eyeIndex;
     void* eyeTex = sEyeTextures[eyeIndex];
     s32 pad2;

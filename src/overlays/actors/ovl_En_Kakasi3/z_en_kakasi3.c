@@ -230,7 +230,6 @@ void func_80A91348(EnKakasi3* this, GlobalContext* globalCtx) {
 
             if (absAngleTowardsLink < 0x4300) {
                 if (!this->unk_194) {
-
                     if (player->stateFlags2 & 0x1000000) {
                         this->camId = OnePointCutscene_Init(globalCtx, 2260, -99, &this->actor, MAIN_CAM);
                         globalCtx->msgCtx.msgMode = MSGMODE_PAUSED;
@@ -245,7 +244,6 @@ void func_80A91348(EnKakasi3* this, GlobalContext* globalCtx) {
                         player->stateFlags2 |= 0x800000;
                     }
                 } else if (gSaveContext.scarecrowSpawnSongSet && !this->unk_195) {
-
                     if (player->stateFlags2 & 0x1000000) {
                         this->camId = OnePointCutscene_Init(globalCtx, 2260, -99, &this->actor, MAIN_CAM);
                         globalCtx->msgCtx.msgMode = MSGMODE_PAUSED;
@@ -280,7 +278,6 @@ void func_80A91620(EnKakasi3* this, GlobalContext* globalCtx) {
     if ((globalCtx->msgCtx.ocarinaMode == OCARINA_MODE_04 ||
          (globalCtx->msgCtx.ocarinaMode >= OCARINA_MODE_05 && globalCtx->msgCtx.ocarinaMode < OCARINA_MODE_0B)) &&
         (globalCtx->msgCtx.msgMode == MSGMODE_NONE)) {
-
         OnePointCutscene_EndCutscene(globalCtx, this->camId);
         if (globalCtx->cameraPtrs[this->camId] == NULL) {
             this->camId = SUBCAM_NONE;
@@ -307,7 +304,6 @@ void func_80A91620(EnKakasi3* this, GlobalContext* globalCtx) {
 }
 
 void func_80A91760(EnKakasi3* this, GlobalContext* globalCtx) {
-
     func_80A90E28(this);
     SkelAnime_Update(&this->skelAnime);
     if (this->dialogState == Message_GetState(&globalCtx->msgCtx) && Message_ShouldAdvance(globalCtx)) {
@@ -319,7 +315,6 @@ void func_80A91760(EnKakasi3* this, GlobalContext* globalCtx) {
 }
 
 void func_80A917FC(EnKakasi3* this, GlobalContext* globalCtx) {
-
     if (globalCtx->msgCtx.ocarinaMode != OCARINA_MODE_0F) {
         func_80A90EBC(this, globalCtx, 1);
     } else {
@@ -348,7 +343,6 @@ void func_80A918E4(EnKakasi3* this, GlobalContext* globalCtx) {
     if ((globalCtx->msgCtx.ocarinaMode == OCARINA_MODE_04 ||
          (globalCtx->msgCtx.ocarinaMode >= OCARINA_MODE_05 && globalCtx->msgCtx.ocarinaMode < OCARINA_MODE_0B)) &&
         globalCtx->msgCtx.msgMode == MSGMODE_NONE) {
-
         Message_StartTextbox(globalCtx, 0x40A6, NULL);
         this->dialogState = TEXT_STATE_EVENT;
         OnePointCutscene_EndCutscene(globalCtx, this->camId);
@@ -406,7 +400,7 @@ void func_80A91A90(EnKakasi3* this, GlobalContext* globalCtx) {
 
 void EnKakasi3_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnKakasi3* this = (EnKakasi3*)thisx;
-    s32 pad;
+
     s32 i;
 
     if (BREG(2) != 0) {

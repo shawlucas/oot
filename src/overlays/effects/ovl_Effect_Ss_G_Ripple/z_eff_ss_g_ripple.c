@@ -30,7 +30,6 @@ EffectSsInit Effect_Ss_G_Ripple_InitVars = {
 };
 
 u32 EffectSsGRipple_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, void* initParamsx) {
-    s32 pad;
     Vec3f zeroVec = { 0.0f, 0.0f, 0.0f };
     WaterBox* waterBox;
     EffectSsGRippleInitParams* initParams = (EffectSsGRippleInitParams*)initParamsx;
@@ -62,7 +61,7 @@ u32 EffectSsGRipple_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, vo
 void EffectSsGRipple_DrawRipple(GlobalContext* globalCtx, EffectSs* this, void* segment) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
     f32 radius;
-    s32 pad;
+
     MtxF mfTrans;
     MtxF mfScale;
     MtxF mfResult;

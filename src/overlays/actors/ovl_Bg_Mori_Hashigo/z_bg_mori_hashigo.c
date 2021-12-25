@@ -78,7 +78,6 @@ static InitChainEntry sInitChainLadder[] = {
 
 void BgMoriHashigo_InitDynapoly(BgMoriHashigo* this, GlobalContext* globalCtx, CollisionHeader* collision,
                                 s32 moveFlag) {
-    s32 pad;
     CollisionHeader* colHeader;
     s32 pad2;
 
@@ -95,8 +94,6 @@ void BgMoriHashigo_InitDynapoly(BgMoriHashigo* this, GlobalContext* globalCtx, C
 }
 
 void BgMoriHashigo_InitCollider(BgMoriHashigo* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     Collider_InitJntSph(globalCtx, &this->collider);
     Collider_SetJntSph(globalCtx, &this->collider, &this->dyna.actor, &sJntSphInit, this->colliderItems);
 
@@ -151,7 +148,6 @@ s32 BgMoriHashigo_InitLadder(BgMoriHashigo* this, GlobalContext* globalCtx) {
 }
 
 void BgMoriHashigo_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMoriHashigo* this = (BgMoriHashigo*)thisx;
 
     if (this->dyna.actor.params == HASHIGO_CLASP) {
@@ -179,7 +175,6 @@ void BgMoriHashigo_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgMoriHashigo_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMoriHashigo* this = (BgMoriHashigo*)thisx;
 
     if (this->dyna.actor.params == HASHIGO_LADDER) {
@@ -266,7 +261,6 @@ void BgMoriHashigo_SetupLadderRest(BgMoriHashigo* this) {
 }
 
 void BgMoriHashigo_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMoriHashigo* this = (BgMoriHashigo*)thisx;
 
     if (this->hitTimer > 0) {
@@ -278,12 +272,11 @@ void BgMoriHashigo_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgMoriHashigo_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMoriHashigo* this = (BgMoriHashigo*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_hashigo.c", __LINE__);
     func_80093D18(globalCtx->state.gfxCtx);
-    
+
     gSPSegment(POLY_OPA_DISP++, 0x08, globalCtx->objectCtx.status[this->moriTexObjIndex].segment);
 
     gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_mori_hashigo.c", __LINE__),

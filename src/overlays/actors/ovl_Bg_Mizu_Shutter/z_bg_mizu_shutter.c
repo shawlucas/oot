@@ -48,7 +48,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void BgMizuShutter_Init(BgMizuShutter* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMizuShutter* this = (BgMizuShutter*)thisx;
     s32 pad2;
     CollisionHeader* sp30 = NULL;
@@ -84,7 +83,6 @@ void BgMizuShutter_Init(BgMizuShutter* thisx, GlobalContext* globalCtx) {
 }
 
 void BgMizuShutter_Destroy(BgMizuShutter* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMizuShutter* this = (BgMizuShutter*)thisx;
 
     DynaPoly_DeleteBgActor(globalCtx, &globalCtx->colCtx.dyna, this->dyna.bgId);
@@ -147,14 +145,12 @@ void BgMizuShutter_WaitForTimer(BgMizuShutter* this, GlobalContext* globalCtx) {
 }
 
 void BgMizuShutter_Update(BgMizuShutter* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMizuShutter* this = (BgMizuShutter*)thisx;
 
     this->actionFunc(this, globalCtx);
 }
 
 void BgMizuShutter_Draw(BgMizuShutter* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMizuShutter* this = (BgMizuShutter*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_mizu_shutter.c", __LINE__);

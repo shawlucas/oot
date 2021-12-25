@@ -40,7 +40,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void BgJyaKanaami_InitDynaPoly(BgJyaKanaami* this, GlobalContext* globalCtx, CollisionHeader* collision, s32 flag) {
-    s32 pad;
     CollisionHeader* colHeader = NULL;
     s32 pad2;
 
@@ -95,7 +94,6 @@ void func_8089993C(BgJyaKanaami* this) {
 }
 
 void func_80899950(BgJyaKanaami* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s32 quakeId;
 
     this->unk_168 += 0x20;

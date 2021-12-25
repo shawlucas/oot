@@ -55,7 +55,6 @@ static Vec3f D_808B45DC[] = {
 };
 
 void func_808B3960(BgSpot15Rrbox* this, GlobalContext* globalCtx, CollisionHeader* collision, s32 flags) {
-    s32 pad;
     CollisionHeader* colHeader = NULL;
     u32 pad2;
 

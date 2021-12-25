@@ -54,7 +54,6 @@ void En_Js_SetupAction(EnJs* this, EnJsActionFunc actionFunc) {
 
 void EnJs_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnJs* this = (EnJs*)thisx;
-    s32 pad;
 
     ActorShape_Init(&this->actor.shape, 0.0f, NULL, 36.0f);
     SkelAnime_InitFlex(globalCtx, &this->skelAnime, &gCarpetMerchantSkel, &gCarpetMerchantSlappingKneeAnim,
@@ -165,7 +164,7 @@ void func_80A89304(EnJs* this, GlobalContext* globalCtx) {
 
 void EnJs_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnJs* this = (EnJs*)thisx;
-    s32 pad;
+
     s32 pad2;
 
     Collider_UpdateCylinder(&this->actor, &this->collider);

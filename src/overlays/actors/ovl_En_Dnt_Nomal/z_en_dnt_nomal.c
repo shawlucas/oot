@@ -115,7 +115,6 @@ static Color_RGBA8 sLeafColors[] = {
 };
 
 void EnDntNomal_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnDntNomal* this = (EnDntNomal*)thisx;
 
     this->type = this->actor.params;
@@ -158,7 +157,6 @@ void EnDntNomal_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnDntNomal_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnDntNomal* this = (EnDntNomal*)thisx;
 
     if (this->type == ENDNTNOMAL_TARGET) {
@@ -736,7 +734,6 @@ void EnDntNomal_StageReturn(EnDntNomal* this, GlobalContext* globalCtx) {
 }
 
 void EnDntNomal_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnDntNomal* this = (EnDntNomal*)thisx;
 
     if (this->timer1 != 0) {
@@ -850,7 +847,6 @@ void EnDntNomal_DrawStageScrub(Actor* thisx, GlobalContext* globalCtx) {
     static void* blinkTex[] = { gDntStageEyeOpenTex, gDntStageEyeHalfTex, gDntStageEyeShutTex };
     EnDntNomal* this = (EnDntNomal*)thisx;
     Vec3f dustScale = { 0.25f, 0.25f, 0.25f };
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_dnt_nomal.c", __LINE__);
     func_80093D18(globalCtx->state.gfxCtx);

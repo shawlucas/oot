@@ -435,7 +435,6 @@ void KaleidoScope_DrawCursor(GlobalContext* globalCtx, u16 pageIndex) {
 
     if ((((pauseCtx->unk_1E4 == 0) || (temp == 8)) && (pauseCtx->state == 6)) ||
         ((pauseCtx->pageIndex == PAUSE_QUEST) && ((temp < 3) || (temp == 5) || (temp == 8)))) {
-
         if (pauseCtx->pageIndex == pageIndex) {
             s16 i;
             s16 j;
@@ -1152,7 +1151,6 @@ void KaleidoScope_DrawInfoPanel(GlobalContext* globalCtx) {
         if ((pauseCtx->pageIndex == PAUSE_MAP) && !sInDungeonScene) {
             if (GET_GS_FLAGS(D_8082AE30[pauseCtx->cursorPoint[PAUSE_WORLD_MAP]]) ==
                 gAreaGsFlags[D_8082AE30[pauseCtx->cursorPoint[PAUSE_WORLD_MAP]]]) {
-
                 pauseCtx->infoPanelVtx[24].v.ob[0] = pauseCtx->infoPanelVtx[26].v.ob[0] = -74;
 
                 pauseCtx->infoPanelVtx[25].v.ob[0] = pauseCtx->infoPanelVtx[27].v.ob[0] =
@@ -1258,7 +1256,6 @@ void KaleidoScope_DrawInfoPanel(GlobalContext* globalCtx) {
                 POLY_OPA_DISP = KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, D_8082AD54[gSaveContext.language],
                                                             D_8082ADD8[gSaveContext.language], 16, 4);
             } else if ((pauseCtx->pageIndex == PAUSE_MAP) && sInDungeonScene) {
-
             } else if ((pauseCtx->pageIndex == PAUSE_QUEST) && (pauseCtx->cursorSlot[PAUSE_QUEST] >= 6) &&
                        (pauseCtx->cursorSlot[PAUSE_QUEST] <= 0x11)) {
                 if (pauseCtx->namedItem != PAUSE_ITEM_NONE) {
@@ -1330,7 +1327,6 @@ void KaleidoScope_UpdateNamePanel(GlobalContext* globalCtx) {
 
     if ((pauseCtx->namedItem != pauseCtx->cursorItem[pauseCtx->pageIndex]) ||
         ((pauseCtx->pageIndex == PAUSE_MAP) && (pauseCtx->cursorSpecialPos != 0))) {
-
         pauseCtx->namedItem = pauseCtx->cursorItem[pauseCtx->pageIndex];
         sp2A = pauseCtx->namedItem;
 
@@ -2431,7 +2427,6 @@ void KaleidoScope_UpdateCursorSize(GlobalContext* globalCtx) {
 
 void KaleidoScope_LoadDungeonMap(GlobalContext* globalCtx) {
     InterfaceContext* interfaceCtx = &globalCtx->interfaceCtx;
-    s32 pad;
 
     DmaMgr_SendRequest1(interfaceCtx->mapSegment, (u32)_map_48x85_staticSegmentRomStart + (R_MAP_TEX_INDEX * 2040),
                         2040, "../z_kaleido_scope_PAL.c", 3467);
@@ -2481,11 +2476,9 @@ void KaleidoScope_Update(GlobalContext* globalCtx) {
     s16 stepG;
     s16 stepB;
     s16 stepA;
-    s32 pad;
 
     if ((R_PAUSE_MENU_MODE >= 3) && (((pauseCtx->state >= 4) && (pauseCtx->state <= 7)) ||
                                      ((pauseCtx->state >= 0xA) && (pauseCtx->state <= 0x12)))) {
-
         if ((!pauseCtx->unk_1E4 || (pauseCtx->unk_1E4 == 8)) && (pauseCtx->state == 6)) {
             pauseCtx->stickRelX = input->rel.stick_x;
             pauseCtx->stickRelY = input->rel.stick_y;

@@ -56,7 +56,6 @@ void func_80A6E3A0(EnHs* this, EnHsActionFunc actionFunc) {
 
 void EnHs_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnHs* this = (EnHs*)thisx;
-    s32 pad;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 36.0f);
     SkelAnime_InitFlex(globalCtx, &this->skelAnime, &object_hs_Skel_006260, &object_hs_Anim_0005C0, this->jointTable,
@@ -228,7 +227,6 @@ void func_80A6E9AC(EnHs* this, GlobalContext* globalCtx) {
 
 void EnHs_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnHs* this = (EnHs*)thisx;
-    s32 pad;
 
     Collider_UpdateCylinder(thisx, &this->collider);
     CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);

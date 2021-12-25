@@ -216,7 +216,6 @@ void EnGeldB_SetupAction(EnGeldB* this, EnGeldBActionFunc actionFunc) {
 }
 
 void EnGeldB_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EffectBlureInit1 blureInit;
     EnGeldB* this = (EnGeldB*)thisx;
 
@@ -259,7 +258,6 @@ void EnGeldB_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnGeldB_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnGeldB* this = (EnGeldB*)thisx;
 
     func_800F5B58();
@@ -418,7 +416,7 @@ void EnGeldB_SetupReady(EnGeldB* this) {
 
 void EnGeldB_Ready(EnGeldB* this, GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     s16 angleToLink;
 
     SkelAnime_Update(&this->skelAnime);
@@ -647,7 +645,7 @@ void EnGeldB_Circle(EnGeldB* this, GlobalContext* globalCtx) {
     s16 phi_v1;
     s32 nextKeyFrame;
     s32 thisKeyFrame;
-    s32 pad;
+
     s32 prevKeyFrame;
     Player* player = GET_PLAYER(globalCtx);
 
@@ -760,7 +758,7 @@ void EnGeldB_SetupSpinDodge(EnGeldB* this, GlobalContext* globalCtx) {
 void EnGeldB_SpinDodge(EnGeldB* this, GlobalContext* globalCtx) {
     s16 phi_v1;
     s32 thisKeyFrame;
-    s32 pad;
+
     s32 lastKeyFrame;
     s32 nextKeyFrame;
 
@@ -1123,7 +1121,7 @@ void EnGeldB_SetupBlock(EnGeldB* this) {
 
 void EnGeldB_Block(EnGeldB* this, GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     s16 angleToLink;
     s16 angleFacingLink;
 
@@ -1349,7 +1347,6 @@ void EnGeldB_TurnHead(EnGeldB* this, GlobalContext* globalCtx) {
 }
 
 void EnGeldB_CollisionCheck(EnGeldB* this, GlobalContext* globalCtx) {
-    s32 pad;
     EnItem00* key;
 
     if (this->blockCollider.base.acFlags & AC_BOUNCED) {
@@ -1392,7 +1389,6 @@ void EnGeldB_CollisionCheck(EnGeldB* this, GlobalContext* globalCtx) {
 }
 
 void EnGeldB_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnGeldB* this = (EnGeldB*)thisx;
 
     EnGeldB_CollisionCheck(this, globalCtx);
@@ -1547,11 +1543,10 @@ void EnGeldB_Draw(Actor* thisx, GlobalContext* globalCtx) {
     };
     static void* eyeTextures[] = { gGerudoRedEyeOpenTex, gGerudoRedEyeHalfTex, gGerudoRedEyeShutTex,
                                    gGerudoRedEyeHalfTex };
-    s32 pad;
+
     EnGeldB* this = (EnGeldB*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_geldB.c", __LINE__);
-    
 
     if ((this->spinAttackState >= 2) && SkelAnime_Update(&this->skelAnime)) {
         if (this->spinAttackState == 2) {

@@ -546,15 +546,12 @@ void Fault_WaitForButtonCombo() {
     u32 kDown;
     u32 kCur;
 
-    
-    
-
     osSyncPrintf(
         VT_FGCOL(WHITE) "Fault_WaitForButtonCombo (LRZ " VT_FGCOL(WHITE) "UP" VT_FGCOL(YELLOW) "DOWN " VT_FGCOL(YELLOW) "UP" VT_FGCOL(WHITE) "DOWN " VT_FGCOL(WHITE) "LEFT" VT_FGCOL(
             YELLOW) "LEFT " VT_FGCOL(YELLOW) "RIGHT" VT_FGCOL(WHITE) "RIGHT " VT_FGCOL(GREEN) "B" VT_FGCOL(BLUE) "A" VT_FGCOL(RED) "START" VT_FGCOL(WHITE) ")" VT_RST
-                                                                                                                                                     "\n");
-    osSyncPrintf(VT_FGCOL(WHITE) "Fault_WaitForButtonCombo'(LR Left" VT_FGCOL(YELLOW) "right +" VT_FGCOL(RED) "START" VT_FGCOL(
-        WHITE) ")" VT_RST "\n");
+                                                                                                                                                           "\n");
+    osSyncPrintf(VT_FGCOL(WHITE) "Fault_WaitForButtonCombo'(LR Left" VT_FGCOL(YELLOW) "right +" VT_FGCOL(
+        RED) "START" VT_FGCOL(WHITE) ")" VT_RST "\n");
 
     FaultDrawer_SetForeColor(0xFFFF);
     FaultDrawer_SetBackColor(1);
@@ -876,7 +873,6 @@ void Fault_LogStackTrace(OSThread* thread, s32 height) {
     u32 ra = thread->context.ra;
     u32 pc = thread->context.pc;
     u32 addr;
-    s32 pad;
 
     osSyncPrintf("STACK TRACE\nSP       PC       (VPC)\n");
     for (line = 1; line < height && (ra != 0 || sp != 0) && pc != (u32)__osCleanupThread; line++) {
@@ -950,7 +946,6 @@ void Fault_UpdatePad() {
 void Fault_ThreadEntry(void* arg) {
     OSMesg msg;
     OSThread* faultedThread;
-    s32 pad;
 
     osSetEventMesg(OS_EVENT_CPU_BREAK, &sFaultStructPtr->queue, 1);
     osSetEventMesg(OS_EVENT_FAULT, &sFaultStructPtr->queue, 2);
@@ -1065,7 +1060,6 @@ void Fault_HangupFaultClient(const char* arg0, const char* arg1) {
 
 void Fault_AddHungupAndCrashImpl(const char* arg0, const char* arg1) {
     FaultClient client;
-    s32 pad;
 
     Fault_AddClient(&client, Fault_HangupFaultClient, (void*)arg0, (void*)arg1);
     *(u32*)0x11111111 = 0; // trigger an exception

@@ -147,7 +147,6 @@ void DemoGj_SpawnSmoke(GlobalContext* globalCtx, Vec3f* pos, f32 arg2) {
     static Color_RGBA8 envColor = { 0, 0, 0, 0 };
     f32 temp = arg2 * 0.2f;
 
-    
     func_800283D4(globalCtx, pos, &velocity, &accel, &primColor, &envColor, temp * Rand_ZeroOne() + arg2, 15, 90);
 }
 
@@ -238,7 +237,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void DemoGj_InitCommon(DemoGj* this, GlobalContext* globalCtx, CollisionHeader* header) {
-    s32 pad[3];
     CollisionHeader* newHeader;
 
     if (header != NULL) {
@@ -282,7 +280,6 @@ void DemoGj_DrawCommon(DemoGj* this, GlobalContext* globalCtx, Gfx* displayList)
 }
 
 void DemoGj_DrawRotated(DemoGj* this, GlobalContext* globalCtx, Gfx* displayList) {
-    s32 pad;
     GraphicsContext* gfxCtx;
     s16 x = this->rotationVec.x;
     s16 y = this->rotationVec.y;
@@ -585,7 +582,6 @@ void DemoGj_SpawnSmokePreBattle1(DemoGj* this, GlobalContext* globalCtx) {
     if (!this->isTransformedIntoGanon) {
         gameplayFrames = globalCtx->gameplayFrames % 3;
 
-        
         if (gameplayFrames == 0) {
             if (!globalCtx->gameplayFrames) {}
             DemoGj_SpawnSmoke(globalCtx, &pos, 300.0f);
@@ -650,7 +646,6 @@ void DemoGj_SpawnSmokePreBattle2(DemoGj* this, GlobalContext* globalCtx) {
     if (!this->isTransformedIntoGanon) {
         gameplayFrames = globalCtx->gameplayFrames % 3;
 
-        
         if (gameplayFrames == 1) {
             if (!globalCtx->gameplayFrames) {}
             DemoGj_SpawnSmoke(globalCtx, &pos, 300.0f);
@@ -907,7 +902,6 @@ void DemoGj_SpawnSmokePreBattle3(DemoGj* this, GlobalContext* globalCtx) {
     if (!this->isTransformedIntoGanon) {
         gameplayFrames = globalCtx->gameplayFrames % 3;
 
-        
         if (gameplayFrames == 2) {
             if (!globalCtx->gameplayFrames) {}
             DemoGj_SpawnSmoke(globalCtx, &pos, 300.0f);
@@ -987,7 +981,7 @@ void func_8097AEE8(DemoGj* this, GlobalContext* globalCtx) {
     ColliderCylinder* cylinder1 = &this->cylinders[1];
     ColliderCylinder* cylinder2 = &this->cylinders[2];
     Vec3f* actorPos = &this->dyna.actor.world.pos;
-    s32 pad;
+
     s16 theta = this->dyna.actor.world.rot.y;
     f32 cos_theta = Math_CosS(theta);
     f32 sin_theta = Math_SinS(theta);
@@ -1006,7 +1000,6 @@ void func_8097AEE8(DemoGj* this, GlobalContext* globalCtx) {
 }
 
 void DemoGj_SetCylindersAsAC(DemoGj* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     Collider* cylinder0 = &this->cylinders[0].base;
     Collider* cylinder1 = &this->cylinders[1].base;
     Collider* cylinder2 = &this->cylinders[2].base;
@@ -1117,7 +1110,7 @@ void func_8097B450(DemoGj* this, GlobalContext* globalCtx) {
     ColliderCylinder* cylinder1 = &this->cylinders[1];
     ColliderCylinder* cylinder2 = &this->cylinders[2];
     Vec3f* actorPos = &this->dyna.actor.world.pos;
-    s32 pad;
+
     s16 theta = this->dyna.actor.world.rot.y;
     f32 cos_theta = Math_CosS(theta);
     f32 sin_theta = Math_SinS(theta);
@@ -1136,7 +1129,6 @@ void func_8097B450(DemoGj* this, GlobalContext* globalCtx) {
 }
 
 void DemoGj_SetCylindersAsAC2(DemoGj* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     Collider* cylinder0 = &this->cylinders[0].base;
     Collider* cylinder1 = &this->cylinders[1].base;
     Collider* cylinder2 = &this->cylinders[2].base;
@@ -1275,7 +1267,6 @@ void func_8097B9BC(DemoGj* this, GlobalContext* globalCtx) {
 void func_8097BA48(DemoGj* this, GlobalContext* globalCtx) {
     Actor* thisx = &this->dyna.actor;
     ColliderCylinder* cylinder = &this->cylinders[0];
-    s32 pad[2];
 
     if (func_809797E4(this, 4)) {
         Actor_Kill(thisx);

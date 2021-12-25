@@ -42,7 +42,6 @@ static ColliderCylinderInitToActor sCylinderInit = {
 
 void ObjDekujr_Init(Actor* thisx, GlobalContext* globalCtx) {
     ObjDekujr* this = (ObjDekujr*)thisx;
-    s32 pad;
 
     if (gSaveContext.cutsceneIndex < 0xFFF0) {
         if (!LINK_IS_ADULT) {
@@ -127,7 +126,6 @@ void ObjDekujr_ComeUp(ObjDekujr* this, GlobalContext* globalCtx) {
 
 void ObjDekujr_Update(Actor* thisx, GlobalContext* globalCtx) {
     ObjDekujr* this = (ObjDekujr*)thisx;
-    s32 pad;
 
     Collider_UpdateCylinder(&this->actor, &this->collider);
     CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);

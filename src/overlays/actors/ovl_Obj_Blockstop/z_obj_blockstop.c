@@ -43,7 +43,6 @@ void ObjBlockstop_Update(Actor* thisx, GlobalContext* globalCtx) {
     DynaPolyActor* dynaPolyActor;
     Vec3f sp4C;
     s32 bgId;
-    s32 pad;
 
     if (BgCheck_EntityLineTest2(&globalCtx->colCtx, &this->actor.home.pos, &this->actor.world.pos, &sp4C,
                                 &this->actor.floorPoly, false, false, true, true, &bgId, &this->actor)) {

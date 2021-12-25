@@ -112,7 +112,6 @@ void EnGe2_ChangeAction(EnGe2* this, s32 i) {
 }
 
 void EnGe2_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnGe2* this = (EnGe2*)thisx;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 36.0f);
@@ -388,7 +387,6 @@ void EnGe2_Stand(EnGe2* this, GlobalContext* globalCtx) {
 }
 
 void EnGe2_TurnToFacePlayer(EnGe2* this, GlobalContext* globalCtx) {
-    s32 pad;
     s16 angleDiff = this->actor.yawTowardsPlayer - this->actor.shape.rot.y;
 
     if (ABS(angleDiff) <= 0x4000) {
@@ -421,7 +419,6 @@ void EnGe2_LookAtPlayer(EnGe2* this, GlobalContext* globalCtx) {
 
 void EnGe2_SetActionAfterTalk(EnGe2* this, GlobalContext* globalCtx) {
     if (Actor_TextboxIsClosing(&this->actor, globalCtx)) {
-
         switch (this->actor.params & 0xFF) {
             case GE2_TYPE_PATROLLING:
                 EnGe2_ChangeAction(this, GE2_ACTION_ABOUTTURN);
@@ -462,7 +459,6 @@ void EnGe2_GiveCard(EnGe2* this, GlobalContext* globalCtx) {
 }
 
 void EnGe2_ForceTalk(EnGe2* this, GlobalContext* globalCtx) {
-
     if (Actor_ProcessTalkRequest(&this->actor, globalCtx)) {
         this->actionFunc = EnGe2_GiveCard;
     } else {
@@ -483,7 +479,6 @@ void EnGe2_SetupCapturePlayer(EnGe2* this, GlobalContext* globalCtx) {
 }
 
 void EnGe2_MaintainColliderAndSetAnimState(EnGe2* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 pad2;
 
     Collider_UpdateCylinder(&this->actor, &this->collider);
@@ -642,7 +637,7 @@ void EnGe2_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Ve
 
 void EnGe2_Draw(Actor* thisx, GlobalContext* globalCtx) {
     static void* eyeTextures[] = { gGerudoPurpleEyeOpenTex, gGerudoPurpleEyeHalfTex, gGerudoPurpleEyeClosedTex };
-    s32 pad;
+
     EnGe2* this = (EnGe2*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ge2.c", __LINE__);

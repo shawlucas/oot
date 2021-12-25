@@ -119,13 +119,10 @@ void BgSpot16Doughnut_UpdateExpanding(Actor* thisx, GlobalContext* globalCtx) {
 void BgSpot16Doughnut_Draw(Actor* thisx, GlobalContext* globalCtx) {
     BgSpot16Doughnut* this = (BgSpot16Doughnut*)thisx;
     u32 scroll = globalCtx->gameplayFrames & 0xFFFF;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_spot16_doughnut.c", __LINE__);
 
     func_80093D84(globalCtx->state.gfxCtx);
-
-    
 
     gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_spot16_doughnut.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);

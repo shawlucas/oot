@@ -313,7 +313,7 @@ f32 EnElf_GetColorValue(s32 colorFlag) {
 
 void EnElf_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnElf* this = (EnElf*)thisx;
-    s32 pad;
+
     Player* player = GET_PLAYER(globalCtx);
     s32 colorConfig;
     s32 i;
@@ -431,7 +431,6 @@ void func_80A029A8(EnElf* this, s16 increment) {
 }
 
 void EnElf_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnElf* this = (EnElf*)thisx;
 
     LightContext_RemoveLight(globalCtx, &globalCtx->lightCtx, this->lightNodeGlow);
@@ -535,7 +534,6 @@ void func_80A02F2C(EnElf* this, Vec3f* targetPos) {
 }
 
 void func_80A03018(EnElf* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     Player* player = GET_PLAYER(globalCtx);
     s16 targetYaw;
     Vec3f* unk_28C = &this->unk_28C;
@@ -597,7 +595,7 @@ void func_80A03148(EnElf* this, Vec3f* arg1, f32 arg2, f32 arg3, f32 arg4) {
 
 void func_80A0329C(EnElf* this, GlobalContext* globalCtx) {
     Player* refActor = GET_PLAYER(globalCtx);
-    s32 pad;
+
     Player* player = GET_PLAYER(globalCtx);
     f32 heightDiff;
 
@@ -848,7 +846,6 @@ void func_80A03CF8(EnElf* this, GlobalContext* globalCtx) {
         EnElf_GetCutsceneNextPos(&nextPos, globalCtx, 8);
 
         if (globalCtx->csCtx.npcActions[8]->action == 5) {
-            
             EnElf_SpawnSparkles(this, globalCtx, 16);
         }
 
@@ -862,7 +859,7 @@ void func_80A03CF8(EnElf* this, GlobalContext* globalCtx) {
 
         if ((globalCtx->sceneNum == SCENE_LINK_HOME) && (gSaveContext.sceneSetupIndex == 4)) {
             // play dash sound as Navi enters Links house in the intro
-            
+
             if (globalCtx->csCtx.frames == 55) {
                 Audio_PlayActorSound2(&this->actor, NA_SE_EV_FAIRY_DASH);
             }
@@ -1177,7 +1174,7 @@ void func_80A0461C(EnElf* this, GlobalContext* globalCtx) {
 void EnElf_SpawnSparkles(EnElf* this, GlobalContext* globalCtx, s32 sparkleLife) {
     static Vec3f sparkleVelocity = { 0.0f, -0.05f, 0.0f };
     static Vec3f sparkleAccel = { 0.0f, -0.025f, 0.0f };
-    s32 pad;
+
     Vec3f sparklePos;
     Color_RGBA8 primColor;
     Color_RGBA8 envColor;
@@ -1199,7 +1196,6 @@ void EnElf_SpawnSparkles(EnElf* this, GlobalContext* globalCtx, s32 sparkleLife)
 }
 
 void func_80A04D90(EnElf* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 bgId;
 
     this->actor.floorHeight = BgCheck_EntityRaycastFloor5(globalCtx, &globalCtx->colCtx, &this->actor.floorPoly, &bgId,
@@ -1363,7 +1359,7 @@ void func_80A052F4(Actor* thisx, GlobalContext* globalCtx) {
 
 void func_80A053F0(Actor* thisx, GlobalContext* globalCtx) {
     u8 unk2C7;
-    s32 pad;
+
     Player* player = GET_PLAYER(globalCtx);
     EnElf* this = (EnElf*)thisx;
 
@@ -1445,7 +1441,6 @@ void func_80A053F0(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnElf_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnElf* this = (EnElf*)thisx;
 
     this->actionFunc(this, globalCtx);
@@ -1460,7 +1455,7 @@ void EnElf_Update(Actor* thisx, GlobalContext* globalCtx) {
 s32 EnElf_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* thisx,
                            Gfx** gfx) {
     static Vec3f zeroVec = { 0.0f, 0.0f, 0.0f };
-    s32 pad;
+
     f32 scale;
     Vec3f mtxMult;
     EnElf* this = (EnElf*)thisx;
@@ -1489,7 +1484,6 @@ s32 EnElf_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList,
 }
 
 void EnElf_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     f32 alphaScale;
     s32 envAlpha;
     EnElf* this = (EnElf*)thisx;

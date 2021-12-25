@@ -330,7 +330,7 @@ void EnItem00_SetupAction(EnItem00* this, EnItem00ActionFunc actionFunc) {
 
 void EnItem00_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnItem00* this = (EnItem00*)thisx;
-    s32 pad;
+
     f32 yOffset = 980.0f;
     f32 shadowScale = 6.0f;
     s32 getItemId = GI_NONE;
@@ -631,7 +631,6 @@ void func_8001E1C8(EnItem00* this, GlobalContext* globalCtx) {
 }
 
 void func_8001E304(EnItem00* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f pos;
     s32 rotOffset;
 
@@ -728,7 +727,6 @@ void EnItem00_Update(Actor* thisx, GlobalContext* globalCtx) {
     s16 i;
     u32* temp;
     EnItem00* this = (EnItem00*)thisx;
-    s32 pad;
 
     if (this->unk_15A > 0) {
         this->unk_15A--;
@@ -1003,7 +1001,6 @@ void EnItem00_Draw(Actor* thisx, GlobalContext* globalCtx) {
  * Draw Function used for Rupee types of En_Item00.
  */
 void EnItem00_DrawRupee(EnItem00* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 texIndex;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_item00.c", __LINE__);
@@ -1058,8 +1055,6 @@ void EnItem00_DrawCollectible(EnItem00* this, GlobalContext* globalCtx) {
  * Draw Function used for the Heart Container type of En_Item00.
  */
 void EnItem00_DrawHeartContainer(EnItem00* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_item00.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -1081,8 +1076,6 @@ void EnItem00_DrawHeartContainer(EnItem00* this, GlobalContext* globalCtx) {
  * Draw Function used for the Piece of Heart type of En_Item00.
  */
 void EnItem00_DrawHeartPiece(EnItem00* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_item00.c", __LINE__);
 
     func_80093D84(globalCtx->state.gfxCtx);
@@ -1131,7 +1124,6 @@ s16 func_8001F404(s16 dropId) {
 // External functions used by other actors to drop collectibles, which usually results in spawning an En_Item00 actor.
 
 EnItem00* Item_DropCollectible(GlobalContext* globalCtx, Vec3f* spawnPos, s16 params) {
-    s32 pad[2];
     EnItem00* spawnedActor = NULL;
     s16 param4000 = params & 0x4000;
     s16 param8000 = params & 0x8000;
@@ -1175,7 +1167,7 @@ EnItem00* Item_DropCollectible(GlobalContext* globalCtx, Vec3f* spawnPos, s16 pa
 
 EnItem00* Item_DropCollectible2(GlobalContext* globalCtx, Vec3f* spawnPos, s16 params) {
     EnItem00* spawnedActor = NULL;
-    s32 pad;
+
     s16 param4000 = params & 0x4000;
     s16 param8000 = params & 0x8000;
     s16 param3F00 = params & 0x3F00;
@@ -1207,7 +1199,6 @@ EnItem00* Item_DropCollectible2(GlobalContext* globalCtx, Vec3f* spawnPos, s16 p
 }
 
 void Item_DropCollectibleRandom(GlobalContext* globalCtx, Actor* fromActor, Vec3f* spawnPos, s16 params) {
-    s32 pad;
     EnItem00* spawnedActor;
     s16 dropQuantity;
     s16 param8000;

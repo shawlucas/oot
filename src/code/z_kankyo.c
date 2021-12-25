@@ -774,7 +774,6 @@ void Environment_DisableUnderwaterLights(GlobalContext* globalCtx) {
 
 void Environment_PrintDebugInfo(GlobalContext* globalCtx, Gfx** gfx) {
     GfxPrint printer;
-    s32 pad[2];
 
     GfxPrint_Init(&printer);
     GfxPrint_Open(&printer, *gfx);
@@ -877,7 +876,6 @@ void Environment_Update(GlobalContext* globalCtx, EnvironmentContext* envCtx, Li
             if (((msgCtx->msgLength == 0) && (msgCtx->msgMode == 0)) || (((void)0, gSaveContext.gameMode) == 3)) {
                 if ((envCtx->unk_1A == 0) && !FrameAdvance_IsEnabled(globalCtx) &&
                     (globalCtx->transitionMode == 0 || ((void)0, gSaveContext.gameMode) != 0)) {
-
                     if (!((void)0, gSaveContext.nightFlag) || gTimeIncrement >= 0x190) {
                         gSaveContext.dayTime += gTimeIncrement;
                     } else {
@@ -1015,8 +1013,9 @@ void Environment_Update(GlobalContext* globalCtx, EnvironmentContext* envCtx, Li
                             osSyncPrintf(VT_COL(RED, WHITE) "\nThe color palette setting seems to be wrong!" VT_RST);
 
                             // "Palette setting = [] Last palette number = []"
-                            osSyncPrintf(VT_COL(RED, WHITE) "\nPalette setting = [%d] Last palette number = [%d]\n" VT_RST,
-                                         TIME_ENTRY_20.unk_05, envCtx->numLightSettings - 1);
+                            osSyncPrintf(
+                                VT_COL(RED, WHITE) "\nPalette setting = [%d] Last palette number = [%d]\n" VT_RST,
+                                TIME_ENTRY_20.unk_05, envCtx->numLightSettings - 1);
                         }
                         break;
                     }
@@ -1086,8 +1085,8 @@ void Environment_Update(GlobalContext* globalCtx, EnvironmentContext* envCtx, Li
                     osSyncPrintf("\n" VT_FGCOL(RED) "The color palette seems to be wrong!");
 
                     // "Palette setting = [] Last palette number = []"
-                    osSyncPrintf("\n" VT_FGCOL(YELLOW) "Palette setting = [%d] Last palette number = [%d]\n" VT_RST, envCtx->unk_BD,
-                                 envCtx->numLightSettings);
+                    osSyncPrintf("\n" VT_FGCOL(YELLOW) "Palette setting = [%d] Last palette number = [%d]\n" VT_RST,
+                                 envCtx->unk_BD, envCtx->numLightSettings);
                 }
             }
         }
@@ -1441,7 +1440,6 @@ void Environment_DrawLensFlare(GlobalContext* globalCtx, EnvironmentContext* env
     }
 
     if (cosAngle < 0.0f) {
-
     } else {
         if (arg9) {
             func_800C016C(globalCtx, &pos, &screenPos);
@@ -1557,7 +1555,7 @@ f32 func_800746DC(void) {
 
 void Environment_DrawRain(GlobalContext* globalCtx, View* view, GraphicsContext* gfxCtx) {
     s16 i;
-    s32 pad;
+
     Vec3f vec;
     f32 temp1;
     f32 temp2;
@@ -1843,7 +1841,7 @@ void Environment_DrawLightning(GlobalContext* globalCtx, s32 unused) {
     f32 dz;
     f32 x;
     f32 z;
-    s32 pad[2];
+
     Vec3f unused1 = { 0.0f, 0.0f, 0.0f };
     Vec3f unused2 = { 0.0f, 0.0f, 0.0f };
 
@@ -1929,8 +1927,8 @@ void func_800758AC(GlobalContext* globalCtx) {
         }
     } else if (globalCtx->sequenceCtx.natureAmbienceId == 0x13) {
         // "BGM Configuration"
-        osSyncPrintf("\n\n\nBGM Configuration: globalCtx->sequenceCtx.seqId=[%d] gSaveContext.seqId=[%d]\n\n", globalCtx->sequenceCtx.seqId,
-                     ((void)0, gSaveContext.seqId));
+        osSyncPrintf("\n\n\nBGM Configuration: globalCtx->sequenceCtx.seqId=[%d] gSaveContext.seqId=[%d]\n\n",
+                     globalCtx->sequenceCtx.seqId, ((void)0, gSaveContext.seqId));
         if (((void)0, gSaveContext.seqId) != globalCtx->sequenceCtx.seqId) {
             func_800F5550(globalCtx->sequenceCtx.seqId);
         }
@@ -2051,7 +2049,6 @@ void Environment_DrawCustomLensFlare(GlobalContext* globalCtx) {
 }
 
 void Environment_InitGameOverLights(GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
 
     sGameOverLightsIntensity = 0;
@@ -2211,7 +2208,7 @@ void Environment_DrawSandstorm(GlobalContext* globalCtx, u8 sandstormState) {
     s32 envA = globalCtx->envCtx.sandstormEnvA;
     Color_RGBA8 primColor;
     Color_RGBA8 envColor;
-    s32 pad;
+
     f32 sp98;
     u16 sp96;
     u16 sp94;

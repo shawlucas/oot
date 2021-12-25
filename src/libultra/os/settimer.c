@@ -21,8 +21,6 @@ s32 osSetTimer(OSTimer* timer, OSTime countdown, OSTime interval, OSMesgQueue* m
 
     prevInt = __osDisableInt();
     if (__osTimerList->next != __osTimerList) {
-        
-
         next = __osTimerList->next;
         count = osGetCount();
         value = count - __osTimerCounter;

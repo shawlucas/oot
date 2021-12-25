@@ -64,7 +64,6 @@ static s32 sCamDataIdxs[] = {
 static s16 sWaypoints[] = { 0, 4, 1, 5, 2, 6, 3, 7 };
 
 void EnHeishi1_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnHeishi1* this = (EnHeishi1*)thisx;
     Vec3f rupeePos;
     s32 i;
@@ -382,7 +381,7 @@ void EnHeishi1_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnHeishi1* this = (EnHeishi1*)thisx;
     s16 path;
     u8 i;
-    s32 pad;
+
     Player* player = GET_PLAYER(globalCtx);
     s32 pad2;
     Camera* activeCam;
@@ -402,7 +401,6 @@ void EnHeishi1_Update(Actor* thisx, GlobalContext* globalCtx) {
     activeCam = GET_ACTIVE_CAM(globalCtx);
 
     if (player->actor.freezeTimer == 0) {
-
         this->actionFunc(this, globalCtx);
 
         this->actor.uncullZoneForward = 550.0f;
@@ -483,7 +481,6 @@ s32 EnHeishi1_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dL
 }
 
 void EnHeishi1_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnHeishi1* this = (EnHeishi1*)thisx;
     Vec3f matrixScale = { 0.3f, 0.3f, 0.3f };
 

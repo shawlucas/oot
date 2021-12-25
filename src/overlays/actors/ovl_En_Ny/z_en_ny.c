@@ -520,7 +520,6 @@ static Vec3f sFireOffsets[] = {
 };
 
 void EnNy_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnNy* this = (EnNy*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ny.c", __LINE__);

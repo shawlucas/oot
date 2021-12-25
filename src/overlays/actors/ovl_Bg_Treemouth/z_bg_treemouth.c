@@ -59,7 +59,6 @@ void BgTreemouth_SetupAction(BgTreemouth* this, BgTreemouthActionFunc actionFunc
 }
 
 void BgTreemouth_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgTreemouth* this = (BgTreemouth*)thisx;
     CollisionHeader* colHeader = NULL;
 
@@ -224,7 +223,6 @@ void BgTreemouth_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgTreemouth_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     u16 alpha = 500;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_treemouth.c", __LINE__);

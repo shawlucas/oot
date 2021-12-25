@@ -102,7 +102,6 @@ void BgHidanFirewall_Wait(BgHidanFirewall* this, GlobalContext* globalCtx) {
 }
 
 void BgHidanFirewall_Countdown(BgHidanFirewall* this, GlobalContext* globalCtx) {
-
     if (this->actor.params != 0) {
         this->actor.params--;
     }

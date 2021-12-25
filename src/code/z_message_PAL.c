@@ -377,8 +377,9 @@ void Message_FindCreditsMessage(GlobalContext* globalCtx, u16 textId) {
             nextSeg = messageTableEntry->segment;
             font->msgOffset = foundSeg - seg;
             font->msgLength = nextSeg - foundSeg;
-            osSyncPrintf("Message found!!! = %x  (msgOffset = %X) (msgLength = %X) (foundSeg = %X) (seg = %X) (nextSeg = %X)\n",
-                         textId, font->msgOffset, font->msgLength, foundSeg, seg, nextSeg);
+            osSyncPrintf(
+                "Message found!!! = %x  (msgOffset = %X) (msgLength = %X) (foundSeg = %X) (seg = %X) (nextSeg = %X)\n",
+                textId, font->msgOffset, font->msgLength, foundSeg, seg, nextSeg);
             return;
         }
         messageTableEntry++;
@@ -732,7 +733,6 @@ f32 sFontWidths[144] = {
 };
 
 u16 Message_DrawItemIcon(GlobalContext* globalCtx, u16 itemId, Gfx** p, u16 i) {
-    s32 pad;
     Gfx* gfx = *p;
     MessageContext* msgCtx = &globalCtx->msgCtx;
 
@@ -1959,7 +1959,7 @@ void Message_DrawMain(GlobalContext* globalCtx, Gfx** p) {
     MessageContext* msgCtx = &globalCtx->msgCtx;
     u16 noteBufPos;
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     Gfx* gfx = *p;
     s16 r;
     s16 g;
@@ -2055,7 +2055,8 @@ void Message_DrawMain(GlobalContext* globalCtx, Gfx** p) {
             case MSGMODE_OCARINA_PLAYING:
                 msgCtx->ocarinaStaff = Audio_OcaGetPlayingStaff();
                 if (msgCtx->ocarinaStaff->pos) {
-                    osSyncPrintf("msgCtx->ocarinaStaff->pos = %d  sOcarinaNoteBufPos = %d\n", msgCtx->ocarinaStaff->pos, sOcarinaNoteBufPos);
+                    osSyncPrintf("msgCtx->ocarinaStaff->pos = %d  sOcarinaNoteBufPos = %d\n", msgCtx->ocarinaStaff->pos,
+                                 sOcarinaNoteBufPos);
                     if (msgCtx->ocarinaStaff->pos == 1 && sOcarinaNoteBufPos == 8) {
                         sOcarinaNoteBufPos = 0;
                     }
@@ -2426,8 +2427,8 @@ void Message_DrawMain(GlobalContext* globalCtx, Gfx** p) {
                             DREG(53) = 1;
                         }
                         osSyncPrintf(VT_FGCOL(YELLOW));
-                        osSyncPrintf("☆☆☆msgCtx->lastPlayedSong = %d   msgCtx->ocarinaAction = %d  ", msgCtx->lastPlayedSong,
-                                     msgCtx->ocarinaAction);
+                        osSyncPrintf("☆☆☆msgCtx->lastPlayedSong = %d   msgCtx->ocarinaAction = %d  ",
+                                     msgCtx->lastPlayedSong, msgCtx->ocarinaAction);
                         if (msgCtx->ocarinaAction == OCARINA_ACTION_FREE_PLAY_DONE) {
                             globalCtx->msgCtx.ocarinaMode = OCARINA_MODE_01;
                             if (msgCtx->lastPlayedSong == OCARINA_SONG_SCARECROW) {
@@ -2490,8 +2491,8 @@ void Message_DrawMain(GlobalContext* globalCtx, Gfx** p) {
                     sOcarinaNoteBufPos++;
                 }
                 if (msgCtx->ocarinaStaff->state < OCARINA_SONG_MEMORY_GAME) {
-                    osSyncPrintf("M_OCARINA20 : msgCtx->ocarinaAction=%x    msgCtx->ocarinaStaff->state=%x\n", msgCtx->ocarinaAction,
-                                 msgCtx->ocarinaStaff->state);
+                    osSyncPrintf("M_OCARINA20 : msgCtx->ocarinaAction=%x    msgCtx->ocarinaStaff->state=%x\n",
+                                 msgCtx->ocarinaAction, msgCtx->ocarinaStaff->state);
                     msgCtx->lastPlayedSong = msgCtx->ocarinaStaff->state;
                     msgCtx->msgMode = MSGMODE_SONG_PLAYBACK_SUCCESS;
                     Item_Give(globalCtx, ITEM_SONG_MINUET + gOcarinaSongItemMap[msgCtx->ocarinaStaff->state]);
@@ -2529,7 +2530,8 @@ void Message_DrawMain(GlobalContext* globalCtx, Gfx** p) {
                 break;
             case MSGMODE_SCARECROW_LONG_RECORDING_ONGOING:
                 msgCtx->ocarinaStaff = Audio_OcaGetRecordingStaff();
-                osSyncPrintf("\nsOcarinaNoteBufPos=%d, msgCtx->ocarinaStaff->pos=%d", sOcarinaNoteBufPos, msgCtx->ocarinaStaff->pos);
+                osSyncPrintf("\nsOcarinaNoteBufPos=%d, msgCtx->ocarinaStaff->pos=%d", sOcarinaNoteBufPos,
+                             msgCtx->ocarinaStaff->pos);
                 if (msgCtx->ocarinaStaff->pos && sOcarinaNoteBufPos == msgCtx->ocarinaStaff->pos - 1) {
                     if (sOcarinaNoteBufLen >= 8) {
                         for (noteBufPos = sOcarinaNoteBufLen - 8, i = 0; i < 8; i++, noteBufPos++) {
@@ -2878,7 +2880,6 @@ void Message_DrawMain(GlobalContext* globalCtx, Gfx** p) {
 void Message_DrawDebugVariableChanged(s16* var, GraphicsContext* gfxCtx) {
     static s16 sVarLastValue = 0;
     static s16 sFillTimer = 0;
-    s32 pad;
 
     OPEN_DISPS(gfxCtx, "../z_message_PAL.c", __LINE__);
 
@@ -2905,7 +2906,6 @@ void Message_DrawDebugVariableChanged(s16* var, GraphicsContext* gfxCtx) {
 }
 
 void Message_DrawDebugText(GlobalContext* globalCtx, Gfx** p) {
-    s32 pad;
     GfxPrint printer;
     s32 pad1;
 
@@ -3036,8 +3036,8 @@ void Message_Update(GlobalContext* globalCtx) {
                     } else {
                         averageY = ((actorFocusScreenPosY - playerFocusScreenPosY) / 2) + playerFocusScreenPosY;
                     }
-                    osSyncPrintf("focusScreenPosX=%d   averageY=%d  playerFocusScreenPosY  actorFocusScreenPosY=%d\n", focusScreenPosX, averageY,
-                                 playerFocusScreenPosY, actorFocusScreenPosY);
+                    osSyncPrintf("focusScreenPosX=%d   averageY=%d  playerFocusScreenPosY  actorFocusScreenPosY=%d\n",
+                                 focusScreenPosX, averageY, playerFocusScreenPosY, actorFocusScreenPosY);
                 } else {
                     R_TEXTBOX_X = R_TEXTBOX_X_TARGET;
                     R_TEXTBOX_Y = R_TEXTBOX_Y_TARGET;
@@ -3197,7 +3197,8 @@ void Message_Update(GlobalContext* globalCtx) {
             }
             if (globalCtx->csCtx.state == 0) {
                 osSyncPrintf(VT_FGCOL(GREEN));
-                osSyncPrintf("gSaveContext.cutsceneIndex=%x  globalCtx->activeCamera=%d  ", gSaveContext.cutsceneIndex, globalCtx->activeCamera);
+                osSyncPrintf("gSaveContext.cutsceneIndex=%x  globalCtx->activeCamera=%d  ", gSaveContext.cutsceneIndex,
+                             globalCtx->activeCamera);
 
                 if (msgCtx->textId != 0x2061 && msgCtx->textId != 0x2025 && msgCtx->textId != 0x208C &&
                     ((msgCtx->textId < 0x88D || msgCtx->textId >= 0x893) || msgCtx->choiceIndex != 0) &&
@@ -3248,7 +3249,8 @@ void Message_Update(GlobalContext* globalCtx) {
                 }
             }
             sLastPlayedSong = 0xFF;
-            osSyncPrintf("msgCtx.ocarinaMode=%d   chk_ocarina_no=%d\n", globalCtx->msgCtx.ocarinaMode, msgCtx->unk_E3F2);
+            osSyncPrintf("msgCtx.ocarinaMode=%d   chk_ocarina_no=%d\n", globalCtx->msgCtx.ocarinaMode,
+                         msgCtx->unk_E3F2);
             break;
         case MSGMODE_PAUSED:
             break;

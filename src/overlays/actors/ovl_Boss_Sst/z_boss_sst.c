@@ -335,7 +335,6 @@ void BossSst_Init(Actor* thisx, GlobalContext* globalCtx2) {
 }
 
 void BossSst_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossSst* this = (BossSst*)thisx;
 
     Collider_DestroyJntSph(globalCtx, &this->colliderJntSph);
@@ -1086,7 +1085,6 @@ void BossSst_HeadDarken(BossSst* this, GlobalContext* globalCtx) {
     if (this->timer != 0) {
         this->timer--;
     }
-    
 
     if (this->timer >= 80) {
         if (this->timer == 80) {
@@ -2567,7 +2565,6 @@ void BossSst_HeadCollisionCheck(BossSst* this, GlobalContext* globalCtx) {
 }
 
 void BossSst_UpdateHand(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossSst* this = (BossSst*)thisx;
     BossSstHandTrail* trail;
 
@@ -2622,7 +2619,6 @@ void BossSst_UpdateHand(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BossSst_UpdateHead(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossSst* this = (BossSst*)thisx;
 
     func_8002DBD0(&this->actor, &sHandOffsets[RIGHT], &sHands[RIGHT]->actor.world.pos);
@@ -2725,7 +2721,6 @@ void BossSst_DrawHand(Actor* thisx, GlobalContext* globalCtx) {
         s32 i;
         s32 idx;
         s32 end;
-        s32 pad;
 
         func_80093D84(globalCtx->state.gfxCtx);
 
@@ -2762,7 +2757,7 @@ s32 BossSst_OverrideHeadDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dLis
                              Gfx** gfx) {
     BossSst* this = (BossSst*)thisx;
     s32 shakeAmp;
-    s32 pad;
+    s32 tmp;
     s32 timer12;
     f32 shakeMod;
 
@@ -2771,7 +2766,6 @@ s32 BossSst_OverrideHeadDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dLis
     } else if (this->actionFunc == BossSst_HeadThrash) { // Animation modifications for death cutscene
         shakeAmp = (this->timer / 10) + 1;
         if ((limbIndex == 3) || (limbIndex == 39) || (limbIndex == 42)) {
-
             shakeMod = sinf(this->timer * (M_PI / 5));
             rot->x += ((0x500 * Rand_ZeroOne() + 0xA00) / 0x10) * shakeAmp * shakeMod;
 
@@ -2779,17 +2773,14 @@ s32 BossSst_OverrideHeadDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dLis
             rot->z -= ((0x800 * Rand_ZeroOne() + 0x1000) / 0x10) * shakeAmp * shakeMod + 0x1000;
 
             if (limbIndex == 3) {
-
                 shakeMod = sinf(this->timer * (M_PI / 5));
                 rot->y += ((0x500 * Rand_ZeroOne() + 0xA00) / 0x10) * shakeAmp * shakeMod;
             }
         } else if ((limbIndex == 5) || (limbIndex == 6)) {
-
             shakeMod = sinf((this->timer % 5) * (M_PI / 5));
             rot->z -= ((0x280 * Rand_ZeroOne() + 0x500) / 0x10) * shakeAmp * shakeMod + 0x500;
 
             if (limbIndex == 5) {
-
                 shakeMod = sinf(this->timer * (M_PI / 5));
                 rot->x += ((0x500 * Rand_ZeroOne() + 0xA00) / 0x10) * shakeAmp * shakeMod;
 
@@ -2810,8 +2801,8 @@ s32 BossSst_OverrideHeadDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dLis
         if (this->timer > 48) {
             timer12 = this->timer - 36;
         } else {
-            pad = ((this->timer > 6) ? 6 : this->timer);
-            timer12 = pad * 2;
+            tmp = ((this->timer > 6) ? 6 : this->timer);
+            timer12 = tmp * 2;
         }
 
         if ((limbIndex == 3) || (limbIndex == 39) || (limbIndex == 42)) {
@@ -2852,7 +2843,6 @@ void BossSst_PostHeadDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, 
 }
 
 void BossSst_DrawHead(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossSst* this = (BossSst*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_sst.c", __LINE__);
@@ -2932,7 +2922,7 @@ void BossSst_SpawnHeadShadow(BossSst* this) {
         { -160.0f, 0.0f, 250.0f },
         { 160.0f, 0.0f, 250.0f },
     };
-    s32 pad;
+
     s32 i;
     f32 sn;
     f32 cs;
@@ -3144,7 +3134,6 @@ void BossSst_UpdateEffect(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BossSst_DrawEffect(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossSst* this = (BossSst*)thisx;
     s32 i;
     BossSstEffect* effect;

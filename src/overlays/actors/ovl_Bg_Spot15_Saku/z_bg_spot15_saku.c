@@ -31,7 +31,6 @@ const ActorInit Bg_Spot15_Saku_InitVars = {
 };
 
 void BgSpot15Saku_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgSpot15Saku* this = (BgSpot15Saku*)thisx;
     s32 pad2;
     CollisionHeader* colHeader = NULL;

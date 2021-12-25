@@ -114,7 +114,6 @@ void EnYukabyun_Break(EnYukabyun* this, GlobalContext* globalCtx) {
 
 void EnYukabyun_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnYukabyun* this = (EnYukabyun*)thisx;
-    s32 pad;
 
     if (((this->collider.base.atFlags & AT_HIT) || (this->collider.base.acFlags & AC_HIT) ||
          ((this->collider.base.ocFlags1 & OC1_HIT) && !(this->collider.base.oc->id == ACTOR_EN_YUKABYUN))) ||

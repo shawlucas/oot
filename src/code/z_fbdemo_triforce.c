@@ -71,7 +71,7 @@ void TransitionTriforce_Draw(void* thisx, Gfx** gfxP) {
     Mtx* modelView;
     f32 scale;
     TransitionTriforce* this = (TransitionTriforce*)thisx;
-    s32 pad;
+
     f32 rotation = this->transPos * 360.0f;
 
     modelView = this->modelView[this->frame];

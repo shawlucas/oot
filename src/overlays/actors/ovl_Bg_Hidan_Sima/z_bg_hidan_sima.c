@@ -206,7 +206,6 @@ void func_8088E90C(BgHidanSima* this) {
 
 void BgHidanSima_Update(Actor* thisx, GlobalContext* globalCtx) {
     BgHidanSima* this = (BgHidanSima*)thisx;
-    s32 pad;
 
     this->actionFunc(this, globalCtx);
     if (this->dyna.actor.params != 0) {
@@ -230,7 +229,6 @@ Gfx* func_8088EB54(GlobalContext* globalCtx, BgHidanSima* this, Gfx* gfx) {
     s32 v0;
     f32 cos;
     f32 sin;
-    s32 pad[2];
 
     Matrix_MtxFCopy(&mtxF, &gMtxFClear);
     cos = Math_CosS(this->dyna.actor.world.rot.y + 0x8000);

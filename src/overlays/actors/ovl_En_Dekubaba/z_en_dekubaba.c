@@ -1035,7 +1035,6 @@ void EnDekubaba_UpdateDamage(EnDekubaba* this, GlobalContext* globalCtx) {
 
         if ((this->collider.base.colType != COLTYPE_HARD) &&
             ((this->actor.colChkInfo.damageEffect != DEKUBABA_DMGEFF_NONE) || (this->actor.colChkInfo.damage != 0))) {
-
             phi_s0 = this->actor.colChkInfo.health - this->actor.colChkInfo.damage;
 
             if (this->actionFunc != EnDekubaba_StunnedVertical) {
@@ -1108,7 +1107,6 @@ void EnDekubaba_UpdateDamage(EnDekubaba* this, GlobalContext* globalCtx) {
 }
 
 void EnDekubaba_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnDekubaba* this = (EnDekubaba*)thisx;
 
     if (this->collider.base.atFlags & AT_HIT) {
@@ -1276,7 +1274,6 @@ void EnDekubaba_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnDekubaba* this = (EnDekubaba*)thisx;
     f32 scale;
 
-    
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_dekubaba.c", __LINE__);
     func_80093D18(globalCtx->state.gfxCtx);
 

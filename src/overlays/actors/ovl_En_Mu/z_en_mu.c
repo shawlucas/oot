@@ -67,7 +67,6 @@ void EnMu_Interact(EnMu* this, GlobalContext* globalCtx) {
     randomIndex = (globalCtx->state.frames + (s32)(Rand_ZeroOne() * 5.0f)) % 5;
 
     for (i = 0; i < 5; i++) {
-
         if (!(textFlags & bitmask[randomIndex])) {
             break;
         }
@@ -128,7 +127,6 @@ s16 EnMu_CheckDialogState(GlobalContext* globalCtx, Actor* thisx) {
 
 void EnMu_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnMu* this = (EnMu*)thisx;
-    s32 pad;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 160.0f);
     SkelAnime_InitFlex(globalCtx, &this->skelAnime, &object_mu_Skel_004F70, &object_mu_Anim_0003F4, NULL, NULL, 0);
@@ -153,7 +151,7 @@ void EnMu_Pose(EnMu* this, GlobalContext* globalCtx) {
 
 void EnMu_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnMu* this = (EnMu*)thisx;
-    s32 pad;
+
     f32 talkDist;
     Vec3s pos;
 

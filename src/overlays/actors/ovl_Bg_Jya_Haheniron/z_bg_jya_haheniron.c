@@ -76,8 +76,6 @@ static Vec3f D_808987A0[] = { 0.0f, 14.0f, 0.0f };
 static Vec3f D_808987AC[] = { 0.0f, 8.0f, 0.0f };
 
 void BgJyaHaheniron_ColliderInit(BgJyaHaheniron* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     Collider_InitJntSph(globalCtx, &this->collider);
     Collider_SetJntSph(globalCtx, &this->collider, &this->actor, &sJntSphInit, this->colliderItems);
 }
@@ -116,7 +114,6 @@ void BgJyaHaheniron_SpawnFragments(GlobalContext* globalCtx, Vec3f* vec1, Vec3f*
 }
 
 void BgJyaHaheniron_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgJyaHaheniron* this = (BgJyaHaheniron*)thisx;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
@@ -133,7 +130,6 @@ void BgJyaHaheniron_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgJyaHaheniron_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgJyaHaheniron* this = (BgJyaHaheniron*)thisx;
 
     if (this->actor.params == 0) {
@@ -194,7 +190,6 @@ void BgJyaHaheniron_RubbleCollide(BgJyaHaheniron* this, GlobalContext* globalCtx
 }
 
 void BgJyaHaheniron_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgJyaHaheniron* this = (BgJyaHaheniron*)thisx;
 
     this->timer++;
@@ -207,7 +202,7 @@ void BgJyaHaheniron_Draw(Actor* thisx, GlobalContext* globalCtx) {
         gObjectJyaIronDL_000AE0,
         gObjectJyaIronDL_000600,
     };
-    s32 pad;
+
     BgJyaHaheniron* this = (BgJyaHaheniron*)thisx;
 
     if (this->actor.params == 0) {

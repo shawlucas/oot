@@ -119,7 +119,6 @@ void BgMenkuriEye_Update(Actor* thisx, GlobalContext* globalCtx) {
 
 void BgMenkuriEye_Draw(Actor* thisx, GlobalContext* globalCtx) {
     BgMenkuriEye* this = (BgMenkuriEye*)thisx;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_menkuri_eye.c", __LINE__);
     func_80093D84(globalCtx->state.gfxCtx);

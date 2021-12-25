@@ -67,7 +67,6 @@ s32 func_80B0BE20(EnSw* this, CollisionPoly* poly) {
     Vec3f sp38;
     f32 sp34;
     f32 temp_f0;
-    s32 pad;
 
     this->actor.floorPoly = poly;
     sp44.x = COLPOLY_GET_NORMAL(poly->normal.x);
@@ -109,7 +108,6 @@ s32 func_80B0BE20(EnSw* this, CollisionPoly* poly) {
 
 CollisionPoly* func_80B0C020(GlobalContext* globalCtx, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3, s32* arg4) {
     CollisionPoly* sp3C;
-    s32 pad;
 
     if (!BgCheck_EntityLineTest1(&globalCtx->colCtx, arg1, arg2, arg3, &sp3C, true, true, true, false, arg4)) {
         return NULL;
@@ -133,7 +131,7 @@ s32 func_80B0C0CC(EnSw* this, GlobalContext* globalCtx, s32 arg2) {
     Vec3f sp90;
     Vec3f sp84;
     Vec3f sp78;
-    s32 pad;
+
     s32 sp70;
     s32 sp6C;
     s32 phi_s1;
@@ -175,7 +173,7 @@ s32 func_80B0C0CC(EnSw* this, GlobalContext* globalCtx, s32 arg2) {
             if (phi_s1 == 0) {
                 sp78.x = sp84.x - (this->unk_37C.x * 24.0f);
                 sp78.y = sp84.y - (this->unk_37C.y * 24.0f);
-                
+
                 sp78.z = sp84.z - (this->unk_37C.z * 24.0f);
             } else if (phi_s1 == 1) {
                 sp78.x = sp84.x + (this->unk_370.x * 24.0f);
@@ -210,7 +208,6 @@ void EnSw_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnSw* this = (EnSw*)thisx;
     s32 phi_v0;
     Vec3f sp4C = { 0.0f, 0.0f, 0.0f };
-    s32 pad;
 
     if (thisx->params & 0x8000) {
         phi_v0 = (((thisx->params - 0x8000) & 0xE000) >> 0xD) + 1;
@@ -310,7 +307,6 @@ s32 func_80B0C9F0(EnSw* this, GlobalContext* globalCtx) {
 
     if (this->actor.xyzDistToPlayerSq < SQ(400.0f) && ((this->actor.params & 0xE000) >> 0xD) == 0 &&
         globalCtx->actorCtx.unk_02 != 0) {
-
         this->actor.colChkInfo.damage = this->actor.colChkInfo.health;
         phi_v1 = true;
     }
@@ -702,7 +698,6 @@ s32 func_80B0DEA8(EnSw* this, GlobalContext* globalCtx, s32 arg2) {
 }
 
 s32 func_80B0DFFC(EnSw* this, GlobalContext* globalCtx) {
-    s32 pad;
     CollisionPoly* sp60;
     s32 sp5C;
     Vec3f sp50;
@@ -722,7 +717,6 @@ s32 func_80B0DFFC(EnSw* this, GlobalContext* globalCtx) {
     } else if (((globalCtx->state.frames % 4) == 2) &&
                !BgCheck_EntityLineTest1(&globalCtx->colCtx, &this->actor.world.pos, &this->unk_46C, &sp50, &sp60, true,
                                         false, false, true, &sp5C)) {
-        
         sp4C = false;
     } else if (((globalCtx->state.frames % 4) == 3) &&
                BgCheck_EntityLineTest1(&globalCtx->colCtx, &this->actor.world.pos, &this->unk_478, &sp50, &sp60, true,
@@ -807,7 +801,6 @@ s32 func_80B0E430(EnSw* this, f32 arg1, s16 arg2, s32 arg3, GlobalContext* globa
 }
 
 void func_80B0E5E0(EnSw* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     f32 rand;
 
     if (func_80B0E430(this, 6.0f, 0x3E8, 1, globalCtx)) {
@@ -826,7 +819,6 @@ void func_80B0E5E0(EnSw* this, GlobalContext* globalCtx) {
 
 void func_80B0E728(EnSw* this, GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
 
     if (DECR(this->unk_442) != 0) {
         if (func_80B0DEA8(this, globalCtx, 1)) {
@@ -859,8 +851,6 @@ void func_80B0E728(EnSw* this, GlobalContext* globalCtx) {
 }
 
 void func_80B0E90C(EnSw* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     func_80B0E314(this, this->unk_448, 0.0f);
     if (this->actor.speedXZ == 0.0f) {
         this->unk_444 = func_80B0DE34(this, &this->actor.home.pos);
@@ -870,8 +860,6 @@ void func_80B0E90C(EnSw* this, GlobalContext* globalCtx) {
 }
 
 void func_80B0E9BC(EnSw* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     if (func_80B0E430(this, 6.0f, 0x3E8, 0, globalCtx)) {
         func_80B0E314(this, this->unk_448, 2.0f);
         if (!(Math_Vec3f_DistXYZ(&this->actor.world.pos, &this->unk_448) > 4.0f)) {
@@ -978,8 +966,6 @@ void func_80B0EDB8(GlobalContext* globalCtx, Color_RGBA8* arg1, s16 arg2, s16 ar
 }
 
 void func_80B0EEA4(GlobalContext* globalCtx) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_sw.c", __LINE__);
 
     POLY_OPA_DISP = Gameplay_SetFog(globalCtx, POLY_OPA_DISP);

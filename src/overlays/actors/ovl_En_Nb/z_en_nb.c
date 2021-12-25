@@ -102,7 +102,7 @@ s32 EnNb_GetType(EnNb* this) {
 void EnNb_UpdatePath(EnNb* this, GlobalContext* globalCtx) {
     Vec3s* pointPos;
     Path* pathList;
-    s32 pad;
+
     s32 path;
 
     pathList = globalCtx->setupPathList;
@@ -135,7 +135,6 @@ void EnNb_SetupCollider(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnNb_UpdateCollider(EnNb* this, GlobalContext* globalCtx) {
-    s32 pad[4];
     ColliderCylinder* collider = &this->collider;
 
     Collider_UpdateCylinder(&this->actor, collider);
@@ -178,7 +177,6 @@ void func_80AB10C4(EnNb* this) {
 }
 
 void EnNb_UpdateEyes(EnNb* this) {
-    s32 pad[3];
     s16* blinkTimer = &this->blinkTimer;
     s16* eyeIdx = &this->eyeIdx;
 
@@ -331,7 +329,6 @@ void EnNb_ComeUpImpl(EnNb* this, GlobalContext* globalCtx) {
 }
 
 void EnNb_SetupChamberCsImpl(EnNb* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     Player* player;
 
     if ((gSaveContext.chamberCutsceneNum == 3) && (gSaveContext.sceneSetupIndex < 4)) {
@@ -541,7 +538,6 @@ void EnNb_CreateLightOrb(EnNb* this, GlobalContext* globalCtx) {
 }
 
 void EnNb_DrawTransparency(EnNb* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s16 eyeSegIdx = this->eyeIdx;
     void* eyeTex = sEyeTextures[eyeSegIdx];
     SkelAnime* skelAnime = &this->skelAnime;
@@ -582,7 +578,7 @@ void EnNb_SetPosInPortal(EnNb* this, GlobalContext* globalCtx) {
     CsCmdActorAction* csCmdNPCAction = EnNb_GetNpcCsAction(globalCtx, 1);
     Vec3f* pos = &this->actor.world.pos;
     f32 f0;
-    s32 pad;
+
     Vec3f startPos;
     Vec3f endPos;
 
@@ -697,8 +693,6 @@ void EnNb_SetupConfrontation(EnNb* this, GlobalContext* globalCtx) {
 }
 
 void EnNb_PlayKnuckleDefeatSFX(EnNb* this, GlobalContext* globalCtx) {
-    s32 pad[2];
-
     if (globalCtx->csCtx.frames == 548) {
         func_80078914(&this->actor.projectedPos, NA_SE_VO_NB_CRY_0);
         func_80078914(&this->actor.projectedPos, NA_SE_EN_FANTOM_HIT_THUNDER);
@@ -706,8 +700,6 @@ void EnNb_PlayKnuckleDefeatSFX(EnNb* this, GlobalContext* globalCtx) {
 }
 
 void EnNb_PlayKneelingOnGroundSFX(EnNb* this) {
-    s32 pad[2];
-
     if ((this->skelAnime.mode == 2) &&
         (Animation_OnFrame(&this->skelAnime, 18.0f) || Animation_OnFrame(&this->skelAnime, 25.0f))) {
         func_80078914(&this->actor.projectedPos, NA_SE_EV_HUMAN_BOUND);
@@ -715,16 +707,12 @@ void EnNb_PlayKneelingOnGroundSFX(EnNb* this) {
 }
 
 void EnNb_PlayLookRightSFX(EnNb* this) {
-    s32 pad[2];
-
     if ((this->skelAnime.mode == 2) && Animation_OnFrame(&this->skelAnime, 9.0f)) {
         func_80078914(&this->actor.projectedPos, NA_SE_PL_WALK_CONCRETE);
     }
 }
 
 void EnNb_PlayLookLeftSFX(EnNb* this) {
-    s32 pad[2];
-
     if (Animation_OnFrame(&this->skelAnime, 9.0f) || Animation_OnFrame(&this->skelAnime, 13.0f)) {
         func_80078914(&this->actor.projectedPos, NA_SE_PL_WALK_CONCRETE);
     }
@@ -747,7 +735,6 @@ void func_80AB26C8(EnNb* this) {
 }
 
 void func_80AB26DC(EnNb* this, GlobalContext* globalCtx) {
-    s32 pad;
     AnimationHeader* animation = &gNabooruCollapseFromStandingToKneelingTransitionAnim;
     f32 lastFrame = Animation_GetLastFrame(animation);
 
@@ -951,7 +938,6 @@ void EnNb_ConfrontationDestroy(EnNb* this, GlobalContext* globalCtx) {
 }
 
 void func_80AB2E70(EnNb* this, GlobalContext* globalCtx) {
-    s32 pad;
     SkelAnime* skelAnime = &this->skelAnime;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_nb_inConfrontion.c", __LINE__);
@@ -978,7 +964,6 @@ s32 func_80AB2FC0(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* p
 }
 
 void func_80AB2FE4(EnNb* this, GlobalContext* globalCtx) {
-    s32 pad;
     s16 eyeIdx = this->eyeIdx;
     SkelAnime* skelAnime = &this->skelAnime;
     void* eyeTexture = sEyeTextures[eyeIdx];
@@ -1218,7 +1203,6 @@ void EnNb_SetupPathMovement(EnNb* this, GlobalContext* globalCtx) {
 }
 
 void EnNb_SetTextIdAsChild(EnNb* this, GlobalContext* globalCtx) {
-    s32 pad;
     u8 choiceIndex;
     s32 pad1;
     u16 textId;
@@ -1422,7 +1406,6 @@ void EnNb_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnNb_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnNb* this = (EnNb*)thisx;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 30.0f);
@@ -1493,7 +1476,6 @@ void EnNb_DrawNothing(EnNb* this, GlobalContext* globalCtx) {
 }
 
 void EnNb_DrawDefault(EnNb* this, GlobalContext* globalCtx) {
-    s32 pad;
     s16 eyeIdx = this->eyeIdx;
     SkelAnime* skelAnime = &this->skelAnime;
     void* eyeTexture = sEyeTextures[eyeIdx];

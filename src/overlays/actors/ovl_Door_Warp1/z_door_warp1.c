@@ -875,8 +875,6 @@ void DoorWarp1_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void DoorWarp1_DrawBlueCrystal(DoorWarp1* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_door_warp1.c", __LINE__);
 
     func_80093D84(globalCtx->state.gfxCtx);
@@ -893,7 +891,6 @@ void DoorWarp1_DrawBlueCrystal(DoorWarp1* this, GlobalContext* globalCtx) {
 }
 
 void DoorWarp1_DrawPurpleCrystal(DoorWarp1* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     Vec3f eye;
 
     eye.x = -(Math_SinS(globalCtx->state.frames * 200) * 120.0f) * 80.0f;
@@ -917,7 +914,6 @@ void DoorWarp1_DrawPurpleCrystal(DoorWarp1* this, GlobalContext* globalCtx) {
 }
 
 void DoorWarp1_DrawWarp(DoorWarp1* this, GlobalContext* globalCtx) {
-    s32 pad;
     u32 pad1;
     u32 spEC = globalCtx->state.frames * 10;
     f32 spE8 = (this->unk_194 >= 1.0f) ? 0.0f : 1.0f - this->unk_194;

@@ -79,7 +79,6 @@ void EffectSsSibuki_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
 }
 
 void EffectSsSibuki_Update(GlobalContext* globalCtx, u32 index, EffectSs* this) {
-    s32 pad[3];
     f32 xzVelScale;
     s16 yaw;
     Player* player = GET_PLAYER(globalCtx);

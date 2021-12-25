@@ -74,8 +74,6 @@ void Lights_Draw(Lights* lights, GraphicsContext* gfxCtx) {
         light++;
     }
 
-    
-
     i++; // abmient light is total number of lights + 1
     gSPLight(POLY_OPA_DISP++, &lights->l.a, i);
     gSPLight(POLY_XLU_DISP++, &lights->l.a, i);
@@ -111,7 +109,7 @@ void Lights_BindPoint(Lights* lights, LightParams* params, Vec3f* vec) {
 
             if (light != NULL) {
                 posDiff = sqrtf(posDiff);
-                
+
                 scale = posDiff / scale;
                 scale = 1 - SQ(scale);
 
@@ -355,7 +353,6 @@ void Lights_GlowCheck(GlobalContext* globalCtx) {
 }
 
 void Lights_DrawGlow(GlobalContext* globalCtx) {
-    s32 pad;
     LightNode* node;
 
     node = globalCtx->lightCtx.listHead;
@@ -371,7 +368,6 @@ void Lights_DrawGlow(GlobalContext* globalCtx) {
         LightInfo* info;
         LightPoint* params;
         f32 scale;
-        s32 pad[4];
 
         info = node->info;
         params = &info->params.point;

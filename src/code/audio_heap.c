@@ -1309,7 +1309,6 @@ void AudioHeap_ApplySampleBankCacheInternal(s32 apply, s32 sampleBankId) {
     Instrument* inst;
     SoundFontSound* sfx;
     u32* fakematch;
-    s32 pad[4];
 
     sampleBankTable = gAudioContext.sampleBankTable;
     numFonts = gAudioContext.soundFontTable->numEntries;

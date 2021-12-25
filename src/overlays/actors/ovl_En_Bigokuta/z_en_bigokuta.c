@@ -353,7 +353,6 @@ void func_809BD5E0(EnBigokuta* this) {
     this->actionFunc = func_809BE180;
 }
 void func_809BD658(EnBigokuta* this) {
-
     Animation_MorphToPlayOnce(&this->skelAnime, &object_bigokuta_Anim_000A74, -5.0f);
     Audio_PlayActorSound2(&this->actor, NA_SE_EN_DAIOCTA_DEAD2);
     this->unk_196 = 38;
@@ -477,7 +476,7 @@ void func_809BDB90(EnBigokuta* this, GlobalContext* globalCtx) {
 void func_809BDC08(EnBigokuta* this, GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
     s16 phi_v0;
-    s16 pad;
+
     s16 phi_v1;
     Vec3f sp28;
 

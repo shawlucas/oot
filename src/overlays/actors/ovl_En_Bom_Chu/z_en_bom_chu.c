@@ -171,8 +171,6 @@ void EnBomChu_UpdateFloorPoly(EnBomChu* this, CollisionPoly* floorPoly, GlobalCo
 
             this->axisUp = normal;
 
-            
-
             // mf = (axisLeft | axisUp | axisForwards)
 
             mf.xx = this->axisLeft.x;
@@ -477,7 +475,6 @@ void EnBomChu_Update(Actor* thisx, GlobalContext* globalCtx2) {
 }
 
 void EnBomChu_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnBomChu* this = (EnBomChu*)thisx;
     f32 colorIntensity;
     s32 blinkHalfPeriod;

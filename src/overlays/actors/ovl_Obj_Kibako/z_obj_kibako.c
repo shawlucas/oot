@@ -89,7 +89,6 @@ void ObjKibako_InitCollider(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void ObjKibako_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     ObjKibako* this = (ObjKibako*)thisx;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
@@ -186,8 +185,6 @@ void ObjKibako_SetupIdle(ObjKibako* this) {
 }
 
 void ObjKibako_Idle(ObjKibako* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     if (Actor_HasParent(&this->actor, globalCtx)) {
         ObjKibako_SetupHeld(this);
     } else if ((this->actor.bgCheckFlags & 0x20) && (this->actor.yDistToWater > 19.0f)) {
@@ -249,7 +246,6 @@ void ObjKibako_SetupThrown(ObjKibako* this) {
 }
 
 void ObjKibako_Thrown(ObjKibako* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 pad2;
 
     if ((this->actor.bgCheckFlags & 0xB) || (this->collider.base.atFlags & AT_HIT)) {
@@ -273,14 +269,12 @@ void ObjKibako_Thrown(ObjKibako* this, GlobalContext* globalCtx) {
 }
 
 void ObjKibako_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     ObjKibako* this = (ObjKibako*)thisx;
 
     this->actionFunc(this, globalCtx);
 }
 
 void ObjKibako_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     ObjKibako* this = (ObjKibako*)thisx;
 
     Gfx_DrawDListOpa(globalCtx, gSmallWoodenBoxDL);

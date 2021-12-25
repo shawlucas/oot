@@ -45,13 +45,10 @@ void DemoGt_SpawnDust(GlobalContext* globalCtx, Vec3f* pos, Vec3f* velocity, Vec
 }
 
 void func_8097D7D8(GlobalContext* globalCtx, Vec3f* pos, Vec3f* velOffset, f32 scale, s32 arg4, s32 arg5, s16 life) {
-    s32 pad;
-
     if (!FrameAdvance_IsEnabled(globalCtx)) {
         s32 frames = globalCtx->gameplayFrames;
 
         if (ABS(frames % arg4) == arg5) {
-            s32 pad[2];
             Vec3f velocity = { 0.0f, 6.0f, 0.0f };
             Vec3f accel = { 0.0f, 0.0f, 0.0f };
 
@@ -62,8 +59,6 @@ void func_8097D7D8(GlobalContext* globalCtx, Vec3f* pos, Vec3f* velOffset, f32 s
             velocity.x += velOffset->x;
             velocity.y += velOffset->y;
             velocity.z += velOffset->z;
-
-            
 
             accel.x *= scale;
             accel.y *= scale;
@@ -80,7 +75,6 @@ Actor* DemoGt_SpawnCloudRing(GlobalContext* globalCtx, Vec3f* pos, s16 params) {
 }
 
 void DemoGt_SpawnExplosionWithSound(GlobalContext* globalCtx, Vec3f* pos, f32 scale) {
-    s32 pad;
     Vec3f velocity = { 0.0f, 0.0f, 0.0f };
     Vec3f accel = { 0.0f, 0.0f, 0.0f };
 
@@ -103,7 +97,6 @@ void func_8097DAC8(DemoGt* this, GlobalContext* globalCtx, Vec3f* spawnerPos) {
     angle = 0;
 
     for (i = 0; i < 12; i++) {
-
         pos.x = Math_SinS(angle) * 46.0f;
         pos.y = (Rand_ZeroOne() * 75.0f) + 2.0f;
         pos.z = Math_CosS(angle) * 46.0f;
@@ -144,7 +137,6 @@ void func_8097DD28(DemoGt* this, GlobalContext* globalCtx, Vec3f* spawnerPos) {
     angle = 0;
 
     for (i = 0; i < 8; i++) {
-
         pos.x = Math_SinS(angle) * 30.0f;
         pos.y = (Rand_ZeroOne() * 75.0f) + 2.0f;
         pos.z = Math_CosS(angle) * 30.0f;
@@ -186,7 +178,6 @@ void func_8097DF70(DemoGt* this, GlobalContext* globalCtx, Vec3f* spawnerPos) {
     angle = 0;
 
     for (i = 0; i < 12; i++) {
-
         pos.x = Math_SinS(angle) * 16.0f;
         pos.y = (Rand_ZeroOne() * 5.0f) + 2.0f;
         pos.z = Math_CosS(angle) * 16.0f;
@@ -227,7 +218,6 @@ void func_8097E1D4(GlobalContext* globalCtx, Vec3f* arg1, s16 arg2) {
     angle = 0;
 
     for (i = 0; i < 1; i++) {
-
         pos.x = Math_SinS(angle) * 46.0f;
         pos.y = (Rand_ZeroOne() * 75.0f) - 28.0f;
         pos.z = Math_CosS(angle) * 46.0f;
@@ -275,7 +265,6 @@ void func_8097E454(GlobalContext* globalCtx, Vec3f* spawnerPos, Vec3f* velocity,
         increment = 0x10000 / arg6;
 
         for (i = frames; i < arg6; i += arg7) {
-
             pos.x = (Math_SinS(phi_s0) * arg4) + spawnerPos->x;
             pos.y = spawnerPos->y;
             pos.z = (Math_CosS(phi_s0) * arg4) + spawnerPos->z;
@@ -300,7 +289,6 @@ u8 func_8097E69C(GlobalContext* globalCtx) {
 }
 
 CsCmdActorAction* DemoGt_GetNpcAction(GlobalContext* globalCtx, u32 actionIdx) {
-    s32 pad[2];
     CsCmdActorAction* ret = NULL;
 
     if (!func_8097E69C(globalCtx)) {
@@ -353,7 +341,7 @@ void func_8097E824(DemoGt* this, s32 arg1) {
     s16 phi_a3;
     Vec3f* pos = &this->dyna.actor.world.pos;
     Vec3s* unk16C = &this->unk_16C;
-    s32 pad;
+
     f32 tempf3;
     f32 tempf2;
     f32 tempf1;
@@ -452,7 +440,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void func_8097EDD8(DemoGt* this, GlobalContext* globalCtx, CollisionHeader* collision) {
-    s32 pad[3];
     CollisionHeader* colHeader;
 
     if (collision != NULL) {
@@ -465,7 +452,6 @@ void func_8097EDD8(DemoGt* this, GlobalContext* globalCtx, CollisionHeader* coll
 }
 
 u8 func_8097EE44(DemoGt* this, GlobalContext* globalCtx, s32 updateMode, s32 drawConfig, CollisionHeader* colHeader) {
-
     if (func_8097ED94()) {
         this->updateMode = updateMode;
         this->drawConfig = drawConfig;
@@ -503,7 +489,6 @@ void func_8097EF40(DemoGt* this, GlobalContext* globalCtx) {
     Vec3f velocity = { 0.0f, -16.0f, 0.0f };
     Vec3f accel = { 0.0f, 1.2f, 0.0f };
     Vec3f* pos = &this->dyna.actor.world.pos;
-    s32 pad;
 
     if ((kREG(1) == 20) || (frames == 220)) {
         dustPos.x = pos->x + 256.0f;
@@ -521,7 +506,6 @@ void func_8097EF40(DemoGt* this, GlobalContext* globalCtx) {
 }
 
 void func_8097F0AC(DemoGt* this, GlobalContext* globalCtx) {
-    s32 pad[3];
     Vec3f sp38;
     s16 pad1[3];
     Vec3f sp24;
@@ -625,7 +609,6 @@ void DemoGt_Update8(DemoGt* this, GlobalContext* globalCtx) {
 }
 
 void DemoGt_Draw1(DemoGt* this, GlobalContext* globalCtx) {
-    s32 pad;
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
     u32 gameplayFrames = globalCtx->gameplayFrames;
     s16 pad2[2];
@@ -703,7 +686,7 @@ void func_8097F960(DemoGt* this, GlobalContext* globalCtx) {
 
 void func_8097F96C(DemoGt* this, GlobalContext* globalCtx) {
     static Actor* cloudRing = NULL;
-    s32 pad[4];
+
     Vec3f pos;
     Actor* actor;
     u16 frames = globalCtx->csCtx.frames;
@@ -725,7 +708,6 @@ void func_8097F96C(DemoGt* this, GlobalContext* globalCtx) {
 }
 
 void func_8097FA1C(DemoGt* this, GlobalContext* globalCtx) {
-    s32 pad[3];
     Vec3f dustPos;
     u16 frames = globalCtx->csCtx.frames;
     Vec3f* pos = &this->dyna.actor.world.pos;
@@ -748,7 +730,7 @@ void func_8097FAFC(DemoGt* this, GlobalContext* globalCtx) {
     static s32 arg6 = 11;
     static s32 arg7 = 1;
     static s16 life = 3;
-    s32 pad[2];
+
     u16 frames = globalCtx->csCtx.frames;
     Vec3f pos;
     f32 new_var = -200.0;
@@ -768,7 +750,6 @@ void func_8097FAFC(DemoGt* this, GlobalContext* globalCtx) {
 }
 
 void func_8097FC1C(DemoGt* this, GlobalContext* globalCtx) {
-    s32 pad[3];
     Vec3f dustPos;
     u16 frames = globalCtx->csCtx.frames;
     Vec3f* pos = &this->dyna.actor.world.pos;
@@ -784,7 +765,6 @@ void func_8097FC1C(DemoGt* this, GlobalContext* globalCtx) {
 }
 
 void func_8097FCE4(DemoGt* this, GlobalContext* globalCtx) {
-    s32 pad[3];
     Vec3f vec;
     u16 frames = globalCtx->csCtx.frames;
 
@@ -851,7 +831,6 @@ void DemoGt_Draw2(DemoGt* this, GlobalContext* globalCtx) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
     s32* unk198;
     s32* unk178;
-    s32 pad;
 
     OPEN_DISPS(gfxCtx, "../z_demo_gt_part2.c", __LINE__);
 
@@ -884,7 +863,7 @@ void func_80980178(DemoGt* this, GlobalContext* globalCtx) {
 
 void func_80980184(DemoGt* this, GlobalContext* globalCtx) {
     static Actor* cloudRing = NULL;
-    s32 pad[4];
+
     Vec3f pos;
     Actor* actor;
 
@@ -906,7 +885,7 @@ void func_80980184(DemoGt* this, GlobalContext* globalCtx) {
 
 void func_80980218(DemoGt* this, GlobalContext* globalCtx) {
     static Actor* cloudRing = NULL;
-    s32 pad[4];
+
     Vec3f pos;
     Actor* actor;
 
@@ -927,7 +906,6 @@ void func_80980218(DemoGt* this, GlobalContext* globalCtx) {
 }
 
 void func_809802AC(DemoGt* this, GlobalContext* globalCtx) {
-    s32 pad[3];
     Vec3f dustPos;
     u16 frames = globalCtx->csCtx.frames;
     Vec3f* pos = &this->dyna.actor.world.pos;
@@ -943,7 +921,6 @@ void func_809802AC(DemoGt* this, GlobalContext* globalCtx) {
 }
 
 void func_8098036C(DemoGt* this, GlobalContext* globalCtx) {
-    s32 pad[3];
     Vec3f dustPos;
     u16 frames = globalCtx->csCtx.frames;
     Vec3f* world = &this->dyna.actor.world.pos;
@@ -959,7 +936,6 @@ void func_8098036C(DemoGt* this, GlobalContext* globalCtx) {
 }
 
 void func_80980430(DemoGt* this, GlobalContext* globalCtx) {
-    s32 pad[3];
     Vec3f dustPos;
     s32 frames = globalCtx->csCtx.frames;
     Vec3f* pos = &this->dyna.actor.world.pos;
@@ -975,7 +951,6 @@ void func_80980430(DemoGt* this, GlobalContext* globalCtx) {
 }
 
 void func_80980504(DemoGt* this, GlobalContext* globalCtx) {
-    s32 pad[3];
     Vec3f dustPos;
     u16 frames = globalCtx->csCtx.frames;
     Vec3f* pos = &this->dyna.actor.world.pos;
@@ -991,7 +966,6 @@ void func_80980504(DemoGt* this, GlobalContext* globalCtx) {
 }
 
 void func_809805D8(DemoGt* this, GlobalContext* globalCtx) {
-    s32 pad[3];
     Vec3f dustPos;
     u16 frames = globalCtx->csCtx.frames;
     Vec3f* homePos = &this->dyna.actor.home.pos;
@@ -1007,7 +981,6 @@ void func_809805D8(DemoGt* this, GlobalContext* globalCtx) {
 }
 
 void func_809806B8(DemoGt* this, GlobalContext* globalContext) {
-    s32 pad[3];
     Vec3f dustPos;
     u16 frames = globalContext->csCtx.frames;
     Vec3f* pos = &this->dyna.actor.world.pos;
@@ -1023,7 +996,6 @@ void func_809806B8(DemoGt* this, GlobalContext* globalContext) {
 }
 
 void func_8098078C(DemoGt* this, GlobalContext* globalContext) {
-    s32 pad[3];
     Vec3f dustPos;
     u16 frames = globalContext->csCtx.frames;
     Vec3f* pos = &this->dyna.actor.world.pos;
@@ -1039,7 +1011,6 @@ void func_8098078C(DemoGt* this, GlobalContext* globalContext) {
 }
 
 void func_8098085C(DemoGt* this, GlobalContext* globalCtx) {
-    s32 pad[3];
     Vec3f sp28;
     u16 frames = globalCtx->csCtx.frames;
     Vec3f* pos = &this->dyna.actor.world.pos;
@@ -1068,7 +1039,6 @@ void func_809809C0(DemoGt* this, GlobalContext* globalCtx2) {
     s32 gameplayFrames = globalCtx->gameplayFrames;
     u16 frames = globalCtx->csCtx.frames;
     Vec3f sp54;
-    s16 pad[3];
 
     if (((frames > 469) && (frames < 481)) || (kREG(1) == 3)) {
         Vec3f sp40 = { 20.0f, 6.0f, 0.0f };
@@ -1086,7 +1056,6 @@ void func_809809C0(DemoGt* this, GlobalContext* globalCtx2) {
 }
 
 void func_80980AD4(DemoGt* this, GlobalContext* globalCtx) {
-    s32 pad[4];
     Vec3f pos;
     u16 frames = globalCtx->csCtx.frames;
 
@@ -1101,7 +1070,6 @@ void func_80980AD4(DemoGt* this, GlobalContext* globalCtx) {
 }
 
 void func_80980B68(DemoGt* this, GlobalContext* globalCtx) {
-    s32 pad[4];
     Vec3f pos;
     u16 frames = globalCtx->csCtx.frames;
 
@@ -1115,7 +1083,6 @@ void func_80980B68(DemoGt* this, GlobalContext* globalCtx) {
 }
 
 void func_80980BFC(DemoGt* this, GlobalContext* globalCtx) {
-    s32 pad[4];
     Vec3f pos;
     u16 frames = globalCtx->csCtx.frames;
 
@@ -1196,14 +1163,12 @@ void func_80980F58(DemoGt* this, GlobalContext* globalCtx) {
 }
 
 void func_80980F8C(DemoGt* this, GlobalContext* globalCtx) {
-    s32 pad[3];
     Vec3f sp58;
     Vec3f dustPos;
     u16 frames = globalCtx->csCtx.frames;
 
     if ((frames > 259) && (frames < 289)) {
         Vec3f velOfset = { 0.0f, -17.0f, 0.0f };
-        s32 pad[3];
 
         sp58.x = 640.0f;
         sp58.y = 2100.0f;
@@ -1248,7 +1213,7 @@ void DemoGt_Draw4(DemoGt* this, GlobalContext* globalCtx2) {
     GraphicsContext* gfxCtx;
     GlobalContext* globalCtx = globalCtx2;
     u16 frames = globalCtx->csCtx.frames;
-    s32 pad;
+
     s16 sp76;
     f32 sp70;
     f32 sp6C;
@@ -1261,7 +1226,6 @@ void DemoGt_Draw4(DemoGt* this, GlobalContext* globalCtx2) {
     f32 sp44;
 
     if (frames < 301) {
-
         sp76 = this->unk_172;
         sp70 = fabsf(sp76 * (M_PI / 0x8000));
         sp6C = kREG(61);
@@ -1319,7 +1283,6 @@ void func_80981424(DemoGt* this, GlobalContext* globalCtx) {
 }
 
 void func_80981458(DemoGt* this, GlobalContext* globalCtx) {
-    s32 pad[3];
     Vec3f sp58;
     Vec3f dustPos;
     u16 frames = globalCtx->csCtx.frames;
@@ -1369,7 +1332,7 @@ void DemoGt_Update17(DemoGt* this, GlobalContext* globalCtx) {
 
 void DemoGt_Draw5(DemoGt* this, GlobalContext* globalCtx) {
     GraphicsContext* gfxCtx;
-    s32 pad;
+
     s16 sp76;
     f32 sp70;
     f32 sp6C;

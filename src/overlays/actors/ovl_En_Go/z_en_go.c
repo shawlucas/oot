@@ -576,7 +576,6 @@ void func_80A3F908(EnGo* this, GlobalContext* globalCtx) {
         this->actionFunc == EnGo_FireGenericActionFunc || this->actionFunc == EnGo_Eyedrops ||
         this->actionFunc == func_80A40DCC || this->actionFunc == EnGo_GetItem || this->actionFunc == func_80A40C78 ||
         this->actionFunc == func_80A40B1C) {
-
         float1 = (this->collider.dim.radius + 30.0f);
         float1 *= (this->actor.scale.x / 0.01f);
         if ((this->actor.params & 0xF0) == 0x90) {
@@ -619,7 +618,7 @@ void func_80A3F908(EnGo* this, GlobalContext* globalCtx) {
 
 void EnGo_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnGo* this = (EnGo*)thisx;
-    s32 pad;
+
     Vec3f D_80A41B9C = { 0.0f, 0.0f, 0.0f }; // unused
     Vec3f D_80A41BA8 = { 0.0f, 0.0f, 0.0f }; // unused
 
@@ -1015,7 +1014,6 @@ void func_80A40DCC(EnGo* this, GlobalContext* globalCtx) {
 }
 
 void EnGo_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnGo* this = (EnGo*)thisx;
 
     Collider_UpdateCylinder(&this->actor, &this->collider);
@@ -1158,7 +1156,7 @@ void EnGo_AddDust(EnGo* this, Vec3f* pos, Vec3f* velocity, Vec3f* accel, u8 init
         if (dustEffect->type != 1) {
             dustEffect->scale = scale;
             dustEffect->scaleStep = scaleStep;
-            
+
             timer = initialTimer;
             dustEffect->timer = timer;
             dustEffect->type = 1;
@@ -1208,7 +1206,7 @@ void EnGo_DrawDust(EnGo* this, GlobalContext* globalCtx) {
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_go.c", __LINE__);
     firstDone = false;
     func_80093D84(globalCtx->state.gfxCtx);
-    
+
     for (i = 0; i < ARRAY_COUNT(this->dustEffects); i++, dustEffect++) {
         if (dustEffect->type) {
             if (!firstDone) {

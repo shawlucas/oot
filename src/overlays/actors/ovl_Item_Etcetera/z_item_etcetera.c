@@ -58,7 +58,7 @@ void ItemEtcetera_SetupAction(ItemEtcetera* this, ItemEtceteraActionFunc actionF
 
 void ItemEtcetera_Init(Actor* thisx, GlobalContext* globalCtx) {
     ItemEtcetera* this = (ItemEtcetera*)thisx;
-    s32 pad;
+
     s32 type;
     s32 objBankIndex;
 

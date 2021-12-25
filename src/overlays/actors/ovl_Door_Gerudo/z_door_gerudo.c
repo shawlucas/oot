@@ -36,7 +36,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void DoorGerudo_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     DoorGerudo* this = (DoorGerudo*)thisx;
     CollisionHeader* colHeader = NULL;
 

@@ -36,7 +36,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void func_808B6BC0(BgSpot17Bakudankabe* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s32 i;
     Vec3f burstDepthY;
     Vec3f burstDepthX;
@@ -92,7 +91,7 @@ void func_808B6BC0(BgSpot17Bakudankabe* this, GlobalContext* globalCtx) {
 
 void BgSpot17Bakudankabe_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgSpot17Bakudankabe* this = (BgSpot17Bakudankabe*)thisx;
-    s32 pad;
+
     CollisionHeader* colHeader = NULL;
 
     DynaPolyActor_Init(&this->dyna, DPM_UNK);
@@ -123,7 +122,6 @@ void BgSpot17Bakudankabe_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgSpot17Bakudankabe_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     s8 r = coss(globalCtx->gameplayFrames * 1500) >> 8;
     s8 g = coss(globalCtx->gameplayFrames * 1500) >> 8;
 

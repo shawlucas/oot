@@ -312,8 +312,6 @@ void BgHakaGate_DrawFlame(BgHakaGate* this, GlobalContext* globalCtx) {
     if (this->vFlameScale > 0) {
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_haka_gate.c", __LINE__);
 
-        
-
         func_80093D84(globalCtx->state.gfxCtx);
         gSPSegment(POLY_XLU_DISP++, 0x08,
                    Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, 0, 0, 0x20, 0x40, 1, 0,

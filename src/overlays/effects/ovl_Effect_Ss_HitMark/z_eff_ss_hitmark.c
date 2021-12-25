@@ -77,7 +77,6 @@ void EffectSsHitMark_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     MtxF mfTrans11DA0;
     Mtx* mtx;
     f32 scale;
-    s32 pad;
 
     OPEN_DISPS(gfxCtx, "../z_eff_ss_hitmark.c", __LINE__);
 

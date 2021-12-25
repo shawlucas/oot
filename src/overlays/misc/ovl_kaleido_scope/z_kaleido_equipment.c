@@ -24,7 +24,7 @@ void KaleidoScope_DrawEquipmentImage(GlobalContext* globalCtx, void* source, u32
     s32 textureHeight;
     s32 remainingSize;
     s32 textureSize;
-    s32 pad;
+
     s32 i;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_equipment.c", __LINE__);
@@ -461,7 +461,6 @@ void KaleidoScope_DrawEquipment(GlobalContext* globalCtx) {
         if ((pauseCtx->cursorSpecialPos == 0) && (cursorItem != PAUSE_ITEM_NONE) && (pauseCtx->state == 6) &&
             (pauseCtx->unk_1E4 == 0) && CHECK_BTN_ALL(input->press.button, BTN_A) &&
             (pauseCtx->cursorX[PAUSE_EQUIP] != 0)) {
-
             if ((gEquipAgeReqs[pauseCtx->cursorY[PAUSE_EQUIP]][pauseCtx->cursorX[PAUSE_EQUIP]] == 9) ||
                 (gEquipAgeReqs[pauseCtx->cursorY[PAUSE_EQUIP]][pauseCtx->cursorX[PAUSE_EQUIP]] ==
                  ((void)0, gSaveContext.linkAge))) {
@@ -509,9 +508,7 @@ void KaleidoScope_DrawEquipment(GlobalContext* globalCtx) {
     }
 
     for (rowStart = 0, i = 0, point = 4; i < 4; i++, rowStart += 4, point += 16) {
-
         for (k = 0, temp = rowStart + 1, bit = rowStart, j = point; k < 3; k++, bit++, j += 4, temp++) {
-
             if ((gBitFlags[bit] & gSaveContext.inventory.equipment) && (pauseCtx->cursorSpecialPos == 0)) {
                 if ((gEquipAgeReqs[i][k + 1] == 9) || (gEquipAgeReqs[i][k + 1] == ((void)0, gSaveContext.linkAge))) {
                     if (temp == cursorSlot) {
@@ -539,7 +536,7 @@ void KaleidoScope_DrawEquipment(GlobalContext* globalCtx) {
 
         if (LINK_AGE_IN_YEARS == YEARS_CHILD) {
             point = CUR_UPG_VALUE(sChildUpgrades[i]);
-            
+
             if ((point != 0) && (CUR_UPG_VALUE(sChildUpgrades[i]) != 0)) {
                 KaleidoScope_DrawQuadTextureRGBA32(globalCtx->state.gfxCtx,
                                                    gItemIcons[sChildUpgradeItemBases[i] + point - 1], 32, 32, 0);
@@ -557,7 +554,6 @@ void KaleidoScope_DrawEquipment(GlobalContext* globalCtx) {
         }
 
         for (k = 0, bit = rowStart, point = 4; k < 3; k++, point += 4, temp++, bit++) {
-
             if (((u32)i == 0) && (k == 2) && (gSaveContext.bgsFlag != 0)) {
                 KaleidoScope_DrawQuadTextureRGBA32(globalCtx->state.gfxCtx, gBiggoronSwordIconTex, 32, 32, point);
             } else if ((i == 0) && (k == 2) && (gBitFlags[bit + 1] & gSaveContext.inventory.equipment)) {

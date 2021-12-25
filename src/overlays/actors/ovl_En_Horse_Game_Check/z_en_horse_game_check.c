@@ -437,7 +437,6 @@ static EnHorseGameCheckFunc sUpdateFuncs[] = {
 };
 
 void EnHorseGameCheck_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnHorseGameCheckBase* this = (EnHorseGameCheckBase*)thisx;
 
     if ((globalCtx->sceneNum == SCENE_SPOT20) && (Flags_GetEventChkInf(0x18) || DREG(1))) {
@@ -449,7 +448,6 @@ void EnHorseGameCheck_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnHorseGameCheck_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnHorseGameCheckBase* this = (EnHorseGameCheckBase*)thisx;
 
     if (sDestroyFuncs[this->actor.params] != NULL) {
@@ -458,7 +456,6 @@ void EnHorseGameCheck_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnHorseGameCheck_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnHorseGameCheckBase* this = (EnHorseGameCheckBase*)thisx;
 
     if (sUpdateFuncs[this->type] != NULL) {

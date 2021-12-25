@@ -252,7 +252,8 @@ void func_80082850(GlobalContext* globalCtx, s16 maxAlpha) {
         case 1:
         case 2:
         case 8:
-            osSyncPrintf("interfaceCtx->aAlpha = %d, interfaceCtx->cLeftAlpha = %d   →   ", interfaceCtx->aAlpha, interfaceCtx->cLeftAlpha);
+            osSyncPrintf("interfaceCtx->aAlpha = %d, interfaceCtx->cLeftAlpha = %d   →   ", interfaceCtx->aAlpha,
+                         interfaceCtx->cLeftAlpha);
 
             if (gSaveContext.unk_13E8 == 8) {
                 if (interfaceCtx->bAlpha != 255) {
@@ -292,7 +293,8 @@ void func_80082850(GlobalContext* globalCtx, s16 maxAlpha) {
                 interfaceCtx->minimapAlpha = maxAlpha;
             }
 
-            osSyncPrintf("interfaceCtx->aAlpha = %d, interfaceCtx->cLeftAlpha = %d\n", interfaceCtx->aAlpha, interfaceCtx->cLeftAlpha);
+            osSyncPrintf("interfaceCtx->aAlpha = %d, interfaceCtx->cLeftAlpha = %d\n", interfaceCtx->aAlpha,
+                         interfaceCtx->cLeftAlpha);
 
             break;
         case 3:
@@ -768,7 +770,6 @@ void func_80083108(GlobalContext* globalCtx) {
 
                     if ((gSaveContext.equips.buttonItems[0] == ITEM_NONE) ||
                         (gSaveContext.equips.buttonItems[0] == ITEM_BOW)) {
-
                         if ((gSaveContext.equips.buttonItems[0] != ITEM_SWORD_KOKIRI) &&
                             (gSaveContext.equips.buttonItems[0] != ITEM_SWORD_MASTER) &&
                             (gSaveContext.equips.buttonItems[0] != ITEM_SWORD_BGS) &&
@@ -778,7 +779,7 @@ void func_80083108(GlobalContext* globalCtx) {
                             gSaveContext.buttonStatus[0] = gSaveContext.equips.buttonItems[0];
                         }
                     }
-                                     }
+                }
 
                 if (sp28) {
                     Interface_LoadItemIcon1(globalCtx, 0);
@@ -1093,15 +1094,18 @@ void Interface_SetSceneRestrictions(GlobalContext* globalCtx) {
             osSyncPrintf(VT_FGCOL(YELLOW));
             osSyncPrintf("sRestrictionsFlags[i].(1,2,3) = %x,%x,%x\n", sRestrictionFlags[i].flags1,
                          sRestrictionFlags[i].flags2, sRestrictionFlags[i].flags3);
-            osSyncPrintf("restrictions.hGauge = %d, restrictions.bButton = %d, restrictions.aButton = %d, restrictions.bottles = %d\n", interfaceCtx->restrictions.hGauge,
-                         interfaceCtx->restrictions.bButton, interfaceCtx->restrictions.aButton,
-                         interfaceCtx->restrictions.bottles);
-            osSyncPrintf("restrictions.tradeItems = %d, restrictions.hookshot = %d, restrictions.ocarina = %d, restrictions.warpSongs = %d\n", interfaceCtx->restrictions.tradeItems,
-                         interfaceCtx->restrictions.hookshot, interfaceCtx->restrictions.ocarina,
-                         interfaceCtx->restrictions.warpSongs);
-            osSyncPrintf("restrictions.sunsSong = %d, restrictions.farores = %d, restrictions.dinsNayrus = %d, restrictions.all = %d\n", interfaceCtx->restrictions.sunsSong,
-                         interfaceCtx->restrictions.farores, interfaceCtx->restrictions.dinsNayrus,
-                         interfaceCtx->restrictions.all);
+            osSyncPrintf("restrictions.hGauge = %d, restrictions.bButton = %d, restrictions.aButton = %d, "
+                         "restrictions.bottles = %d\n",
+                         interfaceCtx->restrictions.hGauge, interfaceCtx->restrictions.bButton,
+                         interfaceCtx->restrictions.aButton, interfaceCtx->restrictions.bottles);
+            osSyncPrintf("restrictions.tradeItems = %d, restrictions.hookshot = %d, restrictions.ocarina = %d, "
+                         "restrictions.warpSongs = %d\n",
+                         interfaceCtx->restrictions.tradeItems, interfaceCtx->restrictions.hookshot,
+                         interfaceCtx->restrictions.ocarina, interfaceCtx->restrictions.warpSongs);
+            osSyncPrintf("restrictions.sunsSong = %d, restrictions.farores = %d, restrictions.dinsNayrus = %d, "
+                         "restrictions.all = %d\n",
+                         interfaceCtx->restrictions.sunsSong, interfaceCtx->restrictions.farores,
+                         interfaceCtx->restrictions.dinsNayrus, interfaceCtx->restrictions.all);
             osSyncPrintf(VT_RST);
             return;
         }
@@ -1361,7 +1365,8 @@ u8 Item_Give(GlobalContext* globalCtx, u8 item) {
         gSaveContext.inventory.gsTokens++;
 
         osSyncPrintf(VT_FGCOL(YELLOW));
-        osSyncPrintf("Gold Skulltula Tokens = %X(%d)\n", gSaveContext.inventory.questItems, gSaveContext.inventory.gsTokens);
+        osSyncPrintf("Gold Skulltula Tokens = %X(%d)\n", gSaveContext.inventory.questItems,
+                     gSaveContext.inventory.gsTokens);
         osSyncPrintf(VT_RST);
 
         return ITEM_NONE;
@@ -1786,7 +1791,8 @@ u8 Item_CheckObtainability(u8 item) {
     }
 
     osSyncPrintf(VT_FGCOL(GREEN));
-    osSyncPrintf("item_get_non_setting=%d  slot = %d  items[slot] = %x\n", item, slot, gSaveContext.inventory.items[slot]);
+    osSyncPrintf("item_get_non_setting=%d  slot = %d  items[slot] = %x\n", item, slot,
+                 gSaveContext.inventory.items[slot]);
     osSyncPrintf(VT_RST);
 
     if ((item >= ITEM_MEDALLION_FOREST) && (item <= ITEM_MEDALLION_LIGHT)) {
@@ -1928,7 +1934,7 @@ s32 Inventory_ReplaceItem(GlobalContext* globalCtx, u16 oldItem, u16 newItem) {
     for (i = 0; i < ARRAY_COUNT(gSaveContext.inventory.items); i++) {
         if (gSaveContext.inventory.items[i] == oldItem) {
             gSaveContext.inventory.items[i] = newItem;
-            osSyncPrintf("Item Removal (%d)\n", i); 
+            osSyncPrintf("Item Removal (%d)\n", i);
             for (i = 1; i < 4; i++) {
                 if (gSaveContext.equips.buttonItems[i] == oldItem) {
                     gSaveContext.equips.buttonItems[i] = newItem;
@@ -1976,8 +1982,8 @@ s32 Inventory_HasSpecificBottle(u8 bottleItem) {
 }
 
 void Inventory_UpdateBottleItem(GlobalContext* globalCtx, u8 item, u8 button) {
-    osSyncPrintf("item = %x,  button = %x,  cButtonSlot[button - 1] = %X  items[cButtonsSlots[button - 1]] = %X\n", item, button,
-                 gSaveContext.equips.cButtonSlots[button - 1],
+    osSyncPrintf("item = %x,  button = %x,  cButtonSlot[button - 1] = %X  items[cButtonsSlots[button - 1]] = %X\n",
+                 item, button, gSaveContext.equips.cButtonSlots[button - 1],
                  gSaveContext.inventory.items[gSaveContext.equips.cButtonSlots[button - 1]]);
 
     // Special case to only empty half of a Lon Lon Milk Bottle
@@ -2120,8 +2126,8 @@ s32 Health_ChangeBy(GlobalContext* globalCtx, s16 healthChange) {
     u16 heartCount;
     u16 healthLevel;
 
-    osSyncPrintf("＊＊＊＊＊  Flucuation = %d (health = %d, healthCapacity = %d)  ＊＊＊", healthChange, gSaveContext.health,
-                 gSaveContext.healthCapacity);
+    osSyncPrintf("＊＊＊＊＊  Flucuation = %d (health = %d, healthCapacity = %d)  ＊＊＊", healthChange,
+                 gSaveContext.health, gSaveContext.healthCapacity);
 
     // clang-format off
     if (healthChange > 0) { Audio_PlaySoundGeneral(NA_SE_SY_HP_RECOVER, &D_801333D4, 4,
@@ -2800,7 +2806,6 @@ void Interface_DrawAmmoCount(GlobalContext* globalCtx, s16 button, s16 alpha) {
     if ((i == ITEM_STICK) || (i == ITEM_NUT) || (i == ITEM_BOMB) || (i == ITEM_BOW) ||
         ((i >= ITEM_BOW_ARROW_FIRE) && (i <= ITEM_BOW_ARROW_LIGHT)) || (i == ITEM_SLINGSHOT) || (i == ITEM_BOMBCHU) ||
         (i == ITEM_BEAN)) {
-
         if ((i >= ITEM_BOW_ARROW_FIRE) && (i <= ITEM_BOW_ARROW_LIGHT)) {
             i = ITEM_BOW;
         }
@@ -3928,8 +3933,7 @@ void Interface_Update(GlobalContext* globalCtx) {
 
         if (gSaveContext.health >= gSaveContext.healthCapacity) {
             gSaveContext.health = gSaveContext.healthCapacity;
-            osSyncPrintf("health = %d  healthCapacity = %d\n", gSaveContext.health,
-                         gSaveContext.healthCapacity);
+            osSyncPrintf("health = %d  healthCapacity = %d\n", gSaveContext.health, gSaveContext.healthCapacity);
             gSaveContext.healthAccumulator = 0;
         }
     }
@@ -4037,7 +4041,7 @@ void Interface_Update(GlobalContext* globalCtx) {
             gSaveContext.magicLevel = gSaveContext.doubleMagic + 1;
             gSaveContext.unk_13F0 = 8;
             osSyncPrintf(VT_FGCOL(YELLOW));
-            osSyncPrintf("Magic Start!!!!!\n"); 
+            osSyncPrintf("Magic Start!!!!!\n");
             osSyncPrintf("magicLevel = %d\n", gSaveContext.magicLevel);
             osSyncPrintf("magic = %d\n", gSaveContext.magic);
             osSyncPrintf("Z_MAGIC_NOW_NOW=%d\n", gSaveContext.unk_13F6);

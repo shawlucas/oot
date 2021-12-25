@@ -93,8 +93,6 @@ void EnTkEff_Draw(EnTk* this, GlobalContext* globalCtx) {
 
     func_80093D84(globalCtx->state.gfxCtx);
 
-    
-
     for (i = 0; i < ARRAY_COUNT(this->eff); i++) {
         if (eff->active != 0) {
             if (gfxSetup == 0) {
@@ -478,7 +476,6 @@ void EnTk_DigEff(EnTk* this) {
 
 void EnTk_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnTk* this = (EnTk*)thisx;
-    s32 pad;
 
     ActorShape_Init(&this->actor.shape, 0, ActorShadow_DrawCircle, 24.0f);
 
@@ -653,7 +650,6 @@ void EnTk_Dig(EnTk* this, GlobalContext* globalCtx) {
 
 void EnTk_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnTk* this = (EnTk*)thisx;
-    s32 pad;
 
     Collider_UpdateCylinder(&this->actor, &this->collider);
     CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);

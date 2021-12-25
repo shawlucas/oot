@@ -72,7 +72,6 @@ typedef enum {
 } EnFuFace;
 
 void EnFu_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnFu* this = (EnFu*)thisx;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 36.0f);
@@ -233,7 +232,6 @@ void EnFu_WaitAdult(EnFu* this, GlobalContext* globalCtx) {
 }
 
 void EnFu_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnFu* this = (EnFu*)thisx;
 
     Collider_UpdateCylinder(&this->actor, &this->collider);
@@ -258,7 +256,6 @@ void EnFu_Update(Actor* thisx, GlobalContext* globalCtx) {
 
 s32 EnFu_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* thisx) {
     EnFu* this = (EnFu*)thisx;
-    s32 pad;
 
     if (limbIndex == FU_LIMB_UNK) {
         return false;
@@ -294,7 +291,7 @@ void EnFu_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec
 void EnFu_Draw(Actor* thisx, GlobalContext* globalCtx) {
     static void* sEyesSegments[] = { gWindmillManEyeClosedTex, gWindmillManEyeAngryTex };
     static void* sMouthSegments[] = { gWindmillManMouthOpenTex, gWindmillManMouthAngryTex };
-    s32 pad;
+
     EnFu* this = (EnFu*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_fu.c", __LINE__);

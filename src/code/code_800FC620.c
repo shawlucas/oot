@@ -21,7 +21,6 @@ char D_80134488[0x18] = {
 };
 
 s32 Overlay_Load(u32 vRomStart, u32 vRomEnd, void* vRamStart, void* vRamEnd, void* allocatedVRamAddr) {
-    s32 pad;
     u32 end;
     u32 bssSize;
     OverlayRelocationSection* ovl;
@@ -159,7 +158,6 @@ void func_800FCA18(void* blk, u32 nBlk, u32 blkSize, arg3_800FCA18 arg3, s32 arg
         while (pos > end) {
             pos -= masked_arg2;
             arg3((void*)pos, 2);
-            
         }
 
         if (!masked_arg2) {}

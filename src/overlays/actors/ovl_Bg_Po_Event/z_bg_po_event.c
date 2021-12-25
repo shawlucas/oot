@@ -110,7 +110,7 @@ void BgPoEvent_InitPaintings(BgPoEvent* this, GlobalContext* globalCtx) {
     }
     for (i1 = 0; i1 < sTrisInit.count; i1++) {
         item = &sTrisInit.elements[i1];
-         // This section looks like a macro of some sort.
+        // This section looks like a macro of some sort.
         for (i2 = 0; i2 < 3; i2++) {
             vtxVec = &item->dim.vtx[i2];
             sp9C[i2].x = (vtxVec->x * coss) + (this->dyna.actor.home.pos.x + (sins * vtxVec->z));
@@ -192,7 +192,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void BgPoEvent_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgPoEvent* this = (BgPoEvent*)thisx;
 
     Actor_ProcessInitChain(thisx, sInitChain);
@@ -219,7 +218,6 @@ void BgPoEvent_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgPoEvent_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgPoEvent* this = (BgPoEvent*)thisx;
 
     if (this->type >= 2) {
@@ -423,7 +421,6 @@ void BgPoEvent_BlockReset(BgPoEvent* this, GlobalContext* globalCtx) {
     }
     if (Math_StepToF(&this->dyna.actor.world.pos.y, 493.0f, 1.0f) &&
         Math_ScaledStepToS(&this->dyna.actor.shape.rot.z, this->dyna.actor.world.rot.z - 0x4000, 0x400)) {
-
         this->index = (this->index + 1) % 4;
         this->actionFunc = BgPoEvent_BlockFall;
         sPuzzleState = 0;
@@ -581,7 +578,6 @@ void BgPoEvent_PaintingBurn(BgPoEvent* this, GlobalContext* globalCtx) {
 }
 
 void BgPoEvent_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgPoEvent* this = (BgPoEvent*)thisx;
 
     this->actionFunc(this, globalCtx);
@@ -595,7 +591,7 @@ void BgPoEvent_Draw(Actor* thisx, GlobalContext* globalCtx) {
         gPoSistersAmyBlockDL,     gPoSistersAmyBethBlockDL, gPoSistersJoellePaintingDL,
         gPoSistersBethPaintingDL, gPoSistersAmyPaintingDL,
     };
-    s32 pad;
+
     BgPoEvent* this = (BgPoEvent*)thisx;
     u8 alpha;
     Vec3f sp58;

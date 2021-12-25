@@ -200,7 +200,6 @@ void HealthMeter_Update(GlobalContext* globalCtx) {
     gFactor = sHeartsEnvFactors[0][1] * factor;
     bFactor = sHeartsEnvFactors[0][2] * factor;
 
-    
     ddType = type;
 
     interfaceCtx->beatingHeartEnv[0] = (u8)(rFactor + HEARTS_ENV_R) & 0xFF;
@@ -293,7 +292,6 @@ static void* sHeartDDTextures[] = {
 };
 
 void HealthMeter_Draw(GlobalContext* globalCtx) {
-    s32 pad[5];
     void* heartBgImg;
     u32 curColorSet;
     f32 offsetX;

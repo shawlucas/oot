@@ -40,7 +40,6 @@ void EnbdFire_SetupDraw(EnBdfire* this, EnBdfireDrawFunc drawFunc) {
 
 void EnBdfire_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnBdfire* this = (EnBdfire*)thisx;
-    s32 pad;
 
     Actor_SetScale(&this->actor, 0.6f);
     EnbdFire_SetupDraw(this, EnBdfire_DrawFire);
@@ -201,7 +200,6 @@ void EnBdfire_DrawFire(EnBdfire* this, GlobalContext* globalCtx) {
         object_kingdodongo_Tex_02C4E0, object_kingdodongo_Tex_02D4E0,
     };
     s16 temp;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_bdfire.c", __LINE__);
     temp = this->unk_156 & 7;

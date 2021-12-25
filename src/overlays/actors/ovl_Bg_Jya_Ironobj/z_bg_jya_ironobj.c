@@ -104,7 +104,6 @@ void BgJyaIronobj_SpawnPillarParticles(BgJyaIronobj* this, GlobalContext* global
     f32 coss;
     s16 rotY;
     f32 sins;
-    s32 pad[2];
 
     if (enIk->unk_2FF <= 0 || enIk->unk_2FF >= 4) {
         osSyncPrintf("Error 攻撃方法が分からない(%s %d)\n", "../z_bg_jya_ironobj.c", 233, enIk->unk_2FF);
@@ -167,7 +166,6 @@ void BgJyaIronobj_SpawnThoneParticles(BgJyaIronobj* this, GlobalContext* arg1, E
     f32 coss;
     s16 rotY;
     f32 sins;
-    s32 pad[2];
 
     if (enIk->unk_2FF <= 0 || enIk->unk_2FF >= 4) {
         osSyncPrintf("Error 攻撃方法が分からない(%s %d)\n", "../z_bg_jya_ironobj.c", 362, enIk->unk_2FF);
@@ -215,7 +213,7 @@ void BgJyaIronobj_SpawnThoneParticles(BgJyaIronobj* this, GlobalContext* arg1, E
 
 void BgJyaIronobj_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgJyaIronobj* this = (BgJyaIronobj*)thisx;
-    s32 pad;
+
     CollisionHeader* colHeader = NULL;
 
     DynaPolyActor_Init(&this->dyna, 0);

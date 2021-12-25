@@ -162,7 +162,6 @@ void EfcErupc_Draw(Actor* thisx, GlobalContext* globalCtx) {
 void EfcErupc_DrawParticles(EfcErupcParticles* particles, GlobalContext* globalCtx) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
     s16 i;
-    s32 pad;
 
     OPEN_DISPS(gfxCtx, "../z_efc_erupc.c", __LINE__);
     for (i = 0; i < EFC_ERUPC_NUM_PARTICLES; i++, particles++) {

@@ -582,7 +582,6 @@ void func_80B3368C(EnWeiyer* this, GlobalContext* globalCtx) {
 
 void EnWeiyer_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnWeiyer* this = (EnWeiyer*)thisx;
-    s32 pad;
 
     this->actor.home.pos.y = this->actor.yDistToWater + this->actor.world.pos.y - 5.0f;
     func_80B3368C(this, globalCtx);

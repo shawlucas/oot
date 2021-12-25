@@ -273,7 +273,6 @@ void EnTuboTrap_Fly(EnTuboTrap* this, GlobalContext* globalCtx) {
 
 void EnTuboTrap_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnTuboTrap* this = (EnTuboTrap*)thisx;
-    s32 pad;
 
     this->actionFunc(this, globalCtx);
     Actor_MoveForward(&this->actor);

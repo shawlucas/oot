@@ -631,7 +631,7 @@ s32 AudioSeq_SeqLayerProcessScriptStep4(SequenceLayer* layer, s32 cmd) {
     SoundFontSound* sound;
     Instrument* instrument;
     Drum* drum;
-    s32 pad;
+
     SequenceChannel* channel;
     SequencePlayer* seqPlayer;
     u8 semitone = cmd;
@@ -1038,7 +1038,6 @@ void AudioSeq_SequenceChannelProcessScript(SequenceChannel* channel) {
                         break;
                     case 0xC5:
                         if (scriptState->value != -1) {
-
                             data = (*channel->dynTable)[scriptState->value];
                             offset = (u16)((data[0] << 8) + data[1]);
 

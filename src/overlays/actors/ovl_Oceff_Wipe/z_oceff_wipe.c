@@ -67,7 +67,7 @@ void OceffWipe_Draw(Actor* thisx, GlobalContext* globalCtx) {
     u32 scroll = globalCtx->state.frames & 0xFF;
     OceffWipe* this = (OceffWipe*)thisx;
     f32 z;
-    s32 pad;
+
     u8 alphaTable[3];
     s32 i;
     Vec3f eye;

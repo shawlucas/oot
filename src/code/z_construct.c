@@ -36,7 +36,8 @@ void func_801109B0(GlobalContext* globalCtx) {
 
     osSyncPrintf("interfaceCtx->parameterSegment=%x\n", interfaceCtx->parameterSegment);
 
-    ASSERT(interfaceCtx->parameterSegment != NULL, "interfaceCtx->parameterSegment != NULL", "../z_construct.c", __LINE__);
+    ASSERT(interfaceCtx->parameterSegment != NULL, "interfaceCtx->parameterSegment != NULL", "../z_construct.c",
+           __LINE__);
     DmaMgr_SendRequest1(interfaceCtx->parameterSegment, (u32)_parameter_staticSegmentRomStart, parameterSize,
                         "../z_construct.c", __LINE__);
 
@@ -45,7 +46,8 @@ void func_801109B0(GlobalContext* globalCtx) {
     osSyncPrintf("DO Action Texture Initialization%x\n", 0x480); // "DO Action Texture Initialization"
     osSyncPrintf("interfaceCtx->doActionSegment=%x\n", interfaceCtx->doActionSegment);
 
-    ASSERT(interfaceCtx->doActionSegment != NULL, "interfaceCtx->doActionSegment != NULL", "../z_construct.c", __LINE__);
+    ASSERT(interfaceCtx->doActionSegment != NULL, "interfaceCtx->doActionSegment != NULL", "../z_construct.c",
+           __LINE__);
 
     if (gSaveContext.language == LANGUAGE_ENG) {
         doActionOffset = 0;
@@ -75,7 +77,8 @@ void func_801109B0(GlobalContext* globalCtx) {
     osSyncPrintf("Icon Item Texture Initialization = %X\n", 0x4000);
     osSyncPrintf("interfaceCtx->iconItemSegment=%x\n", interfaceCtx->iconItemSegment);
 
-    ASSERT(interfaceCtx->iconItemSegment != NULL, "interfaceCtx->iconItemSegment != NULL", "../z_construct.c", __LINE__);
+    ASSERT(interfaceCtx->iconItemSegment != NULL, "interfaceCtx->iconItemSegment != NULL", "../z_construct.c",
+           __LINE__);
 
     osSyncPrintf("gSaveContext.equips.buttonItems[%x, %x, %x, %x]\n", gSaveContext.equips.buttonItems[0],
                  gSaveContext.equips.buttonItems[1], gSaveContext.equips.buttonItems[2],
@@ -166,7 +169,6 @@ void func_801109B0(GlobalContext* globalCtx) {
 
 void Message_Init(GlobalContext* globalCtx) {
     MessageContext* msgCtx = &globalCtx->msgCtx;
-    s32 pad;
 
     Message_SetTables();
 

@@ -76,7 +76,6 @@ void func_808FD080(s32 idx, ColliderJntSph* collider, Vec3f* arg2) {
 }
 
 void BossGanon2_SetObjectSegment(BossGanon2* this, GlobalContext* globalCtx, s32 objectId, u8 setRSPSegment) {
-    s32 pad;
     s32 objectIdx = Object_GetIndex(&globalCtx->objectCtx, objectId);
 
     gSegments[6] = PHYSICAL_TO_VIRTUAL(globalCtx->objectCtx.status[objectIdx].segment);
@@ -129,7 +128,7 @@ void func_808FD27C(GlobalContext* globalCtx, Vec3f* position, Vec3f* velocity, f
 
 void BossGanon2_Init(Actor* thisx, GlobalContext* globalCtx) {
     BossGanon2* this = (BossGanon2*)thisx;
-    s32 pad;
+
     s16 i;
 
     globalCtx->specialEffects = sParticles;
@@ -179,7 +178,6 @@ void func_808FD5C4(BossGanon2* this, GlobalContext* globalCtx) {
 }
 
 void func_808FD5F4(BossGanon2* this, GlobalContext* globalCtx) {
-    s16 pad;
     u8 sp8D;
     Player* player;
     s32 objectIdx;
@@ -905,7 +903,6 @@ void func_808FF898(BossGanon2* this, GlobalContext* globalCtx) {
                     if (SQ(this->unk_218.x - gj->dyna.actor.world.pos.x) +
                             SQ(this->unk_218.z - gj->dyna.actor.world.pos.z) <
                         SQ(100.0f)) {
-                        s32 pad;
                         Vec3f sp28;
 
                         Matrix_RotateY(((this->actor.shape.rot.y / (f32)0x8000) * M_PI) + 0.5f, MTXMODE_NEW);
@@ -1273,7 +1270,7 @@ void func_80900890(BossGanon2* this, GlobalContext* globalCtx) {
     Player* player;
     Camera* temp_v0;
     Camera* temp_v0_2;
-    s32 pad;
+
     f32 temp_f12;
     f32 temp_f2;
 
@@ -1945,7 +1942,7 @@ void func_80902524(BossGanon2* this, GlobalContext* globalCtx) {
 
 void BossGanon2_Update(Actor* thisx, GlobalContext* globalCtx) {
     BossGanon2* this = (BossGanon2*)thisx;
-    s32 pad;
+
     s16 i;
     f32 phi_f2;
     u16 i2;
@@ -2199,7 +2196,7 @@ void func_809034E4(Vec3f* arg0, Vec3f* arg1) {
     f32 phi_f30;
     f32 temp_f28;
     f32 temp_f26;
-    s32 pad[3];
+
     Vec3f sp18C[20];
     Vec3f sp9C[20];
 
@@ -2399,8 +2396,6 @@ void func_80903F38(BossGanon2* this, GlobalContext* globalCtx) {
 }
 
 void func_80904108(BossGanon2* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     if (this->unk_324 > 0.0f) {
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_ganon2.c", __LINE__);
 
@@ -2448,7 +2443,6 @@ void func_80904340(BossGanon2* this, GlobalContext* globalCtx) {
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, this->unk_328);
         BossGanon2_InitRand(this->unk_340 + 1, 0x71AC - this->unk_340, 0x263A);
         rand = BossGanon2_RandZeroOne();
-        
 
         for (i = 0; i < 5; i++) {
             angle = (i * (2 * M_PI / 5)) + (rand * M_PI);
@@ -2474,8 +2468,6 @@ void func_80904340(BossGanon2* this, GlobalContext* globalCtx) {
 }
 
 void func_8090464C(BossGanon2* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     if (this->unk_1B4 > 0.0f) {
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_ganon2.c", __LINE__);
 
@@ -2498,7 +2490,6 @@ void func_8090464C(BossGanon2* this, GlobalContext* globalCtx) {
 
 s32 BossGanon2_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot,
                                 void* thisx) {
-    s32 pad;
     BossGanon2* this = (BossGanon2*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_ganon2.c", __LINE__);
@@ -2596,7 +2587,6 @@ void BossGanon2_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dLis
 }
 
 void func_80904D88(BossGanon2* this, GlobalContext* globalCtx) {
-    s32 pad;
     s16 i;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_ganon2.c", __LINE__);
@@ -2627,8 +2617,6 @@ void func_80904D88(BossGanon2* this, GlobalContext* globalCtx) {
 }
 
 void func_80904FC8(BossGanon2* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_ganon2.c", __LINE__);
 
     if (this->unk_384 > 0.0f) {
@@ -2711,8 +2699,6 @@ void BossGanon2_PostLimbDraw2(GlobalContext* globalCtx, s32 limbIndex, Gfx** dLi
 }
 
 void func_80905674(BossGanon2* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     if (this->unk_380 > 0.0f) {
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_ganon2.c", __LINE__);
 
@@ -2791,8 +2777,6 @@ void BossGanon2_Draw(Actor* thisx, GlobalContext* globalCtx) {
     if ((this->unk_312 != 0) || (D_80907080 != 0)) {
         func_80903F38(this, globalCtx);
         if (this->unk_312 == 0) {
-            s32 pad;
-
             D_80907080 -= 40;
             if (D_80907080 <= 0) {
                 D_80907080 = 0;
@@ -2815,7 +2799,6 @@ void BossGanon2_Draw(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void func_80905DA8(BossGanon2* this, GlobalContext* globalCtx) {
-    s32 pad[5];
     Player* player = GET_PLAYER(globalCtx);
     BossGanon2Effect* effect = globalCtx->specialEffects;
     Vec3f sp78;
@@ -3042,7 +3025,6 @@ void BossGanon2_GenShadowTexture(void* shadowTexture, BossGanon2* this, GlobalCo
 }
 
 void BossGanon2_DrawShadowTexture(void* shadowTexture, BossGanon2* this, GlobalContext* globalCtx) {
-    s32 pad;
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
     s16 alpha;
 

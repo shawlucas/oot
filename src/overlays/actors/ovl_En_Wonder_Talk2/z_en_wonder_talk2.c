@@ -37,7 +37,6 @@ void EnWonderTalk2_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnWonderTalk2_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnWonderTalk2* this = (EnWonderTalk2*)thisx;
 
     osSyncPrintf("\n\n");
@@ -86,7 +85,6 @@ void EnWonderTalk2_Init(Actor* thisx, GlobalContext* globalCtx) {
     }
     if ((this->talkMode == 1) && (globalCtx->sceneNum == SCENE_MEN) && (this->switchFlag != 0x08) &&
         (this->switchFlag != 0x16) && (this->switchFlag != 0x2F)) {
-
         this->unk_15A = false;
         this->talkMode = 4;
     }
@@ -267,7 +265,6 @@ void EnWonderTalk2_DoNothing(EnWonderTalk2* this, GlobalContext* globalCtx) {
 }
 
 void EnWonderTalk2_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnWonderTalk2* this = (EnWonderTalk2*)thisx;
 
     this->actionFunc(this, globalCtx);

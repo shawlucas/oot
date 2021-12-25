@@ -697,7 +697,7 @@ void EnGoma_SetFloorRot(EnGoma* this) {
 
 void EnGoma_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnGoma* this = (EnGoma*)thisx;
-    s32 pad;
+
     Player* player = GET_PLAYER(globalCtx);
 
     if (this->actionTimer != 0) {
@@ -779,7 +779,6 @@ Gfx* EnGoma_NoBackfaceCullingDlist(GraphicsContext* gfxCtx) {
 void EnGoma_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnGoma* this = (EnGoma*)thisx;
     s32 y;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_goma.c", __LINE__);
     func_80093D18(globalCtx->state.gfxCtx);

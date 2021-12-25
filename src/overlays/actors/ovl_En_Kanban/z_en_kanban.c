@@ -220,7 +220,6 @@ void EnKanban_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnKanban_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnKanban* this = (EnKanban*)thisx;
 
     if (this->actionState == ENKANBAN_SIGN) {

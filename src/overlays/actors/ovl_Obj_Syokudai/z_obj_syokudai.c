@@ -79,7 +79,7 @@ static s32 sLitTorchCount;
 
 void ObjSyokudai_Init(Actor* thisx, GlobalContext* globalCtx) {
     static u8 sColTypesStand[] = { 0x09, 0x0B, 0x0B };
-    s32 pad;
+
     ObjSyokudai* this = (ObjSyokudai*)thisx;
     s32 torchType = this->actor.params & 0xF000;
 
@@ -109,7 +109,6 @@ void ObjSyokudai_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void ObjSyokudai_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     ObjSyokudai* this = (ObjSyokudai*)thisx;
 
     Collider_DestroyCylinder(globalCtx, &this->colliderStand);
@@ -133,7 +132,7 @@ void ObjSyokudai_Update(Actor* thisx, GlobalContext* globalCtx2) {
     s32 interactionType;
     u32 dmgFlags;
     Vec3f tipToFlame;
-    s32 pad;
+
     s32 pad2;
 
     litTimeScale = torchCount;
@@ -204,7 +203,6 @@ void ObjSyokudai_Update(Actor* thisx, GlobalContext* globalCtx2) {
                 }
             } else if ((torchType != 0) && (((interactionType > 0) && (dmgFlags & 0x20800)) ||
                                             ((interactionType < 0) && (player->unk_860 != 0)))) {
-
                 if ((interactionType < 0) && (player->unk_860 < 200)) {
                     player->unk_860 = 200;
                 }
@@ -258,7 +256,7 @@ void ObjSyokudai_Update(Actor* thisx, GlobalContext* globalCtx2) {
 
 void ObjSyokudai_Draw(Actor* thisx, GlobalContext* globalCtx) {
     static Gfx* displayLists[] = { gGoldenTorchDL, gTimedTorchDL, gWoodenTorchDL };
-    s32 pad;
+
     ObjSyokudai* this = (ObjSyokudai*)thisx;
     s32 timerMax;
 

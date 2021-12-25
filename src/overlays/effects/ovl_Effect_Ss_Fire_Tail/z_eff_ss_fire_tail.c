@@ -67,7 +67,7 @@ u32 EffectSsFireTail_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, v
 
 void EffectSsFireTail_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    s32 pad;
+
     s16 yaw;
     Vec3f scale;
     f32 temp1;
@@ -79,7 +79,6 @@ void EffectSsFireTail_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) 
     scale.x = scale.y = scale.z = 0.0f;
 
     if (this->actor != NULL) {
-
         this->vec = this->actor->velocity;
 
         if (this->rBodyPart < 0) {

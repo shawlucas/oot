@@ -50,7 +50,6 @@ static ColliderCylinderInit sCylinderInit = {
 
 void EnHs2_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnHs2* this = (EnHs2*)thisx;
-    s32 pad;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 36.0f);
     SkelAnime_InitFlex(globalCtx, &this->skelAnime, &object_hs_Skel_006260, &object_hs_Anim_0005C0, this->jointTable,
@@ -107,7 +106,6 @@ void func_80A6F1A4(EnHs2* this, GlobalContext* globalCtx) {
 
 void EnHs2_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnHs2* this = (EnHs2*)thisx;
-    s32 pad;
 
     Collider_UpdateCylinder(&this->actor, &this->collider);
     CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);

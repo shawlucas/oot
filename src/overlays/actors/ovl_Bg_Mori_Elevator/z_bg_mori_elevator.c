@@ -83,7 +83,7 @@ void func_808A18FC(BgMoriElevator* this, f32 distTo) {
 
 void BgMoriElevator_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgMoriElevator* this = (BgMoriElevator*)thisx;
-    s32 pad;
+
     CollisionHeader* colHeader = NULL;
 
     this->unk_172 = sIsSpawned;
@@ -190,8 +190,6 @@ void BgMoriElevator_SetupSetPosition(BgMoriElevator* this) {
 }
 
 void BgMoriElevator_SetPosition(BgMoriElevator* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     if (BgMoriElevator_IsPlayerRiding(this, globalCtx)) {
         if (globalCtx->roomCtx.curRoom.num == 2) {
             this->targetY = -779.0f;
@@ -248,7 +246,6 @@ void BgMoriElevator_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgMoriElevator_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMoriElevator* this = (BgMoriElevator*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_elevator.c", __LINE__);

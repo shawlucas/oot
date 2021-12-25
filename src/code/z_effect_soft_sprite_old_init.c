@@ -876,7 +876,6 @@ void EffectSsIcePiece_SpawnBurst(GlobalContext* globalCtx, Vec3f* refPos, f32 sc
 
 void EffectSsEnIce_SpawnFlyingVec3f(GlobalContext* globalCtx, Actor* actor, Vec3f* pos, s16 primR, s16 primG, s16 primB,
                                     s16 primA, s16 envR, s16 envG, s16 envB, f32 scale) {
-
     EffectSsEnIceInitParams initParams;
 
     initParams.actor = actor;
@@ -900,7 +899,6 @@ void EffectSsEnIce_SpawnFlyingVec3f(GlobalContext* globalCtx, Actor* actor, Vec3
 
 void EffectSsEnIce_SpawnFlyingVec3s(GlobalContext* globalCtx, Actor* actor, Vec3s* pos, s16 primR, s16 primG, s16 primB,
                                     s16 primA, s16 envR, s16 envG, s16 envB, f32 scale) {
-
     EffectSsEnIceInitParams initParams;
 
     initParams.actor = actor;

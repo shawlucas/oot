@@ -43,7 +43,7 @@ AudioTask* func_800E5000(void) {
     static AudioTask* sWaitingAudioTask = NULL;
     u32 samplesRemainingInAi;
     s32 abiCmdCnt;
-    s32 pad;
+
     s32 j;
     s32 sp5C;
     s16* currAiBuffer;
@@ -152,9 +152,6 @@ AudioTask* func_800E5000(void) {
     if (gAudioContext.resetStatus == 0) {
         // msg = 0000RREE R = read pos, E = End Pos
         while (osRecvMesg(gAudioContext.cmdProcQueueP, (OSMesg*)&sp4C, OS_MESG_NOBLOCK) != -1) {
-            
-            
-            
             Audio_ProcessCmds(sp4C);
             j++;
         }
@@ -187,7 +184,7 @@ AudioTask* func_800E5000(void) {
     task->dram_stack_size = 0;
     task->output_buff = NULL;
     task->output_buff_size = NULL;
-    
+
     task->data_ptr = (u64*)gAudioContext.abiCmdBufs[index];
     task->data_size = abiCmdCnt * sizeof(Acmd);
     task->yield_data_ptr = NULL;
@@ -210,7 +207,7 @@ AudioTask* func_800E5000(void) {
 
 void func_800E5584(AudioCmd* cmd) {
     s32 i;
-    s32 pad;
+
     s32 pad2;
     u32 temp_a1_5;
     u32 temp_t7;
@@ -499,7 +496,6 @@ void func_800E5EA4(s32 arg0, u32* arg1, u32* arg2) {
 }
 
 s32 func_800E5EDC(void) {
-    s32 pad;
     s32 sp18;
 
     if (osRecvMesg(gAudioContext.audioResetQueueP, (OSMesg*)&sp18, OS_MESG_NOBLOCK) == -1) {
@@ -521,7 +517,6 @@ void func_800E5F34(void) {
 s32 func_800E5F88(s32 resetPreloadID) {
     s32 resetStatus;
     OSMesg msg;
-    s32 pad;
 
     func_800E5F34();
     resetStatus = gAudioContext.resetStatus;

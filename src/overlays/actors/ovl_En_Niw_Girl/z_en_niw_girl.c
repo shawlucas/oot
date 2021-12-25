@@ -53,7 +53,7 @@ static ColliderCylinderInit sCylinderInit = {
 
 void EnNiwGirl_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnNiwGirl* this = (EnNiwGirl*)thisx;
-    s32 pad;
+
     Vec3f vec1;
     Vec3f vec2;
     s32 pad2;
@@ -247,7 +247,7 @@ static Vec3f sConstVec3f = { 0.2f, 0.2f, 0.2f };
 void EnNiwGirl_Draw(Actor* thisx, GlobalContext* globalCtx) {
     static void* eyeTextures[] = { gNiwGirlEyeOpenTex, gNiwGirlEyeHalfTex, gNiwGirlEyeClosedTex };
     EnNiwGirl* this = (EnNiwGirl*)thisx;
-    s32 pad;
+
     Vec3f sp4C = sConstVec3f;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_niw_girl.c", __LINE__);

@@ -496,8 +496,6 @@ void EnDivingGame_Update(Actor* thisx, GlobalContext* globalCtx2) {
         this->spawnRuppyTimer--;
     }
 
-    
-
     if (gSaveContext.timer1Value == 10) {
         func_800F5918();
     }
@@ -537,7 +535,6 @@ Gfx* EnDivingGame_EmptyDList(GraphicsContext* gfxCtx) {
 s32 EnDivingGame_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot,
                                   void* thisx) {
     EnDivingGame* this = (EnDivingGame*)thisx;
-    s32 pad;
 
     if (limbIndex == 6) {
         rot->x += this->vec_28A.y;

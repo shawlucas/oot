@@ -34,8 +34,8 @@ void PadMgr_UnlockSerialMesgQueue(PadMgr* padMgr, OSMesgQueue* ctrlrQ) {
 
     if (D_8012D280 > 2) {
         // "serialMsgQ Unlocked"
-        osSyncPrintf("%2d %d serialMsgQ Unlocked %08X %08X %08X\n", osGetThreadId(NULL),
-                     padMgr->serialMsgQ.validCount, padMgr, &padMgr->serialMsgQ, ctrlrQ);
+        osSyncPrintf("%2d %d serialMsgQ Unlocked %08X %08X %08X\n", osGetThreadId(NULL), padMgr->serialMsgQ.validCount,
+                     padMgr, &padMgr->serialMsgQ, ctrlrQ);
     }
 }
 
@@ -76,7 +76,8 @@ void PadMgr_RumbleControl(PadMgr* padMgr) {
                                 padMgr->pakType[i] = 0;
                                 osSyncPrintf(VT_FGCOL(YELLOW));
                                 // "A communication error has occurred with the vibration pack"
-                                osSyncPrintf("padMgr: %dcon: %s\n", i + 1, "A communication error has occurred with the vibration pack");
+                                osSyncPrintf("padMgr: %dcon: %s\n", i + 1,
+                                             "A communication error has occurred with the vibration pack");
                                 osSyncPrintf(VT_RST);
                             } else {
                                 padMgr->rumbleCounter[i] = 3;
@@ -98,7 +99,8 @@ void PadMgr_RumbleControl(PadMgr* padMgr) {
                                 padMgr->pakType[i] = 0;
                                 osSyncPrintf(VT_FGCOL(YELLOW));
                                 // "A communication error has occurred with the vibration pack"
-                                osSyncPrintf("padMgr: %dcon: %s\n", i + 1, "A communication error has occurred with the vibration pack");
+                                osSyncPrintf("padMgr: %dcon: %s\n", i + 1,
+                                             "A communication error has occurred with the vibration pack");
                                 osSyncPrintf(VT_RST);
                             } else {
                                 padMgr->rumbleCounter[i]--;
@@ -113,7 +115,8 @@ void PadMgr_RumbleControl(PadMgr* padMgr) {
                     if (padMgr->pakType[i] == 1) {
                         osSyncPrintf(VT_FGCOL(YELLOW));
                         // "It seems that a vibration pack was pulled out"
-                        osSyncPrintf("padMgr: %dcon: %s\n", i + 1, "It seems that the vibration pack has been pulled out");
+                        osSyncPrintf("padMgr: %dcon: %s\n", i + 1,
+                                     "It seems that the vibration pack has been pulled out");
                         osSyncPrintf(VT_RST);
                         padMgr->pakType[i] = 0;
                     } else {
@@ -212,7 +215,6 @@ void PadMgr_ProcessInputs(PadMgr* padMgr) {
     for (i = 0; i < padMgr->nControllers; i++, input++, padnow1++) {
         input->prev = input->cur;
 
-         
         switch (padnow1->errno) {
             case 0:
                 input->cur = *padnow1;

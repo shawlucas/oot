@@ -42,7 +42,7 @@ u32 EffectSsKFire_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, void
 
 void EffectSsKFire_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    s32 pad;
+
     f32 xzScale;
     f32 yScale;
 
@@ -65,8 +65,6 @@ void EffectSsKFire_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
         gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, 255, 255, 255, this->rAlpha);
         gDPSetEnvColor(POLY_XLU_DISP++, 0, 255, 255, 0);
     }
-
-    
 
     gDPPipeSync(POLY_XLU_DISP++);
     func_800D1FD4(&globalCtx->billboardMtxF);

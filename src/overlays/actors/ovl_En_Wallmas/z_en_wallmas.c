@@ -576,7 +576,6 @@ void EnWallmas_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnWallmas_DrawXlu(EnWallmas* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 xzScale;
     MtxF mf;
 

@@ -444,7 +444,6 @@ void func_80AF6170(CsCmdActorAction* csAction, Vec3f* dst) {
 
 void EnSa_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnSa* this = (EnSa*)thisx;
-    s32 pad;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 12.0f);
     SkelAnime_InitFlex(globalCtx, &this->skelAnime, &gSariaSkel, NULL, this->jointTable, this->morphTable, 17);
@@ -686,7 +685,6 @@ void func_80AF6B20(EnSa* this, GlobalContext* globalCtx) {
 
 void EnSa_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnSa* this = (EnSa*)thisx;
-    s32 pad;
 
     Collider_UpdateCylinder(&this->actor, &this->collider);
     CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);
@@ -726,7 +724,7 @@ void EnSa_Update(Actor* thisx, GlobalContext* globalCtx) {
 s32 EnSa_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* thisx,
                           Gfx** gfx) {
     EnSa* this = (EnSa*)thisx;
-    s32 pad;
+
     Vec3s sp18;
 
     if (limbIndex == 16) {

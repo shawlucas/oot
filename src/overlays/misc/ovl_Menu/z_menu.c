@@ -22,17 +22,15 @@ const ActorInit Menu_InitVars = {
 };
 
 void MenuContext_Init(Actor* thisx, GlobalContext* globalCtx) {
-    MenuContext* this = (MenuContext *)thisx;
-    
+    MenuContext* this = (MenuContext*)thisx;
+
     osSyncPrintf(VT_FGCOL(GREEN) "Menu context init!\n");
 }
 
 void MenuContext_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-
 }
 
 void MenuContext_Update(Actor* thisx, GlobalContext* globalCtx) {
-
 }
 
 void MenuContext_PrintMenu(GfxPrint* printer) {
@@ -55,13 +53,11 @@ void MenuContext_DrawMenu(MenuContext* this, GlobalContext* globalCtx) {
 }
 
 void MenuContext_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    MenuContext* this = (MenuContext *)thisx;
+    MenuContext* this = (MenuContext*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_menu.c", __LINE__);
 
-    
     MenuContext_DrawMenu(this, globalCtx);
 
     CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_menu.c", __LINE__);
-    
 }

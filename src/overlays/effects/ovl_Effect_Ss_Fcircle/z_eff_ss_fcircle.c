@@ -44,7 +44,7 @@ u32 EffectSsFcircle_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, vo
 
 void EffectSsFcircle_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    s32 pad;
+
     f32 yScale;
     f32 xzScale;
     f32 scale;

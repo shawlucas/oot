@@ -580,7 +580,6 @@ void KaleidoScope_UpdateItemEquip(GlobalContext* globalCtx) {
             osSyncPrintf("\n＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝\n");
 
             if (pauseCtx->equipTargetCBtn == 0) {
-
                 if (pauseCtx->equipTargetSlot == gSaveContext.equips.cButtonSlots[1]) {
                     if (gSaveContext.equips.buttonItems[1] != ITEM_NONE) {
                         if ((pauseCtx->equipTargetItem >= 0xBF) && (pauseCtx->equipTargetItem <= 0xC1) &&

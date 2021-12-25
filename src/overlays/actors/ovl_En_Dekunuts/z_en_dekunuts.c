@@ -107,7 +107,6 @@ static InitChainEntry sInitChain[] = {
 
 void EnDekunuts_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnDekunuts* this = (EnDekunuts*)thisx;
-    s32 pad;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
     if (thisx->params == DEKUNUTS_FLOWER) {
@@ -422,7 +421,6 @@ void EnDekunuts_BeStunned(EnDekunuts* this, GlobalContext* globalCtx) {
 void EnDekunuts_Die(EnDekunuts* this, GlobalContext* globalCtx) {
     static Vec3f effectVelAndAccel = { 0.0f, 0.0f, 0.0f };
 
-    s32 pad;
     Vec3f effectPos;
 
     if (SkelAnime_Update(&this->skelAnime)) {
@@ -469,7 +467,6 @@ void EnDekunuts_ColliderCheck(EnDekunuts* this, GlobalContext* globalCtx) {
 
 void EnDekunuts_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnDekunuts* this = (EnDekunuts*)thisx;
-    s32 pad;
 
     if (this->actor.params != DEKUNUTS_FLOWER) {
         EnDekunuts_ColliderCheck(this, globalCtx);

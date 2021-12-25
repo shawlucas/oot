@@ -103,7 +103,6 @@ const ActorInit Demo_Im_InitVars = {
 };
 
 void func_80984BE0(DemoIm* this) {
-    s32 pad[3];
     s16* blinkTimer = &this->blinkTimer;
     s16* eyeIndex = &this->eyeIndex;
 
@@ -157,14 +156,11 @@ void DemoIm_DestroyCollider(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void DemoIm_UpdateCollider(DemoIm* this, GlobalContext* globalCtx) {
-    s32 pad[5];
-
     Collider_UpdateCylinder(&this->actor, &this->collider);
     CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);
 }
 
 void func_80984DB8(DemoIm* this) {
-    s32 pad[2];
     Vec3s* vec1 = &this->unk_2D4.unk_08;
     Vec3s* vec2 = &this->unk_2D4.unk_0E;
 
@@ -222,7 +218,6 @@ s32 DemoIm_IsCsStateIdle(GlobalContext* globalCtx) {
 }
 
 CsCmdActorAction* DemoIm_GetNpcAction(GlobalContext* globalCtx, s32 actionIdx) {
-    s32 pad[2];
     CsCmdActorAction* ret = NULL;
 
     if (!DemoIm_IsCsStateIdle(globalCtx)) {
@@ -325,8 +320,6 @@ void func_80985430(DemoIm* this, GlobalContext* globalCtx) {
 }
 
 void func_8098544C(DemoIm* this, GlobalContext* globalCtx) {
-    s32 pad[2];
-
     if ((gSaveContext.chamberCutsceneNum == 4) && (gSaveContext.sceneSetupIndex < 4)) {
         Player* player = GET_PLAYER(globalCtx);
 
@@ -518,7 +511,6 @@ void func_80985C94(DemoIm* this, GlobalContext* globalCtx) {
 }
 
 void DemoIm_DrawTranslucent(DemoIm* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s16 eyeIndex = this->eyeIndex;
     void* eyeTex = sEyeTextures[eyeIndex];
     SkelAnime* skelAnime = &this->skelAnime;
@@ -727,8 +719,6 @@ void func_80986570(DemoIm* this, GlobalContext* globalCtx) {
 }
 
 void func_809865F8(DemoIm* this, GlobalContext* globalCtx, s32 arg2) {
-    s32 pad[2];
-
     if (arg2 != 0) {
         f32* unk_278 = &this->unk_278;
 
@@ -1181,7 +1171,6 @@ void DemoIm_DrawNothing(DemoIm* this, GlobalContext* globalCtx) {
 }
 
 void DemoIm_DrawSolid(DemoIm* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s16 eyeIndex = this->eyeIndex;
     void* eyeTexture = sEyeTextures[eyeIndex];
     SkelAnime* skelAnime = &this->skelAnime;

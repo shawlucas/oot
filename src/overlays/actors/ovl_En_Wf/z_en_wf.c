@@ -209,7 +209,6 @@ void EnWf_SetupAction(EnWf* this, EnWfActionFunc actionFunc) {
 }
 
 void EnWf_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnWf* this = (EnWf*)thisx;
 
     Actor_ProcessInitChain(thisx, sInitChain);
@@ -282,7 +281,7 @@ void EnWf_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 
 s32 EnWf_ChangeAction(GlobalContext* globalCtx, EnWf* this, s16 mustChoose) {
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     s16 wallYawDiff;
     s16 playerYawDiff;
     Actor* explosive;
@@ -417,7 +416,7 @@ void EnWf_SetupWait(EnWf* this) {
 
 void EnWf_Wait(EnWf* this, GlobalContext* globalCtx) {
     Player* player;
-    s32 pad;
+
     s16 angle;
 
     player = GET_PLAYER(globalCtx);
@@ -490,7 +489,7 @@ void EnWf_SetupRunAtPlayer(EnWf* this, GlobalContext* globalCtx) {
 void EnWf_RunAtPlayer(EnWf* this, GlobalContext* globalCtx) {
     s32 animPrevFrame;
     s32 sp58;
-    s32 pad;
+
     f32 baseRange = 0.0f;
     s16 playerFacingAngleDiff;
     Player* player = GET_PLAYER(globalCtx);
@@ -628,7 +627,7 @@ void EnWf_SetupRunAroundPlayer(EnWf* this) {
 void EnWf_RunAroundPlayer(EnWf* this, GlobalContext* globalCtx) {
     s16 angle1;
     s16 angle2;
-    s32 pad;
+
     f32 baseRange = 0.0f;
     s32 animPrevFrame;
     s32 animFrameSpeedDiff;
@@ -1006,7 +1005,6 @@ void EnWf_SetupBlocking(EnWf* this) {
 
 void EnWf_Blocking(EnWf* this, GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
 
     if (this->actionTimer != 0) {
         this->actionTimer--;
@@ -1293,7 +1291,6 @@ void EnWf_UpdateDamage(EnWf* this, GlobalContext* globalCtx) {
 }
 
 void EnWf_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnWf* this = (EnWf*)thisx;
 
     EnWf_UpdateDamage(this, globalCtx);
@@ -1447,7 +1444,7 @@ void EnWf_Draw(Actor* thisx, GlobalContext* globalCtx) {
 
         if (this->fireTimer != 0) {
             this->actor.colorFilterTimer++;
-            
+
             this->fireTimer--;
 
             if ((this->fireTimer % 4) == 0) {
@@ -1466,7 +1463,7 @@ s32 EnWf_DodgeRanged(GlobalContext* globalCtx, EnWf* this) {
 
     if (actor != NULL) {
         s16 angleToFacing;
-        s16 pad;
+
         f32 dist;
 
         angleToFacing = Actor_WorldYawTowardActor(&this->actor, actor) - this->actor.shape.rot.y;

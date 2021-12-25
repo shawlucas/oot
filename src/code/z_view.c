@@ -127,7 +127,7 @@ void View_GetViewport(View* view, Viewport* viewport) {
 void func_800AA550(View* view) {
     s32 varY;
     s32 varX;
-    s32 pad;
+
     s32 ulx;
     s32 uly;
     s32 lrx;
@@ -433,7 +433,6 @@ s32 func_800AB2C4(View* view) {
 }
 
 s32 func_800AB560(View* view) {
-    s32 pad[2];
     f32 aspect;
     s32 width;
     s32 height;

@@ -195,10 +195,11 @@ void EffectSs_Spawn(GlobalContext* globalCtx, s32 type, s32 priority, void* init
                 osSyncPrintf(VT_FGCOL(RED));
                 // "The memory of %d byte cannot be secured. Therefore, the program cannot be loaded.
                 // What a dangerous situation! Naturally, effects will not produced either."
-                osSyncPrintf("EffectSs_Spawn():ZeldaArena_MallocRDebug()\nThe memory of,%"
-                             "d byte cannot be secured.\nTherefore, the program cannot be loaded.\nWhat a dangerous situation!"
-                             "Naturally, effects will not produced either.\n",
-                             overlaySize);
+                osSyncPrintf(
+                    "EffectSs_Spawn():ZeldaArena_MallocRDebug()\nThe memory of,%"
+                    "d byte cannot be secured.\nTherefore, the program cannot be loaded.\nWhat a dangerous situation!"
+                    "Naturally, effects will not produced either.\n",
+                    overlaySize);
                 osSyncPrintf(VT_RST);
                 return;
             }
@@ -222,7 +223,8 @@ void EffectSs_Spawn(GlobalContext* globalCtx, s32 type, s32 priority, void* init
     if (initInfo->init == NULL) {
         // "Effects have already been loaded, but the constructor is NULL so the addition will not occur.
         // Please fix this. (Waste of memory) %08X %d"
-        osSyncPrintf("EffectSs_Spawn():Effects have already been loaded,\nbut the constructor is NULL so the addition will not occur.\n"
+        osSyncPrintf("EffectSs_Spawn():Effects have already been loaded,\nbut the constructor is NULL so the addition "
+                     "will not occur.\n"
                      "Please fix this. (Waste of memory) %08X %d\n",
                      initInfo, type);
         return;

@@ -193,7 +193,6 @@ void FileChoose_SelectCopyDest(GameState* thisx) {
             Audio_PlaySoundGeneral(NA_SE_SY_FSEL_ERROR, &D_801333D4, 4, &D_801333E0, &D_801333E0, &D_801333E8);
         }
     } else {
-
         if (ABS(this->stickRelY) >= 30) {
             Audio_PlaySoundGeneral(NA_SE_SY_FSEL_CURSOR, &D_801333D4, 4, &D_801333E0, &D_801333E0, &D_801333E8);
 
@@ -937,7 +936,7 @@ void FileChoose_EraseAnim1(GameState* thisx) {
 
             // probably a fake match, there should be a better chained assignment
             this->confirmButtonAlpha[0] = this->confirmButtonAlpha[1] = 0;
-            
+
             this->fileInfoAlpha[this->selectedFileIndex] = this->nameBoxAlpha[this->selectedFileIndex] =
                 this->confirmButtonAlpha[1];
 

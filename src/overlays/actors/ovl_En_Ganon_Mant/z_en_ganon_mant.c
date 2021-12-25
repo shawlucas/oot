@@ -112,7 +112,6 @@ void EnGanonMant_Destroy(Actor* thisx, GlobalContext* globalCtx) {
  * Randomly zeros portions of the cloak texture
  */
 void EnGanonMant_Tear(EnGanonMant* this) {
-    s32 pad;
     s16 i;
     s16 areaX;
     s16 areaY;
@@ -130,7 +129,7 @@ void EnGanonMant_Tear(EnGanonMant* this) {
         if ((0 <= tx && tx < MANT_TEX_WIDTH) && (0 <= ty && ty < MANT_TEX_HEIGHT)) {
             for (areaX = 0; areaX <= tearAreaSizes[i]; areaX++) {
                 texIdx = 0;
-                
+
                 for (areaY = 0; areaY <= tearAreaSizes[i]; areaY++) {
                     texIdx = (s16)((s16)tx + ((s16)ty * MANT_TEX_WIDTH)) + ((s16)areaX + ((s16)areaY * MANT_TEX_WIDTH));
                     if (texIdx < MANT_TEX_WIDTH * MANT_TEX_HEIGHT) {
@@ -157,7 +156,7 @@ void EnGanonMant_UpdateStrand(GlobalContext* globalCtx, EnGanonMant* this, Vec3f
     f32 xDiff;
     f32 zDiff;
     f32 gravity;
-    s32 pad[4];
+
     f32 yaw;
     s16 i;
     f32 x;
@@ -356,8 +355,6 @@ void EnGanonMant_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnGanonMant_DrawCloak(GlobalContext* globalCtx, EnGanonMant* this) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ganon_mant.c", __LINE__);
 
     Matrix_Translate(0.0f, 0.0f, 0.0f, MTXMODE_NEW);

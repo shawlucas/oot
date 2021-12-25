@@ -58,7 +58,7 @@ u32 EffectSsBlast_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, void
 void EffectSsBlast_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
     MtxF mf;
-    s32 pad;
+
     f32 radius;
 
     OPEN_DISPS(gfxCtx, "../z_eff_ss_blast.c", __LINE__);

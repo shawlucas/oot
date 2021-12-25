@@ -175,7 +175,6 @@ static Vec3f D_80ADD7F8 = { 1000.0f, -1700.0f, 0.0f };
 
 void EnPoSisters_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnPoSisters* this = (EnPoSisters*)thisx;
-    s32 pad;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 50.0f);
@@ -193,7 +192,7 @@ void EnPoSisters_Init(Actor* thisx, GlobalContext* globalCtx) {
     CollisionCheck_SetInfo(&this->actor.colChkInfo, &sDamageTable, &sColChkInfoInit);
     this->unk_194 = (thisx->params >> 8) & 3;
     this->actor.naviEnemyId = this->unk_194 + 0x50;
-    
+
     this->unk_195 = (thisx->params >> 0xA) & 3;
     this->unk_196 = 32;
     this->unk_197 = 20;
@@ -397,7 +396,7 @@ void func_80AD9AA8(EnPoSisters* this, GlobalContext* globalCtx) {
                                 this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 0x800);
     Actor* actor3 = Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_EN_PO_SISTERS, this->actor.world.pos.x,
                                 this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 0xC00);
-    s32 pad;
+
     s32 pad1;
 
     if (actor1 == NULL || actor2 == NULL || actor3 == NULL) {
@@ -662,8 +661,6 @@ void func_80ADA7F0(EnPoSisters* this, GlobalContext* globalCtx) {
 }
 
 void func_80ADA8C0(EnPoSisters* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     SkelAnime_Update(&this->skelAnime);
     if (Animation_OnFrame(&this->skelAnime, 0.0f) && this->unk_19A != 0) {
         this->unk_19A--;
@@ -1171,7 +1168,6 @@ void func_80ADC10C(EnPoSisters* this, GlobalContext* globalCtx) {
 }
 
 void EnPoSisters_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnPoSisters* this = (EnPoSisters*)thisx;
     s16 temp;
 
@@ -1298,7 +1294,6 @@ void EnPoSisters_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dLi
                               Gfx** gfxP) {
     EnPoSisters* this = (EnPoSisters*)thisx;
     s32 i;
-    s32 pad;
 
     if (this->actionFunc == func_80ADAFC0 && this->unk_19A >= 8 && limbIndex == 9) {
         gSPMatrix((*gfxP)++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_po_sisters.c", __LINE__),
@@ -1345,7 +1340,6 @@ void EnPoSisters_Draw(Actor* thisx, GlobalContext* globalCtx) {
     u8 spE7;
     Color_RGBA8* temp_s1 = &D_80ADD700[this->unk_194];
     Color_RGBA8* temp_s7 = &D_80ADD6F0[this->unk_194];
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_po_sisters.c", __LINE__);
     func_80ADC55C(this);

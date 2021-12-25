@@ -48,7 +48,6 @@ void EnExItem_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnExItem_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnExItem* this = (EnExItem*)thisx;
 
     this->actor.flags &= ~ACTOR_FLAG_0;
@@ -255,7 +254,6 @@ void EnExItem_WaitForObject(EnExItem* this, GlobalContext* globalCtx) {
 }
 
 void EnExItem_BowlPrize(EnExItem* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 tmpf1;
     f32 tmpf2;
     f32 tmpf3;
@@ -417,7 +415,6 @@ void EnExItem_TargetPrizeFinish(EnExItem* this, GlobalContext* globalCtx) {
 }
 
 void EnExItem_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnExItem* this = (EnExItem*)thisx;
 
     if (this->timer != 0) {
@@ -433,7 +430,6 @@ void EnExItem_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnExItem_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnExItem* this = (EnExItem*)thisx;
     s32 magicType;
 

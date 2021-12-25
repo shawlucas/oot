@@ -75,7 +75,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void BgYdanMaruta_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgYdanMaruta* this = (BgYdanMaruta*)thisx;
     Vec3f sp4C[3];
     s32 i;
@@ -165,8 +164,6 @@ void func_808BF108(BgYdanMaruta* this, GlobalContext* globalCtx) {
     if (this->unk_16A == 0) {
         this->actionFunc = func_808BF1EC;
     }
-
-    
 
     temp = (this->unk_16A % 4) - 2;
     if (temp == -2) {

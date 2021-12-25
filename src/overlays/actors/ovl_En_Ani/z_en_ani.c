@@ -68,7 +68,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void EnAni_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnAni* this = (EnAni*)thisx;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
@@ -172,7 +171,6 @@ void func_809B064C(EnAni* this, GlobalContext* globalCtx) {
 }
 
 void func_809B07F8(EnAni* this, GlobalContext* globalCtx) {
-    s16 pad;
     s16 yawDiff;
     u16 textId;
 
@@ -234,7 +232,6 @@ void func_809B0A6C(EnAni* this, GlobalContext* globalCtx) {
 
 void EnAni_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnAni* this = (EnAni*)thisx;
-    s32 pad[2];
 
     Collider_UpdateCylinder(&this->actor, &this->collider);
     CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);
@@ -316,7 +313,6 @@ void EnAni_Draw(Actor* thisx, GlobalContext* globalCtx) {
         gRoofManEyeClosedTex,
     };
     EnAni* this = (EnAni*)thisx;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ani.c", __LINE__);
 

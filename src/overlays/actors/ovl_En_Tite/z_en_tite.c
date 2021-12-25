@@ -771,7 +771,6 @@ void EnTite_FallApart(EnTite* this, GlobalContext* globalCtx) {
 }
 
 void EnTite_SetupFlipOnBack(EnTite* this) {
-
     Animation_PlayLoopSetSpeed(&this->skelAnime, &object_tite_Anim_000A14, 1.5f);
     Audio_PlayActorSound2(&this->actor, NA_SE_EN_TEKU_REVERSE);
     this->flipState = TEKTITE_FLIPPED;
@@ -878,7 +877,6 @@ void EnTite_CheckDamage(Actor* thisx, GlobalContext* globalCtx) {
         if (this->flipState == TEKTITE_FLIPPED) {
             EnTite_SetupFlipUpright(this);
         } else if ((this->action >= TEKTITE_IDLE) || (this->action >= TEKTITE_IDLE)) {
-            
             EnTite_SetupFlipOnBack(this);
         }
     }

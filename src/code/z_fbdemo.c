@@ -67,7 +67,6 @@ void TransitionUnk_InitGraphics(TransitionUnk* this) {
 
     gfx = this->gfx;
     for (colTex = 0, col = 0; col < this->col; colTex += 0x20, col++) {
-
         gSPVertex(gfx++, SEGMENT_ADDR(0xA, (u32)col * (this->row + 1) * sizeof(Vtx)), 2 * (this->row + 1), 0);
 
         for (rowTex = 0, row = 0, row2 = 0; row < this->row;) {
@@ -134,7 +133,8 @@ TransitionUnk* TransitionUnk_Init(TransitionUnk* this, s32 row, s32 col) {
     this->frame = 0;
     this->row = row;
     this->col = col;
-    this->unk_0C = SystemArena_MallocDebug((row + 1) * sizeof(TransitionUnkData) * (col + 1), "../z_fbdemo.c", __LINE__);
+    this->unk_0C =
+        SystemArena_MallocDebug((row + 1) * sizeof(TransitionUnkData) * (col + 1), "../z_fbdemo.c", __LINE__);
     this->vtxFrame1 = SystemArena_MallocDebug((row + 1) * sizeof(Vtx) * (col + 1), "../z_fbdemo.c", __LINE__);
     this->vtxFrame2 = SystemArena_MallocDebug((row + 1) * sizeof(Vtx) * (col + 1), "../z_fbdemo.c", __LINE__);
     this->gfx = SystemArena_MallocDebug((this->col * (1 + this->row * 9) + 2) * sizeof(Gfx), "../z_fbdemo.c", __LINE__);

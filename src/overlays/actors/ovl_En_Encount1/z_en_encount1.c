@@ -27,7 +27,6 @@ const ActorInit En_Encount1_InitVars = {
 };
 
 void EnEncount1_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnEncount1* this = (EnEncount1*)thisx;
     f32 spawnRange;
 
@@ -140,8 +139,6 @@ void EnEncount1_SpawnLeevers(EnEncount1* this, GlobalContext* globalCtx) {
                 leever = (EnReeba*)Actor_SpawnAsChild(&globalCtx->actorCtx, &this->actor, globalCtx, ACTOR_EN_REEBA,
                                                       spawnPos.x, spawnPos.y, spawnPos.z, 0, 0, 0, spawnParams);
 
-                
-                
                 if (leever != NULL) {
                     this->curNumSpawn++;
                     leever->unk_280 = this->leeverIndex++;
@@ -243,7 +240,6 @@ void EnEncount1_SpawnStalchildOrWolfos(EnEncount1* this, GlobalContext* globalCt
             if (globalCtx->sceneNum == SCENE_SPOT00) {
                 if ((player->unk_89E == 0) || (player->actor.floorBgId != BGCHECK_SCENE) ||
                     !(player->actor.bgCheckFlags & 1) || (player->stateFlags1 & 0x08000000)) {
-
                     this->fieldSpawnTimer = 60;
                     break;
                 }
@@ -313,7 +309,6 @@ void EnEncount1_SpawnStalchildOrWolfos(EnEncount1* this, GlobalContext* globalCt
 }
 
 void EnEncount1_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnEncount1* this = (EnEncount1*)thisx;
 
     if (this->timer != 0) {

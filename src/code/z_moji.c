@@ -60,8 +60,6 @@ void Moji_SetPosition(s32 gridX, s32 gridY) {
 }
 
 void Moji_DrawChar(GraphicsContext* gfxCtx, char c) {
-    s32 pad[2];
-
     OPEN_DISPS(gfxCtx, "../z_moji.c", __LINE__);
 
     if ((u32)gMojiFontTLUTs & 0xF) {

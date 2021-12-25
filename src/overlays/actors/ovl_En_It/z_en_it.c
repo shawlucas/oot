@@ -63,7 +63,6 @@ void EnIt_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 
 void EnIt_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnIt* this = (EnIt*)thisx;
-    s32 pad;
 
     Collider_UpdateCylinder(&this->actor, &this->collider);
     CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);

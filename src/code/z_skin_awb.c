@@ -119,7 +119,7 @@ s32 func_800A698C(PSkinAwb* skin, SkinLimb** skeleton, MtxF* mf, u8 parentIndex,
 
 s32 func_800A6AC4(PSkinAwb* skin, MtxF* arg1, Actor* actor, s32 arg3) {
     s32 i;
-    s32 pad;
+
     f32 yRot;
     f32 xRot;
     f32 zRot;
@@ -136,7 +136,6 @@ s32 func_800A6AC4(PSkinAwb* skin, MtxF* arg1, Actor* actor, s32 arg3) {
     zRot = jointRot[0].z;
 
     if (arg3 != 0) {
-
         jointRot--;
         xTransl = jointRot[0].x;
         yTransl = jointRot[0].y;

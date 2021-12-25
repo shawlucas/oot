@@ -58,7 +58,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void EnPoDesert_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnPoDesert* this = (EnPoDesert*)thisx;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
@@ -187,7 +186,6 @@ void EnPoDesert_Disappear(EnPoDesert* this, GlobalContext* globalCtx) {
 
 void EnPoDesert_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnPoDesert* this = (EnPoDesert*)thisx;
-    s32 pad;
 
     SkelAnime_Update(&this->skelAnime);
     this->actionFunc(this, globalCtx);

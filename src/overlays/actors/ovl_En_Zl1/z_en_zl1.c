@@ -137,7 +137,6 @@ void func_80B4AE18(EnZl1* this) {
 
 void func_80B4AF18(EnZl1* this, GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
 
     func_80038290(globalCtx, &this->actor, &this->unk_200, &this->unk_206, this->actor.focus.pos);
 
@@ -159,7 +158,7 @@ void func_80B4B010(EnZl1* this, GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
     s32 pad2;
     s32 pad3;
-    s32 pad;
+
     Vec3f vec1 = { -460.0f, 118.0f, 0.0f };
     Vec3f vec2 = { -406.0f, 110.0f, 0.0f };
     Vec3f playerPos = { -398.0f, 84.0f, 0.0f };
@@ -187,7 +186,7 @@ void func_80B4B010(EnZl1* this, GlobalContext* globalCtx) {
         this->actionFunc = func_80B4B240;
         Audio_PlayFanfare(NA_BGM_APPEAR);
     } else {
-                 rotDiff = ABS(this->actor.yawTowardsPlayer - this->actor.shape.rot.y);
+        rotDiff = ABS(this->actor.yawTowardsPlayer - this->actor.shape.rot.y);
         if ((rotDiff < 0x238E) && !(player->actor.world.pos.y < this->actor.world.pos.y)) {
             func_8002F2F4(&this->actor, globalCtx);
         }
@@ -197,7 +196,7 @@ void func_80B4B010(EnZl1* this, GlobalContext* globalCtx) {
 void func_80B4B240(EnZl1* this, GlobalContext* globalCtx) {
     Vec3f sp74 = { -427.0f, 108.0, 26.0 };
     Vec3f sp68 = { -340.0f, 108.0f, 98.0f };
-    s32 pad;
+
     Vec3f sp58 = { -434.0f, 84.0f, 0.0f };
     u8 sp54[] = { 0x00, 0x00, 0x02 };
     s32 pad2;
@@ -371,7 +370,7 @@ void func_80B4B8B4(EnZl1* this, GlobalContext* globalCtx) {
     Vec3f sp74;
     Vec3f sp68;
     Vec3f velocity = { 0.0f, 0.0f, 0.0f };
-    s32 pad;
+
     f32 frameCount;
     Vec3f sp48;
 
@@ -415,7 +414,6 @@ void func_80B4B8B4(EnZl1* this, GlobalContext* globalCtx) {
 }
 
 void func_80B4BBC4(EnZl1* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 frameCount = Animation_GetLastFrame(&gChildZelda1Anim_00438);
     Player* player = GET_PLAYER(globalCtx);
 
@@ -450,7 +448,7 @@ void func_80B4BC78(EnZl1* this, GlobalContext* globalCtx) {
     Vec3f sp64;
     Vec3f velocity = { 0.0f, 0.0f, 0.0f };
     CsCmdActorAction* npcAction;
-    s32 pad;
+
     f32 frameCount;
 
     if (SkelAnime_Update(&this->skelAnime) && (this->skelAnime.animation == &gChildZelda1Anim_10B38)) {
@@ -487,7 +485,6 @@ void func_80B4BC78(EnZl1* this, GlobalContext* globalCtx) {
 }
 
 void func_80B4BF2C(EnZl1* this, GlobalContext* globalCtx) {
-    s32 pad;
     MessageContext* msgCtx = &globalCtx->msgCtx;
     Player* player = GET_PLAYER(globalCtx);
 
@@ -564,7 +561,6 @@ void func_80B4BF2C(EnZl1* this, GlobalContext* globalCtx) {
 }
 
 void EnZl1_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnZl1* this = (EnZl1*)thisx;
 
     if ((this->actionFunc != func_80B4B8B4) && (this->actionFunc != func_80B4BC78)) {

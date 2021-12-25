@@ -283,7 +283,6 @@ void EnSb_Lunge(EnSb* this, GlobalContext* globalCtx) {
 }
 
 void EnSb_Bounce(EnSb* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 currentFrame;
     f32 frameCount;
 
@@ -441,7 +440,6 @@ s32 EnSb_UpdateDamage(EnSb* this, GlobalContext* globalCtx) {
 
 void EnSb_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnSb* this = (EnSb*)thisx;
-    s32 pad;
 
     if (this->isDead) {
         if (this->actor.yDistToWater > 0.0f) {

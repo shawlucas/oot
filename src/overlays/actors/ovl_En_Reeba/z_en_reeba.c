@@ -98,7 +98,6 @@ static ColliderCylinderInit sCylinderInit = {
 };
 
 void EnReeba_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnReeba* this = (EnReeba*)thisx;
     s32 surfaceType;
 
@@ -142,7 +141,6 @@ void EnReeba_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnReeba_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnReeba* this = (EnReeba*)thisx;
 
     Collider_DestroyCylinder(globalCtx, &this->collider);
@@ -648,7 +646,6 @@ void EnReeba_Update(Actor* thisx, GlobalContext* globalCtx2) {
 }
 
 void EnReeba_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnReeba* this = (EnReeba*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_reeba.c", __LINE__);

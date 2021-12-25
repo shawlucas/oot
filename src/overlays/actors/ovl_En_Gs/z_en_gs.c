@@ -434,7 +434,6 @@ void func_80A4F13C(EnGs* this, GlobalContext* globalCtx) {
         tmpf1 = Math_SmoothStepToF(&this->unk_1E8, this->unk_1EC, 0.8f, 16384.0f, 3640.0f);
         this->unk_1A0[0].y += (s16)this->unk_1E8;
         if (tmpf1 == 0.0f) {
-
             tmp = this->unk_1A0[0].y;
             if (tmp > 0) {
                 tmp += 0xFFFF0000;

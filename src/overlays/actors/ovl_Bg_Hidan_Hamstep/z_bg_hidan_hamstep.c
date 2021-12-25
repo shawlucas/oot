@@ -330,7 +330,6 @@ void func_808889B8(BgHidanHamstep* this, GlobalContext* globalCtx) {
 }
 
 void func_80888A58(BgHidanHamstep* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 pad2;
     s32 quakeIndex;
 
@@ -353,8 +352,6 @@ void func_80888A58(BgHidanHamstep* this, GlobalContext* globalCtx) {
             BgHidanHamstep_SetupAction(this, 3);
         } else {
             this->dyna.actor.velocity.y *= -0.24f;
-
-            
 
             if (this->unk_244 == 1) {
                 quakeIndex = Quake_Add(GET_ACTIVE_CAM(globalCtx), 3);

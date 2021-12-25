@@ -65,7 +65,6 @@ void BgTokiSwd_SetupAction(BgTokiSwd* this, BgTokiSwdActionFunc actionFunc) {
 }
 
 void BgTokiSwd_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgTokiSwd* this = (BgTokiSwd*)thisx;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
@@ -161,7 +160,6 @@ void BgTokiSwd_Update(Actor* thisx, GlobalContext* globalCtx) {
 void BgTokiSwd_Draw(Actor* thisx, GlobalContext* globalCtx2) {
     GlobalContext* globalCtx = globalCtx2;
     BgTokiSwd* this = (BgTokiSwd*)thisx;
-    s32 pad[3];
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_toki_swd.c", __LINE__);
 

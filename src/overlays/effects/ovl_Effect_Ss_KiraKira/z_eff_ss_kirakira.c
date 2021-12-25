@@ -77,7 +77,7 @@ u32 EffectSsKiraKira_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, v
 void EffectSsKiraKira_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     GraphicsContext* gfxCtx;
     f32 scale;
-    s32 pad;
+
     MtxF mfTrans;
     MtxF mfRotY;
     MtxF mfScale;

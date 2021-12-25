@@ -130,8 +130,6 @@ void OceffStorm_Draw2(Actor* thisx, GlobalContext* globalCtx) {
 
     gDPPipeSync(POLY_XLU_DISP++);
 
-    
-
     POLY_XLU_DISP = func_80093F34(POLY_XLU_DISP);
     gDPSetAlphaDither(POLY_XLU_DISP++, G_AD_NOISE);
     gDPSetColorDither(POLY_XLU_DISP++, G_CD_NOISE);

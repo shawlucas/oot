@@ -379,7 +379,6 @@ void EnFireRock_Update(Actor* thisx, GlobalContext* globalCtx) {
 
 void EnFireRock_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnFireRock* this = (EnFireRock*)thisx;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_fire_rock.c", __LINE__);
     Matrix_Translate(thisx->world.pos.x + this->relativePos.x, thisx->world.pos.y + this->relativePos.y,

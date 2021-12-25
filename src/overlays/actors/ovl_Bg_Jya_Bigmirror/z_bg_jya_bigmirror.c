@@ -62,7 +62,7 @@ void BgJyaBigmirror_HandleCobra(Actor* thisx, GlobalContext* globalCtx) {
     s32 i;
 
     if (this->puzzleFlags & (BIGMIR_PUZZLE_IN_1ST_TOP_ROOM | BIGMIR_PUZZLE_IN_2ND_TOP_ROOM)) {
-        for (i = 0; i < 2; i++) {
+        for (i = 0; i < ARRAY_COUNT(sCobraSpawnData); i++) {
             curSpawnData = &sCobraSpawnData[i];
             curCobraInfo = &this->cobraInfo[i];
             if (curCobraInfo->cobra != NULL) {
@@ -75,8 +75,7 @@ void BgJyaBigmirror_HandleCobra(Actor* thisx, GlobalContext* globalCtx) {
                 }
 
                 if (curCobraInfo->cobra->dyna.actor.update == NULL) {
-                    // "Cobra deleted"
-                    osSyncPrintf("Error : コブラ削除された (%s %d)\n", "../z_bg_jya_bigmirror.c", 203);
+                    osSyncPrintf("Error: Cobra deleted (%s %d)\n", "../z_bg_jya_bigmirror.c", __LINE__);
                 }
             } else {
                 curCobraInfo->cobra = (BgJyaCobra*)Actor_SpawnAsChild(
@@ -85,13 +84,11 @@ void BgJyaBigmirror_HandleCobra(Actor* thisx, GlobalContext* globalCtx) {
                 this->actor.child = NULL;
 
                 if (&curCobraInfo->cobra->dyna.actor == NULL) {
-                    // "Cobra generation failed"
-                    osSyncPrintf("Error : コブラ発生失敗 (%s %d)\n", "../z_bg_jya_bigmirror.c", 221);
+                    osSyncPrintf("Error: Cobra generation failed (%s %d)\n", "../z_bg_jya_bigmirror.c", __LINE__);
                 }
             }
         }
     } else {
-
         for (i = 0; i < 2; i++) {
             curCobraInfo = &this->cobraInfo[i];
             if (curCobraInfo->cobra != NULL) {
@@ -146,7 +143,7 @@ void BgJyaBigmirror_HandleMirRay(Actor* thisx, GlobalContext* globalCtx) {
             }
         }
         lightBeamToggles[0] = puzzleSolved; // Only spawn if puzzle solved
-        
+
         lightBeamToggles[1] = lightBeamToggles[2] =
             this->puzzleFlags & (BIGMIR_PUZZLE_IN_1ST_TOP_ROOM | BIGMIR_PUZZLE_IN_2ND_TOP_ROOM);
 
@@ -157,8 +154,7 @@ void BgJyaBigmirror_HandleMirRay(Actor* thisx, GlobalContext* globalCtx) {
                                                       sMirRayPoss[i].y, sMirRayPoss[i].z, 0, 0, 0, sMirRayParamss[i]);
 
                     if (this->lightBeams[i] == NULL) {
-                        // "Mir Ray generation failed"
-                        osSyncPrintf("Error : Mir Ray 発生失敗 (%s %d)\n", "../z_bg_jya_bigmirror.c", 310);
+                        osSyncPrintf("Error: Mir Ray generation failed (%s %d)\n", "../z_bg_jya_bigmirror.c", __LINE__);
                     }
                 }
             } else {
@@ -188,8 +184,7 @@ void BgJyaBigmirror_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->spawned = true;
     this->mirRayObjIndex = -1;
 
-    // "jya Bigmirror"
-    osSyncPrintf("(jya 大鏡)(arg_data 0x%04x)\n", this->actor.params);
+    osSyncPrintf("(jya Bigmirror)(params 0x%04X)\n", this->actor.params);
 }
 
 void BgJyaBigmirror_Destroy(Actor* thisx, GlobalContext* globalCtx) {
@@ -226,7 +221,6 @@ void BgJyaBigmirror_DrawLightBeam(Actor* thisx, GlobalContext* globalCtx) {
     gSPDisplayList(POLY_XLU_DISP++, gBigMirror1DL);
 
     if (lift != NULL) {
-        
         func_800D1694(lift->world.pos.x, lift->world.pos.y, lift->world.pos.z, &D_80893F4C);
         Matrix_Scale(0.1f, 0.1f, 0.1f, MTXMODE_APPLY);
         gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_jya_bigmirror.c", __LINE__),

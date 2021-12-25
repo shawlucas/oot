@@ -141,7 +141,6 @@ static InitChainEntry sInitChain[] = {
 
 void EnHorseLinkChild_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnHorseLinkChild* this = (EnHorseLinkChild*)thisx;
-    s32 pad;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
     Actor_SetScale(&this->actor, 0.005f);
@@ -551,7 +550,6 @@ static u8 sEyeIndexOrder[] = { 0, 1, 2, 1 };
 
 void EnHorseLinkChild_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnHorseLinkChild* this = (EnHorseLinkChild*)thisx;
-    s32 pad;
 
     sActionFuncs[this->action](this, globalCtx);
     Actor_MoveForward(&this->actor);

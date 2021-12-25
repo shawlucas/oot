@@ -156,7 +156,6 @@ void _Putfld(_Pft* px, va_list* pap, u8 code, u8* ac) {
             if (px->flags & FLAGS_HASH) {
                 ac[px->n0++] = '0';
                 if (code == 'x' || code == 'X') {
-
                     ac[px->n0++] = code;
                 }
             }

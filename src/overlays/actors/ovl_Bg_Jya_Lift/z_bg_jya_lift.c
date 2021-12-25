@@ -42,7 +42,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void BgJyaLift_InitDynapoly(BgJyaLift* this, GlobalContext* globalCtx, CollisionHeader* collisionHeader, s32 moveFlag) {
-    s32 pad;
     CollisionHeader* colHeader = NULL;
 
     DynaPolyActor_Init(&this->dyna, moveFlag);
@@ -77,7 +76,6 @@ void BgJyaLift_Destroy(Actor* thisx, GlobalContext* globalCtx) {
     BgJyaLift* this = (BgJyaLift*)thisx;
 
     if (this->isSpawned) {
-
         // "Goddess Lift DT"
         osSyncPrintf("女神リフト DT\n");
         sIsSpawned = false;

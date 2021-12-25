@@ -307,7 +307,7 @@ void func_80AE2C1C(EnRd* this, GlobalContext* globalCtx) {
     Color_RGBA8 sp40 = D_80AE4924;
     Color_RGBA8 sp3C = D_80AE4928;
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     s16 sp32 = this->actor.yawTowardsPlayer - this->actor.shape.rot.y - this->unk_30E - this->unk_310;
 
     this->skelAnime.playSpeed = this->actor.speedXZ;
@@ -373,7 +373,7 @@ void func_80AE2F50(EnRd* this, GlobalContext* globalCtx) {
 
 void func_80AE2FD0(EnRd* this, GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     s16 targetY = Actor_WorldYawTowardPoint(&this->actor, &this->actor.home.pos);
 
     if (Actor_WorldDistXYZToPoint(&this->actor, &this->actor.home.pos) >= 5.0f) {
@@ -423,7 +423,6 @@ void func_80AE31DC(EnRd* this) {
 
 void func_80AE3260(EnRd* this, GlobalContext* globalCtx) {
     if (this->actor.parent != NULL) {
-        s32 pad;
         s16 targetY;
         Vec3f thisPos = this->actor.parent->world.pos;
 
@@ -469,7 +468,6 @@ void func_80AE33F0(EnRd* this) {
 }
 
 void func_80AE3454(EnRd* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
 
     if (SkelAnime_Update(&this->skelAnime)) {
@@ -735,7 +733,6 @@ void func_80AE3F9C(EnRd* this, GlobalContext* globalCtx) {
 }
 
 void func_80AE4114(EnRd* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
 
     if ((gSaveContext.sunsSongState != SUNSSONG_INACTIVE) && (this->actor.shape.rot.x == 0) && (this->unk_318 == 0) &&
@@ -785,7 +782,6 @@ void func_80AE4114(EnRd* this, GlobalContext* globalCtx) {
 }
 
 void EnRd_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnRd* this = (EnRd*)thisx;
     Player* player = GET_PLAYER(globalCtx);
     s32 pad2;
@@ -889,7 +885,6 @@ void EnRd_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec
 }
 
 void EnRd_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnRd* this = (EnRd*)thisx;
     Vec3f thisPos = thisx->world.pos;
 

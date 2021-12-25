@@ -147,7 +147,6 @@ static MtxF sLimb7Mtx;
 
 void EnPoField_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnPoField* this = (EnPoField*)thisx;
-    s32 pad;
 
     if (sNumSpawned != 10) {
         sSpawnPositions[sNumSpawned].x = this->actor.world.pos.x;
@@ -541,7 +540,7 @@ void EnPoField_Damage(EnPoField* this, GlobalContext* globalCtx) {
 void EnPoField_Death(EnPoField* this, GlobalContext* globalCtx) {
     Vec3f sp6C;
     f32 sp68;
-    s32 pad;
+
     s32 pad1;
     f32 temp_f0;
 
@@ -776,7 +775,6 @@ void EnPoField_UpdateFlame(EnPoField* this, GlobalContext* globalCtx) {
 
 void EnPoField_DrawFlame(EnPoField* this, GlobalContext* globalCtx) {
     f32 sp4C;
-    s32 pad;
 
     if (this->flameTimer != 0) {
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_po_field.c", __LINE__);
@@ -850,7 +848,6 @@ void func_80AD6330(EnPoField* this) {
 }
 
 void EnPoField_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnPoField* this = (EnPoField*)thisx;
 
     EnPoField_TestForDamage(this, globalCtx);
@@ -971,7 +968,7 @@ void EnPoField_UpdateDead(Actor* thisx, GlobalContext* globalCtx) {
 
 void EnPoField_DrawSoul(Actor* thisx, GlobalContext* globalCtx) {
     EnPoField* this = (EnPoField*)thisx;
-    s32 pad;
+
     EnPoFieldInfo* info = &sPoFieldInfo[this->actor.params];
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_po_field.c", __LINE__);

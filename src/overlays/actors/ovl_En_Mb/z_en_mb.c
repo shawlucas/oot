@@ -257,7 +257,7 @@ void EnMb_SetupAction(EnMb* this, EnMbActionFunc actionFunc) {
 
 void EnMb_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnMb* this = (EnMb*)thisx;
-    s32 pad;
+
     Player* player = GET_PLAYER(globalCtx);
     s16 relYawFromPlayer;
 
@@ -674,8 +674,6 @@ void EnMb_SpearPatrolTurnTowardsWaypoint(EnMb* this, GlobalContext* globalCtx) {
  * Slow down and resume walking.
  */
 void EnMb_SpearEndChargeQuick(EnMb* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     Math_SmoothStepToF(&this->actor.speedXZ, 0.0f, 0.5f, 1.0f, 0.0f);
     if (this->actor.speedXZ > 1.0f) {
         Actor_SpawnFloorDustRing(globalCtx, &this->actor, &this->actor.world.pos, 5.0f, 3, 4.0f, 100, 15, false);
@@ -816,7 +814,7 @@ void EnMb_SpearGuardPrepareAndCharge(EnMb* this, GlobalContext* globalCtx) {
 
 void EnMb_ClubAttack(EnMb* this, GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     Vec3f effSpawnPos;
     Vec3f effWhiteShockwaveDynamics = { 0.0f, 0.0f, 0.0f };
     f32 flamesParams[] = { 18.0f, 18.0f, 0.0f };
@@ -1052,8 +1050,6 @@ void EnMb_ClubDamaged(EnMb* this, GlobalContext* globalCtx) {
 }
 
 void EnMb_ClubDamagedWhileKneeling(EnMb* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     if (SkelAnime_Update(&this->skelAnime)) {
         if (this->timer3 != 0) {
             this->timer3--;
@@ -1231,7 +1227,7 @@ void EnMb_SpearPatrolWalkTowardsWaypoint(EnMb* this, GlobalContext* globalCtx) {
 
 void EnMb_ClubWaitPlayerNear(EnMb* this, GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     s16 relYawFromPlayer = this->actor.world.rot.y - this->actor.yawTowardsPlayer;
 
     SkelAnime_Update(&this->skelAnime);
@@ -1416,7 +1412,6 @@ void EnMb_CheckColliding(EnMb* this, GlobalContext* globalCtx) {
 
 void EnMb_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnMb* this = (EnMb*)thisx;
-    s32 pad;
 
     EnMb_CheckColliding(this, globalCtx);
     if (thisx->colChkInfo.damageEffect != ENMB_DMGEFF_FREEZE) {

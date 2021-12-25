@@ -98,7 +98,6 @@ s32 func_800ADBB0(SkyboxContext* skyboxCtx, Vtx* roomVtx, s32 arg2, s32 arg3, s3
     s32 sp1F0[9 * 5];
     s32 sp13C[9 * 5];
     s32 sp88[9 * 5];
-    s32 pad;
 
     switch (arg8) {
         case 0:
@@ -209,7 +208,6 @@ s32 func_800AE2C0(SkyboxContext* skyboxCtx, Vtx* roomVtx, s32 arg2, s32 arg3, s3
     s32 sp1EC[5 * 5];
     s32 sp188[5 * 5];
     s32 sp124[5 * 5];
-    s32 pad;
 
     switch (arg8) {
         case 0:
@@ -474,8 +472,7 @@ void Skybox_Setup(GlobalContext* globalCtx, SkyboxContext* skyboxCtx, s16 skybox
             DmaMgr_SendRequest1(skyboxCtx->staticSegments[0], start, size, "../z_vr_box.c", __LINE__);
 
             skyboxCtx->staticSegments[1] = GameState_Alloc(&globalCtx->state, size, "../z_vr_box.c", __LINE__);
-            ASSERT(skyboxCtx->staticSegments[1] != NULL, "skyboxCtx->staticSegments[1] != NULL", "../z_vr_box.c",
-                   1163);
+            ASSERT(skyboxCtx->staticSegments[1] != NULL, "skyboxCtx->staticSegments[1] != NULL", "../z_vr_box.c", 1163);
 
             DmaMgr_SendRequest1(skyboxCtx->staticSegments[1], start, size, "../z_vr_box.c", 1166);
 
@@ -595,8 +592,7 @@ void Skybox_Setup(GlobalContext* globalCtx, SkyboxContext* skyboxCtx, s16 skybox
             start = _vr_FCVR_staticSegmentRomStart;
             size = _vr_FCVR_staticSegmentRomEnd - start;
             skyboxCtx->staticSegments[0] = GameState_Alloc(&globalCtx->state, size, "../z_vr_box.c", __LINE__);
-            ASSERT(skyboxCtx->staticSegments[0] != NULL, "skyboxCtx->staticSegments[0] != NULL", "../z_vr_box.c",
-                   1287);
+            ASSERT(skyboxCtx->staticSegments[0] != NULL, "skyboxCtx->staticSegments[0] != NULL", "../z_vr_box.c", 1287);
 
             DmaMgr_SendRequest1(skyboxCtx->staticSegments[0], start, size, "../z_vr_box.c", __LINE__);
 

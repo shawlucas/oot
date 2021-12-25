@@ -111,7 +111,6 @@ void func_80A6D8D0(unknownStruct* data, s32 index, Vec3f* vec) {
 }
 
 void func_80A6D918(EnHorseZelda* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f sp28;
     s16 yawDiff;
 
@@ -213,7 +212,6 @@ void func_80A6DDFC(EnHorseZelda* this, GlobalContext* globalCtx) {
 }
 
 void func_80A6DE38(EnHorseZelda* this, GlobalContext* globalCtx) {
-    s32 pad;
     CollisionPoly* poly;
     s32 pad2;
     Vec3f pos;
@@ -228,7 +226,6 @@ void func_80A6DE38(EnHorseZelda* this, GlobalContext* globalCtx) {
 
 void EnHorseZelda_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnHorseZelda* this = (EnHorseZelda*)thisx;
-    s32 pad;
 
     sActionFuncs[this->action](this, globalCtx);
     this->actor.speedXZ = 0.0f;

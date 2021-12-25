@@ -288,7 +288,8 @@ void Gameplay_Init(GameState* thisx) {
         globalCtx,
         gEntranceTable[((void)0, gSaveContext.entranceIndex) + ((void)0, gSaveContext.sceneSetupIndex)].scene,
         gEntranceTable[((void)0, gSaveContext.sceneSetupIndex) + ((void)0, gSaveContext.entranceIndex)].spawn);
-    osSyncPrintf("\nENTRANCE INDEX = %d SCENE SETUP INDEX = %d\n", ((void)0, gSaveContext.entranceIndex), gSaveContext.sceneSetupIndex);
+    osSyncPrintf("\nENTRANCE INDEX = %d SCENE SETUP INDEX = %d\n", ((void)0, gSaveContext.entranceIndex),
+                 gSaveContext.sceneSetupIndex);
 
     // When entering Gerudo Valley in the right setup, trigger the GC emulator to play the ending movie.
     // The emulator constantly checks whether PC is 0x81000000, so this works even though it's not a valid address.
@@ -1093,8 +1094,8 @@ void Gameplay_Draw(GlobalContext* globalCtx) {
                 0.0f;
         // This transpose is where the viewing matrix is properly converted into a billboard matrix
         Matrix_Transpose(&globalCtx->billboardMtxF);
-        globalCtx->billboardMtx = Matrix_MtxFToMtx(Matrix_CheckFloats(&globalCtx->billboardMtxF, "../z_play.c", __LINE__),
-                                                   Graph_Alloc(gfxCtx, sizeof(Mtx)));
+        globalCtx->billboardMtx = Matrix_MtxFToMtx(
+            Matrix_CheckFloats(&globalCtx->billboardMtxF, "../z_play.c", __LINE__), Graph_Alloc(gfxCtx, sizeof(Mtx)));
 
         gSPSegment(POLY_OPA_DISP++, 0x01, globalCtx->billboardMtx);
 
@@ -1367,7 +1368,6 @@ f32 func_800BFCB8(GlobalContext* globalCtx, MtxF* mf, Vec3f* vec) {
     f32 nx;
     f32 ny;
     f32 nz;
-    s32 pad[5];
 
     floorY = BgCheck_AnyRaycastFloor1(&globalCtx->colCtx, &poly, vec);
 

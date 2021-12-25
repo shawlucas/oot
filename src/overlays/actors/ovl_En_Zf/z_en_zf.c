@@ -273,7 +273,6 @@ s16 EnZf_SecondaryFloorCheck(EnZf* this, GlobalContext* globalCtx, f32 dist) {
 }
 
 void EnZf_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnZf* this = (EnZf*)thisx;
     Player* player = GET_PLAYER(globalCtx);
     EffectBlureInit1 blureInit;
@@ -694,7 +693,7 @@ void func_80B45384(EnZf* this) {
 
 void func_80B4543C(EnZf* this, GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     s16 angleToPlayer = (this->actor.yawTowardsPlayer - this->headRot) - this->actor.shape.rot.y;
 
     angleToPlayer = ABS(angleToPlayer);
@@ -962,7 +961,6 @@ void func_80B4604C(EnZf* this) {
 }
 
 void func_80B46098(EnZf* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 phi_f2;
     Player* player = GET_PLAYER(globalCtx);
     s16 temp_v0;
@@ -1039,7 +1037,7 @@ void func_80B462E4(EnZf* this, GlobalContext* globalCtx) {
 void func_80B463E4(EnZf* this, GlobalContext* globalCtx) {
     s16 angleBehindPlayer;
     s16 phi_v0_3;
-    s32 pad;
+
     s32 curKeyFrame;
     s32 prevKeyFrame;
     s32 playSpeed;
@@ -1460,7 +1458,7 @@ void EnZf_HopAway(EnZf* this, GlobalContext* globalCtx) {
     f32 sp74;
     f32 sp70 = 1.0f;
     f32 phi_f20 = 550.0f;
-    s32 pad;
+
     f32 phi_f20_2;
     f32 phi_f0;
     s32 pad2;
@@ -1516,7 +1514,6 @@ void EnZf_HopAway(EnZf* this, GlobalContext* globalCtx) {
                     phi_f0 += 1.2f;
 
                     for (phi_v1 = 20; phi_v1 >= 0; phi_v1--, phi_f20_2 += 10.0f, phi_f0 += 1.2f) {
-
                         if (!EnZf_PrimaryFloorCheck(this, globalCtx, phi_f20_2)) {
                             this->actor.speedXZ = phi_f0;
                             this->actor.velocity.y = 12.0f;
@@ -1641,7 +1638,6 @@ void EnZf_Damaged(EnZf* this, GlobalContext* globalCtx) {
 
     if (((this->actor.params != ENZF_TYPE_DINOLFOS) || !EnZf_ChooseAction(globalCtx, this)) &&
         SkelAnime_Update(&this->skelAnime) && (this->actor.bgCheckFlags & 1)) {
-
         if (D_80B4A1B4 != -1) {
             if (this->damageEffect == ENZF_DMGEFF_PROJECTILE) {
                 D_80B4A1B0++;
@@ -1657,7 +1653,6 @@ void EnZf_Damaged(EnZf* this, GlobalContext* globalCtx) {
                 }
             }
         } else {
-
             wallYawDiff = this->actor.wallYaw - this->actor.shape.rot.y;
             wallYawDiff = ABS(wallYawDiff);
 
@@ -1922,7 +1917,6 @@ void EnZf_SetupDie(EnZf* this) {
 }
 
 void EnZf_Die(EnZf* this, GlobalContext* globalCtx) {
-
     if (this->actor.bgCheckFlags & 2) {
         this->actor.speedXZ = 0.0f;
     }
@@ -1973,7 +1967,6 @@ void EnZf_UpdateHeadRotation(EnZf* this, GlobalContext* globalCtx) {
 }
 
 void EnZf_UpdateDamage(EnZf* this, GlobalContext* globalCtx) {
-    s32 pad;
     s16 dropParams;
 
     if ((this->bodyCollider.base.acFlags & AC_HIT) && (this->action <= ENZF_ACTION_STUNNED)) {
@@ -2020,7 +2013,6 @@ void EnZf_UpdateDamage(EnZf* this, GlobalContext* globalCtx) {
 }
 
 void EnZf_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnZf* this = (EnZf*)thisx;
     s32 pad2;
 
@@ -2229,7 +2221,6 @@ static Gfx D_80B4A2F8[] = {
 };
 
 void EnZf_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnZf* this = (EnZf*)thisx;
     ; // Extra ";" required for matching. Cannot be  or the like. Typo?
 
@@ -2259,7 +2250,6 @@ void EnZf_Draw(Actor* thisx, GlobalContext* globalCtx) {
                 EffectSsEnIce_SpawnFlyingVec3f(globalCtx, thisx, &this->bodyPartsPos[icePosIndex], 150, 150, 150, 250,
                                                235, 245, 255, 1.4f);
             }
-            
         }
     } else { // fades out when dead
         func_80093D84(globalCtx->state.gfxCtx);

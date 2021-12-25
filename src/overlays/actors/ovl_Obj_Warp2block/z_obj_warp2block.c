@@ -75,7 +75,6 @@ void ObjWarp2block_Spawn(ObjWarp2block* this, GlobalContext* globalCtx) {
 }
 
 s32 func_80BA1ECC(ObjWarp2block* this, GlobalContext* globalCtx) {
-    s32 pad;
     Actor* temp_a3;
     Player* player;
     Vec3f sp20;
@@ -89,7 +88,6 @@ s32 func_80BA1ECC(ObjWarp2block* this, GlobalContext* globalCtx) {
     player = GET_PLAYER(globalCtx);
     if ((this->dyna.actor.xzDistToPlayer <= sDistances[(((this->dyna.actor.params >> 0xB) & 7))]) ||
         (temp_a3->xzDistToPlayer <= sDistances[(((temp_a3->params >> 0xB) & 7))])) {
-
         func_8002DBD0(&this->dyna.actor, &sp20, &player->actor.world.pos);
         temp_f2 = (this->dyna.actor.scale.x * 50.0f) + 6.0f;
 

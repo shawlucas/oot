@@ -357,7 +357,6 @@ void EnTest_ChooseRandomAction(EnTest* this, GlobalContext* globalCtx) {
 }
 
 void EnTest_ChooseAction(EnTest* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
     s16 yawDiff = player->actor.shape.rot.y - this->actor.shape.rot.y;
 
@@ -564,7 +563,6 @@ void EnTest_SetupWalkAndBlock(EnTest* this) {
 }
 
 void EnTest_WalkAndBlock(EnTest* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 checkDist = 0.0f;
     s32 pad1;
     s32 prevFrame;
@@ -788,7 +786,7 @@ void func_80860EC0(EnTest* this) {
 // a variation of sidestep
 void func_80860F84(EnTest* this, GlobalContext* globalCtx) {
     s16 playerYaw180;
-    s32 pad;
+
     s32 prevFrame;
     s32 temp_f16;
     s16 yawDiff;
@@ -1357,7 +1355,6 @@ void func_808627C4(EnTest* this, GlobalContext* globalCtx) {
 
 // a variation of sidestep
 void func_808628C8(EnTest* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
     s32 pad1;
     s32 prevFrame;
@@ -1699,7 +1696,6 @@ void EnTest_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnTest* this = (EnTest*)thisx;
     f32 oldWeight;
     u32 floorProperty;
-    s32 pad;
 
     EnTest_UpdateDamage(this, globalCtx);
 
@@ -1815,7 +1811,6 @@ void EnTest_Update(Actor* thisx, GlobalContext* globalCtx) {
 
 s32 EnTest_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* thisx) {
     EnTest* this = (EnTest*)thisx;
-    s32 pad;
 
     if (limbIndex == STALFOS_LIMB_HEAD_ROOT) {
         rot->x += this->headRot.y;
@@ -1857,7 +1852,7 @@ void EnTest_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, V
     Vec3f sp70;
     Vec3f sp64;
     EnTest* this = (EnTest*)thisx;
-    s32 pad;
+
     Vec3f sp50;
 
     BodyBreak_SetInfo(&this->bodyBreak, limbIndex, 0, 60, 60, dList, BODYBREAK_OBJECT_DEFAULT);

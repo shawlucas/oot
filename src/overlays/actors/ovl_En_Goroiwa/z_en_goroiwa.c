@@ -95,8 +95,6 @@ void EnGoroiwa_UpdateCollider(EnGoroiwa* this) {
 }
 
 void EnGoroiwa_InitCollider(EnGoroiwa* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     Collider_InitJntSph(globalCtx, &this->collider);
     Collider_SetJntSph(globalCtx, &this->collider, &this->actor, &sJntSphInit, this->colliderItems);
     EnGoroiwa_UpdateCollider(this);
@@ -235,7 +233,6 @@ void EnGoroiwa_InitRotation(EnGoroiwa* this) {
 }
 
 s32 EnGoroiwa_GetAscendDirection(EnGoroiwa* this, GlobalContext* globalCtx) {
-    s32 pad;
     Path* path = &globalCtx->setupPathList[this->actor.params & 0xFF];
     Vec3s* nextPointPos = (Vec3s*)SEGMENTED_TO_VIRTUAL(path->points) + this->nextWaypoint;
     Vec3s* currentPointPos = (Vec3s*)SEGMENTED_TO_VIRTUAL(path->points) + this->currentWaypoint;
@@ -295,7 +292,7 @@ void EnGoroiwa_SpawnWaterEffects(GlobalContext* globalCtx, Vec3f* contactPos) {
 s32 EnGoroiwa_MoveAndFall(EnGoroiwa* this, GlobalContext* globalCtx) {
     Path* path;
     s32 result;
-    s32 pad;
+
     Vec3s* nextPointPos;
 
     Math_StepToF(&this->actor.speedXZ, R_EN_GOROIWA_SPEED * 0.01f, 0.3f);
@@ -311,7 +308,7 @@ s32 EnGoroiwa_MoveAndFall(EnGoroiwa* this, GlobalContext* globalCtx) {
 
 s32 EnGoroiwa_Move(EnGoroiwa* this, GlobalContext* globalCtx) {
     Path* path = &globalCtx->setupPathList[this->actor.params & 0xFF];
-    s32 pad;
+
     Vec3s* nextPointPos = (Vec3s*)SEGMENTED_TO_VIRTUAL(path->points) + this->nextWaypoint;
     Vec3s* currentPointPos = (Vec3s*)SEGMENTED_TO_VIRTUAL(path->points) + this->currentWaypoint;
     s32 nextPointReached;
@@ -341,7 +338,6 @@ s32 EnGoroiwa_Move(EnGoroiwa* this, GlobalContext* globalCtx) {
 }
 
 s32 EnGoroiwa_MoveUpToNextWaypoint(EnGoroiwa* this, GlobalContext* globalCtx) {
-    s32 pad;
     Path* path = &globalCtx->setupPathList[this->actor.params & 0xFF];
     Vec3s* nextPointPos = (Vec3s*)SEGMENTED_TO_VIRTUAL(path->points) + this->nextWaypoint;
 
@@ -352,7 +348,6 @@ s32 EnGoroiwa_MoveUpToNextWaypoint(EnGoroiwa* this, GlobalContext* globalCtx) {
 }
 
 s32 EnGoroiwa_MoveDownToNextWaypoint(EnGoroiwa* this, GlobalContext* globalCtx) {
-    s32 pad;
     Path* path = &globalCtx->setupPathList[this->actor.params & 0xFF];
     Vec3s* nextPointPos = (Vec3s*)SEGMENTED_TO_VIRTUAL(path->points) + this->nextWaypoint;
     f32 nextPointY;
@@ -374,7 +369,7 @@ s32 EnGoroiwa_MoveDownToNextWaypoint(EnGoroiwa* this, GlobalContext* globalCtx) 
     this->actor.world.pos.x = nextPointPos->x;
     this->actor.world.pos.z = nextPointPos->z;
     thisY = this->actor.world.pos.y;
-    
+
     this->actor.world.pos.y += this->actor.velocity.y;
     if (this->actor.velocity.y < 0.0f && this->actor.world.pos.y <= nextPointY) {
         if (this->bounceCount == 0) {
@@ -428,7 +423,7 @@ s32 EnGoroiwa_MoveDownToNextWaypoint(EnGoroiwa* this, GlobalContext* globalCtx) 
 
 void EnGoroiwa_UpdateRotation(EnGoroiwa* this, GlobalContext* globalCtx) {
     static Vec3f unitY = { 0.0f, 1.0f, 0.0f };
-    s32 pad;
+
     Vec3f* rollAxisPtr;
     f32 rollAngleDiff;
     Vec3f rollAxis;
@@ -488,7 +483,7 @@ void EnGoroiwa_SpawnFragments(EnGoroiwa* this, GlobalContext* globalCtx) {
     static f32 yOffsets[] = { 0.0f, 59.5f };
     s16 angle1;
     s16 angle2;
-    s32 pad;
+
     Vec3f* thisPos = &this->actor.world.pos;
     Vec3f effectPos;
     Vec3f fragmentVelocity;
@@ -722,7 +717,7 @@ void EnGoroiwa_MoveDown(EnGoroiwa* this, GlobalContext* globalCtx) {
 void EnGoroiwa_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnGoroiwa* this = (EnGoroiwa*)thisx;
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     s32 sp30;
 
     if (!(player->stateFlags1 & 0x300000C0)) {

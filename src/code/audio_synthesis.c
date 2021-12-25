@@ -43,7 +43,7 @@ u8 D_801304C0[] = { 0x40, 0x20, 0x10, 0x8 };
 
 void AudioSynth_InitNextRingBuf(s32 chunkLen, s32 bufIndex, s32 reverbIndex) {
     ReverbRingBufferItem* bufItem;
-    s32 pad[3];
+
     SynthesisReverb* reverb = &gAudioContext.synthesisReverbs[reverbIndex];
     s32 temp_a0_2;
     s32 temp_a0_4;
@@ -787,9 +787,7 @@ Acmd* AudioSynth_ProcessNote(s32 noteIndex, NoteSubEu* noteSubEu, NoteSynthesisS
                             gAudioContext.curLoadedBook = audioFontSample->book->book;
                             break;
                     }
-                    
-                    
-                    
+
                     nEntries = 16 * audioFontSample->book->order * audioFontSample->book->npredictors;
                     aLoadADPCM(cmd++, nEntries, gAudioContext.curLoadedBook);
                 }
@@ -897,7 +895,6 @@ Acmd* AudioSynth_ProcessNote(s32 noteIndex, NoteSubEu* noteSubEu, NoteSynthesisS
 
                 nSamplesInThisIteration = nSamplesToDecode + nSamplesInFirstFrame - nTrailingSamplesToIgnore;
                 if (nSamplesProcessed == 0) {
-                    
                     skipBytes = nFirstFrameSamplesToIgnore * 2;
                 } else {
                     phi_s4 = ALIGN16(s5 + 16);
@@ -1088,7 +1085,6 @@ Acmd* AudioSynth_ProcessEnvelope(Acmd* cmd, NoteSubEu* noteSubEu, NoteSynthesisS
     s16 rampReverb;
     s16 sourceReverbVol;
     u16 targetVolRight;
-    s32 pad;
 
     curVolLeft = synthState->curVolLeft;
     targetVolLeft = noteSubEu->targetVolLeft;

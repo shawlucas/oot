@@ -177,7 +177,6 @@ void EnHeishi3_CatchStart(EnHeishi3* this, GlobalContext* globalCtx) {
 }
 
 void func_80A55BD4(EnHeishi3* this, GlobalContext* globalCtx) {
-
     SkelAnime_Update(&this->skelAnime);
     if (Animation_OnFrame(&this->skelAnime, 1.0f) || Animation_OnFrame(&this->skelAnime, 17.0f)) {
         Audio_PlayActorSound2(&this->actor, NA_SE_EV_KNIGHT_WALK);
@@ -213,7 +212,6 @@ void func_80A55D00(EnHeishi3* this, GlobalContext* globalCtx) {
 
 void EnHeishi3_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnHeishi3* this = (EnHeishi3*)thisx;
-    s32 pad;
 
     Actor_SetFocus(&this->actor, 60.0f);
     this->unk_274 += 1;

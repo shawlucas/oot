@@ -16,7 +16,8 @@ s32 Object_Spawn(ObjectContext* objectCtx, s16 objectId) {
 
     ASSERT(((objectCtx->num < OBJECT_EXCHANGE_BANK_MAX) &&
             (((s32)objectCtx->status[objectCtx->num].segment + size) < (u32)objectCtx->spaceEnd)),
-           "objectCtx->num < OBJECT_EXCHANGE_BANK_MAX && (objectCtx->status[objectCtx->num].segment + size) < objectCtx->spaceEnd",
+           "objectCtx->num < OBJECT_EXCHANGE_BANK_MAX && (objectCtx->status[objectCtx->num].segment + size) < "
+           "objectCtx->spaceEnd",
            "../z_scene.c", __LINE__);
 
     DmaMgr_SendRequest1(objectCtx->status[objectCtx->num].segment, gObjectTable[objectId].vromStart, size,
@@ -474,8 +475,7 @@ void func_800993C0(GlobalContext* globalCtx, SceneCmd* cmd) {
         ((globalCtx->sceneNum >= SCENE_ENTRA) && (globalCtx->sceneNum <= SCENE_SHRINE_R))) {
         if (gSaveContext.cutsceneIndex < 0xFFF0) {
             gSaveContext.worldMapAreaData |= gBitFlags[gSaveContext.worldMapArea];
-            osSyncPrintf("000 WORLD MAP AREA = %X (%d)\n", gSaveContext.worldMapAreaData,
-                         gSaveContext.worldMapArea);
+            osSyncPrintf("000 WORLD MAP AREA = %X (%d)\n", gSaveContext.worldMapAreaData, gSaveContext.worldMapArea);
         }
     }
 }

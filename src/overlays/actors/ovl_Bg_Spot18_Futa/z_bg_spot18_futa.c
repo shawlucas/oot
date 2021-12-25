@@ -35,7 +35,7 @@ static InitChainEntry sInitChain[] = {
 
 void BgSpot18Futa_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgSpot18Futa* this = (BgSpot18Futa*)thisx;
-    s32 pad;
+
     CollisionHeader* colHeader = NULL;
 
     DynaPolyActor_Init(&this->dyna, DPM_UNK);

@@ -388,7 +388,6 @@ void BossMo_Init(Actor* thisx, GlobalContext* globalCtx2) {
 }
 
 void BossMo_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossMo* this = (BossMo*)thisx;
 
     if (this->actor.params >= BOSSMO_TENTACLE) {
@@ -598,7 +597,6 @@ void BossMo_Tentacle(BossMo* this, GlobalContext* globalCtx) {
             }
             Math_ApproachF(&this->waterLevelMod, -5.0f, 0.1f, 0.4f);
             for (indS1 = 0; indS1 < 41; indS1++) {
-
                 sin = Math_SinS(((s16)this->fwork[MO_TENT_SWING_LAG_X] * indS1) + this->xSwing);
                 tempf1 = this->fwork[MO_TENT_SWING_SIZE_X] * (indS1 * 0.025f * sin);
 
@@ -686,7 +684,6 @@ void BossMo_Tentacle(BossMo* this, GlobalContext* globalCtx) {
                     if ((fabsf(player->actor.world.pos.x - this->actor.world.pos.x) > 300.0f) ||
                         (player->actor.world.pos.y < MO_WATER_LEVEL(globalCtx)) || HAS_LINK(otherTent) ||
                         (fabsf(player->actor.world.pos.z - this->actor.world.pos.z) > 300.0f)) {
-
                         this->work[MO_TENT_ACTION_STATE] = MO_TENT_RETREAT;
                         this->timers[0] = 75;
                     }
@@ -1401,7 +1398,7 @@ void BossMo_IntroCs(BossMo* this, GlobalContext* globalCtx) {
                 this->cameraEyeVel.x = fabsf(this->cameraEye.x - 111.0f) * 0.1f;
                 this->cameraEyeVel.y = fabsf(this->cameraEye.y - 133.0f) * 0.1f;
                 this->cameraEyeVel.z = fabsf(this->cameraEye.z - -191.0f) * 0.1f;
-                
+
                 this->csState = MO_INTRO_FINISH;
                 this->timers[2] = 110;
                 this->cameraNextEye.x = 111.0f;
@@ -1580,7 +1577,7 @@ void BossMo_DeathCs(BossMo* this, GlobalContext* globalCtx) {
                 this->cameraSpeedMod = 0.0f;
                 this->cameraAccel = 0.02f;
                 this->cameraNextAt.y = 320.0f;
-                
+
                 this->timers[0] = 100;
                 sMorphaTent1->drawActor = true;
                 sMorphaTent1->work[MO_TENT_ACTION_STATE] = MO_TENT_DEATH_3;
@@ -2201,7 +2198,6 @@ void BossMo_Core(BossMo* this, GlobalContext* globalCtx) {
 }
 
 void BossMo_UpdateCore(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossMo* this = (BossMo*)thisx;
     s16 i;
     Player* player = GET_PLAYER(globalCtx);
@@ -2249,7 +2245,7 @@ void BossMo_UpdateCore(Actor* thisx, GlobalContext* globalCtx) {
 void BossMo_UpdateTent(Actor* thisx, GlobalContext* globalCtx) {
     s16 i;
     s16 index;
-    s32 pad;
+
     BossMo* this = (BossMo*)thisx;
     Player* player = GET_PLAYER(globalCtx);
     f32 phi_f0;
@@ -2342,7 +2338,6 @@ void BossMo_UpdateTent(Actor* thisx, GlobalContext* globalCtx) {
         Vec3f sp7C;
         Vec3f bubblePos;
         Vec3f zeroVec = { 0.0f, 0.0f, 0.0f };
-        s32 pad;
 
         this->baseBubblesTimer--;
         sp88.x = 0.0;
@@ -2453,7 +2448,6 @@ void BossMo_DrawTentacle(BossMo* this, GlobalContext* globalCtx) {
     BossMo_InitRand(1, 29100, 9786);
 
     for (i = 0; i < 41; i++, matrix++) {
-        s32 pad;
         s32 pad2;
 
         if (i < 2) {
@@ -2557,10 +2551,7 @@ void BossMo_DrawTentacle(BossMo* this, GlobalContext* globalCtx) {
 }
 
 void BossMo_DrawWater(BossMo* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_mo.c", __LINE__);
-    
 
     Matrix_Push();
     func_80093D84(globalCtx->state.gfxCtx);
@@ -2587,7 +2578,6 @@ void BossMo_DrawWater(BossMo* this, GlobalContext* globalCtx) {
 }
 
 void BossMo_DrawCore(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossMo* this = (BossMo*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_mo.c", __LINE__);
@@ -2715,12 +2705,11 @@ void BossMo_DrawCore(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BossMo_DrawTent(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossMo* this = (BossMo*)thisx;
     u16 scroll;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_mo.c", __LINE__);
-    
+
     func_80093D18(globalCtx->state.gfxCtx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, (s8)(this->baseAlpha * 1.5f));
     gDPSetEnvColor(POLY_OPA_DISP++, 150, 150, 150, 0);
@@ -2897,7 +2886,7 @@ void BossMo_UpdateEffects(BossMo* this, GlobalContext* globalCtx) {
 void BossMo_DrawEffects(BossMoEffect* effect, GlobalContext* globalCtx) {
     u8 flag = 0;
     s16 i;
-    s32 pad;
+
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
     BossMoEffect* effectHead = effect;
 

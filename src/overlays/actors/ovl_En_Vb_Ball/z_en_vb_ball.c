@@ -49,7 +49,6 @@ static ColliderCylinderInit sCylinderInit = {
 };
 
 void EnVbBall_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnVbBall* this = (EnVbBall*)thisx;
     s32 pad2;
     f32 angle;
@@ -76,7 +75,6 @@ void EnVbBall_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnVbBall_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnVbBall* this = (EnVbBall*)thisx;
 
     if (this->actor.params < 200) {
@@ -298,11 +296,10 @@ void EnVbBall_Update(Actor* thisx, GlobalContext* globalCtx2) {
 }
 
 void EnVbBall_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnVbBall* this = (EnVbBall*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_vb_ball.c", __LINE__);
-     // needed for match
+    // needed for match
     func_80093D18(globalCtx->state.gfxCtx);
     gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_vb_ball.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);

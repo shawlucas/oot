@@ -38,7 +38,6 @@ void Jpeg_ScheduleDecoderTask(JpegContext* ctx) {
     };
 
     JpegWork* workBuf = ctx->workBuf;
-    s32 pad[2];
 
     workBuf->taskData.address = PHYSICAL_TO_VIRTUAL(&workBuf->data);
     workBuf->taskData.mode = ctx->mode;
@@ -181,7 +180,7 @@ void Jpeg_ParseMarkers(u8* ptr, JpegContext* ctx) {
                     osSyncPrintf("MARKER_SOF   %d "
                                  "accuracy%02x " // "accuracy"
                                  "vertical%d "   // "vertical"
-                                 "horizontal%d "   // "horizontal"
+                                 "horizontal%d " // "horizontal"
                                  "compo%02x "
                                  "(1:Y)%d (H0=2,V0=1(422) or 2(420))%02x (量子化テーブル)%02x "
                                  "(2:Cb)%d (H1=1,V1=1)%02x (量子化テーブル)%02x "
@@ -246,8 +245,7 @@ s32 Jpeg_Decode(void* data, void* zbuffer, void* work, u32 workSize) {
     workBuff = work;
 
     time = osGetTime();
-    ASSERT(workSize >= sizeof(JpegWork), "workSize >= sizeof(JpegWork)", "../z_jpeg.c",
-           __LINE__);
+    ASSERT(workSize >= sizeof(JpegWork), "workSize >= sizeof(JpegWork)", "../z_jpeg.c", __LINE__);
 
     osCreateMesgQueue(&ctx.mq, &ctx.msg, 1);
     MsgEvent_SendNullTask();
@@ -256,7 +254,8 @@ s32 Jpeg_Decode(void* data, void* zbuffer, void* work, u32 workSize) {
     diff = curTime - time;
     time = curTime;
     // "Wait for synchronization of fifo buffer"
-    osSyncPrintf("*** Wait for synchronization of fifo buffer time = %6.3f ms ***\n", OS_CYCLES_TO_USEC(diff) / 1000.0f);
+    osSyncPrintf("*** Wait for synchronization of fifo buffer time = %6.3f ms ***\n",
+                 OS_CYCLES_TO_USEC(diff) / 1000.0f);
 
     ctx.workBuf = workBuff;
     Jpeg_ParseMarkers(data, &ctx);

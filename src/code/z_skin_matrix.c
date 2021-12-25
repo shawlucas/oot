@@ -237,7 +237,7 @@ void SkinMatrix_MtxFCopy(MtxF* src, MtxF* dest) {
 s32 SkinMatrix_Invert(MtxF* src, MtxF* dest) {
     MtxF mfCopy;
     s32 i;
-    s32 pad;
+
     f32 temp2;
     f32 temp1;
     s32 thisCol;

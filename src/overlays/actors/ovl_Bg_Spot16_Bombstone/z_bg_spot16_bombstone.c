@@ -149,8 +149,6 @@ void func_808B4C30(BgSpot16Bombstone* this) {
 }
 
 void func_808B4C4C(BgSpot16Bombstone* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     Collider_InitJntSph(globalCtx, &this->colliderJntSph);
     Collider_SetJntSph(globalCtx, &this->colliderJntSph, &this->actor, &sJntSphInit, this->colliderElements);
     this->colliderJntSph.elements[0].dim.worldSphere.center.x = this->actor.world.pos.x;
@@ -160,8 +158,6 @@ void func_808B4C4C(BgSpot16Bombstone* this, GlobalContext* globalCtx) {
 }
 
 void func_808B4D04(BgSpot16Bombstone* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     Collider_InitCylinder(globalCtx, &this->colliderCylinder);
     Collider_SetCylinder(globalCtx, &this->colliderCylinder, &this->actor, &sCylinderInit);
     this->colliderCylinder.dim.pos.x += (s16)this->actor.world.pos.x;
@@ -292,8 +288,6 @@ void func_808B5240(BgSpot16Bombstone* this, GlobalContext* globalCtx) {
     s16 index;
     Vec3f position;
     Vec3f* actorPosition = &this->actor.world.pos;
-
-    
 
     while (true) {
         if ((u32)this->unk_158 >= ARRAY_COUNTU(D_808B5EB0) || this->unk_154 < D_808B5EB0[this->unk_158][0]) {
@@ -428,8 +422,6 @@ void func_808B5934(BgSpot16Bombstone* this) {
 }
 
 void func_808B5950(BgSpot16Bombstone* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     func_808B56BC(this, globalCtx);
     func_808B57E0(this, globalCtx);
 
@@ -468,7 +460,6 @@ void func_808B5A78(BgSpot16Bombstone* this) {
 }
 
 void func_808B5A94(BgSpot16Bombstone* this, GlobalContext* globalCtx) {
-
     func_808B5240(this, globalCtx);
 
     if (this->unk_154 == 56) {
@@ -531,7 +522,6 @@ void BgSpot16Bombstone_Update(Actor* thisx, GlobalContext* globalCtx) {
 
 void BgSpot16Bombstone_Draw(Actor* thisx, GlobalContext* globalCtx) {
     BgSpot16Bombstone* this = (BgSpot16Bombstone*)thisx;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_spot16_bombstone.c", __LINE__);
 

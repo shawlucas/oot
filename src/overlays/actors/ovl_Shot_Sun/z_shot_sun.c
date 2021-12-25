@@ -120,7 +120,7 @@ void ShotSun_TriggerFairy(ShotSun* this, GlobalContext* globalCtx) {
 
 void func_80BADF0C(ShotSun* this, GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     s32 params = this->actor.params & 0xFF;
 
     if (Math3D_Vec3fDistSq(&this->actor.world.pos, &player->actor.world.pos) > 22500.0f) {
@@ -155,7 +155,7 @@ void ShotSun_UpdateHyliaSun(ShotSun* this, GlobalContext* globalCtx) {
     Vec3s cylinderPos;
     Player* player = GET_PLAYER(globalCtx);
     EnItem00* collectible;
-    s32 pad;
+
     Vec3f spawnPos;
 
     if (this->collider.base.acFlags & AC_HIT) {
@@ -164,7 +164,7 @@ void ShotSun_UpdateHyliaSun(ShotSun* this, GlobalContext* globalCtx) {
         if (INV_CONTENT(ITEM_ARROW_FIRE) == ITEM_NONE) {
             Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_ITEM_ETCETERA, 700.0f, -800.0f, 7261.0f, 0, 0, 0, 7);
             globalCtx->csCtx.segment = SEGMENTED_TO_VIRTUAL(gLakeHyliaFireArrowsCS);
-            
+
             gSaveContext.cutsceneTrigger = 1;
         } else {
             spawnPos.x = 700.0f;

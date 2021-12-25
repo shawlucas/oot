@@ -79,7 +79,6 @@ void EffectSsGSpk_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     MtxF mfTrans11DA0;
     Mtx* mtx;
     f32 scale;
-    s32 pad;
 
     OPEN_DISPS(gfxCtx, "../z_eff_ss_g_spk.c", __LINE__);
 
@@ -100,14 +99,10 @@ void EffectSsGSpk_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
         gSPDisplayList(POLY_XLU_DISP++, this->gfx);
     }
 
-    
-    
-
     CLOSE_DISPS(gfxCtx, "../z_eff_ss_g_spk.c", __LINE__);
 }
 
 void EffectSsGSpk_Update(GlobalContext* globalCtx, u32 index, EffectSs* this) {
-
     this->accel.x = (Rand_ZeroOne() - 0.5f) * 3.0f;
     this->accel.z = (Rand_ZeroOne() - 0.5f) * 3.0f;
 

@@ -82,8 +82,6 @@ void BgTokiHikari_Draw(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void func_808BA018(BgTokiHikari* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_toki_hikari.c", __LINE__);
     func_80093D18(globalCtx->state.gfxCtx);
     gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_bg_toki_hikari.c", __LINE__),
@@ -133,8 +131,6 @@ void func_808BA274(BgTokiHikari* this, GlobalContext* globalCtx) {
 }
 
 void func_808BA2CC(BgTokiHikari* this, GlobalContext* globalCtx) {
-    s32 pad[2];
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_toki_hikari.c", __LINE__);
     Matrix_Translate(0.0f, 276.0f, 1122.0f, MTXMODE_NEW);
     Matrix_Scale(0.32f, 0.32f, this->unk_14C * 7.0f, MTXMODE_APPLY);

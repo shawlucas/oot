@@ -52,8 +52,6 @@ static Vec3f D_808B272C = { 2259.0f, 108.0f, -1550.0f };
 static Vec3f D_808B2738 = { 2259.0f, 108.0f, -1550.0f };
 
 void func_808B2180(BgSpot11Bakudankabe* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     Collider_InitCylinder(globalCtx, &this->collider);
     Collider_SetCylinder(globalCtx, &this->collider, &this->dyna.actor, &sCylinderInit);
     this->collider.dim.pos.x += (s16)this->dyna.actor.world.pos.x;
@@ -109,7 +107,7 @@ void func_808B2218(BgSpot11Bakudankabe* this, GlobalContext* globalCtx) {
 
 void BgSpot11Bakudankabe_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgSpot11Bakudankabe* this = (BgSpot11Bakudankabe*)thisx;
-    s32 pad;
+
     CollisionHeader* colHeader = NULL;
 
     DynaPolyActor_Init(&this->dyna, DPM_UNK);

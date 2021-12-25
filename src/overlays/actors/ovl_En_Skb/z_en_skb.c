@@ -281,7 +281,6 @@ void EnSkb_Advance(EnSkb* this, GlobalContext* globalCtx) {
     if (thisKeyFrame != (s32)this->skelAnime.curFrame) {
         if (((prevKeyFrame < 9) && (((s32)playSpeed + thisKeyFrame) >= 8)) ||
             !((prevKeyFrame >= 16) || (((s32)playSpeed + thisKeyFrame) < 15))) {
-
             Audio_PlayActorSound2(&this->actor, NA_SE_EN_STALKID_WALK);
         }
     }
@@ -432,7 +431,6 @@ void func_80AFD880(EnSkb* this, GlobalContext* globalCtx) {
 }
 
 void func_80AFD968(EnSkb* this, GlobalContext* globalCtx) {
-    s16 pad;
     s32 i;
     Vec3f flamePos;
     s16 scale;
@@ -493,7 +491,6 @@ void func_80AFD968(EnSkb* this, GlobalContext* globalCtx) {
 
 void EnSkb_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnSkb* this = (EnSkb*)thisx;
-    s32 pad;
 
     func_80AFD968(this, globalCtx);
     Actor_MoveForward(&this->actor);
@@ -507,7 +504,6 @@ void EnSkb_Update(Actor* thisx, GlobalContext* globalCtx) {
 
     if (this->unk_280 >= 3) {
         if ((this->actor.colorFilterTimer == 0) || ((this->actor.colorFilterParams & 0x4000) == 0)) {
-
             CollisionCheck_SetAC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);
         }
     }
@@ -517,7 +513,6 @@ void EnSkb_Update(Actor* thisx, GlobalContext* globalCtx) {
 s32 EnSkb_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* thisx) {
     EnSkb* this = (EnSkb*)thisx;
     s16 color;
-    s16 pad[2];
 
     if (limbIndex == 11) {
         if ((this->unk_283 & 2) == 0) {

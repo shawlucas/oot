@@ -46,8 +46,8 @@ s32 BgCheck_PosErrorCheck(Vec3f* pos, char* file, s32 line) {
         pos->y <= -BGCHECK_XYZ_ABSMAX || pos->z >= BGCHECK_XYZ_ABSMAX || pos->z <= -BGCHECK_XYZ_ABSMAX) {
         osSyncPrintf(VT_FGCOL(RED));
         // "Position is invalid."
-        osSyncPrintf("BgCheck_PosErrorCheck(): Position is invalid (%f,%f,%f) file:%s line:%d\n", pos->x,
-                     pos->y, pos->z, file, line);
+        osSyncPrintf("BgCheck_PosErrorCheck(): Position is invalid (%f,%f,%f) file:%s line:%d\n", pos->x, pos->y,
+                     pos->z, file, line);
         osSyncPrintf(VT_RST);
         return true;
     }
@@ -195,7 +195,7 @@ void func_80038A28(CollisionPoly* poly, f32 tx, f32 ty, f32 tz, MtxF* dest) {
     f32 nx;
     f32 ny;
     f32 nz;
-    s32 pad;
+
     f32 phi_f2;
     f32 phi_f14;
     f32 phi_f12;
@@ -214,7 +214,7 @@ void func_80038A28(CollisionPoly* poly, f32 tx, f32 ty, f32 tz, MtxF* dest) {
         phi_f12 = -(nz * inv_phi_f2);
     } else {
         phi_f14 = sqrtf(1.0f - SQ(ny));
-        
+
         if (!IS_ZERO(phi_f14)) {
             inv_phi_f14 = (1.0f / phi_f14);
             phi_f12 = nx * inv_phi_f14;
@@ -269,8 +269,9 @@ void CollisionPoly_GetVerticesByBgId(CollisionPoly* poly, s32 bgId, CollisionCon
     if (poly == NULL || bgId > BG_ACTOR_MAX || dest == NULL) {
         osSyncPrintf(VT_COL(RED, WHITE));
         // "Argument not appropriate. Processing terminated."
-        osSyncPrintf("CollisionPoly_GetVerticesByBgId(): Error %d %d %d Argument not appropriate. Process terminated.\n",
-                     poly == NULL, bgId > BG_ACTOR_MAX, dest == NULL);
+        osSyncPrintf(
+            "CollisionPoly_GetVerticesByBgId(): Error %d %d %d Argument not appropriate. Process terminated.\n",
+            poly == NULL, bgId > BG_ACTOR_MAX, dest == NULL);
         osSyncPrintf(VT_RST);
 
         if (dest != NULL) {
@@ -551,7 +552,6 @@ f32 BgCheck_RaycastFloorStaticList(CollisionContext* colCtx, u16 xpFlags, SSList
                                           pos->z, &yIntersect, chkDist) == true) {
             // if poly is closer to pos without going over
             if (yIntersect < pos->y && result < yIntersect) {
-
                 result = yIntersect;
                 *outPoly = &colCtx->colHeader->polyList[polyId];
             }
@@ -933,7 +933,6 @@ s32 BgCheck_CheckLineAgainstSSList(SSList* ssList, CollisionContext* colCtx, u16
 
         if (*checkedPoly == true || COLPOLY_VIA_FLAG_TEST(polyList[polyId].flags_vIA, xpFlags1) ||
             !(xpFlags2 == 0 || COLPOLY_VIA_FLAG_TEST(polyList[polyId].flags_vIA, xpFlags2))) {
-
             if (curNode->next == SS_NULL) {
                 break;
             } else {
@@ -951,7 +950,6 @@ s32 BgCheck_CheckLineAgainstSSList(SSList* ssList, CollisionContext* colCtx, u16
                                      (bccFlags & BGCHECK_CHECK_ONE_FACE) != 0, chkDist)) {
             distSq = Math3D_Vec3fDistSq(posA, &polyIntersect);
             if (distSq < *outDistSq) {
-
                 *outDistSq = distSq;
                 *outPos = polyIntersect;
                 *posB = polyIntersect;
@@ -1651,7 +1649,6 @@ s32 BgCheck_PosInStaticBoundingBox(CollisionContext* colCtx, Vec3f* pos) {
  */
 f32 BgCheck_RaycastFloorImpl(GlobalContext* globalCtx, CollisionContext* colCtx, u16 xpFlags, CollisionPoly** outPoly,
                              s32* outBgId, Vec3f* pos, Actor* actor, u32 arg7, f32 chkDist) {
-
     f32 yIntersectDyna;
     s32* temp_a0;
     StaticLookup* lookupTbl;
@@ -1882,7 +1879,7 @@ s32 BgCheck_CheckWallImpl(CollisionContext* colCtx, u16 xpFlags, Vec3f* posResul
     dz = posNext->z - posPrev->z;
 
     if (BgCheck_PosErrorCheck(posNext, "../z_bgcheck.c", __LINE__) == true ||
-        BgCheck_PosErrorCheck(posPrev, "../z_bgcheck.c", __LINE__ ) == true) {
+        BgCheck_PosErrorCheck(posPrev, "../z_bgcheck.c", __LINE__) == true) {
         if (actor != NULL) {
             osSyncPrintf("actor, actor->id %d\n", actor->id);
         }
@@ -2430,8 +2427,7 @@ SSNode* SSNodeList_GetNextNode(SSNodeList* this) {
     SSNode* result = &this->tbl[this->count];
 
     this->count++;
-    ASSERT(this->count < this->max, "this->count < this->max", "../z_bgcheck.c",
-           __LINE__);
+    ASSERT(this->count < this->max, "this->count < this->max", "../z_bgcheck.c", __LINE__);
     if (!(this->count < this->max)) {
         return NULL;
     }
@@ -2699,12 +2695,11 @@ void DynaPoly_DeleteBgActor(GlobalContext* globalCtx, DynaCollisionContext* dyna
     osSyncPrintf("DynaPoly_DeleteBgActor():index %d\n", bgId);
     osSyncPrintf(VT_RST);
     if (DynaPoly_IsBgIdBgActor(bgId) == false) {
-
         if (bgId == -1) {
             osSyncPrintf(VT_FGCOL(GREEN));
             // "The index that should have been deleted(? ) was(== -1), processing aborted."
-            osSyncPrintf(
-                "DynaPoly_DeleteBgActor():The index that should have been deleted (?) was (==-1), processing aborted.\n");
+            osSyncPrintf("DynaPoly_DeleteBgActor():The index that should have been deleted (?) was (==-1), processing "
+                         "aborted.\n");
             osSyncPrintf(VT_RST);
             return;
         } else {
@@ -2719,7 +2714,6 @@ void DynaPoly_DeleteBgActor(GlobalContext* globalCtx, DynaCollisionContext* dyna
     }
     actor = DynaPoly_GetActor(&globalCtx->colCtx, bgId);
     if (actor != NULL) {
-
         actor->bgId = BGACTOR_NEG_ONE;
         dyna->bgActors[bgId].actor = NULL;
         dyna->bgActorFlags[bgId] |= 2;
@@ -2737,7 +2731,7 @@ void DynaPoly_ExpandSRT(GlobalContext* globalCtx, DynaCollisionContext* dyna, s3
                         s32* polyStartIndex) {
     MtxF mtx;
     Actor* actor;
-    s32 pad;
+
     s32 pad2;
     f32 numVtxInverse;
     s32 i;
@@ -2778,8 +2772,8 @@ void DynaPoly_ExpandSRT(GlobalContext* globalCtx, DynaCollisionContext* dyna, s3
     if (!(dyna->vtxListMax >= *vtxStartIndex + pbgdata->numVertices)) {
         osSyncPrintf(VT_FGCOL(RED));
         // "do not use if %d exceeds %d"
-        osSyncPrintf("DynaPoly_ExpandSRT():vertex over Not if %d exceeds %d.\n",
-                     *vtxStartIndex + pbgdata->numVertices, dyna->vtxListMax);
+        osSyncPrintf("DynaPoly_ExpandSRT():vertex over Not if %d exceeds %d.\n", *vtxStartIndex + pbgdata->numVertices,
+                     dyna->vtxListMax);
     }
 
     ASSERT(dyna->polyListMax >= *polyStartIndex + pbgdata->numPolygons,
@@ -3062,7 +3056,7 @@ f32 BgCheck_RaycastFloorDyna(DynaRaycast* dynaRaycast) {
     s32 i2;
     s32 pauseState;
     DynaPolyActor* dynaActor;
-    s32 pad;
+
     Vec3f polyVtx[3];
     Vec3f polyNorm;
     u32 polyIndex;
@@ -3097,7 +3091,6 @@ f32 BgCheck_RaycastFloorDyna(DynaRaycast* dynaRaycast) {
             intersect2 = BgCheck_RaycastFloorDynaList(dynaRaycast, DYNA_RAYCAST_FLOORS);
 
             if (dynaRaycast->yIntersect < intersect2) {
-
                 dynaRaycast->yIntersect = intersect2;
                 *dynaRaycast->bgId = i;
                 result = intersect2;
@@ -3108,7 +3101,6 @@ f32 BgCheck_RaycastFloorDyna(DynaRaycast* dynaRaycast) {
             dynaRaycast->ssList = &dynaRaycast->colCtx->dyna.bgActors[i].dynaLookup.wall;
             intersect2 = BgCheck_RaycastFloorDynaList(dynaRaycast, DYNA_RAYCAST_WALLS);
             if (dynaRaycast->yIntersect < intersect2) {
-
                 dynaRaycast->yIntersect = intersect2;
                 *dynaRaycast->bgId = i;
                 result = intersect2;
@@ -3119,7 +3111,6 @@ f32 BgCheck_RaycastFloorDyna(DynaRaycast* dynaRaycast) {
             dynaRaycast->ssList = &dynaRaycast->colCtx->dyna.bgActors[i].dynaLookup.ceiling;
             intersect2 = BgCheck_RaycastFloorDynaList(dynaRaycast, DYNA_RAYCAST_CEILINGS);
             if (dynaRaycast->yIntersect < intersect2) {
-
                 dynaRaycast->yIntersect = intersect2;
                 *dynaRaycast->bgId = i;
                 result = intersect2;
@@ -3163,7 +3154,6 @@ f32 BgCheck_RaycastFloorDyna(DynaRaycast* dynaRaycast) {
                                                               polyNorm.y, polyNorm.z, polyDist, dynaRaycast->pos->z,
                                                               dynaRaycast->pos->x, &intersect, dynaRaycast->chkDist)) {
                     if (fabsf(intersect - result) < 1.0f) {
-
                         result = intersect;
                     }
                 }
@@ -3517,7 +3507,6 @@ s32 BgCheck_CheckDynaCeiling(CollisionContext* colCtx, u16 xpFlags, f32* outY, V
         if (BgCheck_CheckDynaCeilingList(colCtx, xpFlags, &colCtx->dyna, &colCtx->dyna.bgActors[i].dynaLookup.ceiling,
                                          &tempY, pos, chkDist, &poly) == true &&
             tempY < resultY) {
-
             resultY = tempY;
             *outPoly = poly;
             *outBgId = i;
@@ -3632,7 +3621,6 @@ s32 BgCheck_CheckLineAgainstBgActor(CollisionContext* colCtx, u16 xpFlags, Vec3f
 s32 BgCheck_CheckLineAgainstDyna(CollisionContext* colCtx, u16 xpFlags, Vec3f* posA, Vec3f* posB, Vec3f* posResult,
                                  CollisionPoly** outPoly, f32* distSq, s32* outBgId, Actor* actor, f32 chkDist,
                                  s32 bccFlags) {
-    s32 pad;
     s32 i;
     s32 result = false;
     Linef line;
@@ -3833,7 +3821,6 @@ u32 SurfaceType_GetData(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId,
  * SurfaceType return CamData Index
  */
 u32 SurfaceType_GetCamDataIndex(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId) {
-
     return SurfaceType_GetData(colCtx, poly, bgId, 0) & 0xFF;
 }
 
@@ -4434,7 +4421,6 @@ void BgCheck_DrawDynaCollision(GlobalContext* globalCtx, CollisionContext* colCt
     s32 bgId;
 
     for (bgId = 0; bgId < BG_ACTOR_MAX; bgId++) {
-
         if (!(colCtx->dyna.bgActorFlags[bgId] & 1)) {
             continue;
         }

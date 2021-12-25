@@ -37,7 +37,7 @@ static s32 sUnused[2] = { 0, 0 };
 
 void EnJsjutan_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnJsjutan* this = (EnJsjutan*)thisx;
-    s32 pad;
+
     CollisionHeader* header = NULL;
 
     this->dyna.actor.flags &= ~ACTOR_FLAG_0;
@@ -321,7 +321,6 @@ void func_80A89A6C(EnJsjutan* this, GlobalContext* globalCtx) {
     for (i = 0; i < ARRAY_COUNT(sCarpetOddVtx); i++, carpetVtx++) {
         f32 rotX;
         f32 rotZ;
-        s32 pad;
 
         // Carpet size is 12x12.
         if ((i % 12) == 11) { // Last column.

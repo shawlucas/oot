@@ -92,7 +92,6 @@ void EnfHG_Init(Actor* thisx, GlobalContext* globalCtx2) {
 }
 
 void EnfHG_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnfHG* this = (EnfHG*)thisx;
 
     osSyncPrintf("F DT1\n");
@@ -678,7 +677,6 @@ void EnfHG_Done(EnfHG* this, GlobalContext* globalCtx) {
 }
 
 void EnfHG_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnfHG* this = (EnfHG*)thisx;
     u8 i;
 
@@ -714,7 +712,6 @@ void EnfHG_Noop(Actor* thisx, GlobalContext* globalCtx, PSkinAwb* skin) {
 void EnfHG_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnfHG* this = (EnfHG*)thisx;
     BossGanondrof* bossGnd = (BossGanondrof*)this->actor.parent;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_fhg.c", __LINE__);
     func_80093D18(globalCtx->state.gfxCtx);

@@ -86,7 +86,7 @@ void EnBombf_SetupAction(EnBombf* this, EnBombfActionFunc actionFunc) {
 
 void EnBombf_Init(Actor* thisx, GlobalContext* globalCtx) {
     f32 shapeUnk10 = 0.0f;
-    s32 pad;
+
     EnBombf* this = (EnBombf*)thisx;
 
     Actor_SetScale(thisx, 0.01f);
@@ -143,7 +143,7 @@ void EnBombf_SetupGrowBomb(EnBombf* this, s16 params) {
 
 void EnBombf_GrowBomb(EnBombf* this, GlobalContext* globalCtx) {
     EnBombf* bombFlower;
-    s32 pad;
+
     s32 pad1;
     Player* player = GET_PLAYER(globalCtx);
     s32 pad2;
@@ -319,7 +319,7 @@ void EnBombf_Update(Actor* thisx, GlobalContext* globalCtx) {
     Vec3f effPos;
     Vec3f dustAccel = { 0.0f, 0.6f, 0.0f };
     Color_RGBA8 dustColor = { 255, 255, 255, 255 };
-    s32 pad[2];
+
     EnBombf* this = (EnBombf*)thisx;
 
     if ((this->unk_200 != 0) && (this->timer != 0)) {
@@ -344,16 +344,13 @@ void EnBombf_Update(Actor* thisx, GlobalContext* globalCtx) {
     }
 
     if (thisx->params == BOMBFLOWER_BODY) {
-
         if ((thisx->velocity.y > 0.0f) && (thisx->bgCheckFlags & 0x10)) {
             thisx->velocity.y = -thisx->velocity.y;
         }
 
         // rebound bomb off the wall it hits
         if ((thisx->speedXZ != 0.0f) && (thisx->bgCheckFlags & 8)) {
-
             if (ABS((s16)(thisx->wallYaw - thisx->world.rot.y)) > 0x4000) {
-                
                 thisx->world.rot.y = ((thisx->wallYaw - thisx->world.rot.y) + thisx->wallYaw) - 0x8000;
             }
             Audio_PlayActorSound2(thisx, NA_SE_EV_BOMB_BOUND);
@@ -440,7 +437,6 @@ void EnBombf_Update(Actor* thisx, GlobalContext* globalCtx) {
     thisx->focus.pos.y += 10.0f;
 
     if (thisx->params <= BOMBFLOWER_BODY) {
-
         Collider_UpdateCylinder(thisx, &this->bombCollider);
 
         if ((this->flowerBombScale >= 1.0f) && (this->bumpOn)) {
@@ -478,10 +474,7 @@ Gfx* EnBombf_NewMtxDList(GraphicsContext* gfxCtx, GlobalContext* globalCtx) {
 }
 
 void EnBombf_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnBombf* this = (EnBombf*)thisx;
-
-    
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_bombf.c", __LINE__);
 

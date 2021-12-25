@@ -145,7 +145,6 @@ void EnTr_ChooseAction2(EnTr* this, GlobalContext* globalCtx) {
     if (globalCtx->csCtx.state != CS_STATE_IDLE) {
         if (globalCtx->csCtx.npcActions[this->actionIndex] != NULL) {
             switch (globalCtx->csCtx.npcActions[this->actionIndex]->action) {
-
                 case 4:
                     Actor_SetScale(&this->actor, 0.01f);
                     EnTr_SetupAction(this, EnTr_ShrinkVanish);
@@ -372,7 +371,6 @@ void EnTr_ChooseAction1(EnTr* this, GlobalContext* globalCtx) {
 }
 
 void EnTr_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnTr* this = (EnTr*)thisx;
 
     Actor_UpdateBgCheckInfo(globalCtx, &this->actor, 0.0f, 0.0f, 0.0f, 5);
@@ -426,10 +424,7 @@ s32 EnTr_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, 
 }
 
 void EnTr_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnTr* this = (EnTr*)thisx;
-
-    
 
     if ((globalCtx->csCtx.state == CS_STATE_IDLE) || (globalCtx->csCtx.npcActions[this->actionIndex] == 0)) {
         this->actor.shape.shadowDraw = NULL;

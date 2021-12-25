@@ -35,7 +35,7 @@ static InitChainEntry sInitChain[] = {
 
 void BgSpot00Break_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgSpot00Break* this = (BgSpot00Break*)thisx;
-    s32 pad;
+
     CollisionHeader* colHeader = NULL;
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);

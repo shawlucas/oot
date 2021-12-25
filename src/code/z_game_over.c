@@ -52,7 +52,6 @@ void GameOver_Update(GlobalContext* globalCtx) {
                 gSaveContext.equips.buttonItems[0] != ITEM_SWORD_MASTER &&
                 gSaveContext.equips.buttonItems[0] != ITEM_SWORD_BGS &&
                 gSaveContext.equips.buttonItems[0] != ITEM_SWORD_KNIFE) {
-
                 if (gSaveContext.buttonStatus[0] != BTN_ENABLED) {
                     gSaveContext.equips.buttonItems[0] = gSaveContext.buttonStatus[0];
                 } else {
@@ -74,7 +73,7 @@ void GameOver_Update(GlobalContext* globalCtx) {
 
             Environment_InitGameOverLights(globalCtx);
             gGameOverTimer = 20;
-            
+
             v90 = VREG(90);
             v91 = VREG(91);
             v92 = VREG(92);
@@ -108,7 +107,6 @@ void GameOver_Update(GlobalContext* globalCtx) {
         case GAMEOVER_REVIVE_RUMBLE:
             gGameOverTimer = 50;
             gameOverCtx->state++;
-            
 
             v90 = VREG(90);
             v91 = VREG(91);

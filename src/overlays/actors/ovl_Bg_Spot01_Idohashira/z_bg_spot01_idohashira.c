@@ -106,7 +106,6 @@ void func_808AAD3C(GlobalContext* globalCtx, Vec3f* vec, u32 arg2) {
 }
 
 void func_808AAE6C(BgSpot01Idohashira* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f sp30 = this->dyna.actor.world.pos;
 
     sp30.y += kREG(15);
@@ -116,7 +115,6 @@ void func_808AAE6C(BgSpot01Idohashira* this, GlobalContext* globalCtx) {
 }
 
 void func_808AAF34(BgSpot01Idohashira* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     Vec3f dest;
     Vec3f src;
 
@@ -152,7 +150,6 @@ s32 BgSpot01Idohashira_NotInCsMode(GlobalContext* globalCtx) {
 }
 
 CsCmdActorAction* BgSpot01Idohashira_GetNpcAction(GlobalContext* globalCtx, s32 actionIdx) {
-    s32 pad[2];
     CsCmdActorAction* npcAction = NULL;
 
     if (!BgSpot01Idohashira_NotInCsMode(globalCtx)) {
@@ -291,7 +288,6 @@ void BgSpot01Idohashira_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgSpot01Idohashira_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad[2];
     BgSpot01Idohashira* this = (BgSpot01Idohashira*)thisx;
     CollisionHeader* colHeader;
 

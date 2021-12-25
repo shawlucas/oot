@@ -37,7 +37,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void BgSpot18Shutter_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgSpot18Shutter* this = (BgSpot18Shutter*)thisx;
     s32 param = (this->dyna.actor.params >> 8) & 1;
     CollisionHeader* colHeader = NULL;

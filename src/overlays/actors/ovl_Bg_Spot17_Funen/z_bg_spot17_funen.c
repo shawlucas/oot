@@ -52,8 +52,6 @@ void func_808B746C(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void func_808B7478(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_spot17_funen.c", __LINE__);
 
     func_80093D84(globalCtx->state.gfxCtx);
@@ -67,8 +65,6 @@ void func_808B7478(Actor* thisx, GlobalContext* globalCtx) {
                Gfx_TwoTexScroll(globalCtx->state.gfxCtx, 0, 0, (0 - globalCtx->gameplayFrames) & 0x7F, 0x20, 0x20, 1, 0,
                                 (0 - globalCtx->gameplayFrames) & 0x7F, 0x20, 0x20));
     gSPDisplayList(POLY_XLU_DISP++, gCraterSmokeConeDL);
-
-    
 
     CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_bg_spot17_funen.c", __LINE__);
 }

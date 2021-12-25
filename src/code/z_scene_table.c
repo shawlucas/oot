@@ -2355,7 +2355,6 @@ void func_8009FE58(GlobalContext* globalCtx) {
     gDPSetEnvColor(POLY_XLU_DISP++, 128, 128, 128, 128);
 
     if (FrameAdvance_IsEnabled(globalCtx) != true) {
-
         D_8012A39C += 1820;
         D_8012A3A0 += 1820;
 

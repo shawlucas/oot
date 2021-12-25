@@ -70,7 +70,6 @@ void BgGndSoulmeiro_Init(Actor* thisx, GlobalContext* globalCtx) {
             Collider_SetCylinder(globalCtx, &this->collider, &this->actor, &sCylinderInit);
             this->actionFunc = func_8087B284;
             if (Flags_GetSwitch(globalCtx, (this->actor.params >> 8) & 0x3F)) {
-
                 Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_MIR_RAY, this->actor.world.pos.x,
                             this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 9);
                 this->actor.draw = NULL;

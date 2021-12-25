@@ -102,7 +102,6 @@ void EnMag_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnMag_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad[2];
     EnMag* this = (EnMag*)thisx;
 
     if (gSaveContext.fileNum != 0xFEDC) {
@@ -110,7 +109,6 @@ void EnMag_Update(Actor* thisx, GlobalContext* globalCtx) {
             if (CHECK_BTN_ALL(globalCtx->state.input[0].press.button, BTN_START) ||
                 CHECK_BTN_ALL(globalCtx->state.input[0].press.button, BTN_A) ||
                 CHECK_BTN_ALL(globalCtx->state.input[0].press.button, BTN_B)) {
-
                 Audio_PlaySoundGeneral(NA_SE_SY_PIECE_OF_HEART, &D_801333D4, 4, &D_801333E0, &D_801333E0, &D_801333E8);
 
                 this->mainAlpha = 210;
@@ -137,7 +135,6 @@ void EnMag_Update(Actor* thisx, GlobalContext* globalCtx) {
                 if (CHECK_BTN_ALL(globalCtx->state.input[0].press.button, BTN_START) ||
                     CHECK_BTN_ALL(globalCtx->state.input[0].press.button, BTN_A) ||
                     CHECK_BTN_ALL(globalCtx->state.input[0].press.button, BTN_B)) {
-
                     if (globalCtx->sceneLoadFlag != 20) {
                         Audio_SetCutsceneFlag(0);
 
@@ -304,7 +301,7 @@ void EnMag_DrawImageRGBA32(Gfx** gfxp, s16 centerX, s16 centerY, u8* source, u32
     u32 textureHeight;
     s32 remainingSize;
     s32 textureSize;
-    s32 pad;
+
     s32 i;
 
     func_80094D28(&gfx);
@@ -386,7 +383,7 @@ void EnMag_DrawInner(Actor* thisx, GlobalContext* globalCtx, Gfx** gfxp) {
     };
     EnMag* this = (EnMag*)thisx;
     Font* font = &this->font;
-    s32 pad;
+
     Gfx* gfx = *gfxp;
     u16 i, j, k;
     u16 rectLeft;
@@ -561,7 +558,6 @@ void EnMag_DrawInner(Actor* thisx, GlobalContext* globalCtx, Gfx** gfxp) {
 }
 
 void EnMag_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     Gfx* gfx;
     Gfx* gfxRef;
 

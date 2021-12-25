@@ -62,8 +62,6 @@ void Quake_UpdateShakeInfo(QuakeRequest* req, ShakeInfo* shake, f32 y, f32 x) {
 }
 
 s16 Quake_Callback1(QuakeRequest* req, ShakeInfo* shake) {
-    s32 pad;
-
     if (req->countdown > 0) {
         f32 a = Math_SinS(req->speed * req->countdown);
 
@@ -84,7 +82,6 @@ s16 Quake_Callback5(QuakeRequest* req, ShakeInfo* shake) {
 }
 
 s16 Quake_Callback6(QuakeRequest* req, ShakeInfo* shake) {
-    s32 pad;
     f32 a;
 
     req->countdown--;

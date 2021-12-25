@@ -155,7 +155,7 @@ void EnDaiku_Change(EnDaiku* this, s32 animIndex, s32* currentAnimIndex) {
 
 void EnDaiku_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnDaiku* this = (EnDaiku*)thisx;
-    s32 pad;
+
     s32 noKill = true;
     s32 isFree = false;
 
@@ -444,7 +444,6 @@ void EnDaiku_EscapeRotate(EnDaiku* this, GlobalContext* globalCtx) {
 }
 
 void EnDaiku_InitSubCamera(EnDaiku* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f eyePosDeltaLocal;
     Vec3f eyePosDeltaWorld;
 
@@ -459,13 +458,12 @@ void EnDaiku_InitSubCamera(EnDaiku* this, GlobalContext* globalCtx) {
 
     this->subCamEyeInit.x = this->subCamEye.x = this->actor.world.pos.x + eyePosDeltaWorld.x;
     this->subCamEyeInit.y = this->subCamEye.y = this->actor.world.pos.y + eyePosDeltaWorld.y;
-    
+
     this->subCamEyeInit.z = this->subCamEye.z = this->actor.world.pos.z + eyePosDeltaWorld.z;
 
-    
     this->subCamAtTarget.x = this->subCamAt.x = this->actor.world.pos.x;
     this->subCamAtTarget.y = this->subCamAt.y = this->actor.world.pos.y + 60.0f;
-    
+
     this->subCamAtTarget.z = this->subCamAt.z = this->actor.world.pos.z;
 
     this->subCamId = Gameplay_CreateSubCamera(globalCtx);
@@ -478,8 +476,6 @@ void EnDaiku_InitSubCamera(EnDaiku* this, GlobalContext* globalCtx) {
 }
 
 void EnDaiku_UpdateSubCamera(EnDaiku* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     this->subCamAtTarget.x = this->actor.world.pos.x;
     this->subCamAtTarget.y = this->actor.world.pos.y + 60.0f;
     this->subCamAtTarget.z = this->actor.world.pos.z;

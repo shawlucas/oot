@@ -297,7 +297,6 @@ void EnDoor_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 s32 EnDoor_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* thisx) {
-    s32 pad;
     TransitionActorEntry* transitionEntry;
     Gfx** temp_a2;
     s32 pad2;
@@ -335,7 +334,6 @@ void EnDoor_Draw(Actor* thisx, GlobalContext* globalCtx) {
         SkelAnime_DrawOpa(globalCtx, this->skelAnime.skeleton, this->skelAnime.jointTable, EnDoor_OverrideLimbDraw,
                           NULL, &this->actor);
         if (this->actor.world.rot.y != 0) {
-            
             if (this->actor.world.rot.y > 0) {
                 gSPDisplayList(POLY_OPA_DISP++, gDoorRightDL);
             } else {

@@ -343,7 +343,6 @@ void func_80044340(Camera* camera, Vec3f* arg1, Vec3f* arg2) {
  * Checks if `from` to `to` is looking from the outside of a poly towards the front
  */
 s32 Camera_CheckOOB(Camera* camera, Vec3f* from, Vec3f* to) {
-    s32 pad;
     Vec3f intersect;
     s32 pad2;
     s32 bgId;
@@ -365,7 +364,6 @@ s32 Camera_CheckOOB(Camera* camera, Vec3f* from, Vec3f* to) {
  * and bgId to `bgId`.  If no floor is found, then the normal is a flat surface pointing upwards.
  */
 f32 Camera_GetFloorYNorm(Camera* camera, Vec3f* floorNorm, Vec3f* chkPos, s32* bgId) {
-    s32 pad;
     CollisionPoly* floorPoly;
     f32 floorY = BgCheck_EntityRaycastFloor3(&camera->globalCtx->colCtx, &floorPoly, bgId, chkPos);
 
@@ -475,7 +473,7 @@ s32 Camera_GetDataIdxForPoly(Camera* camera, s32* bgId, CollisionPoly* poly) {
  */
 Vec3s* Camera_GetCamBgDataUnderPlayer(Camera* camera, u16* dataCnt) {
     CollisionPoly* floorPoly;
-    s32 pad;
+
     s32 bgId;
     PosRot playerPosShape;
 
@@ -834,7 +832,6 @@ s32 func_80045508(Camera* camera, VecSph* diffSph, CamColChk* eyeChk, CamColChk*
         if (eyeAtBgId == 0) {
             // no collision from eyeNext->at
             if (checkEye & 1) {
-
                 atChk->pos = *at;
                 eyePos = *eye;
 
@@ -930,7 +927,6 @@ s32 func_800458D4(Camera* camera, VecSph* eyeAtDir, f32 arg2, f32* arg3, s16 arg
     f32 eyeAtAngle;
     PosRot* playerPosRot = &camera->playerPosRot;
     f32 deltaY;
-    s32 pad[2];
 
     posOffsetTarget.y = Player_GetHeight(camera->player) + arg2;
     posOffsetTarget.x = 0.0f;
@@ -944,7 +940,6 @@ s32 func_800458D4(Camera* camera, VecSph* eyeAtDir, f32 arg2, f32* arg3, s16 arg
     eyeAtAngle = Math_FAtan2F(deltaY, OLib_Vec3fDistXZ(&camera->at, &camera->eye));
 
     if (eyeAtAngle > DEGF_TO_RADF(OREG(32))) {
-        
         phi_f2 = 1.0f - sinf(DEGF_TO_RADF(eyeAtAngle - OREG(32)));
     } else if (eyeAtAngle < DEGF_TO_RADF(OREG(33))) {
         phi_f2 = 1.0f - sinf(DEGF_TO_RADF(OREG(33)) - eyeAtAngle);
@@ -1174,7 +1169,7 @@ s32 Camera_CalcAtForHorse(Camera* camera, VecSph* eyeAtDir, f32 yOffset, f32* yP
     Vec3f* at = &camera->at;
     Vec3f posOffsetTarget;
     Vec3f atTarget;
-    s32 pad;
+
     s32 pad2;
     f32 playerHeight;
     Player* player;
@@ -1254,7 +1249,7 @@ f32 Camera_ClampDist(Camera* camera, f32 dist, f32 minDist, f32 maxDist, s16 tim
 }
 
 s16 Camera_CalcDefaultPitch(Camera* camera, s16 arg1, s16 arg2, s16 arg3) {
-    f32 pad;
+    f32 tmp;
     f32 phi_a2;
     f32 t;
     s16 phi_v0;
@@ -1269,8 +1264,8 @@ s16 Camera_CalcDefaultPitch(Camera* camera, s16 arg1, s16 arg2, s16 arg3) {
         phi_a2 = (1.0f / camera->pitchUpdateRateInv) * 3.0f;
     } else {
         t = phi_v1 * (1.0f / R_CAM_MAX_PHI);
-        pad = Camera_InterpolateCurve(0.8f, 1.0f - t);
-        phi_a2 = (1.0f / camera->pitchUpdateRateInv) * pad;
+        tmp = Camera_InterpolateCurve(0.8f, 1.0f - t);
+        phi_a2 = (1.0f / camera->pitchUpdateRateInv) * tmp;
     }
     return Camera_LERPCeilS(sp1C, arg1, phi_a2, 0xA);
 }
@@ -1649,7 +1644,7 @@ s32 Camera_Normal2(Camera* camera) {
     PosRot* playerPosRot = &camera->playerPosRot;
     Normal2* norm2 = (Normal2*)camera->paramData;
     Normal2Anim* anim = &norm2->anim;
-    s32 pad;
+
     Vec3s* bgData;
     f32 playerHeight;
     f32 yNormal;
@@ -1690,9 +1685,9 @@ s32 Camera_Normal2(Camera* camera) {
             anim->unk_20 = BGCAM_ROT(bgData).x;
             anim->unk_22 = BGCAM_ROT(bgData).y;
             anim->unk_24 = playerPosRot->pos.y;
-            anim->unk_1C = BGCAM_FOV(bgData) == -1      ? norm2->unk_14
-                           : BGCAM_FOV(bgData) >= 0x169 ? PCT(BGCAM_FOV(bgData))
-                                                        : BGCAM_FOV(bgData);
+            anim->unk_1C = BGCAM_FOV(bgData) == -1
+                               ? norm2->unk_14
+                               : BGCAM_FOV(bgData) >= 0x169 ? PCT(BGCAM_FOV(bgData)) : BGCAM_FOV(bgData);
 
             anim->unk_28 = BGCAM_JFIFID(bgData) == -1 ? 0 : BGCAM_JFIFID(bgData);
 
@@ -1748,7 +1743,6 @@ s32 Camera_Normal2(Camera* camera) {
     phi_a1 = (anim->unk_28 & 2 ? anim->unk_22 : norm2->unk_1C);
     phi_a0 = BINANG_SUB(sp90.yaw, sp88.yaw);
     if ((phi_a1 < 0x4000 && ABS(phi_a0) > phi_a1) || (phi_a1 >= 0x4000 && ABS(phi_a0) < phi_a1)) {
-
         phi_a0 = (phi_a0 < 0 ? -phi_a1 : phi_a1);
         phi_a0 += sp88.yaw;
         adjSph.yaw =
@@ -1871,7 +1865,7 @@ s32 Camera_Normal3(Camera* camera) {
                                                     camera->yawUpdateRateInv, sp98, 0.1f);
         camera->pitchUpdateRateInv = Camera_LERPCeilF((f32)OREG(7) + (anim->swing.swingUpdateRateTimer * 2),
                                                       camera->pitchUpdateRateInv, sp94, 0.1f);
-        
+
         anim->swing.swingUpdateRateTimer--;
     } else {
         camera->yawUpdateRateInv = Camera_LERPCeilF(norm3->yawUpdateSpeed, camera->yawUpdateRateInv, sp98, 0.1f);
@@ -2175,7 +2169,7 @@ s32 Camera_Jump1(Camera* camera) {
     s16 tangle;
     Jump1* jump1 = (Jump1*)camera->paramData;
     Jump1Anim* anim = &jump1->anim;
-    s32 pad;
+
     f32 playerHeight;
 
     playerHeight = Player_GetHeight(camera->player);
@@ -2500,7 +2494,7 @@ s32 Camera_Jump3(Camera* camera) {
     Jump3* jump3 = (Jump3*)camera->paramData;
     VecSph eyeAtOffset;
     VecSph eyeNextAtOffset;
-    s32 pad;
+
     s32 pad2;
     CameraModeValue* values;
     f32 t2;
@@ -2714,7 +2708,7 @@ s32 Camera_Battle1(Camera* camera) {
     f32 fov;
     Battle1* batt1 = (Battle1*)camera->paramData;
     Battle1Anim* anim = &batt1->anim;
-    s32 pad;
+
     f32 playerHeight;
 
     skipEyeAtCalc = false;
@@ -2923,9 +2917,7 @@ s32 Camera_Battle1(Camera* camera) {
     }
     anim->roll += (((OREG(36) * camera->speedRatio) * (1.0f - distRatio)) - anim->roll) * PCT(OREG(37));
     camera->roll = DEGF_TO_BINANG(anim->roll);
-    camera->fov = Camera_LERPCeilF((player->swordState != 0       ? 0.8f
-                                    : gSaveContext.health <= 0x10 ? 0.8f
-                                                                  : 1.0f) *
+    camera->fov = Camera_LERPCeilF((player->swordState != 0 ? 0.8f : gSaveContext.health <= 0x10 ? 0.8f : 1.0f) *
                                        (fov - ((fov * 0.05f) * distRatio)),
                                    camera->fov, camera->fovUpdateRate, 1.0f);
 }
@@ -2952,7 +2944,7 @@ s32 Camera_Battle4(Camera* camera) {
     VecSph eyeNextAtOffset;
     Battle4* batt4 = (Battle4*)camera->paramData;
     Battle4Anim* anim = &batt4->anim;
-    s32 pad;
+
     f32 playerHeight;
 
     playerHeight = Player_GetHeight(camera->player);
@@ -3263,6 +3255,7 @@ s32 Camera_KeepOn2(Camera* camera) {
  * Talking to an NPC
  */
 s32 Camera_KeepOn3(Camera* camera) {
+    s32 var;
     Vec3f* eye = &camera->eye;
     Vec3f* at = &camera->at;
     Vec3f* eyeNext = &camera->eyeNext;
@@ -3285,7 +3278,7 @@ s32 Camera_KeepOn3(Camera* camera) {
     PosRot* camPlayerPosRot = &camera->playerPosRot;
     KeepOn3* keep3 = (KeepOn3*)camera->paramData;
     Keep3Anim* anim = &keep3->anim;
-    s32 pad;
+
     f32 playerHeight;
 
     playerHeight = Player_GetHeight(camera->player);
@@ -3401,10 +3394,10 @@ s32 Camera_KeepOn3(Camera* camera) {
         }
         osSyncPrintf("camera: talk: BG&collision check %d time(s)\n", i);
         camera->unk_14C &= ~0xC;
-        pad = ((anim->animTimer + 1) * anim->animTimer) >> 1;
-        anim->eyeToAtTarget.y = (f32)BINANG_SUB(atToEyeAdj.yaw, atToEyeNextDir.yaw) / pad;
-        anim->eyeToAtTarget.z = (f32)BINANG_SUB(atToEyeAdj.pitch, atToEyeNextDir.pitch) / pad;
-        anim->eyeToAtTarget.x = (atToEyeAdj.r - atToEyeNextDir.r) / pad;
+        var = ((anim->animTimer + 1) * anim->animTimer) >> 1;
+        anim->eyeToAtTarget.y = (f32)BINANG_SUB(atToEyeAdj.yaw, atToEyeNextDir.yaw) / var;
+        anim->eyeToAtTarget.z = (f32)BINANG_SUB(atToEyeAdj.pitch, atToEyeNextDir.pitch) / var;
+        anim->eyeToAtTarget.x = (atToEyeAdj.r - atToEyeNextDir.r) / var;
         return 1;
     }
 
@@ -3470,7 +3463,7 @@ s32 Camera_KeepOn4(Camera* camera) {
     PosRot* playerPosRot = &camera->playerPosRot;
     KeepOn4* keep4 = (KeepOn4*)camera->paramData;
     KeepOn4_Unk20* unk20 = &keep4->unk_20;
-    s32 pad;
+
     f32 playerHeight;
     Player* player = GET_PLAYER(camera->globalCtx);
     s16 angleCnt;
@@ -3753,7 +3746,7 @@ s32 Camera_KeepOn0(Camera* camera) {
     VecSph eyeAtOffset;
     KeepOn0* keep0 = (KeepOn0*)camera->paramData;
     KeepOn0Anim* anim = &keep0->anim;
-    s32 pad;
+
     Vec3s* sceneCamData;
     Vec3s sceneCamRot;
     s16 fov;
@@ -3822,7 +3815,7 @@ s32 Camera_KeepOn0(Camera* camera) {
 s32 Camera_Fixed1(Camera* camera) {
     Fixed1* fixd1 = (Fixed1*)camera->paramData;
     Fixed1Anim* anim = &fixd1->anim;
-    s32 pad;
+
     VecSph eyeOffset;
     VecSph eyeAtOffset;
     s32 pad2;
@@ -3901,7 +3894,7 @@ s32 Camera_Fixed2(Camera* camera) {
     Vec3s* scenePosData;
     Fixed2* fixd2 = (Fixed2*)camera->paramData;
     Fixed2InitParams* initParams = &fixd2->initParams;
-    s32 pad;
+
     f32 playerHeight;
 
     playerHeight = Player_GetHeight(camera->player);
@@ -3979,7 +3972,6 @@ s32 Camera_Fixed3(Camera* camera) {
     VecSph eyeAtOffset;
     Fixed3* fixd3 = (Fixed3*)camera->paramData;
     Fixed3Anim* anim = &fixd3->anim;
-    s32 pad;
 
     sceneCamData = Camera_GetCamBGData(camera);
 
@@ -4413,7 +4405,6 @@ s32 Camera_Data4(Camera* camera) {
     Vec3f* eye = &camera->eye;
     f32 playerHeight;
     Vec3f* at = &camera->at;
-    s32 pad;
 
     playerHeight = Player_GetHeight(camera->player);
 
@@ -4487,7 +4478,7 @@ s32 Camera_Unique1(Camera* camera) {
     PosRot playerhead;
     Unique1* uniq1 = (Unique1*)camera->paramData;
     Unique1Anim* anim = &uniq1->anim;
-    s32 pad;
+
     f32 playerHeight;
     s32 pad2;
 
@@ -4573,7 +4564,7 @@ s32 Camera_Unique2(Camera* camera) {
     Vec3f playerPos;
     VecSph eyeOffset;
     VecSph eyeAtOffset;
-    s32 pad;
+
     f32 lerpRateFactor;
     Unique2* uniq2 = (Unique2*)camera->paramData;
     Unique2Unk10* unk10 = &uniq2->unk_10;
@@ -4933,7 +4924,6 @@ s32 Camera_Unique6(Camera* camera) {
  * camera rotates to follow player
  */
 s32 Camera_Unique7(Camera* camera) {
-    s32 pad;
     Unique7* uniq7 = (Unique7*)camera->paramData;
     CameraModeValue* values;
     VecSph playerPosEyeOffset;
@@ -5397,7 +5387,7 @@ s32 Camera_Unique9(Camera* camera) {
             }
 
             spB4 = scratchSph.r;
-            
+
             scratchSph.r =
                 !(spB4 < anim->curKeyFrame->eyeTargetInit.z)
                     ? Camera_LERPCeilF(anim->curKeyFrame->eyeTargetInit.z, spB4, anim->curKeyFrame->lerpStepScale, 1.0f)
@@ -5513,7 +5503,6 @@ void Camera_RotateAroundPoint(PosRot* at, Vec3f* pos, Vec3f* dst) {
  * until all keyFrames have been exhausted.
  */
 s32 Camera_Demo1(Camera* camera) {
-    s32 pad;
     Demo1* demo1 = (Demo1*)camera->paramData;
     CameraModeValue* values;
     Vec3f* at = &camera->at;
@@ -5600,7 +5589,7 @@ s32 Camera_Demo3(Camera* camera) {
     Vec3f sp68;
     Vec3f sp5C;
     f32 temp_f0;
-    s32 pad;
+
     u8 skipUpdateEye = false;
     f32 yOffset = Player_GetHeight(camera->player);
     s16 angle;
@@ -5819,10 +5808,10 @@ s32 Camera_Demo5(Camera* camera) {
     PosRot targethead;
     Player* player;
     s16 sp4A;
-    s32 pad;
+    s32 var;
+
     s32 temp_v0;
     s16 t;
-    s32 pad2;
 
     Actor_GetFocus(&playerhead, &camera->player->actor);
     player = camera->player;
@@ -5997,8 +5986,8 @@ s32 Camera_Demo5(Camera* camera) {
         }
     }
 
-    pad = sDemo5PrevSfxFrame - camera->globalCtx->state.frames;
-    if ((pad >= 0x33) || (pad < -0x32)) {
+    var = sDemo5PrevSfxFrame - camera->globalCtx->state.frames;
+    if ((var >= 0x33) || (var < -0x32)) {
         func_80078884(camera->data1);
     }
 
@@ -6012,11 +6001,11 @@ s32 Camera_Demo5(Camera* camera) {
     } else {
         sp4A = playerhead.rot.y - playerTargetGeo.yaw;
         if (camera->target->category == ACTORCAT_PLAYER) {
-            pad = camera->globalCtx->state.frames - sDemo5PrevAction12Frame;
+            var = camera->globalCtx->state.frames - sDemo5PrevAction12Frame;
             if (player->stateFlags1 & 0x800) {
                 // holding object over head.
                 func_8002DF54(camera->globalCtx, camera->target, 8);
-            } else if (ABS(pad) > 3000) {
+            } else if (ABS(var) > 3000) {
                 func_8002DF54(camera->globalCtx, camera->target, 12);
             } else {
                 func_8002DF54(camera->globalCtx, camera->target, 69);
@@ -6131,7 +6120,6 @@ s32 Camera_Demo8(Camera* camera) {
  * to be relative to the main camera's player, the current camera's player, or the main camera's target
  */
 s32 Camera_Demo9(Camera* camera) {
-    s32 pad;
     s32 finishAction;
     s16 onePointTimer;
     Demo9OnePointCs* demo9OnePoint = (Demo9OnePointCs*)camera->paramData;
@@ -6371,7 +6359,7 @@ s32 Camera_Special5(Camera* camera) {
     Vec3f* at = &camera->at;
     Vec3f* eyeNext = &camera->eyeNext;
     PosRot spA8;
-    s16 pad;
+
     s16 spA4;
     CamColChk sp7C;
     VecSph sp74;
@@ -6526,7 +6514,6 @@ s32 Camera_Special6(Camera* camera) {
     f32 timerDivisor;
     Special6* spec6 = (Special6*)camera->paramData;
     Special6Anim* anim = &spec6->anim;
-    s32 pad;
 
     if (RELOAD_PARAMS) {
         CameraModeValue* values = sCameraSettings[camera->setting].cameraModes[camera->mode].values;
@@ -6615,7 +6602,6 @@ s32 Camera_Special8(Camera* camera) {
 }
 
 s32 Camera_Special9(Camera* camera) {
-    s32 pad;
     Vec3f* eye = &camera->eye;
     Vec3f* at = &camera->at;
     Vec3f* eyeNext = &camera->eyeNext;
@@ -6662,8 +6648,6 @@ s32 Camera_Special9(Camera* camera) {
     sCameraInterfaceFlags = params->interfaceFlags;
 
     switch (camera->animState) {
-        
-
         case 0:
             camera->unk_14C &= ~(0x4 | 0x2);
             camera->animState++;
@@ -6740,13 +6724,12 @@ s32 Camera_Special9(Camera* camera) {
                 CHECK_BTN_ALL(D_8015BD7C->state.input[0].press.button, BTN_CRIGHT) ||
                 CHECK_BTN_ALL(D_8015BD7C->state.input[0].press.button, BTN_R) ||
                 CHECK_BTN_ALL(D_8015BD7C->state.input[0].press.button, BTN_Z) || params->interfaceFlags & 0x8) {
-
                 Camera_ChangeSettingFlags(camera, camera->prevSetting, 2);
                 camera->unk_14C |= (0x4 | 0x2);
             }
             break;
     }
-    
+
     spAC = playerPosRot->pos;
     spAC.y += playerYOffset;
     camera->dist = OLib_Vec3fDist(&spAC, eye);
@@ -7224,7 +7207,7 @@ void func_80058E8C(Camera* camera) {
     static s16 D_8011DB0C = 0x156;
     s32 pad3;
     f32 sp60;
-    s32 pad;
+
     s32 pad1;
     s32 pad4;
     f32 phi_f2;
@@ -7777,7 +7760,6 @@ s16 Camera_ChangeSettingFlags(Camera* camera, s16 setting, s16 flags) {
     }
 
     if (flags & 8) {
-        
         camera->camDataIdx = camera->prevCamDataIdx;
         camera->prevCamDataIdx = -1;
     } else if (!(flags & 4)) {
@@ -7892,8 +7874,6 @@ s32 Camera_AddQuake(Camera* camera, s32 arg1, s16 y, s32 countdown) {
 }
 
 s32 Camera_SetParam(Camera* camera, s32 param, void* value) {
-    s32 pad[3];
-
     if (value != NULL) {
         switch (param) {
             case 1:
@@ -8019,8 +7999,6 @@ s32 Camera_ChangeDoorCam(Camera* camera, Actor* doorActor, s16 camDataIdx, f32 a
 }
 
 s32 Camera_Copy(Camera* dstCamera, Camera* srcCamera) {
-    s32 pad;
-
     dstCamera->posOffset.x = 0.0f;
     dstCamera->posOffset.y = 0.0f;
     dstCamera->posOffset.z = 0.0f;

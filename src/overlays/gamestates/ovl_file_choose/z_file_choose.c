@@ -800,8 +800,6 @@ void FileChoose_DrawFileInfo(GameState* thisx, s16 fileIndex, s16 isActive) {
     s16 j;
     s16 deathCountSplit[3];
 
-    
-
     OPEN_DISPS(this->state.gfxCtx, "../z_file_choose.c", __LINE__);
 
     gDPPipeSync(POLY_OPA_DISP++);
@@ -938,7 +936,6 @@ void FileChoose_DrawWindowContents(GameState* thisx) {
     s16 i;
     s16 quadVtxIndex;
     s16 isActive;
-    s16 pad;
 
     OPEN_DISPS(this->state.gfxCtx, "../z_file_choose.c", __LINE__);
 
@@ -1428,7 +1425,6 @@ void FileChoose_FadeOut(GameState* thisx) {
 void FileChoose_LoadGame(GameState* thisx) {
     FileChooseContext* this = (FileChooseContext*)thisx;
     u16 swordEquipMask;
-    s32 pad;
 
     if (this->buttonIndex == FS_BTN_SELECT_FILE_1) {
         Audio_PlaySoundGeneral(NA_SE_SY_FSEL_DECIDE_L, &D_801333D4, 4, &D_801333E0, &D_801333E0, &D_801333E8);
@@ -1482,8 +1478,6 @@ void FileChoose_LoadGame(GameState* thisx) {
     gSaveContext.magic = 0;
     gSaveContext.magicLevel = gSaveContext.magic;
 
-    
-
     osSyncPrintf(VT_FGCOL(GREEN));
     osSyncPrintf("Z_MAGIC_NOW_NOW=%d  MAGIC_NOW=%d\n", ((void)0, gSaveContext.unk_13F6), gSaveContext.magic);
     osSyncPrintf(VT_RST);
@@ -1494,7 +1488,6 @@ void FileChoose_LoadGame(GameState* thisx) {
         (gSaveContext.equips.buttonItems[0] != ITEM_SWORD_MASTER) &&
         (gSaveContext.equips.buttonItems[0] != ITEM_SWORD_BGS) &&
         (gSaveContext.equips.buttonItems[0] != ITEM_SWORD_KNIFE)) {
-
         gSaveContext.equips.buttonItems[0] = ITEM_NONE;
         swordEquipMask = gEquipMasks[EQUIP_SWORD] & gSaveContext.equips.equipment;
         gSaveContext.equips.equipment &= gEquipNegMasks[EQUIP_SWORD];
@@ -1860,7 +1853,6 @@ void FileChoose_Destroy(GameState* thisx) {
 void FileChoose_Init(GameState* thisx) {
     FileChooseContext* this = (FileChooseContext*)thisx;
     u32 size = (u32)_title_staticSegmentRomEnd - (u32)_title_staticSegmentRomStart;
-    s32 pad;
 
     SREG(30) = 1;
     osSyncPrintf("SIZE=%x\n", size);

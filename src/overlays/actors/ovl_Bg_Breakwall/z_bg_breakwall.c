@@ -287,7 +287,6 @@ static Vec3f sColQuadList[][4] = {
 };
 
 void BgBreakwall_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgBreakwall* this = (BgBreakwall*)thisx;
 
     if (this->bombableWallDList != NULL) {

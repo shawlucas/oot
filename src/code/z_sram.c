@@ -535,7 +535,8 @@ void Sram_VerifyAndLoadAllSaves(FileChooseContext* fileChooseCtx, SramContext* s
         osSyncPrintf("\nSAVE checksum calculation  newChecksum = %X  oldChecksum=%X  ", newChecksum, oldChecksum);
 
         if (newChecksum != oldChecksum) {
-            osSyncPrintf("ERROR! Checksum didn't match, try backup save ＝ %X(%d)\n", gSramSlotOffsets[slotNum], slotNum);
+            osSyncPrintf("ERROR! Checksum didn't match, try backup save ＝ %X(%d)\n", gSramSlotOffsets[slotNum],
+                         slotNum);
             offset = gSramSlotOffsets[slotNum + 3];
             MemCopy(&gSaveContext, sramCtx->readBuff + offset, sizeof(Save));
 
@@ -547,11 +548,13 @@ void Sram_VerifyAndLoadAllSaves(FileChooseContext* fileChooseCtx, SramContext* s
             for (i = newChecksum = j = 0; i < CHECKSUM_SIZE; i++, offset += 2) {
                 newChecksum += *ptr++;
             }
-            osSyncPrintf("\n（(BACKUP) SAVE checksum calculation  newChecksum = %X  oldChecksum = %X  ", newChecksum, oldChecksum);
+            osSyncPrintf("\n（(BACKUP) SAVE checksum calculation  newChecksum = %X  oldChecksum = %X  ", newChecksum,
+                         oldChecksum);
 
             if (newChecksum != oldChecksum) {
                 // backup save didnt work, make new save
-                osSyncPrintf("ERROR! Backup save didn't work, make new save = %X(%d+3)\n", gSramSlotOffsets[slotNum + 3], slotNum);
+                osSyncPrintf("ERROR! Backup save didn't work, make new save = %X(%d+3)\n",
+                             gSramSlotOffsets[slotNum + 3], slotNum);
                 bzero(&gSaveContext.entranceIndex, sizeof(s32));
                 bzero(&gSaveContext.linkAge, sizeof(s32));
                 bzero(&gSaveContext.cutsceneIndex, sizeof(s32));
@@ -596,8 +599,7 @@ void Sram_VerifyAndLoadAllSaves(FileChooseContext* fileChooseCtx, SramContext* s
 
                 osSyncPrintf("????#%x,%x,%x,%x,%x,%x\n", gSaveContext.newf[0], gSaveContext.newf[1],
                              gSaveContext.newf[2], gSaveContext.newf[3], gSaveContext.newf[4], gSaveContext.newf[5]);
-                osSyncPrintf("\nfile＝%X(%d+3)  checkSum=%X(%X)\n", i, slotNum, gSaveContext.checksum,
-                             newChecksum);
+                osSyncPrintf("\nfile＝%X(%d+3)  checkSum=%X(%X)\n", i, slotNum, gSaveContext.checksum, newChecksum);
             }
 
             i = gSramSlotOffsets[slotNum];
@@ -613,8 +615,8 @@ void Sram_VerifyAndLoadAllSaves(FileChooseContext* fileChooseCtx, SramContext* s
     SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000), sramCtx->readBuff, SRAM_SIZE, OS_READ);
     gSaveContext.dayTime = dayTime;
 
-    osSyncPrintf("DEATHS = %X, NAME = %X, HEALTH_CAP = %X, QUEST = %X,  64DD = %X,  DEFENSE = %X\n", DEATHS, NAME, HEALTH_CAP, QUEST, N64DD,
-                 DEFENSE);
+    osSyncPrintf("DEATHS = %X, NAME = %X, HEALTH_CAP = %X, QUEST = %X,  64DD = %X,  DEFENSE = %X\n", DEATHS, NAME,
+                 HEALTH_CAP, QUEST, N64DD, DEFENSE);
 
     MemCopy(&fileChooseCtx->deaths[0], sramCtx->readBuff + SLOT_OFFSET(0) + DEATHS, sizeof(fileChooseCtx->deaths[0]));
     MemCopy(&fileChooseCtx->deaths[1], sramCtx->readBuff + SLOT_OFFSET(1) + DEATHS, sizeof(fileChooseCtx->deaths[0]));
@@ -663,7 +665,8 @@ void Sram_VerifyAndLoadAllSaves(FileChooseContext* fileChooseCtx, SramContext* s
                  fileChooseCtx->n64ddFlags[2]);
     osSyncPrintf("defense[0, 1, 2] = %d, %d, %d\n", fileChooseCtx->defense[0], fileChooseCtx->defense[1],
                  fileChooseCtx->defense[2]);
-    osSyncPrintf("health[0, 1, 2] = %d, %d, %d\n", fileChooseCtx->health[0], fileChooseCtx->health[1], fileChooseCtx->health[2]);
+    osSyncPrintf("health[0, 1, 2] = %d, %d, %d\n", fileChooseCtx->health[0], fileChooseCtx->health[1],
+                 fileChooseCtx->health[2]);
 }
 
 void Sram_InitSave(FileChooseContext* fileChooseCtx, SramContext* sramCtx) {
@@ -732,7 +735,8 @@ void Sram_InitSave(FileChooseContext* fileChooseCtx, SramContext* sramCtx) {
 
     osSyncPrintf("SAVE END\n"); // "SAVE end"
     osSyncPrintf("gSaveContext.fileNum = %d\n", gSaveContext.fileNum);
-    osSyncPrintf("DEATHS = %X, NAME = %X, HEALTH_CAP = %X, QUEST = %X,  N64DD = %X\n", DEATHS, NAME, HEALTH_CAP, QUEST, N64DD);
+    osSyncPrintf("DEATHS = %X, NAME = %X, HEALTH_CAP = %X, QUEST = %X,  N64DD = %X\n", DEATHS, NAME, HEALTH_CAP, QUEST,
+                 N64DD);
 
     j = gSramSlotOffsets[gSaveContext.fileNum];
 
@@ -751,8 +755,10 @@ void Sram_InitSave(FileChooseContext* fileChooseCtx, SramContext* sramCtx) {
     MemCopy(&fileChooseCtx->health[gSaveContext.fileNum], sramCtx->readBuff + j + HEALTH,
             sizeof(fileChooseCtx->health[0]));
 
-    osSyncPrintf("fileChooseCtx->n64ddFlags[%d] = %d\n", gSaveContext.fileNum, fileChooseCtx->n64ddFlags[gSaveContext.fileNum]);
-    osSyncPrintf("fileChooseCtx->defense[%d] = %d\n", gSaveContext.fileNum, fileChooseCtx->defense[gSaveContext.fileNum]);
+    osSyncPrintf("fileChooseCtx->n64ddFlags[%d] = %d\n", gSaveContext.fileNum,
+                 fileChooseCtx->n64ddFlags[gSaveContext.fileNum]);
+    osSyncPrintf("fileChooseCtx->defense[%d] = %d\n", gSaveContext.fileNum,
+                 fileChooseCtx->defense[gSaveContext.fileNum]);
     osSyncPrintf("fileChooseCtx->health[%d] = %d\n", gSaveContext.fileNum, fileChooseCtx->health[gSaveContext.fileNum]);
 }
 
@@ -810,8 +816,10 @@ void Sram_CopySave(FileChooseContext* fileChooseCtx, SramContext* sramCtx) {
     MemCopy(&fileChooseCtx->health[fileChooseCtx->copyDestFileIndex], (sramCtx->readBuff + offset) + HEALTH,
             sizeof(fileChooseCtx->health[0]));
 
-    osSyncPrintf("filseChooseCtx->n64ddFlags[%d] = %d\n", gSaveContext.fileNum, fileChooseCtx->n64ddFlags[gSaveContext.fileNum]);
-    osSyncPrintf("filseChooseCtx->defense[%d] = %d\n", gSaveContext.fileNum, fileChooseCtx->defense[gSaveContext.fileNum]);
+    osSyncPrintf("filseChooseCtx->n64ddFlags[%d] = %d\n", gSaveContext.fileNum,
+                 fileChooseCtx->n64ddFlags[gSaveContext.fileNum]);
+    osSyncPrintf("filseChooseCtx->defense[%d] = %d\n", gSaveContext.fileNum,
+                 fileChooseCtx->defense[gSaveContext.fileNum]);
     osSyncPrintf("SAVE COPY END\n");
 }
 

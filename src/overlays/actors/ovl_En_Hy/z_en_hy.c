@@ -1095,12 +1095,10 @@ void EnHy_Update(Actor* thisx, GlobalContext* globalCtx) {
 
 s32 EnHy_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* thisx) {
     EnHy* this = (EnHy*)thisx;
-    s32 pad;
+
     Vec3s sp48;
     u8 i;
     UNK_PTR ptr;
-
-    
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_hy.c", __LINE__);
 
@@ -1144,7 +1142,7 @@ s32 EnHy_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, 
 
 void EnHy_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3s* rot, void* thisx) {
     EnHy* this = (EnHy*)thisx;
-    s32 pad;
+
     Vec3f sp3C = { 400.0f, 0.0f, 0.0f };
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_hy.c", __LINE__);

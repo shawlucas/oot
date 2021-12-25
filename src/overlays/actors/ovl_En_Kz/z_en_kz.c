@@ -311,7 +311,6 @@ s32 EnKz_SetMovedPos(EnKz* this, GlobalContext* globalCtx) {
 
 void EnKz_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnKz* this = (EnKz*)thisx;
-    s32 pad;
 
     SkelAnime_InitFlex(globalCtx, &this->skelanime, &object_kz_Skel_0086D0, NULL, this->jointTable, this->morphTable,
                        12);
@@ -446,7 +445,6 @@ void EnKz_StartTimer(EnKz* this, GlobalContext* globalCtx) {
 
 void EnKz_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnKz* this = (EnKz*)thisx;
-    s32 pad;
 
     if (LINK_IS_ADULT && !(gSaveContext.infTable[19] & 0x100)) {
         gSaveContext.infTable[19] |= 0x100;

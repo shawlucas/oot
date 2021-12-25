@@ -684,7 +684,6 @@ s32 EnHorse_Spawn(EnHorse* this, GlobalContext* globalCtx) {
                 // always load two spawns inside lon lon
                 ((sHorseSpawns[i].pos.x == 856 && sHorseSpawns[i].pos.y == 0 && sHorseSpawns[i].pos.z == -918) ||
                  (sHorseSpawns[i].pos.x == -1003 && sHorseSpawns[i].pos.y == 0 && sHorseSpawns[i].pos.z == -755))) {
-
                 spawnPos.x = sHorseSpawns[i].pos.x;
                 spawnPos.y = sHorseSpawns[i].pos.y;
                 spawnPos.z = sHorseSpawns[i].pos.z;
@@ -2896,7 +2895,6 @@ void EnHorse_CheckFloors(EnHorse* this, GlobalContext* globalCtx) {
     f32 dist;
     f32 waterHeight;
     WaterBox* waterBox;
-    s32 pad;
 
     if (WaterBox_GetSurfaceImpl(globalCtx, &globalCtx->colCtx, this->actor.world.pos.x, this->actor.world.pos.z,
                                 &waterHeight, &waterBox) == 1 &&
@@ -2997,7 +2995,6 @@ void EnHorse_CheckFloors(EnHorse* this, GlobalContext* globalCtx) {
 s32 EnHorse_GetMountSide(EnHorse* this, GlobalContext* globalCtx);
 
 void EnHorse_MountDismount(EnHorse* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s32 mountSide;
     Player* player = GET_PLAYER(globalCtx);
 
@@ -3096,7 +3093,6 @@ void EnHorse_Stub2(EnHorse* this);
 void EnHorse_Stub1(EnHorse* this);
 
 void EnHorse_UpdateBgCheckInfo(EnHorse* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 pad2;
     Vec3f startPos;
     Vec3f endPos;
@@ -3290,7 +3286,6 @@ void EnHorse_UpdateBgCheckInfo(EnHorse* this, GlobalContext* globalCtx) {
     } else if ((movingFast == true && this->actor.speedXZ < 13.8f && obstacleHeight > 19.0f &&
                 obstacleHeight <= 72.0f) ||
                (this->actor.speedXZ > 13.8f && obstacleHeight <= 112.0f)) {
-
         EnHorse_Stub2(this);
         this->postDrawFunc = EnHorse_HighJumpInit;
     }
@@ -3299,7 +3294,6 @@ void EnHorse_UpdateBgCheckInfo(EnHorse* this, GlobalContext* globalCtx) {
 void EnHorse_CheckBoost(EnHorse* thisx, GlobalContext* globalCtx2) {
     EnHorse* this = (EnHorse*)thisx;
     GlobalContext* globalCtx = globalCtx2;
-    s32 pad;
 
     if (this->action == ENHORSE_ACT_MOUNTED_WALK || this->action == ENHORSE_ACT_MOUNTED_TROT ||
         this->action == ENHORSE_ACT_MOUNTED_GALLOP) {
@@ -3653,7 +3647,7 @@ void EnHorse_RandomOffset(Vec3f* src, f32 dist, Vec3f* dst) {
 
 void EnHorse_SkinCallback1(Actor* thisx, GlobalContext* globalCtx, PSkinAwb* skin) {
     EnHorse* this = (EnHorse*)thisx;
-    s32 pad;
+
     Vec3f sp94 = { 0.0f, 0.0f, 0.0f };
     Vec3f hoofOffset = { 5.0f, -4.0f, 5.0f };
     Vec3f riderOffset = { 600.0f, -1670.0f, 0.0f };

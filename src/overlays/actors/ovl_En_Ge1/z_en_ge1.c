@@ -86,7 +86,6 @@ static void* sEyeTextures[] = {
 };
 
 void EnGe1_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnGe1* this = (EnGe1*)thisx;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 30.0f);
@@ -105,7 +104,6 @@ void EnGe1_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->actor.uncullZoneForward = ((globalCtx->sceneNum == SCENE_SPOT09) ? 1000.0f : 1200.0f);
 
     switch (this->actor.params & 0xFF) {
-
         case GE1_TYPE_GATE_GUARD:
             this->hairstyle = GE1_HAIR_SPIKY;
             this->actionFunc = EnGe1_GetReaction_GateGuard;
@@ -686,7 +684,6 @@ void EnGe1_Wait_Archery(EnGe1* this, GlobalContext* globalCtx) {
 // General functions
 
 void EnGe1_TurnToFacePlayer(EnGe1* this, GlobalContext* globalCtx) {
-    s32 pad;
     s16 angleDiff = this->actor.yawTowardsPlayer - this->actor.shape.rot.y;
 
     if (ABS(angleDiff) <= 0x4000) {
@@ -717,7 +714,6 @@ void EnGe1_LookAtPlayer(EnGe1* this, GlobalContext* globalCtx) {
 }
 
 void EnGe1_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnGe1* this = (EnGe1*)thisx;
 
     Collider_UpdateCylinder(&this->actor, &this->collider);
@@ -763,7 +759,6 @@ void EnGe1_StopFidget(EnGe1* this) {
 }
 
 s32 EnGe1_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* thisx) {
-    s32 pad;
     EnGe1* this = (EnGe1*)thisx;
 
     if (limbIndex == GE1_LIMB_HEAD) {
@@ -799,7 +794,6 @@ void EnGe1_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Ve
 }
 
 void EnGe1_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnGe1* this = (EnGe1*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ge1.c", __LINE__);

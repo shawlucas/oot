@@ -92,7 +92,6 @@ void EnGe3_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnGe3_TurnToFacePlayer(EnGe3* this, GlobalContext* globalCtx) {
-    s32 pad;
     s16 angleDiff = this->actor.yawTowardsPlayer - this->actor.shape.rot.y;
 
     if (ABS(angleDiff) <= 0x4000) {
@@ -170,7 +169,6 @@ void EnGe3_ForceTalk(EnGe3* this, GlobalContext* globalCtx) {
 }
 
 void EnGe3_UpdateCollision(EnGe3* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 pad2;
 
     Collider_UpdateCylinder(&this->actor, &this->collider);
@@ -183,7 +181,6 @@ void EnGe3_UpdateCollision(EnGe3* this, GlobalContext* globalCtx) {
 }
 
 void EnGe3_MoveAndBlink(EnGe3* this, GlobalContext* globalCtx) {
-
     Actor_MoveForward(&this->actor);
 
     if (DECR(this->blinkTimer) == 0) {

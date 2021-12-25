@@ -799,7 +799,8 @@ void EffectBlure_DrawSimpleVertices(GraphicsContext* gfxCtx, EffectBlure* this, 
                     mtx = SkinMatrix_MtxFToNewMtx(gfxCtx, &sp94);
                     if (mtx == NULL) {
                         // "Forced termination because a matrix cannot be taken"
-                        osSyncPrintf("EffectBlure_DrawSimpleVertices():Forced termination because a matrix cannot be taken\n");
+                        osSyncPrintf(
+                            "EffectBlure_DrawSimpleVertices():Forced termination because a matrix cannot be taken\n");
                         break;
                     }
 

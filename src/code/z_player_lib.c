@@ -443,7 +443,6 @@ s32 func_8008EF44(GlobalContext* globalCtx, s32 ammo) {
 s32 Player_IsBurningStickInRange(GlobalContext* globalCtx, Vec3f* pos, f32 xzRange, f32 yRange) {
     Player* this = GET_PLAYER(globalCtx);
     Vec3f diff;
-    s32 pad;
 
     if ((this->heldItemActionParam == PLAYER_AP_STICK) && (this->unk_860 != 0)) {
         Math_Vec3f_Diff(&this->swordInfo[0].tip, pos, &diff);
@@ -749,7 +748,6 @@ void func_8008F87C(GlobalContext* globalCtx, Player* this, SkelAnime* skelAnime,
 
     if ((this->actor.scale.y >= 0.0f) && !(this->stateFlags1 & 0x80) &&
         (Player_ActionToMagicSpell(this, this->itemActionParam) < 0)) {
-
         sp7C = D_80126058[(void)0, gSaveContext.linkAge];
         sp78 = D_80126060[(void)0, gSaveContext.linkAge];
         sp74 = D_80126068[(void)0, gSaveContext.linkAge] - this->unk_6C4;

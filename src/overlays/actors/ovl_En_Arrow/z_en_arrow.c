@@ -90,7 +90,6 @@ void EnArrow_Init(Actor* thisx, GlobalContext* globalCtx) {
     }
 
     if (this->actor.params <= ARROW_SEED) {
-
         if (this->actor.params <= ARROW_0E) {
             SkelAnime_Init(globalCtx, &this->skelAnime, &gArrowSkel, &gArrow2Anim, NULL, NULL, 0);
         }
@@ -105,15 +104,12 @@ void EnArrow_Init(Actor* thisx, GlobalContext* globalCtx) {
             Effect_Add(globalCtx, &this->effectIndex, EFFECT_BLURE2, 0, 0, &blureNormal);
 
         } else if (this->actor.params == ARROW_FIRE) {
-
             Effect_Add(globalCtx, &this->effectIndex, EFFECT_BLURE2, 0, 0, &blureFire);
 
         } else if (this->actor.params == ARROW_ICE) {
-
             Effect_Add(globalCtx, &this->effectIndex, EFFECT_BLURE2, 0, 0, &blureIce);
 
         } else if (this->actor.params == ARROW_LIGHT) {
-
             Effect_Add(globalCtx, &this->effectIndex, EFFECT_BLURE2, 0, 0, &blureLight);
         }
 
@@ -385,7 +381,6 @@ void func_809B4640(EnArrow* this, GlobalContext* globalCtx) {
 }
 
 void EnArrow_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnArrow* this = (EnArrow*)thisx;
     Player* player = GET_PLAYER(globalCtx);
 
@@ -449,7 +444,6 @@ void func_809B4800(EnArrow* this, GlobalContext* globalCtx) {
 }
 
 void EnArrow_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnArrow* this = (EnArrow*)thisx;
     u8 alpha;
     f32 scale;

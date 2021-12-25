@@ -41,7 +41,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void func_808B3420(BgSpot12Saku* this, GlobalContext* globalCtx, CollisionHeader* collision, s32 flags) {
-    s32 pad;
     CollisionHeader* colHeader = NULL;
     s32 pad2;
 

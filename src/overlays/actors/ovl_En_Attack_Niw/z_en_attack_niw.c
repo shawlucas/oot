@@ -39,7 +39,6 @@ static InitChainEntry sInitChain[] = {
 
 void EnAttackNiw_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnAttackNiw* this = (EnAttackNiw*)thisx;
-    s32 pad;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 25.0f);
@@ -221,7 +220,6 @@ void func_809B5670(EnAttackNiw* this, GlobalContext* globalCtx) {
                 (fabsf(sp34.y - this->actor.world.pos.y) < 50.0f) &&
                 (fabsf(sp34.z - this->actor.world.pos.z) < 50.0f)) ||
                (this->actor.bgCheckFlags & 1)) {
-
         this->unk_2D4 = this->actor.yawTowardsPlayer;
         this->unk_2D0 = this->actor.world.rot.x - 2000.0f;
         this->unk_2DC = 0.0f;
@@ -297,7 +295,7 @@ void EnAttackNiw_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnAttackNiw* this = (EnAttackNiw*)thisx;
     EnNiw* cucco;
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     Vec3f sp30;
     GlobalContext* globalCtx2 = globalCtx;
 

@@ -134,7 +134,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void EnVali_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnVali* this = (EnVali*)thisx;
     s32 bgId;
 
@@ -536,7 +535,6 @@ void EnVali_UpdateDamage(EnVali* this, GlobalContext* globalCtx) {
 }
 
 void EnVali_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnVali* this = (EnVali*)thisx;
 
     if ((this->bodyCollider.base.atFlags & AT_HIT) || (this->leftArmCollider.base.atFlags & AT_HIT) ||
@@ -784,7 +782,6 @@ static Gfx D_80B289A8[] = {
 };
 
 void EnVali_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnVali* this = (EnVali*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_vali.c", __LINE__);

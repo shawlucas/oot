@@ -420,7 +420,7 @@ void BossGanon_Init(Actor* thisx, GlobalContext* globalCtx2) {
             } else {
                 thisx->update = func_808E1EB4;
                 thisx->draw = func_808E229C;
-                
+
                 thisx->speedXZ = 11.0f;
 
                 if (thisx->params == 0xC8) {
@@ -471,7 +471,6 @@ void BossGanon_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BossGanon_SetupIntroCutscene(BossGanon* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 animBankIndex = Object_GetIndex(&globalCtx->objectCtx, OBJECT_GANON_ANIME2);
 
     if (animBankIndex < 0) {
@@ -526,7 +525,7 @@ void BossGanon_SetIntroCsCamera(BossGanon* this, u8 camPosIndex) {
 void BossGanon_IntroCutscene(BossGanon* this, GlobalContext* globalCtx) {
     u8 moveCam = false;
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     f32 sin;
     f32 cos;
     Camera* mainCam;
@@ -1161,7 +1160,6 @@ void BossGanon_IntroCutscene(BossGanon* this, GlobalContext* globalCtx) {
 }
 
 void BossGanon_SetupDeathCutscene(BossGanon* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 animBankIndex = Object_GetIndex(&globalCtx->objectCtx, OBJECT_GANON_ANIME2);
 
     if (Object_IsLoaded(&globalCtx->objectCtx, animBankIndex)) {
@@ -1177,7 +1175,6 @@ void BossGanon_SetupDeathCutscene(BossGanon* this, GlobalContext* globalCtx) {
 }
 
 void BossGanon_SetupTowerCutscene(BossGanon* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 animBankIndex = Object_GetIndex(&globalCtx->objectCtx, OBJECT_GANON_ANIME2);
 
     if (Object_IsLoaded(&globalCtx->objectCtx, animBankIndex)) {
@@ -1216,7 +1213,7 @@ void BossGanon_DeathAndTowerCutscene(BossGanon* this, GlobalContext* globalCtx) 
     s16 i;
     u8 moveCam = false;
     Player* player = GET_PLAYER(globalCtx);
-    s16 pad;
+
     Vec3f sp98;
     Vec3f sp8C;
     Vec3f sp80;
@@ -1975,7 +1972,6 @@ void BossGanon_SetupChargeBigMagic(BossGanon* this, GlobalContext* globalCtx) {
 }
 
 void BossGanon_ChargeBigMagic(BossGanon* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 targetPosX;
     f32 targetPosZ;
     Vec3f sp80;
@@ -2189,7 +2185,7 @@ void BossGanon_SetupWait(BossGanon* this, GlobalContext* globalCtx) {
 
 void BossGanon_Wait(BossGanon* this, GlobalContext* globalCtx) {
     f32 sin;
-    s32 pad;
+
     f32 cos;
     Player* player = GET_PLAYER(globalCtx);
 
@@ -3339,7 +3335,6 @@ f32 BossGanon_RandZeroOne(void) {
 }
 
 void BossGanon_DrawShock(BossGanon* this, GlobalContext* globalCtx) {
-    s32 pad;
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
     s16 i;
 
@@ -3395,7 +3390,6 @@ void BossGanon_DrawShock(BossGanon* this, GlobalContext* globalCtx) {
 }
 
 void BossGanon_DrawHandLightBall(BossGanon* this, GlobalContext* globalCtx) {
-    s32 pad;
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
     s32 alpha;
 
@@ -3435,7 +3429,6 @@ void BossGanon_DrawHandLightBall(BossGanon* this, GlobalContext* globalCtx) {
 }
 
 void BossGanon_DrawBigMagicCharge(BossGanon* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 yRot;
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
     s16 i;
@@ -3520,8 +3513,6 @@ void BossGanon_DrawBigMagicCharge(BossGanon* this, GlobalContext* globalCtx) {
 }
 
 void BossGanon_DrawTriforce(BossGanon* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     if (this->fwork[GDF_TRIFORCE_PRIM_A] > 0.0f) {
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_ganon.c", __LINE__);
 
@@ -3572,8 +3563,6 @@ void BossGanon_DrawTriforce(BossGanon* this, GlobalContext* globalCtx) {
 }
 
 void BossGanon_DrawDarkVortex(BossGanon* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     if (this->fwork[GDF_VORTEX_ALPHA] > 0.0f) {
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_ganon.c", __LINE__);
 
@@ -3637,7 +3626,6 @@ void func_808E0254(BossGanon* this, u8* tex, f32 arg2) {
                 sp68.y = lerpY - this->actor.world.pos.y + 76 + 30 + 30;
                 sp68.z = lerpZ - this->actor.world.pos.z;
             } else {
-
                 sp68.x = this->unk_2EC[i].x - this->actor.world.pos.x;
                 sp68.y = this->unk_2EC[i].y - this->actor.world.pos.y + 76 + 30 + 30;
                 sp68.z = this->unk_2EC[i].z - this->actor.world.pos.z;
@@ -3752,7 +3740,6 @@ void BossGanon_GenShadowTexture(u8* tex, BossGanon* this, GlobalContext* globalC
 }
 
 void BossGanon_DrawShadowTexture(void* tex, BossGanon* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 zOffset;
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
 
@@ -3872,7 +3859,7 @@ void BossGanon_LightBall_Update(Actor* thisx, GlobalContext* globalCtx2) {
     f32 yDistFromGanondorf;
     f32 zDistFromGanondorf;
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     BossGanon* ganondorf = (BossGanon*)this->actor.parent;
     s32 pad1;
 
@@ -4125,7 +4112,6 @@ void BossGanon_LightBall_Draw(Actor* thisx, GlobalContext* globalCtx) {
     BossGanon* this = (BossGanon*)thisx;
     s16 i;
     f32 alpha;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_ganon.c", __LINE__);
 
@@ -4207,7 +4193,6 @@ void func_808E1EB4(Actor* thisx, GlobalContext* globalCtx2) {
     this->unk_2EC[this->unk_1A6] = this->actor.world.pos;
 
     if (this->unk_1C2 == 0) {
-        
         if (this->timers[0] == 0) {
             this->unk_1C2 = 1;
         }
@@ -4233,7 +4218,6 @@ void func_808E1EB4(Actor* thisx, GlobalContext* globalCtx2) {
                 func_80078884(NA_SE_EN_GANON_DD_THUNDER);
 
                 for (i = 0; i < 150; i++) {
-
                     vel.x = Rand_CenteredFloat(25.0f);
                     vel.y = Rand_CenteredFloat(25.0f);
                     vel.z = Rand_CenteredFloat(25.0f);
@@ -4308,7 +4292,7 @@ void func_808E2544(Actor* thisx, GlobalContext* globalCtx) {
     s16 sp80;
     BossGanon* this = (BossGanon*)thisx;
     BossGanon* dorf = (BossGanon*)this->actor.parent;
-    s32 pad;
+
     Player* player = GET_PLAYER(globalCtx);
     ColliderInfo* acHitInfo;
     Vec3f sp60;
@@ -4336,7 +4320,6 @@ void func_808E2544(Actor* thisx, GlobalContext* globalCtx) {
     this->unk_3C4[this->unk_1A6].y = BINANG_TO_RAD(this->actor.world.rot.y);
 
     switch (this->unk_1C2) {
-        
         case 0:
             this->actor.speedXZ = 40.0f;
             Math_ApproachF(&this->fwork[1], 255.0f, 1.0f, 40.0f);
@@ -4592,7 +4575,7 @@ void BossGanon_UpdateEffects(GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
     GanondorfEffect* eff = globalCtx->specialEffects;
     s16 i;
-    s32 pad;
+
     f32 xDiff;
     f32 yDiff;
     f32 zDiff;
@@ -4807,7 +4790,7 @@ static u8 sLightningEnvColors[] = {
 void BossGanon_DrawEffects(GlobalContext* globalCtx) {
     u8 flag = 0;
     s16 i;
-    s32 pad;
+
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
     GanondorfEffect* eff = globalCtx->specialEffects;
     GanondorfEffect* effFirst = eff;

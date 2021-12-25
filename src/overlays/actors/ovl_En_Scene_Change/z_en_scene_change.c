@@ -50,7 +50,6 @@ void EnSceneChange_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnSceneChange_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad[2];
     Gfx* displayList;
     s32 pad2[2];
     Gfx* displayListHead;

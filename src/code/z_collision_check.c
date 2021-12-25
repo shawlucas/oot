@@ -367,7 +367,8 @@ s32 Collider_SetJntSphToActor(GlobalContext* globalCtx, ColliderJntSph* dest, Co
 
     Collider_SetBaseToActor(globalCtx, &dest->base, &src->base);
     dest->count = src->count;
-    dest->elements = ZeldaArena_MallocDebug(src->count * sizeof(ColliderJntSphElement), "../z_collision_check.c", __LINE__);
+    dest->elements =
+        ZeldaArena_MallocDebug(src->count * sizeof(ColliderJntSphElement), "../z_collision_check.c", __LINE__);
 
     if (dest->elements == NULL) {
         dest->count = 0;
@@ -396,7 +397,8 @@ s32 Collider_SetJntSphAllocType1(GlobalContext* globalCtx, ColliderJntSph* dest,
 
     Collider_SetBaseType1(globalCtx, &dest->base, actor, &src->base);
     dest->count = src->count;
-    dest->elements = ZeldaArena_MallocDebug(src->count * sizeof(ColliderJntSphElement), "../z_collision_check.c", __LINE__);
+    dest->elements =
+        ZeldaArena_MallocDebug(src->count * sizeof(ColliderJntSphElement), "../z_collision_check.c", __LINE__);
 
     if (dest->elements == NULL) {
         dest->count = 0;
@@ -424,7 +426,8 @@ s32 Collider_SetJntSphAlloc(GlobalContext* globalCtx, ColliderJntSph* dest, Acto
 
     Collider_SetBase(globalCtx, &dest->base, actor, &src->base);
     dest->count = src->count;
-    dest->elements = ZeldaArena_MallocDebug(src->count * sizeof(ColliderJntSphElement), "../z_collision_check.c", __LINE__);
+    dest->elements =
+        ZeldaArena_MallocDebug(src->count * sizeof(ColliderJntSphElement), "../z_collision_check.c", __LINE__);
 
     if (dest->elements == NULL) {
         dest->count = 0;
@@ -734,7 +737,8 @@ s32 Collider_SetTrisAllocType1(GlobalContext* globalCtx, ColliderTris* dest, Act
 
     Collider_SetBaseType1(globalCtx, &dest->base, actor, &src->base);
     dest->count = src->count;
-    dest->elements = ZeldaArena_MallocDebug(dest->count * sizeof(ColliderTrisElement), "../z_collision_check.c", __LINE__);
+    dest->elements =
+        ZeldaArena_MallocDebug(dest->count * sizeof(ColliderTrisElement), "../z_collision_check.c", __LINE__);
     if (dest->elements == NULL) {
         dest->count = 0;
         osSyncPrintf(VT_FGCOL(RED));
@@ -760,7 +764,8 @@ s32 Collider_SetTrisAlloc(GlobalContext* globalCtx, ColliderTris* dest, Actor* a
 
     Collider_SetBase(globalCtx, &dest->base, actor, &src->base);
     dest->count = src->count;
-    dest->elements = ZeldaArena_MallocDebug(dest->count * sizeof(ColliderTrisElement), "../z_collision_check.c", __LINE__);
+    dest->elements =
+        ZeldaArena_MallocDebug(dest->count * sizeof(ColliderTrisElement), "../z_collision_check.c", __LINE__);
 
     if (dest->elements == NULL) {
         osSyncPrintf(VT_FGCOL(RED));
@@ -1216,7 +1221,8 @@ s32 CollisionCheck_SetAT_SAC(GlobalContext* globalCtx, CollisionCheckContext* co
     if (colChkCtx->sacFlags & 1) {
         if (!(index < colChkCtx->colATCount)) {
             // "You are trying to register a location that is larger than the total number of data."
-            osSyncPrintf("CollisionCheck_SetAT_SAC():You are trying to register a location that is larger than the total number of data.\n");
+            osSyncPrintf("CollisionCheck_SetAT_SAC():You are trying to register a location that is larger than the "
+                         "total number of data.\n");
             return -1;
         }
         colChkCtx->colAT[index] = collider;
@@ -1285,7 +1291,8 @@ s32 CollisionCheck_SetAC_SAC(GlobalContext* globalCtx, CollisionCheckContext* co
     if (colChkCtx->sacFlags & 1) {
         if (!(index < colChkCtx->colACCount)) {
             // "You are trying to register a location that is larger than the total number of data."
-            osSyncPrintf("CollisionCheck_SetAC_SAC():You are trying to register a location that is larger than the total number of data.\n");
+            osSyncPrintf("CollisionCheck_SetAC_SAC():You are trying to register a location that is larger than the "
+                         "total number of data.\n");
             return -1;
         }
         colChkCtx->colAC[index] = collider;
@@ -1356,7 +1363,8 @@ s32 CollisionCheck_SetOC_SAC(GlobalContext* globalCtx, CollisionCheckContext* co
     if (colChkCtx->sacFlags & 1) {
         if (!(index < colChkCtx->colOCCount)) {
             // "You are trying to register a location that is larger than the total number of data."
-            osSyncPrintf("CollisionCheck_SetOC_SAC():You are trying to register a location that is larger than the total number of data.\n");
+            osSyncPrintf("CollisionCheck_SetOC_SAC():You are trying to register a location that is larger than the "
+                         "total number of data.\n");
             return -1;
         }
         //! @bug Should be colOC

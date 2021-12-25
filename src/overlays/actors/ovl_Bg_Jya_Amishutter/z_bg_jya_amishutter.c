@@ -44,15 +44,13 @@ static InitChainEntry sInitChain[] = {
 
 void BgJyaAmishutter_InitDynaPoly(BgJyaAmishutter* this, GlobalContext* globalCtx, CollisionHeader* collision,
                                   s32 flag) {
-    s32 pad1;
     CollisionHeader* colHeader = NULL;
-    s32 pad2;
 
     DynaPolyActor_Init(&this->dyna, flag);
     CollisionHeader_GetVirtual(collision, &colHeader);
     this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, colHeader);
     if (this->dyna.bgId == BG_ACTOR_MAX) {
-        osSyncPrintf("Warning : move BG 登録失敗(%s %d)(name %d)(arg_data 0x%04x)\n", "../z_bg_jya_amishutter.c", 129,
+        osSyncPrintf("Warning : move BG registration failed(%s %d)(name %d)(params 0x%04X)\n", "../z_bg_jya_amishutter.c", __LINE__,
                      this->dyna.actor.id, this->dyna.actor.params);
     }
 }

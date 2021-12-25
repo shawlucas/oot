@@ -135,7 +135,6 @@ void MirRay_MakeShieldLight(MirRay* this, GlobalContext* globalCtx) {
     if (MirRay_CheckInFrustum(&this->sourcePt, &this->poolPt, player->actor.world.pos.x,
                               player->actor.world.pos.y + 30.0f, player->actor.world.pos.z, this->sourceEndRad,
                               this->poolEndRad)) {
-
         if (dataEntry->params & 8) { // Light beams from mirrors
             Math_Vec3f_Diff(&player->actor.world.pos, &this->sourcePt, &reflectionPt);
         } else { // Light beams from windows
@@ -159,7 +158,6 @@ void MirRay_MakeShieldLight(MirRay* this, GlobalContext* globalCtx) {
 }
 
 void MirRay_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     MirRay* this = (MirRay*)thisx;
     MirRayDataEntry* dataEntry = &sMirRayData[this->actor.params];
 
@@ -237,7 +235,6 @@ void MirRay_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void MirRay_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     MirRay* this = (MirRay*)thisx;
     Player* player = GET_PLAYER(globalCtx);
 
@@ -266,7 +263,7 @@ void MirRay_SetIntensity(MirRay* this, GlobalContext* globalCtx) {
     f32 temp_f0;
     f32 temp_f0_2;
     f32 temp_f2_2;
-    s32 pad;
+
     Player* player = GET_PLAYER(globalCtx);
     MtxF* shieldMtx = &player->shieldMf;
 
@@ -274,7 +271,6 @@ void MirRay_SetIntensity(MirRay* this, GlobalContext* globalCtx) {
 
     if (MirRay_CheckInFrustum(&this->sourcePt, &this->poolPt, shieldMtx->xw, shieldMtx->yw, shieldMtx->zw,
                               this->sourceEndRad, this->poolEndRad)) {
-
         temp_f0 = sqrtf(SQ(shieldMtx->zz) + (SQ(shieldMtx->xz) + SQ(shieldMtx->yz)));
 
         if (temp_f0 == 0.0f) {
@@ -412,7 +408,6 @@ void MirRay_ReflectedBeam(MirRay* this, GlobalContext* globalCtx, MirRayShieldRe
 
             if (Math3D_LineSegVsPlane(normalVec.x, normalVec.y, normalVec.z, currentReflection->reflectionPoly->dist,
                                       &vecB, &vecD, &sp118, 1)) {
-
                 currentReflection->pos.x = sp118.x;
                 currentReflection->pos.y = sp118.y;
                 currentReflection->pos.z = sp118.z;
@@ -439,10 +434,7 @@ void MirRay_ReflectedBeam(MirRay* this, GlobalContext* globalCtx, MirRayShieldRe
 
                 currentReflection->mtx.zw = 0.0f;
 
-                
-                
-                
-                 // All four required to match
+                // All four required to match
 
                 currentReflection->mtx.xx = currentReflection->mtx.yy = currentReflection->mtx.zz =
                     currentReflection->mtx.ww = 1.0f;
@@ -549,7 +541,7 @@ s32 MirRay_CheckInFrustum(Vec3f* vecA, Vec3f* vecB, f32 pointx, f32 pointy, f32 
     vecdiff.x = vecB->x - vecA->x;
     vecdiff.y = vecB->y - vecA->y;
     vecdiff.z = vecB->z - vecA->z;
-    
+
     dist = SQ(vecdiff.x) + SQ(vecdiff.y) + SQ(vecdiff.z);
 
     if (dist == 0.0f) {
@@ -570,8 +562,6 @@ s32 MirRay_CheckInFrustum(Vec3f* vecA, Vec3f* vecB, f32 pointx, f32 pointy, f32 
     // If the Point is within the bounding double cone, check if it is in the frustum by checking whether it is between
     // the bounding planes
     if ((SQ(closestPtx - pointx) + SQ(closestPty - pointy) + SQ(closestPtz - pointz)) <= SQ(coneRadius)) {
-        
-
         // Stores the vector difference again
         Math_Vec3f_Diff(vecB, vecA, &sp5C);
 

@@ -76,7 +76,6 @@ void EnGuest_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 
 void EnGuest_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnGuest* this = (EnGuest*)thisx;
-    s32 pad;
 
     if (Object_IsLoaded(&globalCtx->objectCtx, this->osAnimeBankIndex) != 0) {
         this->actor.flags &= ~ACTOR_FLAG_4;
@@ -143,7 +142,7 @@ void func_80A5057C(EnGuest* this, GlobalContext* globalCtx) {
 
 void func_80A505CC(Actor* thisx, GlobalContext* globalCtx) {
     EnGuest* this = (EnGuest*)thisx;
-    s32 pad;
+
     Player* player;
 
     player = GET_PLAYER(globalCtx);
@@ -220,7 +219,6 @@ void EnGuest_Draw(Actor* thisx, GlobalContext* globalCtx) {
         0x060007FC,
     };
     EnGuest* this = (EnGuest*)thisx;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_guest.c", __LINE__);
 

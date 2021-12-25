@@ -65,7 +65,6 @@ void ObjKibako2_InitCollider(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void ObjKibako2_Break(ObjKibako2* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     Vec3f* thisPos;
     Vec3f pos;
     Vec3f velocity;
@@ -116,7 +115,7 @@ void ObjKibako2_SpawnCollectible(ObjKibako2* this, GlobalContext* globalCtx) {
 
 void ObjKibako2_Init(Actor* thisx, GlobalContext* globalCtx) {
     ObjKibako2* this = (ObjKibako2*)thisx;
-    s16 pad;
+
     CollisionHeader* colHeader = NULL;
     u32 bgId;
 

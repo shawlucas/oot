@@ -270,7 +270,6 @@ void BgDodoago_Update(Actor* thisx, GlobalContext* globalCtx) {
         // this is a "bomb catcher", it kills the XZ speed and sets the timer for bombs that are dropped through the
         // holes in the bridge above the skull
         if ((this->colliderLeft.base.ocFlags1 & OC1_HIT) || (this->colliderRight.base.ocFlags1 & OC1_HIT)) {
-
             if (this->colliderLeft.base.ocFlags1 & OC1_HIT) {
                 actor = this->colliderLeft.base.oc;
             } else {

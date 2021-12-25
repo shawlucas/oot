@@ -91,7 +91,6 @@ void ObjHamishi_Shake(ObjHamishi* this) {
 }
 
 void ObjHamishi_Break(ObjHamishi* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f velocity;
     Vec3f pos;
     s16 phi_s0 = 1000;

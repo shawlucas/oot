@@ -97,7 +97,6 @@ void BgZg_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgZg_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad[2];
     BgZg* this = (BgZg*)thisx;
     CollisionHeader* colHeader;
 

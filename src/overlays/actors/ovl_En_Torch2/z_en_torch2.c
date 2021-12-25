@@ -158,7 +158,6 @@ void EnTorch2_Init(Actor* thisx, GlobalContext* globalCtx2) {
 }
 
 void EnTorch2_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     Player* this = (Player*)thisx;
 
     Effect_Delete(globalCtx, this->swordEffectIndex);
@@ -323,7 +322,6 @@ void EnTorch2_Update(Actor* thisx, GlobalContext* globalCtx2) {
                 sStickTilt = 127.0f;
                 input->cur.button = BTN_A;
             } else if (sJumpslashTimer == 0) {
-
                 // Handles Dark Link's initial reaction to jumpslashes
 
                 if (((player->swordState != 0) || (player->actor.velocity.y > -3.0f)) &&
@@ -382,14 +380,12 @@ void EnTorch2_Update(Actor* thisx, GlobalContext* globalCtx2) {
 
                     if (func_800354B4(globalCtx, &this->actor, 120.0f, 0x7FFF, 0x7FFF, this->actor.world.rot.y)) {
                         if ((player->swordAnimation == STAB_1H) && (this->actor.xzDistToPlayer < 90.0f)) {
-
                             // Handles the reaction to a one-handed stab. If the conditions are satisfied,
                             // Dark Link jumps on Link's sword. Otherwise he backflips away.
 
                             if ((this->swordState == 0) && (sCounterState == 0) && (player->invincibilityTimer == 0) &&
                                 (player->swordAnimation == STAB_1H) && (this->actor.xzDistToPlayer <= 85.0f) &&
                                 Actor_IsTargeted(globalCtx, &this->actor)) {
-
                                 sStickTilt = 0.0f;
                                 sSwordJumpState = 1;
                                 player->stateFlags3 |= 4;
@@ -407,7 +403,6 @@ void EnTorch2_Update(Actor* thisx, GlobalContext* globalCtx2) {
                                 EnTorch2_Backflip(this, input, &this->actor);
                             }
                         } else {
-
                             // Handles reactions to all other sword attacks
 
                             sStickAngle = thisx->yawTowardsPlayer;
@@ -434,7 +429,6 @@ void EnTorch2_Update(Actor* thisx, GlobalContext* globalCtx2) {
                             }
                         }
                     } else {
-
                         // Handles movement and attacks when not reacting to Link's actions
 
                         sStickAngle = thisx->yawTowardsPlayer;
@@ -593,7 +587,6 @@ void EnTorch2_Update(Actor* thisx, GlobalContext* globalCtx2) {
     if ((this->invincibilityTimer == 0) && (this->actor.colChkInfo.health != 0) &&
         (this->cylinder.base.acFlags & AC_HIT) && !(this->stateFlags1 & 0x04000000) &&
         !(this->swordQuads[0].base.atFlags & AT_HIT) && !(this->swordQuads[1].base.atFlags & AT_HIT)) {
-
         if (!Actor_ApplyDamage(&this->actor)) {
             func_800F5B58();
             this->actor.flags &= ~(ACTOR_FLAG_0 | ACTOR_FLAG_2);
@@ -767,7 +760,6 @@ void EnTorch2_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList,
 void EnTorch2_Draw(Actor* thisx, GlobalContext* globalCtx2) {
     GlobalContext* globalCtx = globalCtx2;
     Player* this = (Player*)thisx;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_torch2.c", __LINE__);
     func_80093C80(globalCtx);

@@ -262,7 +262,6 @@ void func_80A8F9C8(EnKakasi* this, GlobalContext* globalCtx) {
     func_8002DF54(globalCtx, NULL, 8);
 
     if (this->unk_196 == Message_GetState(&globalCtx->msgCtx) && Message_ShouldAdvance(globalCtx)) {
-
         if (this->camId != SUBCAM_NONE) {
             func_8005B1A4(globalCtx->cameraPtrs[this->camId]);
         }
@@ -314,7 +313,7 @@ void func_80A8FBB8(EnKakasi* this, GlobalContext* globalCtx) {
 
 void EnKakasi_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnKakasi* this = (EnKakasi*)thisx;
-    s32 pad;
+
     s32 i;
 
     this->unk_198++;

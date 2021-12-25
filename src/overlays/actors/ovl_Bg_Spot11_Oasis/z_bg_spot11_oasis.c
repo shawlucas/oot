@@ -123,7 +123,7 @@ void func_808B2AB8(BgSpot11Oasis* this, GlobalContext* globalCtx) {
 
 void BgSpot11Oasis_Update(Actor* thisx, GlobalContext* globalCtx) {
     BgSpot11Oasis* this = (BgSpot11Oasis*)thisx;
-    s32 pad;
+
     u32 gameplayFrames;
     Vec3f sp30;
 

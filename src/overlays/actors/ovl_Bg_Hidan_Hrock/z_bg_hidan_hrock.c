@@ -108,7 +108,7 @@ void BgHidanHrock_Init(Actor* thisx, GlobalContext* globalCtx) {
             vertices[j].y = vtx->y + thisx->home.pos.y;
             vertices[j].z = vtx->z * cosRotY + (thisx->home.pos.z - vtx->x * sinRotY);
         }
-        
+
         Collider_SetTrisVertices(&this->collider, i, &vertices[0], &vertices[1], &vertices[2]);
     }
 

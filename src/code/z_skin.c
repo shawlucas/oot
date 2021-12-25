@@ -135,7 +135,6 @@ void func_800A5E28(GraphicsContext* gfxCtx, PSkinAwb* skin, s32 limbIndex, s32 a
 void func_800A5F60(GraphicsContext* gfxCtx, PSkinAwb* skin, s32 limbIndex, Gfx* arg3, s32 arg4) {
     Gfx* gfx = arg3;
     SkinLimb** skeleton;
-    s32 pad;
 
     OPEN_DISPS(gfxCtx, "../z_skin.c", __LINE__);
     skeleton = SEGMENTED_TO_VIRTUAL(skin->skeletonHeader->segment);
@@ -161,7 +160,6 @@ void func_800A60D8(Actor* actor, GlobalContext* globalCtx, PSkinAwb* skin, SkinC
     s32 dataType;
     SkinLimb** skeleton;
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    s32 pad;
 
     OPEN_DISPS(gfxCtx, "../z_skin.c", __LINE__);
     if ((arg7 & 1) == 0) {

@@ -35,7 +35,6 @@ static EffectSsDrawFunc sDrawFuncs[] = {
 };
 
 u32 EffectSsBomb2_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, void* initParamsx) {
-
     EffectSsBomb2InitParams* initParams = (EffectSsBomb2InitParams*)initParamsx;
 
     Math_Vec3f_Copy(&this->pos, &initParams->pos);
@@ -70,7 +69,7 @@ void EffectSsBomb2_DrawFade(GlobalContext* globalCtx, u32 index, EffectSs* this)
     MtxF mfResult;
     MtxF mfTrans11DA0;
     Mtx* mtx;
-    s32 pad;
+
     f32 scale;
 
     OPEN_DISPS(gfxCtx, "../z_eff_ss_bomb2.c", __LINE__);
@@ -93,9 +92,6 @@ void EffectSsBomb2_DrawFade(GlobalContext* globalCtx, u32 index, EffectSs* this)
         gSPDisplayList(POLY_XLU_DISP++, this->gfx);
     }
 
-    
-    
-
     CLOSE_DISPS(gfxCtx, "../z_eff_ss_bomb2.c", __LINE__);
 }
 
@@ -112,7 +108,7 @@ void EffectSsBomb2_DrawLayered(GlobalContext* globalCtx, u32 index, EffectSs* th
     MtxF mtx2F;
     Mtx* mtx2;
     Mtx* mtx;
-    s32 pad[3];
+
     f32 scale;
     f32 depth;
     f32 layer2Scale = 0.925f;
@@ -157,9 +153,6 @@ void EffectSsBomb2_DrawLayered(GlobalContext* globalCtx, u32 index, EffectSs* th
             }
         }
     }
-
-    
-    
 
     CLOSE_DISPS(gfxCtx, "../z_eff_ss_bomb2.c", __LINE__);
 }

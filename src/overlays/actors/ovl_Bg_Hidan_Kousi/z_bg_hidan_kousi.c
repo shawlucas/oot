@@ -68,8 +68,8 @@ void BgHidanKousi_Init(Actor* thisx, GlobalContext* globalCtx) {
 
     DynaPolyActor_Init(&this->dyna, DPM_UNK);
     Actor_SetFocus(thisx, 50.0f);
-    osSyncPrintf("◯◯◯Fire Temple Object [Lattice(params: %0X)] Appearance (%d %d)\n", thisx->params, thisx->params & 0xFF,
-                 ((s32)thisx->params >> 8) & 0xFF);
+    osSyncPrintf("◯◯◯Fire Temple Object [Lattice(params: %0X)] Appearance (%d %d)\n", thisx->params,
+                 thisx->params & 0xFF, ((s32)thisx->params >> 8) & 0xFF);
 
     Actor_ProcessInitChain(thisx, sInitChain);
     if (((thisx->params & 0xFF) < 0) || ((thisx->params & 0xFF) >= 3)) {

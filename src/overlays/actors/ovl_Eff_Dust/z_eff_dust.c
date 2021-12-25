@@ -207,7 +207,6 @@ void EffDust_UpdateFunc_8099DFC0(EffDust* this, GlobalContext* globalCtx) {
     for (j = 0; j < 3; j++) {
         i = this->index & 0x3F;
         if (this->distanceTraveled[i] >= 1.0f) {
-
             theta = Rand_CenteredFloat(65536.0f);
             switch (this->actor.params) {
                 case EFF_DUST_TYPE_2:
@@ -300,7 +299,6 @@ void EffDust_DrawFunc_8099E4F4(Actor* thisx, GlobalContext* globalCtx2) {
         initialPositions++;
         distanceTraveled++;
         // Needed for matching.
-        
     }
 
     CLOSE_DISPS(gfxCtx, "../z_eff_dust.c", __LINE__);

@@ -61,7 +61,7 @@ static InitChainEntry sInitChain[] = {
 
 void BgIceTurara_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgIceTurara* this = (BgIceTurara*)thisx;
-    s32 pad;
+
     CollisionHeader* colHeader = NULL;
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);

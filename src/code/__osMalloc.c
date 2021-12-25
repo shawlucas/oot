@@ -181,8 +181,8 @@ void __osMalloc_FreeBlockTest(Arena* arena, ArenaNode* node) {
         while (iter < end) {
             if (*iter != BLOCK_UNINIT_MAGIC_32 && *iter != BLOCK_FREE_MAGIC_32) {
                 osSyncPrintf(
-                    VT_COL(RED, WHITE) "Emergency! Memory leak detected! (block=%08X s=%08X e=%08X p=%08X)\n" VT_RST, node,
-                    start, end, iter);
+                    VT_COL(RED, WHITE) "Emergency! Memory leak detected! (block=%08X s=%08X e=%08X p=%08X)\n" VT_RST,
+                    node, start, end, iter);
                 __osDisplayArena(arena);
                 return;
             }
@@ -313,7 +313,6 @@ void* __osMalloc_NoLock(Arena* arena, u32 size) {
     blockSize = ALIGN16(size) + sizeof(ArenaNode);
 
     while (iter != NULL) {
-
         if (iter->isFree && iter->size >= size) {
             if (arena->flag & CHECK_FREE_BLOCK) {
                 __osMalloc_FreeBlockTest(arena, iter);
@@ -426,13 +425,15 @@ void __osFree_NoLock(Arena* arena, void* ptr) {
         return;
     }
     if (node->isFree) {
-        osSyncPrintf(VT_COL(RED, WHITE) "__osFree: Double release(0x%08X)\n" VT_RST, ptr); // "__osFree: Double release (%08X)"
+        osSyncPrintf(VT_COL(RED, WHITE) "__osFree: Double release(0x%08X)\n" VT_RST,
+                     ptr); // "__osFree: Double release (%08X)"
         return;
     }
     if (arena != node->arena && arena != NULL) {
         // "__osFree:Tried to release in a different way than when it was secured (%08X:%08X)"
-        osSyncPrintf(VT_COL(RED, WHITE) "__osFree: Tried to release in a different way than when it was secured (0x%08X:0x%08X)\n" VT_RST, arena,
-                     node->arena);
+        osSyncPrintf(VT_COL(RED, WHITE) "__osFree: Tried to release in a different way than when it was secured "
+                                        "(0x%08X:0x%08X)\n" VT_RST,
+                     arena, node->arena);
         return;
     }
 
@@ -501,8 +502,9 @@ void __osFree_NoLockDebug(Arena* arena, void* ptr, const char* file, s32 line) {
     }
     if (arena != node->arena && arena != NULL) {
         // "__osFree:Tried to release in a different way than when it was secured (%08X:%08X)"
-        osSyncPrintf(VT_COL(RED, WHITE) "__osFree: Tried to release in a different way than when it was secured (0x%08X:0x%08X)\n" VT_RST, arena,
-                     node->arena);
+        osSyncPrintf(VT_COL(RED, WHITE) "__osFree: Tried to release in a different way than when it was secured "
+                                        "(0x%08X:0x%08X)\n" VT_RST,
+                     arena, node->arena);
         return;
     }
 
@@ -560,7 +562,6 @@ void* __osRealloc(Arena* arena, void* ptr, u32 newSize) {
     ArenaNode* overNext2;
     ArenaNode localCopy;
     u32 blockSize;
-    s32 pad;
 
     newSize = ALIGN16(newSize);
     osSyncPrintf("__osRealloc(0x%08X, %d)\n", ptr, newSize);

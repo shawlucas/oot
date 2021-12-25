@@ -198,7 +198,6 @@ void EnRr_Init(Actor* thisx, GlobalContext* globalCtx2) {
 }
 
 void EnRr_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnRr* this = (EnRr*)thisx;
 
     Collider_DestroyCylinder(globalCtx, &this->collider1);
@@ -650,7 +649,6 @@ void EnRr_Damage(EnRr* this, GlobalContext* globalCtx) {
 }
 
 void EnRr_Death(EnRr* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 i;
 
     if (this->frameCount < 40) {
@@ -755,7 +753,6 @@ void EnRr_Stunned(EnRr* this, GlobalContext* globalCtx) {
 }
 
 void EnRr_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnRr* this = (EnRr*)thisx;
     s32 i;
 
@@ -838,14 +835,13 @@ static Vec3f sEffectOffsets[] = {
 };
 
 void EnRr_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f zeroVec;
     EnRr* this = (EnRr*)thisx;
     s32 i;
     Mtx* segMtx = Graph_Alloc(globalCtx->state.gfxCtx, 4 * sizeof(Mtx));
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_rr.c", __LINE__);
-    
+
     func_80093D84(globalCtx->state.gfxCtx);
     gSPSegment(POLY_XLU_DISP++, 0x0C, segMtx);
     gSPSegment(POLY_XLU_DISP++, 0x08,

@@ -165,7 +165,6 @@ void EnMm_ChangeAnimation(EnMm* this, s32 newAnimIndex, s32* curAnimIndex) {
 }
 
 void EnMm_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnMm* this = (EnMm*)thisx;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
@@ -202,7 +201,6 @@ void EnMm_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnMm_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnMm* this = (EnMm*)thisx;
 
     Collider_DestroyCylinder(globalCtx, &this->collider);
@@ -219,7 +217,6 @@ s32 func_80AADA70(void) {
 }
 
 s32 func_80AADAA0(EnMm* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
     s32 sp1C = 1;
 
@@ -509,7 +506,6 @@ void func_80AAE598(EnMm* this, GlobalContext* globalCtx) {
 }
 
 void EnMm_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnMm* this = (EnMm*)thisx;
 
     this->actionFunc(this, globalCtx);
@@ -520,10 +516,8 @@ void EnMm_Update(Actor* thisx, GlobalContext* globalCtx) {
 
 void EnMm_Draw(Actor* thisx, GlobalContext* globalCtx) {
     static void* mouthTextures[] = { gRunningManMouthOpenTex, gRunningManMouthClosedTex };
-    s32 pad;
-    EnMm* this = (EnMm*)thisx;
 
-    
+    EnMm* this = (EnMm*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_mm.c", __LINE__);
 

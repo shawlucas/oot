@@ -120,7 +120,7 @@ static InitChainEntry sInitChain[] = {
 
 void EnNiw_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnNiw* this = (EnNiw*)thisx;
-    s32 pad;
+
     s32 i;
 
     if (this->actor.params < 0) {
@@ -468,7 +468,6 @@ void func_80AB6450(EnNiw* this, GlobalContext* globalCtx) {
 }
 
 void func_80AB6570(EnNiw* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     f32 posY = Rand_CenteredFloat(100.0f);
     f32 posZ = Rand_CenteredFloat(100.0f);
     s16 tmp;
@@ -537,10 +536,8 @@ void func_80AB6570(EnNiw* this, GlobalContext* globalCtx) {
                     posY += 20.0f;
                 }
                 if (posZ < 0.0f) {
-                     // Required to match
-                    
-                    
-                    
+                    // Required to match
+
                     posZ -= 20.0f;
                 } else {
                     posZ += 20.0f;
@@ -888,9 +885,7 @@ void EnNiw_Update(Actor* thisx, GlobalContext* globalCtx) {
     f32 camResult;
     s32 pad3[10];
 
-     // Required to match
-    
-    
+    // Required to match
 
     this->unk_294++;
 
@@ -1198,7 +1193,7 @@ void EnNiw_FeatherUpdate(EnNiw* this, GlobalContext* globalCtx) {
 void EnNiw_FeatherDraw(EnNiw* this, GlobalContext* globalCtx) {
     u8 flag = 0;
     s16 i;
-    s32 pad;
+
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
     EnNiwFeather* feather = &this->feathers[0];
 

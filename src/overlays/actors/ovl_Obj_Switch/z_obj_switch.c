@@ -183,7 +183,6 @@ void ObjSwitch_RotateY(Vec3f* dest, Vec3f* src, s16 angle) {
 }
 
 void ObjSwitch_InitDynapoly(ObjSwitch* this, GlobalContext* globalCtx, CollisionHeader* collision, s32 moveFlag) {
-    s32 pad;
     CollisionHeader* colHeader = NULL;
     s32 pad2;
 
@@ -238,7 +237,6 @@ Actor* ObjSwitch_SpawnIce(ObjSwitch* this, GlobalContext* globalCtx) {
 }
 
 void ObjSwitch_SetOn(ObjSwitch* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 subType;
 
     if (Flags_GetSwitch(globalCtx, (this->dyna.actor.params >> 8 & 0x3F))) {
@@ -726,7 +724,7 @@ void ObjSwitch_DrawEye(ObjSwitch* this, GlobalContext* globalCtx) {
         { gEyeSwitchSilverOpenTex, gEyeSwitchSilverHalfTex, gEyeSwitchSilverClosedTex, gEyeSwitchSilverClosedTex },
     };
     static Gfx* eyeDlists[] = { gEyeSwitch1DL, gEyeSwitch2DL };
-    s32 pad;
+
     s32 subType = (this->dyna.actor.params >> 4 & 7);
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_obj_switch.c", __LINE__);
@@ -751,8 +749,6 @@ void ObjSwitch_DrawCrystal(ObjSwitch* this, GlobalContext* globalCtx) {
 
     subType = (this->dyna.actor.params >> 4 & 7);
     func_8002ED80(&this->dyna.actor, globalCtx, 0);
-
-    
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_obj_switch.c", __LINE__);
 

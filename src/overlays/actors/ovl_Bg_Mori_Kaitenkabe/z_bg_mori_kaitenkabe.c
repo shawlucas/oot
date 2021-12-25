@@ -46,7 +46,6 @@ void BgMoriKaitenkabe_CrossProduct(Vec3f* dest, Vec3f* v1, Vec3f* v2) {
 }
 
 void BgMoriKaitenkabe_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMoriKaitenkabe* this = (BgMoriKaitenkabe*)thisx;
     CollisionHeader* colHeader = NULL;
 
@@ -67,7 +66,6 @@ void BgMoriKaitenkabe_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgMoriKaitenkabe_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMoriKaitenkabe* this = (BgMoriKaitenkabe*)thisx;
 
     DynaPoly_DeleteBgActor(globalCtx, &globalCtx->colCtx.dyna, this->dyna.bgId);
@@ -150,14 +148,12 @@ void BgMoriKaitenkabe_Rotate(BgMoriKaitenkabe* this, GlobalContext* globalCtx) {
 }
 
 void BgMoriKaitenkabe_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMoriKaitenkabe* this = (BgMoriKaitenkabe*)thisx;
 
     this->actionFunc(this, globalCtx);
 }
 
 void BgMoriKaitenkabe_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMoriKaitenkabe* this = (BgMoriKaitenkabe*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_kaitenkabe.c", __LINE__);

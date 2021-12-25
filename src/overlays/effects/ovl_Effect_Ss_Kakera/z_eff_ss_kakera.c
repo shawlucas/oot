@@ -89,7 +89,7 @@ f32 func_809A9818(f32 arg0, f32 arg1) {
 void EffectSsKakera_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     static Color_RGB8 colors[] = { { 255, 255, 255 }, { 235, 170, 130 } };
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    s32 pad;
+
     f32 scale;
     s32 colorIdx;
 
@@ -227,7 +227,6 @@ s32 func_809A9E88(EffectSs* this, Vec3f* diff, f32 dist) {
     temp_v0 = this->rReg0 & 3;
 
     if (temp_v0 != 0) {
-
         if (dist > 1.0f) {
             phi_f0 = 1.0f / dist;
         } else {
@@ -262,7 +261,6 @@ s32 func_809A9F4C(EffectSs* this, Vec3f* diff, f32 dist) {
     temp_v0 = (this->rReg0 >> 5) & 3;
 
     if (temp_v0 != 0) {
-
         if (dist > 1.0f) {
             phi_f0 = 1.0f / dist;
         } else {

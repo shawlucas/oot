@@ -224,7 +224,7 @@ void EnBom_Update(Actor* thisx, GlobalContext* globalCtx2) {
     Vec3f effPos;
     Vec3f dustAccel = { 0.0f, 0.6f, 0.0f };
     Color_RGBA8 dustColor = { 255, 255, 255, 255 };
-    s32 pad;
+
     GlobalContext* globalCtx = globalCtx2;
     EnBom* this = (EnBom*)thisx;
 
@@ -356,10 +356,7 @@ void EnBom_Update(Actor* thisx, GlobalContext* globalCtx2) {
 }
 
 void EnBom_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnBom* this = (EnBom*)thisx;
-
-    
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_bom.c", __LINE__);
 

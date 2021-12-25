@@ -1356,7 +1356,6 @@ void func_80832924(Player* this, struct_80832924* entry) {
     s32 data;
     s32 flags;
     u32 cont;
-    s32 pad;
 
     do {
         data = ABS(entry->field);
@@ -2093,7 +2092,6 @@ s32 func_80834758(GlobalContext* globalCtx, Player* this) {
         (this->heldItemActionParam == this->itemActionParam) && (this->currentShield != PLAYER_SHIELD_NONE) &&
         !Player_IsChildWithHylianShield(this) && func_80833BCC(this) &&
         CHECK_BTN_ALL(sControlInput->cur.button, BTN_R)) {
-
         anim = func_808346C4(globalCtx, this);
         frame = Animation_GetLastFrame(anim);
         LinkAnimation_Change(globalCtx, &this->skelAnime2, anim, 1.0f, frame, frame, ANIMMODE_ONCE, 0.0f);
@@ -2702,11 +2700,9 @@ void func_80835F44(GlobalContext* globalCtx, Player* this, s32 item) {
           (actionParam == PLAYER_AP_NONE))) ||
         ((this->itemActionParam < 0) &&
          ((Player_ActionToSword(actionParam) != 0) || (actionParam == PLAYER_AP_NONE)))) {
-
         if ((actionParam == PLAYER_AP_NONE) || !(this->stateFlags1 & 0x8000000) ||
             ((this->actor.bgCheckFlags & 1) &&
              ((actionParam == PLAYER_AP_HOOKSHOT) || (actionParam == PLAYER_AP_LONGSHOT)))) {
-
             if ((globalCtx->bombchuBowlingStatus == 0) &&
                 (((actionParam == PLAYER_AP_STICK) && (AMMO(ITEM_STICK) == 0)) ||
                  ((actionParam == PLAYER_AP_BEAN) && (AMMO(ITEM_BEAN) == 0)) ||
@@ -2957,7 +2953,7 @@ void func_80836BEC(Player* this, GlobalContext* globalCtx) {
     s32 sp1C = 0;
     s32 zTrigPressed = CHECK_BTN_ALL(sControlInput->cur.button, BTN_Z);
     Actor* actorToTarget;
-    s32 pad;
+
     s32 holdTarget;
     s32 cond;
 
@@ -2990,7 +2986,6 @@ void func_80836BEC(Player* this, GlobalContext* globalCtx) {
             if (!(this->stateFlags1 & 0x2000000) &&
                 ((this->heldItemActionParam != PLAYER_AP_FISHING_POLE) || (this->unk_860 == 0)) &&
                 CHECK_BTN_ALL(sControlInput->press.button, BTN_Z)) {
-
                 if (this->actor.category == ACTORCAT_PLAYER) {
                     actorToTarget = globalCtx->actorCtx.targetCtx.arrowPointedActor;
                 } else {
@@ -3326,7 +3321,6 @@ static u32 D_80854488[][2] = {
 };
 
 void func_80837948(GlobalContext* globalCtx, Player* this, s32 arg2) {
-    s32 pad;
     u32 flags;
     s32 temp;
 
@@ -3599,7 +3593,6 @@ void func_808382BC(Player* this) {
 }
 
 s32 func_808382DC(Player* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 sp68 = false;
     s32 sp64;
 
@@ -3663,7 +3656,6 @@ s32 func_808382DC(Player* this, GlobalContext* globalCtx) {
             // This behavior was later fixed in MM, most likely by removing both the `atHit` and `atFlags` checks.
             if (sp64 || ((this->invincibilityTimer < 0) && (this->cylinder.base.acFlags & AC_HIT) &&
                          (this->cylinder.info.atHit != NULL) && (this->cylinder.info.atHit->atFlags & 0x20000000))) {
-
                 func_8083264C(this, 180, 20, 100, 0);
 
                 if (!Player_IsChildWithHylianShield(this)) {
@@ -3943,7 +3935,6 @@ s32 func_80839034(GlobalContext* globalCtx, Player* this, CollisionPoly* poly, u
             !(this->stateFlags1 & 1) &&
             (((poly != NULL) && (sp3C = SurfaceType_GetSceneExitIndex(&globalCtx->colCtx, poly, bgId), sp3C != 0)) ||
              (func_8083816C(D_808535E4) && (this->unk_A7A == 12)))) {
-
             sp34 = this->unk_A84 - (s32)this->actor.world.pos.y;
 
             if (!(this->stateFlags1 & 0x28800000) && !(this->actor.bgCheckFlags & 1) && (sp34 < 100) &&
@@ -3980,7 +3971,6 @@ s32 func_80839034(GlobalContext* globalCtx, Player* this, CollisionPoly* poly, u
             if (!(this->stateFlags1 & 0x20800000) && !(this->stateFlags2 & 0x40000) && !func_808332B8(this) &&
                 (temp = func_80041D4C(&globalCtx->colCtx, poly, bgId), (temp != 10)) &&
                 ((sp34 < 100) || (this->actor.bgCheckFlags & 1))) {
-
                 if (temp == 11) {
                     func_800788CC(NA_SE_OC_SECRET_HOLE_OUT);
                     func_800F6964(5);
@@ -4020,13 +4010,11 @@ s32 func_80839034(GlobalContext* globalCtx, Player* this, CollisionPoly* poly, u
             return 1;
         } else {
             if (globalCtx->sceneLoadFlag == 0) {
-
                 if ((this->actor.world.pos.y < -4000.0f) ||
                     (((this->unk_A7A == 5) || (this->unk_A7A == 12)) &&
                      ((D_80853600 < 100.0f) || (this->fallDistance > 400.0f) ||
                       ((globalCtx->sceneNum != SCENE_HAKADAN) && (this->fallDistance > 200.0f)))) ||
                     ((globalCtx->sceneNum == SCENE_GANON_FINAL) && (this->fallDistance > 320.0f))) {
-
                     if (this->actor.bgCheckFlags & 1) {
                         if (this->unk_A7A == 5) {
                             Gameplay_TriggerRespawn(globalCtx);
@@ -4553,7 +4541,6 @@ void func_8083AA10(Player* this, GlobalContext* globalCtx) {
 
             if (!(this->stateFlags3 & 2) && !(this->skelAnime.moveFlags & 0x80) && (func_8084411C != this->func_674) &&
                 (func_80844A44 != this->func_674)) {
-
                 if ((D_80853604 == 7) || (this->swordState != 0)) {
                     Math_Vec3f_Copy(&this->actor.world.pos, &this->actor.prevPos);
                     func_80832210(this);
@@ -4576,9 +4563,7 @@ void func_8083AA10(Player* this, GlobalContext* globalCtx) {
                 if ((this->actor.bgCheckFlags & 4) && !(this->stateFlags1 & 0x8000000) && (D_80853604 != 6) &&
                     (D_80853604 != 9) && (D_80853600 > 20.0f) && (this->swordState == 0) && (ABS(sp5C) < 0x2000) &&
                     (this->linearVelocity > 3.0f)) {
-
                     if ((D_80853604 == 11) && !(this->stateFlags1 & 0x800)) {
-
                         sp40 = func_808396F4(globalCtx, this, &D_8085451C, &sp44, &sp58, &sp54);
                         sp3C = this->actor.world.pos.y;
 
@@ -4640,7 +4625,6 @@ s32 func_8083ADD4(GlobalContext* globalCtx, Player* this) {
 }
 
 void func_8083AE40(Player* this, s16 objectId) {
-    s32 pad;
     u32 size;
 
     if (objectId != 0) {
@@ -4649,11 +4633,11 @@ void func_8083AE40(Player* this, s16 objectId) {
 
         size = gObjectTable[objectId].vromEnd - gObjectTable[objectId].vromStart;
 
-        LOG_HEX("size", size, "../z_player.c", 9090);
+        LOG_HEX("size", size, "../z_player.c", __LINE__);
         ASSERT(size <= 1024 * 8, "size <= 1024 * 8", "../z_player.c", __LINE__);
 
         DmaMgr_SendRequest2(&this->giObjectDmaRequest, (u32)this->giObjectSegment, gObjectTable[objectId].vromStart,
-                            size, 0, &this->giObjectLoadQueue, NULL, "../z_player.c", 9099);
+                            size, 0, &this->giObjectLoadQueue, NULL, "../z_player.c", __LINE__);
     }
 }
 
@@ -4701,7 +4685,6 @@ s32 func_8083B040(Player* this, GlobalContext* globalCtx) {
 
     if ((this->unk_6AD != 0) &&
         (func_808332B8(this) || (this->actor.bgCheckFlags & 1) || (this->stateFlags1 & 0x800000))) {
-
         if (!func_8083ADD4(globalCtx, this)) {
             if (this->unk_6AD == 4) {
                 sp2C = Player_ActionToMagicSpell(this, this->itemActionParam);
@@ -4727,7 +4710,6 @@ s32 func_8083B040(Player* this, GlobalContext* globalCtx) {
                        ((this->targetActor != NULL) &&
                         (((this->itemActionParam == PLAYER_AP_BOTTLE_POE) && (this->exchangeItemId == EXCH_ITEM_POE)) ||
                          (this->exchangeItemId == EXCH_ITEM_BLUE_FIRE))))))) {
-
                     if ((globalCtx->actorCtx.titleCtx.delayTimer == 0) && (globalCtx->actorCtx.titleCtx.alpha == 0)) {
                         func_80835DE4(globalCtx, this, func_8084F104, 0);
 
@@ -4866,7 +4848,6 @@ s32 func_8083B644(Player* this, GlobalContext* globalCtx) {
                                                ((sp34 != NULL) && (sp34->flags & ACTOR_FLAG_16))))) {
                 if ((this->actor.bgCheckFlags & 1) || (this->stateFlags1 & 0x800000) ||
                     (func_808332B8(this) && !(this->stateFlags2 & 0x400))) {
-
                     if (sp34 != NULL) {
                         this->stateFlags2 |= 2;
                         if (CHECK_BTN_ALL(sControlInput->press.button, BTN_A) || (sp34->flags & ACTOR_FLAG_16)) {
@@ -5122,7 +5103,6 @@ s32 func_8083C2B0(Player* this, GlobalContext* globalCtx) {
     if ((globalCtx->shootingGalleryStatus == 0) && (this->currentShield != PLAYER_SHIELD_NONE) &&
         CHECK_BTN_ALL(sControlInput->cur.button, BTN_R) &&
         (Player_IsChildWithHylianShield(this) || (!func_80833B2C(this) && (this->unk_664 == NULL)))) {
-
         func_80832318(this);
         func_808323B4(globalCtx, this);
 
@@ -5447,7 +5427,6 @@ s32 func_8083D12C(GlobalContext* globalCtx, Player* this, Input* arg2) {
     if (!(this->stateFlags1 & 0x400) && !(this->stateFlags2 & 0x400)) {
         if ((arg2 == NULL) || (CHECK_BTN_ALL(arg2->press.button, BTN_A) && (ABS(this->unk_6C2) < 12000) &&
                                (this->currentBoots != PLAYER_BOOTS_IRON))) {
-
             func_80835C58(globalCtx, this, func_8084DC48, 0);
             func_80832264(globalCtx, this, &gPlayerAnim_003308);
 
@@ -5467,7 +5446,6 @@ s32 func_8083D12C(GlobalContext* globalCtx, Player* this, Input* arg2) {
     if ((this->stateFlags1 & 0x400) || (this->stateFlags2 & 0x400)) {
         if (this->actor.velocity.y > 0.0f) {
             if (this->actor.yDistToWater < this->ageProperties->unk_30) {
-
                 this->stateFlags2 &= ~0x400;
 
                 if (arg2 != NULL) {
@@ -5817,7 +5795,6 @@ static LinkAnimationHeader* D_80854590[] = {
 };
 
 s32 func_8083E318(GlobalContext* globalCtx, Player* this, CollisionPoly* arg2) {
-    s32 pad;
     s16 sp4A;
     Vec3f sp3C;
     s16 sp3A;
@@ -6043,7 +6020,6 @@ s32 func_8083EC18(Player* this, GlobalContext* globalCtx, u32 arg2) {
                     s32 i;
                     f32 sp48;
                     Vec3f* sp44 = &sp50[0];
-                    s32 pad;
 
                     CollisionPoly_GetVerticesByBgId(sp84, this->actor.wallBgId, &globalCtx->colCtx, sp50);
 
@@ -6248,7 +6224,6 @@ s32 func_8083F570(Player* this, GlobalContext* globalCtx) {
     s16 temp;
 
     if ((this->linearVelocity != 0.0f) && (this->actor.bgCheckFlags & 8) && (D_808535F0 & 0x30)) {
-
         temp = this->actor.shape.rot.y - this->actor.wallYaw;
         if (this->linearVelocity < 0.0f) {
             temp += 0x8000;
@@ -6295,7 +6270,6 @@ s32 func_8083F7BC(Player* this, GlobalContext* globalCtx) {
     DynaPolyActor* wallPolyActor;
 
     if (!(this->stateFlags1 & 0x800) && (this->actor.bgCheckFlags & 0x200) && (D_80853608 < 0x3000)) {
-
         if (((this->linearVelocity > 0.0f) && func_8083EC18(this, globalCtx, D_808535F0)) ||
             func_8083F0C8(this, globalCtx, D_808535F0)) {
             return 1;
@@ -6303,14 +6277,11 @@ s32 func_8083F7BC(Player* this, GlobalContext* globalCtx) {
 
         if (!func_808332B8(this) && ((this->linearVelocity == 0.0f) || !(this->stateFlags2 & 4)) &&
             (D_808535F0 & 0x40) && (this->actor.bgCheckFlags & 1) && (this->wallHeight >= 39.0f)) {
-
             this->stateFlags2 |= 1;
 
             if (CHECK_BTN_ALL(sControlInput->cur.button, BTN_A)) {
-
                 if ((this->actor.wallBgId != BGCHECK_SCENE) &&
                     ((wallPolyActor = DynaPoly_GetActor(&globalCtx->colCtx, this->actor.wallBgId)) != NULL)) {
-
                     if (wallPolyActor->actor.id == ACTOR_BG_HEAVY_BLOCK) {
                         if (Player_GetStrength() < PLAYER_STR_GOLD_G) {
                             return 0;
@@ -6528,8 +6499,6 @@ void func_8084029C(Player* this, f32 arg1) {
     } else if (arg1 > 7.25f) {
         arg1 = 7.25f;
     }
-
-    
 
     if ((this->currentBoots == PLAYER_BOOTS_HOVER) && !(this->actor.bgCheckFlags & 1) && (this->hoverBootsTimer != 0)) {
         func_8002F8F0(&this->actor, NA_SE_PL_HOBBERBOOTS_LV - SFX_FLAG);
@@ -7478,7 +7447,6 @@ static LinkAnimationHeader* D_808545CC[] = {
 };
 
 void func_80842D20(GlobalContext* globalCtx, Player* this) {
-    s32 pad;
     s32 sp28;
 
     if (func_80843188 != this->func_674) {
@@ -7513,7 +7481,6 @@ s32 func_80842DF4(GlobalContext* globalCtx, Player* this) {
         if (this->swordAnimation < 0x18) {
             if (!(this->swordQuads[0].base.atFlags & AT_BOUNCED) && !(this->swordQuads[1].base.atFlags & AT_BOUNCED)) {
                 if (this->skelAnime.curFrame >= 2.0f) {
-
                     phi_f2 = Math_Vec3f_DistXYZAndStoreDiff(&this->swordInfo[0].tip, &this->swordInfo[0].base, &sp50);
                     if (phi_f2 != 0.0f) {
                         phi_f2 = (phi_f2 + 10.0f) / phi_f2;
@@ -7528,7 +7495,6 @@ s32 func_80842DF4(GlobalContext* globalCtx, Player* this) {
                         !SurfaceType_IsIgnoredByEntities(&globalCtx->colCtx, sp78, sp74) &&
                         (func_80041D4C(&globalCtx->colCtx, sp78, sp74) != 6) &&
                         (func_8002F9EC(globalCtx, &this->actor, sp78, sp74, &sp5C) == 0)) {
-
                         if (this->heldItemActionParam == PLAYER_AP_HAMMER) {
                             func_80832630(globalCtx);
                             func_80842A28(globalCtx, this);
@@ -8088,7 +8054,7 @@ void func_80844708(Player* this, GlobalContext* globalCtx) {
     s32 temp;
     s32 sp44;
     DynaPolyActor* wallPolyActor;
-    s32 pad;
+
     f32 sp38;
     s16 sp36;
 
@@ -8116,7 +8082,6 @@ void func_80844708(Player* this, GlobalContext* globalCtx) {
                      (cylinderOc = this->cylinder.base.oc,
                       ((cylinderOc->id == ACTOR_EN_WOOD02) &&
                        (ABS((s16)(this->actor.world.rot.y - cylinderOc->yawTowardsPlayer)) > 0x6000))))) {
-
                     if (cylinderOc != NULL) {
                         cylinderOc->home.rot.y = 1;
                     } else if (this->actor.wallBgId != BGCHECK_SCENE) {
@@ -8591,7 +8556,6 @@ void func_80845CA4(Player* this, GlobalContext* globalCtx) {
     s32 temp;
     f32 sp34;
     s32 sp30;
-    s32 pad;
 
     if (!func_8083B040(this, globalCtx)) {
         if (this->unk_850 == 0) {
@@ -8633,7 +8597,6 @@ void func_80845CA4(Player* this, GlobalContext* globalCtx) {
 
             if ((this->unk_850 == 0) ||
                 ((temp == 0) && (this->linearVelocity == 0.0f) && (Gameplay_GetCamera(globalCtx, 0)->unk_14C & 0x10))) {
-
                 func_8005B1A4(Gameplay_GetCamera(globalCtx, 0));
                 func_80845C68(globalCtx, gSaveContext.respawn[RESPAWN_MODE_DOWN].data);
 
@@ -9474,7 +9437,6 @@ void func_80847BA0(GlobalContext* globalCtx, Player* this) {
         CollisionPoly* spA0;
         s32 sp9C;
         s16 sp9A;
-        s32 pad;
 
         D_80854798.y = 18.0f;
         D_80854798.z = this->ageProperties->unk_38 + 10.0f;
@@ -9628,7 +9590,7 @@ void func_80847BA0(GlobalContext* globalCtx, Player* this) {
 
 void Player_UpdateCamAndSeqModes(GlobalContext* globalCtx, Player* this) {
     u8 seqMode;
-    s32 pad;
+
     Actor* unk_664;
     s32 camMode;
 
@@ -9865,8 +9827,6 @@ static f32 D_80854820[] = { 2.0f, 4.0f, 7.0f };
 static f32 D_8085482C[] = { 0.5f, 1.0f, 3.0f };
 
 void Player_UpdateCommon(Player* this, GlobalContext* globalCtx, Input* input) {
-    s32 pad;
-
     sControlInput = input;
 
     if (this->unk_A86 < 0) {
@@ -9991,7 +9951,6 @@ void Player_UpdateCommon(Player* this, GlobalContext* globalCtx, Input* input) {
                 f32 sp70 = this->linearVelocity;
                 s16 sp6E = this->currentYaw;
                 s16 yawDiff = this->actor.world.rot.y - sp6E;
-                s32 pad;
 
                 if ((ABS(yawDiff) > 0x6000) && (this->actor.speedXZ != 0.0f)) {
                     sp70 = 0.0f;
@@ -10091,9 +10050,9 @@ void Player_UpdateCommon(Player* this, GlobalContext* globalCtx, Input* input) {
                     func_80837B9C(this, globalCtx);
                 } else if ((this->actor.bgCheckFlags & 1) || (this->stateFlags1 & 0x8000000)) {
                     func_80836448(globalCtx, this,
-                                  func_808332B8(this)       ? &gPlayerAnim_003310
-                                  : (this->shockTimer != 0) ? &gPlayerAnim_002F08
-                                                            : &gPlayerAnim_002878);
+                                  func_808332B8(this)
+                                      ? &gPlayerAnim_003310
+                                      : (this->shockTimer != 0) ? &gPlayerAnim_002F08 : &gPlayerAnim_002878);
                 }
             } else {
                 if ((this->actor.parent == NULL) &&
@@ -10259,7 +10218,7 @@ void Player_Update(Actor* thisx, GlobalContext* globalCtx) {
     static Vec3f sDogSpawnPos;
     Player* this = (Player*)thisx;
     s32 dogParams;
-    s32 pad;
+
     Input sp44;
     Actor* dog;
 
@@ -10342,13 +10301,13 @@ void func_8084A0E8(GlobalContext* globalCtx, Player* this, s32 lod, Gfx* cullDLi
             sp68.y = D_80858AC8.unk_04 + 0xDBE;
             sp68.z = D_80858AC8.unk_00 - 0x348A;
             func_800D1694(97.0f, -1203.0f, -240.0f, &sp68);
-            Matrix_ToMtx(sp70++, "../z_player.c", 19273);
+            Matrix_ToMtx(sp70++, "../z_player.c", __LINE__);
 
             sp68.x = D_80858AC8.unk_02 - 0x3E2;
             sp68.y = -0xDBE - D_80858AC8.unk_04;
             sp68.z = D_80858AC8.unk_00 - 0x348A;
             func_800D1694(97.0f, -1203.0f, 240.0f, &sp68);
-            Matrix_ToMtx(sp70, "../z_player.c", 19279);
+            Matrix_ToMtx(sp70, "../z_player.c", __LINE__);
         }
 
         gSPDisplayList(POLY_OPA_DISP++, sMaskDlists[this->currentMask - 1]);
@@ -10402,7 +10361,6 @@ void Player_Draw(Actor* thisx, GlobalContext* globalCtx2) {
     if (!(this->stateFlags2 & 0x20000000)) {
         OverrideLimbDrawOpa overrideLimbDraw = func_80090014;
         s32 lod;
-        s32 pad;
 
         if ((this->csMode != 0) || (func_8008E9C4(this) && 0) || (this->actor.projectedPos.z < 160.0f)) {
             lod = 0;
@@ -12386,8 +12344,6 @@ void func_8084F698(Player* this, GlobalContext* globalCtx) {
 }
 
 void func_8084F710(Player* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     if ((this->unk_84F != 0) && (globalCtx->csCtx.frames < 0x131)) {
         this->actor.gravity = 0.0f;
         this->actor.velocity.y = 0.0f;
@@ -12424,7 +12380,6 @@ void func_8084F88C(Player* this, GlobalContext* globalCtx) {
     LinkAnimation_Update(globalCtx, &this->skelAnime);
 
     if ((this->unk_850++ > 8) && (globalCtx->sceneLoadFlag == 0)) {
-
         if (this->unk_84F != 0) {
             if (globalCtx->sceneNum == 9) {
                 Gameplay_TriggerRespawn(globalCtx);
@@ -12527,7 +12482,6 @@ s32 func_8084FCAC(Player* this, GlobalContext* globalCtx) {
     if ((CHECK_BTN_ALL(sControlInput->cur.button, BTN_A | BTN_L | BTN_R) &&
          CHECK_BTN_ALL(sControlInput->press.button, BTN_B)) ||
         (CHECK_BTN_ALL(sControlInput->cur.button, BTN_L) && CHECK_BTN_ALL(sControlInput->press.button, BTN_DRIGHT))) {
-
         D_808535D0 ^= 1;
 
         if (D_808535D0) {
@@ -12605,7 +12559,6 @@ void func_8084FF7C(Player* this) {
 }
 
 void func_8085002C(Player* this) {
-    s32 pad;
     s16 sp2A;
     s16 sp28;
     s16 sp26;
@@ -13974,7 +13927,7 @@ void func_80852C0C(GlobalContext* globalCtx, Player* this, s32 csMode) {
 
 void func_80852C50(GlobalContext* globalCtx, Player* this, CsCmdActorAction* arg2) {
     CsCmdActorAction* linkCsAction = globalCtx->csCtx.linkAction;
-    s32 pad;
+
     s32 sp24;
 
     if (globalCtx->csCtx.state == CS_STATE_UNSKIPPABLE_INIT) {
@@ -14094,7 +14047,6 @@ s32 Player_InflictDamage(GlobalContext* globalCtx, s32 damage) {
 // Start talking with the given actor
 void func_80853148(GlobalContext* globalCtx, Actor* actor) {
     Player* this = GET_PLAYER(globalCtx);
-    s32 pad;
 
     if ((this->targetActor != NULL) || (actor == this->naviActor) ||
         CHECK_FLAG_ALL(actor->flags, ACTOR_FLAG_0 | ACTOR_FLAG_18)) {

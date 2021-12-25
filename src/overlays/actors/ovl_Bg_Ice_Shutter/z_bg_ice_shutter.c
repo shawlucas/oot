@@ -35,9 +35,8 @@ static InitChainEntry sInitChain[] = {
 };
 
 void func_80891AC0(BgIceShutter* this) {
-    f32 sp24;
+    f32 sp24 = Math_SinS(this->dyna.actor.shape.rot.x) * this->dyna.actor.velocity.y;
 
-    sp24 = Math_SinS(this->dyna.actor.shape.rot.x) * this->dyna.actor.velocity.y;
     this->dyna.actor.world.pos.y =
         (Math_CosS(this->dyna.actor.shape.rot.x) * this->dyna.actor.velocity.y) + this->dyna.actor.home.pos.y;
     this->dyna.actor.world.pos.x = (Math_SinS(this->dyna.actor.shape.rot.y) * sp24) + this->dyna.actor.home.pos.x;

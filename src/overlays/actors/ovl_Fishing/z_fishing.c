@@ -1170,7 +1170,7 @@ void Fishing_DrawEffects(FishingEffect* effect, GlobalContext* globalCtx) {
     u8 flag = 0;
     f32 rotY;
     s16 i;
-    s32 pad;
+
     FishingEffect* firstEffect = effect;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_fishing.c", __LINE__);
@@ -1374,8 +1374,6 @@ void Fishing_DrawEffects(FishingEffect* effect, GlobalContext* globalCtx) {
 }
 
 void Fishing_DrawStreamSplash(GlobalContext* globalCtx) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_fishing.c", __LINE__);
 
     gSPSegment(POLY_XLU_DISP++, 0x09,
@@ -1416,7 +1414,7 @@ void Fishing_UpdateLine(GlobalContext* globalCtx, Vec3f* basePos, Vec3f* pos, Ve
     f32 dist;
     f32 spD8;
     s16 temp_s2;
-    s32 pad;
+
     f32 temp_f20;
     Vec3f posSrc = { 0.0f, 0.0f, 0.0f };
     Vec3f posStep;
@@ -1784,7 +1782,7 @@ void Fishing_DrawLureAndLine(GlobalContext* globalCtx, Vec3f* linePos, Vec3f* li
     Vec3f hookPos[2];
     s16 i;
     s16 spB4 = D_80B7E144;
-    s32 pad;
+
     Player* player = GET_PLAYER(globalCtx);
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_fishing.c", __LINE__);
@@ -1952,7 +1950,6 @@ void Fishing_DrawRod(GlobalContext* globalCtx) {
     f32 spC0;
     Input* input = &globalCtx->state.input[0];
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_fishing.c", __LINE__);
 
@@ -2111,7 +2108,6 @@ void Fishing_UpdateLure(Fishing* this, GlobalContext* globalCtx) {
     f32 sp70;
     Vec3f sp64;
     Vec3f sp58;
-    s32 pad;
 
     D_80B7E0AE++;
 
@@ -2595,7 +2591,6 @@ void Fishing_UpdateLure(Fishing* this, GlobalContext* globalCtx) {
 
             if ((sLurePos.y <= (WATER_SURFACE_Y(globalCtx) + 4.0f)) &&
                 (sLurePos.y >= (WATER_SURFACE_Y(globalCtx) - 4.0f))) {
-
                 phi_v0 = 63;
                 if (CHECK_BTN_ALL(input->cur.button, BTN_A) || (D_80B7E138 > 1.0f)) {
                     phi_v0 = 1;
@@ -2656,7 +2651,7 @@ s32 func_80B70A2C(Fishing* this, GlobalContext* globalCtx, u8 ignorePosCheck) {
         return false;
     }
 
-        if (this->unk_1AC) {}
+    if (this->unk_1AC) {}
 
     if (this->unk_1AC >= 40.0f) {
         count = 40;
@@ -2702,7 +2697,7 @@ void func_80B70CF0(Fishing* this, GlobalContext* globalCtx) {
     f32 speedXZ;
     f32 angle;
 
-        if (this->unk_1AC) {}
+    if (this->unk_1AC) {}
 
     if (this->unk_1AC >= 45.0f) {
         count = 30;
@@ -2896,7 +2891,7 @@ void Fishing_UpdateFish(Actor* thisx, GlobalContext* globalCtx2) {
     u8 phi_v0_2;
     f32 temp_f0;
     f32 temp;
-    s32 pad;
+
     f32 spA4;
     u16 spA2;
     u8 phi_a1;
@@ -3448,7 +3443,6 @@ void Fishing_UpdateFish(Actor* thisx, GlobalContext* globalCtx2) {
 
             if ((D_80B7A694 != 3) || (this->unk_17A[0] == 0) || (sLurePos.y > (WATER_SURFACE_Y(globalCtx) + 5.0f)) ||
                 (sqrtf(SQ(sLurePos.x) + SQ(sLurePos.z)) > 800.0f)) {
-
                 this->unk_17A[0] = 0;
                 this->unk_158 = this->unk_15A;
                 this->unk_190 = 1.0f;
@@ -3511,7 +3505,6 @@ void Fishing_UpdateFish(Actor* thisx, GlobalContext* globalCtx2) {
 
             if ((D_80B7A694 != 3) || (this->unk_17A[0] == 0) || (sLurePos.y > (WATER_SURFACE_Y(globalCtx) + 5.0f)) ||
                 (sqrtf(SQ(sLurePos.x) + SQ(sLurePos.z)) > 800.0f)) {
-
                 this->unk_17A[0] = 0;
                 this->unk_190 = 1.0f;
                 this->unk_158 = this->unk_15A;
@@ -3564,7 +3557,6 @@ void Fishing_UpdateFish(Actor* thisx, GlobalContext* globalCtx2) {
             if (D_80B7E124 == 0) {
                 if ((D_80B7FEA0 < 20) && ((D_80B7E0AE & 3) == 0)) {
                     D_80B7FEA0++;
-                    
                 }
             }
 
@@ -4061,8 +4053,6 @@ void Fishing_UpdateFish(Actor* thisx, GlobalContext* globalCtx2) {
 
         this->actor.world.pos.y += (this->unk_184 * 1.5f);
 
-        
-
         if (this->unk_152 != 0) {
             this->unk_168 = this->unk_154;
             this->unk_152--;
@@ -4381,7 +4371,6 @@ void Fishing_DrawPondProps(GlobalContext* globalCtx) {
     u8 flag = 0;
     FishingProp* prop = &sPondProps[0];
     s16 i;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_fishing.c", __LINE__);
 
@@ -4676,15 +4665,12 @@ void Fishing_DrawGroupFishes(GlobalContext* globalCtx) {
     FishingGroupFish* fish = &sGroupFishes[0];
     f32 scale;
     s16 i;
-    s32 pad;
 
     if (sLinkAge == 1) {
         scale = 0.003325f;
     } else {
         scale = 0.00475f;
     }
-
-    
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_fishing.c", __LINE__);
 
@@ -5082,7 +5068,7 @@ void Fishing_UpdateOwner(Actor* thisx, GlobalContext* globalCtx2) {
     f32 target;
     f32 camAtFraction;
     f32 lureDistXZ;
-    s32 pad;
+
     Player* player = GET_PLAYER(globalCtx);
     Input* input = &globalCtx->state.input[0];
 
@@ -5618,8 +5604,7 @@ void Fishing_UpdateOwner(Actor* thisx, GlobalContext* globalCtx2) {
     if (target < 0.0f) {
         target = 0.0f;
     }
-    
-    
+
     Math_ApproachF(&D_80B7A65C.z, target, 1.0f, 5.0f);
 
     if (D_80B7A65C.z < 1500.0f) {
@@ -5636,7 +5621,6 @@ void Fishing_UpdateOwner(Actor* thisx, GlobalContext* globalCtx2) {
         D_80B7A658;
 
     if ((u8)D_80B7A650 > 0) {
-        s32 pad;
         Camera* camera = Gameplay_GetCamera(globalCtx, MAIN_CAM);
         s16 i;
         s32 pad1;
@@ -5714,7 +5698,6 @@ static void* sFishingOwnerEyeTexs[] = {
 };
 
 void Fishing_DrawOwner(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     Fishing* this = (Fishing*)thisx;
     Input* input = &globalCtx->state.input[0];
 

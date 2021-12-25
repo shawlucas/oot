@@ -113,7 +113,7 @@ void EndTitle_DrawFull(Actor* thisx, GlobalContext* globalCtx) {
 // Used in the Temple of Time
 void EndTitle_DrawNintendoLogo(Actor* thisx, GlobalContext* globalCtx) {
     EndTitle* this = (EndTitle*)thisx;
-    s32 pad;
+
     s32 frames = globalCtx->csCtx.frames;
 
     if ((frames >= 1101) && (this->endAlpha < 255)) {

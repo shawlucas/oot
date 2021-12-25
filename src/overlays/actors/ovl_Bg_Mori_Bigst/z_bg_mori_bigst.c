@@ -50,7 +50,6 @@ void BgMoriBigst_SetupAction(BgMoriBigst* this, BgMoriBigstActionFunc actionFunc
 }
 
 void BgMoriBigst_InitDynapoly(BgMoriBigst* this, GlobalContext* globalCtx, CollisionHeader* collision, s32 moveFlag) {
-    s32 pad;
     CollisionHeader* colHeader = NULL;
     s32 pad2;
 
@@ -66,7 +65,6 @@ void BgMoriBigst_InitDynapoly(BgMoriBigst* this, GlobalContext* globalCtx, Colli
 }
 
 void BgMoriBigst_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMoriBigst* this = (BgMoriBigst*)thisx;
 
     // "mori (bigST.keyceiling)"
@@ -94,7 +92,6 @@ void BgMoriBigst_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgMoriBigst_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMoriBigst* this = (BgMoriBigst*)thisx;
 
     DynaPoly_DeleteBgActor(globalCtx, &globalCtx->colCtx.dyna, this->dyna.bgId);
@@ -168,7 +165,6 @@ void BgMoriBigst_Fall(BgMoriBigst* this, GlobalContext* globalCtx) {
 }
 
 void BgMoriBigst_SetupLanding(BgMoriBigst* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 quake;
 
     BgMoriBigst_SetupAction(this, BgMoriBigst_Landing);
@@ -224,7 +220,6 @@ void BgMoriBigst_SetupDone(BgMoriBigst* this, GlobalContext* globalCtx) {
 }
 
 void BgMoriBigst_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMoriBigst* this = (BgMoriBigst*)thisx;
 
     Actor_SetFocus(&this->dyna.actor, 50.0f);
@@ -240,7 +235,6 @@ void BgMoriBigst_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgMoriBigst_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgMoriBigst* this = (BgMoriBigst*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_mori_bigst.c", __LINE__);

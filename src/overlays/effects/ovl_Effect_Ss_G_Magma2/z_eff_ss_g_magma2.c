@@ -39,7 +39,6 @@ EffectSsInit Effect_Ss_G_Magma2_InitVars = {
 
 u32 EffectSsGMagma2_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, void* initParamsx) {
     s32 objBankIndex = Object_GetIndex(&globalCtx->objectCtx, OBJECT_KINGDODONGO);
-    s32 pad;
 
     if ((objBankIndex >= 0) && Object_IsLoaded(&globalCtx->objectCtx, objBankIndex)) {
         Vec3f zeroVec = { 0.0f, 0.0f, 0.0f };
@@ -73,7 +72,7 @@ u32 EffectSsGMagma2_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, vo
 
 void EffectSsGMagma2_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    s32 pad;
+
     f32 scale;
     void* object;
 

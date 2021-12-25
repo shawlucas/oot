@@ -74,8 +74,8 @@ void BgHidanCurtain_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->type = (thisx->params >> 0xC) & 0xF;
     if (this->type > 6) {
         // "Type is not set"
-        osSyncPrintf("Error : object type is not set(%s %d)(params 0x%04x)\n", "../z_bg_hidan_curtain.c",
-                     __LINE__, this->actor.params);
+        osSyncPrintf("Error : object type is not set(%s %d)(params 0x%04x)\n", "../z_bg_hidan_curtain.c", __LINE__,
+                     this->actor.params);
         Actor_Kill(&this->actor);
         return;
     }
@@ -86,8 +86,8 @@ void BgHidanCurtain_Init(Actor* thisx, GlobalContext* globalCtx) {
     thisx->params &= 0x3F;
 
     if ((this->actor.params < 0) || (this->actor.params > 0x3F)) {
-        osSyncPrintf("Warning : object's save bit is not set(%s %d)(params 0x%04X)\n",
-                     "../z_bg_hidan_curtain.c", __LINE__, this->actor.params);
+        osSyncPrintf("Warning : object's save bit is not set(%s %d)(params 0x%04X)\n", "../z_bg_hidan_curtain.c",
+                     __LINE__, this->actor.params);
     }
     Actor_SetScale(&this->actor, hcParams->scale);
     Collider_InitCylinder(globalCtx, &this->collider);

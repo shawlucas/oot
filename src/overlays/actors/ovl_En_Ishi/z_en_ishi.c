@@ -134,7 +134,7 @@ s32 EnIshi_SnapToFloor(EnIshi* this, GlobalContext* globalCtx, f32 arg2) {
 
 void EnIshi_SpawnFragmentsSmall(EnIshi* this, GlobalContext* globalCtx) {
     static s16 scales[] = { 16, 13, 11, 9, 7, 5 };
-    s32 pad;
+
     Vec3f velocity;
     Vec3f pos;
     s16 phi_v0;
@@ -344,7 +344,7 @@ void EnIshi_SetupWait(EnIshi* this) {
 
 void EnIshi_Wait(EnIshi* this, GlobalContext* globalCtx) {
     static u16 liftSounds[] = { NA_SE_PL_PULL_UP_ROCK, NA_SE_PL_PULL_UP_BIGROCK };
-    s32 pad;
+
     s16 type = this->actor.params & 1;
 
     if (Actor_HasParent(&this->actor, globalCtx)) {
@@ -413,7 +413,6 @@ void EnIshi_SetupFly(EnIshi* this) {
 }
 
 void EnIshi_Fly(EnIshi* this, GlobalContext* globalCtx) {
-    s32 pad;
     s16 type = this->actor.params & 1;
     s32 pad2;
     s32 quakeIdx;

@@ -1020,7 +1020,7 @@ void func_800ED458(s32 arg0) {
     if ((D_8016BA10 == 0) ||
         ((D_8016BA10 & sOcarinaAllowedBtnMask) != (sCurOcarinaBtnPress & sOcarinaAllowedBtnMask))) {
         D_8016BA10 = 0;
-        
+
         sCurOcarinaBtnVal = 0xFF;
         sCurOcarinaBtnIdx = 0xFF;
         phi_v1_2 = (sCurOcarinaBtnPress & sOcarinaAllowedBtnMask) & (sPrevOcarinaBtnPress & sOcarinaAllowedBtnMask);
@@ -1157,7 +1157,6 @@ void Audio_OcaPlayback(void) {
         }
 
         if (sNotePlaybackTimer == 0) {
-
             sNotePlaybackTimer = sPlaybackSong[sPlaybackNotePos].unk_02;
 
             if (sPlaybackNotePos == 1) {
@@ -1262,8 +1261,6 @@ void func_800EDD68(u8 arg0) {
         i--;
         lastNote = song[i].noteIdx;
     }
-
-    
 
     if (sRecordSongPos != (i + 1)) {
         sRecordSongPos = i + 2;
@@ -1491,7 +1488,7 @@ s32 Audio_OcaMemoryGameGenNote(void) {
     sOcarinaSongs[OCARINA_SONG_MEMORY_GAME][sOcaMinigameAppendPos].unk_02 = 0;
     sOcarinaSongs[OCARINA_SONG_MEMORY_GAME][sOcaMinigameAppendPos + 1].noteIdx = 0xFF;
     sOcarinaSongs[OCARINA_SONG_MEMORY_GAME][sOcaMinigameAppendPos + 1].unk_02 = 0;
-    
+
     return 0;
 }
 
@@ -1668,7 +1665,6 @@ char* AudioDebug_ToStringBinary(u32 num, u8 bits) {
 }
 
 void AudioDebug_Draw(GfxPrint* printer) {
-    s32 pad[3];
     u8 i;
     u8 j;
     u8 ctr;
@@ -2475,14 +2471,12 @@ void AudioDebug_ProcessInput_SndCont(void) {
 
     if (CHECK_BTN_ANY(sDebugPadPress, BTN_CDOWN)) {
         if (sAudioSndContSel == 0) {
-            
             func_800F595C(sAudioSndContWork[sAudioSndContSel]);
         }
     }
 
     if (CHECK_BTN_ANY(sDebugPadPress, BTN_CRIGHT)) {
         if (sAudioSndContSel == 0) {
-            
             func_800F5ACC(sAudioSndContWork[sAudioSndContSel]);
         }
     }
@@ -3822,7 +3816,6 @@ void func_800F5550(u16 seqId) {
         }
 
         if ((sSeqFlags[D_80130630] & 0x20) && sSeqFlags[(seqId & 0xFF) & 0xFF] & 0x10) {
-
             if ((D_8013062C & 0x3F) != 0) {
                 sp27 = 0x1E;
             }
@@ -4128,7 +4121,6 @@ void func_800F6268(f32 dist, u16 arg1) {
         temp_a0 = (s8)(func_800FA0B4(SEQ_PLAYER_BGM_MAIN) & 0xFF);
         if (temp_a0 == (arg1 & 0xFF)) {
             if ((arg1 & 0xFF) == NA_BGM_LONLON) {
-
                 if (dist > 2000.0f) {
                     phi_v1 = 127;
                 } else if (dist < 200.0f) {

@@ -81,7 +81,6 @@ void func_8099375C(DemoTreLgt* this, GlobalContext* globalCtx) {
 
 void func_809937B4(DemoTreLgt* this, GlobalContext* globalCtx, f32 currentFrame) {
     SkelAnimeCurve* skelCurve = &this->skelCurve;
-    s32 pad[2];
 
     this->action = DEMO_TRE_LGT_ACTION_ANIMATE;
 
@@ -132,7 +131,6 @@ void DemoTreLgt_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 s32 DemoTreLgt_PostLimbDraw(GlobalContext* globalCtx, SkelAnimeCurve* skelCurve, s32 limbIndex, void* thisx) {
-    s32 pad;
     DemoTreLgt* this = (DemoTreLgt*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_tre_lgt.c", __LINE__);

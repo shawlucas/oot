@@ -307,7 +307,7 @@ void EnBb_KillFlameTrail(EnBb* this) {
 
 void EnBb_Init(Actor* thisx, GlobalContext* globalCtx) {
     EffectBlureInit1 blureInit;
-    s32 pad;
+
     EnBb* this = (EnBb*)thisx;
 
     Actor_ProcessInitChain(thisx, sInitChain);
@@ -398,7 +398,6 @@ void EnBb_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnBb_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnBb* this = (EnBb*)thisx;
 
     Collider_DestroyJntSph(globalCtx, &this->collider);
@@ -1272,7 +1271,6 @@ static Vec3f sFireIceOffsets[] = {
 };
 
 void EnBb_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnBb* this = (EnBb*)thisx;
     Vec3f blureBase1 = { 0.0f, 5000.0f, 0.0f };
     Vec3f blureBase2 = { 0.0f, 2000.0f, 0.0f };
@@ -1296,7 +1294,7 @@ void EnBb_Draw(Actor* thisx, GlobalContext* globalCtx) {
                 //! the above bugs mean unk_2A8 can be nonzero without damage effects ever having been set.
                 //! This routine will then increment colorFilterTimer, and on the next frame Actor_Draw will try
                 //! to draw the unset colorFilterParams. This causes a divide-by-zero error, crashing the game.
-                
+
                 this->fireIceTimer--;
                 if ((this->fireIceTimer % 4) == 0) {
                     Vec3f sp70;

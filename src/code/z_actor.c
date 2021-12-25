@@ -413,7 +413,6 @@ void func_8002C124(TargetContext* targetCtx, GlobalContext* globalCtx) {
 }
 
 void func_8002C7BC(TargetContext* targetCtx, Player* player, Actor* actorArg, GlobalContext* globalCtx) {
-    s32 pad;
     Actor* unkActor;
     s32 actorCategory;
     Vec3f sp50;
@@ -1226,7 +1225,7 @@ s32 func_8002E2AC(GlobalContext* globalCtx, Actor* actor, Vec3f* arg2, s32 arg3)
 void Actor_UpdateBgCheckInfo(GlobalContext* globalCtx, Actor* actor, f32 wallCheckHeight, f32 wallCheckRadius,
                              f32 ceilingCheckHeight, s32 flags) {
     f32 sp74;
-    s32 pad;
+
     Vec3f sp64;
     s32 bgId;
     CollisionPoly* wallPoly;
@@ -2619,7 +2618,6 @@ void Actor_FreeOverlay(ActorOverlay* actorOverlay) {
 
 Actor* Actor_Spawn(ActorContext* actorCtx, GlobalContext* globalCtx, s16 actorId, f32 posX, f32 posY, f32 posZ,
                    s16 rotX, s16 rotY, s16 rotZ, s16 params) {
-    s32 pad;
     Actor* actor;
     ActorInit* actorInit;
     s32 objBankIndex;
@@ -2662,7 +2660,8 @@ Actor* Actor_Spawn(ActorContext* actorCtx, GlobalContext* globalCtx, s16 actorId
 
                 if (actorCtx->absoluteSpace == NULL) {
                     // "AMF: absolute magic field"
-                    actorCtx->absoluteSpace = ZeldaArena_MallocRDebug(AM_FIELD_SIZE, "AMF: Absolute magic field", __LINE__);
+                    actorCtx->absoluteSpace =
+                        ZeldaArena_MallocRDebug(AM_FIELD_SIZE, "AMF: Absolute magic field", __LINE__);
                     if (HREG(20) != 0) {
                         // "Absolute magic field reservation - %d bytes reserved"
                         osSyncPrintf("Absolute magic field reservation - %d bytes reserved", AM_FIELD_SIZE);
@@ -2897,7 +2896,6 @@ void func_800328D4(GlobalContext* globalCtx, ActorContext* actorCtx, Player* pla
 
     while (actor != NULL) {
         if ((actor->update != NULL) && ((Player*)actor != player) && CHECK_FLAG_ALL(actor->flags, ACTOR_FLAG_0)) {
-
             // This block below is for determining the closest actor to player in determining the volume
             // used while playing enemy bgm music
             if ((actorCategory == ACTORCAT_ENEMY) && CHECK_FLAG_ALL(actor->flags, ACTOR_FLAG_0 | ACTOR_FLAG_2) &&
@@ -3438,7 +3436,6 @@ void func_80033C30(Vec3f* arg0, Vec3f* arg1, u8 alpha, GlobalContext* globalCtx)
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_actor.c", __LINE__);
 
-     
     POLY_OPA_DISP = Gfx_CallSetupDL(POLY_OPA_DISP, 0x2C);
 
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 0, alpha);
@@ -3715,7 +3712,6 @@ s16 func_800347E8(s16 arg0) {
 }
 
 s16 func_80034810(Actor* actor, struct_80034A14_arg1* arg1, f32 arg2, s16 arg3, s16 arg4) {
-    s32 pad;
     s16 var;
     s16 abs_var;
 
@@ -4126,7 +4122,6 @@ void func_800359B8(Actor* actor, s16 arg1, Vec3s* arg2) {
     f32 sp28;
     f32 sp24;
     CollisionPoly* floorPoly;
-    s32 pad;
 
     if (actor->floorPoly != NULL) {
         floorPoly = actor->floorPoly;
@@ -5419,7 +5414,6 @@ s32 func_80037D98(GlobalContext* globalCtx, Actor* actor, s16 arg2, s32* arg3) {
 
     Actor_GetScreenPos(globalCtx, actor, &sp2C, &sp2A);
 
-     
     if ((sp2C < 0) || (sp2C > SCREEN_WIDTH) || (sp2A < 0) || (sp2A > SCREEN_HEIGHT)) {
         return false;
     }
@@ -5482,7 +5476,7 @@ s32 func_80037FC8(Actor* actor, Vec3f* arg1, Vec3s* arg2, Vec3s* arg3) {
 
 s32 func_80038154(GlobalContext* globalCtx, Actor* actor, Vec3s* arg2, Vec3s* arg3, f32 arg4) {
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     Vec3f sp2C;
     s16 var;
     s16 abs_var;
@@ -5512,7 +5506,7 @@ s32 func_80038154(GlobalContext* globalCtx, Actor* actor, Vec3s* arg2, Vec3s* ar
 
 s32 func_80038290(GlobalContext* globalCtx, Actor* actor, Vec3s* arg2, Vec3s* arg3, Vec3f arg4) {
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     Vec3f sp24;
     s16 var;
     s16 abs_var;

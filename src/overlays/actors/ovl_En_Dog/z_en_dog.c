@@ -232,7 +232,6 @@ s32 EnDog_Orient(EnDog* this, GlobalContext* globalCtx) {
 void EnDog_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnDog* this = (EnDog*)thisx;
     s16 followingDog;
-    s32 pad;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 24.0f);
     SkelAnime_InitFlex(globalCtx, &this->skelAnime, &object_dog_Skel_007290, NULL, this->jointTable, this->morphTable,
@@ -440,7 +439,6 @@ void EnDog_Wait(EnDog* this, GlobalContext* globalCtx) {
 
 void EnDog_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnDog* this = (EnDog*)thisx;
-    s32 pad;
 
     EnDog_PlayAnimAndSFX(this);
     SkelAnime_Update(&this->skelAnime);

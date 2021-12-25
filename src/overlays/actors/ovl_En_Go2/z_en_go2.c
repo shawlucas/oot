@@ -161,7 +161,7 @@ void EnGo2_AddDust(EnGo2* this, Vec3f* pos, Vec3f* velocity, Vec3f* accel, u8 in
         if (dustEffect->type != 1) {
             dustEffect->scale = scale;
             dustEffect->scaleStep = scaleStep;
-            
+
             timer = initialTimer;
             dustEffect->timer = timer;
             dustEffect->type = 1;
@@ -210,7 +210,6 @@ void EnGo2_DrawDust(EnGo2* this, GlobalContext* globalCtx) {
 
     firstDone = false;
     func_80093D84(globalCtx->state.gfxCtx);
-    
 
     for (i = 0; i < ARRAY_COUNT(this->dustEffects); i++, dustEffect++) {
         if (dustEffect->type) {
@@ -455,10 +454,9 @@ u16 EnGo2_GetTextIdGoronCityLowestFloor(GlobalContext* globalCtx, EnGo2* this) {
     } else if (CHECK_QUEST_ITEM(QUEST_GORON_RUBY)) {
         return 0x3027;
     } else {
-        return CUR_UPG_VALUE(UPG_STRENGTH) != 0    ? 0x302C
-               : !Flags_GetSwitch(globalCtx, 0x1B) ? 0x3017
-               : gSaveContext.infTable[15] & 0x100 ? 0x3019
-                                                   : 0x3018;
+        return CUR_UPG_VALUE(UPG_STRENGTH) != 0
+                   ? 0x302C
+                   : !Flags_GetSwitch(globalCtx, 0x1B) ? 0x3017 : gSaveContext.infTable[15] & 0x100 ? 0x3019 : 0x3018;
     }
 }
 
@@ -1474,7 +1472,6 @@ void EnGo2_BiggoronAnimation(EnGo2* this) {
 
 void EnGo2_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnGo2* this = (EnGo2*)thisx;
-    s32 pad;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 28.0f);
     SkelAnime_InitFlex(globalCtx, &this->skelAnime, &gGoronSkel, NULL, this->jointTable, this->morphTable, 18);
@@ -1964,7 +1961,6 @@ s32 EnGo2_DrawCurledUp(EnGo2* this, GlobalContext* globalCtx) {
 }
 
 s32 EnGo2_DrawRolling(EnGo2* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f D_80A48560 = { 0.0f, 0.0f, 0.0f };
     f32 speedXZ;
 
@@ -2031,7 +2027,6 @@ void EnGo2_Draw(Actor* thisx, GlobalContext* globalCtx) {
 
     if ((this->actionFunc == EnGo2_CurledUp) && (this->skelAnime.playSpeed == 0.0f) &&
         (this->skelAnime.curFrame == 0.0f)) {
-        
         EnGo2_DrawCurledUp(this, globalCtx);
     } else if (this->actionFunc == EnGo2_SlowRolling || this->actionFunc == EnGo2_ReverseRolling ||
                this->actionFunc == EnGo2_ContinueRolling) {

@@ -55,7 +55,7 @@ const ActorInit En_Kakasi2_InitVars = {
 
 void EnKakasi2_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnKakasi2* this = (EnKakasi2*)thisx;
-    s32 pad;
+
     f32 spawnRangeY;
     f32 spawnRangeXZ;
 
@@ -118,7 +118,6 @@ void func_80A90264(EnKakasi2* this, GlobalContext* globalCtx) {
 
     if ((BREG(1) != 0) && (this->actor.xzDistToPlayer < this->maxSpawnDistance.x) &&
         (fabsf(player->actor.world.pos.y - this->actor.world.pos.y) < this->maxSpawnDistance.y)) {
-
         this->actor.draw = func_80A90948;
         Collider_InitCylinder(globalCtx, &this->collider);
         Collider_SetCylinder(globalCtx, &this->collider, &this->actor, &sCylinderInit);
@@ -136,7 +135,6 @@ void func_80A90264(EnKakasi2* this, GlobalContext* globalCtx) {
     } else if ((this->actor.xzDistToPlayer < this->maxSpawnDistance.x) &&
                (fabsf(player->actor.world.pos.y - this->actor.world.pos.y) < this->maxSpawnDistance.y) &&
                (gSaveContext.eventChkInf[9] & 0x1000)) {
-
         this->unk_194 = 0;
         if (globalCtx->msgCtx.ocarinaMode == OCARINA_MODE_0B) {
             if (this->switchFlag >= 0) {

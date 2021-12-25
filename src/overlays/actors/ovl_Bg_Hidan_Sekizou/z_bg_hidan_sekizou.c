@@ -327,7 +327,6 @@ Gfx* func_8088D9F4(GlobalContext* globalCtx, BgHidanSekizou* this, s16 arg2, Mtx
 }
 
 Gfx* func_8088DC50(GlobalContext* globalCtx, BgHidanSekizou* this, s16 arg2, s16 arg3, Gfx* arg4) {
-    s32 pad;
     s16 temp_v1;
     s32 phi_s1;
     s32 phi_s2;

@@ -296,7 +296,7 @@ void EnTp_SetupDie(EnTp* this) {
 void EnTp_Die(EnTp* this, GlobalContext* globalCtx) {
     EnTp* now;
     s16 i;
-    s32 pad;
+
     Vec3f effectVelAccel = { 0.0f, 0.5f, 0.0f };
     Vec3f effectPos = { 0.0f, 0.0f, 0.0f };
 
@@ -372,7 +372,6 @@ void EnTp_Head_SetupTakeOff(EnTp* this) {
  * Flies up and loops around until it makes for Player
  */
 void EnTp_Head_TakeOff(EnTp* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
 
     Math_SmoothStepToF(&this->actor.speedXZ, 2.5f, 0.1f, 0.2f, 0.0f);
@@ -644,7 +643,6 @@ void EnTp_UpdateDamage(EnTp* this, GlobalContext* globalCtx) {
 }
 
 void EnTp_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnTp* this = (EnTp*)thisx;
     Vec3f kiraVelocity = { 0.0f, 0.0f, 0.0f };
     Vec3f kiraAccel = { 0.0f, -0.6f, 0.0f };
@@ -726,7 +724,6 @@ void EnTp_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnTp_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnTp* this = (EnTp*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_tp.c", __LINE__);

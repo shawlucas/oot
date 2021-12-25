@@ -80,8 +80,6 @@ void BgJyaGoroiwa_UpdateCollider(BgJyaGoroiwa* this) {
 }
 
 void BgJyaGoroiwa_InitCollider(BgJyaGoroiwa* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     Collider_InitJntSph(globalCtx, &this->collider);
     Collider_SetJntSph(globalCtx, &this->collider, &this->actor, &sJntSphInit, &this->colliderItem);
     BgJyaGoroiwa_UpdateCollider(this);
@@ -194,7 +192,6 @@ void BgJyaGoroiwa_Wait(BgJyaGoroiwa* this, GlobalContext* globalCtx) {
 }
 
 void BgJyaGoroiwa_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgJyaGoroiwa* this = (BgJyaGoroiwa*)thisx;
     Player* player = GET_PLAYER(globalCtx);
     s32 bgId;

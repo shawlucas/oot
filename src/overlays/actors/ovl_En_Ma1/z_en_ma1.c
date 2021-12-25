@@ -255,7 +255,6 @@ void func_80AA0B74(EnMa1* this) {
 
 void EnMa1_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnMa1* this = (EnMa1*)thisx;
-    s32 pad;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 18.0f);
     SkelAnime_InitFlex(globalCtx, &this->skelAnime, &gMalonChildSkel, NULL, NULL, NULL, 0);
@@ -391,7 +390,6 @@ void EnMa1_DoNothing(EnMa1* this, GlobalContext* globalCtx) {
 
 void EnMa1_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnMa1* this = (EnMa1*)thisx;
-    s32 pad;
 
     Collider_UpdateCylinder(&this->actor, &this->collider);
     CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);
@@ -441,7 +439,6 @@ void EnMa1_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnMa1* this = (EnMa1*)thisx;
     Camera* camera;
     f32 distFromCamera;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ma1.c", __LINE__);
 

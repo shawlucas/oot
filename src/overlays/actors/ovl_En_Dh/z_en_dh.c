@@ -157,7 +157,6 @@ void EnDh_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnDh_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnDh* this = (EnDh*)thisx;
 
     func_800F5B58();
@@ -296,8 +295,6 @@ void EnDh_SetupAttack(EnDh* this) {
 }
 
 void EnDh_Attack(EnDh* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     if (SkelAnime_Update(&this->skelAnime)) {
         this->actionState++;
     } else if ((this->actor.xzDistToPlayer > 100.0f) || !Actor_IsFacingPlayer(&this->actor, 60 * 0x10000 / 360)) {
@@ -468,7 +465,6 @@ void EnDh_Death(EnDh* this, GlobalContext* globalCtx) {
 }
 
 void EnDh_CollisionCheck(EnDh* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
     s32 lastHealth;
 
@@ -489,7 +485,6 @@ void EnDh_CollisionCheck(EnDh* this, GlobalContext* globalCtx) {
                 if (((lastHealth >= 15) && (this->actor.colChkInfo.health < 15)) ||
                     ((lastHealth >= 9) && (this->actor.colChkInfo.health < 9)) ||
                     ((lastHealth >= 3) && (this->actor.colChkInfo.health < 3))) {
-
                     this->retreat++;
                 }
                 EnDh_SetupDamage(this);
@@ -499,7 +494,6 @@ void EnDh_CollisionCheck(EnDh* this, GlobalContext* globalCtx) {
 }
 
 void EnDh_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnDh* this = (EnDh*)thisx;
     Player* player = GET_PLAYER(globalCtx);
     s32 pad40;
@@ -518,7 +512,6 @@ void EnDh_Update(Actor* thisx, GlobalContext* globalCtx) {
         }
         if (((this->curAction != DH_DAMAGE) && (this->actor.shape.yOffset == 0.0f)) ||
             ((player->unk_844 != 0) && (player->unk_845 != this->unk_258))) {
-
             CollisionCheck_SetAC(globalCtx, &globalCtx->colChkCtx, &this->collider2.base);
             CollisionCheck_SetAT(globalCtx, &globalCtx->colChkCtx, &this->collider2.base);
             CollisionCheck_SetAT(globalCtx, &globalCtx->colChkCtx, &this->collider1.base);
@@ -543,7 +536,6 @@ void EnDh_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec
 }
 
 void EnDh_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnDh* this = (EnDh*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_dh.c", __LINE__);

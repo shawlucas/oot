@@ -60,7 +60,6 @@ void EnEncount2_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnEncount2_Wait(EnEncount2* this, GlobalContext* globalCtx) {
-    s32 pad;
     s16 quakeIndex;
     s16 spawnerState;
     Player* player = GET_PLAYER(globalCtx);

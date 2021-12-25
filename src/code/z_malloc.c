@@ -23,40 +23,40 @@ void ZeldaArena_CheckPointer(void* ptr, u32 size, const char* name, const char* 
 void* ZeldaArena_Malloc(u32 size) {
     void* ptr = __osMalloc(&sZeldaArena, size);
 
-    ZeldaArena_CheckPointer(ptr, size, "ZeldaArena_Malloc", "Secure"); 
+    ZeldaArena_CheckPointer(ptr, size, "ZeldaArena_Malloc", "Secure");
     return ptr;
 }
 
 void* ZeldaArena_MallocDebug(u32 size, const char* file, s32 line) {
     void* ptr = __osMallocDebug(&sZeldaArena, size, file, line);
 
-    ZeldaArena_CheckPointer(ptr, size, "ZeldaArena_MallocDebug", "Secure"); 
+    ZeldaArena_CheckPointer(ptr, size, "ZeldaArena_MallocDebug", "Secure");
     return ptr;
 }
 
 void* ZeldaArena_MallocR(u32 size) {
     void* ptr = __osMallocR(&sZeldaArena, size);
 
-    ZeldaArena_CheckPointer(ptr, size, "ZeldaArena_MallocR", "Secure"); 
+    ZeldaArena_CheckPointer(ptr, size, "ZeldaArena_MallocR", "Secure");
     return ptr;
 }
 
 void* ZeldaArena_MallocRDebug(u32 size, const char* file, s32 line) {
     void* ptr = __osMallocRDebug(&sZeldaArena, size, file, line);
 
-    ZeldaArena_CheckPointer(ptr, size, "ZeldaArena_MallocRDebug", "Secure"); 
+    ZeldaArena_CheckPointer(ptr, size, "ZeldaArena_MallocRDebug", "Secure");
     return ptr;
 }
 
 void* ZeldaArena_Realloc(void* ptr, u32 newSize) {
     ptr = __osRealloc(&sZeldaArena, ptr, newSize);
-    ZeldaArena_CheckPointer(ptr, newSize, "ZeldaArena_Realloc", "Re-securing"); 
+    ZeldaArena_CheckPointer(ptr, newSize, "ZeldaArena_Realloc", "Re-securing");
     return ptr;
 }
 
 void* ZeldaArena_ReallocDebug(void* ptr, u32 newSize, const char* file, s32 line) {
     ptr = __osReallocDebug(&sZeldaArena, ptr, newSize, file, line);
-    ZeldaArena_CheckPointer(ptr, newSize, "ZeldaArena_ReallocDebug", "Re-securing"); 
+    ZeldaArena_CheckPointer(ptr, newSize, "ZeldaArena_ReallocDebug", "Re-securing");
     return ptr;
 }
 

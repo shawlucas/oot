@@ -126,7 +126,6 @@ typedef struct {
 } struct_8011F9B8;
 
 void func_8006D684(GlobalContext* globalCtx, Player* player) {
-    s32 pad;
     s32 i;
     Vec3s spawnPos;
 

@@ -339,7 +339,7 @@ void func_80A56B40(EnHeishi4* this, GlobalContext* globalCtx) {
 
 void EnHeishi4_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnHeishi4* this = (EnHeishi4*)thisx;
-    s32 pad;
+
     Player* player = GET_PLAYER(globalCtx);
 
     thisx->world.pos.x = this->pos.x;

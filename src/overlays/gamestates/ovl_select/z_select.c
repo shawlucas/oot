@@ -298,7 +298,7 @@ static SceneSelectEntry sScenes[] = {
 
 void Select_UpdateMenu(SelectContext* this) {
     Input* input = &this->state.input[0];
-    s32 pad;
+
     SceneSelectEntry* selectedScene;
 
     if (this->verticalInputAccumulator == 0) {
@@ -715,7 +715,6 @@ void Select_Destroy(GameState* thisx) {
 void Select_Init(GameState* thisx) {
     SelectContext* this = (SelectContext*)thisx;
     u32 size;
-    s32 pad;
 
     this->state.main = Select_Main;
     this->state.destroy = Select_Destroy;

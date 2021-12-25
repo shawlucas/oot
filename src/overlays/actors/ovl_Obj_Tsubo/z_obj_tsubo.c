@@ -154,7 +154,6 @@ void ObjTsubo_Destroy(Actor* thisx, GlobalContext* globalCtx2) {
 }
 
 void ObjTsubo_AirBreak(ObjTsubo* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 rand;
     s16 angle;
     Vec3f pos;
@@ -190,7 +189,6 @@ void ObjTsubo_AirBreak(ObjTsubo* this, GlobalContext* globalCtx) {
 }
 
 void ObjTsubo_WaterBreak(ObjTsubo* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s16 angle;
     Vec3f pos = this->actor.world.pos;
     Vec3f velocity;
@@ -235,7 +233,6 @@ void ObjTsubo_SetupIdle(ObjTsubo* this) {
 }
 
 void ObjTsubo_Idle(ObjTsubo* this, GlobalContext* globalCtx) {
-    s32 pad;
     s16 temp_v0;
     s32 phi_v1;
 
@@ -301,8 +298,6 @@ void ObjTsubo_SetupThrown(ObjTsubo* this) {
 }
 
 void ObjTsubo_Thrown(ObjTsubo* this, GlobalContext* globalCtx) {
-    s32 pad[2];
-
     if ((this->actor.bgCheckFlags & 0xB) || (this->collider.base.atFlags & AT_HIT)) {
         ObjTsubo_AirBreak(this, globalCtx);
         ObjTsubo_SpawnCollectible(this, globalCtx);

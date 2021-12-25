@@ -77,7 +77,6 @@ const ActorInit En_G_Switch_InitVars = {
 };
 
 void EnGSwitch_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnGSwitch* this = (EnGSwitch*)thisx;
 
     this->type = (this->actor.params >> 0xC) & 0xF;
@@ -165,7 +164,6 @@ void EnGSwitch_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnGSwitch_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnGSwitch* this = (EnGSwitch*)thisx;
 
     Collider_DestroyCylinder(globalCtx, &this->collider);
@@ -371,7 +369,6 @@ void EnGSwitch_ArcheryPot(EnGSwitch* this, GlobalContext* globalCtx) {
             f32 rand;
             s32 phi_s0;
             s32 scale;
-            s32 pad;
 
             pos.x = sn * 8.0f;
             pos.y = 10.0f + Rand_CenteredFloat(5.0f);
@@ -415,7 +412,6 @@ void EnGSwitch_Kill(EnGSwitch* this, GlobalContext* globalCtx) {
 }
 
 void EnGSwitch_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnGSwitch* this = (EnGSwitch*)thisx;
 
     this->actionFunc(this, globalCtx);
@@ -450,7 +446,6 @@ void EnGSwitch_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnGSwitch_DrawPot(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnGSwitch* this = (EnGSwitch*)thisx;
 
     if (!this->broken) {
@@ -468,10 +463,8 @@ static void* sRupeeTextures[] = {
 };
 
 void EnGSwitch_DrawRupee(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnGSwitch* this = (EnGSwitch*)thisx;
 
-    
     if (!this->broken) {
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_g_switch.c", __LINE__);
         func_80093D18(globalCtx->state.gfxCtx);
@@ -548,7 +541,6 @@ void EnGSwitch_DrawEffects(EnGSwitch* this, GlobalContext* globalCtx) {
     EnGSwitchEffect* effect = this->effects;
     s16 i;
     f32 scale;
-    s32 pad;
 
     OPEN_DISPS(gfxCtx, "../z_en_g_switch.c", __LINE__);
     func_80093D18(globalCtx->state.gfxCtx);

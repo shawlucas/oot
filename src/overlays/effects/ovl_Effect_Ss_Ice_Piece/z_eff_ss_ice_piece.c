@@ -44,7 +44,7 @@ u32 EffectSsIcePiece_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, v
 
 void EffectSsIcePiece_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    s32 pad;
+
     f32 scale;
     u32 frames;
     f32 alpha;

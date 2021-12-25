@@ -74,7 +74,7 @@ static ColliderCylinderInit D_80891738 = {
 void func_80890740(BgIceShelter* this, GlobalContext* globalCtx) {
     static s16 cylinderRadii[] = { 47, 33, 44, 41, 100 };
     static s16 cylinderHeights[] = { 80, 54, 90, 60, 200 };
-    s32 pad;
+
     s32 type = (this->dyna.actor.params >> 8) & 7;
 
     Collider_InitCylinder(globalCtx, &this->cylinder1);
@@ -99,17 +99,14 @@ void func_80890740(BgIceShelter* this, GlobalContext* globalCtx) {
 }
 
 void func_80890874(BgIceShelter* this, GlobalContext* globalCtx, CollisionHeader* collision, s32 moveFlag) {
-    s32 pad;
     CollisionHeader* colHeader = NULL;
-    s32 pad2;
 
     DynaPolyActor_Init(&this->dyna, moveFlag);
     CollisionHeader_GetVirtual(collision, &colHeader);
     this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, colHeader);
 
     if (this->dyna.bgId == BG_ACTOR_MAX) {
-        // "Warning : move BG registration failed"
-        osSyncPrintf("Warning : move BG 登録失敗(%s %d)(name %d)(arg_data 0x%04x)\n", "../z_bg_ice_shelter.c", 362,
+        osSyncPrintf("Warning: move BG registration failed(%s %d)(name %d)(params 0x%04X)\n", "../z_bg_ice_shelter.c", __LINE__,
                      this->dyna.actor.id, this->dyna.actor.params);
     }
 }
@@ -169,7 +166,7 @@ void BgIceShelter_Init(Actor* thisx, GlobalContext* globalCtx) {
 
     func_80891064(this);
 
-    osSyncPrintf("(ice shelter)(arg_data 0x%04x)\n", this->dyna.actor.params);
+    osSyncPrintf("(ice shelter)(params 0x%04X)\n", this->dyna.actor.params);
 }
 
 void BgIceShelter_Destroy(Actor* thisx, GlobalContext* globalCtx) {
@@ -202,7 +199,7 @@ void func_80890B8C(BgIceShelter* this, GlobalContext* globalCtx, f32 chance, f32
     s16 angle;
     s16 frames;
     s32 i;
-    s32 pad[2];
+
     Vec3f dustPos;
     Vec3f dustVel;
     Vec3f dustAccel;
@@ -241,7 +238,7 @@ void func_80890E00(BgIceShelter* this, GlobalContext* globalCtx, f32 chance, f32
     static f32 D_808917B4[] = { -1.0f, 1.0f };
     Vec3f* icePos;
     s16 frames;
-    s32 pad[2];
+
     Vec3f dustPos;
     Vec3f dustVel;
     Vec3f dustAccel;
@@ -283,7 +280,6 @@ void func_80891064(BgIceShelter* this) {
 }
 
 void func_8089107C(BgIceShelter* this, GlobalContext* globalCtx) {
-    s32 pad;
     s16 type = (this->dyna.actor.params >> 8) & 7;
 
     if (type == 4) {
@@ -332,8 +328,6 @@ static void (*sEffSpawnFuncs[])(BgIceShelter* this, GlobalContext* globalCtx, f3
 };
 
 void func_808911D4(BgIceShelter* this, GlobalContext* globalCtx) {
-
-    s32 pad;
     s32 type = (this->dyna.actor.params >> 8) & 7;
     f32 phi_f0;
 

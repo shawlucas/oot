@@ -389,7 +389,7 @@ void EnBox_WaitOpen(EnBox* this, GlobalContext* globalCtx) {
     f32 frameCount;
     AnimationHeader* anim;
     s32 linkAge;
-    s32 pad;
+
     Vec3f sp4C;
     Player* player;
 
@@ -542,7 +542,6 @@ void EnBox_Update(Actor* thisx, GlobalContext* globalCtx) {
 
 void EnBox_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3s* rot, void* thisx, Gfx** gfx) {
     EnBox* this = (EnBox*)thisx;
-    s32 pad;
 
     if (limbIndex == 1) {
         gSPMatrix((*gfx)++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_en_box.c", __LINE__),

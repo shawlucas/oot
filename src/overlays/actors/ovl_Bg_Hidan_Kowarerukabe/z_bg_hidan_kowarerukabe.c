@@ -73,7 +73,7 @@ void BgHidanKowarerukabe_InitDynaPoly(BgHidanKowarerukabe* this, GlobalContext* 
         &gFireTempleBombableWallCol,
         &gFireTempleLargeBombableWallCol,
     };
-    s32 pad;
+
     CollisionHeader* colHeader = NULL;
     s32 pad2;
 
@@ -89,7 +89,6 @@ void BgHidanKowarerukabe_InitDynaPoly(BgHidanKowarerukabe* this, GlobalContext* 
 void BgHidanKowarerukabe_InitColliderSphere(BgHidanKowarerukabe* this, GlobalContext* globalCtx) {
     static s16 sphereRadii[] = { 80, 45, 80 };
     static s16 sphereYPositions[] = { 0, 500, 500 };
-    s32 pad;
 
     Collider_InitJntSph(globalCtx, &this->collider);
     Collider_SetJntSph(globalCtx, &this->collider, &this->dyna.actor, &sJntSphInit, this->colliderItems);

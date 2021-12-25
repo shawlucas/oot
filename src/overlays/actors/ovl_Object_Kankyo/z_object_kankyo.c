@@ -66,7 +66,7 @@ void ObjectKankyo_SetupAction(ObjectKankyo* this, ObjectKankyoActionFunc action)
 
 void ObjectKankyo_Init(Actor* thisx, GlobalContext* globalCtx) {
     ObjectKankyo* this = (ObjectKankyo*)thisx;
-    s32 pad;
+
     s16 i;
 
     for (i = 0; i < ARRAY_COUNT(this->effects); i++) {
@@ -412,7 +412,6 @@ void ObjectKankyo_Fairies(ObjectKankyo* this, GlobalContext* globalCtx) {
                         this->effects[i].base.y + this->effects[i].pos.y - baseY < -maxDist ||
                         this->effects[i].base.z + this->effects[i].pos.z - baseZ > maxDist ||
                         this->effects[i].base.z + this->effects[i].pos.z - baseZ < -maxDist) {
-
                         // when a fairy moves off screen, wrap around to the other side
                         if (this->effects[i].base.x + this->effects[i].pos.x - baseX > maxDist) {
                             this->effects[i].base.x = baseX - maxDist;
@@ -559,7 +558,8 @@ void ObjectKankyo_DrawFairies(ObjectKankyo* this2, GlobalContext* globalCtx2) {
 
             Matrix_Mult(&globalCtx->billboardMtxF, MTXMODE_APPLY);
             Matrix_RotateZ(DEG_TO_RAD(globalCtx->state.frames * 20.0f), MTXMODE_APPLY);
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_object_kankyo.c", __LINE__), G_MTX_LOAD);
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_object_kankyo.c", __LINE__),
+                      G_MTX_LOAD);
             gSPDisplayList(POLY_XLU_DISP++, gKokiriDustMoteDL);
         }
         CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_object_kankyo.c", __LINE__);
@@ -581,7 +581,7 @@ void ObjectKankyo_DrawSnow(ObjectKankyo* this2, GlobalContext* globalCtx2) {
     Vec3f vec1 = { 0.0f, 0.0f, 0.0f };
     Vec3f vec2 = { 0.0f, 0.0f, 0.0f };
     s16 i;
-    s32 pad;
+
     s32 pad2;
 
     if (!(globalCtx->cameraPtrs[0]->unk_14C & 0x100)) {
@@ -651,7 +651,6 @@ void ObjectKankyo_DrawSnow(ObjectKankyo* this2, GlobalContext* globalCtx2) {
                         this->effects[i].base.y + this->effects[i].pos.y - baseY < -maxDist ||
                         this->effects[i].base.z + this->effects[i].pos.z - baseZ > maxDist ||
                         this->effects[i].base.z + this->effects[i].pos.z - baseZ < -maxDist) {
-
                         // when off screen, wrap around to the other side
                         if (this->effects[i].base.x + this->effects[i].pos.x - baseX > maxDist) {
                             this->effects[i].base.x = baseX - maxDist;
@@ -677,8 +676,6 @@ void ObjectKankyo_DrawSnow(ObjectKankyo* this2, GlobalContext* globalCtx2) {
                     break;
             }
 
-            
-            
             Matrix_Translate(this->effects[i].base.x + this->effects[i].pos.x,
                              this->effects[i].base.y + this->effects[i].pos.y,
                              this->effects[i].base.z + this->effects[i].pos.z, MTXMODE_NEW);
@@ -733,7 +730,6 @@ void ObjectKankyo_Lightning(ObjectKankyo* this, GlobalContext* globalCtx) {
 }
 
 void ObjectKankyo_DrawLightning(ObjectKankyo* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 pad2;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_object_kankyo.c", __LINE__);
@@ -746,7 +742,8 @@ void ObjectKankyo_DrawLightning(ObjectKankyo* this, GlobalContext* globalCtx) {
         Matrix_Scale(2.0f, 5.0f, 2.0f, MTXMODE_APPLY);
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, 128);
         gDPSetEnvColor(POLY_XLU_DISP++, 0, 255, 255, 128);
-        gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_object_kankyo.c", __LINE__), G_MTX_LOAD);
+        gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(globalCtx->state.gfxCtx, "../z_object_kankyo.c", __LINE__),
+                  G_MTX_LOAD);
         gSPSegment(POLY_XLU_DISP++, 0x08, SEGMENTED_TO_VIRTUAL(sEffLightningTextures[this->effects[0].timer]));
         func_80094C50(globalCtx->state.gfxCtx);
         gSPMatrix(POLY_XLU_DISP++, &D_01000000, G_MTX_MODELVIEW | G_MTX_NOPUSH | G_MTX_MUL);

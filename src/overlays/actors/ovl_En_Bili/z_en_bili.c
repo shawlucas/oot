@@ -258,7 +258,6 @@ void EnBili_SetupFrozen(EnBili* this, GlobalContext* globalCtx) {
     effectPos.y = this->actor.world.pos.y - 15.0f;
 
     for (i = 0; i < 8; i++) {
-
         effectPos.x = this->actor.world.pos.x + ((i & 1) ? 7.0f : -7.0f);
         effectPos.y += 2.5f;
         effectPos.z = this->actor.world.pos.z + ((i & 4) ? 7.0f : -7.0f);

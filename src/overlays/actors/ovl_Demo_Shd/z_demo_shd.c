@@ -98,10 +98,10 @@ void DemoShd_Update(Actor* thisx, GlobalContext* globalCtx) {
 
 void DemoShd_Draw(Actor* thisx, GlobalContext* globalCtx) {
     DemoShd* this = (DemoShd*)thisx;
-    s32 pad;
+
     u32 unk_14E = this->unk_14E;
 
-     // Necessary to match, can be anywhere in the function
+    // Necessary to match, can be anywhere in the function
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_shd.c", __LINE__);
 

@@ -84,7 +84,6 @@ static Vec2f sFaceDirection[] = {
 };
 
 void ObjOshihiki_InitDynapoly(ObjOshihiki* this, GlobalContext* globalCtx, CollisionHeader* collision, s32 moveFlag) {
-    s32 pad;
     CollisionHeader* colHeader = NULL;
     s32 pad2;
 
@@ -307,7 +306,6 @@ void ObjOshihiki_Init(Actor* thisx, GlobalContext* globalCtx2) {
 }
 
 void ObjOshihiki_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     ObjOshihiki* this = (ObjOshihiki*)thisx;
 
     DynaPoly_DeleteBgActor(globalCtx, &globalCtx->colCtx.dyna, this->dyna.bgId);
@@ -434,7 +432,6 @@ s32 ObjOshihiki_CheckWall(GlobalContext* globalCtx, s16 angle, f32 direction, Ob
 }
 
 s32 ObjOshihiki_MoveWithBlockUnder(ObjOshihiki* this, GlobalContext* globalCtx) {
-    s32 pad;
     ObjOshihiki* blockUnder = ObjOshihiki_GetBlockUnder(this, globalCtx);
 
     if ((blockUnder != NULL) && (blockUnder->stateFlags & PUSHBLOCK_SETUP_PUSH) &&
@@ -465,7 +462,6 @@ void ObjOshihiki_SetupOnScene(ObjOshihiki* this, GlobalContext* globalCtx) {
 }
 
 void ObjOshihiki_OnScene(ObjOshihiki* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
 
     this->stateFlags |= PUSHBLOCK_ON_SCENE;
@@ -512,7 +508,6 @@ void ObjOshihiki_OnActor(ObjOshihiki* this, GlobalContext* globalCtx) {
                 if ((this->timer <= 0) && (fabsf(this->dyna.unk_150) > 0.001f)) {
                     if (ObjOshihiki_StrongEnough(this) && ObjOshihiki_NoSwitchPress(this, dynaPolyActor, globalCtx) &&
                         !ObjOshihiki_CheckWall(globalCtx, this->dyna.unk_158, this->dyna.unk_150, this)) {
-
                         this->direction = this->dyna.unk_150;
                         ObjOshihiki_SetupPush(this, globalCtx);
                     } else {
@@ -627,7 +622,6 @@ void ObjOshihiki_Fall(ObjOshihiki* this, GlobalContext* globalCtx) {
 }
 
 void ObjOshihiki_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     ObjOshihiki* this = (ObjOshihiki*)thisx;
 
     this->stateFlags &=
@@ -650,7 +644,6 @@ void ObjOshihiki_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void ObjOshihiki_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     ObjOshihiki* this = (ObjOshihiki*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_obj_oshihiki.c", __LINE__);

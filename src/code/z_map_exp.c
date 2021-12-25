@@ -154,8 +154,7 @@ void Map_InitData(GlobalContext* globalCtx, s16 room) {
         case SCENE_HAKADAN_BS:
             osSyncPrintf(VT_FGCOL(YELLOW));
             // "Deku Tree Dungeon MAP Texture DMA"
-            osSyncPrintf("Deku Tree Dungeon MAP Texture DMA(%X) mapIndex=%d  VREG(30)=%d\n", room,
-                         mapIndex, VREG(30));
+            osSyncPrintf("Deku Tree Dungeon MAP Texture DMA(%X) mapIndex=%d  VREG(30)=%d\n", room, mapIndex, VREG(30));
             osSyncPrintf(VT_RST);
             DmaMgr_SendRequest1(globalCtx->interfaceCtx.mapSegment,
                                 (u32)_map_i_staticSegmentRomStart +
@@ -309,7 +308,6 @@ void Map_Init(GlobalContext* globalCtx) {
 }
 
 void Minimap_DrawCompassIcons(GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
     s16 tempX, tempZ;
 
@@ -358,7 +356,6 @@ void Minimap_DrawCompassIcons(GlobalContext* globalCtx) {
 }
 
 void Minimap_Draw(GlobalContext* globalCtx) {
-    s32 pad[2];
     InterfaceContext* interfaceCtx = &globalCtx->interfaceCtx;
     s32 mapIndex = gSaveContext.mapIndex;
 
@@ -455,7 +452,6 @@ void Minimap_Draw(GlobalContext* globalCtx) {
                         if ((gMapData->owEntranceFlag[sEntranceIconMapIndex] == 0xFFFF) ||
                             ((gMapData->owEntranceFlag[sEntranceIconMapIndex] != 0xFFFF) &&
                              (gSaveContext.infTable[26] & gBitFlags[gMapData->owEntranceFlag[mapIndex]]))) {
-
                             gDPLoadTextureBlock(OVERLAY_DISP++, gMapDungeonEntranceIconTex, G_IM_FMT_RGBA, G_IM_SIZ_16b,
                                                 8, 8, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
                                                 G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -542,8 +538,8 @@ void Map_Update(GlobalContext* globalCtx) {
                 }
 
                 if (interfaceCtx->mapRoomNum != sLastRoomNum) {
-                    osSyncPrintf("Current floor = %d  Current room = %x  Number of rooms = %d\n", floor, interfaceCtx->mapRoomNum,
-                                 gMapData->switchEntryCount[mapIndex]);
+                    osSyncPrintf("Current floor = %d  Current room = %x  Number of rooms = %d\n", floor,
+                                 interfaceCtx->mapRoomNum, gMapData->switchEntryCount[mapIndex]);
                     sLastRoomNum = interfaceCtx->mapRoomNum;
                 }
 

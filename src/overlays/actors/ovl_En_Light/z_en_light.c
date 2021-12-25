@@ -151,11 +151,9 @@ void EnLight_UpdateSwitch(Actor* thisx, GlobalContext* globalCtx) {
 
 void EnLight_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnLight* this = (EnLight*)thisx;
-    s32 pad;
+
     FlameParams* flameParams;
     Gfx* dList;
-
-    
 
     flameParams = &D_80A9E840[this->actor.params & 0xF];
 

@@ -358,7 +358,7 @@ void func_800C2500(PreRender* this, s32 x, s32 y) {
     s32 buffB[3 * 5];
     s32 x1;
     s32 y1;
-    s32 pad;
+
     s32 pxR;
     s32 pxG;
     s32 pxB;
@@ -433,7 +433,7 @@ void func_800C2500(PreRender* this, s32 x, s32 y) {
                     }
                 }
             }
-            
+
             if (pxR2 > buffR[i]) {
                 for (j = 1; j < 15; j += 2) {
                     if ((i != j) && (buffR[j] <= buffR[i]) && (buffA[j] == 7)) {
@@ -476,7 +476,7 @@ void func_800C2FE4(PreRender* this) {
     u8* buffR = alloca(this->width);
     u8* buffG = alloca(this->width);
     u8* buffB = alloca(this->width);
-    s32 pad[3];
+
     s32 pxR;
     s32 pxG;
     s32 pxB;
@@ -544,7 +544,6 @@ void PreRender_Calc(PreRender* this) {
     s32 y;
 
     if ((this->cvgSave != NULL) && (this->fbufSave != NULL)) {
-
         for (y = 0; y < this->height; y++) {
             for (x = 0; x < this->width; x++) {
                 s32 a = this->cvgSave[x + y * this->width];

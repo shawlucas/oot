@@ -107,7 +107,6 @@ void func_80068ECC(GlobalContext* globalCtx, CutsceneContext* csCtx);
 
 void Cutscene_DrawDebugInfo(GlobalContext* globalCtx, Gfx** dlist, CutsceneContext* csCtx) {
     GfxPrint printer;
-    s32 pad[2];
 
     GfxPrint_Init(&printer);
     GfxPrint_Open(&printer, *dlist);
@@ -1903,9 +1902,8 @@ void func_80068C3C(GlobalContext* globalCtx, CutsceneContext* csCtx) {
     Gfx* displayList;
     Gfx* prevDisplayList;
 
-     
     if (gSaveContext.cutsceneIndex >= 0xFFF0) {
-         // Also necessary to match
+        // Also necessary to match
 
         if (BREG(0) != 0) {
             OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo.c", __LINE__);

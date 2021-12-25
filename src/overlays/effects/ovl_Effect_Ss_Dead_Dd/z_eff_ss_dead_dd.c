@@ -121,7 +121,6 @@ void EffectSsDeadDd_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
 }
 
 void EffectSsDeadDd_Update(GlobalContext* globalCtx, u32 index, EffectSs* this) {
-
     this->rScale += this->rScaleStep;
 
     if (this->rScale < 0) {

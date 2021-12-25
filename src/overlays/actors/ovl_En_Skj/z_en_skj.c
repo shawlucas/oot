@@ -370,7 +370,7 @@ void EnSkj_Init(Actor* thisx, GlobalContext* globalCtx2) {
     s16 type = (thisx->params >> 0xA) & 0x3F;
     EnSkj* this = (EnSkj*)thisx;
     GlobalContext* globalCtx = globalCtx2;
-    s32 pad;
+
     Player* player;
 
     Actor_ProcessInitChain(thisx, sInitChain);
@@ -465,7 +465,6 @@ void EnSkj_Init(Actor* thisx, GlobalContext* globalCtx2) {
 }
 
 void EnSkj_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnSkj* this = (EnSkj*)thisx;
 
     Collider_DestroyCylinder(globalCtx, &this->collider);
@@ -495,7 +494,6 @@ f32 EnSkj_GetItemYRange(EnSkj* this) {
 }
 
 s32 EnSkj_ShootNeedle(EnSkj* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f pos;
     Vec3f pos2;
     EnSkjneedle* needle;
@@ -810,7 +808,7 @@ void EnSkj_SetupStand(EnSkj* this) {
 void EnSkj_Fight(EnSkj* this, GlobalContext* globalCtx) {
     Vec3f pos1;
     Vec3f pos2;
-    s32 pad[3];
+
     f32 prevPosX;
     f32 prevPosZ;
     f32 phi_f14;
@@ -832,7 +830,7 @@ void EnSkj_Fight(EnSkj* this, GlobalContext* globalCtx) {
         Matrix_MultVec3f(&pos1, &pos2);
         prevPosX = this->actor.world.pos.x;
         prevPosZ = this->actor.world.pos.z;
-        
+
         this->actor.world.pos.x = this->center.x + pos2.x;
         this->actor.world.pos.z = this->center.z + pos2.z;
 
@@ -1034,8 +1032,6 @@ void EnSkj_SetupTalk(EnSkj* this) {
 }
 
 void EnSkj_SariaSongTalk(EnSkj* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     if ((Message_GetState(&globalCtx->msgCtx) == TEXT_STATE_DONE) && Message_ShouldAdvance(globalCtx)) {
         if (gSaveContext.itemGetInf[1] & 0x40) {
             EnSkj_SetupWaitInRange(this);
@@ -1289,7 +1285,7 @@ void EnSkj_LeaveOcarinaGame(EnSkj* this, GlobalContext* globalCtx) {
 
 void EnSkj_Update(Actor* thisx, GlobalContext* globalCtx) {
     Vec3f dropPos;
-    s32 pad;
+
     EnSkj* this = (EnSkj*)thisx;
 
     D_80B01EA0 = Actor_ProcessTalkRequest(&this->actor, globalCtx);
@@ -1648,7 +1644,6 @@ Gfx* EnSkj_OpaqueDL(GraphicsContext* gfxCtx, u32 alpha) {
 }
 
 void EnSkj_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnSkj* this = (EnSkj*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_skj.c", __LINE__);

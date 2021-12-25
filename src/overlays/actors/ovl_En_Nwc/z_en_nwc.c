@@ -202,7 +202,6 @@ void EnNwc_DrawChicks(EnNwc* this, GlobalContext* globalCtx) {
 }
 
 void EnNwc_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnNwc* this = (EnNwc*)thisx;
     ColliderJntSphElementInit elementInits[16];
     ColliderJntSphElementInit* element;
@@ -229,7 +228,6 @@ void EnNwc_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnNwc_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnNwc* this = (EnNwc*)thisx;
 
     Collider_FreeJntSph(globalCtx, &this->collider);
@@ -240,7 +238,6 @@ void EnNwc_Idle(EnNwc* this, GlobalContext* globalCtx) {
 }
 
 void EnNwc_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnNwc* this = (EnNwc*)thisx;
 
     this->updateFunc(this, globalCtx);
@@ -248,7 +245,6 @@ void EnNwc_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnNwc_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnNwc* this = (EnNwc*)thisx;
 
     EnNwc_DrawChicks(this, globalCtx);

@@ -112,7 +112,7 @@ void EnStream_SuckPlayer(EnStream* this, GlobalContext* globalCtx) {
 
 void EnStream_WaitForPlayer(EnStream* this, GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
-    s16 pad;
+
     Vec3f temp;
 
     if (func_80B0B81C(&this->actor.world.pos, &player->actor.world.pos, &temp, this->actor.scale.y) != 0) {

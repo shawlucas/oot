@@ -129,7 +129,6 @@ void Title_Main(GameState* thisx) {
 
     if (gIsCtrlr2Valid) {
         Gfx* gfx = POLY_OPA_DISP;
-        s32 pad;
 
         Title_PrintBuildInfo(&gfx);
         POLY_OPA_DISP = gfx;

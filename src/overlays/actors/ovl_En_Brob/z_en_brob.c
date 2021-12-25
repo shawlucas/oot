@@ -57,7 +57,6 @@ static ColliderCylinderInit sCylinderInit = {
 static CollisionCheckInfoInit sColChkInfoInit = { 0, 60, 120, MASS_IMMOVABLE };
 
 void EnBrob_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnBrob* this = (EnBrob*)thisx;
     CollisionHeader* colHeader = NULL;
 
@@ -264,7 +263,6 @@ void EnBrob_Update(Actor* thisx, GlobalContext* globalCtx2) {
     acHits[1] = (this->colliders[1].base.acFlags & AC_HIT) != 0;
     if ((acHits[0] && (this->colliders[0].info.acHitInfo->toucher.dmgFlags & 0x10)) ||
         (acHits[1] && (this->colliders[1].info.acHitInfo->toucher.dmgFlags & 0x10))) {
-
         for (i = 0; i < 2; i++) {
             this->colliders[i].base.atFlags &= ~(AT_HIT | AT_BOUNCED);
             this->colliders[i].base.acFlags &= ~AC_HIT;
@@ -274,7 +272,6 @@ void EnBrob_Update(Actor* thisx, GlobalContext* globalCtx2) {
     } else if ((this->colliders[0].base.atFlags & AT_HIT) || (this->colliders[1].base.atFlags & AT_HIT) ||
                (acHits[0] && (this->colliders[0].info.acHitInfo->toucher.dmgFlags & 0x100)) ||
                (acHits[1] && (this->colliders[1].info.acHitInfo->toucher.dmgFlags & 0x100))) {
-
         if (this->actionFunc == func_809CB114 && !(this->colliders[0].base.atFlags & AT_BOUNCED) &&
             !(this->colliders[1].base.atFlags & AT_BOUNCED)) {
             func_8002F71C(globalCtx, &this->dyna.actor, 5.0f, this->dyna.actor.yawTowardsPlayer, 1.0f);

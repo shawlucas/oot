@@ -115,7 +115,7 @@ static InitChainEntry sInitChain[] = {
 
 void EnOkuta_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnOkuta* this = (EnOkuta*)thisx;
-    s32 pad;
+
     WaterBox* outWaterBox;
     f32 ySurface;
     s32 sp30;
@@ -289,8 +289,6 @@ void EnOkuta_WaitToAppear(EnOkuta* this, GlobalContext* globalCtx) {
 }
 
 void EnOkuta_Appear(EnOkuta* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     if (SkelAnime_Update(&this->skelAnime)) {
         if (this->actor.xzDistToPlayer < 160.0f) {
             EnOkuta_SetupHide(this);
@@ -314,8 +312,6 @@ void EnOkuta_Appear(EnOkuta* this, GlobalContext* globalCtx) {
 }
 
 void EnOkuta_Hide(EnOkuta* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     Math_ApproachF(&this->actor.world.pos.y, this->actor.home.pos.y, 0.5f, 30.0f);
     if (SkelAnime_Update(&this->skelAnime)) {
         Audio_PlayActorSound2(&this->actor, NA_SE_EN_OCTAROCK_BUBLE);
@@ -702,7 +698,6 @@ s32 EnOkuta_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dLis
 
 void EnOkuta_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnOkuta* this = (EnOkuta*)thisx;
-    s32 pad;
 
     func_80093D18(globalCtx->state.gfxCtx);
 

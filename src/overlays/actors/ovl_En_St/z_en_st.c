@@ -267,7 +267,6 @@ void EnSt_InitColliders(EnSt* this, GlobalContext* globalCtx) {
     };
 
     s32 i;
-    s32 pad;
 
     for (i = 0; i < ARRAY_COUNT(cylinders); i++) {
         Collider_InitCylinder(globalCtx, &this->colCylinder[i]);
@@ -728,7 +727,6 @@ void EnSt_Sway(EnSt* this) {
     s16 rotAngle;
 
     if (this->swayTimer != 0) {
-
         this->swayAngle += 0xA28;
         this->swayTimer--;
 
@@ -765,7 +763,6 @@ void EnSt_Sway(EnSt* this) {
 
 void EnSt_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnSt* this = (EnSt*)thisx;
-    s32 pad;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 14.0f);
     SkelAnime_Init(globalCtx, &this->skelAnime, &object_st_Skel_005298, NULL, this->jointTable, this->morphTable, 30);
@@ -993,7 +990,7 @@ void EnSt_StartOnCeilingOrGround(EnSt* this, GlobalContext* globalCtx) {
 
 void EnSt_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnSt* this = (EnSt*)thisx;
-    s32 pad;
+
     Color_RGBA8 color = { 0, 0, 0, 0 };
 
     if (this->actor.flags & ACTOR_FLAG_15) {

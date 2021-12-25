@@ -283,7 +283,7 @@ void EnKarebaba_Spin(EnKarebaba* this, GlobalContext* globalCtx) {
     SkelAnime_Update(&this->skelAnime);
 
     if (Animation_OnFrame(&this->skelAnime, 0.0f) || Animation_OnFrame(&this->skelAnime, 12.0f)) {
-         // Here for matching purposes only.
+        // Here for matching purposes only.
 
         Audio_PlayActorSound2(&this->actor, NA_SE_EN_DEKU_JR_MOUTH);
     }
@@ -408,7 +408,6 @@ void EnKarebaba_Regrow(EnKarebaba* this, GlobalContext* globalCtx) {
 }
 
 void EnKarebaba_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnKarebaba* this = (EnKarebaba*)thisx;
     f32 height;
 

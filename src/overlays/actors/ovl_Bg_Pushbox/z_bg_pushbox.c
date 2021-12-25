@@ -38,7 +38,6 @@ void BgPushbox_SetupAction(BgPushbox* this, BgPushboxActionFunc actionFunc) {
 }
 
 void BgPushbox_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgPushbox* this = (BgPushbox*)thisx;
     CollisionHeader* colHeader = NULL;
     s32 pad2;
@@ -76,8 +75,6 @@ void BgPushbox_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgPushbox_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_pushbox.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);

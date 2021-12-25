@@ -239,7 +239,6 @@ void EnDodongo_SetupAction(EnDodongo* this, EnDodongoActionFunc actionFunc) {
 }
 
 void EnDodongo_SpawnBombSmoke(EnDodongo* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f velocity = { 0.0f, 0.0f, 0.0f };
     Vec3f accel = { 0.0f, 0.3f, 0.0f };
     Vec3f pos = this->headPos;
@@ -345,7 +344,6 @@ void EnDodongo_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnDodongo_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnDodongo* this = (EnDodongo*)thisx;
 
     Effect_Delete(globalCtx, this->blureIdx);
@@ -421,7 +419,6 @@ void EnDodongo_EndBreatheFire(EnDodongo* this, GlobalContext* globalCtx) {
 }
 
 void EnDodongo_BreatheFire(EnDodongo* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f velocity = { 0.0f, 0.0f, 0.0f };
     Vec3f accel = { 0.0f, 0.0f, 0.0f };
     Vec3f pos;
@@ -455,7 +452,6 @@ void EnDodongo_SwallowBomb(EnDodongo* this, GlobalContext* globalCtx) {
     Vec3f deathFireAccel = { 0.0f, 1.0f, 0.0f };
     s16 i;
     Vec3f pos;
-    s32 pad;
 
     if (this->actor.child != NULL) {
         this->actor.child->world.pos = this->mouthPos;
@@ -524,7 +520,6 @@ void EnDodongo_SwallowBomb(EnDodongo* this, GlobalContext* globalCtx) {
 }
 
 void EnDodongo_Walk(EnDodongo* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 playbackSpeed;
     Player* player = GET_PLAYER(globalCtx);
     s16 yawDiff = (s16)(this->actor.yawTowardsPlayer - this->actor.shape.rot.y);
@@ -762,7 +757,6 @@ void EnDodongo_UpdateQuad(EnDodongo* this, GlobalContext* globalCtx) {
 }
 
 void EnDodongo_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnDodongo* this = (EnDodongo*)thisx;
 
     EnDodongo_CollisionCheck(this, globalCtx);
@@ -923,7 +917,7 @@ void EnDodongo_Draw(Actor* thisx, GlobalContext* globalCtx2) {
 
     if (this->iceTimer != 0) {
         this->actor.colorFilterTimer++;
-        
+
         this->iceTimer--;
         if ((this->iceTimer % 4) == 0) {
             index = this->iceTimer >> 2;

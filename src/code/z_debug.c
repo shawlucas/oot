@@ -102,7 +102,6 @@ void func_80063828(GfxPrint* printer) {
 
 // Edit REG
 void func_8006390C(Input* input) {
-
     s32 dpad;
     s32 regGroup;
     s32 increment;
@@ -151,15 +150,19 @@ void func_8006390C(Input* input) {
                     gGameInfo->dpadLast = dpad;
                 }
 
-                increment = CHECK_BTN_ANY(dpad, BTN_DRIGHT)  ? (CHECK_BTN_ALL(input->cur.button, BTN_A | BTN_B) ? 1000
-                                                                : CHECK_BTN_ALL(input->cur.button, BTN_A)       ? 100
-                                                                : CHECK_BTN_ALL(input->cur.button, BTN_B)       ? 10
-                                                                                                                : 1)
-                            : CHECK_BTN_ANY(dpad, BTN_DLEFT) ? (CHECK_BTN_ALL(input->cur.button, BTN_A | BTN_B) ? -1000
-                                                                : CHECK_BTN_ALL(input->cur.button, BTN_A)       ? -100
-                                                                : CHECK_BTN_ALL(input->cur.button, BTN_B)       ? -10
-                                                                                                                : -1)
-                                                             : 0;
+                increment = CHECK_BTN_ANY(dpad, BTN_DRIGHT)
+                                ? (CHECK_BTN_ALL(input->cur.button, BTN_A | BTN_B)
+                                       ? 1000
+                                       : CHECK_BTN_ALL(input->cur.button, BTN_A)
+                                             ? 100
+                                             : CHECK_BTN_ALL(input->cur.button, BTN_B) ? 10 : 1)
+                                : CHECK_BTN_ANY(dpad, BTN_DLEFT)
+                                      ? (CHECK_BTN_ALL(input->cur.button, BTN_A | BTN_B)
+                                             ? -1000
+                                             : CHECK_BTN_ALL(input->cur.button, BTN_A)
+                                                   ? -100
+                                                   : CHECK_BTN_ALL(input->cur.button, BTN_B) ? -10 : -1)
+                                      : 0;
 
                 gGameInfo->data[gGameInfo->regCur + regGroup] += increment;
                 if (CHECK_BTN_ANY(dpad, BTN_DUP)) {
@@ -186,7 +189,7 @@ void func_80063C04(GfxPrint* printer) {
     s32 i;
     s32 page = (gGameInfo->regPage * REG_PER_PAGE) - REG_PER_PAGE;
     s32 regGroup = (gGameInfo->regGroup * REG_PAGES + gGameInfo->regPage) * REG_PER_PAGE - REG_PER_PAGE;
-    s32 pad;
+
     char name[3];
 
     // set up register name string
@@ -234,8 +237,6 @@ void func_80063D7C(GraphicsContext* gfxCtx) {
     gSPEndDisplayList(sp7C++);
     Graph_BranchDlist(sp78, sp7C);
     POLY_OPA_DISP = sp7C;
-
-    
 
     CLOSE_DISPS(gfxCtx, "../z_debug.c", __LINE__);
 

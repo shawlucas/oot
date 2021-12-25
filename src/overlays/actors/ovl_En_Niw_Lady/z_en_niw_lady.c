@@ -66,7 +66,6 @@ static ColliderCylinderInit sCylinderInit = {
 };
 
 void EnNiwLady_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnNiwLady* this = (EnNiwLady*)thisx;
 
     this->objectAneIndex = Object_GetIndex(&globalCtx->objectCtx, OBJECT_ANE);
@@ -149,7 +148,6 @@ void EnNiwLady_ChoseAnimation(EnNiwLady* this, GlobalContext* globalCtx, s32 arg
 
 void func_80AB9F24(EnNiwLady* this, GlobalContext* globalCtx) {
     f32 frames;
-    s32 pad;
 
     if (Object_IsLoaded(&globalCtx->objectCtx, this->objectAneIndex) &&
         Object_IsLoaded(&globalCtx->objectCtx, this->objectOsAnimeIndex)) {
@@ -487,7 +485,6 @@ void func_80ABAD7C(EnNiwLady* this, GlobalContext* globalCtx) {
 }
 
 void EnNiwLady_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnNiwLady* this = (EnNiwLady*)thisx;
     Player* player = GET_PLAYER(globalCtx);
 
@@ -531,7 +528,7 @@ void EnNiwLady_Update(Actor* thisx, GlobalContext* globalCtx) {
             }
             Actor_UpdateBgCheckInfo(globalCtx, thisx, 20.0f, 20.0f, 60.0f, 0x1D);
             Collider_UpdateCylinder(thisx, &this->collider);
-            
+
             CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);
         }
     }
@@ -548,7 +545,6 @@ Gfx* func_80ABB0A0(GraphicsContext* gfxCtx) {
 s32 EnNiwLady_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot,
                                void* thisx) {
     EnNiwLady* this = (EnNiwLady*)thisx;
-    s32 pad;
 
     if (limbIndex == 15) {
         rot->x += this->unk_254.y;
@@ -569,7 +565,6 @@ s32 EnNiwLady_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dL
 void EnNiwLady_Draw(Actor* thisx, GlobalContext* globalCtx) {
     static void* sEyeTextures[] = { gCuccoLadyEyeOpenTex, gCuccoLadyEyeHalfTex, gCuccoLadyEyeClosedTex };
     EnNiwLady* this = (EnNiwLady*)thisx;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_niw_lady.c", __LINE__);
     if (this->unk_27E != 0) {

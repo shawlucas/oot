@@ -183,7 +183,6 @@ void func_80B86CA8(ItemShield* this, GlobalContext* globalCtx) {
 }
 
 void func_80B86F68(ItemShield* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
     MtxF* shield = &player->shieldMf;
 

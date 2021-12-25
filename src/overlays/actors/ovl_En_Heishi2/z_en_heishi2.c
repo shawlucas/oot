@@ -129,7 +129,6 @@ void EnHeishi2_Init(Actor* thisx, GlobalContext* globalCtx) {
         this->actor.targetMode = 6;
 
         switch (this->type) {
-
             case 2:
                 this->actionFunc = func_80A531E4;
                 this->actor.gravity = -1.0f;
@@ -277,7 +276,6 @@ void func_80A535BC(EnHeishi2* this, GlobalContext* globalCtx) {
 }
 
 void func_80A53638(EnHeishi2* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 frameCount = this->skelAnime.curFrame;
 
     BgSpot15Saku* actor = (BgSpot15Saku*)globalCtx->actorCtx.actorLists[ACTORCAT_ITEMACTION].head;
@@ -438,7 +436,6 @@ void func_80A53C90(EnHeishi2* this, GlobalContext* globalCtx) {
 }
 
 void func_80A53D0C(EnHeishi2* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 frameCount;
     BgGateShutter* gate;
 
@@ -599,7 +596,6 @@ void func_80A54320(EnHeishi2* this, GlobalContext* globalCtx) {
 }
 
 void func_80A543A0(EnHeishi2* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 frameCount = this->skelAnime.curFrame;
     BgGateShutter* gate = (BgGateShutter*)(globalCtx->actorCtx.actorLists[ACTORCAT_ITEMACTION].head);
     SkelAnime_Update(&this->skelAnime);
@@ -644,7 +640,6 @@ void func_80A544AC(EnHeishi2* this, GlobalContext* globalCtx) {
 }
 
 void func_80A5455C(EnHeishi2* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f pos;
     f32 rotY;
     EnBom* bomb;
@@ -761,7 +756,6 @@ void func_80A549E8(EnHeishi2* this, GlobalContext* globalCtx) {
 }
 
 void EnHeishi2_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnHeishi2* this = (EnHeishi2*)thisx;
     s32 i;
 

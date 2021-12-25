@@ -32,7 +32,7 @@ static InitChainEntry sInitChain[] = {
 
 void BgMenkuriKaiten_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgMenkuriKaiten* this = (BgMenkuriKaiten*)thisx;
-    s32 pad;
+
     CollisionHeader* colHeader = NULL;
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);

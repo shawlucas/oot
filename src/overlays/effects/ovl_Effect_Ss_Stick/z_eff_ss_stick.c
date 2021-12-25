@@ -48,7 +48,6 @@ u32 EffectSsStick_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, void
 
 void EffectSsStick_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    s32 pad;
 
     OPEN_DISPS(gfxCtx, "../z_eff_ss_stick.c", __LINE__);
 

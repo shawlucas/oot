@@ -67,7 +67,7 @@ void EffectSsEnFire_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
     f32 scale;
     s16 camYaw;
-    s32 pad[3];
+
     s16 redGreen;
 
     OPEN_DISPS(gfxCtx, "../z_eff_en_fire.c", __LINE__);
@@ -114,7 +114,6 @@ typedef struct {
 } FireActorS;
 
 void EffectSsEnFire_Update(GlobalContext* globalCtx, u32 index, EffectSs* this) {
-
     this->rScroll++;
 
     if (this->actor != NULL) {

@@ -605,8 +605,6 @@ s32 EnViewer_ZeldaOverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx*
 }
 
 void EnViewer_ZeldaPostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3s* rot, void* thisx) {
-    s32 pad;
-
     if (globalCtx->sceneNum == SCENE_TOKINOMA) {
         if (limbIndex == 16) {
             OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_viewer.c", __LINE__);
@@ -692,7 +690,7 @@ static EnViewerDrawFunc sDrawFuncs[] = {
 
 void EnViewer_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnViewer* this = (EnViewer*)thisx;
-    s32 pad;
+
     s16 type;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_viewer.c", __LINE__);
@@ -865,7 +863,6 @@ void EnViewer_UpdateGanondorfCape(GlobalContext* globalCtx, EnViewer* this) {
     Vec3f forearmWorldOffset;
 
     if ((this->actor.params >> 8) == ENVIEWER_TYPE_5_GANONDORF) {
-        
         sGanondorfCape->backPush = BREG(54) / 10.0f;
         sGanondorfCape->backSwayMagnitude = (BREG(60) + 25) / 100.0f;
         sGanondorfCape->sideSwayMagnitude = (BREG(55) - 45) / 10.0f;

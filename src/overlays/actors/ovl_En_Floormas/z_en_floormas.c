@@ -123,7 +123,6 @@ void EnFloormas_Init(Actor* thisx, GlobalContext* globalCtx2) {
     EnFloormas* this = (EnFloormas*)thisx;
     GlobalContext* globalCtx = globalCtx2;
     s32 invisble;
-    s32 pad;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 50.0f);
@@ -278,7 +277,6 @@ void EnFloormas_SetupLand(EnFloormas* this) {
 }
 
 void EnFloormas_SetupSplit(EnFloormas* this) {
-
     Actor_SetScale(&this->actor, 0.004f);
     this->actor.flags |= ACTOR_FLAG_4;
     if (CHECK_FLAG_ALL(this->actor.flags, ACTOR_FLAG_7)) {
@@ -797,7 +795,6 @@ void EnFloormas_GrabLink(EnFloormas* this, GlobalContext* globalCtx) {
 
         if (((parent->actionFunc == EnFloormas_GrabLink) || parent->actionFunc == EnFloormas_SmWait) &&
             (child->actionFunc == EnFloormas_GrabLink || child->actionFunc == EnFloormas_SmWait)) {
-
             parent->actor.params = MERGE_SLAVE;
             child->actor.params = MERGE_SLAVE;
             this->actor.params = MERGE_MASTER;
@@ -974,7 +971,6 @@ void EnFloormas_Freeze(EnFloormas* this, GlobalContext* globalCtx) {
 }
 
 void EnFloormas_ColliderCheck(EnFloormas* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 isSmall;
 
     if ((this->collider.base.acFlags & AC_HIT) != 0) {
@@ -1020,7 +1016,6 @@ void EnFloormas_ColliderCheck(EnFloormas* this, GlobalContext* globalCtx) {
 
 void EnFloormas_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnFloormas* this = (EnFloormas*)thisx;
-    s32 pad;
 
     if (this->actionFunc != EnFloormas_SmWait) {
         if (this->collider.base.atFlags & AT_HIT) {

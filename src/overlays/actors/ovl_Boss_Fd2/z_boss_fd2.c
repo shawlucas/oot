@@ -169,7 +169,6 @@ void BossFd2_SpawnDust(BossFdEffect* effect, Vec3f* position, Vec3f* velocity, V
 }
 
 void BossFd2_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossFd2* this = (BossFd2*)thisx;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
@@ -187,7 +186,6 @@ void BossFd2_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BossFd2_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossFd2* this = (BossFd2*)thisx;
 
     SkelAnime_Free(&this->skelAnime, globalCtx);
@@ -1155,12 +1153,11 @@ void BossFd2_UpdateMane(BossFd2* this, GlobalContext* globalCtx, Vec3f* head, Ve
 }
 
 void BossFd2_DrawMane(BossFd2* this, GlobalContext* globalCtx) {
-    s32 pad;
     BossFd* bossFd = (BossFd*)this->actor.parent;
     s16 i;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_fd2.c", __LINE__);
-    
+
     for (i = 0; i < 10; i++) {
         this->centerMane.scale[i] = 1.5f + 0.3f * Math_SinS(5596.0f * this->work[FD2_VAR_TIMER] + i * 0x3200);
         this->rightMane.scale[i] = 1.5f + 0.3f * Math_SinS(5496.0f * this->work[FD2_VAR_TIMER] + i * 0x3200);
@@ -1188,7 +1185,7 @@ void BossFd2_DrawMane(BossFd2* this, GlobalContext* globalCtx) {
 
 void BossFd2_Draw(Actor* thisx, GlobalContext* globalCtx) {
     static void* eyeTextures[] = { gHoleVolvagiaEyeOpenTex, gHoleVolvagiaEyeHalfTex, gHoleVolvagiaEyeClosedTex };
-    s32 pad;
+
     BossFd2* this = (BossFd2*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_fd2.c", __LINE__);

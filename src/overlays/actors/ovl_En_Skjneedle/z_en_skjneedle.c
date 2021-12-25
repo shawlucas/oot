@@ -98,8 +98,6 @@ void EnSkjneedle_Update(Actor* thisx, GlobalContext* globalCtx2) {
 }
 
 void EnSkjneedle_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_skj_needle.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);

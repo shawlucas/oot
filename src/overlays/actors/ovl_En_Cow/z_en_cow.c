@@ -103,7 +103,6 @@ void func_809DEF94(EnCow* this) {
 
 void EnCow_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnCow* this = (EnCow*)thisx;
-    s32 pad;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 72.0f);
     switch (this->actor.params) {
@@ -341,7 +340,6 @@ void EnCow_Update(Actor* thisx, GlobalContext* globalCtx2) {
 
 void func_809DFE98(Actor* thisx, GlobalContext* globalCtx) {
     EnCow* this = (EnCow*)thisx;
-    s32 pad;
 
     if (SkelAnime_Update(&this->skelAnime) != 0) {
         if (this->skelAnime.animation == &gCowTailIdleAnim) {

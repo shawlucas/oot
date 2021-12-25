@@ -205,7 +205,7 @@ s32 EnAm_CanMove(EnAm* this, GlobalContext* globalCtx, f32 distance, s16 yaw) {
 
 void EnAm_Init(Actor* thisx, GlobalContext* globalCtx) {
     CollisionHeader* colHeader = NULL;
-    s32 pad;
+
     EnAm* this = (EnAm*)thisx;
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
@@ -241,7 +241,6 @@ void EnAm_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnAm_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnAm* this = (EnAm*)thisx;
 
     DynaPoly_DeleteBgActor(globalCtx, &globalCtx->colCtx.dyna, this->dyna.bgId);
@@ -257,7 +256,6 @@ void EnAm_SpawnEffects(EnAm* this, GlobalContext* globalCtx) {
     Vec3f pos;
     Color_RGBA8 primColor = { 100, 100, 100, 0 };
     Color_RGBA8 envColor = { 40, 40, 40, 0 };
-    s32 pad;
 
     for (i = 4; i > 0; i--) {
         pos.x = this->dyna.actor.world.pos.x + ((Rand_ZeroOne() - 0.5f) * 65.0f);
@@ -367,7 +365,7 @@ void EnAm_SetupRicochet(EnAm* this, GlobalContext* globalCtx) {
 
 void EnAm_Sleep(EnAm* this, GlobalContext* globalCtx) {
     f32 cos;
-    s32 pad;
+
     f32 rand;
     f32 sin;
     Player* player = GET_PLAYER(globalCtx);
@@ -687,7 +685,6 @@ void EnAm_Statue(EnAm* this, GlobalContext* globalCtx) {
             !func_800435D8(globalCtx, &this->dyna, 0x14,
                            (Math_SinS(this->unk_258) * (this->dyna.unk_150 * 0.5f)) + 40.0f, 0xA) ||
             ((this->hurtCollider.base.ocFlags1 & OC1_HIT) && (ABS(moveDir) <= 0x2000))) {
-
             this->unk_258 = 0;
             player->stateFlags2 &= ~0x151;
             player->actor.speedXZ = 0.0f;
@@ -781,7 +778,6 @@ void EnAm_TransformSwordHitbox(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnAm_UpdateDamage(EnAm* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f sparkPos;
 
     if (this->deathTimer == 0) {
@@ -831,7 +827,7 @@ void EnAm_Update(Actor* thisx, GlobalContext* globalCtx) {
     static Vec3f zeroVec = { 0.0f, 0.0f, 0.0f };
     static Color_RGBA8 dustPrimColor = { 150, 150, 150, 255 };
     static Color_RGBA8 dustEnvColor = { 100, 100, 100, 150 };
-    s32 pad;
+
     EnAm* this = (EnAm*)thisx;
     EnBom* bomb;
     Vec3f dustPos;
@@ -941,7 +937,6 @@ static Vec3f sIcePosOffsets[] = {
 };
 
 void EnAm_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f sp68;
     EnAm* this = (EnAm*)thisx;
 

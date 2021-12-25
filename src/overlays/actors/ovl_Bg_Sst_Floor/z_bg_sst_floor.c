@@ -33,7 +33,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void BgSstFloor_Init(BgSstFloor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgSstFloor* this = (BgSstFloor*)thisx;
     CollisionHeader* colHeader = NULL;
 
@@ -44,21 +43,17 @@ void BgSstFloor_Init(BgSstFloor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgSstFloor_Destroy(BgSstFloor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgSstFloor* this = (BgSstFloor*)thisx;
 
     DynaPoly_DeleteBgActor(globalCtx, &globalCtx->colCtx.dyna, this->dyna.bgId);
 }
 
 void BgSstFloor_Update(BgSstFloor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgSstFloor* this = (BgSstFloor*)thisx;
     Player* player = GET_PLAYER(globalCtx);
     CollisionHeader* colHeader = SEGMENTED_TO_VIRTUAL(&gBongoDrumCol);
 
     colHeader->vtxList = SEGMENTED_TO_VIRTUAL(colHeader->vtxList);
-
-    
 
     if (func_80043590(&this->dyna) && (this->dyna.actor.yDistToPlayer < 1000.0f)) {
         Camera_ChangeSetting(globalCtx->cameraPtrs[MAIN_CAM], CAM_SET_BOSS_BONGO);
@@ -116,7 +111,7 @@ void BgSstFloor_Update(BgSstFloor* thisx, GlobalContext* globalCtx) {
     if (this->drumPhase != 0) {
         this->drumPhase--;
     }
-    
+
     func_8003EE6C(globalCtx, &globalCtx->colCtx.dyna);
 }
 

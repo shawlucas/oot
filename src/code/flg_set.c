@@ -44,7 +44,6 @@ void FlagSet_Update(GlobalContext* globalCtx) {
 
     {
         GfxPrint printer;
-        s32 pad;
 
         polyOpa = POLY_OPA_DISP;
         gfx = Graph_GfxPlusOne(polyOpa);

@@ -36,7 +36,6 @@ void EnRl_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void func_80AE72D0(EnRl* this) {
-    s32 pad[3];
     s16* timer = &this->timer;
     s16* eyeTextureIndex = &this->eyeTextureIndex;
 
@@ -113,7 +112,6 @@ void func_80AE7544(EnRl* this, GlobalContext* globalCtx) {
 }
 
 void func_80AE7590(EnRl* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player;
     Vec3f pos;
     s16 sceneNum = globalCtx->sceneNum;
@@ -296,7 +294,6 @@ void func_80AE7D40(EnRl* this, GlobalContext* globalCtx) {
 }
 
 void func_80AE7D94(EnRl* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s16 temp = this->eyeTextureIndex;
     void* tex = D_80AE81A0[temp];
     SkelAnime* skelAnime = &this->skelAnime;
@@ -345,7 +342,6 @@ void func_80AE7FD0(EnRl* this, GlobalContext* globalCtx) {
 }
 
 void func_80AE7FDC(EnRl* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s16 temp = this->eyeTextureIndex;
     void* tex = D_80AE81A0[temp];
     SkelAnime* skelAnime = &this->skelAnime;

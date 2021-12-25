@@ -172,7 +172,6 @@ void EnDha_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnDha_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnDha* this = (EnDha*)thisx;
 
     Collider_DestroyJntSph(globalCtx, &this->collider);
@@ -193,7 +192,7 @@ void EnDha_Wait(EnDha* this, GlobalContext* globalCtx) {
     Vec3f armPosMultiplier1 = { 0.0f, 0.0f, 55.0f };
     Vec3f armPosMultiplier2 = { 0.0f, 0.0f, -54.0f };
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     s32 pad2;
     Vec3f playerPos = player->actor.world.pos;
     Vec3s angle;
@@ -402,7 +401,6 @@ void EnDha_UpdateHealth(EnDha* this, GlobalContext* globalCtx) {
 }
 
 void EnDha_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnDha* this = (EnDha*)thisx;
 
     if (this->actor.parent == NULL) {
@@ -456,7 +454,6 @@ void EnDha_OverridePostDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList
 }
 
 void EnDha_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnDha* this = (EnDha*)thisx;
 
     func_80093D18(globalCtx->state.gfxCtx);

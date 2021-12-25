@@ -160,7 +160,6 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
     }
 
     if (R_ENABLE_AUDIO_DBG & 1) {
-        s32 pad;
         GfxPrint printer;
 
         GfxPrint_Init(&printer);
@@ -171,8 +170,6 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
     }
 
     if (R_ENABLE_ARENA_DBG < 0) {
-        s32 pad;
-
         DebugArena_Display();
         SystemArena_Display();
         // "%08X bytes left until the death of Hyrule (game_alloc)"
@@ -183,8 +180,6 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
     gSPEndDisplayList(newDList++);
     Graph_BranchDlist(polyOpaP, newDList);
     POLY_OPA_DISP = newDList;
-
-    
 
     CLOSE_DISPS(gfxCtx, "../game.c", __LINE__);
 
@@ -224,8 +219,6 @@ void func_800C49F4(GraphicsContext* gfxCtx) {
     gSPEndDisplayList(newDlist++);
     Graph_BranchDlist(polyOpaP, newDlist);
     POLY_OPA_DISP = newDlist;
-
-    
 
     CLOSE_DISPS(gfxCtx, "../game.c", __LINE__);
 }
@@ -321,9 +314,9 @@ void GameState_Update(GameState* gameState) {
         if (sMenuInitialized) {
             sMenuInitialized = false;
         } else {
-            GlobalContext* globalCtx = (GlobalContext *)gameState;
-            Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_MENUCONTEXT, 0.0f, 0.0f, 0.0f, 0, 0, 0, 0x0000);      
-            sMenuInitialized = true;   
+            GlobalContext* globalCtx = (GlobalContext*)gameState;
+            Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_MENUCONTEXT, 0.0f, 0.0f, 0.0f, 0, 0, 0, 0x0000);
+            sMenuInitialized = true;
         }
     }
 
@@ -480,8 +473,8 @@ void* GameState_Alloc(GameState* gameState, size_t size, char* file, s32 line) {
         ret = NULL;
     } else if ((u32)THA_GetSize(&gameState->tha) < size) {
         // "Hyral on the verge of extinction does not have %d bytes left (%d bytes until extinction)"
-        osSyncPrintf("Hyrule is on the verge of extinction and has no more than %d bytes to spare (%d bytes to go).\n", size,
-                     THA_GetSize(&gameState->tha));
+        osSyncPrintf("Hyrule is on the verge of extinction and has no more than %d bytes to spare (%d bytes to go).\n",
+                     size, THA_GetSize(&gameState->tha));
         ret = NULL;
     } else {
         ret = THA_AllocEndAlign16(&gameState->tha, size);

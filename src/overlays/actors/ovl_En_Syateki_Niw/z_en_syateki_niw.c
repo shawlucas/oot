@@ -513,7 +513,6 @@ void func_80B128F8(EnSyatekiNiw* this, GlobalContext* globalCtx) {
 }
 
 void func_80B129EC(EnSyatekiNiw* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 phi_f2;
     s16 sp2E;
     s16 sp2C;
@@ -573,17 +572,13 @@ void func_80B12BA4(EnSyatekiNiw* this, GlobalContext* globalCtx) {
 
 void EnSyatekiNiw_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnSyatekiNiw* this = (EnSyatekiNiw*)thisx;
-    s32 pad;
+
     s16 i;
     Vec3f sp90 = { 0.0f, 0.0f, 0.0f };
     Vec3f sp84 = { 0.0f, 0.0f, 0.0f };
     Vec3f sp78;
     Vec3f sp6C;
     Vec3f sp60;
-
-    
-    
-    
 
     func_80B132A8(this, globalCtx);
     this->unk_28C++;

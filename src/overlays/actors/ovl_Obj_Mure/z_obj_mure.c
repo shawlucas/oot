@@ -135,7 +135,7 @@ void ObjMure_SpawnActors0(ObjMure* this, GlobalContext* globalCtx) {
     ActorContext* ac;
     s32 i;
     Vec3f pos;
-    s32 pad;
+
     s32 maxChildren = ObjMure_GetMaxChildSpawns(this);
 
     for (i = 0; i < maxChildren; i++) {

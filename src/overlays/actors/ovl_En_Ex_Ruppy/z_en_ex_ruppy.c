@@ -247,7 +247,6 @@ void EnExRuppy_EnterWater(EnExRuppy* this, GlobalContext* globalCtx) {
 void EnExRuppy_Sink(EnExRuppy* this, GlobalContext* globalCtx) {
     EnDivingGame* divingGame;
     Vec3f pos;
-    s32 pad;
 
     if ((this->actor.bgCheckFlags & 0x20) && (this->actor.yDistToWater > 15.0f)) {
         pos = this->actor.world.pos;
@@ -281,7 +280,7 @@ void EnExRuppy_WaitInGame(EnExRuppy* this, GlobalContext* globalCtx) {
             if (divingGame->phase == ENDIVINGGAME_PHASE_ENDED) {
                 this->timer = 20;
                 this->actionFunc = EnExRuppy_Kill;
-                
+
             } else if (this->actor.xyzDistToPlayerSq < SQ(localConst)) {
                 Rupees_ChangeBy(this->rupeeValue);
                 func_80078884(NA_SE_SY_GET_RUPY);
@@ -378,7 +377,7 @@ void EnExRuppy_Draw(Actor* thisx, GlobalContext* globalCtx) {
     static void* rupeeTextures[] = {
         gRupeeGreenTex, gRupeeBlueTex, gRupeeRedTex, gRupeePinkTex, gRupeeOrangeTex,
     };
-    s32 pad;
+
     EnExRuppy* this = (EnExRuppy*)thisx;
 
     if (!this->invisible) {

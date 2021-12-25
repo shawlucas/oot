@@ -64,7 +64,7 @@ void OceffWipe3_Draw(Actor* thisx, GlobalContext* globalCtx) {
     OceffWipe3* this = (OceffWipe3*)thisx;
     f32 z;
     u8 alpha;
-    s32 pad[2];
+
     Vec3f eye;
     Vtx* vtxPtr;
     Vec3f vec;

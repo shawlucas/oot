@@ -85,7 +85,6 @@ void func_80977EA8(GlobalContext* globalCtx, Gfx* dlist) {
 }
 
 void func_80977F80(DemoGeff* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s32 objBankIndex = this->objBankIndex;
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
 
@@ -94,7 +93,7 @@ void func_80977F80(DemoGeff* this, GlobalContext* globalCtx) {
     gSPSegment(POLY_OPA_DISP++, 0x06, globalCtx->objectCtx.status[objBankIndex].segment);
     gSegments[6] = VIRTUAL_TO_PHYSICAL(globalCtx->objectCtx.status[objBankIndex].segment);
 
-        if (!globalCtx) {}
+    if (!globalCtx) {}
 
     CLOSE_DISPS(gfxCtx, "../z_demo_geff.c", __LINE__);
 }
@@ -189,7 +188,6 @@ void func_809783D4(DemoGeff* this, GlobalContext* globalCtx) {
     s32 params = thisx->params;
     s16 objectId = sObjectIDs[params];
     s32 objBankIndex = Object_GetIndex(objCtx, objectId);
-    s32 pad;
 
     if (objBankIndex < 0) {
         osSyncPrintf(VT_FGCOL(RED) "Demo_Geff_main_bank:バンクを読めない arg_data = %d!\n" VT_RST, params);

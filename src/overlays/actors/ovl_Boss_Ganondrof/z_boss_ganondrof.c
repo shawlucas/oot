@@ -274,7 +274,6 @@ void BossGanondrof_SetColliderPos(Vec3f* pos, ColliderCylinder* collider) {
 }
 
 void BossGanondrof_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossGanondrof* this = (BossGanondrof*)thisx;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
@@ -310,7 +309,6 @@ void BossGanondrof_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BossGanondrof_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossGanondrof* this = (BossGanondrof*)thisx;
 
     osSyncPrintf("DT1\n");
@@ -332,7 +330,7 @@ void BossGanondrof_SetupIntro(BossGanondrof* this, GlobalContext* globalCtx) {
 
 void BossGanondrof_Intro(BossGanondrof* this, GlobalContext* globalCtx) {
     s16 i;
-    s32 pad;
+
     EnfHG* horse = (EnfHG*)this->actor.child;
 
     SkelAnime_Update(&this->skelAnime);
@@ -1290,7 +1288,7 @@ void BossGanondrof_Update(Actor* thisx, GlobalContext* globalCtx) {
     f32 legSplitTarget;
     s32 pad2;
     s16 i;
-    s32 pad;
+
     BossGanondrof* this = (BossGanondrof*)thisx;
     EnfHG* horse;
 
@@ -1482,7 +1480,6 @@ Gfx* BossGanondrof_GetNullDList(GraphicsContext* gfxCtx) {
 }
 
 void BossGanondrof_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossGanondrof* this = (BossGanondrof*)thisx;
     EnfHG* horse;
 

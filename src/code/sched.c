@@ -134,7 +134,8 @@ void Sched_QueueTask(SchedContext* sc, OSScTask* task) {
 
 void Sched_Yield(SchedContext* sc) {
     if (!(sc->curRSPTask->state & OS_SC_YIELD)) {
-        ASSERT(sc->curRSPTask->list.t.type != M_AUDTASK, "sc->curRSPTask->list.t.type != M_AUDTASK", "../sched.c", __LINE__);
+        ASSERT(sc->curRSPTask->list.t.type != M_AUDTASK, "sc->curRSPTask->list.t.type != M_AUDTASK", "../sched.c",
+               __LINE__);
 
         sc->curRSPTask->state |= OS_SC_YIELD;
 
@@ -317,7 +318,8 @@ void Sched_HandleEntry(SchedContext* sc) {
 
 void Sched_HandleRetrace(SchedContext* sc) {
     if (sLogScheduler) {
-        osSyncPrintf("%08d:Sched_HandleRetrace %08X\n", (u32)OS_CYCLES_TO_USEC(osGetTime()), osViGetCurrentFramebuffer());
+        osSyncPrintf("%08d:Sched_HandleRetrace %08X\n", (u32)OS_CYCLES_TO_USEC(osGetTime()),
+                     osViGetCurrentFramebuffer());
     }
     ViConfig_UpdateBlack();
     sc->retraceCnt++;
@@ -406,7 +408,8 @@ void Sched_HandleRDPDone(SchedContext* sc) {
 
     gRDPTotalTime = osGetTime() - sRDPStartTime;
     ASSERT(sc->curRDPTask != NULL, "sc->curRDPTask != NULL", "../sched.c", __LINE__);
-    ASSERT(sc->curRDPTask->list.t.type == M_GFXTASK, "sc->curRDPTask->list.t.type == M_GFXTASK", "../sched.c", __LINE__);
+    ASSERT(sc->curRDPTask->list.t.type == M_GFXTASK, "sc->curRDPTask->list.t.type == M_GFXTASK", "../sched.c",
+           __LINE__);
     curTask = sc->curRDPTask;
     sc->curRDPTask = NULL;
     curTask->state &= ~OS_SC_DP;

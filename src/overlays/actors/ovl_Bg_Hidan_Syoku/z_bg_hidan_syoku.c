@@ -35,7 +35,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void BgHidanSyoku_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BgHidanSyoku* this = (BgHidanSyoku*)thisx;
     CollisionHeader* colHeader = NULL;
 

@@ -94,14 +94,11 @@ static InitChainEntry sInitChain[] = {
 };
 
 void func_808B02D0(BgSpot08Bakudankabe* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     Collider_InitJntSph(globalCtx, &this->collider);
     Collider_SetJntSph(globalCtx, &this->collider, &this->dyna.actor, &sJntSphInit, this->colliderItems);
 }
 
 void func_808B0324(BgSpot08Bakudankabe* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s32 i;
     Vec3f burstDepthY;
     Vec3f burstDepthX;
@@ -158,7 +155,7 @@ void func_808B0324(BgSpot08Bakudankabe* this, GlobalContext* globalCtx) {
 
 void BgSpot08Bakudankabe_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgSpot08Bakudankabe* this = (BgSpot08Bakudankabe*)thisx;
-    s32 pad;
+
     CollisionHeader* colHeader = NULL;
 
     DynaPolyActor_Init(&this->dyna, DPM_UNK);

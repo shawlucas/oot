@@ -72,7 +72,6 @@ s32 DemoKekkai_CheckEventFlag(s32 params) {
 }
 
 void DemoKekkai_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     DemoKekkai* this = (DemoKekkai*)thisx;
 
     this->sfxFlag = 0;
@@ -123,7 +122,6 @@ void DemoKekkai_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void DemoKekkai_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     DemoKekkai* this = (DemoKekkai*)thisx;
 
     Collider_DestroyCylinder(globalCtx, &this->collider1);
@@ -202,7 +200,7 @@ void DemoKekkai_Update(Actor* thisx, GlobalContext* globalCtx2) {
 
 void DemoKekkai_TrialBarrierDispel(Actor* thisx, GlobalContext* globalCtx) {
     static u16 csFrames[] = { 0, 280, 280, 280, 280, 280, 280 };
-    s32 pad;
+
     DemoKekkai* this = (DemoKekkai*)thisx;
 
     if (globalCtx->csCtx.frames == csFrames[this->actor.params]) {
@@ -240,7 +238,6 @@ static CutsceneData* sSageCutscenes[] = {
 };
 
 void DemoKekkai_TrialBarrierIdle(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     DemoKekkai* this = (DemoKekkai*)thisx;
 
     if (this->collider1.base.atFlags & AT_HIT) {
@@ -276,7 +273,6 @@ void DemoKekkai_DrawTrialBarrier(Actor* thisx, GlobalContext* globalCtx2) {
     s32 i;
 
     if (this->orbScale != 0.0f) {
-        
         alphas[2] = (s32)(this->energyAlpha * 202.0f);
         alphas[1] = (s32)(this->energyAlpha * 126.0f);
         alphas[0] = 0;
@@ -318,7 +314,6 @@ void DemoKekkai_DrawTrialBarrier(Actor* thisx, GlobalContext* globalCtx2) {
 }
 
 void DemoKekkai_DrawTowerBarrier(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     DemoKekkai* this = (DemoKekkai*)thisx;
     s32 scroll;
 

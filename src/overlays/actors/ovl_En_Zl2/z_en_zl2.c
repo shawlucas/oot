@@ -104,7 +104,6 @@ void EnZl2_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnZl2_UpdateEyes(EnZl2* this) {
-    s32 pad[4];
     s16* eyeTexIndex2 = &this->eyeTexIndex2;
     s16* blinkTimer = &this->blinkTimer;
     s16* eyeTexIndex = &this->eyeTexIndex;
@@ -434,7 +433,6 @@ void func_80B4F230(EnZl2* this, s16 arg1, s32 arg2) {
 
 s32 func_80B4F45C(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* thisx,
                   Gfx** gfx) {
-    s32 pad;
     EnZl2* this = (EnZl2*)thisx;
     Mtx* sp74;
     MtxF sp34;
@@ -534,7 +532,6 @@ s32 func_80B4F45C(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* p
 
 void EnZl2_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3s* rot, void* thisx, Gfx** gfx) {
     EnZl2* this = (EnZl2*)thisx;
-    s32 pad[2];
 
     if (limbIndex == 10) {
         if ((this->unk_254 != 0) && (globalCtx->csCtx.frames >= 900)) {
@@ -740,7 +737,6 @@ void func_80B50278(EnZl2* this, GlobalContext* globalCtx) {
 }
 
 void func_80B50304(EnZl2* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     ActorShape* shape = &this->actor.shape;
     CsCmdActorAction* npcAction = EnZl2_GetNpcAction(globalCtx, 0);
     f32 actionXDelta;
@@ -1432,7 +1428,6 @@ void func_80B51D0C(EnZl2* this, GlobalContext* globalCtx) {
 }
 
 void func_80B51D24(EnZl2* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     u32 sfxId;
     SkelAnime* skelAnime = &this->skelAnime;
 
@@ -1483,7 +1478,6 @@ void func_80B51EA8(EnZl2* this) {
 void func_80B51EBC(EnZl2* this, GlobalContext* globalCtx) {
     ActorShape* shape = &this->actor.shape;
     CsCmdActorAction* npcAction = EnZl2_GetNpcAction(globalCtx, 0);
-    s32 pad[2];
 
     this->actor.world.rot.y = shape->rot.y = npcAction->rot.y;
     func_80B4FD00(this, &gZelda2Anime1Anim_00B224, 0, 0.0f, 0);
@@ -1567,7 +1561,6 @@ void func_80B52114(EnZl2* this, GlobalContext* globalCtx) {
 }
 
 void func_80B521A0(EnZl2* this, GlobalContext* globalCtx) {
-    s32 pad;
     ObjectContext* objectCtx = &globalCtx->objectCtx;
     s32 bankIndex = Object_GetIndex(objectCtx, OBJECT_ZL2_ANIME1);
     s32 pad2;
@@ -1598,7 +1591,6 @@ void EnZl2_Update(Actor* thisx, GlobalContext* globalCtx) {
 void EnZl2_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnZl2* this = (EnZl2*)thisx;
     ActorShape* shape = &thisx->shape;
-    s32 pad;
 
     ActorShape_Init(shape, 0.0f, ActorShadow_DrawCircle, 30.0f);
     shape->shadowAlpha = 0;
@@ -1630,7 +1622,6 @@ void func_80B523BC(EnZl2* this, GlobalContext* globalCtx) {
 }
 
 void func_80B523C8(EnZl2* this, GlobalContext* globalCtx) {
-    s32 pad[3];
     s16 eyeTexIndex = this->eyeTexIndex;
     s16 eyeTexIndex2 = this->eyeTexIndex2;
     void* eyeTex = sEyeTextures[eyeTexIndex];
@@ -1657,7 +1648,6 @@ void func_80B523C8(EnZl2* this, GlobalContext* globalCtx) {
 }
 
 void func_80B525D4(EnZl2* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s16 eyeTexIndex = this->eyeTexIndex;
     void* eyeTex = sEyeTextures[eyeTexIndex];
     s16 mouthTexIndex = this->mouthTexIndex;

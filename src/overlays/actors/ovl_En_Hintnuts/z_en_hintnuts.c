@@ -71,7 +71,6 @@ static InitChainEntry sInitChain[] = {
 
 void EnHintnuts_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnHintnuts* this = (EnHintnuts*)thisx;
-    s32 pad;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
     if (this->actor.params == 0xA) {
@@ -476,7 +475,6 @@ void EnHintnuts_ColliderCheck(EnHintnuts* this, GlobalContext* globalCtx) {
 
 void EnHintnuts_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnHintnuts* this = (EnHintnuts*)thisx;
-    s32 pad;
 
     if (this->actor.params != 0xA) {
         EnHintnuts_ColliderCheck(this, globalCtx);

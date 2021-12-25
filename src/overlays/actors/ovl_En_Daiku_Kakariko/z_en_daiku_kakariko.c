@@ -118,7 +118,6 @@ void EnDaikuKakariko_SetAnimFromIndex(EnDaikuKakariko* this, s32 animIndex, s32*
 void EnDaikuKakariko_Init(Actor* thisx, GlobalContext* globalCtx) {
     static u16 initFlags[] = { 0x0080, 0x00B0, 0x0070, 0x0470 }; // List of inital values for this->flags
     EnDaikuKakariko* this = (EnDaikuKakariko*)thisx;
-    s32 pad;
 
     if (LINK_AGE_IN_YEARS == YEARS_CHILD) {
         switch (globalCtx->sceneNum) {
@@ -340,7 +339,6 @@ void EnDaikuKakariko_StopRunning(EnDaikuKakariko* this, GlobalContext* globalCtx
 }
 
 void EnDaikuKakariko_Run(EnDaikuKakariko* this, GlobalContext* globalCtx) {
-    s32 pad;
     Path* path;
     Vec3s* pathPos;
     f32 xDist;
@@ -444,7 +442,7 @@ void EnDaikuKakariko_Run(EnDaikuKakariko* this, GlobalContext* globalCtx) {
 
 void EnDaikuKakariko_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnDaikuKakariko* this = (EnDaikuKakariko*)thisx;
-    s32 pad;
+
     Player* player = GET_PLAYER(globalCtx);
     s32 pad2;
 

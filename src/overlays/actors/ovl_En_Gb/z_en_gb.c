@@ -150,7 +150,7 @@ void func_80A2F180(EnGb* this) {
 
 void EnGb_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnGb* this = (EnGb*)thisx;
-    s32 pad;
+
     CollisionHeader* colHeader = NULL;
     s32 i;
     f32 rand;
@@ -420,7 +420,6 @@ void EnGb_Update(Actor* thisx, GlobalContext* globalCtx2) {
 
 void EnGb_Draw(Actor* thisx, GlobalContext* globalCtx) {
     EnGb* this = (EnGb*)thisx;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_gb.c", __LINE__);
 
@@ -513,7 +512,6 @@ void EnGb_UpdateCagedSouls(EnGb* this, GlobalContext* globalCtx) {
 }
 
 void EnGb_DrawCagedSouls(EnGb* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 i;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_gb.c", __LINE__);

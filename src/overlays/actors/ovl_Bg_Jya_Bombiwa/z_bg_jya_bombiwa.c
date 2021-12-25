@@ -63,24 +63,18 @@ static InitChainEntry sInitChain[] = {
 };
 
 void BgJyaBombiwa_SetupDynaPoly(BgJyaBombiwa* this, GlobalContext* globalCtx, CollisionHeader* collision, s32 flag) {
-    s16 pad1;
     CollisionHeader* colHeader = NULL;
-    s16 pad2;
 
     DynaPolyActor_Init(&this->dyna, flag);
     CollisionHeader_GetVirtual(collision, &colHeader);
     this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, colHeader);
     if (this->dyna.bgId == BG_ACTOR_MAX) {
-
-        // "Warning: move BG registration failed"
-        osSyncPrintf("Warning : move BG 登録失敗(%s %d)(name %d)(arg_data 0x%04x)\n", "../z_bg_jya_bombiwa.c", 174,
+        osSyncPrintf("Warning : move BG registration failed(%s %d)(name %d)(params 0x%04X)\n", "../z_bg_jya_bombiwa.c", __LINE__,
                      this->dyna.actor.id, this->dyna.actor.params);
     }
 }
 
 void BgJyaBombiwa_InitCollider(BgJyaBombiwa* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     Collider_InitJntSph(globalCtx, &this->collider);
     Collider_SetJntSph(globalCtx, &this->collider, &this->dyna.actor, &sJntSphInit, this->colliderItems);
 }
@@ -91,8 +85,7 @@ void BgJyaBombiwa_Init(Actor* thisx, GlobalContext* globalCtx) {
     if ((this->dyna.actor.params & 0x3F) != 0x29) {
         osSyncPrintf(VT_COL(YELLOW, BLACK));
 
-        // "Warning: Switch Number changed (%s %d)(SW %d)"
-        osSyncPrintf("Ｗａｒｎｉｎｇ : Switch Number が変更された(%s %d)(SW %d)\n", "../z_bg_jya_bombiwa.c", 218,
+        osSyncPrintf("Warning: Switch Number changed (%s %d)(SW %d)\n", "../z_bg_jya_bombiwa.c", __LINE__,
                      this->dyna.actor.params & 0x3F);
         osSyncPrintf(VT_RST);
     }
@@ -103,8 +96,7 @@ void BgJyaBombiwa_Init(Actor* thisx, GlobalContext* globalCtx) {
     } else {
         Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
 
-        // "Rock destroyed by jya bomb"
-        osSyncPrintf("(jya 爆弾で破壊岩)(arg_data 0x%04x)\n", this->dyna.actor.params);
+        osSyncPrintf("(Rock destroyed by jya bomb)(params 0x%04X)\n", this->dyna.actor.params);
     }
 }
 

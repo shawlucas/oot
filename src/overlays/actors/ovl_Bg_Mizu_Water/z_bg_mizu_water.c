@@ -142,7 +142,7 @@ void BgMizuWater_Init(Actor* thisx, GlobalContext* globalCtx) {
         case 3:
             if (Flags_GetSwitch(globalCtx, this->switchFlag)) {
                 this->actor.world.pos.y = this->baseY + 110.0f;
-                
+
                 this->targetY = this->actor.world.pos.y;
             }
             waterBoxes[8].ySurface = this->actor.world.pos.y;
@@ -150,7 +150,7 @@ void BgMizuWater_Init(Actor* thisx, GlobalContext* globalCtx) {
         case 4:
             if (Flags_GetSwitch(globalCtx, this->switchFlag)) {
                 this->actor.world.pos.y = this->baseY + 160.0f;
-                
+
                 this->targetY = this->actor.world.pos.y;
             }
             waterBoxes[16].ySurface = this->actor.world.pos.y;
@@ -164,7 +164,6 @@ void BgMizuWater_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BgMizuWater_WaitForAction(BgMizuWater* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 waterLevelActionIndex;
     s16 prevSwitchFlag;
 
@@ -213,7 +212,6 @@ void BgMizuWater_WaitForAction(BgMizuWater* this, GlobalContext* globalCtx) {
 }
 
 void BgMizuWater_ChangeWaterLevel(BgMizuWater* this, GlobalContext* globalCtx) {
-    s32 pad;
     s16 prevSwitchFlag;
     s32 waterLevelActionIndex;
     WaterBox* waterBoxes;
@@ -295,7 +293,6 @@ void BgMizuWater_Update(Actor* thisx, GlobalContext* globalCtx) {
     s32 posY;
     s32 unk0;
     s32 unk1;
-    s32 pad;
 
     if (bREG(15) == 0) {
         osSyncPrintf("%x %x %x\n", Flags_GetSwitch(globalCtx, WATER_TEMPLE_WATER_F1_FLAG),

@@ -70,7 +70,6 @@ void EnMs_SetOfferText(EnMs* this, GlobalContext* globalCtx) {
 
 void EnMs_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnMs* this = (EnMs*)thisx;
-    s32 pad;
 
     if (LINK_AGE_IN_YEARS != YEARS_CHILD) {
         Actor_Kill(&this->actor);
@@ -159,7 +158,6 @@ void EnMs_TalkAfterPurchase(EnMs* this, GlobalContext* globalCtx) {
 
 void EnMs_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnMs* this = (EnMs*)thisx;
-    s32 pad;
 
     this->activeTimer += 1;
     Actor_SetFocus(&this->actor, 20.0f);

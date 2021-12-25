@@ -89,8 +89,6 @@ static InitChainEntry sInitChain[] = {
 };
 
 void ObjLightswitch_InitCollider(ObjLightswitch* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     Collider_InitJntSph(globalCtx, &this->collider);
     Collider_SetJntSph(globalCtx, &this->collider, &this->actor, &sColliderJntSphInit, this->colliderItems);
     func_800D1694(this->actor.world.pos.x, this->actor.world.pos.y + (this->actor.shape.yOffset * this->actor.scale.y),
@@ -135,7 +133,6 @@ void ObjLightswitch_SpawnDisappearEffects(ObjLightswitch* this, GlobalContext* g
     f32 x;
     f32 y;
     f32 z;
-    s32 pad;
 
     if (this->alpha >= (100 << 6)) {
         x = (CLAMP_MAX((1.0f - 1.0f / (255 << 6) * this->alpha) * 400.0f, 60.0f) - 30.0f + 30.0f) * Rand_ZeroOne();
@@ -444,7 +441,6 @@ void ObjLightswitch_DrawOpa(ObjLightswitch* this, GlobalContext* globalCtx) {
 }
 
 void ObjLightswitch_DrawXlu(ObjLightswitch* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f sp68;
     Vec3s sp60;
 

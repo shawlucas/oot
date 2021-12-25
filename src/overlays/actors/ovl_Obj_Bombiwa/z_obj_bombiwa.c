@@ -122,7 +122,6 @@ void ObjBombiwa_Break(ObjBombiwa* this, GlobalContext* globalCtx) {
 
 void ObjBombiwa_Update(Actor* thisx, GlobalContext* globalCtx) {
     ObjBombiwa* this = (ObjBombiwa*)thisx;
-    s32 pad;
 
     if ((func_80033684(globalCtx, &this->actor) != NULL) ||
         ((this->collider.base.acFlags & AC_HIT) && (this->collider.info.acHitInfo->toucher.dmgFlags & 0x40000040))) {

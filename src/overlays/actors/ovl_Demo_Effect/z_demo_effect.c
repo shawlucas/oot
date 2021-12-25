@@ -1080,8 +1080,6 @@ void DemoEffect_UpdateLightEffect(DemoEffect* this, GlobalContext* globalCtx) {
             if (globalCtx->csCtx.frames == 640) {
                 Audio_PlayActorSound2(&this->actor, NA_SE_EV_WHITE_OUT);
             }
-
-            
         }
 
         if (globalCtx->sceneNum == SCENE_SPOT08 && gSaveContext.sceneSetupIndex == 4) {
@@ -1091,13 +1089,9 @@ void DemoEffect_UpdateLightEffect(DemoEffect* this, GlobalContext* globalCtx) {
             if (globalCtx->csCtx.frames == 648) {
                 Audio_PlayActorSound2(&this->actor, NA_SE_EV_WHITE_OUT);
             }
-
-                        
         }
 
         if (globalCtx->sceneNum == SCENE_TOKINOMA && gSaveContext.sceneSetupIndex == 14) {
-            
-
             if (globalCtx->csCtx.npcActions[this->csActionId]->action == 2) {
                 Audio_PlayActorSound2(&this->actor, NA_SE_EV_LIGHT_GATHER - SFX_FLAG);
             }
@@ -1399,7 +1393,6 @@ void DemoEffect_MoveJewelSplit(PosRot* world, DemoEffect* this) {
  */
 void DemoEffect_MoveJewelSpherical(f32 degrees, f32 frameDivisor, Vec3f startPos, Vec3f endPos, f32 radius,
                                    Vec3s rotation, DemoEffect* this) {
-    s32 pad;
     s32 pad2;
     f32 distance;
     f32 xPos;
@@ -1670,8 +1663,6 @@ void DemoEffect_DrawJewel(Actor* thisx, GlobalContext* globalCtx2) {
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_effect.c", __LINE__);
 
     if (!DemoEffect_CheckCsAction(this, globalCtx, 1)) {
-        
-
         if (!(this->effectFlags & 0x1)) {
             switch (this->jewel.type) {
                 case DEMO_EFFECT_JEWEL_KOKIRI:
@@ -1796,7 +1787,7 @@ void DemoEffect_DrawFireBall(Actor* thisx, GlobalContext* globalCtx) {
  */
 void DemoEffect_DrawGodLgt(Actor* thisx, GlobalContext* globalCtx) {
     DemoEffect* this = (DemoEffect*)thisx;
-    s32 pad;
+
     u32 frames = globalCtx->gameplayFrames;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_effect.c", __LINE__);
@@ -1835,7 +1826,6 @@ void DemoEffect_DrawGodLgt(Actor* thisx, GlobalContext* globalCtx) {
         this->godLgt.rotation++;
         if (this->godLgt.rotation > 120) {
             this->godLgt.rotation = 0;
-            
         }
 
         Matrix_RotateZ((((s32)this->godLgt.rotation) * 3.0f) * (M_PI / 180.0f), MTXMODE_APPLY);
@@ -1861,7 +1851,6 @@ void DemoEffect_DrawLightEffect(Actor* thisx, GlobalContext* globalCtx) {
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_effect.c", __LINE__);
 
     if (!DemoEffect_CheckCsAction(this, globalCtx, 1)) {
-
         if (this->light.flicker == 0) {
             this->light.flicker = 1;
         } else {
@@ -1917,7 +1906,7 @@ void DemoEffect_DrawBlueOrb(Actor* thisx, GlobalContext* globalCtx) {
  */
 void DemoEffect_DrawLgtShower(Actor* thisx, GlobalContext* globalCtx) {
     DemoEffect* this = (DemoEffect*)thisx;
-    s32 pad;
+
     u32 frames = globalCtx->gameplayFrames;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_effect.c", __LINE__);
@@ -1961,7 +1950,7 @@ void DemoEffect_DrawLightRing(Actor* thisx, GlobalContext* globalCtx2) {
  */
 void DemoEffect_DrawTriforceSpot(Actor* thisx, GlobalContext* globalCtx) {
     DemoEffect* this = (DemoEffect*)thisx;
-    s32 pad;
+
     Vtx* vertices = SEGMENTED_TO_VIRTUAL(gTriforceVtx);
     u32 frames = globalCtx->gameplayFrames;
 
@@ -2042,7 +2031,6 @@ void DemoEffect_DrawGetItem(Actor* thisx, GlobalContext* globalCtx) {
  * Callback for the SkelCurve system to draw the animated limbs.
  */
 s32 DemoEffect_DrawTimewarpLimbs(GlobalContext* globalCtx, SkelAnimeCurve* skelCuve, s32 limbIndex, void* thisx) {
-    s32 pad;
     DemoEffect* this = (DemoEffect*)thisx;
     u32 frames = globalCtx->gameplayFrames;
 
@@ -2087,7 +2075,6 @@ void DemoEffect_DrawTimeWarp(Actor* thisx, GlobalContext* globalCtx) {
  * Faces/rotates the Actor towards the current cutscene action end point.
  */
 void DemoEffect_FaceToCsEndpoint(DemoEffect* this, Vec3f startPos, Vec3f endPos) {
-    s32 pad;
     f32 x = endPos.x - startPos.x;
     f32 z = endPos.z - startPos.z;
     f32 xzDistance = sqrtf(SQ(x) + SQ(z));

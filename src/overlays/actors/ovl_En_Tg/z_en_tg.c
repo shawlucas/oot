@@ -139,7 +139,7 @@ void EnTg_SpinIfNotTalking(EnTg* this, GlobalContext* globalCtx) {
 
 void EnTg_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnTg* this = (EnTg*)thisx;
-    s32 pad;
+
     f32 temp;
     Vec3s sp2C;
 

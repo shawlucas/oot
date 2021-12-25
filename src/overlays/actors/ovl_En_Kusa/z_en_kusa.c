@@ -97,7 +97,6 @@ void EnKusa_SetupAction(EnKusa* this, EnKusaActionFunc actionFunc) {
 }
 
 s32 EnKusa_SnapToFloor(EnKusa* this, GlobalContext* globalCtx, f32 yOffset) {
-    s32 pad;
     CollisionPoly* poly;
     Vec3f pos;
     s32 bgId;
@@ -172,7 +171,6 @@ void EnKusa_SpawnFragments(EnKusa* this, GlobalContext* globalCtx) {
     s32 i;
     s32 scaleIndex;
     Vec3f* dir;
-    s32 pad;
 
     for (i = 0; i < ARRAY_COUNT(sUnitDirections); i++) {
         dir = &sUnitDirections[i];
@@ -294,8 +292,6 @@ void EnKusa_SetupMain(EnKusa* this) {
 }
 
 void EnKusa_Main(EnKusa* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     if (Actor_HasParent(&this->actor, globalCtx)) {
         EnKusa_SetupLiftedUp(this);
         Audio_PlaySoundAtPosition(globalCtx, &this->actor.world.pos, 20, NA_SE_PL_PULL_UP_PLANT);
@@ -366,7 +362,6 @@ void EnKusa_SetupFall(EnKusa* this) {
 }
 
 void EnKusa_Fall(EnKusa* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f contactPos;
 
     if (this->actor.bgCheckFlags & 0xB) {

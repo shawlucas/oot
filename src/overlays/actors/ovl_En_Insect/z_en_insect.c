@@ -92,7 +92,6 @@ f32 EnInsect_XZDistanceSquared(Vec3f* v1, Vec3f* v2) {
 }
 
 s32 EnInsect_InBottleRange(EnInsect* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
     Vec3f pos;
 
@@ -242,7 +241,6 @@ void func_80A7C3A0(EnInsect* this) {
 }
 
 void func_80A7C3F4(EnInsect* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s16 sp2E;
     f32 playSpeed;
 
@@ -403,7 +401,7 @@ void func_80A7CBC8(EnInsect* this) {
 void func_80A7CC3C(EnInsect* this, GlobalContext* globalCtx) {
     static Vec3f accel = { 0.0f, 0.0f, 0.0f };
     static Vec3f unused = { 0.0f, 0.0f, 0.0f };
-    s32 pad[2];
+
     Vec3f velocity;
 
     Math_SmoothStepToF(&this->actor.speedXZ, 0.0f, 0.1f, 0.5f, 0.0f);
@@ -445,7 +443,7 @@ void func_80A7CE60(EnInsect* this) {
 void func_80A7CEC0(EnInsect* this, GlobalContext* globalCtx) {
     f32 temp_f0;
     s16 temp_v1;
-    s16 pad;
+
     s16 sp4E;
     Vec3f sp40;
     s32 phi_v0;

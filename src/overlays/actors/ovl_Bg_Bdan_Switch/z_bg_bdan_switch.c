@@ -96,8 +96,8 @@ void BgBdanSwitch_InitDynaPoly(BgBdanSwitch* this, GlobalContext* globalCtx, Col
     CollisionHeader_GetVirtual(collision, &colHeader);
     this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, colHeader);
     if (this->dyna.bgId == BG_ACTOR_MAX) {
-        osSyncPrintf("Warning : move BG registration failure (%s %d)(name %d)(params 0x%04X)\n", "../z_bg_bdan_switch.c", __LINE__,
-                     this->dyna.actor.id, this->dyna.actor.params);
+        osSyncPrintf("Warning : move BG registration failure (%s %d)(name %d)(params 0x%04X)\n",
+                     "../z_bg_bdan_switch.c", __LINE__, this->dyna.actor.id, this->dyna.actor.params);
     }
 }
 
@@ -189,8 +189,8 @@ void BgBdanSwitch_Init(Actor* thisx, GlobalContext* globalCtx) {
             }
             break;
         default:
-            osSyncPrintf("Unauthorized PARAMS(params 0x%04X)(%s %d)\n", this->dyna.actor.params, "../z_bg_bdan_switch.c",
-                         __LINE__);
+            osSyncPrintf("Unauthorized PARAMS(params 0x%04X)(%s %d)\n", this->dyna.actor.params,
+                         "../z_bg_bdan_switch.c", __LINE__);
             Actor_Kill(&this->dyna.actor);
             return;
     }

@@ -46,7 +46,6 @@ u32 EffectSsDeadDs_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, voi
 }
 
 void EffectSsDeadDs_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
-    s32 pad;
     f32 scale;
     s32 pad1;
     s32 pad2;
@@ -110,7 +109,6 @@ void EffectSsDeadDs_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
 
 void EffectSsDeadDs_Update(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     if (this->life < this->rHalfOfLife) {
-
         this->rScale += this->rScaleStep;
         if (this->rScale < 0) {
             this->rScale = 0;

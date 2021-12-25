@@ -521,7 +521,7 @@ void BossDodongo_Damaged(BossDodongo* this, GlobalContext* globalCtx) {
 void BossDodongo_Explode(BossDodongo* this, GlobalContext* globalCtx) {
     static Color_RGBA8 dustPrimColor = { 255, 255, 0, 255 };
     static Color_RGBA8 dustEnvColor = { 255, 10, 0, 255 };
-    s16 pad;
+
     Vec3f dustVel;
     Vec3f dustAcell;
     Vec3f dustPos;
@@ -598,7 +598,6 @@ void BossDodongo_GetUp(BossDodongo* this, GlobalContext* globalCtx) {
 }
 
 void BossDodongo_BlowFire(BossDodongo* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f unusedZeroVec1 = { 0.0f, 0.0f, 0.0f };
     Vec3f unusedZeroVec2 = { 0.0f, 0.0f, 0.0f };
 
@@ -820,7 +819,6 @@ void BossDodongo_Update(Actor* thisx, GlobalContext* globalCtx2) {
     s16 i;
     Player* player = GET_PLAYER(globalCtx);
     Player* player2 = GET_PLAYER(globalCtx);
-    s32 pad;
 
     this->unk_1E2 = 0;
     this->unk_19E++;
@@ -1090,7 +1088,7 @@ block_1:
 
         CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_boss_dodongo.c", __LINE__);
     }
-    { s32 pad; } // Required to match
+    {} // Required to match
     return 1;
 }
 
@@ -1118,7 +1116,6 @@ void BossDodongo_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dLi
 
 void BossDodongo_Draw(Actor* thisx, GlobalContext* globalCtx) {
     BossDodongo* this = (BossDodongo*)thisx;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_dodongo.c", __LINE__);
     func_80093D18(globalCtx->state.gfxCtx);
@@ -1147,7 +1144,7 @@ f32 func_808C4F6C(BossDodongo* this, GlobalContext* globalCtx) {
     f32 xDiff;
     f32 zDiff;
     f32 sp2C;
-    s32 pad;
+
     f32 temp_f2;
     f32 rotation;
     Player* player = GET_PLAYER(globalCtx);
@@ -1170,7 +1167,7 @@ f32 func_808C50A8(BossDodongo* this, GlobalContext* globalCtx) {
     f32 xDiff;
     f32 zDiff;
     f32 sp2C;
-    s32 pad;
+
     f32 temp_f2;
     f32 rotation;
     Player* player = GET_PLAYER(globalCtx);
@@ -1223,7 +1220,6 @@ void BossDodongo_SpawnFire(BossDodongo* this, GlobalContext* globalCtx, s16 para
 }
 
 void BossDodongo_UpdateDamage(BossDodongo* this, GlobalContext* globalCtx) {
-    s32 pad;
     ColliderInfo* item1;
     u8 swordDamage;
     s32 damage;
@@ -1465,7 +1461,6 @@ void BossDodongo_DeathCutscene(BossDodongo* this, GlobalContext* globalCtx) {
             if (this->unk_1DA < 960) {
                 Math_SmoothStepToF(&this->actor.shape.shadowScale, 0.0f, 1.0f, 10.0f, 0.0f);
                 if (this->unk_1DA >= 710) {
-
                     if (this->unk_1DA == 710) {
                         Vec3f sp124[] = {
                             { -440.0f, 0.0f, -3304.0f },
@@ -1584,7 +1579,6 @@ void BossDodongo_DeathCutscene(BossDodongo* this, GlobalContext* globalCtx) {
                     Math_SmoothStepToF(&this->unk_23C, 0.0f, 0.2f, 0.01f, 0.0f);
                 }
             } else {
-
                 if (this->unk_1A2 == 0) {
                     Math_SmoothStepToF(&this->unk_23C, -0.5f, 0.2f, 0.05f, 0.0f);
                 } else {

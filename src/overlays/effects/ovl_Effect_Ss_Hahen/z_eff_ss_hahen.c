@@ -68,7 +68,7 @@ u32 EffectSsHahen_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, void
 
 void EffectSsHahen_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    s32 pad;
+
     f32 scale = this->rScale * 0.001f;
 
     OPEN_DISPS(gfxCtx, "../z_eff_hahen.c", __LINE__);
@@ -92,7 +92,7 @@ void EffectSsHahen_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
 // in the original game this function is hardcoded to be used only by the skull pots in Shadow Temple
 void EffectSsHahen_DrawGray(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     GraphicsContext* gfxCtx = globalCtx->state.gfxCtx;
-    s32 pad;
+
     f32 scale = this->rScale * 0.001f;
 
     OPEN_DISPS(gfxCtx, "../z_eff_hahen.c", __LINE__);

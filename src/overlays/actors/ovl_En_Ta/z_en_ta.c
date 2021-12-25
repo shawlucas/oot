@@ -1133,7 +1133,6 @@ void func_80B16938(EnTa* this) {
 
 void EnTa_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnTa* this = (EnTa*)thisx;
-    s32 pad;
 
     Collider_UpdateCylinder(&this->actor, &this->collider);
     CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);
@@ -1208,7 +1207,6 @@ void EnTa_Draw(Actor* thisx, GlobalContext* globalCtx) {
         gTalonEyeClosedTex,
     };
     EnTa* this = (EnTa*)thisx;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_ta.c", __LINE__);
 

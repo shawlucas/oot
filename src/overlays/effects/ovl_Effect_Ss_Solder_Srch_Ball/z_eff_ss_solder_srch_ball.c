@@ -30,7 +30,6 @@ u32 EffectSsSolderSrchBall_Init(GlobalContext* globalCtx, u32 index, EffectSs* t
 }
 
 void EffectSsSolderSrchBall_Update(GlobalContext* globalCtx, u32 index, EffectSs* this) {
-    s32 pad;
     f32 playerPosDiffX;
     f32 playerPosDiffY;
     f32 playerPosDiffZ;

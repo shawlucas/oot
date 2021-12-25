@@ -1225,7 +1225,6 @@ void BossVa_SetupBodyPhase3(BossVa* this) {
 }
 
 void BossVa_BodyPhase3(BossVa* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
     s32 i;
     s16 sp62;
@@ -2003,7 +2002,6 @@ void BossVa_ZapperAttack(BossVa* this, GlobalContext* globalCtx) {
     tmp17 = sp98 - this->actor.shape.rot.y;
 
     if ((sp8E >= ABS(tmp17) || this->burst) && !(sBodyState & 0x80) && !(player->stateFlags1 & 0x04000000)) {
-
         if (!this->burst) {
             sp94 = sp98 - this->actor.shape.rot.y;
 
@@ -2179,7 +2177,6 @@ void BossVa_ZapperDeath(BossVa* this, GlobalContext* globalCtx) {
                 if (((this->actor.params == BOSSVA_ZAPPER_1) && (this->timer2 < 16)) ||
                     ((this->actor.params == BOSSVA_ZAPPER_2) && (this->timer2 < 24)) ||
                     (this->actor.params == BOSSVA_ZAPPER_3)) {
-
                     if ((this->timer2 % 2) == 0 && (this->timer2 >= 0)) {
                         if (this->timer2 < 8) {
                             BossVa_Tumor(globalCtx, this, 1, (s16)Rand_CenteredFloat(5.0f) + 0xD, 0.0f, 0.0f, TUMOR_ARM,
@@ -2238,7 +2235,7 @@ void BossVa_SetupZapperEnraged(BossVa* this, GlobalContext* globalCtx) {
 
 void BossVa_ZapperEnraged(BossVa* this, GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     s16 tmp16;
     s16 sp6C;
     s16 sp6A;
@@ -2267,7 +2264,6 @@ void BossVa_ZapperEnraged(BossVa* this, GlobalContext* globalCtx) {
 
     if ((ABS(tmp16) <= 0x4650 || this->burst) && !(sBodyState & 0x80) && !(player->stateFlags1 & 0x04000000)) {
         if (!this->burst) {
-
             sp68 = sp6C - this->actor.shape.rot.y;
             if (ABS(sp68) > 0x1770) {
                 sp68 = (sp68 > 0) ? 0x1770 : -0x1770;
@@ -2529,7 +2525,6 @@ void BossVa_BariPhase3Attack(BossVa* this, GlobalContext* globalCtx) {
     EnBoom* boomerang;
     Vec3f sp54 = GET_BODY(this)->unk_1D8;
     s16 sp52;
-    s32 pad;
 
     this->unk_1A4 += Rand_ZeroOne() * 0.5f;
     sp52 = this->timer2 & 0x1FF;
@@ -2618,7 +2613,6 @@ void BossVa_BariPhase2Attack(BossVa* this, GlobalContext* globalCtx) {
     s16 sp52;
     s16 sp50;
     f32 sp4C;
-    s32 pad;
 
     this->unk_1A4 += Rand_ZeroOne() * 0.5f;
     sp52 = this->timer2 & 0x1FF;
@@ -2865,7 +2859,6 @@ void BossVa_Update(Actor* thisx, GlobalContext* globalCtx2) {
 s32 BossVa_BodyOverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot,
                                 void* thisx) {
     BossVa* this = (BossVa*)thisx;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_va.c", __LINE__);
 
@@ -2894,7 +2887,6 @@ s32 BossVa_BodyOverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** d
 void BossVa_BodyPostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3s* rot, void* thisx) {
     BossVa* this = (BossVa*)thisx;
     Vec3f sp78 = { 0.0f, 0.0f, 0.0f };
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_boss_va.c", __LINE__);
 
@@ -2975,7 +2967,6 @@ s32 BossVa_SupportOverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx*
 void BossVa_SupportPostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3s* rot, void* thisx) {
     BossVa* this = (BossVa*)thisx;
     Vec3f sp20 = { 0.0f, 0.0f, 0.0f };
-    s32 pad;
 
     if (this->onCeiling) {
         switch (limbIndex) {
@@ -3452,7 +3443,6 @@ void BossVa_UpdateEffects(GlobalContext* globalCtx) {
                 } else if (effect->mode == GORE_FADING) {
                     if (effect->timer == 0) {
                         effect->type = VA_NONE;
-                        
                     }
 
                 } else {
@@ -3494,7 +3484,6 @@ void BossVa_UpdateEffects(GlobalContext* globalCtx) {
                         }
                         break;
                 }
-                
             }
         }
     }

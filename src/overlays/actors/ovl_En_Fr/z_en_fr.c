@@ -260,7 +260,7 @@ void EnFr_DrawActive(EnFr* this) {
 
 void EnFr_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnFr* this = (EnFr*)thisx;
-    s32 pad;
+
     s32 frogIndex;
     s32 pad2;
 
@@ -827,7 +827,7 @@ s32 EnFr_IsFrogSongComplete(EnFr* this, GlobalContext* globalCtx) {
     if (this->ocarinaNote == (*msgCtx).lastOcaNoteIdx) { // required to match, possibly an array?
         this->ocarinaNoteIndex++;
         ocarinaNoteIndex = this->ocarinaNoteIndex;
-        
+
         if (ocarinaNoteIndex >= 14) { // Frog Song is completed
             this->ocarinaNoteIndex = 13;
             return true;

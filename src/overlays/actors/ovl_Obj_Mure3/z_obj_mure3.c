@@ -141,7 +141,6 @@ void func_80B9ADCC(ObjMure3* this, GlobalContext* globalCtx) {
 }
 
 void ObjMure3_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     ObjMure3* this = (ObjMure3*)thisx;
 
     if (Flags_GetSwitch(globalCtx, this->actor.params & 0x3F)) {

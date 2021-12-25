@@ -380,8 +380,6 @@ void GetItem_Draw(GlobalContext* globalCtx, s16 drawId) {
 // All remaining functions in this file are draw functions referenced in the table and called by the function above
 
 void GetItem_DrawMaskOrBombchu(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093BA8(globalCtx->state.gfxCtx);
@@ -393,8 +391,6 @@ void GetItem_DrawMaskOrBombchu(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawSoldOut(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     POLY_XLU_DISP = Gfx_CallSetupDL(POLY_XLU_DISP, 5);
@@ -406,8 +402,6 @@ void GetItem_DrawSoldOut(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawBlueFire(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -432,8 +426,6 @@ void GetItem_DrawBlueFire(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawPoes(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -461,8 +453,6 @@ void GetItem_DrawPoes(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawFairy(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -489,8 +479,6 @@ void GetItem_DrawFairy(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawMirrorShield(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -512,8 +500,6 @@ void GetItem_DrawMirrorShield(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawSkullToken(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -534,8 +520,6 @@ void GetItem_DrawSkullToken(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawEggOrMedallion(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093BA8(globalCtx->state.gfxCtx);
@@ -548,8 +532,6 @@ void GetItem_DrawEggOrMedallion(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawCompass(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -566,8 +548,6 @@ void GetItem_DrawCompass(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawPotion(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -592,8 +572,6 @@ void GetItem_DrawPotion(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawGoronSword(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -609,8 +587,6 @@ void GetItem_DrawGoronSword(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawDekuNuts(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -626,8 +602,6 @@ void GetItem_DrawDekuNuts(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawRecoveryHeart(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D84(globalCtx->state.gfxCtx);
@@ -643,8 +617,6 @@ void GetItem_DrawRecoveryHeart(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawFish(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D84(globalCtx->state.gfxCtx);
@@ -660,8 +632,6 @@ void GetItem_DrawFish(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawOpa0(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -673,8 +643,6 @@ void GetItem_DrawOpa0(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawOpa0Xlu1(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -691,8 +659,6 @@ void GetItem_DrawOpa0Xlu1(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawXlu01(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D84(globalCtx->state.gfxCtx);
@@ -705,8 +671,6 @@ void GetItem_DrawXlu01(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawOpa10Xlu2(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -724,8 +688,6 @@ void GetItem_DrawOpa10Xlu2(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawMagicArrow(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -743,8 +705,6 @@ void GetItem_DrawMagicArrow(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawMagicSpell(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D84(globalCtx->state.gfxCtx);
@@ -762,8 +722,6 @@ void GetItem_DrawMagicSpell(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawOpa1023(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -778,8 +736,6 @@ void GetItem_DrawOpa1023(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawOpa10Xlu32(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -798,8 +754,6 @@ void GetItem_DrawOpa10Xlu32(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawSmallRupee(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     Matrix_Scale(0.7f, 0.7f, 0.7f, MTXMODE_APPLY);
@@ -820,8 +774,6 @@ void GetItem_DrawSmallRupee(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawScale(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D84(globalCtx->state.gfxCtx);
@@ -840,8 +792,6 @@ void GetItem_DrawScale(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawBulletBag(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);
@@ -861,8 +811,6 @@ void GetItem_DrawBulletBag(GlobalContext* globalCtx, s16 drawId) {
 }
 
 void GetItem_DrawWallet(GlobalContext* globalCtx, s16 drawId) {
-    s32 pad;
-
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_draw.c", __LINE__);
 
     func_80093D18(globalCtx->state.gfxCtx);

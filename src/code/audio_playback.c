@@ -153,7 +153,6 @@ void Audio_NoteDisable(Note* note) {
 }
 
 void Audio_ProcessNotes(void) {
-    s32 pad[2];
     NoteAttributes* attrs;
     NoteSubEu* noteSubEu2;
     NoteSubEu* noteSubEu;
@@ -205,7 +204,6 @@ void Audio_ProcessNotes(void) {
 
     out:
         if (playbackState->priority != 0) {
-            
             noteSubEu = &note->noteSubEu;
             if (playbackState->unk_04 >= 1 || noteSubEu->bitField0.finished) {
                 if (playbackState->adsr.action.s.state == ADSR_STATE_DISABLED || noteSubEu->bitField0.finished) {
@@ -744,7 +742,6 @@ Note* Audio_FindNodeWithPrioLessThan(AudioListItem* list, s32 limit) {
 }
 
 void Audio_NoteInitForLayer(Note* note, SequenceLayer* layer) {
-    s32 pad[3];
     s16 instId;
     NotePlaybackState* playback = &note->playbackState;
     NoteSubEu* sub = &note->noteSubEu;

@@ -76,7 +76,6 @@ static InitChainEntry sInitChain[] = {
 
 void BgPoSyokudai_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgPoSyokudai* this = (BgPoSyokudai*)thisx;
-    s32 pad;
 
     Actor_ProcessInitChain(thisx, sInitChain);
 
@@ -99,13 +98,11 @@ void BgPoSyokudai_Init(Actor* thisx, GlobalContext* globalCtx) {
     if (this->flameColor == POE_FLAME_PURPLE && Flags_GetSwitch(globalCtx, POE_TORCH_FLAG + POE_FLAME_GREEN) &&
         Flags_GetSwitch(globalCtx, POE_TORCH_FLAG + POE_FLAME_BLUE) &&
         Flags_GetSwitch(globalCtx, POE_TORCH_FLAG + POE_FLAME_RED) && !Flags_GetSwitch(globalCtx, thisx->params)) {
-
         Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_EN_PO_SISTERS, 119.0f, 225.0f, -1566.0f, 0, 0, 0,
                     thisx->params);
         globalCtx->envCtx.unk_BF = 0x4;
 
     } else if (!Flags_GetSwitch(globalCtx, POE_TORCH_FLAG + POE_FLAME_PURPLE) && !Flags_GetSwitch(globalCtx, 0x1B)) {
-
         Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_EN_PO_SISTERS, thisx->world.pos.x,
                     thisx->world.pos.y + 52.0f, thisx->world.pos.z, 0, 0, 0,
                     (this->flameColor << 8) + thisx->params + 0x1000);
@@ -132,7 +129,6 @@ void BgPoSyokudai_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 
 void BgPoSyokudai_Update(Actor* thisx, GlobalContext* globalCtx) {
     BgPoSyokudai* this = (BgPoSyokudai*)thisx;
-    s32 pad;
 
     CollisionCheck_SetAC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);
     CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);

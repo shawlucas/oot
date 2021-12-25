@@ -93,7 +93,7 @@ static InitChainEntry sInitChainWaterPlane[] = {
 
 void BgSpot06Objects_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgSpot06Objects* this = (BgSpot06Objects*)thisx;
-    s32 pad;
+
     CollisionHeader* colHeader = NULL;
 
     this->switchFlag = thisx->params & 0xFF;
@@ -282,7 +282,6 @@ void BgSpot06Objects_LockSpawnBubbles(BgSpot06Objects* this, GlobalContext* glob
  * This is where the fish shaped lock waits to be pulled out by the hookshot. Once it does it will spawn bubbles.
  */
 void BgSpot06Objects_LockWait(BgSpot06Objects* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 i;
     s32 pad2;
     Vec3f effectPos;
@@ -424,7 +423,6 @@ void BgSpot06Objects_Update(Actor* thisx, GlobalContext* globalCtx) {
  * Draw the Lake Hylia water plane, and scroll its texture
  */
 void BgSpot06Objects_DrawLakeHyliaWater(BgSpot06Objects* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 gameplayFrames;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_bg_spot06_objects.c", __LINE__);
@@ -491,8 +489,6 @@ void BgSpot06Objects_WaterPlaneCutsceneWait(BgSpot06Objects* this, GlobalContext
  * This is where the Lake Hylia water plane rises in the cutscene after the Water Temple is cleared.
  */
 void BgSpot06Objects_WaterPlaneCutsceneRise(BgSpot06Objects* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     this->dyna.actor.world.pos.y = this->lakeHyliaWaterLevel + WATER_LEVEL_RAISED;
 
     if (this->lakeHyliaWaterLevel >= 0.0001f) {

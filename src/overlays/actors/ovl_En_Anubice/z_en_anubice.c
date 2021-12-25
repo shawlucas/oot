@@ -311,7 +311,6 @@ void EnAnubice_Die(EnAnubice* this, GlobalContext* globalCtx) {
     f32 phi_f2;
     Vec3f sp4C = { 0.0f, 0.0f, 0.0f };
     Vec3f fireEffectPos = { 0.0f, 0.0f, 0.0f };
-    s32 pad;
 
     SkelAnime_Update(&this->skelAnime);
     Math_ApproachZeroF(&this->actor.shape.shadowScale, 0.4f, 0.25f);

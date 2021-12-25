@@ -381,7 +381,6 @@ static s16 sPrizeRot[] = { 0x4268, 0x4268, -0x03E8, 0x0000, 0x4268, 0x0000 };
 
 void EnBomBowMan_ChooseShowPrize(EnBomBowlMan* this, GlobalContext* globalCtx) {
     s16 prizeTemp;
-    s32 pad;
 
     SkelAnime_Update(&this->skelAnime);
 

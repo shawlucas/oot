@@ -53,7 +53,6 @@ void ObjHsblock_SetupAction(ObjHsblock* this, ObjHsblockActionFunc actionFunc) {
 }
 
 void func_80B93B68(ObjHsblock* this, GlobalContext* globalCtx, CollisionHeader* collision, s32 moveFlags) {
-    s32 pad;
     CollisionHeader* colHeader = NULL;
     s32 pad2[2];
 

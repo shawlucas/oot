@@ -150,7 +150,6 @@ static s16 sTextIds[] = { 0x2B, 0x2E, 0xC8, 0x2D };
 static s16 sTextBoxCount[] = { TEXT_STATE_CHOICE, TEXT_STATE_EVENT, TEXT_STATE_EVENT, TEXT_STATE_EVENT };
 
 void EnSyatekiMan_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnSyatekiMan* this = (EnSyatekiMan*)thisx;
 
     osSyncPrintf("\n\n");
@@ -287,7 +286,7 @@ void EnSyatekiMan_WaitForGame(EnSyatekiMan* this, GlobalContext* globalCtx) {
     EnSyatekiItm* gallery;
 
     SkelAnime_Update(&this->skelAnime);
-    
+
     gallery = ((EnSyatekiItm*)this->actor.parent);
     if ((gallery->actor.update != NULL) && (gallery->signal == ENSYATEKI_END)) {
         this->csCam = OnePointCutscene_Init(globalCtx, 8002, -99, &this->actor, MAIN_CAM);
@@ -460,7 +459,6 @@ void EnSyatekiMan_Blink(EnSyatekiMan* this) {
 }
 
 void EnSyatekiMan_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnSyatekiMan* this = (EnSyatekiMan*)thisx;
 
     if (this->timer != 0) {
@@ -495,7 +493,6 @@ s32 EnSyatekiMan_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx**
 }
 
 void EnSyatekiMan_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnSyatekiMan* this = (EnSyatekiMan*)thisx;
 
     func_80093D18(globalCtx->state.gfxCtx);

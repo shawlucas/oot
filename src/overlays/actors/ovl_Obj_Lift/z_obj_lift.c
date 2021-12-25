@@ -61,7 +61,6 @@ void ObjLift_SetupAction(ObjLift* this, ObjLiftActionFunc actionFunc) {
 }
 
 void ObjLift_InitDynaPoly(ObjLift* this, GlobalContext* globalCtx, CollisionHeader* collision, s32 flags) {
-    s32 pad;
     CollisionHeader* colHeader = NULL;
     s32 pad2;
 
@@ -134,7 +133,6 @@ void func_80B9651C(ObjLift* this) {
 }
 
 void func_80B96560(ObjLift* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 quakeIndex;
 
     if (func_8004356C(&this->dyna)) {
@@ -187,7 +185,6 @@ void func_80B967C0(ObjLift* this) {
 }
 
 void func_80B96840(ObjLift* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 bgId;
     Vec3f sp2C;
 

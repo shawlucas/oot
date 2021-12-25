@@ -48,11 +48,9 @@ void EffectSsBomb_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
     MtxF mfResult;
     MtxF mfTrans11DA0;
     Mtx* mtx;
-    s32 pad;
+
     f32 scale;
     s16 color;
-
-    
 
     OPEN_DISPS(gfxCtx, "../z_eff_ss_bomb.c", __LINE__);
 

@@ -524,8 +524,6 @@ void DemoKankyo_DrawRain(Actor* thisx, GlobalContext* globalCtx) {
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_kankyo.c", __LINE__);
 
     for (i = 0; i < 30; i++) {
-        s32 pad[2];
-
         dx = globalCtx->view.lookAt.x - globalCtx->view.eye.x;
         dy = globalCtx->view.lookAt.y - globalCtx->view.eye.y;
         dz = globalCtx->view.lookAt.z - globalCtx->view.eye.z;
@@ -629,7 +627,6 @@ void DemoKankyo_DrawRain(Actor* thisx, GlobalContext* globalCtx) {
 
 void DemoKankyo_DrawRock(Actor* thisx, GlobalContext* globalCtx) {
     DemoKankyo* this = (DemoKankyo*)thisx;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_kankyo.c", __LINE__);
 
@@ -651,7 +648,7 @@ void DemoKankyo_DrawRock(Actor* thisx, GlobalContext* globalCtx) {
 void DemoKankyo_DrawClouds(Actor* thisx, GlobalContext* globalCtx) {
     DemoKankyo* this = (DemoKankyo*)thisx;
     s16 i;
-    s32 pad;
+
     f32 dx;
     f32 dy;
     f32 dz;
@@ -687,7 +684,6 @@ void DemoKankyo_DrawClouds(Actor* thisx, GlobalContext* globalCtx) {
 
 void DemoKankyo_DrawDoorOfTime(Actor* thisx, GlobalContext* globalCtx) {
     DemoKankyo* this = (DemoKankyo*)thisx;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_kankyo.c", __LINE__);
 
@@ -706,7 +702,6 @@ void DemoKankyo_DrawDoorOfTime(Actor* thisx, GlobalContext* globalCtx) {
 
 void DemoKankyo_DrawLightPlane(Actor* thisx, GlobalContext* globalCtx) {
     DemoKankyo* this = (DemoKankyo*)thisx;
-    s32 pad;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_kankyo.c", __LINE__);
 

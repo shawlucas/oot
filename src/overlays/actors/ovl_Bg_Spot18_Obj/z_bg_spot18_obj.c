@@ -125,7 +125,6 @@ s32 func_808B8A5C(BgSpot18Obj* this, GlobalContext* globalCtx) {
 }
 
 s32 func_808B8A98(BgSpot18Obj* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     CollisionHeader* colHeader = NULL;
 
     DynaPolyActor_Init(&this->dyna, DPM_UNK);
@@ -242,7 +241,6 @@ void func_808B8EE0(BgSpot18Obj* this) {
 }
 
 void func_808B8F08(BgSpot18Obj* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
 
     Math_StepToF(&this->dyna.actor.speedXZ, 1.2f, 0.1f);

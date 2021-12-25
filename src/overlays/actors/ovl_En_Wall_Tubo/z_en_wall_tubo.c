@@ -64,7 +64,7 @@ void EnWallTubo_FindGirl(EnWallTubo* this, GlobalContext* globalCtx) {
 
 void EnWallTubo_DetectChu(EnWallTubo* this, GlobalContext* globalCtx) {
     EnBomChu* chu;
-    s32 pad;
+
     Vec3f effAccel = { 0.0f, 0.1f, 0.0f };
     Vec3f effVelocity = { 0.0f, 0.0f, 0.0f };
     Vec3f chuPosDiff;

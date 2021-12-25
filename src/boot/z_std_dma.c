@@ -49,7 +49,6 @@ s32 DmaMgr_DmaRomToRam(u32 rom, u32 ram, u32 size) {
     OSMesg msg;
     s32 ret;
     u32 buffSize = gDmaMgrDmaBuffSize;
-    s32 pad[2];
 
     if (buffSize == 0) {
         buffSize = 0x2000;
@@ -60,7 +59,6 @@ s32 DmaMgr_DmaRomToRam(u32 rom, u32 ram, u32 size) {
     osCreateMesgQueue(&queue, &msg, 1);
 
     while (size > buffSize) {
-         
         ioMsg.hdr.pri = OS_MESG_PRI_NORMAL;
         ioMsg.hdr.retQueue = &queue;
         ioMsg.devAddr = rom;
@@ -91,7 +89,7 @@ s32 DmaMgr_DmaRomToRam(u32 rom, u32 ram, u32 size) {
         ram += buffSize;
     }
 
-     // Also necessary to match
+    // Also necessary to match
 
     ioMsg.hdr.pri = OS_MESG_PRI_NORMAL;
     ioMsg.hdr.retQueue = &queue;
@@ -248,7 +246,6 @@ void DmaMgr_ProcessMsg(DmaRequest* req) {
 
     while (iter->vromEnd) {
         if (vrom >= iter->vromStart && vrom < iter->vromEnd) {
-             
             if (iter->romEnd == 0) {
                 if (iter->vromEnd < vrom + size) {
                     DmaMgr_Error(req, filename, "Segment Alignment Error",
@@ -323,7 +320,8 @@ void DmaMgr_ThreadEntry(void* arg0) {
         if (req->notifyQueue) {
             osSendMesg(req->notifyQueue, req->notifyMsg, OS_MESG_NOBLOCK);
             if (0) {
-                osSyncPrintf("osSendMesg: req=%08X, req->notifyQueue=%08x, req->notifyMsg=%08X \n", req, req->notifyQueue, req->notifyMsg);
+                osSyncPrintf("osSendMesg: req=%08X, req->notifyQueue=%08x, req->notifyMsg=%08X \n", req,
+                             req->notifyQueue, req->notifyMsg);
             }
         }
     }
@@ -351,8 +349,8 @@ s32 DmaMgr_SendRequestImpl(DmaRequest* req, u32 ram, u32 vrom, u32 size, u32 unk
             osSyncPrintf("%c", 7);
             osSyncPrintf(VT_FGCOL(RED));
             osSyncPrintf("sDmaMgrMsgQueue is full. We recommend that you reconsider the queue size.");
-            LOG_NUM("(sizeof(sDmaMgrMsgs) / sizeof(sDmaMgrMsgs[0]))", ARRAY_COUNT(sDmaMgrMsgs),
-                    "../z_std_dma.c", __LINE__);
+            LOG_NUM("(sizeof(sDmaMgrMsgs) / sizeof(sDmaMgrMsgs[0]))", ARRAY_COUNT(sDmaMgrMsgs), "../z_std_dma.c",
+                    __LINE__);
             osSyncPrintf(VT_RST);
         }
     }

@@ -129,7 +129,6 @@ void EnWeatherTag_Init(Actor* thisx, GlobalContext* globalCtx) {
 
 u8 WeatherTag_CheckEnableWeatherEffect(EnWeatherTag* this, GlobalContext* globalCtx, u8 arg2, u8 arg3, u8 arg4, u8 arg5,
                                        u16 arg6, u8 weatherMode) {
-    s32 pad;
     u8 ret = false;
     Player* player = GET_PLAYER(globalCtx);
 
@@ -169,7 +168,6 @@ u8 WeatherTag_CheckEnableWeatherEffect(EnWeatherTag* this, GlobalContext* global
 
 u8 WeatherTag_CheckRestoreWeather(EnWeatherTag* this, GlobalContext* globalCtx, u8 arg2, u8 arg3, u8 arg4, u8 arg5,
                                   u16 arg6) {
-    s32 pad;
     u8 ret = false;
     Player* player = GET_PLAYER(globalCtx);
 

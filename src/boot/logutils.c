@@ -31,7 +31,6 @@ void LogUtils_LogHexDump(void* ptr, s32 size0) {
 
     off = 0;
     while (size > 0) {
-
         osSyncPrintf("%08X %04x", addr, off);
         rest = (size < 0x10) ? size : 0x10;
 
@@ -80,8 +79,8 @@ void LogUtils_CheckBoundary(const char* name, s32 value, s32 unk, const char* fi
     u32 mask = (unk - 1);
 
     if (value & mask) {
-        osSyncPrintf(VT_COL(RED, WHITE) "%s %d:%s(0x%08X) is a boundary (%d) violation\n" VT_RST, file, line, name, value,
-                     unk);
+        osSyncPrintf(VT_COL(RED, WHITE) "%s %d:%s(0x%08X) is a boundary (%d) violation\n" VT_RST, file, line, name,
+                     value, unk);
     }
 }
 

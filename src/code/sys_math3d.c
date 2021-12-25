@@ -257,7 +257,6 @@ s32 Math3D_CosOut(Vec3f* a, Vec3f* b, f32* dst) {
  * `reflVec`
  */
 void Math3D_Vec3fReflect(Vec3f* vec, Vec3f* normal, Vec3f* reflVec) {
-
     f32 normScaleY;
     Vec3f negVec;
     f32 normScaleZ;
@@ -920,7 +919,6 @@ f32 Math3D_Plane(Plane* plane, Vec3f* pointOnPlane) {
  * `nx`, `ny`, `nz`, and `originDist`
  */
 f32 Math3D_UDistPlaneToPos(f32 nx, f32 ny, f32 nz, f32 originDist, Vec3f* p) {
-
     if (IS_ZERO(sqrtf(SQ(nx) + SQ(ny) + SQ(nz)))) {
         osSyncPrintf(VT_COL(YELLOW, BLACK));
         // "Math3DLengthPlaneAndPos(): Normal size is near zero %f %f %f"
@@ -968,7 +966,6 @@ s32 Math3D_TriChkPointParaYImpl(Vec3f* v0, Vec3f* v1, Vec3f* v2, f32 z, f32 x, f
     chkDistSq = SQ(chkDist);
     if (((SQ(v0->z - z) + SQ(v0->x - x)) < chkDistSq) || ((SQ(v1->z - z) + SQ(v1->x - x)) < chkDistSq) ||
         ((SQ(v2->z - z) + SQ(v2->x - x)) < chkDistSq)) {
-
         return true;
     }
 
@@ -1118,7 +1115,6 @@ s32 Math3D_TriChkPointParaXImpl(Vec3f* v0, Vec3f* v1, Vec3f* v2, f32 y, f32 z, f
     }
 
     if (fabsf(nx) > 0.5f) {
-
         if (Math3D_PointDistToLine2D(y, z, v0->y, v0->z, v1->y, v1->z, &distToEdgeSq) && (distToEdgeSq < chkDistSq)) {
             return true;
         }
@@ -1230,7 +1226,6 @@ s32 Math3D_TriChkPointParaZImpl(Vec3f* v0, Vec3f* v1, Vec3f* v2, f32 x, f32 y, f
     }
 
     if (fabsf(nz) > 0.5f) {
-
         if (Math3D_PointDistToLine2D(x, y, v0->x, v0->y, v1->x, v1->y, &distToEdgeSq) && (distToEdgeSq < chkDistSq)) {
             return true;
         }
@@ -1253,7 +1248,6 @@ s32 Math3D_TriChkPointParaZDeterminate(Vec3f* v0, Vec3f* v1, Vec3f* v2, f32 x, f
 
 s32 Math3D_TriChkPointParaZIntersect(Vec3f* v0, Vec3f* v1, Vec3f* v2, f32 nx, f32 ny, f32 nz, f32 originDist, f32 x,
                                      f32 y, f32* zIntersect) {
-
     if (IS_ZERO(nz)) {
         return false;
     }
@@ -1371,7 +1365,6 @@ s32 Math3D_LineSegVsPlane(f32 nx, f32 ny, f32 nz, f32 originDist, Vec3f* linePoi
  */
 s32 Math3D_TriLineIntersect(Vec3f* v0, Vec3f* v1, Vec3f* v2, f32 nx, f32 ny, f32 nz, f32 originDist, Vec3f* linePointA,
                             Vec3f* linePointB, Vec3f* intersect, s32 fromFront) {
-
     if (!Math3D_LineSegVsPlane(nx, ny, nz, originDist, linePointA, linePointB, intersect, fromFront)) {
         return false;
     }
@@ -1402,7 +1395,6 @@ void Math3D_TriNorm(TriNorm* tri, Vec3f* va, Vec3f* vb, Vec3f* vc) {
  * Determines if point `point` lies within `sphere`
  */
 s32 Math3D_PointInSph(Sphere16* sphere, Vec3f* point) {
-
     if (Math3D_DistXYZ16toF(&sphere->center, point) < sphere->radius) {
         return true;
     }
@@ -1823,7 +1815,6 @@ s32 Math3D_CylTriVsIntersect(Cylinder16* cyl, TriNorm* tri, Vec3f* intersect) {
     Vec3f midpointv0v1;
     Vec3f diffMidpointIntersect;
     f32 distFromCylYIntersectTov0v1;
-    s32 pad;
 
     cylBottom = (f32)cyl->pos.y + cyl->yShift;
     cylTop = cyl->height + cylBottom;
@@ -1864,7 +1855,6 @@ s32 Math3D_CylTriVsIntersect(Cylinder16* cyl, TriNorm* tri, Vec3f* intersect) {
     if (Math3D_TriChkLineSegParaYIntersect(&tri->vtx[0], &tri->vtx[1], &tri->vtx[2], tri->plane.normal.x,
                                            tri->plane.normal.y, tri->plane.normal.z, tri->plane.originDist, cyl->pos.z,
                                            cyl->pos.x, &yIntersect, cylBottom, cylTop)) {
-
         cylIntersectCenter.x = cyl->pos.x;
         cylIntersectCenter.y = yIntersect;
         cylIntersectCenter.z = cyl->pos.z;

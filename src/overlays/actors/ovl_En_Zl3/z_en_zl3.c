@@ -73,7 +73,6 @@ void func_80B533B0(Actor* thisx, GlobalContext* globalCtx) {
 
 void func_80B533FC(EnZl3* this, GlobalContext* globalCtx) {
     ColliderCylinder* collider = &this->collider;
-    s32 pad[4];
 
     Collider_UpdateCylinder(&this->actor, collider);
     CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &collider->base);
@@ -105,7 +104,6 @@ BossGanon2* func_80B53488(EnZl3* this, GlobalContext* globalCtx) {
 }
 
 void EnZl3_UpdateEyes(EnZl3* this) {
-    s32 pad[2];
     s16* eyeTexIndex = &this->eyeTexIndex;
     s16* blinkTimer = &this->blinkTimer;
 
@@ -149,7 +147,6 @@ void func_80B536B4(EnZl3* this) {
 }
 
 void func_80B536C4(EnZl3* this) {
-    s32 pad[2];
     Vec3s* vec1 = &this->unk_3F8.unk_08;
     Vec3s* vec2 = &this->unk_3F8.unk_0E;
 
@@ -172,7 +169,6 @@ s32 func_80B537E8(EnZl3* this) {
     s16* rotY = &this->actor.world.rot.y;
     s16* unk_3D0 = &this->unk_3D0;
     s16 retVal;
-    s16 pad[2];
 
     Math_SmoothStepToS(unk_3D0, ABS((s16)(yawTowardsPlayer - *rotY)), 5, 6200, 100);
     retVal = Math_SmoothStepToS(rotY, yawTowardsPlayer, 5, *unk_3D0, 100);
@@ -597,7 +593,6 @@ void func_80B54360(EnZl3* this, s16 arg1, s32 arg2) {
 
 s32 func_80B5458C(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* thisx,
                   Gfx** gfx) {
-    s32 pad[3];
     EnZl3* this = (EnZl3*)thisx;
     s16* unk_28C = this->unk_28C;
     Mtx* sp78;
@@ -701,7 +696,7 @@ s32 func_80B5458C(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3f* p
 
 void EnZl3_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, Vec3s* rot, void* thisx, Gfx** gfx) {
     EnZl3* this = (EnZl3*)thisx;
-    s32 pad;
+
     Vec3f sp34;
     s32 pad2;
     Vec3f sp24;
@@ -834,7 +829,6 @@ void func_80B550F0(EnZl3* this) {
 void func_80B55144(EnZl3* this) {
     f32* fl = &D_80B5A484;
 
-     
     if (*fl < 2.0f) {
         *fl += 1.0f;
         EnZl3_setEyeIndex(this, 2);
@@ -1027,7 +1021,6 @@ void func_80B5585C(EnZl3* this) {
 }
 
 void func_80B558A8(EnZl3* this) {
-    s32 pad[4];
     s16 thisRotY = this->actor.world.rot.y;
     Vec3f* unk_338 = &this->unk_338;
 
@@ -1549,7 +1542,6 @@ void func_80B56DEC(EnZl3* this) {
 }
 
 void func_80B56E38(EnZl3* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s32 sfxId;
     SkelAnime* sp20 = &this->skelAnime;
 
@@ -1631,7 +1623,6 @@ s16 func_80B57104(EnZl3* this, s32 arg1) {
 }
 
 s32 func_80B571A8(EnZl3* this) {
-    s32 pad;
     s32 unk_314 = this->unk_314;
     s32 pad2;
 
@@ -1643,7 +1634,6 @@ s32 func_80B571A8(EnZl3* this) {
 }
 
 s32 func_80B571FC(EnZl3* this) {
-    s32 pad;
     s32 unk_314 = this->unk_314;
 
     if (func_80B56F8C(this, unk_314) == 0) {
@@ -1726,7 +1716,7 @@ s32 func_80B57458(EnZl3* this, GlobalContext* globalCtx) {
     f32 thisZ = thisPos->z;
     Player* player = GET_PLAYER(globalCtx);
     Vec3f* playerPos = &player->actor.world.pos;
-    s32 pad;
+
     f32 playerX = playerPos->x;
     f32 playerZ = playerPos->z;
     f32 temp_f12 = playerX - thisX;
@@ -1817,7 +1807,6 @@ void func_80B57754(EnZl3* this, GlobalContext* globalCtx) {
 }
 
 void func_80B577BC(GlobalContext* globalCtx, Vec3f* vec) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
     Vec3f* playerPos = &player->actor.world.pos;
     f32 posX = vec->x;
@@ -1902,7 +1891,6 @@ void func_80B57AAC(EnZl3* this, s32 arg1, AnimationHeader* arg2) {
 }
 
 void func_80B57AE0(EnZl3* this, GlobalContext* globalCtx) {
-    s32 pad;
     s16 shapeRotY = this->actor.shape.rot.y;
     s32 pad2;
     Vec3f* unk_354 = &this->unk_354;
@@ -1967,7 +1955,6 @@ void func_80B57D60(EnZl3* this, GlobalContext* globalCtx) {
 }
 
 s32 func_80B57D80(EnZl3* this, GlobalContext* globalCtx) {
-    s32 pad;
     s16* sp32 = &this->actor.shape.rot.y;
     struct_80034A14_arg1* unk_3F8 = &this->unk_3F8;
     Player* player = GET_PLAYER(globalCtx);
@@ -2027,7 +2014,6 @@ s32 func_80B57F84(EnZl3* this, GlobalContext* globalCtx) {
 }
 
 void func_80B58014(EnZl3* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
     s8 invincibilityTimer = player->invincibilityTimer;
 
@@ -2082,7 +2068,6 @@ void func_80B58268(EnZl3* this, GlobalContext* globalCtx) {
 
 void func_80B582C8(EnZl3* this, GlobalContext* globalCtx) {
     f32* unk_3CC = &this->unk_3CC;
-    s32 pad;
 
     if (*unk_3CC == kREG(14) + 10.0f) {
         *unk_3CC += 1.0f;
@@ -2107,7 +2092,6 @@ void func_80B582C8(EnZl3* this, GlobalContext* globalCtx) {
 }
 
 void func_80B584B4(EnZl3* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
     s8 invincibilityTimer = player->invincibilityTimer;
     Actor* nearbyEnTest = Actor_FindNearby(globalCtx, &this->actor, ACTOR_EN_TEST, ACTORCAT_ENEMY, 8000.0f);
@@ -2135,7 +2119,6 @@ void func_80B584B4(EnZl3* this, GlobalContext* globalCtx) {
 }
 
 void func_80B58624(EnZl3* this, GlobalContext* globalCtx) {
-    s32 pad[4];
     f32* unk_3CC = &this->unk_3CC;
 
     if (*unk_3CC == (kREG(18) + 10.0f)) {
@@ -2245,7 +2228,6 @@ void func_80B58AAC(EnZl3* this, GlobalContext* globalCtx) {
 }
 
 void func_80B58C08(EnZl3* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     Vec3f* unk_348 = &this->unk_348;
     Vec3f* unk_354 = &this->unk_354;
     Vec3f* thisPos = &this->actor.world.pos;
@@ -2615,7 +2597,6 @@ void func_80B59B6C(EnZl3* this, GlobalContext* globalCtx) {
 }
 
 void func_80B59DB8(EnZl3* this, GlobalContext* globalCtx) {
-    s32 pad;
     ObjectContext* objCtx = &globalCtx->objectCtx;
     s32 objIndex = Object_GetIndex(objCtx, OBJECT_ZL2_ANIME2);
     s32 pad2;
@@ -2654,7 +2635,6 @@ void EnZl3_Update(Actor* thisx, GlobalContext* globalCtx) {
 void EnZl3_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnZl3* this = (EnZl3*)thisx;
     ActorShape* shape = &this->actor.shape;
-    s32 pad;
 
     osSyncPrintf("ゼルダ姫のEn_Zl3_Actor_ct通すよ!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     ActorShape_Init(shape, 0.0f, ActorShadow_DrawCircle, 30.0f);
@@ -2695,7 +2675,6 @@ void func_80B59FE8(EnZl3* this, GlobalContext* globalCtx) {
 }
 
 void func_80B59FF4(EnZl3* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s16 eyeTexIndex = this->eyeTexIndex;
     void* eyeTex = sEyeTextures[eyeTexIndex];
     s16 mouthTexIndex = this->mouthTexIndex;
@@ -2720,7 +2699,6 @@ void func_80B59FF4(EnZl3* this, GlobalContext* globalCtx) {
 }
 
 void func_80B5A1D0(EnZl3* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s16 eyeTexIndex = this->eyeTexIndex;
     void* eyeTex = sEyeTextures[eyeTexIndex];
     s16 mouthTexIndex = this->mouthTexIndex;

@@ -72,11 +72,9 @@ void MagicDark_DiamondUpdate(Actor* thisx, GlobalContext* globalCtx) {
     MagicDark* this = (MagicDark*)thisx;
     u8 phi_a0;
     Player* player = GET_PLAYER(globalCtx);
-    s16 pad;
+
     s16 nayrusLoveTimer = gSaveContext.nayrusLoveTimer;
     s32 msgMode = globalCtx->msgCtx.msgMode;
-
-    
 
     if ((msgMode == MSGMODE_OCARINA_CORRECT_PLAYBACK) || (msgMode == MSGMODE_SONG_PLAYED)) {
         Actor_Kill(thisx);
@@ -169,7 +167,7 @@ void MagicDark_DimLighting(GlobalContext* globalCtx, f32 intensity) {
 
 void MagicDark_OrbUpdate(Actor* thisx, GlobalContext* globalCtx) {
     MagicDark* this = (MagicDark*)thisx;
-    s32 pad;
+
     Player* player = GET_PLAYER(globalCtx);
 
     func_8002F974(&this->actor, NA_SE_PL_MAGIC_SOUL_BALL - SFX_FLAG);
@@ -197,7 +195,7 @@ void MagicDark_OrbUpdate(Actor* thisx, GlobalContext* globalCtx) {
 
 void MagicDark_DiamondDraw(Actor* thisx, GlobalContext* globalCtx) {
     MagicDark* this = (MagicDark*)thisx;
-    s32 pad;
+
     u16 gameplayFrames = globalCtx->gameplayFrames;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_magic_dark.c", __LINE__);
@@ -237,7 +235,7 @@ void MagicDark_OrbDraw(Actor* thisx, GlobalContext* globalCtx) {
     MagicDark* this = (MagicDark*)thisx;
     Vec3f pos;
     Player* player = GET_PLAYER(globalCtx);
-    s32 pad;
+
     f32 sp6C = globalCtx->state.frames & 0x1F;
 
     if (this->timer < 32) {

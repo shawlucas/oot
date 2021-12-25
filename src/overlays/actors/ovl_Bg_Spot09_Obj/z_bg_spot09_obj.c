@@ -93,7 +93,6 @@ s32 func_808B1BA0(BgSpot09Obj* this, GlobalContext* globalCtx) {
 }
 
 s32 func_808B1BEC(BgSpot09Obj* this, GlobalContext* globalCtx) {
-    s32 pad;
     CollisionHeader* colHeader = NULL;
     s32 pad2[2];
 

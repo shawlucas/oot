@@ -171,7 +171,6 @@ void BossFd_UpdateCamera(BossFd* this, GlobalContext* globalCtx) {
 }
 
 void BossFd_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossFd* this = (BossFd*)thisx;
     s16 i;
 
@@ -227,7 +226,6 @@ void BossFd_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void BossFd_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossFd* this = (BossFd*)thisx;
 
     SkelAnime_Free(&this->skelAnimeHead, globalCtx);
@@ -312,7 +310,6 @@ void BossFd_Fly(BossFd* this, GlobalContext* globalCtx) {
                 this->work[BFD_ACTION_STATE] = BOSSFD_WAIT_INTRO;
                 if ((fabsf(player2->actor.world.pos.z) < 80.0f) &&
                     (fabsf(player2->actor.world.pos.x - 340.0f) < 60.0f)) {
-
                     this->introState = BFD_CS_START;
                     func_80064520(globalCtx, &globalCtx->csCtx);
                     func_8002DF54(globalCtx, &this->actor, 8);
@@ -1034,7 +1031,7 @@ void BossFd_Wait(BossFd* this, GlobalContext* globalCtx) {
             temp_rand = Rand_ZeroFloat(8.9f);
         } while (temp_rand == this->holeIndex);
         this->holeIndex = temp_rand;
-         // Needed for matching
+        // Needed for matching
         this->targetPosition.x = sHoleLocations[this->holeIndex].x;
         this->targetPosition.y = sHoleLocations[this->holeIndex].y - 200.0f;
         this->targetPosition.z = sHoleLocations[this->holeIndex].z;
@@ -1072,7 +1069,7 @@ void BossFd_Effects(BossFd* this, GlobalContext* globalCtx) {
     f32 temp_z;
     s16 i;
 
-     // Needed for match
+    // Needed for match
 
     if (this->fogMode == 0) {
         globalCtx->envCtx.unk_BF = 0;
@@ -1149,7 +1146,6 @@ void BossFd_Effects(BossFd* this, GlobalContext* globalCtx) {
         Vec3f spawnVel1;
         Vec3f spawnAccel1;
         Vec3f spawnPos1;
-        s32 pad;
 
         Audio_PlaySoundGeneral(NA_SE_EN_VALVAISA_APPEAR - SFX_FLAG, &this->actor.projectedPos, 4, &D_801333E0,
                                &D_801333E0, &D_801333E8);
@@ -1298,7 +1294,6 @@ void BossFd_CollisionCheck(BossFd* this, GlobalContext* globalCtx) {
 }
 
 void BossFd_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossFd* this = (BossFd*)thisx;
     f32 headGlow;
     f32 rManeGlow;
@@ -1630,7 +1625,6 @@ void BossFd_DrawEffects(BossFdEffect* effect, GlobalContext* globalCtx) {
 }
 
 void BossFd_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     BossFd* this = (BossFd*)thisx;
 
     osSyncPrintf("FD DRAW START\n");

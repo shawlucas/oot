@@ -343,11 +343,9 @@ void EnClearTag_Update(Actor* thisx, GlobalContext* globalCtx2) {
                 s16 worldRotationTargetY;
                 f32 loseTargetLockDistance;
                 s16 worldRotationTargetZ;
-                s32 pad;
 
                 // Check if the Arwing should crash.
                 if (this->collider.base.acFlags & AC_HIT) {
-
                     this->collider.base.acFlags &= ~AC_HIT;
                     this->crashingTimer = 20;
                     Actor_SetColorFilter(&this->actor, 0x4000, 255, 0, 5);
@@ -678,7 +676,6 @@ void EnClearTag_Update(Actor* thisx, GlobalContext* globalCtx2) {
  * Arwing clear tage types will draw the Arwing, the backfire, and a shadow.
  */
 void EnClearTag_Draw(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnClearTag* this = (EnClearTag*)thisx;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_en_clear_tag.c", __LINE__);

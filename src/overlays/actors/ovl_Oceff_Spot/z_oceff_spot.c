@@ -40,7 +40,6 @@ void OceffSpot_SetupAction(OceffSpot* this, OceffSpotActionFunc actionFunc) {
 }
 
 void OceffSpot_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     OceffSpot* this = (OceffSpot*)thisx;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
@@ -63,7 +62,6 @@ void OceffSpot_Init(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void OceffSpot_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     OceffSpot* this = (OceffSpot*)thisx;
     Player* player = GET_PLAYER(globalCtx);
 
@@ -118,7 +116,7 @@ void OceffSpot_GrowCylinder(OceffSpot* this, GlobalContext* globalCtx) {
 
 void OceffSpot_Update(Actor* thisx, GlobalContext* globalCtx) {
     OceffSpot* this = (OceffSpot*)thisx;
-    s32 pad;
+
     Player* player = GET_PLAYER(globalCtx);
     f32 temp;
 

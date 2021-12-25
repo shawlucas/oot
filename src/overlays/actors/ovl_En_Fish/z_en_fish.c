@@ -164,7 +164,6 @@ void EnFish_SetYOffset(EnFish* this) {
 }
 
 s32 EnFish_InBottleRange(EnFish* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
     Vec3f sp1C;
 
@@ -227,8 +226,6 @@ void EnFish_Respawning_SetupFollowChild(EnFish* this) {
 }
 
 void EnFish_Respawning_FollowChild(EnFish* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     EnFish_SetYOffset(this);
     Math_SmoothStepToF(&this->actor.speedXZ, 1.8f, 0.08f, 0.4f, 0.0f);
 
@@ -263,7 +260,6 @@ void EnFish_Respawning_SetupFleePlayer(EnFish* this) {
 }
 
 void EnFish_Respawning_FleePlayer(EnFish* this, GlobalContext* globalCtx) {
-    s32 pad;
     s16 pad2;
     s16 frames;
     s16 yaw;
@@ -318,7 +314,6 @@ void EnFish_Respawning_SetupApproachPlayer(EnFish* this) {
 }
 
 void EnFish_Respawning_ApproachPlayer(EnFish* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
     s32 pad2;
     Vec3f sp38;
@@ -397,7 +392,6 @@ void EnFish_Dropped_Fall(EnFish* this, GlobalContext* globalCtx) {
  * height and whether the sound should play again.
  */
 void EnFish_Dropped_SetupFlopOnGround(EnFish* this) {
-    s32 pad;
     f32 randomFloat;
     s32 playSound;
 
@@ -432,7 +426,6 @@ void EnFish_Dropped_SetupFlopOnGround(EnFish* this) {
 }
 
 void EnFish_Dropped_FlopOnGround(EnFish* this, GlobalContext* globalCtx) {
-    s32 pad;
     s16 frames = globalCtx->state.frames;
     s16 targetXRot;
 
@@ -484,8 +477,6 @@ void EnFish_Dropped_SetupSwimAway(EnFish* this) {
 }
 
 void EnFish_Dropped_SwimAway(EnFish* this, GlobalContext* globalCtx) {
-    s32 pad;
-
     Math_SmoothStepToF(&this->actor.speedXZ, 2.8f, 0.1f, 0.4f, 0.0f);
 
     // If touching wall or not in water, turn back and slow down for one frame.
@@ -605,7 +596,6 @@ void EnFish_Cutscene_FlopOnGround(EnFish* this, GlobalContext* globalCtx) {
 }
 
 void EnFish_Cutscene_WiggleFlyingThroughAir(EnFish* this, GlobalContext* globalCtx) {
-    s32 pad;
     f32 sp28 = Math_SinS(this->slowPhase);
     f32 sp24 = Math_SinS(this->fastPhase);
 
@@ -617,7 +607,6 @@ void EnFish_Cutscene_WiggleFlyingThroughAir(EnFish* this, GlobalContext* globalC
 }
 
 void EnFish_UpdateCutscene(EnFish* this, GlobalContext* globalCtx) {
-    s32 pad;
     s32 pad2;
     CsCmdActorAction* csAction = globalCtx->csCtx.npcActions[1];
     Vec3f startPos;

@@ -72,7 +72,6 @@ void EnDntDemo_Init(Actor* thisx, GlobalContext* globalCtx2) {
     GlobalContext* globalCtx = globalCtx2;
     EnDntDemo* this = (EnDntDemo*)thisx;
     s32 i;
-    s32 pad;
 
     osSyncPrintf("\n\n");
     // "Deku Scrub mask show start"
@@ -312,7 +311,6 @@ void EnDntDemo_Prize(EnDntDemo* this, GlobalContext* globalCtx) {
 }
 
 void EnDntDemo_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnDntDemo* this = (EnDntDemo*)thisx;
 
     if (this->unkTimer2 != 0) {

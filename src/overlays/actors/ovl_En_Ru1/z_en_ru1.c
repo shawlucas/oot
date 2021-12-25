@@ -144,15 +144,11 @@ const ActorInit En_Ru1_InitVars = {
 };
 
 void func_80AEAC10(EnRu1* this, GlobalContext* globalCtx) {
-    s32 pad[5];
-
     Collider_UpdateCylinder(&this->actor, &this->collider);
     CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);
 }
 
 void func_80AEAC54(EnRu1* this, GlobalContext* globalCtx) {
-    s32 pad[5];
-
     Collider_UpdateCylinder(&this->actor, &this->collider2);
     if (this->unk_34C != 0) {
         CollisionCheck_SetOC(globalCtx, &globalCtx->colChkCtx, &this->collider2.base);
@@ -162,8 +158,6 @@ void func_80AEAC54(EnRu1* this, GlobalContext* globalCtx) {
 }
 
 void func_80AEACDC(EnRu1* this, GlobalContext* globalCtx) {
-    s32 pad[5];
-
     Collider_UpdateCylinder(&this->actor, &this->collider2);
     CollisionCheck_SetAT(globalCtx, &globalCtx->colChkCtx, &this->collider2.base);
 }
@@ -206,7 +200,6 @@ void EnRu1_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnRu1_UpdateEyes(EnRu1* this) {
-    s32 pad[3];
     s16* blinkTimer = &this->blinkTimer;
     s16* eyeIndex = &this->eyeIndex;
 
@@ -245,7 +238,6 @@ s32 EnRu1_IsCsStateIdle(GlobalContext* globalCtx) {
 }
 
 CsCmdActorAction* func_80AEAF58(GlobalContext* globalCtx, s32 npcActionIdx) {
-    s32 pad[2];
     CsCmdActorAction* ret = NULL;
 
     if (!EnRu1_IsCsStateIdle(globalCtx)) {
@@ -357,7 +349,6 @@ void func_80AEB220(EnRu1* this, GlobalContext* globalCtx) {
 }
 
 void func_80AEB264(EnRu1* this, AnimationHeader* animation, u8 arg2, f32 transitionRate, s32 arg4) {
-    s32 pad[2];
     AnimationHeader* animHeader = SEGMENTED_TO_VIRTUAL(animation);
     f32 frameCount = Animation_GetLastFrame(animHeader);
     f32 playbackSpeed;
@@ -525,7 +516,6 @@ void func_80AEB974(EnRu1* this, GlobalContext* globalCtx) {
     Vec3f* thisPos;
     f32 sp30;
     CsCmdActorAction* csCmdNPCAction = func_80AEB438(globalCtx);
-    s32 pad;
 
     if (csCmdNPCAction != NULL) {
         sp30 = func_80AEB7E0(csCmdNPCAction, globalCtx);
@@ -541,7 +531,6 @@ void func_80AEBA0C(EnRu1* this, GlobalContext* globalCtx) {
 }
 
 void func_80AEBA2C(EnRu1* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f* unk_364 = &this->unk_364;
     Vec3f* thisPos;
     f32 temp_ret_2;
@@ -620,7 +609,6 @@ void func_80AEBD1C(EnRu1* this, GlobalContext* globalCtx) {
 }
 
 void func_80AEBD94(EnRu1* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     f32 frameCount;
 
     if (func_80AEB480(globalCtx, 3)) {
@@ -634,7 +622,6 @@ void func_80AEBD94(EnRu1* this, GlobalContext* globalCtx) {
 }
 
 void func_80AEBE3C(EnRu1* this, GlobalContext* globalCtx, s32 arg2) {
-    s32 pad[2];
     f32 frameCount;
 
     if (arg2 != 0) {
@@ -648,7 +635,6 @@ void func_80AEBE3C(EnRu1* this, GlobalContext* globalCtx, s32 arg2) {
 }
 
 void func_80AEBEC8(EnRu1* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     f32 frameCount;
 
     if (func_80AEB458(globalCtx, 6)) {
@@ -828,8 +814,6 @@ s32 func_80AEC5FC(EnRu1* this, GlobalContext* globalCtx) {
 }
 
 void func_80AEC650(EnRu1* this) {
-    s32 pad[2];
-
     if (this->unk_280 == 0) {
         if (Animation_OnFrame(&this->skelAnime, 2.0f) || Animation_OnFrame(&this->skelAnime, 7.0f)) {
             func_80078914(&this->actor.projectedPos, NA_SE_PL_WALK_DIRT);
@@ -852,12 +836,10 @@ void func_80AEC6E4(EnRu1* this, GlobalContext* globalCtx) {
 }
 
 void func_80AEC780(EnRu1* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
 
     if ((func_80AEC5FC(this, globalCtx)) && (!Gameplay_InCsMode(globalCtx)) && (!(player->stateFlags1 & 0x206000)) &&
         (player->actor.bgCheckFlags & 1)) {
-
         globalCtx->csCtx.segment = &D_80AF0880;
         gSaveContext.cutsceneTrigger = 1;
         player->linearVelocity = 0.0f;
@@ -984,7 +966,6 @@ void func_80AECC84(EnRu1* this, GlobalContext* globalCtx) {
 }
 
 void func_80AECCB0(EnRu1* this, GlobalContext* globalCtx) {
-    s32 pad;
     Vec3f* pos;
     s16 yawTowardsPlayer;
     f32 spawnX;
@@ -1018,7 +999,7 @@ void func_80AECE20(EnRu1* this, GlobalContext* globalCtx) {
     Player* player = GET_PLAYER(globalCtx);
     Vec3f* playerPos = &player->actor.world.pos;
     s16 shapeRotY = player->actor.shape.rot.y;
-    s32 pad;
+
     f32 unk_27C = this->unk_27C;
     Vec3f* pos = &this->actor.world.pos;
 
@@ -1028,7 +1009,6 @@ void func_80AECE20(EnRu1* this, GlobalContext* globalCtx) {
 }
 
 void func_80AECEB4(EnRu1* this, GlobalContext* globalCtx) {
-    s32 pad;
     Player* player = GET_PLAYER(globalCtx);
     Vec3f* player_unk_450 = &player->unk_450;
     Vec3f* pos = &this->actor.world.pos;
@@ -1268,7 +1248,6 @@ void func_80AED738(EnRu1* this, GlobalContext* globalCtx) {
 }
 
 void func_80AED83C(EnRu1* this) {
-    s32 pad[2];
     Vec3s* tempPtr;
     Vec3s* tempPtr2;
 
@@ -1285,7 +1264,6 @@ void func_80AED8DC(EnRu1* this) {
     s16* unk_2AC = &this->unk_2AC;
     s16* someY = &this->unk_374.unk_08.y;
     s16* unk_29E = &this->unk_29E;
-    s32 pad[2];
 
     if (DECR(*unk_2AC) == 0) {
         *unk_2AC = Rand_S16Offset(0xA, 0x19);
@@ -1440,11 +1418,10 @@ void func_80AEE02C(EnRu1* this) {
 }
 
 void func_80AEE050(EnRu1* this) {
-    s32 pad;
     f32 sp28;
     f32 sp24;
     f32 temp_f10;
-    EnRu1* thisx = this; 
+    EnRu1* thisx = this;
     if (this->unk_350 == 0) {
         if ((this->actor.minVelocityY == 0.0f) && (this->actor.speedXZ == 0.0f)) {
             this->unk_350 = 1;
@@ -1527,7 +1504,6 @@ void func_80AEE2F8(EnRu1* this, GlobalContext* globalCtx) {
 }
 
 s32 func_80AEE394(EnRu1* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     CollisionContext* colCtx;
     DynaPolyActor* dynaPolyActor;
     s32 floorBgId;
@@ -1581,7 +1557,6 @@ void func_80AEE568(EnRu1* this, GlobalContext* globalCtx) {
 }
 
 void func_80AEE628(EnRu1* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s8 curRoomNum = globalCtx->roomCtx.curRoom.num;
 
     if (EnRu1_IsCsStateIdle(globalCtx)) {
@@ -1594,7 +1569,6 @@ void func_80AEE628(EnRu1* this, GlobalContext* globalCtx) {
 }
 
 s32 func_80AEE6D0(EnRu1* this, GlobalContext* globalCtx) {
-    s32 pad;
     s8 curRoomNum = globalCtx->roomCtx.curRoom.num;
 
     if (!(gSaveContext.infTable[20] & 0x10) && (func_80AEB124(globalCtx) != 0)) {
@@ -1616,7 +1590,7 @@ s32 func_80AEE6D0(EnRu1* this, GlobalContext* globalCtx) {
 
 void func_80AEE7C4(EnRu1* this, GlobalContext* globalCtx) {
     f32 frameCount;
-    s32 pad[13];
+
     Player* player;
     f32* unk_370 = &this->unk_370;
 
@@ -1996,7 +1970,6 @@ void func_80AEF820(EnRu1* this, UNK_TYPE arg1) {
 }
 
 void func_80AEF890(EnRu1* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s8 curRoomNum;
 
     if ((gSaveContext.sceneSetupIndex < 4) && (EnRu1_IsCsStateIdle(globalCtx))) {
@@ -2216,7 +2189,6 @@ void EnRu1_Update(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void EnRu1_Init(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnRu1* this = (EnRu1*)thisx;
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 30.0f);
@@ -2305,7 +2277,6 @@ void EnRu1_DrawNothing(EnRu1* this, GlobalContext* globalCtx) {
 }
 
 void EnRu1_DrawOpa(EnRu1* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s16 eyeIndex = this->eyeIndex;
     void* eyeTex = sEyeTextures[eyeIndex];
     s16 mouthIndex = this->mouthIndex;
@@ -2330,7 +2301,6 @@ void EnRu1_DrawOpa(EnRu1* this, GlobalContext* globalCtx) {
 }
 
 void EnRu1_DrawXlu(EnRu1* this, GlobalContext* globalCtx) {
-    s32 pad[2];
     s16 eyeIndex = this->eyeIndex;
     void* eyeTex = sEyeTextures[eyeIndex];
     s16 mouthIndex = this->mouthIndex;

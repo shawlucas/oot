@@ -1202,7 +1202,6 @@ void func_80A995CC(EnKo* this, GlobalContext* globalCtx) {
 void EnKo_Update(Actor* thisx, GlobalContext* globalCtx) {
     ColliderCylinder* collider;
     EnKo* this = (EnKo*)thisx;
-    s32 pad;
 
     if (this->actionFunc != func_80A99048) {
         if ((s32)this->modelAlpha != 0) {
@@ -1236,7 +1235,6 @@ s32 EnKo_OverrideLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList, 
     void* eyeTexture;
     Vec3s sp40;
     u8 headId;
-    s32 pad;
 
     if (limbIndex == 15) {
         gSPSegment((*gfx)++, 0x06, globalCtx->objectCtx.status[this->headObjectBankIdx].segment);

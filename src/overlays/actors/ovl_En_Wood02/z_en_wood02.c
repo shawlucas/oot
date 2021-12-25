@@ -304,7 +304,7 @@ void EnWood02_Update(Actor* thisx, GlobalContext* globalCtx2) {
     f32 wobbleAmplitude;
     u8 new_var;
     u8 phi_v0;
-    s32 pad;
+
     Vec3f dropsSpawnPt;
     s32 i;
     s32 leavesParams;

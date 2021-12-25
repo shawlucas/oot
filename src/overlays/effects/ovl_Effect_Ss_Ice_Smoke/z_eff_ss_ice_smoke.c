@@ -22,7 +22,7 @@ EffectSsInit Effect_Ss_Ice_Smoke_InitVars = {
 
 u32 EffectSsIceSmoke_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, void* initParamsx) {
     EffectSsIceSmokeInitParams* initParams = (EffectSsIceSmokeInitParams*)initParamsx;
-    s32 pad;
+
     s32 objBankIdx;
     void* oldSeg6;
 
@@ -51,7 +51,6 @@ u32 EffectSsIceSmoke_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, v
 }
 
 void EffectSsIceSmoke_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
-    s32 pad;
     void* object;
     Mtx* mtx;
     f32 scale;

@@ -290,7 +290,7 @@ void EnPoRelay_Talk2(EnPoRelay* this, GlobalContext* globalCtx) {
 void EnPoRelay_DisappearAndReward(EnPoRelay* this, GlobalContext* globalCtx) {
     Vec3f vec;
     f32 multiplier;
-    s32 pad;
+
     Vec3f sp60;
     s32 pad1;
 
@@ -350,7 +350,6 @@ void EnPoRelay_DisappearAndReward(EnPoRelay* this, GlobalContext* globalCtx) {
 
 void EnPoRelay_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnPoRelay* this = (EnPoRelay*)thisx;
-    s32 pad;
 
     SkelAnime_Update(&this->skelAnime);
     this->actionFunc(this, globalCtx);
@@ -387,7 +386,7 @@ void EnPoRelay_PostLimbDraw(GlobalContext* globalCtx, s32 limbIndex, Gfx** dList
         gDPPipeSync(POLY_OPA_DISP++);
         gDPSetEnvColor(POLY_OPA_DISP++, this->lightColor.r, this->lightColor.g, this->lightColor.b, 128);
         gSPDisplayList(POLY_OPA_DISP++, gDampeLanternDL);
-        
+
         CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_en_po_relay.c", __LINE__);
         Matrix_MultVec3f(&D_80AD8D48, &vec);
         Lights_PointNoGlowSetInfo(&this->lightInfo, vec.x, vec.y, vec.z, this->lightColor.r, this->lightColor.g,

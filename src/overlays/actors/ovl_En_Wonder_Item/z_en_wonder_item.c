@@ -57,7 +57,6 @@ static Vec3f sTagPointsFree[9];
 static Vec3f sTagPointsOrdered[9];
 
 void EnWonderItem_Destroy(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     EnWonderItem* this = (EnWonderItem*)thisx;
 
     if ((this->collider.dim.radius != 0) || (this->collider.dim.height != 0)) {
@@ -106,7 +105,7 @@ void EnWonderItem_Init(Actor* thisx, GlobalContext* globalCtx) {
         0x00000702 /* sword slash */, 0x0001F820 /* arrow */,     0x00000040 /* hammer */,   0x00000008 /* bomb */,
         0x00000004 /* slingshot */,   0x00000010 /* boomerang */, 0x00000080 /* hookshot */,
     };
-    s32 pad;
+
     s16 colTypeIndex;
     EnWonderItem* this = (EnWonderItem*)thisx;
     s16 rotZover10;
@@ -333,7 +332,7 @@ void EnWonderItem_Update(Actor* thisx, GlobalContext* globalCtx) {
         255, 255, 0,   255, 0,   255, 0,   255, 255, 255, 0,   0, 0, 255, 0,   0, 0, 255, 128, 128,
         128, 128, 128, 0,   128, 0,   128, 0,   128, 0,   128, 0, 0, 0,   128, 0, 0, 0,   128,
     }; // These seem to be mistyped. Logically they should be s16[13][3] and be indexed as [colorIndex][i]
-    s32 pad;
+
     EnWonderItem* this = (EnWonderItem*)thisx;
     s32 colorIndex;
 

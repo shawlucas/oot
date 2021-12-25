@@ -281,7 +281,7 @@ void EnMk_Wait(EnMk* this, GlobalContext* globalCtx) {
 
 void EnMk_Update(Actor* thisx, GlobalContext* globalCtx) {
     EnMk* this = (EnMk*)thisx;
-    s32 pad;
+
     Vec3s vec;
     Player* player;
     s16 swimFlag;

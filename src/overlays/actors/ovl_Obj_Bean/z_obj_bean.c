@@ -134,7 +134,6 @@ void ObjBean_InitCollider(Actor* thisx, GlobalContext* globalCtx) {
 }
 
 void ObjBean_InitDynaPoly(ObjBean* this, GlobalContext* globalCtx, CollisionHeader* collision, s32 moveFlag) {
-    s32 pad;
     CollisionHeader* colHeader;
     s32 pad2;
 
@@ -867,7 +866,6 @@ void func_80B90A34(ObjBean* this, GlobalContext* globalCtx) {
     }
 }
 void ObjBean_Update(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     ObjBean* this = (ObjBean*)thisx;
 
     if (this->timer > 0) {

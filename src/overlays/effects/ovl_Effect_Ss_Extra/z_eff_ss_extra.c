@@ -25,7 +25,7 @@ EffectSsInit Effect_Ss_Extra_InitVars = {
 
 u32 EffectSsExtra_Init(GlobalContext* globalCtx, u32 index, EffectSs* this, void* initParamsx) {
     EffectSsExtraInitParams* initParams = (EffectSsExtraInitParams*)initParamsx;
-    s32 pad;
+
     s32 objBankIndex;
     u32 oldSeg6;
 
@@ -59,7 +59,6 @@ static void* sTextures[] = {
 };
 
 void EffectSsExtra_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this) {
-    s32 pad;
     f32 scale = this->rScale / 100.0f;
     void* object = globalCtx->objectCtx.status[this->rObjBankIdx].segment;
 

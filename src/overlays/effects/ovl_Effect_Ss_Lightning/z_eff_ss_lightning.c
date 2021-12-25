@@ -118,13 +118,11 @@ void EffectSsLightning_Draw(GlobalContext* globalCtx, u32 index, EffectSs* this)
 }
 
 void EffectSsLightning_Update(GlobalContext* globalCtx, u32 index, EffectSs* this) {
-    s32 pad;
     Vec3f pos;
     s16 yaw;
     f32 scale;
 
     if ((this->rNumBolts != 0) && ((this->life + 1) == this->rLifespan)) {
-
         yaw = this->rYaw + (((Rand_ZeroOne() < 0.5f) ? -1 : 1) * ((s16)((Rand_ZeroOne() * 3640.0f)) + 0xE38));
 
         scale = (this->rScale * 0.01f) * 80.0f;

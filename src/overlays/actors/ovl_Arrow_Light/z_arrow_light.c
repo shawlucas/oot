@@ -117,7 +117,6 @@ void ArrowLight_Hit(ArrowLight* this, GlobalContext* globalCtx) {
             this->radius = (((1.0f - offset) * scale) + 10.0f);
             this->unk_160 += ((2.0f - this->unk_160) * 0.1f);
             if (this->timer < 16) {
-                
                 this->alpha = ((this->timer * 0x23) - 0x118);
             }
         }
@@ -190,10 +189,9 @@ void ArrowLight_Draw(Actor* thisx, GlobalContext* globalCtx) {
     ArrowLight* this = (ArrowLight*)thisx;
     u32 stateFrames = globalCtx->state.frames;
     EnArrow* arrow = (EnArrow*)this->actor.parent;
-    Actor* tranform;  
+    Actor* tranform;
 
     if ((arrow != NULL) && (arrow->actor.update != NULL) && (this->timer < 255)) {
-        
         tranform = (arrow->hitFlags & 2) ? &this->actor : &arrow->actor;
 
         OPEN_DISPS(globalCtx->state.gfxCtx, "../z_arrow_light.c", __LINE__);

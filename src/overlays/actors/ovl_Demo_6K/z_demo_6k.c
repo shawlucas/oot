@@ -67,7 +67,7 @@ void Demo6K_SetupAction(Demo6K* this, Demo6KActionFunc actionFunc) {
 
 void Demo6K_Init(Actor* thisx, GlobalContext* globalCtx) {
     Demo6K* this = (Demo6K*)thisx;
-    s32 pad;
+
     s32 params = this->actor.params;
     s32 objBankIndex;
     s32 i;
@@ -558,7 +558,7 @@ void Demo6K_Update(Actor* thisx, GlobalContext* globalCtx) {
 
 void func_80967FFC(Actor* thisx, GlobalContext* globalCtx) {
     Demo6K* this = (Demo6K*)thisx;
-    s32 pad;
+
     u16 timer1 = this->timer1;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_6k.c", __LINE__);
@@ -571,7 +571,7 @@ void func_80967FFC(Actor* thisx, GlobalContext* globalCtx) {
 
     {
         s32 i;
-        s32 pad;
+
         Color_RGB8 colors[6][2] = {
             { { 255, 170, 255 }, { 255, 0, 100 } }, { { 255, 255, 170 }, { 0, 255, 0 } },
             { { 255, 255, 170 }, { 255, 255, 0 } }, { { 255, 170, 255 }, { 50, 0, 255 } },
@@ -600,7 +600,7 @@ void func_80967FFC(Actor* thisx, GlobalContext* globalCtx) {
 void func_80968298(Actor* thisx, GlobalContext* globalCtx) {
     static u8 skipIndices[] = { 6, 7, 11, 16, 20, 24, 28, 33, 35, 41, 45, 50, 57, 58, 62, 255 };
     Demo6K* this = (Demo6K*)thisx;
-    s32 pad;
+
     u32 timer1 = this->timer1;
     f32 scale = this->unk_164 * this->unk_168;
     Vtx* vertices = SEGMENTED_TO_VIRTUAL(object_demo_6kVtx_0035E0);
@@ -649,7 +649,7 @@ void func_80968298(Actor* thisx, GlobalContext* globalCtx) {
 
 void func_8096865C(Actor* thisx, GlobalContext* globalCtx) {
     Demo6K* this = (Demo6K*)thisx;
-    s32 pad;
+
     Gfx* displayList;
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_6k.c", __LINE__);
@@ -718,13 +718,10 @@ void func_809688C4(Actor* thisx, GlobalContext* globalCtx2) {
 }
 
 void func_80968B70(Actor* thisx, GlobalContext* globalCtx) {
-    s32 pad;
     Demo6K* this = (Demo6K*)thisx;
     u32 timer2 = this->timer2;
     u8 primColor[4];
     u8 envColor[3];
-
-    
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_6k.c", __LINE__);
 
@@ -772,9 +769,6 @@ void func_80968FB0(Actor* thisx, GlobalContext* globalCtx) {
     Gfx* displayList = Graph_Alloc(globalCtx->state.gfxCtx, 4 * sizeof(Gfx));
     u16 frames = globalCtx->gameplayFrames;
     f32 scaleFactor;
-    s32 pad;
-
-    
 
     OPEN_DISPS(globalCtx->state.gfxCtx, "../z_demo_6k.c", __LINE__);
 
