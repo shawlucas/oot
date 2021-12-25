@@ -2591,7 +2591,7 @@ void func_80B59B6C(EnZl3* this, GlobalContext* globalCtx) {
             func_80B59828(this, globalCtx);
             break;
         default:
-            osSyncPrintf(VT_FGCOL(RED) " En_Oa3 の arg_data がおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+            osSyncPrintf(VT_FGCOL(RED) " En_Oa3 の params がおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
             Actor_Kill(&this->actor);
     }
 }

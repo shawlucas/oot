@@ -165,7 +165,7 @@ void MirRay_Init(Actor* thisx, GlobalContext* globalCtx) {
     ActorShape_Init(&this->actor.shape, 0.0f, NULL, 0.0f);
     // "Generation of reflectable light!"
     osSyncPrintf("反射用 光の発生!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
-    LOG_NUM("this->actor.arg_data", this->actor.params, "../z_mir_ray.c", 518);
+    LOG_NUM("this->actor.params", this->actor.params, "../z_mir_ray.c", 518);
 
     if (this->actor.params >= 0xA) {
         // "Reflected light generation failure"

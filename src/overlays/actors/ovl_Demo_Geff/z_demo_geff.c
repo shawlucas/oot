@@ -61,7 +61,7 @@ void DemoGeff_Init(Actor* thisx, GlobalContext* globalCtx) {
     DemoGeff* this = (DemoGeff*)thisx;
 
     if (this->actor.params < 0 || this->actor.params >= 9) {
-        osSyncPrintf(VT_FGCOL(RED) "Demo_Geff_Actor_ct:arg_dataがおかしい!!!!!!!!!!!!\n" VT_RST);
+        osSyncPrintf(VT_FGCOL(RED) "Demo_Geff_Actor_ct:paramsがおかしい!!!!!!!!!!!!\n" VT_RST);
         Actor_Kill(&this->actor);
         return;
     }
@@ -175,7 +175,7 @@ void func_80978370(DemoGeff* this, GlobalContext* globalCtx) {
     s16 params = this->actor.params;
     DemoGeffInitFunc initFunc = sInitFuncs[params];
     if (initFunc == NULL) {
-        osSyncPrintf(VT_FGCOL(RED) " Demo_Geff_main_init:初期化処理がおかしいarg_data = %d!\n" VT_RST, params);
+        osSyncPrintf(VT_FGCOL(RED) " Demo_Geff_main_init:初期化処理がおかしいparams = %d!\n" VT_RST, params);
         Actor_Kill(&this->actor);
         return;
     }
@@ -190,7 +190,7 @@ void func_809783D4(DemoGeff* this, GlobalContext* globalCtx) {
     s32 objBankIndex = Object_GetIndex(objCtx, objectId);
 
     if (objBankIndex < 0) {
-        osSyncPrintf(VT_FGCOL(RED) "Demo_Geff_main_bank:バンクを読めない arg_data = %d!\n" VT_RST, params);
+        osSyncPrintf(VT_FGCOL(RED) "Demo_Geff_main_bank:バンクを読めない params = %d!\n" VT_RST, params);
         Actor_Kill(thisx);
         return;
     }

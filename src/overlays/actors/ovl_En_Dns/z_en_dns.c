@@ -137,7 +137,7 @@ void EnDns_Init(Actor* thisx, GlobalContext* globalCtx) {
 
     if (this->actor.params < 0) {
         // "Function Error (Deku Salesman)"
-        osSyncPrintf(VT_FGCOL(RED) "引数エラー（売りナッツ）[ arg_data = %d ]" VT_RST "\n", this->actor.params);
+        osSyncPrintf(VT_FGCOL(RED) "引数エラー（売りナッツ）[ params = %d ]" VT_RST "\n", this->actor.params);
         Actor_Kill(&this->actor);
         return;
     }

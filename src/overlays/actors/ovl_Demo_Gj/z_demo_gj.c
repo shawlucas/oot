@@ -381,8 +381,8 @@ void DemoGj_SetupRotation(DemoGj* this, GlobalContext* globalCtx) {
             break;
 
         default:
-            // "Demo_Gj_common_Reflect : This arg_data is not supported = %d"
-            osSyncPrintf(VT_FGCOL(RED) "Demo_Gj_common_Reflect : そんなarg_dataには対応していない = %d\n" VT_RST,
+            // "Demo_Gj_common_Reflect : This params is not supported = %d"
+            osSyncPrintf(VT_FGCOL(RED) "Demo_Gj_common_Reflect : そんなparamsには対応していない = %d\n" VT_RST,
                          this->dyna.actor.params);
             return;
     }
@@ -535,8 +535,8 @@ void DemoGj_SetupMovement(DemoGj* this, GlobalContext* globalCtx) {
                 break;
 
             default:
-                // "Demo_Gj_Setup_Move_common : This arg_data is not supported = %d"
-                osSyncPrintf(VT_FGCOL(RED) "Demo_Gj_Setup_Move_common : そんなarg_dataには対応していない = %d\n" VT_RST,
+                // "Demo_Gj_Setup_Move_common : This params is not supported = %d"
+                osSyncPrintf(VT_FGCOL(RED) "Demo_Gj_Setup_Move_common : そんなparamsには対応していない = %d\n" VT_RST,
                              actor->params);
                 break;
         }

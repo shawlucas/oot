@@ -69,7 +69,7 @@ void ObjLift_InitDynaPoly(ObjLift* this, GlobalContext* globalCtx, CollisionHead
     this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, colHeader);
 
     if (this->dyna.bgId == BG_ACTOR_MAX) {
-        osSyncPrintf("Warning : move BG 登録失敗(%s %d)(name %d)(arg_data 0x%04x)\n", "../z_obj_lift.c", 188,
+        osSyncPrintf("Warning: move BG registration failed(%s %d)(name %d)(params 0x%04X)\n", "../z_obj_lift.c", 188,
                      this->dyna.actor.id, this->dyna.actor.params);
     }
 }
@@ -118,7 +118,7 @@ void ObjLift_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->unk168.y = Rand_ZeroOne() * 65535.5f;
     this->unk168.z = Rand_ZeroOne() * 65535.5f;
     func_80B9651C(this);
-    osSyncPrintf("(Dungeon Lift)(arg_data 0x%04x)\n", this->dyna.actor.params);
+    osSyncPrintf("(Dungeon Lift)(params 0x%04X)\n", this->dyna.actor.params);
 }
 
 void ObjLift_Destroy(Actor* thisx, GlobalContext* globalCtx) {

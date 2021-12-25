@@ -51,15 +51,13 @@ void BgMoriBigst_SetupAction(BgMoriBigst* this, BgMoriBigstActionFunc actionFunc
 
 void BgMoriBigst_InitDynapoly(BgMoriBigst* this, GlobalContext* globalCtx, CollisionHeader* collision, s32 moveFlag) {
     CollisionHeader* colHeader = NULL;
-    s32 pad2;
 
     DynaPolyActor_Init(&this->dyna, moveFlag);
     CollisionHeader_GetVirtual(collision, &colHeader);
     this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, colHeader);
 
     if (this->dyna.bgId == BG_ACTOR_MAX) {
-        // "Warning : move BG login failed"
-        osSyncPrintf("Warning : move BG 登録失敗(%s %d)(name %d)(arg_data 0x%04x)\n", "../z_bg_mori_bigst.c", 190,
+        osSyncPrintf("Warning: move BG registration failed(%s %d)(name %d)(params 0x%04X)\n", "../z_bg_mori_bigst.c", __LINE__,
                      this->dyna.actor.id, this->dyna.actor.params);
     }
 }
@@ -67,8 +65,7 @@ void BgMoriBigst_InitDynapoly(BgMoriBigst* this, GlobalContext* globalCtx, Colli
 void BgMoriBigst_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgMoriBigst* this = (BgMoriBigst*)thisx;
 
-    // "mori (bigST.keyceiling)"
-    osSyncPrintf("mori (bigST.鍵型天井)(arg : %04x)(sw %d)(noE %d)(roomC %d)(playerPosY %f)\n", this->dyna.actor.params,
+    osSyncPrintf("mori (bigST.keyceiling)(params: %04X)(sw %d)(noE %d)(roomC %d)(playerPosY %f)\n", this->dyna.actor.params,
                  Flags_GetSwitch(globalCtx, (this->dyna.actor.params >> 8) & 0x3F),
                  Flags_GetTempClear(globalCtx, this->dyna.actor.room), Flags_GetClear(globalCtx, this->dyna.actor.room),
                  GET_PLAYER(globalCtx)->actor.world.pos.y);
@@ -77,8 +74,8 @@ void BgMoriBigst_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->moriTexObjIndex = Object_GetIndex(&globalCtx->objectCtx, OBJECT_MORI_TEX);
     if (this->moriTexObjIndex < 0) {
         // "【Big Stalfos key ceiling】 bank danger!"
-        osSyncPrintf("【ビッグスタルフォス鍵型天井】 バンク危険！\n");
-        osSyncPrintf("%s %d\n", "../z_bg_mori_bigst.c", 234);
+        osSyncPrintf("[Big Stalfos key ceiling] bank danger!\n");
+        osSyncPrintf("%s %d\n", "../z_bg_mori_bigst.c", __LINE__);
         Actor_Kill(&this->dyna.actor);
         return;
     }
@@ -133,8 +130,7 @@ void BgMoriBigst_SetupStalfosFight(BgMoriBigst* this, GlobalContext* globalCtx) 
         this->dyna.actor.child = NULL;
         this->dyna.actor.home.rot.z++;
     } else {
-        // "Second Stalfos failure"
-        osSyncPrintf("Warning : 第２スタルフォス発生失敗\n");
+        osSyncPrintf("Warning: Second Stalfos failure\n");
     }
     Flags_SetClear(globalCtx, this->dyna.actor.room);
 }
@@ -193,8 +189,7 @@ void BgMoriBigst_SetupStalfosPairFight(BgMoriBigst* this, GlobalContext* globalC
         this->dyna.actor.child = NULL;
         this->dyna.actor.home.rot.z++;
     } else {
-        // "Warning: 3-1 Stalfos failure"
-        osSyncPrintf("Warning : 第３-1スタルフォス発生失敗\n");
+        osSyncPrintf("Warning: 3-1 Stalfos failure\n");
     }
     stalfos2 = Actor_SpawnAsChild(&globalCtx->actorCtx, &this->dyna.actor, globalCtx, ACTOR_EN_TEST, 170.0f, 827.0f,
                                   -3260.0f, 0, 0, 0, 5);
@@ -202,8 +197,7 @@ void BgMoriBigst_SetupStalfosPairFight(BgMoriBigst* this, GlobalContext* globalC
         this->dyna.actor.child = NULL;
         this->dyna.actor.home.rot.z++;
     } else {
-        // "Warning: 3-2 Stalfos failure"
-        osSyncPrintf("Warning : 第３-2スタルフォス発生失敗\n");
+        osSyncPrintf("Warning: 3-2 Stalfos failure\n");
     }
     Flags_SetClear(globalCtx, this->dyna.actor.room);
 }

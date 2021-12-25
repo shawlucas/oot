@@ -68,17 +68,15 @@ void BgMoriIdomizu_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->moriTexObjIndex = Object_GetIndex(&globalCtx->objectCtx, OBJECT_MORI_TEX);
     if (this->moriTexObjIndex < 0) {
         Actor_Kill(&this->actor);
-        // "Bank danger!"
-        osSyncPrintf("Error : バンク危険！(arg_data 0x%04x)(%s %d)\n", this->actor.params, "../z_bg_mori_idomizu.c",
-                     202);
+        osSyncPrintf("Error: Bank danger!(params 0x%04X)(%s %d)\n", this->actor.params, "../z_bg_mori_idomizu.c",
+                     __LINE__);
         return;
     }
     BgMoriIdomizu_SetupWaitForMoriTex(this);
     sIsSpawned = true;
     this->isLoaded = true;
     this->actor.room = -1;
-    // "Forest Temple well water"
-    osSyncPrintf("(森の神殿 井戸水)(arg_data 0x%04x)\n", this->actor.params);
+    osSyncPrintf("(Forest Temple well water)(params 0x%04X)\n", this->actor.params);
 }
 
 void BgMoriIdomizu_Destroy(Actor* thisx, GlobalContext* globalCtx) {

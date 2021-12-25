@@ -138,11 +138,11 @@ void ObjTsubo_Init(Actor* thisx, GlobalContext* globalCtx) {
     }
     this->objTsuboBankIndex = Object_GetIndex(&globalCtx->objectCtx, sObjectIds[(this->actor.params >> 8) & 1]);
     if (this->objTsuboBankIndex < 0) {
-        osSyncPrintf("Error : バンク危険！ (arg_data 0x%04x)(%s %d)\n", this->actor.params, "../z_obj_tsubo.c", 410);
+        osSyncPrintf("Error: バンク危険！ (params 0x%04X)(%s %d)\n", this->actor.params, "../z_obj_tsubo.c", 410);
         Actor_Kill(&this->actor);
     } else {
         ObjTsubo_SetupWaitForObject(this);
-        osSyncPrintf("(dungeon keep 壷)(arg_data 0x%04x)\n", this->actor.params);
+        osSyncPrintf("(dungeon keep 壷)(params 0x%04X)\n", this->actor.params);
     }
 }
 

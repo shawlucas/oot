@@ -262,7 +262,7 @@ void func_80BA24F8(ObjWarp2block* this, GlobalContext* globalCtx) {
     this->unk_174++;
     if (this->unk_174 > 60) {
         osSyncPrintf(VT_COL(RED, WHITE));
-        osSyncPrintf("Error : 時のブロック(ワープ２)が対でセットされていません(%s %d)\n", "../z_obj_warp2block.c", 505);
+        osSyncPrintf("Error: 時のブロック(ワープ２)が対でセットされていません(%s %d)\n", "../z_obj_warp2block.c", 505);
         osSyncPrintf(VT_RST);
         Actor_Kill(&this->dyna.actor);
     }

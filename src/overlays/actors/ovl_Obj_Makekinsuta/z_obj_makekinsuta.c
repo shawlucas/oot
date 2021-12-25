@@ -32,13 +32,13 @@ void ObjMakekinsuta_Init(Actor* thisx, GlobalContext* globalCtx) {
 
     if ((this->actor.params & 0x6000) == 0x4000) {
         osSyncPrintf(VT_FGCOL(BLUE));
-        // "Gold Star Enemy(arg_data %x)"
-        osSyncPrintf("金スタ発生敵(arg_data %x)\n", this->actor.params);
+        // "Gold Star Enemy(params %x)"
+        osSyncPrintf("金スタ発生敵(params %x)\n", this->actor.params);
         osSyncPrintf(VT_RST);
     } else {
         osSyncPrintf(VT_COL(YELLOW, BLACK));
-        // "Invalid Argument (arg_data %x)(%s %d)"
-        osSyncPrintf("引数不正 (arg_data %x)(%s %d)\n", this->actor.params, "../z_obj_makekinsuta.c", 119);
+        // "Invalid Argument (params %x)(%s %d)"
+        osSyncPrintf("引数不正 (params %x)(%s %d)\n", this->actor.params, "../z_obj_makekinsuta.c", 119);
         osSyncPrintf(VT_RST);
     }
     this->actionFunc = func_80B98320;

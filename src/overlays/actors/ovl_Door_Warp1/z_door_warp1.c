@@ -76,7 +76,7 @@ void DoorWarp1_Init(Actor* thisx, GlobalContext* globalCtx) {
                                   this->actor.world.pos.z, 0, 0, 0, 0);
         this->lowerLight = LightContext_InsertLight(globalCtx2, &globalCtx2->lightCtx, &this->lowerLightInfo);
     }
-    osSyncPrintf("\nBOSSWARP arg_data=[%d]", this->actor.params);
+    osSyncPrintf("\nBOSSWARP params=[%d]", this->actor.params);
 
     DoorWarp1_ChooseInitialAction(this, globalCtx2);
 }

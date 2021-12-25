@@ -105,7 +105,7 @@ void BgMizuWater_Init(Actor* thisx, GlobalContext* globalCtx) {
     switch (this->type) {
         case 0:
             if (bREG(15) == 0) {
-                osSyncPrintf("<コンストラクト>%x %x %x\n", Flags_GetSwitch(globalCtx, WATER_TEMPLE_WATER_F1_FLAG),
+                osSyncPrintf("<Construct> %X %X %X\n", Flags_GetSwitch(globalCtx, WATER_TEMPLE_WATER_F1_FLAG),
                              Flags_GetSwitch(globalCtx, WATER_TEMPLE_WATER_F2_FLAG),
                              Flags_GetSwitch(globalCtx, WATER_TEMPLE_WATER_F3_FLAG));
             }

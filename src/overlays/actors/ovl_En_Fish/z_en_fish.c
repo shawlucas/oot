@@ -616,7 +616,7 @@ void EnFish_UpdateCutscene(EnFish* this, GlobalContext* globalCtx) {
 
     if (csAction == NULL) {
         // "Warning : DEMO ended without dousa (action) 3 termination being called"
-        osSyncPrintf("Warning : dousa 3 消滅 が呼ばれずにデモが終了した(%s %d)(arg_data 0x%04x)\n", "../z_en_sakana.c",
+        osSyncPrintf("Warning : dousa 3 消滅 が呼ばれずにデモが終了した(%s %d)(params 0x%04X)\n", "../z_en_sakana.c",
                      1169, this->actor.params);
         EnFish_ClearCutsceneData(this);
         Actor_Kill(&this->actor);
@@ -641,7 +641,7 @@ void EnFish_UpdateCutscene(EnFish* this, GlobalContext* globalCtx) {
             return;
         default:
             // "Improper DEMO action"
-            osSyncPrintf("不正なデモ動作(%s %d)(arg_data 0x%04x)\n", "../z_en_sakana.c", 1200, this->actor.params);
+            osSyncPrintf("不正なデモ動作(%s %d)(params 0x%04X)\n", "../z_en_sakana.c", 1200, this->actor.params);
             break;
     }
 

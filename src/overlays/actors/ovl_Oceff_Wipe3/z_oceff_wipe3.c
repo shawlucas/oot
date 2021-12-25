@@ -35,7 +35,7 @@ void OceffWipe3_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->counter = 0;
     this->actor.world.pos = GET_ACTIVE_CAM(globalCtx)->eye;
     // it's actually WIPE3...
-    osSyncPrintf(VT_FGCOL(CYAN) " WIPE2 arg_data = %d\n" VT_RST, this->actor.params);
+    osSyncPrintf(VT_FGCOL(CYAN) " WIPE2 params = %d\n" VT_RST, this->actor.params);
 }
 
 void OceffWipe3_Destroy(Actor* thisx, GlobalContext* globalCtx) {

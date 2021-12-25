@@ -381,7 +381,7 @@ void EnGirlA_InitItem(EnGirlA* this, GlobalContext* globalCtx) {
     if ((params >= SI_MAX) && (params < 0)) {
         Actor_Kill(&this->actor);
         osSyncPrintf(VT_COL(RED, WHITE));
-        osSyncPrintf("引数がおかしいよ(arg_data=%d)！！\n", this->actor.params);
+        osSyncPrintf("引数がおかしいよ(params=%d)！！\n", this->actor.params);
         osSyncPrintf(VT_RST);
         ASSERT(0, "0", "../z_en_girlA.c", __LINE__);
         return;

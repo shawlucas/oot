@@ -74,7 +74,7 @@ void BgHidanCurtain_Init(Actor* thisx, GlobalContext* globalCtx) {
     this->type = (thisx->params >> 0xC) & 0xF;
     if (this->type > 6) {
         // "Type is not set"
-        osSyncPrintf("Error : object type is not set(%s %d)(params 0x%04x)\n", "../z_bg_hidan_curtain.c", __LINE__,
+        osSyncPrintf("Error: object type is not set(%s %d)(params 0x%04x)\n", "../z_bg_hidan_curtain.c", __LINE__,
                      this->actor.params);
         Actor_Kill(&this->actor);
         return;

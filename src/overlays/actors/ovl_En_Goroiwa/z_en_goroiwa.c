@@ -240,8 +240,8 @@ s32 EnGoroiwa_GetAscendDirection(EnGoroiwa* this, GlobalContext* globalCtx) {
     if (nextPointPos->x == currentPointPos->x && nextPointPos->z == currentPointPos->z) {
         if (nextPointPos->y == currentPointPos->y) {
             // "Error: Invalid path data (points overlap)"
-            osSyncPrintf("Error : レールデータ不正(点が重なっている)");
-            osSyncPrintf("(%s %d)(arg_data 0x%04x)\n", "../z_en_gr.c", 559, this->actor.params);
+            osSyncPrintf("Error: レールデータ不正(点が重なっている)");
+            osSyncPrintf("(%s %d)(params 0x%04X)\n", "../z_en_gr.c", 559, this->actor.params);
         }
 
         if (nextPointPos->y > currentPointPos->y) {
@@ -531,8 +531,8 @@ void EnGoroiwa_Init(Actor* thisx, GlobalContext* globalCtx) {
     EnGoroiwa_InitCollider(this, globalCtx);
     pathIdx = this->actor.params & 0xFF;
     if (pathIdx == 0xFF) {
-        // "Error: Invalid arg_data"
-        osSyncPrintf("Ｅｒｒｏｒ : arg_data が不正(%s %d)(arg_data 0x%04x)\n", "../z_en_gr.c", 1033,
+        // "Error: Invalid params"
+        osSyncPrintf("Ｅｒｒｏｒ : params が不正(%s %d)(params 0x%04X)\n", "../z_en_gr.c", 1033,
                      this->actor.params);
         Actor_Kill(&this->actor);
         return;

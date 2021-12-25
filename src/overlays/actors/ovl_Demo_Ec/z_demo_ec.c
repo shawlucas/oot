@@ -161,7 +161,7 @@ void DemoEc_Init(Actor* thisx, GlobalContext* globalCtx) {
     DemoEc* this = (DemoEc*)thisx;
 
     if ((this->actor.params < 0) || (this->actor.params > 34)) {
-        osSyncPrintf(VT_FGCOL(RED) "Demo_Ec_Actor_ct:arg_dataがおかしい!!!!!!!!!!!!\n" VT_RST);
+        osSyncPrintf(VT_FGCOL(RED) "Demo_Ec_Actor_ct:paramsがおかしい!!!!!!!!!!!!\n" VT_RST);
         Actor_Kill(&this->actor);
     } else {
         this->updateMode = EC_UPDATE_COMMON;
@@ -1208,8 +1208,8 @@ void DemoEc_InitNpc(DemoEc* this, GlobalContext* globalCtx) {
     s16 type = this->actor.params;
 
     if (sInitFuncs[type] == NULL) {
-        // "Demo_Ec_main_init: Initialization process is wrong arg_data"
-        osSyncPrintf(VT_FGCOL(RED) " Demo_Ec_main_init:初期化処理がおかしいarg_data = %d!\n" VT_RST, type);
+        // "Demo_Ec_main_init: Initialization process is wrong params"
+        osSyncPrintf(VT_FGCOL(RED) " Demo_Ec_main_init:初期化処理がおかしいparams = %d!\n" VT_RST, type);
         Actor_Kill(&this->actor);
         return;
     }
@@ -1232,8 +1232,8 @@ void DemoEc_InitCommon(DemoEc* this, GlobalContext* globalCtx) {
     secondaryBankIndex = Object_GetIndex(&globalCtx->objectCtx, sp28);
 
     if ((secondaryBankIndex < 0) || (primaryBankIndex < 0)) {
-        // "Demo_Ec_main_bank: Bank unreadable arg_data = %d!"
-        osSyncPrintf(VT_FGCOL(RED) "Demo_Ec_main_bank:バンクを読めない arg_data = %d!\n" VT_RST, type);
+        // "Demo_Ec_main_bank: Bank unreadable params = %d!"
+        osSyncPrintf(VT_FGCOL(RED) "Demo_Ec_main_bank:バンクを読めない params = %d!\n" VT_RST, type);
         Actor_Kill(&this->actor);
         return;
     }

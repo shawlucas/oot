@@ -96,7 +96,7 @@ s32 func_808B8910(BgSpot18Obj* this, GlobalContext* globalCtx) {
     } else if (LINK_AGE_IN_YEARS == YEARS_CHILD) {
         age = 0;
     } else {
-        osSyncPrintf("Error : リンク年齢不詳 (%s %d)(arg_data 0x%04x)\n", "../z_bg_spot18_obj.c", 182,
+        osSyncPrintf("Error: リンク年齢不詳 (%s %d)(params 0x%04X)\n", "../z_bg_spot18_obj.c", 182,
                      this->dyna.actor.params);
         return 0;
     }
@@ -109,11 +109,11 @@ s32 func_808B8910(BgSpot18Obj* this, GlobalContext* globalCtx) {
             }
             return D_808B90F0[this->dyna.actor.params & 0xF][age];
         case 2:
-            osSyncPrintf("Error : Obj出現判定が設定されていない(%s %d)(arg_data 0x%04x)\n", "../z_bg_spot18_obj.c", 202,
+            osSyncPrintf("Error: Obj出現判定が設定されていない(%s %d)(params 0x%04X)\n", "../z_bg_spot18_obj.c", 202,
                          this->dyna.actor.params);
             break;
         default:
-            osSyncPrintf("Error : Obj出現判定失敗(%s %d)(arg_data 0x%04x)\n", "../z_bg_spot18_obj.c", 210,
+            osSyncPrintf("Error: Obj出現判定失敗(%s %d)(params 0x%04X)\n", "../z_bg_spot18_obj.c", 210,
                          this->dyna.actor.params);
     }
     return 0;
@@ -181,7 +181,7 @@ s32 func_808B8CC8(BgSpot18Obj* this, GlobalContext* globalCtx) {
 void BgSpot18Obj_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgSpot18Obj* this = (BgSpot18Obj*)thisx;
 
-    osSyncPrintf("Spot18 Object [arg_data : 0x%04x]\n", this->dyna.actor.params);
+    osSyncPrintf("Spot18 Object [params : 0x%04x]\n", this->dyna.actor.params);
     if (!func_808B8B38(this, globalCtx)) {
         Actor_Kill(&this->dyna.actor);
     } else if (!func_808B8CC8(this, globalCtx)) {

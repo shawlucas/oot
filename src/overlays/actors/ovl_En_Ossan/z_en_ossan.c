@@ -581,7 +581,7 @@ void EnOssan_Init(Actor* thisx, GlobalContext* globalCtx) {
     if (this->actor.params > OSSAN_TYPE_MASK && this->actor.params < OSSAN_TYPE_KOKIRI) {
         Actor_Kill(&this->actor);
         osSyncPrintf(VT_COL(RED, WHITE));
-        osSyncPrintf("引数がおかしいよ(arg_data=%d)！！\n", this->actor.params);
+        osSyncPrintf("引数がおかしいよ(params=%d)！！\n", this->actor.params);
         osSyncPrintf(VT_RST);
         ASSERT(0, "0", "../z_en_oB1.c", __LINE__);
         return;

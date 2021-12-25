@@ -68,7 +68,7 @@ void BgJyaZurerukabe_InitDynaPoly(BgJyaZurerukabe* this, GlobalContext* globalCt
     CollisionHeader_GetVirtual(collision, &colHeader);
     this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, colHeader);
     if (this->dyna.bgId == BG_ACTOR_MAX) {
-        osSyncPrintf("Warning : move BG 登録失敗(%s %d)(name %d)(arg_data 0x%04x)\n", "../z_bg_jya_zurerukabe.c", 194,
+        osSyncPrintf("Warning: move BG registration failure(%s %d)(name %d)(params 0x%04X)\n", "../z_bg_jya_zurerukabe.c", __LINE__,
                      this->dyna.actor.id, this->dyna.actor.params);
     }
 }
@@ -122,14 +122,14 @@ void BgJyaZurerukabe_Init(Actor* thisx, GlobalContext* globalCtx) {
 
     if (i == ARRAY_COUNT(D_8089B9F0)) {
         osSyncPrintf(VT_COL(RED, WHITE));
-        osSyncPrintf("home pos が変更されたみたい(%s %d)(arg_data 0x%04x)\n", "../z_bg_jya_zurerukabe.c", 299,
+        osSyncPrintf("home pos seems to have changed(%s %d)(params 0x%04X)\n", "../z_bg_jya_zurerukabe.c", __LINE__,
                      this->dyna.actor.params);
         osSyncPrintf(VT_RST);
     }
 
     this->unk_16E = D_8089B9F8[this->unk_168];
     func_8089B7B4(this);
-    osSyncPrintf("(jya ずれる壁)(arg_data 0x%04x)\n", this->dyna.actor.params);
+    osSyncPrintf("(jya sliding wall)(params 0x%04X)\n", this->dyna.actor.params);
 }
 
 void BgJyaZurerukabe_Destroy(Actor* thisx, GlobalContext* globalCtx) {

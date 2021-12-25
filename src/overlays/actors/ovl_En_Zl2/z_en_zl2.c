@@ -1555,7 +1555,7 @@ void func_80B52114(EnZl2* this, GlobalContext* globalCtx) {
             func_80B4FD90(this, globalCtx);
             break;
         default:
-            osSyncPrintf(VT_FGCOL(RED) " En_Oa2 の arg_data がおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+            osSyncPrintf(VT_FGCOL(RED) " En_Oa2 の params がおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
             func_80B4FD90(this, globalCtx);
     }
 }

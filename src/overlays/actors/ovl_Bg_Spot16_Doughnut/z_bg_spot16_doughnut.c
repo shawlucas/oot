@@ -75,7 +75,7 @@ void BgSpot16Doughnut_Init(Actor* thisx, GlobalContext* globalCtx) {
         } else {
             this->fireFlag |= 1;
         }
-        osSyncPrintf("(ｓｐｏｔ１６ ドーナツ雲)(arg_data 0x%04x)\n", this->actor.params);
+        osSyncPrintf("(ｓｐｏｔ１６ ドーナツ雲)(params 0x%04X)\n", this->actor.params);
     }
 }
 

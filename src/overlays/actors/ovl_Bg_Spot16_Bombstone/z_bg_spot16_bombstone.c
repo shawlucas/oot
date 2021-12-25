@@ -217,7 +217,7 @@ s32 func_808B4E58(BgSpot16Bombstone* this, GlobalContext* globalctx) {
     this->bombiwaBankIndex = Object_GetIndex(&globalctx->objectCtx, OBJECT_BOMBIWA);
 
     if (this->bombiwaBankIndex < 0) {
-        osSyncPrintf("Error : バンク危険！(arg_data 0x%04x)(%s %d)\n", actor->params, "../z_bg_spot16_bombstone.c",
+        osSyncPrintf("Error: バンク危険！(params 0x%04X)(%s %d)\n", actor->params, "../z_bg_spot16_bombstone.c",
                      589);
         return false;
     }
@@ -247,7 +247,7 @@ void BgSpot16Bombstone_Init(Actor* thisx, GlobalContext* globalCtx) {
             shouldLive = func_808B4E58(this, globalCtx);
             break;
         default:
-            osSyncPrintf("Error : arg_data おかしいな(%s %d)(arg_data 0x%04x)\n", "../z_bg_spot16_bombstone.c", 668,
+            osSyncPrintf("Error: params おかしいな(%s %d)(params 0x%04X)\n", "../z_bg_spot16_bombstone.c", 668,
                          this->actor.params);
             shouldLive = false;
             break;
@@ -257,7 +257,7 @@ void BgSpot16Bombstone_Init(Actor* thisx, GlobalContext* globalCtx) {
         Actor_Kill(&this->actor);
         return;
     }
-    osSyncPrintf("Spot16 obj 爆弾石 (scaleX %f)(arg_data 0x%04x)\n", this->actor.scale.x, this->actor.params);
+    osSyncPrintf("Spot16 obj 爆弾石 (scaleX %f)(params 0x%04X)\n", this->actor.scale.x, this->actor.params);
 }
 
 void BgSpot16Bombstone_Destroy(Actor* thisx, GlobalContext* globalCtx) {
@@ -378,7 +378,7 @@ void func_808B56BC(BgSpot16Bombstone* this, GlobalContext* globalCtx) {
                 player->actor.world.pos.x += sinValue * this->sinRotation;
                 player->actor.world.pos.z += sinValue * this->cosRotation;
             } else {
-                osSyncPrintf("Error 補正出来ない(%s %d)(arg_data 0x%04x)(hosei_angY %x)\n",
+                osSyncPrintf("Error 補正出来ない(%s %d)(params 0x%04X)(hosei_angY %x)\n",
                              "../z_bg_spot16_bombstone.c", 935, this->actor.params, adjustedYawDiff);
             }
         }

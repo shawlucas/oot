@@ -172,7 +172,7 @@ void EnIceHono_Init(Actor* thisx, GlobalContext* globalCtx) {
         this->lightNode = LightContext_InsertLight(globalCtx, &globalCtx->lightCtx, &this->lightInfo);
         this->unk_154 = Rand_ZeroOne() * (0x1FFFF / 2.0f);
         this->unk_156 = Rand_ZeroOne() * (0x1FFFF / 2.0f);
-        osSyncPrintf("(ice 炎)(arg_data 0x%04x)\n", this->actor.params); // "(ice flame)"
+        osSyncPrintf("(ice 炎)(params 0x%04X)\n", this->actor.params); // "(ice flame)"
     }
 }
 

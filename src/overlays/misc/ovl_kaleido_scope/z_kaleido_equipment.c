@@ -395,7 +395,7 @@ void KaleidoScope_DrawEquipment(GlobalContext* globalCtx) {
                 } else {
                     cursorItem = ITEM_QUIVER_30 + sUpgradeItemOffsets[pauseCtx->cursorY[PAUSE_EQUIP]] +
                                  CUR_UPG_VALUE(pauseCtx->cursorY[PAUSE_EQUIP]) - 1;
-                    osSyncPrintf("H_arrowcase_1 + non_equip_item_table = %d\n", cursorItem);
+                    osSyncPrintf("cursorItem = %d\n", cursorItem);
                 }
             } else {
                 if ((pauseCtx->cursorY[PAUSE_EQUIP] == 0) && (CUR_UPG_VALUE(UPG_QUIVER) == 0)) {
@@ -403,12 +403,12 @@ void KaleidoScope_DrawEquipment(GlobalContext* globalCtx) {
                 } else {
                     cursorItem = ITEM_QUIVER_30 + sUpgradeItemOffsets[pauseCtx->cursorY[PAUSE_EQUIP]] +
                                  CUR_UPG_VALUE(pauseCtx->cursorY[PAUSE_EQUIP]) - 1;
-                    osSyncPrintf("大人 H_arrowcase_1 + non_equip_item_table = %d\n", cursorItem);
+                    osSyncPrintf("cursorItem = %d\n", cursorItem);
                 }
             }
         } else {
             cursorItem = ITEM_SWORD_KOKIRI + sEquipmentItemOffsets[pauseCtx->cursorPoint[PAUSE_EQUIP]];
-            osSyncPrintf("ccc=%d\n", cursorItem);
+            osSyncPrintf("cursorItem = %d\n", cursorItem);
 
             if (pauseCtx->cursorSpecialPos == 0) {
                 pauseCtx->cursorColorSet = 8;
@@ -428,7 +428,7 @@ void KaleidoScope_DrawEquipment(GlobalContext* globalCtx) {
         pauseCtx->cursorItem[PAUSE_EQUIP] = cursorItem;
         pauseCtx->cursorSlot[PAUSE_EQUIP] = cursorSlot;
 
-        osSyncPrintf("kscope->select_name[Display_Equipment] = %d\n", pauseCtx->cursorItem[PAUSE_EQUIP]);
+        osSyncPrintf("pauseCtx->cursorItem[PAUSE_EQUIP] = %d\n", pauseCtx->cursorItem[PAUSE_EQUIP]);
 
         if (!((gEquipAgeReqs[pauseCtx->cursorY[PAUSE_EQUIP]][pauseCtx->cursorX[PAUSE_EQUIP]] == 9) ||
               (gEquipAgeReqs[pauseCtx->cursorY[PAUSE_EQUIP]][pauseCtx->cursorX[PAUSE_EQUIP]] ==
@@ -572,8 +572,7 @@ void KaleidoScope_DrawEquipment(GlobalContext* globalCtx) {
     }
 
     if ((pauseCtx->unk_1E4 == 7) && (sEquipTimer == 9)) {
-        //! @bug: This function shouldn't take any arguments
-        KaleidoScope_ProcessPlayerPreRender(globalCtx);
+        KaleidoScope_ProcessPlayerPreRender();
     }
 
     gSPSegment(POLY_OPA_DISP++, 0x07, pauseCtx->playerSegment);
@@ -585,8 +584,6 @@ void KaleidoScope_DrawEquipment(GlobalContext* globalCtx) {
 
     func_800949A8(globalCtx->state.gfxCtx);
     KaleidoScope_DrawEquipmentImage(globalCtx, pauseCtx->playerSegment, 64, 112);
-
-    if (gUpgradeMasks[0]) {}
 
     CLOSE_DISPS(globalCtx->state.gfxCtx, "../z_kaleido_equipment.c", __LINE__);
 }

@@ -476,7 +476,7 @@ void EnfHG_Approach(EnfHG* this, GlobalContext* globalCtx) {
     Math_ApproachF(&this->actor.world.pos.y, 60.0f, 0.1f, 1.0f);
     this->actor.scale.y = this->actor.scale.x;
     if (this->timers[0] == 0) {
-        osSyncPrintf("arg_data ------------------------------------>%d\n", this->actor.params);
+        osSyncPrintf("params ------------------------------------>%d\n", this->actor.params);
         if (this->actor.params != GND_REAL_BOSS) {
             this->timers[0] = 140;
             this->actionFunc = EnfHG_Retreat;

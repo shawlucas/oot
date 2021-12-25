@@ -2320,7 +2320,7 @@ void EnXc_Init(Actor* thisx, GlobalContext* globalCtx) {
             EnXc_DoNothing(this, globalCtx);
             break;
         default:
-            osSyncPrintf(VT_FGCOL(RED) " En_Oa2 の arg_data がおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
+            osSyncPrintf(VT_FGCOL(RED) " En_Oa2 の params がおかしい!!!!!!!!!!!!!!!!!!!!!!!!!\n" VT_RST);
             EnXc_DoNothing(this, globalCtx);
     }
 }

@@ -37,7 +37,6 @@ static InitChainEntry sInitChain[] = {
 void BgMizuUzu_Init(Actor* thisx, GlobalContext* globalCtx) {
     BgMizuUzu* this = (BgMizuUzu*)thisx;
     CollisionHeader* colHeader = NULL;
-    s32 pad2;
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
     DynaPolyActor_Init(&this->dyna, DPM_UNK);

@@ -87,8 +87,7 @@ void BgMoriHashigo_InitDynapoly(BgMoriHashigo* this, GlobalContext* globalCtx, C
     this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, colHeader);
 
     if (this->dyna.bgId == BG_ACTOR_MAX) {
-        // "Warning : move BG login failed"
-        osSyncPrintf("Warning : move BG 登録失敗(%s %d)(name %d)(arg_data 0x%04x)\n", "../z_bg_mori_hashigo.c", 164,
+        osSyncPrintf("Warning: move BG registration failed(%s %d)(name %d)(params 0x%04X)\n", "../z_bg_mori_hashigo.c", __LINE__,
                      this->dyna.actor.id, this->dyna.actor.params);
     }
 }
@@ -122,8 +121,7 @@ s32 BgMoriHashigo_SpawnLadder(BgMoriHashigo* this, GlobalContext* globalCtx) {
     if (ladder != NULL) {
         return true;
     } else {
-        // "Ladder failure"
-        osSyncPrintf("Error : 梯子の発生失敗(%s %d)(arg_data 0x%04x)\n", "../z_bg_mori_hashigo.c", 220,
+        osSyncPrintf("Error: Ladder failure(%s %d)(params 0x%04X)\n", "../z_bg_mori_hashigo.c", __LINE__,
                      this->dyna.actor.params);
         return false;
     }
@@ -163,14 +161,12 @@ void BgMoriHashigo_Init(Actor* thisx, GlobalContext* globalCtx) {
     }
     this->moriTexObjIndex = Object_GetIndex(&globalCtx->objectCtx, OBJECT_MORI_TEX);
     if (this->moriTexObjIndex < 0) {
-        // "Bank danger!"
-        osSyncPrintf("Error : バンク危険！(arg_data 0x%04x)(%s %d)\n", this->dyna.actor.params,
-                     "../z_bg_mori_hashigo.c", 312);
+        osSyncPrintf("Error: Bank danger!(params 0x%04X)(%s %d)\n", this->dyna.actor.params,
+                     "../z_bg_mori_hashigo.c", __LINE__);
         Actor_Kill(&this->dyna.actor);
     } else {
         BgMoriHashigo_SetupWaitForMoriTex(this);
-        // "(Forest Temple Ladder and its clasp)"
-        osSyncPrintf("(森の神殿 梯子とその留め金)(arg_data 0x%04x)\n", this->dyna.actor.params);
+        osSyncPrintf("(Forest Temple Ladder and its clasp)(params 0x%04X)\n", this->dyna.actor.params);
     }
 }
 

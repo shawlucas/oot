@@ -144,7 +144,7 @@ void ObjBean_InitDynaPoly(ObjBean* this, GlobalContext* globalCtx, CollisionHead
 
     this->dyna.bgId = DynaPoly_SetBgActor(globalCtx, &globalCtx->colCtx.dyna, &this->dyna.actor, colHeader);
     if (this->dyna.bgId == BG_ACTOR_MAX) {
-        osSyncPrintf("Warning : move BG 登録失敗(%s %d)(name %d)(arg_data 0x%04x)\n", "../z_obj_bean.c", 374,
+        osSyncPrintf("Warning: move BG registration failed(%s %d)(name %d)(params 0x%04X)\n", "../z_obj_bean.c", 374,
                      this->dyna.actor.id, this->dyna.actor.params);
     }
 }
@@ -474,7 +474,7 @@ void ObjBean_Init(Actor* thisx, GlobalContext* globalCtx) {
             if (path == 0x1F) {
                 osSyncPrintf(VT_COL(RED, WHITE));
                 // "No path data?"
-                osSyncPrintf("パスデータが無い？(%s %d)(arg_data %xH)\n", "../z_obj_bean.c", 909,
+                osSyncPrintf("パスデータが無い？(%s %d)(params %xH)\n", "../z_obj_bean.c", 909,
                              this->dyna.actor.params);
                 osSyncPrintf(VT_RST);
                 Actor_Kill(&this->dyna.actor);
@@ -483,7 +483,7 @@ void ObjBean_Init(Actor* thisx, GlobalContext* globalCtx) {
             if (globalCtx->setupPathList[path].count < 3) {
                 osSyncPrintf(VT_COL(RED, WHITE));
                 // "Incorrect number of path data"
-                osSyncPrintf("パスデータ数が不正(%s %d)(arg_data %xH)\n", "../z_obj_bean.c", 921,
+                osSyncPrintf("パスデータ数が不正(%s %d)(params %xH)\n", "../z_obj_bean.c", 921,
                              this->dyna.actor.params);
                 osSyncPrintf(VT_RST);
                 Actor_Kill(&this->dyna.actor);
@@ -513,7 +513,7 @@ void ObjBean_Init(Actor* thisx, GlobalContext* globalCtx) {
     }
     this->dyna.actor.world.rot.z = this->dyna.actor.home.rot.z = this->dyna.actor.shape.rot.z = 0;
     // "Magic bean tree lift"
-    osSyncPrintf("(魔法の豆の木リフト)(arg_data 0x%04x)\n", this->dyna.actor.params);
+    osSyncPrintf("(魔法の豆の木リフト)(params 0x%04X)\n", this->dyna.actor.params);
 }
 
 void ObjBean_Destroy(Actor* thisx, GlobalContext* globalCtx) {
