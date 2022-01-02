@@ -410,7 +410,6 @@ void Gameplay_Update(GlobalContext* globalCtx) {
     s32 sp80;
     Input* input;
     u32 i;
-    s32 pad2;
 
     input = globalCtx->state.input;
 

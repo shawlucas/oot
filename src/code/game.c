@@ -189,6 +189,10 @@ void GameState_Draw(GameState* gameState, GraphicsContext* gfxCtx) {
         SpeedMeter_DrawTimeEntries(&D_801664D0, gfxCtx);
         SpeedMeter_DrawAllocEntries(&D_801664D0, gfxCtx, gameState);
     }
+
+    if (gMenuInitialized) {
+        Menu_Draw(gameState);
+    }
 }
 
 void GameState_SetFrameBuffer(GraphicsContext* gfxCtx) {
@@ -231,6 +235,7 @@ void GameState_ReqPadData(GameState* gameState) {
 
 void GameState_Update(GameState* gameState) {
     GraphicsContext* gfxCtx = gameState->gfxCtx;
+    Input* input = &gameState->input[0];
 
     GameState_SetFrameBuffer(gfxCtx);
 
@@ -305,19 +310,20 @@ void GameState_Update(GameState* gameState) {
         }
     }
 
+    if (CHECK_BTN_ALL(input->cur.button, BTN_R) && CHECK_BTN_ALL(input->press.button, BTN_L)) {      
+        if (!gMenuInitialized) {
+            MenuSystem_Init();
+        }
+        gMenuInitialized ^= true;
+    }
+
+    if (gMenuInitialized) {
+        Menu_Update(gameState);
+    }
+
     if (R_PAUSE_MENU_MODE != 2u) {
         GameState_Draw(gameState, gfxCtx);
         func_800C49F4(gfxCtx);
-    }
-
-    if (gActorContextInitialized && CHECK_BTN_ALL(gameState->input[0].cur.button, BTN_R | BTN_L)) {
-        if (sMenuInitialized) {
-            sMenuInitialized = false;
-        } else {
-            GlobalContext* globalCtx = (GlobalContext*)gameState;
-            Actor_Spawn(&globalCtx->actorCtx, globalCtx, ACTOR_MENUCONTEXT, 0.0f, 0.0f, 0.0f, 0, 0, 0, 0x0000);
-            sMenuInitialized = true;
-        }
     }
 
     gameState->frames++;

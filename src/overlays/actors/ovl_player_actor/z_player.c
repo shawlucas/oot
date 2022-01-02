@@ -467,7 +467,7 @@ static PlayerAgeProperties sAgeProperties[] = {
     },
 };
 
-static u32 D_808535D0 = false;
+static u32 sFreeMovementActive = false;
 static f32 D_808535D4 = 0.0f;
 static s16 D_808535D8 = 0;
 static s16 D_808535DC = 0;
@@ -12482,14 +12482,14 @@ s32 func_8084FCAC(Player* this, GlobalContext* globalCtx) {
     if ((CHECK_BTN_ALL(sControlInput->cur.button, BTN_A | BTN_L | BTN_R) &&
          CHECK_BTN_ALL(sControlInput->press.button, BTN_B)) ||
         (CHECK_BTN_ALL(sControlInput->cur.button, BTN_L) && CHECK_BTN_ALL(sControlInput->press.button, BTN_DRIGHT))) {
-        D_808535D0 ^= 1;
+        sFreeMovementActive ^= 1;
 
-        if (D_808535D0) {
+        if (sFreeMovementActive) {
             Camera_ChangeMode(Gameplay_GetCamera(globalCtx, 0), CAM_MODE_BOWARROWZ);
         }
     }
 
-    if (D_808535D0) {
+    if (sFreeMovementActive) {
         f32 speed;
 
         if (CHECK_BTN_ALL(sControlInput->cur.button, BTN_R)) {

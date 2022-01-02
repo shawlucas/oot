@@ -27,7 +27,6 @@ OSMesg sSiIntMsgBuf[1];
 
 void Main_LogSystemHeap(void) {
     osSyncPrintf(VT_FGCOL(GREEN));
-    // "System heap size% 08x (% dKB) Start address% 08x"
     osSyncPrintf("System heap size 0x%08X(%d KB) Start address 0x%08X\n", gSystemHeapSize, gSystemHeapSize / 1024,
                  gSystemHeap);
     osSyncPrintf(VT_RST);
@@ -43,7 +42,7 @@ void Main(void* arg) {
     s32 debugHeapSize;
     s16* msg;
 
-    osSyncPrintf("Start execution of Main\n"); // "Start running"
+    osSyncPrintf("Start execution of Main\n");
     gScreenWidth = SCREEN_WIDTH;
     gScreenHeight = SCREEN_HEIGHT;
     gAppNmiBufferPtr = (PreNmiBuff*)osAppNmiBuffer;
@@ -53,7 +52,6 @@ void Main(void* arg) {
     sysHeap = (u32)gSystemHeap;
     fb = SysCfb_GetFbPtr(0);
     gSystemHeapSize = (fb - sysHeap);
-    // "System heap initalization"
     osSyncPrintf("System heap initialization %08X-%08X %08X\n", sysHeap, fb, gSystemHeapSize);
     SystemHeap_Init(sysHeap, gSystemHeapSize); // initializes the system heap
     if (osMemSize >= 0x800000) {
@@ -78,7 +76,7 @@ void Main(void* arg) {
     StackCheck_Init(&sIrqMgrStackInfo, sIrqMgrStack, sIrqMgrStack + sizeof(sIrqMgrStack), 0, 0x100, "irqmgr");
     IrqMgr_Init(&gIrqMgr, &sGraphStackInfo, Z_PRIORITY_IRQMGR, 1);
 
-    osSyncPrintf("Initialize the task scheduler\n"); // "Initialize the task scheduler"
+    osSyncPrintf("Initialize the task scheduler\n");
     StackCheck_Init(&sSchedStackInfo, sSchedStack, sSchedStack + sizeof(sSchedStack), 0, 0x100, "sched");
     Sched_Init(&gSchedContext, &sAudioStack, Z_PRIORITY_SCHED, D_80013960, 1, &gIrqMgr);
 
@@ -104,13 +102,13 @@ void Main(void* arg) {
             break;
         }
         if (*msg == OS_SC_PRE_NMI_MSG) {
-            osSyncPrintf("main.c: Looks like it's been reset.\n"); // "Looks like it's been reset"
+            osSyncPrintf("main.c: Looks like it's been reset.\n");
             PreNmiBuff_SetReset(gAppNmiBufferPtr);
         }
     }
 
-    osSyncPrintf("Main cleanup\n"); // "Cleanup"
+    osSyncPrintf("Main cleanup\n");
     osDestroyThread(&sGraphThread);
     func_800FBFD8();
-    osSyncPrintf("End of Main execution\n"); // "End of execution"
+    osSyncPrintf("End of Main execution\n");
 }

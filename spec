@@ -379,6 +379,7 @@ beginseg
     include "build/src/code/z_kaleido_manager.o"
     include "build/src/code/z_kaleido_scope_call.o"
     include "build/src/code/z_play.o"
+    include "build/src/code/z_menu.o"
     include "build/src/code/PreRender.o"
     include "build/src/code/TwoHeadArena.o"
     include "build/src/code/code_800C3C20.o"
@@ -3364,12 +3365,6 @@ beginseg
     name "ovl_Shot_Sun"
     include "build/src/overlays/actors/ovl_Shot_Sun/z_shot_sun.o"
     include "build/src/overlays/actors/ovl_Shot_Sun/ovl_Shot_Sun_reloc.o"
-endseg
-
-beginseg
-    name "ovl_Menu"
-    include "build/src/overlays/misc/ovl_Menu/z_menu.o"
-    include "build/src/overlays/misc/ovl_Menu/ovl_Menu_reloc.o"
 endseg
 
 beginseg

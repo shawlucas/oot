@@ -89,8 +89,6 @@ s32 DmaMgr_DmaRomToRam(u32 rom, u32 ram, u32 size) {
         ram += buffSize;
     }
 
-    // Also necessary to match
-
     ioMsg.hdr.pri = OS_MESG_PRI_NORMAL;
     ioMsg.hdr.retQueue = &queue;
     ioMsg.devAddr = rom;

@@ -6743,20 +6743,20 @@ Camera* Camera_Create(View* view, CollisionContext* colCtx, GlobalContext* globa
     Camera* newCamera = ZeldaArena_MallocDebug(sizeof(*newCamera), "../z_camera.c", __LINE__);
 
     if (newCamera != NULL) {
-        osSyncPrintf(VT_FGCOL(BLUE) "camera: create --- allocate %d byte" VT_RST "\n", sizeof(*newCamera) * 4);
+        osSyncPrintf(VT_FGCOL(BLUE) "Camera_Create(): --- allocate %d byte" VT_RST "\n", sizeof(*newCamera) * 4);
         Camera_Init(newCamera, view, colCtx, globalCtx);
     } else {
-        osSyncPrintf(VT_COL(RED, WHITE) "camera: create: not enough memory\n" VT_RST);
+        osSyncPrintf(VT_COL(RED, WHITE) "Camera_Create(): not enough memory\n" VT_RST);
     }
     return newCamera;
 }
 
 void Camera_Destroy(Camera* camera) {
     if (camera != NULL) {
-        osSyncPrintf(VT_FGCOL(BLUE) "camera: destroy ---" VT_RST "\n");
-        ZeldaArena_FreeDebug(camera, "../z_camera.c", 9391);
+        osSyncPrintf(VT_FGCOL(BLUE) ":Camera_Destroy() ---" VT_RST "\n");
+        ZeldaArena_FreeDebug(camera, "../z_camera.c", __LINE__);
     } else {
-        osSyncPrintf(VT_COL(YELLOW, BLACK) "camera: destroy: already cleared\n" VT_RST);
+        osSyncPrintf(VT_COL(YELLOW, BLACK) "Camera_Destroy(): already destroyed\n" VT_RST);
     }
 }
 

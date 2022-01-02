@@ -2387,5 +2387,8 @@ void Opening_Init(GameState* thisx);
 void Opening_Destroy(GameState* thisx);
 void FileChoose_Init(GameState* thisx);
 void FileChoose_Destroy(GameState* thisx);
-
+extern void Menu_Init();
+void MenuSystem_Init();
+void Menu_Update(GameState* gameState);
+extern void Menu_Draw(GameState* gameState);
 #endif

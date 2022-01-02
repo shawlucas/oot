@@ -560,7 +560,7 @@ void Fault_WaitForButtonCombo() {
     s1 = 0;
     s2 = 1;
 
-    while (state != 11) {
+    while (state != 0) {
         Fault_Sleep(0x10);
         Fault_UpdatePadImpl();
 

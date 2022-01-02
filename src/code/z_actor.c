@@ -2714,7 +2714,6 @@ Actor* Actor_Spawn(ActorContext* actorCtx, GlobalContext* globalCtx, s16 actorId
     actor = ZeldaArena_MallocDebug(actorInit->instanceSize, name, 1);
 
     if (actor == NULL) {
-        // "Actor class cannot be reserved! %s <size＝%d bytes>"
         osSyncPrintf(VT_COL(RED, WHITE) "Actor class cannot be reserved! %s <size = %d bytes>\n", VT_RST, name,
                      actorInit->instanceSize);
         Actor_FreeOverlay(overlayEntry);
@@ -5506,7 +5505,6 @@ s32 func_80038154(GlobalContext* globalCtx, Actor* actor, Vec3s* arg2, Vec3s* ar
 
 s32 func_80038290(GlobalContext* globalCtx, Actor* actor, Vec3s* arg2, Vec3s* arg3, Vec3f arg4) {
     Player* player = GET_PLAYER(globalCtx);
-
     Vec3f sp24;
     s16 var;
     s16 abs_var;
