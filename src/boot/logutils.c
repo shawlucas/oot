@@ -26,13 +26,13 @@ void LogUtils_LogHexDump(void* ptr, s32 size0) {
     s32 i;
     u32 off;
 
-    osSyncPrintf("dump(%08x, %u)\n", addr, size);
+    osSyncPrintf("dump(%08X, %u)\n", addr, size);
     osSyncPrintf("address  off  +0 +1 +2 +3 +4 +5 +6 +7 +8 +9 +a +b +c +d +e +f   0123456789abcdef\n");
 
     off = 0;
     while (size > 0) {
 
-        osSyncPrintf("%08x %04x", addr, off);
+        osSyncPrintf("%08X %04x", addr, off);
         rest = (size < 0x10) ? size : 0x10;
 
         i = 0;
@@ -73,14 +73,14 @@ void LogUtils_LogHexDump(void* ptr, s32 size0) {
 }
 
 void LogUtils_LogPointer(s32 value, u32 max, void* ptr, const char* name, const char* file, s32 line) {
-    osSyncPrintf(VT_COL(RED, WHITE) "%s %d %s[%d] max=%u ptr=%08x\n" VT_RST, file, line, name, value, max, ptr);
+    osSyncPrintf(VT_COL(RED, WHITE) "%s %d %s[%d] max=%u ptr=%08X\n" VT_RST, file, line, name, value, max, ptr);
 }
 
 void LogUtils_CheckBoundary(const char* name, s32 value, s32 unk, const char* file, s32 line) {
     u32 mask = (unk - 1);
 
     if (value & mask) {
-        osSyncPrintf(VT_COL(RED, WHITE) "%s %d:%s(%08x) は バウンダリ(%d)違反です\n" VT_RST, file, line, name, value,
+        osSyncPrintf(VT_COL(RED, WHITE) "%s %d:%s(%08X) は バウンダリ(%d)違反です\n" VT_RST, file, line, name, value,
                      unk);
     }
 }
@@ -93,7 +93,7 @@ void LogUtils_CheckNullPointer(const char* exp, void* ptr, const char* file, s32
 
 void LogUtils_CheckValidPointer(const char* exp, void* ptr, const char* file, s32 line) {
     if (ptr == NULL || (u32)ptr < 0x80000000 || (0x80000000 + osMemSize) <= (u32)ptr) {
-        osSyncPrintf(VT_COL(RED, WHITE) "%s %d:ポインタ %s(%08x) が異常です\n" VT_RST, file, line, exp, ptr);
+        osSyncPrintf(VT_COL(RED, WHITE) "%s %d:ポインタ %s(%08X) が異常です\n" VT_RST, file, line, exp, ptr);
     }
 }
 

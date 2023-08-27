@@ -11,53 +11,53 @@ void SystemArena_CheckPointer(void* ptr, u32 size, const char* name, const char*
     if (ptr == NULL) {
         if (gSystemArenaLogSeverity >= LOG_SEVERITY_ERROR) {
             // "%s: %u bytes %s failed\n"
-            osSyncPrintf("%s: %u バイトの%sに失敗しました\n", name, size, action);
+            osSyncPrintf("%s: %u bytes %s failed\n\n", name, size, action);
             __osDisplayArena(&gSystemArena);
             return;
         }
     } else if (gSystemArenaLogSeverity >= LOG_SEVERITY_VERBOSE) {
         // "%s: %u bytes %s succeeded\n"
-        osSyncPrintf("%s: %u バイトの%sに成功しました\n", name, size, action);
+        osSyncPrintf("%s: %u bytes %s succeeded\n", name, size, action);
     }
 }
 
 void* SystemArena_Malloc(u32 size) {
     void* ptr = __osMalloc(&gSystemArena, size);
 
-    SystemArena_CheckPointer(ptr, size, "malloc", "確保"); // "Secure"
+    SystemArena_CheckPointer(ptr, size, "malloc", "secure"); // "Secure"
     return ptr;
 }
 
 void* SystemArena_MallocDebug(u32 size, const char* file, s32 line) {
     void* ptr = __osMallocDebug(&gSystemArena, size, file, line);
 
-    SystemArena_CheckPointer(ptr, size, "malloc_DEBUG", "確保"); // "Secure"
+    SystemArena_CheckPointer(ptr, size, "malloc_DEBUG", "secure"); // "Secure"
     return ptr;
 }
 
 void* SystemArena_MallocR(u32 size) {
     void* ptr = __osMallocR(&gSystemArena, size);
 
-    SystemArena_CheckPointer(ptr, size, "malloc_r", "確保"); // "Secure"
+    SystemArena_CheckPointer(ptr, size, "malloc_r", "Secure"); // "Secure"
     return ptr;
 }
 
 void* SystemArena_MallocRDebug(u32 size, const char* file, s32 line) {
     void* ptr = __osMallocRDebug(&gSystemArena, size, file, line);
 
-    SystemArena_CheckPointer(ptr, size, "malloc_r_DEBUG", "確保"); // "Secure"
+    SystemArena_CheckPointer(ptr, size, "malloc_r_DEBUG", "Secure"); // "Secure"
     return ptr;
 }
 
 void* SystemArena_Realloc(void* ptr, u32 newSize) {
     ptr = __osRealloc(&gSystemArena, ptr, newSize);
-    SystemArena_CheckPointer(ptr, newSize, "realloc", "再確保"); // "Re-securing"
+    SystemArena_CheckPointer(ptr, newSize, "realloc", "Re-securing"); // "Re-securing"
     return ptr;
 }
 
 void* SystemArena_ReallocDebug(void* ptr, u32 newSize, const char* file, s32 line) {
     ptr = __osReallocDebug(&gSystemArena, ptr, newSize, file, line);
-    SystemArena_CheckPointer(ptr, newSize, "realloc_DEBUG", "再確保"); // "Re-securing"
+    SystemArena_CheckPointer(ptr, newSize, "realloc_DEBUG", "Re-securing"); // "Re-securing"
     return ptr;
 }
 
@@ -78,12 +78,12 @@ void* SystemArena_Calloc(u32 num, u32 size) {
         bzero(ret, n);
     }
 
-    SystemArena_CheckPointer(ret, n, "calloc", "確保");
+    SystemArena_CheckPointer(ret, n, "calloc", "Secure");
     return ret;
 }
 
 void SystemArena_Display(void) {
-    osSyncPrintf("システムヒープ表示\n"); // "System heap display"
+    osSyncPrintf("System heap display\n"); // "System heap display"
     __osDisplayArena(&gSystemArena);
 }
 

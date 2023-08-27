@@ -23,7 +23,7 @@ void KaleidoManager_LoadOvl(KaleidoMgrOverlay* ovl) {
     Overlay_Load(ovl->vromStart, ovl->vromEnd, ovl->vramStart, ovl->vramEnd, ovl->loadedRamAddr);
 
     osSyncPrintf(VT_FGCOL(GREEN));
-    osSyncPrintf("OVL(k):Seg:%08x-%08x Ram:%08x-%08x Off:%08x %s\n", ovl->vramStart, ovl->vramEnd, ovl->loadedRamAddr,
+    osSyncPrintf("OVL(k):Seg:%08X-%08X Ram:%08X-%08X Off:%08X %s\n", ovl->vramStart, ovl->vramEnd, ovl->loadedRamAddr,
                  (uintptr_t)ovl->loadedRamAddr + (uintptr_t)ovl->vramEnd - (uintptr_t)ovl->vramStart,
                  (uintptr_t)ovl->vramStart - (uintptr_t)ovl->loadedRamAddr, ovl->name);
     osSyncPrintf(VT_RST);
@@ -61,7 +61,7 @@ void KaleidoManager_Init(PlayState* play) {
     LogUtils_CheckNullPointer("KaleidoArea_allocp", sKaleidoAreaPtr, "../z_kaleido_manager.c", 151);
 
     osSyncPrintf(VT_FGCOL(GREEN));
-    osSyncPrintf("KaleidoArea %08x - %08x\n", sKaleidoAreaPtr, (uintptr_t)sKaleidoAreaPtr + largestSize);
+    osSyncPrintf("KaleidoArea %08X - %08X\n", sKaleidoAreaPtr, (uintptr_t)sKaleidoAreaPtr + largestSize);
     osSyncPrintf(VT_RST);
 
     gKaleidoMgrCurOvl = NULL;

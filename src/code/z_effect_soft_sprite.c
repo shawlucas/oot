@@ -207,7 +207,7 @@ void EffectSs_Spawn(PlayState* play, s32 type, s32 priority, void* initParams) {
                          overlayEntry->loadedRamAddr);
 
             osSyncPrintf(VT_FGCOL(GREEN));
-            osSyncPrintf("EFFECT SS OVL:SegRom %08x %08x, Seg %08x %08x, RamStart %08x, type: %d\n",
+            osSyncPrintf("EFFECT SS OVL:SegRom %08X %08X, Seg %08X %08X, RamStart %08X, type: %d\n",
                          overlayEntry->vromStart, overlayEntry->vromEnd, overlayEntry->vramStart, overlayEntry->vramEnd,
                          overlayEntry->loadedRamAddr, type);
             osSyncPrintf(VT_RST);
@@ -222,9 +222,9 @@ void EffectSs_Spawn(PlayState* play, s32 type, s32 priority, void* initParams) {
 
     if (initInfo->init == NULL) {
         // "Effects have already been loaded, but the constructor is NULL so the addition will not occur.
-        // Please fix this. (Waste of memory) %08x %d"
+        // Please fix this. (Waste of memory) %08X %d"
         osSyncPrintf("EffectSoftSprite2_makeEffect():すでにエフェクトはロード済みで\nすが,"
-                     "コンストラクターがNULLなので追加をやめます。\n直してください。（メモリーの無駄) %08x %d\n",
+                     "コンストラクターがNULLなので追加をやめます。\n直してください。（メモリーの無駄) %08X %d\n",
                      initInfo, type);
         return;
     }

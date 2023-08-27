@@ -329,7 +329,7 @@ s32 View_ApplyPerspective(View* view) {
         s32 i;
         MtxF mf;
 
-        osSyncPrintf("fovy %f near %f far %f scale %f aspect %f normal %08x\n", view->fovy, view->zNear, view->zFar,
+        osSyncPrintf("fovy %f near %f far %f scale %f aspect %f normal %08X\n", view->fovy, view->zNear, view->zFar,
                      view->scale, aspect, view->normal);
 
         Matrix_MtxToMtxF(projection, &mf);

@@ -263,9 +263,9 @@ s32 Room_DecodeJpeg(void* data) {
 
     if (*(u32*)data == JPEG_MARKER) {
         osSyncPrintf("JPEGデータを展開します\n");        // "Expanding jpeg data"
-        osSyncPrintf("JPEGデータアドレス %08x\n", data); // "Jpeg data address %08x"
-        // "Work buffer address (Z buffer) %08x"
-        osSyncPrintf("ワークバッファアドレス（Ｚバッファ）%08x\n", gZBuffer);
+        osSyncPrintf("JPEGデータアドレス %08X\n", data); // "Jpeg data address %08X"
+        // "Work buffer address (Z buffer) %08X"
+        osSyncPrintf("ワークバッファアドレス（Ｚバッファ）%08X\n", gZBuffer);
 
         time = osGetTime();
         if (!Jpeg_Decode(data, gZBuffer, gGfxSPTaskOutputBuffer, sizeof(gGfxSPTaskOutputBuffer))) {
@@ -569,14 +569,14 @@ u32 func_80096FE8(PlayState* play, RoomContext* roomCtx) {
     }
 
     osSyncPrintf(VT_FGCOL(YELLOW));
-    // "Room buffer size=%08x(%5.1fK)"
-    osSyncPrintf("部屋バッファサイズ=%08x(%5.1fK)\n", maxRoomSize, maxRoomSize / 1024.0f);
+    // "Room buffer size=%08X(%5.1fK)"
+    osSyncPrintf("部屋バッファサイズ=%08X(%5.1fK)\n", maxRoomSize, maxRoomSize / 1024.0f);
     roomCtx->bufPtrs[0] = GameState_Alloc(&play->state, maxRoomSize, "../z_room.c", 946);
-    // "Room buffer initial pointer=%08x"
-    osSyncPrintf("部屋バッファ開始ポインタ=%08x\n", roomCtx->bufPtrs[0]);
+    // "Room buffer initial pointer=%08X"
+    osSyncPrintf("部屋バッファ開始ポインタ=%08X\n", roomCtx->bufPtrs[0]);
     roomCtx->bufPtrs[1] = (void*)((uintptr_t)roomCtx->bufPtrs[0] + maxRoomSize);
-    // "Room buffer end pointer=%08x"
-    osSyncPrintf("部屋バッファ終了ポインタ=%08x\n", roomCtx->bufPtrs[1]);
+    // "Room buffer end pointer=%08X"
+    osSyncPrintf("部屋バッファ終了ポインタ=%08X\n", roomCtx->bufPtrs[1]);
     osSyncPrintf(VT_RST);
     roomCtx->unk_30 = 0;
     roomCtx->status = 0;

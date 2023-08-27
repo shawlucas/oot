@@ -128,7 +128,7 @@ void TransitionTile_InitVtxData(TransitionTile* this) {
 }
 
 void TransitionTile_Destroy(TransitionTile* this) {
-    osSyncPrintf("fbdemo_cleanup(%08x)\n", this);
+    osSyncPrintf("fbdemo_cleanup(%08X)\n", this);
     osSyncPrintf("msleep(100);\n");
     Sleep_Msec(100);
 
@@ -151,7 +151,7 @@ void TransitionTile_Destroy(TransitionTile* this) {
 }
 
 TransitionTile* TransitionTile_Init(TransitionTile* this, s32 cols, s32 rows) {
-    osSyncPrintf("fbdemo_init(%08x, %d, %d)\n", this, cols, rows);
+    osSyncPrintf("fbdemo_init(%08X, %d, %d)\n", this, cols, rows);
     bzero(this, sizeof(TransitionTile));
     this->frame = 0;
     this->cols = cols;

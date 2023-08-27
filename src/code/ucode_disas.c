@@ -217,7 +217,7 @@ void UCodeDisas_SetCurUCodeImpl(UCodeDisas* this, void* ptr) {
         }
     }
     if (i >= this->ucodeInfoCount) {
-        DISAS_LOG("マイクロコードが一致しなかった\n"); // "Microcode did not match"
+        DISAS_LOG("Microcode did not match\n"); // "Microcode did not match"
         this->ucodeType = UCODE_NULL;
     }
 }
@@ -330,13 +330,13 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
         this->dlCnt++;
 
         ptr = UCodeDisas_TranslateAddr(this, (uintptr_t)ptr);
-        DISAS_LOG("%08x:", ptr);
+        DISAS_LOG("%08X:", ptr);
 
         *curGfx = *ptr;
         cmd = curGfx->noop.cmd;
         addr = (uintptr_t)UCodeDisas_TranslateAddr(this, (uintptr_t)curGfx->noop.value.addr);
 
-        DISAS_LOG("%08x-%08x:", curGfx->words.w0, curGfx->words.w1);
+        DISAS_LOG("%08X-%08X:", curGfx->words.w0, curGfx->words.w1);
 
         for (i = 0; i < this->dlDepth; i++) {
             DISAS_LOG(" ");
@@ -352,20 +352,20 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
 
                 switch (dma.par) {
                     case G_DL_PUSH: {
-                        DISAS_LOG("gsSPDisplayList(0x%08x),", dma.addr);
+                        DISAS_LOG("gsSPDisplayList(0x%08X),", dma.addr);
                         this->dlStack[this->dlDepth++] = (Gfx*)(ptr + 1);
                         ptr = (Gfx*)addr - 1;
                     } break;
 
                     case G_DL_NOPUSH: {
-                        DISAS_LOG("gsSPBranchList(0x%08x),", dma.addr);
+                        DISAS_LOG("gsSPBranchList(0x%08X),", dma.addr);
                         ptr = (Gfx*)addr - 1;
                     } break;
                 }
             } break;
 
             case G_RDPHALF_1: {
-                DISAS_LOG("RDPHALF_1(0x%08x),", curGfx->dma.addr);
+                DISAS_LOG("RDPHALF_1(0x%08X),", curGfx->dma.addr);
                 rdpHalf = curGfx->dma.addr;
             } break;
 
@@ -382,9 +382,9 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
 
             case G_LOAD_UCODE: {
                 if (curGfx->dma.len == SP_UCODE_DATA_SIZE - 1) {
-                    DISAS_LOG("gsSPLoadUcode(0x%08x, 0x%08x),", curGfx->dma.addr, rdpHalf);
+                    DISAS_LOG("gsSPLoadUcode(0x%08X, 0x%08X),", curGfx->dma.addr, rdpHalf);
                 } else {
-                    DISAS_LOG("gsSPLoadUcodeEx(0x%08x, 0x%08x, 0x%05x),", curGfx->dma.addr, rdpHalf,
+                    DISAS_LOG("gsSPLoadUcodeEx(0x%08X, 0x%08X, 0x%05x),", curGfx->dma.addr, rdpHalf,
                               curGfx->dma.len + 1);
                 }
                 UCodeDisas_SetCurUCodeImpl(this, UCodeDisas_TranslateAddr(this, curGfx->dma.addr));
@@ -471,7 +471,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                           UCodeDisas_GetCombineAlphaName(setcombine.Ad1, COMBINER_D));
 
                 if (this->pipeSyncRequired) {
-                    DISAS_LOG("### PipeSyncが必要です。\n");
+                    DISAS_LOG("### PipeSync is required\n");
                     this->syncErr++;
                 }
             } break;
@@ -517,14 +517,14 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                         }
                     }
                 }
-                DISAS_LOG("gsSPSetOtherModeH(%d, %d, 0x%08x),", sft, len, s2);
+                DISAS_LOG("gsSPSetOtherModeH(%d, %d, 0x%08X),", sft, len, s2);
 
             found_othermode_hi_macro:
                 this->modeH &= ((1 - (1 << len)) << sft) - 1;
                 this->modeH |= s2;
 
                 if (this->pipeSyncRequired) {
-                    DISAS_LOG("### PipeSyncが必要です。\n");
+                    DISAS_LOG("### PipeSync is required\n");
                     this->syncErr++;
                 }
             } break;
@@ -558,7 +558,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                             }
                         }
                     }
-                    DISAS_LOG("gsSPSetOtherModeL(%d, %d, 0x%08x),", sft, len, s2);
+                    DISAS_LOG("gsSPSetOtherModeL(%d, %d, 0x%08X),", sft, len, s2);
                 }
 
             found_othermode_lo_macro:
@@ -566,18 +566,18 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                 this->modeL |= s2;
 
                 if (this->pipeSyncRequired) {
-                    DISAS_LOG("### PipeSyncが必要です。\n");
+                    DISAS_LOG("### PipeSync is required\n");
                     this->syncErr++;
                 }
             } break;
 
             case G_RDPSETOTHERMODE: {
-                DISAS_LOG("gsDPSetOtherMode(0x%08x, 0x%08x),", curGfx->words.w0 & 0xFFFFFF, curGfx->words.w1);
+                DISAS_LOG("gsDPSetOtherMode(0x%08X, 0x%08X),", curGfx->words.w0 & 0xFFFFFF, curGfx->words.w1);
                 this->modeH = curGfx->words.w0 & 0xFFF;
                 this->modeL = curGfx->words.w1;
 
                 if (this->pipeSyncRequired) {
-                    DISAS_LOG("### PipeSyncが必要です。\n");
+                    DISAS_LOG("### PipeSync is required\n");
                     this->syncErr++;
                 }
             } break;
@@ -614,7 +614,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                 u32 fmt = ((curGfx->words.w0 & 0xE00000) >> 0x15) & 0xFF;
                 u32 siz = ((curGfx->words.w0 & 0x180000) >> 0x13) & 0xFF;
 
-                DISAS_LOG("gsDPSetColorImage(G_IM_FMT_%s, G_IM_SIZ_%s, %d, 0x%08x(0x%08x) ),",
+                DISAS_LOG("gsDPSetColorImage(G_IM_FMT_%s, G_IM_SIZ_%s, %d, 0x%08X(0x%08X) ),",
                           (fmt == G_IM_FMT_RGBA)  ? "RGBA"
                           : (fmt == G_IM_FMT_YUV) ? "YUV"
                           : (fmt == G_IM_FMT_CI)  ? "CI"
@@ -627,16 +627,16 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                           (curGfx->dma.len & 0xFFF) + 1, curGfx->setimg.dram, addr);
 
                 if (this->pipeSyncRequired) {
-                    DISAS_LOG("### PipeSyncが必要です。\n");
+                    DISAS_LOG("### PipeSync is required\n");
                     this->syncErr++;
                 }
             } break;
 
             case G_SETZIMG: {
-                DISAS_LOG("gsDPSetDepthImage(0x%08x(0x%08x)),", curGfx->setimg.dram, addr);
+                DISAS_LOG("gsDPSetDepthImage(0x%08X(0x%08X)),", curGfx->setimg.dram, addr);
 
                 if (this->pipeSyncRequired) {
-                    DISAS_LOG("### PipeSyncが必要です。\n");
+                    DISAS_LOG("### PipeSync is required\n");
                     this->syncErr++;
                 }
             } break;
@@ -645,7 +645,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                 u32 fmt = ((curGfx->words.w0 & 0xE00000) >> 0x15) & 0xFF;
                 u32 siz = ((curGfx->words.w0 & 0x180000) >> 0x13) & 0xFF;
 
-                DISAS_LOG("gsDPSetTextureImage(G_IM_FMT_%s, G_IM_SIZ_%s, %d, 0x%08x(0x%08x)),",
+                DISAS_LOG("gsDPSetTextureImage(G_IM_FMT_%s, G_IM_SIZ_%s, %d, 0x%08X(0x%08X)),",
                           (fmt == G_IM_FMT_RGBA)  ? "RGBA"
                           : (fmt == G_IM_FMT_YUV) ? "YUV"
                           : (fmt == G_IM_FMT_CI)  ? "CI"
@@ -663,7 +663,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                           curGfx->setcolor.b, curGfx->setcolor.a);
 
                 if (this->pipeSyncRequired) {
-                    DISAS_LOG("### PipeSyncが必要です。\n");
+                    DISAS_LOG("### PipeSync is required\n");
                     this->syncErr++;
                 }
             } break;
@@ -673,7 +673,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                           curGfx->setcolor.b, curGfx->setcolor.a);
 
                 if (this->pipeSyncRequired) {
-                    DISAS_LOG("### PipeSyncが必要です。\n");
+                    DISAS_LOG("### PipeSync is required\n");
                     this->syncErr++;
                 }
             } break;
@@ -683,16 +683,16 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                           curGfx->setcolor.b, curGfx->setcolor.a);
 
                 if (this->pipeSyncRequired) {
-                    DISAS_LOG("### PipeSyncが必要です。\n");
+                    DISAS_LOG("### PipeSync is required\n");
                     this->syncErr++;
                 }
             } break;
 
             case G_SETFILLCOLOR: {
-                DISAS_LOG("gsDPSetFillColor(0x%08x),", curGfx->setcolor.color);
+                DISAS_LOG("gsDPSetFillColor(0x%08X),", curGfx->setcolor.color);
 
                 if (this->pipeSyncRequired) {
-                    DISAS_LOG("### PipeSyncが必要です。\n");
+                    DISAS_LOG("### PipeSync is required\n");
                     this->syncErr++;
                 }
             } break;
@@ -701,7 +701,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                 DISAS_LOG("gsDPSetPrimDepth(%d, %d),", curGfx->setprimdepth.z, curGfx->setprimdepth.dz);
 
                 if (this->pipeSyncRequired) {
-                    DISAS_LOG("### PipeSyncが必要です。\n");
+                    DISAS_LOG("### PipeSync is required\n");
                     this->syncErr++;
                 }
             } break;
@@ -716,7 +716,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                 DISAS_LOG("gsDPFullSync(),");
 
                 if (this->pipeSyncRequired) {
-                    DISAS_LOG("### PipeSyncが必要です。\n");
+                    DISAS_LOG("### PipeSync is required\n");
                     this->syncErr++;
                 }
             } break;
@@ -742,7 +742,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                         if (curGfx->noop.value.u32 == 0) {
                             DISAS_LOG("gsDPNoOp(),");
                         } else {
-                            DISAS_LOG("gsDPNoOpTag(%08x),", curGfx->noop.value.u32);
+                            DISAS_LOG("gsDPNoOpTag(%08X),", curGfx->noop.value.u32);
                         }
                     } break;
 
@@ -764,7 +764,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                     } break;
 
                     case 3: {
-                        DISAS_LOG("count_gsDPNoOpWord(0x%08x, %d),", curGfx->noop.value.u32, curGfx->noop.len);
+                        DISAS_LOG("count_gsDPNoOpWord(0x%08X, %d),", curGfx->noop.value.u32, curGfx->noop.len);
                     } break;
 
                     case 4: {
@@ -782,12 +782,12 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
 
                     case 6: {
                         //! @bug arguments are not printed
-                        DISAS_LOG("count_gsDPNoOpCallBack(%08x,%d),");
+                        DISAS_LOG("count_gsDPNoOpCallBack(%08X,%d),");
                         ((UcodeDisasCallback)curGfx->noop.value.callback)(this, curGfx->noop.len);
                     } break;
 
                     default: {
-                        DISAS_LOG("gsDPNoOpTag3(%02x, %08x, %04x),", curGfx->noop.type, curGfx->noop.value.u32,
+                        DISAS_LOG("gsDPNoOpTag3(%02x, %08X, %04x),", curGfx->noop.type, curGfx->noop.value.u32,
                                   curGfx->noop.len);
                     } break;
                 }
@@ -804,7 +804,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                                 MtxF mtxF;
                                 s32 j = 0;
 
-                                DISAS_LOG("gsSPMatrix(0x%08x(%08x), 0", gmtx.addr, addr);
+                                DISAS_LOG("gsSPMatrix(0x%08X(%08X), 0", gmtx.addr, addr);
 
                                 params = gmtx.par ^ G_MTX_PUSH;
 
@@ -858,7 +858,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                                 numv &= 0xFF;
                                 vbidx = (curGfx->vtx.par >> 1) - numv;
 
-                                DISAS_LOG("gsSPVertex(0x%08x(0x%08x), %d, %d),", curGfx->vtx.addr, addr, numv, vbidx);
+                                DISAS_LOG("gsSPVertex(0x%08X(0x%08X), %d, %d),", curGfx->vtx.addr, addr, numv, vbidx);
 
                                 this->vtxCnt += numv;
                                 this->spvtxCnt++;
@@ -869,7 +869,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                             } break;
 
                             case G_MODIFYVTX: {
-                                DISAS_LOG("gsSPModifyVertex(%d, %s, %08x),", curGfx->dma.par,
+                                DISAS_LOG("gsSPModifyVertex(%d, %s, %08X),", curGfx->dma.par,
                                           (curGfx->dma.len == G_MWO_POINT_RGBA)       ? "G_MWO_POINT_RGBA"
                                           : (curGfx->dma.len == G_MWO_POINT_ST)       ? "G_MWO_POINT_ST"
                                           : (curGfx->dma.len == G_MWO_POINT_XYSCREEN) ? "G_MWO_POINT_XYSCREEN"
@@ -943,7 +943,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
 
                             case G_BRANCH_Z: {
                                 addr = (uintptr_t)UCodeDisas_TranslateAddr(this, rdpHalf);
-                                DISAS_LOG("gsSPBranchLessZraw(0x%08x(0x%08x), %d, 0x%08x),", rdpHalf, addr,
+                                DISAS_LOG("gsSPBranchLessZraw(0x%08X(0x%08X), %d, 0x%08X),", rdpHalf, addr,
                                           (curGfx->words.w0 & 0xFFF) / 2, curGfx->words.w1);
                                 ptr = (Gfx*)addr - 1;
                             } break;
@@ -1011,7 +1011,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                                 movewd.data = dma.addr;
                                 switch (movewd.index) {
                                     case G_MW_SEGMENT: {
-                                        DISAS_LOG("gsSPSegment(%d, 0x%08x),", movewd.offset / 4, movewd.data);
+                                        DISAS_LOG("gsSPSegment(%d, 0x%08X),", movewd.offset / 4, movewd.data);
                                         this->segments[movewd.offset / 4] = movewd.data & 0xFFFFFF;
                                     } break;
 
@@ -1051,7 +1051,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
 
                                 switch (movemem.index) {
                                     case G_MV_VIEWPORT: {
-                                        DISAS_LOG("gsSPViewport(0x%08x(0x%08x)),", movemem.data, vp);
+                                        DISAS_LOG("gsSPViewport(0x%08X(0x%08X)),", movemem.data, vp);
                                         DISAS_LOG("\t# vscale=[%d %d %d %d], ", vp->vscale[0], vp->vscale[1],
                                                   vp->vscale[2], vp->vscale[3]);
                                         DISAS_LOG("vtrans=[%d %d %d %d] ", vp->vtrans[0], vp->vtrans[1], vp->vtrans[2],
@@ -1059,29 +1059,29 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                                     } break;
 
                                     case G_MV_MATRIX: {
-                                        DISAS_LOG("gsSPForceMatrix(0x%08x),", movemem.data);
+                                        DISAS_LOG("gsSPForceMatrix(0x%08X),", movemem.data);
                                         ptr += 2 - 1;
                                     } break;
 
                                     case G_MV_LIGHT: {
                                         switch (movemem.offset * 8) {
                                             case G_MVO_LOOKATX: {
-                                                DISAS_LOG("gsSPLookAtX(0x%08x),", movemem.data);
+                                                DISAS_LOG("gsSPLookAtX(0x%08X),", movemem.data);
                                             } break;
 
                                             case G_MVO_LOOKATY: {
-                                                DISAS_LOG("gsSPLookAtY(0x%08x),", movemem.data);
+                                                DISAS_LOG("gsSPLookAtY(0x%08X),", movemem.data);
                                             } break;
 
                                             default: {
-                                                DISAS_LOG("gsSPLight(0x%08x,%d),", movemem.data,
+                                                DISAS_LOG("gsSPLight(0x%08X,%d),", movemem.data,
                                                           (movemem.offset * 8 - 0x18) / 0x18);
                                             } break;
                                         }
                                     } break;
 
                                     default: {
-                                        DISAS_LOG("gsMoveMem(0x%08x, %d, %d, %d),", movemem.data,
+                                        DISAS_LOG("gsMoveMem(0x%08X, %d, %d, %d),", movemem.data,
                                                   ((movemem.size >> 3) + 1) * 8, movemem.index, movemem.offset * 8);
                                     } break;
                                 }
@@ -1098,40 +1098,40 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                             case G_BG_COPY: {
                                 Gwords words = ptr->words;
 
-                                DISAS_LOG("gsSPBgRectCopy(0x%08x(0x%08x)),", words.w1, addr);
+                                DISAS_LOG("gsSPBgRectCopy(0x%08X(0x%08X)),", words.w1, addr);
                                 this->pipeSyncRequired = true;
                             } break;
 
                             case G_BG_1CYC: {
                                 Gwords words = ptr->words;
 
-                                DISAS_LOG("gsSPBgRect1Cyc(0x%08x(0x%08x)),", words.w1, addr);
+                                DISAS_LOG("gsSPBgRect1Cyc(0x%08X(0x%08X)),", words.w1, addr);
                                 this->pipeSyncRequired = true;
                             } break;
 
                             case G_OBJ_SPRITE: {
                                 Gwords words = ptr->words;
 
-                                DISAS_LOG("gsSPObjSprite(0x%08x(0x%08x)),", words.w1, addr);
+                                DISAS_LOG("gsSPObjSprite(0x%08X(0x%08X)),", words.w1, addr);
                                 this->pipeSyncRequired = true;
                             } break;
 
                             case G_OBJ_RECTANGLE: {
                                 Gwords words = ptr->words;
 
-                                DISAS_LOG("gsSPObjRectangle(0x%08x(0x%08x)),", words.w1, addr);
+                                DISAS_LOG("gsSPObjRectangle(0x%08X(0x%08X)),", words.w1, addr);
                                 this->pipeSyncRequired = true;
                             } break;
 
                             case G_OBJ_RECTANGLE_R: {
                                 Gwords words = ptr->words;
 
-                                DISAS_LOG("gsSPObjRectangleR(0x%08x(0x%08x)),", words.w1, addr);
+                                DISAS_LOG("gsSPObjRectangleR(0x%08X(0x%08X)),", words.w1, addr);
                                 this->pipeSyncRequired = true;
                             } break;
 
                             case G_RDPHALF_0: {
-                                DISAS_LOG("RDPHALF_0(0x%02x, 0x%08x, 0x%04x),", curGfx->dma.par, curGfx->dma.addr,
+                                DISAS_LOG("RDPHALF_0(0x%02x, 0x%08X, 0x%04x),", curGfx->dma.par, curGfx->dma.addr,
                                           curGfx->dma.len);
                                 sid = curGfx->dma.par;
                                 rdpHalf = curGfx->dma.addr;
@@ -1142,34 +1142,34 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                                 Gdma dma = ptr->dma;
 
                                 if (dma.par == 23) {
-                                    DISAS_LOG("gsSPObjMatrix(0x%08x(0x%08x)),", dma.addr, addr);
+                                    DISAS_LOG("gsSPObjMatrix(0x%08X(0x%08X)),", dma.addr, addr);
                                 } else {
-                                    DISAS_LOG("gsSPObjSubMatrix(0x%08x(0x%08x)),", dma.addr, addr);
+                                    DISAS_LOG("gsSPObjSubMatrix(0x%08X(0x%08X)),", dma.addr, addr);
                                 }
                             } break;
 
                             case G_OBJ_LOADTXTR: {
                                 Gdma dma = ptr->dma;
 
-                                DISAS_LOG("gsSPObjLoadTxtr(0x%08x(0x%08x)),", dma.addr, addr);
+                                DISAS_LOG("gsSPObjLoadTxtr(0x%08X(0x%08X)),", dma.addr, addr);
                             } break;
 
                             case G_OBJ_LDTX_SPRITE: {
                                 Gdma dma = ptr->dma;
 
-                                DISAS_LOG("gsSPObjLoadTxSprite(0x%08x(0x%08x)),", dma.addr, addr);
+                                DISAS_LOG("gsSPObjLoadTxSprite(0x%08X(0x%08X)),", dma.addr, addr);
                             } break;
 
                             case G_OBJ_LDTX_RECT: {
                                 Gdma dma = ptr->dma;
 
-                                DISAS_LOG("gsSPObjLoadTxRect(0x%08x(0x%08x)),", dma.addr, addr);
+                                DISAS_LOG("gsSPObjLoadTxRect(0x%08X(0x%08X)),", dma.addr, addr);
                             } break;
 
                             case G_OBJ_LDTX_RECT_R: {
                                 Gdma dma = ptr->dma;
 
-                                DISAS_LOG("gsSPObjLoadTxRectR(0x%08x(0x%08x)),", dma.addr, addr);
+                                DISAS_LOG("gsSPObjLoadTxRectR(0x%08X(0x%08X)),", dma.addr, addr);
                             } break;
 
                             case G_SELECT_DL: {
@@ -1179,10 +1179,10 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                                 uintptr_t dmaAddr = dma.addr;
 
                                 if (dma.par == 0) {
-                                    DISAS_LOG("gsSPSelectDL(0x%08x, %d, 0x%08x, 0x%08x),", dlAddr, sid, rdpHalf,
+                                    DISAS_LOG("gsSPSelectDL(0x%08X, %d, 0x%08X, 0x%08X),", dlAddr, sid, rdpHalf,
                                               dmaAddr);
                                 } else {
-                                    DISAS_LOG("gsSPSelectBranchDL(0x%08x, %d, 0x%08x, 0x%08x),", dlAddr, sid, rdpHalf,
+                                    DISAS_LOG("gsSPSelectBranchDL(0x%08X, %d, 0x%08X, 0x%08X),", dlAddr, sid, rdpHalf,
                                               dmaAddr);
                                 }
                             } break;
@@ -1195,12 +1195,12 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                                     case 6: {
                                         u32 segId = movewd.offset / 4;
 
-                                        DISAS_LOG("gsSPSegment(%d, 0x%08x),", segId, movewd.data);
+                                        DISAS_LOG("gsSPSegment(%d, 0x%08X),", segId, movewd.data);
                                         this->segments[segId] = movewd.data & 0xFFFFFF;
                                     } break;
 
                                     case 8: {
-                                        DISAS_LOG("gsSPSetStatus(0x%08x, 0x%08x),", movewd.offset, movewd.data);
+                                        DISAS_LOG("gsSPSetStatus(0x%08X, 0x%08X),", movewd.offset, movewd.data);
                                     } break;
 
                                     default: {
@@ -1212,7 +1212,7 @@ void UCodeDisas_Disassemble(UCodeDisas* this, Gfx* ptr) {
                             case G_OBJ_RENDERMODE: {
                                 Gdma dma = ptr->dma;
 
-                                DISAS_LOG("gsSPObjRenderMode(0x%08x),", dma.addr);
+                                DISAS_LOG("gsSPObjRenderMode(0x%08X),", dma.addr);
                             } break;
 
                             default: {

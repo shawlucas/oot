@@ -1681,27 +1681,27 @@ void AudioOcarina_PlayControllerInput(u8 unused) {
 
         // Interprets and transforms controller input into ocarina buttons and notes
         if (CHECK_BTN_ANY(sOcarinaInputButtonPress, sOcarinaAButtonMap)) {
-            osSyncPrintf("Presss NA_KEY_D4 %08x\n", sOcarinaAButtonMap);
+            osSyncPrintf("Presss NA_KEY_D4 %08X\n", sOcarinaAButtonMap);
             sCurOcarinaPitch = OCARINA_PITCH_D4;
             sCurOcarinaButtonIndex = OCARINA_BTN_A;
 
         } else if (CHECK_BTN_ANY(sOcarinaInputButtonPress, sOcarinaCDownButtonMap)) {
-            osSyncPrintf("Presss NA_KEY_F4 %08x\n", sOcarinaCDownButtonMap);
+            osSyncPrintf("Presss NA_KEY_F4 %08X\n", sOcarinaCDownButtonMap);
             sCurOcarinaPitch = OCARINA_PITCH_F4;
             sCurOcarinaButtonIndex = OCARINA_BTN_C_DOWN;
 
         } else if (CHECK_BTN_ANY(sOcarinaInputButtonPress, BTN_CRIGHT)) {
-            osSyncPrintf("Presss NA_KEY_A4 %08x\n", BTN_CRIGHT);
+            osSyncPrintf("Presss NA_KEY_A4 %08X\n", BTN_CRIGHT);
             sCurOcarinaPitch = OCARINA_PITCH_A4;
             sCurOcarinaButtonIndex = OCARINA_BTN_C_RIGHT;
 
         } else if (CHECK_BTN_ANY(sOcarinaInputButtonPress, BTN_CLEFT)) {
-            osSyncPrintf("Presss NA_KEY_B4 %08x\n", BTN_CLEFT);
+            osSyncPrintf("Presss NA_KEY_B4 %08X\n", BTN_CLEFT);
             sCurOcarinaPitch = OCARINA_PITCH_B4;
             sCurOcarinaButtonIndex = OCARINA_BTN_C_LEFT;
 
         } else if (CHECK_BTN_ANY(sOcarinaInputButtonPress, sOcarinaCUpButtonMap)) {
-            osSyncPrintf("Presss NA_KEY_D5 %08x\n", sOcarinaCUpButtonMap);
+            osSyncPrintf("Presss NA_KEY_D5 %08X\n", sOcarinaCUpButtonMap);
             sCurOcarinaPitch = OCARINA_PITCH_D5;
             sCurOcarinaButtonIndex = OCARINA_BTN_C_UP;
         }
@@ -2491,7 +2491,7 @@ void AudioDebug_Draw(GfxPrint* printer) {
 
             while (i != 0xFF) {
                 GfxPrint_SetPos(printer, 3, 7 + j++);
-                GfxPrint_Printf(printer, "%02x %04x %02x %08x", i, gSfxBanks[ind][i].sfxId, gSfxBanks[ind][i].state,
+                GfxPrint_Printf(printer, "%02x %04x %02x %08X", i, gSfxBanks[ind][i].sfxId, gSfxBanks[ind][i].state,
                                 gSfxBanks[ind][i].priority);
                 i = gSfxBanks[ind][i].next;
             }
@@ -2976,7 +2976,7 @@ void AudioDebug_Draw(GfxPrint* printer) {
                             sPlayingStaff.pos);
 
             GfxPrint_SetPos(printer, 3, 6);
-            GfxPrint_Printf(printer, "8note REC POINTER : %08x", gScarecrowSpawnSongPtr);
+            GfxPrint_Printf(printer, "8note REC POINTER : %08X", gScarecrowSpawnSongPtr);
 
             ctr = 0;
             for (j = 0; j < 4; j++) {
@@ -3070,7 +3070,7 @@ void AudioDebug_Draw(GfxPrint* printer) {
 
             GfxPrint_SetPos(printer, 3, 24);
             if (sSariaBgmPtr != NULL) {
-                GfxPrint_Printf(printer, "SARIA BGM PTR %08x", sSariaBgmPtr);
+                GfxPrint_Printf(printer, "SARIA BGM PTR %08X", sSariaBgmPtr);
             }
 
             GfxPrint_SetPos(printer, 3, 25);
