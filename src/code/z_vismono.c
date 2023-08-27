@@ -39,7 +39,7 @@ void VisMono_Init(VisMono* this) {
 }
 
 void VisMono_Destroy(VisMono* this) {
-    SystemArena_FreeDebug(this->dList, "../z_vismono.c", 137);
+    SystemArena_FreeDebug(this->dList, "../z_vismono.c", __LINE__);
 }
 
 void VisMono_DesaturateTLUT(VisMono* this, u16* tlut) {
@@ -149,12 +149,12 @@ void VisMono_Draw(VisMono* this, Gfx** gfxp) {
         dListEnd = VisMono_DesaturateDList(this, dList);
 
         if (!(dListEnd <= dList + VISMONO_DLSIZE)) {
-            LOG_ADDRESS("glistp_end", dListEnd, "../z_vismono.c", 257);
-            LOG_ADDRESS("mono_dl", dList, "../z_vismono.c", 258);
-            LOG_ADDRESS("mono_dl + (1+3+1+1+80*(7+2+2+3)+1)", dList + VISMONO_DLSIZE, "../z_vismono.c", 259);
-            LOG_ADDRESS("(1+3+1+1+80*(7+2+2+3)+1)", VISMONO_DLSIZE, "../z_vismono.c", 260);
+            LOG_ADDRESS("dListEnd", dListEnd, "../z_vismono.c", __LINE__);
+            LOG_ADDRESS("dList", dList, "../z_vismono.c", __LINE__);
+            LOG_ADDRESS("dList + (1+3+1+1+80*(7+2+2+3)+1)", dList + VISMONO_DLSIZE, "../z_vismono.c", __LINE__);
+            LOG_ADDRESS("(1+3+1+1+80*(7+2+2+3)+1)", VISMONO_DLSIZE, "../z_vismono.c", __LINE__);
         }
-        ASSERT(dListEnd <= dList + VISMONO_DLSIZE, "glistp_end <= mono_dl + DLSIZE", "../z_vismono.c", 262);
+        ASSERT(dListEnd <= dList + VISMONO_DLSIZE, "dListEnd <= dList + VISMONO_DLSIZE", "../z_vismono.c", __LINE__);
     }
 
     gDPPipeSync(gfx++);
@@ -179,13 +179,13 @@ void VisMono_DrawOld(VisMono* this) {
     Gfx* dListEnd;
 
     if (this->tlut == NULL) {
-        this->tlut = SystemArena_MallocDebug(256 * G_IM_SIZ_16b_BYTES, "../z_vismono.c", 283);
+        this->tlut = SystemArena_MallocDebug(256 * G_IM_SIZ_16b_BYTES, "../z_vismono.c", __LINE__);
         VisMono_DesaturateTLUT(this, this->tlut);
     }
 
     if (this->dList == NULL) {
-        this->dList = SystemArena_MallocDebug(VISMONO_DLSIZE * sizeof(Gfx), "../z_vismono.c", 289);
+        this->dList = SystemArena_MallocDebug(VISMONO_DLSIZE * sizeof(Gfx), "../z_vismono.c", __LINE__);
         dListEnd = VisMono_DesaturateDList(this, this->dList);
-        ASSERT(dListEnd <= this->dList + VISMONO_DLSIZE, "glistp_end <= this->mono_dl + DLSIZE", "../z_vismono.c", 292);
+        ASSERT(dListEnd <= this->dList + VISMONO_DLSIZE, "dListEnd <= this->dList + VISMONO_DLSIZE", "../z_vismono.c", __LINE__);
     }
 }

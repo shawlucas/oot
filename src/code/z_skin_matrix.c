@@ -255,7 +255,7 @@ s32 SkinMatrix_Invert(MtxF* src, MtxF* dest) {
             // Therefore src is a singular matrix (0 determinant).
 
             osSyncPrintf(VT_COL(YELLOW, BLACK));
-            osSyncPrintf("Skin_Matrix_InverseMatrix():逆行列つくれません\n");
+            osSyncPrintf("SkinMatrix_Invert: Cannot create inverse matrix\n");
             osSyncPrintf(VT_RST);
             return 2;
         }
@@ -596,7 +596,7 @@ Mtx* SkinMatrix_MtxFToNewMtx(GraphicsContext* gfxCtx, MtxF* src) {
     Mtx* mtx = Graph_Alloc(gfxCtx, sizeof(Mtx));
 
     if (mtx == NULL) {
-        osSyncPrintf("Skin_Matrix_to_Mtx_new() 確保失敗:NULLを返して終了\n", mtx);
+        osSyncPrintf("SkinMatrix_MtxFToNewMtx Failure to allocate: return NULL and exit\n", mtx);
         return NULL;
     }
     SkinMatrix_MtxFToMtx(src, mtx);

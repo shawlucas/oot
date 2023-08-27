@@ -8,11 +8,11 @@ Mtx* Skybox_UpdateMatrix(SkyboxContext* skyboxCtx, f32 x, f32 y, f32 z) {
     Matrix_RotateX(skyboxCtx->rot.x, MTXMODE_APPLY);
     Matrix_RotateY(skyboxCtx->rot.y, MTXMODE_APPLY);
     Matrix_RotateZ(skyboxCtx->rot.z, MTXMODE_APPLY);
-    return Matrix_ToMtx(sSkyboxDrawMatrix, "../z_vr_box_draw.c", 42);
+    return Matrix_ToMtx(sSkyboxDrawMatrix, "../z_vr_box_draw.c", __LINE__);
 }
 
 void Skybox_Draw(SkyboxContext* skyboxCtx, GraphicsContext* gfxCtx, s16 skyboxId, s16 blend, f32 x, f32 y, f32 z) {
-    OPEN_DISPS(gfxCtx, "../z_vr_box_draw.c", 52);
+    OPEN_DISPS(gfxCtx, "../z_vr_box_draw.c", __LINE__);
 
     Gfx_SetupDL_40Opa(gfxCtx);
 
@@ -30,7 +30,7 @@ void Skybox_Draw(SkyboxContext* skyboxCtx, GraphicsContext* gfxCtx, s16 skyboxId
     Matrix_RotateX(skyboxCtx->rot.x, MTXMODE_APPLY);
     Matrix_RotateY(skyboxCtx->rot.y, MTXMODE_APPLY);
     Matrix_RotateZ(skyboxCtx->rot.z, MTXMODE_APPLY);
-    Matrix_ToMtx(sSkyboxDrawMatrix, "../z_vr_box_draw.c", 76);
+    Matrix_ToMtx(sSkyboxDrawMatrix, "../z_vr_box_draw.c", __LINE__);
     gSPMatrix(POLY_OPA_DISP++, sSkyboxDrawMatrix, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     // Enable magic square RGB dithering and bilinear filtering
@@ -93,7 +93,7 @@ void Skybox_Draw(SkyboxContext* skyboxCtx, GraphicsContext* gfxCtx, s16 skyboxId
 
     gDPPipeSync(POLY_OPA_DISP++);
 
-    CLOSE_DISPS(gfxCtx, "../z_vr_box_draw.c", 125);
+    CLOSE_DISPS(gfxCtx, "../z_vr_box_draw.c", __LINE__);
 }
 
 void Skybox_Update(SkyboxContext* skyboxCtx) {

@@ -9,18 +9,18 @@ s32 Object_Spawn(ObjectContext* objectCtx, s16 objectId) {
     objectCtx->status[objectCtx->num].id = objectId;
     size = gObjectTable[objectId].vromEnd - gObjectTable[objectId].vromStart;
 
-    osSyncPrintf("OBJECT[%d] SIZE %fK SEG=%x\n", objectId, size / 1024.0f, objectCtx->status[objectCtx->num].segment);
+    osSyncPrintf("OBJECT[%d] SIZE %fK SEG=%X\n", objectId, size / 1024.0f, objectCtx->status[objectCtx->num].segment);
 
-    osSyncPrintf("num=%d adrs=%x end=%x\n", objectCtx->num, (uintptr_t)objectCtx->status[objectCtx->num].segment + size,
+    osSyncPrintf("num=%d segment=%X end=%X\n", objectCtx->num, (uintptr_t)objectCtx->status[objectCtx->num].segment + size,
                  objectCtx->spaceEnd);
 
     ASSERT(((objectCtx->num < OBJECT_EXCHANGE_BANK_MAX) &&
             (((uintptr_t)objectCtx->status[objectCtx->num].segment + size) < (uintptr_t)objectCtx->spaceEnd)),
            "this->num < OBJECT_EXCHANGE_BANK_MAX && (this->status[this->num].Segment + size) < this->endSegment",
-           "../z_scene.c", 142);
+           "../z_scene.c", __LINE__);
 
     DmaMgr_RequestSyncDebug(objectCtx->status[objectCtx->num].segment, gObjectTable[objectId].vromStart, size,
-                            "../z_scene.c", 145);
+                            "../z_scene.c", __LINE__);
 
     if (objectCtx->num < OBJECT_EXCHANGE_BANK_MAX - 1) {
         objectCtx->status[objectCtx->num + 1].segment =
@@ -65,11 +65,11 @@ void Object_InitBank(PlayState* play, ObjectContext* objectCtx) {
 
     osSyncPrintf(VT_FGCOL(GREEN));
     // "Object exchange bank data %8.3fKB"
-    osSyncPrintf("オブジェクト入れ替えバンク情報 %8.3fKB\n", spaceSize / 1024.0f);
+    osSyncPrintf("Object exchange bank data %8.3fKB\n", spaceSize / 1024.0f);
     osSyncPrintf(VT_RST);
 
     objectCtx->spaceStart = objectCtx->status[0].segment =
-        GameState_Alloc(&play->state, spaceSize, "../z_scene.c", 219);
+        GameState_Alloc(&play->state, spaceSize, "../z_scene.c", __LINE__);
     objectCtx->spaceEnd = (void*)((uintptr_t)objectCtx->spaceStart + spaceSize);
 
     objectCtx->mainKeepIndex = Object_Spawn(objectCtx, OBJECT_GAMEPLAY_KEEP);
@@ -90,7 +90,7 @@ void Object_UpdateBank(ObjectContext* objectCtx) {
                 size = objectFile->vromEnd - objectFile->vromStart;
                 osSyncPrintf("OBJECT EXCHANGE BANK-%2d SIZE %8.3fK SEG=%08X\n", i, size / 1024.0f, status->segment);
                 DmaMgr_RequestAsync(&status->dmaRequest, status->segment, objectFile->vromStart, size, 0,
-                                    &status->loadQueue, NULL, "../z_scene.c", 266);
+                                    &status->loadQueue, NULL, "../z_scene.c", __LINE__);
             } else if (osRecvMesg(&status->loadQueue, NULL, OS_MESG_NOBLOCK) == 0) {
                 status->id = -status->id;
             }
@@ -131,7 +131,7 @@ void func_800981B8(ObjectContext* objectCtx) {
                      objectCtx->status[i].segment);
         osSyncPrintf("num=%d adrs=%x end=%x\n", objectCtx->num, (uintptr_t)objectCtx->status[i].segment + size,
                      objectCtx->spaceEnd);
-        DmaMgr_RequestSyncDebug(objectCtx->status[i].segment, gObjectTable[id].vromStart, size, "../z_scene.c", 342);
+        DmaMgr_RequestSyncDebug(objectCtx->status[i].segment, gObjectTable[id].vromStart, size, "../z_scene.c", __LINE__);
     }
 }
 
@@ -149,7 +149,7 @@ void* func_800982FC(ObjectContext* objectCtx, s32 bankIndex, s16 objectId) {
 
     nextPtr = (void*)ALIGN16((uintptr_t)status->segment + size);
 
-    ASSERT(nextPtr < objectCtx->spaceEnd, "nextptr < this->endSegment", "../z_scene.c", 381);
+    ASSERT(nextPtr < objectCtx->spaceEnd, "nextPtr < objectCtx->spaceEnd", "../z_scene.c", __LINE__);
 
     // "Object exchange free size=%08X"
     osSyncPrintf("オブジェクト入れ替え空きサイズ=%08X\n", (uintptr_t)objectCtx->spaceEnd - (uintptr_t)nextPtr);
@@ -162,7 +162,7 @@ s32 Scene_ExecuteCommands(PlayState* play, SceneCmd* sceneCmd) {
 
     while (true) {
         cmdCode = sceneCmd->base.code;
-        osSyncPrintf("*** Scene_Word = { code=%d, data1=%02x, data2=%04x } ***\n", cmdCode, sceneCmd->base.data1,
+        osSyncPrintf("*** Scene_Word = { cmdCode=%d, data1=%02X, data2=%04X } ***\n", cmdCode, sceneCmd->base.data1,
                      sceneCmd->base.data2);
 
         if (cmdCode == SCENE_CMD_ID_END) {
@@ -173,7 +173,7 @@ s32 Scene_ExecuteCommands(PlayState* play, SceneCmd* sceneCmd) {
             gSceneCmdHandlers[cmdCode](play, sceneCmd);
         } else {
             osSyncPrintf(VT_FGCOL(RED));
-            osSyncPrintf("code の値が異常です\n"); // "code variable is abnormal"
+            osSyncPrintf("code vraiable is abnormal\n"); // "code variable is abnormal"
             osSyncPrintf(VT_RST);
         }
         sceneCmd++;
@@ -281,7 +281,7 @@ void Scene_CommandObjectList(PlayState* play, SceneCmd* cmd) {
     }
 
     ASSERT(cmd->objectList.length <= OBJECT_EXCHANGE_BANK_MAX,
-           "scene_info->object_bank.num <= OBJECT_EXCHANGE_BANK_MAX", "../z_scene.c", 705);
+           "cmd->objectList.length <= OBJECT_EXCHANGE_BANK_MAX", "../z_scene.c", __LINE__);
 
     while (k < cmd->objectList.length) {
         nextPtr = func_800982FC(&play->objectCtx, i, *objectEntry);
@@ -408,9 +408,9 @@ void Scene_CommandAlternateHeaderList(PlayState* play, SceneCmd* cmd) {
     s32 pad;
     SceneCmd* altHeader;
 
-    osSyncPrintf("\n[ZU]sceneset age    =[%X]", ((void)0, gSaveContext.save.linkAge));
-    osSyncPrintf("\n[ZU]sceneset time   =[%X]", ((void)0, gSaveContext.save.cutsceneIndex));
-    osSyncPrintf("\n[ZU]sceneset counter=[%X]", ((void)0, gSaveContext.sceneLayer));
+    osSyncPrintf("\n[ZU]sceneset linkAge       =[%X]", ((void)0, gSaveContext.save.linkAge));
+    osSyncPrintf("\n[ZU]sceneset cutsceneIndex =[%X]", ((void)0, gSaveContext.save.cutsceneIndex));
+    osSyncPrintf("\n[ZU]sceneset sceneLayer    =[%X]", ((void)0, gSaveContext.sceneLayer));
 
     if (gSaveContext.sceneLayer != 0) {
         altHeader = ((SceneCmd**)SEGMENTED_TO_VIRTUAL(cmd->altHeaders.data))[gSaveContext.sceneLayer - 1];
@@ -422,7 +422,7 @@ void Scene_CommandAlternateHeaderList(PlayState* play, SceneCmd* cmd) {
             (cmd + 1)->base.code = SCENE_CMD_ID_END;
         } else {
             // "Coughh! There is no specified dataaaaa!"
-            osSyncPrintf("\nげぼはっ！ 指定されたデータがないでええっす！");
+            osSyncPrintf("\nCoughh! There is no specified dataaaaa!");
 
             if (gSaveContext.sceneLayer == SCENE_LAYER_ADULT_NIGHT) {
                 // Due to the condition above, this is equivalent to accessing altHeaders[SCENE_LAYER_ADULT_DAY - 1]
@@ -431,7 +431,7 @@ void Scene_CommandAlternateHeaderList(PlayState* play, SceneCmd* cmd) {
                         .data))[(gSaveContext.sceneLayer - SCENE_LAYER_ADULT_NIGHT) + SCENE_LAYER_ADULT_DAY - 1];
 
                 // "Using adult day data there!"
-                osSyncPrintf("\nそこで、大人の昼データを使用するでええっす！！");
+                osSyncPrintf("\nUsing adult day data there!");
 
                 if (altHeader != NULL) {
                     Scene_ExecuteCommands(play, SEGMENTED_TO_VIRTUAL(altHeader));
@@ -443,7 +443,7 @@ void Scene_CommandAlternateHeaderList(PlayState* play, SceneCmd* cmd) {
 }
 
 void Scene_CommandCutsceneData(PlayState* play, SceneCmd* cmd) {
-    osSyncPrintf("\ngame_play->demo_play.data=[%x]", play->csCtx.script);
+    osSyncPrintf("\nplay->csCtx.script=[%X]", play->csCtx.script);
     play->csCtx.script = SEGMENTED_TO_VIRTUAL(cmd->cutsceneData.data);
 }
 
@@ -462,7 +462,7 @@ void Scene_CommandMiscSettings(PlayState* play, SceneCmd* cmd) {
         ((play->sceneId >= SCENE_MARKET_ENTRANCE_DAY) && (play->sceneId <= SCENE_TEMPLE_OF_TIME_EXTERIOR_RUINS))) {
         if (gSaveContext.save.cutsceneIndex < 0xFFF0) {
             gSaveContext.save.info.worldMapAreaData |= gBitFlags[gSaveContext.worldMapArea];
-            osSyncPrintf("０００  ａｒｅａ＿ａｒｒｉｖａｌ＝%x (%d)\n", gSaveContext.save.info.worldMapAreaData,
+            osSyncPrintf("０００  worldMapAreaData=%x (%d)\n", gSaveContext.save.info.worldMapAreaData,
                          gSaveContext.worldMapArea);
         }
     }

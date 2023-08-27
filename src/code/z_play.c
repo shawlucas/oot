@@ -18,10 +18,10 @@ void Play_SpawnScene(PlayState* this, s32 sceneId, s32 spawn);
 
 // This macro prints the number "1" with a file and line number if R_ENABLE_PLAY_LOGS is enabled.
 // For example, it can be used to trace the play state execution at a high level.
-#define PLAY_LOG(line)                            \
+#define PLAY_LOG()                            \
     do {                                          \
         if (R_ENABLE_PLAY_LOGS) {                 \
-            LOG_NUM("1", 1, "../z_play.c", line); \
+            LOG_NUM("1", 1, "../z_play.c", __LINE__); \
         }                                         \
     } while (0)
 
@@ -30,8 +30,8 @@ void Play_ChangeViewpointBgCamIndex(PlayState* this) {
 }
 
 void Play_SetViewpoint(PlayState* this, s16 viewpoint) {
-    ASSERT(viewpoint == VIEWPOINT_LOCKED || viewpoint == VIEWPOINT_PIVOT, "point == 1 || point == 2", "../z_play.c",
-           2160);
+    ASSERT(viewpoint == VIEWPOINT_LOCKED || viewpoint == VIEWPOINT_PIVOT, "viewpoint == VIEWPOINT_LOCKED || viewpoint == VIEWPOINT_PIVOT", "../z_play.c",
+           __LINE__);
 
     this->viewpoint = viewpoint;
 
@@ -57,7 +57,7 @@ s32 Play_CheckViewpoint(PlayState* this, s16 viewpoint) {
  * to toggle the camera into a "browsing item selection" setting.
  */
 void Play_SetShopBrowsingViewpoint(PlayState* this) {
-    osSyncPrintf("Game_play_shop_pr_vr_switch_set()\n");
+    osSyncPrintf("Play_SetShopBrowsingViewpoint()\n");
 
     if (R_SCENE_CAM_TYPE == SCENE_CAM_TYPE_FIXED_SHOP_VIEWPOINT) {
         this->viewpoint = VIEWPOINT_PIVOT;
@@ -156,7 +156,7 @@ void Play_SetupTransition(PlayState* this, s32 transitionType) {
                 break;
 
             default:
-                Fault_AddHungupAndCrash("../z_play.c", 2290);
+                Fault_AddHungupAndCrash("../z_play.c", __LINE__);
                 break;
         }
     }
@@ -324,15 +324,15 @@ void Play_Init(GameState* thisx) {
         this, gEntranceTable[((void)0, gSaveContext.save.entranceIndex) + ((void)0, gSaveContext.sceneLayer)].sceneId,
         gEntranceTable[((void)0, gSaveContext.save.entranceIndex) + ((void)0, gSaveContext.sceneLayer)].spawn);
 
-    osSyncPrintf("\nSCENE_NO=%d COUNTER=%d\n", ((void)0, gSaveContext.save.entranceIndex), gSaveContext.sceneLayer);
+    osSyncPrintf("\nentranceIndex=%d sceneLayer=%d\n", ((void)0, gSaveContext.save.entranceIndex), gSaveContext.sceneLayer);
 
     // When entering Gerudo Valley in the credits, trigger the GC emulator to play the ending movie.
     // The emulator constantly checks whether PC is 0x81000000, so this works even though it's not a valid address.
     if ((gEntranceTable[((void)0, gSaveContext.save.entranceIndex)].sceneId == SCENE_GERUDO_VALLEY) &&
         gSaveContext.sceneLayer == 6) {
-        osSyncPrintf("エンディングはじまるよー\n"); // "The ending starts"
+        osSyncPrintf("The ending starts\n"); // "The ending starts"
         ((void (*)(void))0x81000000)();
-        osSyncPrintf("出戻り？\n"); // "Return?"
+        osSyncPrintf("Return?\n"); // "Return?"
     }
 
     Cutscene_HandleEntranceTriggers(this);
@@ -396,11 +396,11 @@ void Play_Init(GameState* thisx) {
 
     osSyncPrintf("ZELDA ALLOC SIZE=%x\n", THA_GetRemaining(&this->state.tha));
     zAllocSize = THA_GetRemaining(&this->state.tha);
-    zAlloc = (uintptr_t)GameState_Alloc(&this->state, zAllocSize, "../z_play.c", 2918);
+    zAlloc = (uintptr_t)GameState_Alloc(&this->state, zAllocSize, "../z_play.c", __LINE__);
     zAllocAligned = (zAlloc + 8) & ~0xF;
     ZeldaArena_Init((void*)zAllocAligned, zAllocSize - (zAllocAligned - zAlloc));
     // "Zelda Heap"
-    osSyncPrintf("ゼルダヒープ %08X-%08X\n", zAllocAligned, zAllocAligned + zAllocSize - (s32)(zAllocAligned - zAlloc));
+    osSyncPrintf("Zelda Heap %08X-%08X\n", zAllocAligned, zAllocAligned + zAllocSize - (s32)(zAllocAligned - zAlloc));
 
     Fault_AddClient(&D_801614B8, ZeldaArena_Display, NULL, NULL);
     Actor_InitContext(this, &this->actorCtx, this->playerEntry);
@@ -437,7 +437,7 @@ void Play_Init(GameState* thisx) {
 
     if (R_USE_DEBUG_CUTSCENE) {
         gDebugCutsceneScript = sDebugCutsceneScriptBuf;
-        osSyncPrintf("\nkawauso_data=[%x]", gDebugCutsceneScript);
+        osSyncPrintf("\ngDebugCutsceneScript=[%x]", gDebugCutsceneScript);
 
         // This hardcoded ROM address extends past the end of the ROM file.
         // Presumably the ROM was larger at a previous point in development when this debug feature was used.
@@ -461,7 +461,7 @@ void Play_Update(PlayState* this) {
 
     if ((R_HREG_MODE == HREG_MODE_PRINT_OBJECT_TABLE) && (R_PRINT_OBJECT_TABLE_TRIGGER < 0)) {
         R_PRINT_OBJECT_TABLE_TRIGGER = 0;
-        osSyncPrintf("object_exchange_rom_address %u\n", gObjectTableSize);
+        osSyncPrintf("gObjectTableSize %u\n", gObjectTableSize);
         osSyncPrintf("RomStart RomEnd   Size\n");
 
         for (i = 0; i < gObjectTableSize; i++) {
@@ -495,7 +495,7 @@ void Play_Update(PlayState* this) {
             switch (gTransitionTileState) {
                 case TRANS_TILE_PROCESS:
                     if (TransitionTile_Init(&sTransitionTile, 10, 7) == NULL) {
-                        osSyncPrintf("fbdemo_init呼出し失敗！\n"); // "fbdemo_init call failed!"
+                        osSyncPrintf("TransitionTile_Init call failed!\n"); // "fbdemo_init call failed!"
                         gTransitionTileState = TRANS_TILE_OFF;
                     } else {
                         sTransitionTile.zBuffer = (u16*)gZBuffer;
@@ -529,10 +529,10 @@ void Play_Update(PlayState* this) {
                         if (!(gEntranceTable[this->nextEntranceIndex + sceneLayer].field &
                               ENTRANCE_INFO_CONTINUE_BGM_FLAG)) {
                             // "Sound initialized. 111"
-                            osSyncPrintf("\n\n\nサウンドイニシャル来ました。111");
+                            osSyncPrintf("\n\n\nSound initialized. 111");
                             if ((this->transitionType < TRANS_TYPE_MAX) && !Environment_IsForcedSequenceDisabled()) {
                                 // "Sound initialized. 222"
-                                osSyncPrintf("\n\n\nサウンドイニシャル来ました。222");
+                                osSyncPrintf("\n\n\nSound initialized. 222");
                                 func_800F6964(0x14);
                                 gSaveContext.seqId = (u8)NA_BGM_DISABLED;
                                 gSaveContext.natureAmbienceId = NATURE_ID_DISABLED;
@@ -838,29 +838,29 @@ void Play_Update(PlayState* this) {
             }
         }
 
-        PLAY_LOG(3533);
+        PLAY_LOG();
 
         if (1 && (gTransitionTileState != TRANS_TILE_READY)) {
-            PLAY_LOG(3542);
+            PLAY_LOG();
 
             if ((gSaveContext.gameMode == GAMEMODE_NORMAL) && (this->msgCtx.msgMode == MSGMODE_NONE) &&
                 (this->gameOverCtx.state == GAMEOVER_INACTIVE)) {
                 KaleidoSetup_Update(this);
             }
 
-            PLAY_LOG(3551);
+            PLAY_LOG();
             sp80 = (this->pauseCtx.state != 0) || (this->pauseCtx.debugState != 0);
 
-            PLAY_LOG(3555);
+            PLAY_LOG();
             AnimationContext_Reset(&this->animationCtx);
 
-            PLAY_LOG(3561);
+            PLAY_LOG();
             Object_UpdateBank(&this->objectCtx);
 
-            PLAY_LOG(3577);
+            PLAY_LOG();
 
             if ((sp80 == 0) && (IREG(72) == 0)) {
-                PLAY_LOG(3580);
+                PLAY_LOG();
 
                 this->gameplayFrames++;
                 Rumble_SetUpdateEnabled(true);
@@ -877,61 +877,61 @@ void Play_Update(PlayState* this) {
                         this->envCtx.fillScreen = false;
                     }
                 } else {
-                    PLAY_LOG(3606);
+                    PLAY_LOG();
                     func_800973FC(this, &this->roomCtx);
 
-                    PLAY_LOG(3612);
+                    PLAY_LOG();
                     CollisionCheck_AT(this, &this->colChkCtx);
 
-                    PLAY_LOG(3618);
+                    PLAY_LOG();
                     CollisionCheck_OC(this, &this->colChkCtx);
 
-                    PLAY_LOG(3624);
+                    PLAY_LOG();
                     CollisionCheck_Damage(this, &this->colChkCtx);
 
-                    PLAY_LOG(3631);
+                    PLAY_LOG();
                     CollisionCheck_ClearContext(this, &this->colChkCtx);
 
-                    PLAY_LOG(3637);
+                    PLAY_LOG();
 
                     if (!this->haltAllActors) {
                         Actor_UpdateAll(this, &this->actorCtx);
                     }
 
-                    PLAY_LOG(3643);
+                    PLAY_LOG();
                     Cutscene_UpdateManual(this, &this->csCtx);
 
-                    PLAY_LOG(3648);
+                    PLAY_LOG();
                     Cutscene_UpdateScripted(this, &this->csCtx);
 
-                    PLAY_LOG(3651);
+                    PLAY_LOG();
                     Effect_UpdateAll(this);
 
-                    PLAY_LOG(3657);
+                    PLAY_LOG();
                     EffectSs_UpdateAll(this);
 
-                    PLAY_LOG(3662);
+                    PLAY_LOG();
                 }
             } else {
                 Rumble_SetUpdateEnabled(false);
             }
 
-            PLAY_LOG(3672);
+            PLAY_LOG();
             func_80095AA0(this, &this->roomCtx.curRoom, &input[1], 0);
 
-            PLAY_LOG(3675);
+            PLAY_LOG();
             func_80095AA0(this, &this->roomCtx.prevRoom, &input[1], 1);
 
-            PLAY_LOG(3677);
+            PLAY_LOG();
 
             if (this->viewpoint != VIEWPOINT_NONE) {
                 if (CHECK_BTN_ALL(input[0].press.button, BTN_CUP)) {
                     if ((this->pauseCtx.state != 0) || (this->pauseCtx.debugState != 0)) {
                         // "Changing viewpoint is prohibited due to the kaleidoscope"
-                        osSyncPrintf(VT_FGCOL(CYAN) "カレイドスコープ中につき視点変更を禁止しております\n" VT_RST);
+                        osSyncPrintf(VT_FGCOL(CYAN) "Changing viewpoint is prohibited due to the kaleidoscope\n" VT_RST);
                     } else if (Player_InCsMode(this)) {
                         // "Changing viewpoint is prohibited during the cutscene"
-                        osSyncPrintf(VT_FGCOL(CYAN) "デモ中につき視点変更を禁止しております\n" VT_RST);
+                        osSyncPrintf(VT_FGCOL(CYAN) "Changing viewpoint is prohibited during the cutscene\n" VT_RST);
                     } else if (R_SCENE_CAM_TYPE == SCENE_CAM_TYPE_FIXED_SHOP_VIEWPOINT) {
                         Audio_PlaySfxGeneral(NA_SE_SY_ERROR, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale,
                                              &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
@@ -945,47 +945,47 @@ void Play_Update(PlayState* this) {
                 Play_ChangeViewpointBgCamIndex(this);
             }
 
-            PLAY_LOG(3708);
+            PLAY_LOG();
             Skybox_Update(&this->skyboxCtx);
 
-            PLAY_LOG(3716);
+            PLAY_LOG();
 
             if ((this->pauseCtx.state != 0) || (this->pauseCtx.debugState != 0)) {
-                PLAY_LOG(3721);
+                PLAY_LOG();
                 KaleidoScopeCall_Update(this);
             } else if (this->gameOverCtx.state != GAMEOVER_INACTIVE) {
-                PLAY_LOG(3727);
+                PLAY_LOG();
                 GameOver_Update(this);
             } else {
-                PLAY_LOG(3733);
+                PLAY_LOG();
                 Message_Update(this);
             }
 
-            PLAY_LOG(3737);
+            PLAY_LOG();
 
-            PLAY_LOG(3742);
+            PLAY_LOG();
             Interface_Update(this);
 
-            PLAY_LOG(3765);
+            PLAY_LOG();
             AnimationContext_Update(this, &this->animationCtx);
 
-            PLAY_LOG(3771);
+            PLAY_LOG();
             SfxSource_UpdateAll(this);
 
-            PLAY_LOG(3777);
+            PLAY_LOG();
             Letterbox_Update(R_UPDATE_RATE);
 
-            PLAY_LOG(3783);
+            PLAY_LOG();
             TransitionFade_Update(&this->transitionFadeFlash, R_UPDATE_RATE);
         } else {
             goto skip;
         }
     }
 
-    PLAY_LOG(3799);
+    PLAY_LOG();
 
 skip:
-    PLAY_LOG(3801);
+    PLAY_LOG();
 
     if ((sp80 == 0) || gDebugCamEnabled) {
         s32 pad3[5];
@@ -993,21 +993,21 @@ skip:
 
         this->nextCamId = this->activeCamId;
 
-        PLAY_LOG(3806);
+        PLAY_LOG();
 
         for (i = 0; i < NUM_CAMS; i++) {
             if ((i != this->nextCamId) && (this->cameraPtrs[i] != NULL)) {
-                PLAY_LOG(3809);
+                PLAY_LOG();
                 Camera_Update(this->cameraPtrs[i]);
             }
         }
 
         Camera_Update(this->cameraPtrs[this->nextCamId]);
 
-        PLAY_LOG(3814);
+        PLAY_LOG();
     }
 
-    PLAY_LOG(3816);
+    PLAY_LOG();
     Environment_Update(this, &this->envCtx, &this->lightCtx, &this->pauseCtx, &this->msgCtx, &this->gameOverCtx,
                        this->state.gfxCtx);
 }
@@ -1033,7 +1033,7 @@ void Play_Draw(PlayState* this) {
     Lights* sp228;
     Vec3f sp21C;
 
-    OPEN_DISPS(gfxCtx, "../z_play.c", 3907);
+    OPEN_DISPS(gfxCtx, "../z_play.c", __LINE__);
 
     gSegments[4] = VIRTUAL_TO_PHYSICAL(this->objectCtx.status[this->objectCtx.mainKeepIndex].segment);
     gSegments[5] = VIRTUAL_TO_PHYSICAL(this->objectCtx.status[this->objectCtx.subKeepIndex].segment);
@@ -1075,7 +1075,7 @@ void Play_Draw(PlayState* this) {
             this->billboardMtxF.mf[3][0] = this->billboardMtxF.mf[3][1] = this->billboardMtxF.mf[3][2] = 0.0f;
         // This transpose is where the viewing matrix is properly converted into a billboard matrix
         Matrix_Transpose(&this->billboardMtxF);
-        this->billboardMtx = Matrix_MtxFToMtx(Matrix_CheckFloats(&this->billboardMtxF, "../z_play.c", 4005),
+        this->billboardMtx = Matrix_MtxFToMtx(Matrix_CheckFloats(&this->billboardMtxF, "../z_play.c", __LINE__),
                                               Graph_Alloc(gfxCtx, sizeof(Mtx)));
 
         gSPSegment(POLY_OPA_DISP++, 0x01, this->billboardMtx);
@@ -1294,7 +1294,7 @@ Play_Draw_skip:
 
     Camera_Finish(GET_ACTIVE_CAM(this));
 
-    CLOSE_DISPS(gfxCtx, "../z_play.c", 4508);
+    CLOSE_DISPS(gfxCtx, "../z_play.c", __LINE__);
 }
 
 void Play_Main(GameState* thisx) {
@@ -1304,7 +1304,7 @@ void Play_Main(GameState* thisx) {
 
     DebugDisplay_Init();
 
-    PLAY_LOG(4556);
+    PLAY_LOG();
 
     if ((R_HREG_MODE == HREG_MODE_PLAY) && (R_PLAY_INIT != HREG_MODE_PLAY)) {
         R_PLAY_RUN_UPDATE = true;
@@ -1328,11 +1328,11 @@ void Play_Main(GameState* thisx) {
         Play_Update(this);
     }
 
-    PLAY_LOG(4583);
+    PLAY_LOG();
 
     Play_Draw(this);
 
-    PLAY_LOG(4587);
+    PLAY_LOG();
 }
 
 // original name: "Game_play_demo_mode_check"
@@ -1411,8 +1411,8 @@ void* Play_LoadFile(PlayState* this, RomFile* file) {
     void* allocp;
 
     size = file->vromEnd - file->vromStart;
-    allocp = GameState_Alloc(&this->state, size, "../z_play.c", 4692);
-    DmaMgr_RequestSyncDebug(allocp, file->vromStart, size, "../z_play.c", 4694);
+    allocp = GameState_Alloc(&this->state, size, "../z_play.c", __LINE__);
+    DmaMgr_RequestSyncDebug(allocp, file->vromStart, size, "../z_play.c", __LINE__);
 
     return allocp;
 }
@@ -1456,7 +1456,7 @@ void Play_SpawnScene(PlayState* this, s32 sceneId, s32 spawn) {
 
     this->sceneSegment = Play_LoadFile(this, &scene->sceneFile);
     scene->unk_13 = 0;
-    ASSERT(this->sceneSegment != NULL, "this->sceneSegment != NULL", "../z_play.c", 4960);
+    ASSERT(this->sceneSegment != NULL, "this->sceneSegment != NULL", "../z_play.c", __LINE__);
 
     gSegments[2] = VIRTUAL_TO_PHYSICAL(this->sceneSegment);
 

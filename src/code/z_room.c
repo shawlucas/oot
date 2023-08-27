@@ -36,7 +36,7 @@ void Room_DrawNormal(PlayState* play, Room* room, u32 flags) {
     RoomShapeNormal* roomShape;
     RoomShapeDListsEntry* entry;
 
-    OPEN_DISPS(play->state.gfxCtx, "../z_room.c", 193);
+    OPEN_DISPS(play->state.gfxCtx, "../z_room.c", __LINE__);
 
     if (flags & ROOM_DRAW_OPA) {
         func_800342EC(&D_801270A0, play);
@@ -66,7 +66,7 @@ void Room_DrawNormal(PlayState* play, Room* room, u32 flags) {
         entry++;
     }
 
-    CLOSE_DISPS(play->state.gfxCtx, "../z_room.c", 239);
+    CLOSE_DISPS(play->state.gfxCtx, "../z_room.c", __LINE__);
 }
 
 typedef enum {
@@ -110,7 +110,7 @@ void Room_DrawCullable(PlayState* play, Room* room, u32 flags) {
     RoomShapeCullableEntry* roomShapeCullableEntryIter;
     f32 entryBoundsNearZ;
 
-    OPEN_DISPS(play->state.gfxCtx, "../z_room.c", 287);
+    OPEN_DISPS(play->state.gfxCtx, "../z_room.c", __LINE__);
 
     if (flags & ROOM_DRAW_OPA) {
         func_800342EC(&D_801270A0, play);
@@ -132,7 +132,7 @@ void Room_DrawCullable(PlayState* play, Room* room, u32 flags) {
     roomShapeCullableEntry = SEGMENTED_TO_VIRTUAL(roomShape->entries);
     insert = linkedEntriesBuffer;
 
-    ASSERT(roomShape->numEntries <= ROOM_SHAPE_CULLABLE_MAX_ENTRIES, "polygon2->num <= SHAPE_SORT_MAX", "../z_room.c",
+    ASSERT(roomShape->numEntries <= ROOM_SHAPE_CULLABLE_MAX_ENTRIES, "roomShape->numEntries <= ROOM_SHAPE_CULLABLE_MAX_ENTRIES", "../z_room.c",
            317);
 
     roomShapeCullableEntries = roomShapeCullableEntry;
@@ -249,7 +249,7 @@ void Room_DrawCullable(PlayState* play, Room* room, u32 flags) {
 
     R_ROOM_CULL_USED_ENTRIES = i - 1;
 
-    CLOSE_DISPS(play->state.gfxCtx, "../z_room.c", 430);
+    CLOSE_DISPS(play->state.gfxCtx, "../z_room.c", __LINE__);
 }
 
 #define JPEG_MARKER 0xFFD8FFE0
@@ -262,25 +262,25 @@ s32 Room_DecodeJpeg(void* data) {
     OSTime time;
 
     if (*(u32*)data == JPEG_MARKER) {
-        osSyncPrintf("JPEGデータを展開します\n");        // "Expanding jpeg data"
-        osSyncPrintf("JPEGデータアドレス %08X\n", data); // "Jpeg data address %08X"
+        osSyncPrintf("Expanding JPEG data\n");        // "Expanding jpeg data"
+        osSyncPrintf("JPEG data address 0x%08X\n", data); // "Jpeg data address %08X"
         // "Work buffer address (Z buffer) %08X"
-        osSyncPrintf("ワークバッファアドレス（Ｚバッファ）%08X\n", gZBuffer);
+        osSyncPrintf("Work buffer address (Z buffer）0x%08X\n", gZBuffer);
 
         time = osGetTime();
         if (!Jpeg_Decode(data, gZBuffer, gGfxSPTaskOutputBuffer, sizeof(gGfxSPTaskOutputBuffer))) {
             time = osGetTime() - time;
 
             // "Success... I think. time = %6.3f ms"
-            osSyncPrintf("成功…だと思う。 time = %6.3f ms \n", OS_CYCLES_TO_USEC(time) / 1000.0f);
+            osSyncPrintf("Success...I think. time = %6.3f ms \n", OS_CYCLES_TO_USEC(time) / 1000.0f);
             // "Writing back to original address from work buffer."
-            osSyncPrintf("ワークバッファから元のアドレスに書き戻します。\n");
+            osSyncPrintf("Writing back to original address from Z buffer\n");
             // "If the original buffer size isn't at least 150kB, it will be out of control."
-            osSyncPrintf("元のバッファのサイズが150キロバイト無いと暴走するでしょう。\n");
+            osSyncPrintf("If the original buffer size is not 150 kilobytes, it will run out of control.\n");
 
             bcopy(gZBuffer, data, sizeof(u16[SCREEN_HEIGHT][SCREEN_WIDTH]));
         } else {
-            osSyncPrintf("失敗！なんで〜\n"); // "Failure! Why is it 〜"
+            osSyncPrintf("Failure! Why?\n"); // "Failure! Why is it 〜"
         }
     }
 
@@ -362,7 +362,7 @@ void Room_DrawImageSingle(PlayState* play, Room* room, u32 flags) {
     u32 drawOpa;
     u32 drawXlu;
 
-    OPEN_DISPS(play->state.gfxCtx, "../z_room.c", 628);
+    OPEN_DISPS(play->state.gfxCtx, "../z_room.c", __LINE__);
 
     activeCam = GET_ACTIVE_CAM(play);
     isFixedCamera = (activeCam->setting == CAM_SET_PREREND_FIXED);
@@ -408,7 +408,7 @@ void Room_DrawImageSingle(PlayState* play, Room* room, u32 flags) {
         gSPDisplayList(POLY_XLU_DISP++, entry->xlu);
     }
 
-    CLOSE_DISPS(play->state.gfxCtx, "../z_room.c", 691);
+    CLOSE_DISPS(play->state.gfxCtx, "../z_room.c", __LINE__);
 }
 
 RoomShapeImageMultiBgEntry* Room_GetImageMultiBgEntry(RoomShapeImageMulti* roomShapeImageMulti, PlayState* play) {
@@ -438,8 +438,8 @@ RoomShapeImageMultiBgEntry* Room_GetImageMultiBgEntry(RoomShapeImageMulti* roomS
     }
 
     // "z_room.c: Data consistent with camera id does not exist camid=%d"
-    osSyncPrintf(VT_COL(RED, WHITE) "z_room.c:カメラＩＤに一致するデータが存在しません camid=%d\n" VT_RST, bgCamIndex);
-    LogUtils_HungupThread("../z_room.c", 726);
+    osSyncPrintf(VT_COL(RED, WHITE) "z_room.c: Data consistent with camera id does not exist bgCamIndex=%d\n" VT_RST, bgCamIndex);
+    LogUtils_HungupThread("../z_room.c", __LINE__);
 
     return NULL;
 }
@@ -455,7 +455,7 @@ void Room_DrawImageMulti(PlayState* play, Room* room, u32 flags) {
     u32 drawOpa;
     u32 drawXlu;
 
-    OPEN_DISPS(play->state.gfxCtx, "../z_room.c", 752);
+    OPEN_DISPS(play->state.gfxCtx, "../z_room.c", __LINE__);
 
     activeCam = GET_ACTIVE_CAM(play);
     isFixedCamera = (activeCam->setting == CAM_SET_PREREND_FIXED);
@@ -506,7 +506,7 @@ void Room_DrawImageMulti(PlayState* play, Room* room, u32 flags) {
         gSPDisplayList(POLY_XLU_DISP++, dListsEntry->xlu);
     }
 
-    CLOSE_DISPS(play->state.gfxCtx, "../z_room.c", 819);
+    CLOSE_DISPS(play->state.gfxCtx, "../z_room.c", __LINE__);
 }
 
 void Room_DrawImage(PlayState* play, Room* room, u32 flags) {
@@ -517,7 +517,7 @@ void Room_DrawImage(PlayState* play, Room* room, u32 flags) {
     } else if (roomShape->amountType == ROOM_SHAPE_IMAGE_AMOUNT_MULTI) {
         Room_DrawImageMulti(play, room, flags);
     } else {
-        LogUtils_HungupThread("../z_room.c", 841);
+        LogUtils_HungupThread("../z_room.c", __LINE__);
     }
 }
 
@@ -550,7 +550,7 @@ u32 func_80096FE8(PlayState* play, RoomContext* roomCtx) {
         RomFile* roomList = play->roomList;
         TransitionActorEntry* transitionActor = &play->transiActorCtx.list[0];
 
-        LOG_NUM("game_play->room_rom_address.num", play->numRooms, "../z_room.c", 912);
+        LOG_NUM("play->numRooms", play->numRooms, "../z_room.c", __LINE__);
 
         for (j = 0; j < play->transiActorCtx.numActors; j++) {
             frontRoom = transitionActor->sides[0].room;
@@ -570,13 +570,13 @@ u32 func_80096FE8(PlayState* play, RoomContext* roomCtx) {
 
     osSyncPrintf(VT_FGCOL(YELLOW));
     // "Room buffer size=%08X(%5.1fK)"
-    osSyncPrintf("部屋バッファサイズ=%08X(%5.1fK)\n", maxRoomSize, maxRoomSize / 1024.0f);
-    roomCtx->bufPtrs[0] = GameState_Alloc(&play->state, maxRoomSize, "../z_room.c", 946);
+    osSyncPrintf("Room buffer size=%08X(%5.1fK)\n", maxRoomSize, maxRoomSize / 1024.0f);
+    roomCtx->bufPtrs[0] = GameState_Alloc(&play->state, maxRoomSize, "../z_room.c", __LINE__);
     // "Room buffer initial pointer=%08X"
-    osSyncPrintf("部屋バッファ開始ポインタ=%08X\n", roomCtx->bufPtrs[0]);
+    osSyncPrintf("Room buffer initial pointer=%08X\n", roomCtx->bufPtrs[0]);
     roomCtx->bufPtrs[1] = (void*)((uintptr_t)roomCtx->bufPtrs[0] + maxRoomSize);
     // "Room buffer end pointer=%08X"
-    osSyncPrintf("部屋バッファ終了ポインタ=%08X\n", roomCtx->bufPtrs[1]);
+    osSyncPrintf("Room buffer end pointer=%08X\n", roomCtx->bufPtrs[1]);
     osSyncPrintf(VT_RST);
     roomCtx->unk_30 = 0;
     roomCtx->status = 0;
@@ -597,7 +597,7 @@ s32 func_8009728C(PlayState* play, RoomContext* roomCtx, s32 roomNum) {
         roomCtx->curRoom.segment = NULL;
         roomCtx->status = 1;
 
-        ASSERT(roomNum < play->numRooms, "read_room_ID < game_play->room_rom_address.num", "../z_room.c", 1009);
+        ASSERT(roomNum < play->numRooms, "roomNum < play->numRooms", "../z_room.c", __LINE__);
 
         size = play->roomList[roomNum].vromEnd - play->roomList[roomNum].vromStart;
         roomCtx->unk_34 =
@@ -605,7 +605,7 @@ s32 func_8009728C(PlayState* play, RoomContext* roomCtx, s32 roomNum) {
 
         osCreateMesgQueue(&roomCtx->loadQueue, &roomCtx->loadMsg, 1);
         DmaMgr_RequestAsync(&roomCtx->dmaRequest, roomCtx->unk_34, play->roomList[roomNum].vromStart, size, 0,
-                            &roomCtx->loadQueue, NULL, "../z_room.c", 1036);
+                            &roomCtx->loadQueue, NULL, "../z_room.c", __LINE__);
         roomCtx->unk_30 ^= 1;
 
         return true;
@@ -638,7 +638,7 @@ void Room_Draw(PlayState* play, Room* room, u32 flags) {
     if (room->segment != NULL) {
         gSegments[3] = VIRTUAL_TO_PHYSICAL(room->segment);
         ASSERT(room->roomShape->base.type < ARRAY_COUNTU(sRoomDrawHandlers),
-               "this->ground_shape->polygon.type < number(Room_Draw_Proc)", "../z_room.c", 1125);
+               "room->roomShape->base.type < ARRAY_COUNTU(sRoomDrawHandlers)", "../z_room.c", __LINE__);
         sRoomDrawHandlers[room->roomShape->base.type](play, room, flags);
     }
 }
