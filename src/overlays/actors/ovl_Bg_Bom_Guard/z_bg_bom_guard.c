@@ -43,7 +43,7 @@ void BgBomGuard_Init(Actor* thisx, PlayState* play) {
     this->dyna.bgId = DynaPoly_SetBgActor(play, &play->colCtx.dyna, thisx, colHeader);
 
     osSyncPrintf("\n\n");
-    osSyncPrintf(VT_FGCOL(GREEN) " ☆☆☆☆☆ 透明ガード出現 ☆☆☆☆☆ \n" VT_RST);
+    osSyncPrintf(VT_FGCOL(GREEN) " ☆☆☆☆☆ transparent guard appears ☆☆☆☆☆ \n" VT_RST);
 
     thisx->scale.x = 1.0f;
     thisx->scale.y = 1.0f;

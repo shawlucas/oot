@@ -62,7 +62,7 @@ void BgBowlWall_Init(Actor* thisx, PlayState* play) {
     this->dyna.bgId = DynaPoly_SetBgActor(play, &play->colCtx.dyna, &this->dyna.actor, colHeader);
     this->initPos = this->dyna.actor.world.pos;
     osSyncPrintf("\n\n");
-    osSyncPrintf(VT_FGCOL(GREEN) " ☆☆☆☆☆ ボーリングおじゃま壁発生 ☆☆☆☆☆ %d\n" VT_RST, this->dyna.actor.params);
+    osSyncPrintf(VT_FGCOL(GREEN) " ☆☆☆☆☆ bowling obstacle wall generated ☆☆☆☆☆ %d\n" VT_RST, this->dyna.actor.params);
     this->actionFunc = BgBowlWall_SpawnBullseyes;
     this->dyna.actor.scale.x = this->dyna.actor.scale.y = this->dyna.actor.scale.z = 1.0f;
 }
@@ -207,7 +207,7 @@ void BgBowlWall_Draw(Actor* thisx, PlayState* play2) {
     Gfx_SetupDL_25Xlu(play->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x8, Gfx_TexScroll(play->state.gfxCtx, 0, -2 * (frames = play->state.frames), 16, 16));
     gDPPipeSync(POLY_OPA_DISP++);
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_bg_bowl_wall.c", 453),
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_bg_bowl_wall.c", __LINE__),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     if (this->dyna.actor.params == 0) {

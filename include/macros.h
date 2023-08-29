@@ -110,17 +110,17 @@
 
 #define LOG(exp, value, format, file, line)         \
     do {                                            \
-        LogUtils_LogThreadId(file, line);           \
+        LogUtils_LogThreadId(file, __LINE__);           \
         osSyncPrintf(exp " = " format "\n", value); \
     } while (0)
 
-#define LOG_STRING(string, file, line) LOG(#string, string, "%s", file, line)
-#define LOG_ADDRESS(exp, value, file, line) LOG(exp, value, "%08x", file, line)
-#define LOG_TIME(exp, value, file, line) LOG(exp, value, "%lld", file, line)
-#define LOG_NUM(exp, value, file, line) LOG(exp, value, "%d", file, line)
-#define LOG_HEX(exp, value, file, line) LOG(exp, value, "%x", file, line)
-#define LOG_HEX32(exp, value, file, line) LOG(exp, value, "%08x", file, line)
-#define LOG_FLOAT(exp, value, file, line) LOG(exp, value, "%f", file, line)
+#define LOG_STRING(string, file, line) LOG(#string, string, "%s", file, __LINE__)
+#define LOG_ADDRESS(exp, value, file, line) LOG(exp, value, "%08x", file, __LINE__)
+#define LOG_TIME(exp, value, file, line) LOG(exp, value, "%lld", file, __LINE__)
+#define LOG_NUM(exp, value, file, line) LOG(exp, value, "%d", file, __LINE__)
+#define LOG_HEX(exp, value, file, line) LOG(exp, value, "%x", file, __LINE__)
+#define LOG_HEX32(exp, value, file, line) LOG(exp, value, "%08x", file, __LINE__)
+#define LOG_FLOAT(exp, value, file, line) LOG(exp, value, "%f", file, __LINE__)
 
 #define SET_NEXT_GAMESTATE(curState, newInit, newStruct) \
     do {                                                 \
@@ -156,10 +156,10 @@ extern struct GraphicsContext* __gfxCtx;
         Gfx* dispRefs[4];              \
         __gfxCtx = gfxCtx;             \
         (void)__gfxCtx;                \
-        Graph_OpenDisps(dispRefs, gfxCtx, file, line)
+        Graph_OpenDisps(dispRefs, gfxCtx, file, __LINE__)
 
 #define CLOSE_DISPS(gfxCtx, file, line)                 \
-        Graph_CloseDisps(dispRefs, gfxCtx, file, line); \
+        Graph_CloseDisps(dispRefs, gfxCtx, file, __LINE__); \
     }                                                   \
     (void)0
 
@@ -183,7 +183,7 @@ extern struct GraphicsContext* __gfxCtx;
 #elif defined(REAL_ASSERT_MACRO)
 #define ASSERT(cond, msg, file, line) ((cond) ? ((void)0) : __assert(#cond, __FILE__, __LINE__))
 #else
-#define ASSERT(cond, msg, file, line) ((cond) ? ((void)0) : __assert(msg, file, line))
+#define ASSERT(cond, msg, file, line) ((cond) ? ((void)0) : __assert(msg, file, __LINE__))
 #endif
 
 #define gDPSetTileCustom(pkt, fmt, siz, width, height, pal, cms, cmt, masks, maskt, shifts, shiftt)                    \

@@ -56,7 +56,7 @@ void ArrowLight_Init(Actor* thisx, PlayState* play) {
 
 void ArrowLight_Destroy(Actor* thisx, PlayState* play) {
     Magic_Reset(play);
-    LOG_STRING("消滅", "../z_arrow_light.c", 403); // "Disappearance"
+    LOG_STRING("Termination", "../z_arrow_light.c", 403); // "Disappearance"
 }
 
 void ArrowLight_Charge(ArrowLight* this, PlayState* play) {

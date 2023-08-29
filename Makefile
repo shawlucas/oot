@@ -20,15 +20,15 @@ CPPFLAGS ?=
 
 # ORIG_COMPILER cannot be combined with a non-IDO compiler. Check for this case and error out if found.
 ifneq ($(COMPILER),ido)
-  ifeq ($(ORIG_COMPILER),1)
-    $(error ORIG_COMPILER can only be used with the IDO compiler. Please check your Makefile variables and try again)
-  endif
+	ifeq ($(ORIG_COMPILER),1)
+		$(error ORIG_COMPILER can only be used with the IDO compiler. Please check your Makefile variables and try again)
+	endif
 endif
 
 ifeq ($(COMPILER),gcc)
-  CFLAGS += -DCOMPILER_GCC
-  CPPFLAGS += -DCOMPILER_GCC
-  NON_MATCHING := 1
+	CFLAGS += -DCOMPILER_GCC
+	CPPFLAGS += -DCOMPILER_GCC
+	NON_MATCHING := 1
 endif
 
 # Set prefix to mips binutils binaries (mips-linux-gnu-ld => 'mips-linux-gnu-') - Change at your own risk!
@@ -36,9 +36,9 @@ endif
 MIPS_BINUTILS_PREFIX ?= mips-linux-gnu-
 
 ifeq ($(NON_MATCHING),1)
-  CFLAGS += -DNON_MATCHING -DAVOID_UB
-  CPPFLAGS += -DNON_MATCHING -DAVOID_UB
-  COMPARE := 0
+	CFLAGS += -DNON_MATCHING -DAVOID_UB
+	CPPFLAGS += -DNON_MATCHING -DAVOID_UB
+	COMPARE := 0
 endif
 
 PROJECT_DIR := $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
@@ -47,33 +47,33 @@ MAKE = make
 CPPFLAGS += -fno-dollars-in-identifiers -P
 
 ifeq ($(OS),Windows_NT)
-    DETECTED_OS=windows
+		DETECTED_OS=windows
 else
-    UNAME_S := $(shell uname -s)
-    ifeq ($(UNAME_S),Linux)
-        DETECTED_OS=linux
-    endif
-    ifeq ($(UNAME_S),Darwin)
-        DETECTED_OS=macos
-        MAKE=gmake
-        CPPFLAGS += -xc++
-    endif
+		UNAME_S := $(shell uname -s)
+		ifeq ($(UNAME_S),Linux)
+				DETECTED_OS=linux
+		endif
+		ifeq ($(UNAME_S),Darwin)
+				DETECTED_OS=macos
+				MAKE=gmake
+				CPPFLAGS += -xc++
+		endif
 endif
 
 N_THREADS ?= $(shell nproc)
 
 #### Tools ####
 ifneq ($(shell type $(MIPS_BINUTILS_PREFIX)ld >/dev/null 2>/dev/null; echo $$?), 0)
-  $(error Unable to find $(MIPS_BINUTILS_PREFIX)ld. Please install or build MIPS binutils, commonly mips-linux-gnu. (or set MIPS_BINUTILS_PREFIX if your MIPS binutils install uses another prefix))
+	$(error Unable to find $(MIPS_BINUTILS_PREFIX)ld. Please install or build MIPS binutils, commonly mips-linux-gnu. (or set MIPS_BINUTILS_PREFIX if your MIPS binutils install uses another prefix))
 endif
 
 # Detect compiler and set variables appropriately.
 ifeq ($(COMPILER),gcc)
-  CC       := $(MIPS_BINUTILS_PREFIX)gcc
+	CC       := $(MIPS_BINUTILS_PREFIX)gcc
 else
 ifeq ($(COMPILER),ido)
-  CC       := tools/ido_recomp/$(DETECTED_OS)/7.1/cc
-  CC_OLD   := tools/ido_recomp/$(DETECTED_OS)/5.3/cc
+	CC       := tools/ido_recomp/$(DETECTED_OS)/7.1/cc
+	CC_OLD   := tools/ido_recomp/$(DETECTED_OS)/5.3/cc
 else
 $(error Unsupported compiler. Please use either ido or gcc as the COMPILER variable.)
 endif
@@ -81,14 +81,14 @@ endif
 
 # if ORIG_COMPILER is 1, check that either QEMU_IRIX is set or qemu-irix package installed
 ifeq ($(ORIG_COMPILER),1)
-  ifndef QEMU_IRIX
-    QEMU_IRIX := $(shell which qemu-irix)
-    ifeq (, $(QEMU_IRIX))
-      $(error Please install qemu-irix package or set QEMU_IRIX env var to the full qemu-irix binary path)
-    endif
-  endif
-  CC        = $(QEMU_IRIX) -L tools/ido7.1_compiler tools/ido7.1_compiler/usr/bin/cc
-  CC_OLD    = $(QEMU_IRIX) -L tools/ido5.3_compiler tools/ido5.3_compiler/usr/bin/cc
+	ifndef QEMU_IRIX
+		QEMU_IRIX := $(shell which qemu-irix)
+		ifeq (, $(QEMU_IRIX))
+			$(error Please install qemu-irix package or set QEMU_IRIX env var to the full qemu-irix binary path)
+		endif
+	endif
+	CC        = $(QEMU_IRIX) -L tools/ido7.1_compiler tools/ido7.1_compiler/usr/bin/cc
+	CC_OLD    = $(QEMU_IRIX) -L tools/ido5.3_compiler tools/ido5.3_compiler/usr/bin/cc
 endif
 
 AS         := $(MIPS_BINUTILS_PREFIX)as
@@ -111,35 +111,35 @@ ZAPD       := tools/ZAPD/ZAPD.out
 FADO       := tools/fado/fado.elf
 
 ifeq ($(COMPILER),gcc)
-  OPTFLAGS := -Os -ffast-math -fno-unsafe-math-optimizations
+	OPTFLAGS := -Os -ffast-math -fno-unsafe-math-optimizations
 else
-  OPTFLAGS := -O2
+	OPTFLAGS := -O2
 endif
 
 ASFLAGS := -march=vr4300 -32 -no-pad-sections -Iinclude
 
 ifeq ($(COMPILER),gcc)
-  CFLAGS += -G 0 -nostdinc $(INC) -march=vr4300 -mfix4300 -mabi=32 -mno-abicalls -mdivide-breaks -fno-zero-initialized-in-bss -fno-toplevel-reorder -ffreestanding -fno-common -fno-merge-constants -mno-explicit-relocs -mno-split-addresses $(CHECK_WARNINGS) -funsigned-char
-  MIPS_VERSION := -mips3
+	CFLAGS += -G 0 -nostdinc $(INC) -march=vr4300 -mfix4300 -mabi=32 -mno-abicalls -mdivide-breaks -fno-zero-initialized-in-bss -fno-toplevel-reorder -ffreestanding -fno-common -fno-merge-constants -mno-explicit-relocs -mno-split-addresses $(CHECK_WARNINGS) -funsigned-char
+	MIPS_VERSION := -mips3
 else
-  # we support Microsoft extensions such as anonymous structs, which the compiler does support but warns for their usage. Surpress the warnings with -woff.
-  CFLAGS += -G 0 -non_shared -fullwarn -verbose -Xcpluscomm $(INC) -Wab,-r4300_mul -woff 516,649,838,712
-  MIPS_VERSION := -mips2
+	# we support Microsoft extensions such as anonymous structs, which the compiler does support but warns for their usage. Surpress the warnings with -woff.
+	CFLAGS += -G 0 -non_shared -fullwarn -verbose -Xcpluscomm $(INC) -Wab,-r4300_mul -woff 516,649,838,712
+	MIPS_VERSION := -mips2
 endif
 
 ifeq ($(COMPILER),ido)
-  # Have CC_CHECK pretend to be a MIPS compiler
-  MIPS_BUILTIN_DEFS := -D_MIPS_ISA_MIPS2=2 -D_MIPS_ISA=_MIPS_ISA_MIPS2 -D_ABIO32=1 -D_MIPS_SIM=_ABIO32 -D_MIPS_SZINT=32 -D_MIPS_SZLONG=32 -D_MIPS_SZPTR=32
-  CC_CHECK  = gcc -fno-builtin -fsyntax-only -funsigned-char -std=gnu90 -D_LANGUAGE_C -DNON_MATCHING $(MIPS_BUILTIN_DEFS) $(INC) $(CHECK_WARNINGS)
-  ifeq ($(shell getconf LONG_BIT), 32)
-    # Work around memory allocation bug in QEMU
-    export QEMU_GUEST_BASE := 1
-  else
-    # Ensure that gcc (warning check) treats the code as 32-bit
-    CC_CHECK += -m32
-  endif
+	# Have CC_CHECK pretend to be a MIPS compiler
+	MIPS_BUILTIN_DEFS := -D_MIPS_ISA_MIPS2=2 -D_MIPS_ISA=_MIPS_ISA_MIPS2 -D_ABIO32=1 -D_MIPS_SIM=_ABIO32 -D_MIPS_SZINT=32 -D_MIPS_SZLONG=32 -D_MIPS_SZPTR=32
+	CC_CHECK  = gcc -fno-builtin -fsyntax-only -funsigned-char -std=gnu90 -D_LANGUAGE_C -DNON_MATCHING $(MIPS_BUILTIN_DEFS) $(INC) $(CHECK_WARNINGS)
+	ifeq ($(shell getconf LONG_BIT), 32)
+		# Work around memory allocation bug in QEMU
+		export QEMU_GUEST_BASE := 1
+	else
+		# Ensure that gcc (warning check) treats the code as 32-bit
+		CC_CHECK += -m32
+	endif
 else
-  CC_CHECK  = @:
+	CC_CHECK  = @:
 endif
 
 OBJDUMP_FLAGS := -d -r -z -Mreg-names=32
@@ -162,8 +162,8 @@ ASSET_BIN_DIRS := $(shell find assets/* -type d -not -path "assets/xml*" -not -p
 ASSET_FILES_XML := $(foreach dir,$(ASSET_BIN_DIRS),$(wildcard $(dir)/*.xml))
 ASSET_FILES_BIN := $(foreach dir,$(ASSET_BIN_DIRS),$(wildcard $(dir)/*.bin))
 ASSET_FILES_OUT := $(foreach f,$(ASSET_FILES_XML:.xml=.c),$f) \
-				   $(foreach f,$(ASSET_FILES_BIN:.bin=.bin.inc.c),build/$f) \
-				   $(foreach f,$(wildcard assets/text/*.c),build/$(f:.c=.o))
+					 $(foreach f,$(ASSET_FILES_BIN:.bin=.bin.inc.c),build/$f) \
+					 $(foreach f,$(wildcard assets/text/*.c),build/$(f:.c=.o))
 
 UNDECOMPILED_DATA_DIRS := $(shell find data -type d)
 
@@ -171,8 +171,8 @@ UNDECOMPILED_DATA_DIRS := $(shell find data -type d)
 C_FILES       := $(filter-out %.inc.c,$(foreach dir,$(SRC_DIRS) $(ASSET_BIN_DIRS),$(wildcard $(dir)/*.c)))
 S_FILES       := $(foreach dir,$(SRC_DIRS) $(UNDECOMPILED_DATA_DIRS),$(wildcard $(dir)/*.s))
 O_FILES       := $(foreach f,$(S_FILES:.s=.o),build/$f) \
-                 $(foreach f,$(C_FILES:.c=.o),build/$f) \
-                 $(foreach f,$(wildcard baserom/*),build/$f.o)
+								 $(foreach f,$(C_FILES:.c=.o),build/$f) \
+								 $(foreach f,$(wildcard baserom/*),build/$f.o)
 
 OVL_RELOC_FILES := $(shell $(CPP) $(CPPFLAGS) $(SPEC) | grep -o '[^"]*_reloc.o' )
 
@@ -242,6 +242,8 @@ build/src/libultra/libc/ll.o: OPTFLAGS := -Ofast
 build/src/%.o: CC := $(CC) -fexec-charset=euc-jp
 endif
 
+
+
 #### Main Targets ###
 
 all: $(ROM)
@@ -272,6 +274,10 @@ setup:
 test: $(ROM)
 	$(EMULATOR) $(EMU_FLAGS) $<
 
+src/boot/version.c: FORCE
+	tools/gen_version.sh $(MAKEOPTION) > src/boot/version.c
+
+FORCE: ;
 
 .PHONY: all clean setup test distclean assetclean
 
@@ -281,6 +287,8 @@ $(ROM): $(ELF)
 	$(ELF2ROM) -cic 6105 $< $@
 
 $(ELF): $(TEXTURE_FILES_OUT) $(ASSET_FILES_OUT) $(O_FILES) $(OVL_RELOC_FILES) build/ldscript.txt build/undefined_syms.txt
+	tools/gen_version.sh $(MAKEOPTION) > src/boot/version.c
+	$(CC) -c $(CFLAGS) $(MIPS_VERSION) $(OPTFLAGS) -o build/src/boot/version.o src/boot/version.c
 	$(LD) -T build/undefined_syms.txt -T build/ldscript.txt --no-check-sections --accept-unknown-input-arch --emit-relocs -Map build/z64.map -o $@
 
 ## Order-only prerequisites

@@ -55,7 +55,7 @@ void ArrowFire_Init(Actor* thisx, PlayState* play) {
 
 void ArrowFire_Destroy(Actor* thisx, PlayState* play) {
     Magic_Reset(play);
-    LOG_STRING("消滅", "../z_arrow_fire.c", 421); // "Disappearance"
+    LOG_STRING("Termination", "../z_arrow_fire.c", __LINE__); // "Disappearance"
 }
 
 void ArrowFire_Charge(ArrowFire* this, PlayState* play) {
@@ -206,7 +206,7 @@ void ArrowFire_Draw(Actor* thisx, PlayState* play2) {
         if (1) {}
         transform = (arrow->hitFlags & 2) ? &this->actor : &arrow->actor;
 
-        OPEN_DISPS(play->state.gfxCtx, "../z_arrow_fire.c", 618);
+        OPEN_DISPS(play->state.gfxCtx, "../z_arrow_fire.c", __LINE__);
 
         Matrix_Translate(transform->world.pos.x, transform->world.pos.y, transform->world.pos.z, MTXMODE_NEW);
         Matrix_RotateY(BINANG_TO_RAD(transform->shape.rot.y), MTXMODE_APPLY);
@@ -236,7 +236,7 @@ void ArrowFire_Draw(Actor* thisx, PlayState* play2) {
         }
         Matrix_Scale(this->radius * 0.2f, this->unk_158 * 4.0f, this->radius * 0.2f, MTXMODE_APPLY);
         Matrix_Translate(0.0f, -700.0f, 0.0f, MTXMODE_APPLY);
-        gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_arrow_fire.c", 666),
+        gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_arrow_fire.c", __LINE__),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPDisplayList(POLY_XLU_DISP++, sMaterialDL);
         gSPDisplayList(POLY_XLU_DISP++,

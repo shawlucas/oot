@@ -92,7 +92,7 @@ void BgBombwall_InitDynapoly(BgBombwall* this, PlayState* play) {
 
     if (this->dyna.bgId == BG_ACTOR_MAX) {
         // "Warning : move BG login failed"
-        osSyncPrintf("Warning : move BG 登録失敗(%s %d)(arg_data 0x%04x)\n", "../z_bg_bombwall.c", 243,
+        osSyncPrintf("	Warning : move BG register fail (%s %d)(params 0x%04x)\n", "../z_bg_bombwall.c", __LINE__,
                      this->dyna.actor.params);
     }
 }
@@ -149,7 +149,7 @@ void BgBombwall_Init(Actor* thisx, PlayState* play) {
         func_8086ED50(this, play);
     }
 
-    osSyncPrintf("(field keep 汎用爆弾壁)(arg_data 0x%04x)(angY %d)\n", this->dyna.actor.params,
+    osSyncPrintf("(field keep generic bombable wall)(params 0x%04X)(shape.rot.y %d)\n", this->dyna.actor.params,
                  this->dyna.actor.shape.rot.y);
 }
 

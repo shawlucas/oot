@@ -54,3 +54,6 @@ graphs/
 
 # Per-user configuration
 .python-version
+
+# other
+src/boot/version.c

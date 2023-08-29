@@ -99,7 +99,7 @@ beginseg
     include "build/src/libultra/rmon/xlitob.o"
     include "build/src/libultra/libc/ldiv.o"
     include "build/src/libultra/rmon/xldtob.o"
-    include "build/src/boot/build.o"
+    include "build/src/boot/version.o"
     include "build/src/libultra/io/sirawwrite.o"
     include "build/src/libultra/io/vimgr.o"
     include "build/src/libultra/io/vigetcurrcontext.o"

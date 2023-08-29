@@ -98,7 +98,7 @@ void BgBdanSwitch_InitDynaPoly(BgBdanSwitch* this, PlayState* play, CollisionHea
     CollisionHeader_GetVirtual(collision, &colHeader);
     this->dyna.bgId = DynaPoly_SetBgActor(play, &play->colCtx.dyna, &this->dyna.actor, colHeader);
     if (this->dyna.bgId == BG_ACTOR_MAX) {
-        osSyncPrintf("Warning : move BG 登録失敗(%s %d)(name %d)(arg_data 0x%04x)\n", "../z_bg_bdan_switch.c", 325,
+        osSyncPrintf("Warning : move BG register fail (%s %d)(name %d)(params 0x%04X)\n", "../z_bg_bdan_switch.c", __LINE__,
                      this->dyna.actor.id, this->dyna.actor.params);
     }
 }
@@ -192,12 +192,12 @@ void BgBdanSwitch_Init(Actor* thisx, PlayState* play) {
             }
             break;
         default:
-            osSyncPrintf("不正な ARG_DATA(arg_data 0x%04x)(%s %d)\n", this->dyna.actor.params, "../z_bg_bdan_switch.c",
-                         454);
+            osSyncPrintf("	incorrect PARAMS(params 0x%04x)(%s %d)\n", this->dyna.actor.params, "../z_bg_bdan_switch.c",
+                         __LINE__);
             Actor_Kill(&this->dyna.actor);
             return;
     }
-    osSyncPrintf("(巨大魚ダンジョン 専用スイッチ)(arg_data 0x%04x)\n", this->dyna.actor.params);
+    osSyncPrintf("(giant fish dungeon unique switch) (params 0x%04x)\n", this->dyna.actor.params);
 }
 
 void BgBdanSwitch_Destroy(Actor* thisx, PlayState* play) {
