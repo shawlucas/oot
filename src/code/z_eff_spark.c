@@ -103,7 +103,7 @@ s32 EffectSpark_Update(void* thisx) {
     s32 i;
 
     if (this == NULL) {
-        osSyncPrintf("EffectSparkInfo_proc():Spark Pointer is NULL\n");
+        osSyncPrintf("EffectSpark_Update():Spark Pointer is NULL\n");
     }
 
     for (i = 0; i < this->numElements; i++) {
@@ -174,7 +174,7 @@ void EffectSpark_Draw(void* thisx, GraphicsContext* gfxCtx) {
         vertices = Graph_Alloc(gfxCtx, this->numElements * sizeof(Vtx[4]));
         if (vertices == NULL) {
             // "Memory Allocation Failure graph_malloc"
-            osSyncPrintf("EffectSparkInfo_disp():メモリー確保失敗 graph_malloc\n");
+            osSyncPrintf("EffectSpark_Draw():Graph_Alloc memory allocation failure\n");
             goto end;
         }
 

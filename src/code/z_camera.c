@@ -5681,7 +5681,7 @@ s32 Camera_Unique9(Camera* camera) {
 void Camera_DebugPrintSplineArray(char* name, s16 length, CutsceneCameraPoint cameraPoints[]) {
     s32 i;
 
-    osSyncPrintf("static SplinedatZ  %s[] = {\n", name);
+    osSyncPrintf("static cameraPoints  %s[] = {\n", name);
     for (i = 0; i < length; i++) {
         osSyncPrintf("    /* key frame %2d */ {\n", i);
         osSyncPrintf("    /*     code     */ %d,\n", cameraPoints[i].continueFlag);
@@ -5756,7 +5756,7 @@ s32 Camera_Demo1(Camera* camera) {
             camera->animState++;
             // "absolute" : "relative"
             osSyncPrintf(VT_SGR("1") "%06u:" VT_RST " camera: spline demo: start %s \n", camera->play->state.frames,
-                         *relativeToPlayer == 0 ? "絶対" : "相対");
+                         *relativeToPlayer == 0 ? "absolute" : "relative");
 
             if (PREG(93)) {
                 Camera_DebugPrintSplineArray("CENTER", 5, csAtPoints);
@@ -7015,7 +7015,7 @@ s32 Camera_Special9(Camera* camera) {
 }
 
 Camera* Camera_Create(View* view, CollisionContext* colCtx, PlayState* play) {
-    Camera* newCamera = ZeldaArena_MallocDebug(sizeof(*newCamera), "../z_camera.c", 9370);
+    Camera* newCamera = ZeldaArena_MallocDebug(sizeof(*newCamera), "../z_camera.c", __LINE__);
 
     if (newCamera != NULL) {
         osSyncPrintf(VT_FGCOL(BLUE) "camera: create --- allocate %d byte" VT_RST "\n", sizeof(*newCamera) * 4);
@@ -7029,7 +7029,7 @@ Camera* Camera_Create(View* view, CollisionContext* colCtx, PlayState* play) {
 void Camera_Destroy(Camera* camera) {
     if (camera != NULL) {
         osSyncPrintf(VT_FGCOL(BLUE) "camera: destroy ---" VT_RST "\n");
-        ZeldaArena_FreeDebug(camera, "../z_camera.c", 9391);
+        ZeldaArena_FreeDebug(camera, "../z_camera.c", __LINE__);
     } else {
         osSyncPrintf(VT_COL(YELLOW, BLACK) "camera: destroy: already cleared\n" VT_RST);
     }

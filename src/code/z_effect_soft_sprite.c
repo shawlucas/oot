@@ -15,8 +15,8 @@ void EffectSs_InitInfo(PlayState* play, s32 tableSize) {
                      overlay->vromEnd - overlay->vromStart);
     }
 
-    sEffectSsInfo.table = GameState_Alloc(&play->state, tableSize * sizeof(EffectSs), "../z_effect_soft_sprite.c", 289);
-    ASSERT(sEffectSsInfo.table != NULL, "EffectSS2Info.data_table != NULL", "../z_effect_soft_sprite.c", 290);
+    sEffectSsInfo.table = GameState_Alloc(&play->state, tableSize * sizeof(EffectSs), "../z_effect_soft_sprite.c", __LINE__);
+    ASSERT(sEffectSsInfo.table != NULL, "sEffectSsInfo.table != NULL", "../z_effect_soft_sprite.c", 290);
 
     sEffectSsInfo.searchStartIndex = 0;
     sEffectSsInfo.tableSize = tableSize;
@@ -52,7 +52,7 @@ void EffectSs_ClearAll(PlayState* play) {
         addr = overlay->loadedRamAddr;
 
         if (addr != NULL) {
-            ZeldaArena_FreeDebug(addr, "../z_effect_soft_sprite.c", 337);
+            ZeldaArena_FreeDebug(addr, "../z_effect_soft_sprite.c", __LINE__);
         }
 
         overlay->loadedRamAddr = NULL;
@@ -173,7 +173,7 @@ void EffectSs_Spawn(PlayState* play, s32 type, s32 priority, void* initParams) {
 
     overlayEntry = &gEffectSsOverlayTable[type];
 
-    ASSERT(type < EFFECT_SS_TYPE_MAX, "type < EFFECT_SS2_TYPE_LAST_LABEL", "../z_effect_soft_sprite.c", 556);
+    ASSERT(type < EFFECT_SS_TYPE_MAX, "type < EFFECT_SS_TYPE_MAX", "../z_effect_soft_sprite.c", 556);
 
     if (EffectSs_FindSlot(priority, &index) != 0) {
         // Abort because we couldn't find a suitable slot to add this effect in
@@ -185,17 +185,17 @@ void EffectSs_Spawn(PlayState* play, s32 type, s32 priority, void* initParams) {
 
     if (overlayEntry->vramStart == NULL) {
         // "Not an overlay"
-        osSyncPrintf("EffectSoftSprite2_makeEffect():オーバーレイではありません。\n");
+        osSyncPrintf("EffectSs_Spawn():オーバーレイではありません。\n");
         initInfo = overlayEntry->initInfo;
     } else {
         if (overlayEntry->loadedRamAddr == NULL) {
-            overlayEntry->loadedRamAddr = ZeldaArena_MallocRDebug(overlaySize, "../z_effect_soft_sprite.c", 585);
+            overlayEntry->loadedRamAddr = ZeldaArena_MallocRDebug(overlaySize, "../z_effect_soft_sprite.c", __LINE__);
 
             if (overlayEntry->loadedRamAddr == NULL) {
                 osSyncPrintf(VT_FGCOL(RED));
                 // "The memory of %d byte cannot be secured. Therefore, the program cannot be loaded.
                 // What a dangerous situation! Naturally, effects will not produced either."
-                osSyncPrintf("EffectSoftSprite2_makeEffect():zelda_malloc_r()により,%"
+                osSyncPrintf("EffectSs_Spawn():ZeldaArena_Malloc()により,%"
                              "dbyteのメモリ確保ができま\nせん。そのため、プログラムのロードも\n出来ません。ただいま危険"
                              "な状態です！\nもちろん,エフェクトも出ません。\n",
                              overlaySize);
@@ -306,7 +306,7 @@ void EffectSs_DrawAll(PlayState* play) {
                 // "Since the position is outside the area, delete it.
                 // Effect label No. %d: Please respond by the program.
                 // Here is ==> pos (%f, %f, %f) and the label is in z_effect_soft_sprite_dlftbls.decl."
-                osSyncPrintf("EffectSoftSprite2_disp():位置が領域外のため "
+                osSyncPrintf("EffectSs_DrawAll():位置が領域外のため "
                              "削除します。エフェクトラベルNo.%d:プログラムの方で対応をお願いします。ここです ==> "
                              "pos(%f, %f, %f)で、ラベルはz_effect_soft_sprite_dlftbls.declにあります。\n",
                              sEffectSsInfo.table[i].type, sEffectSsInfo.table[i].pos.x, sEffectSsInfo.table[i].pos.y,

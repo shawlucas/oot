@@ -20,7 +20,7 @@ void StackCheck_Init(StackEntry* entry, void* stackBottom, void* stackTop, u32 i
         iter = sStackInfoListStart;
         while (iter) {
             if (iter == entry) {
-                osSyncPrintf(VT_COL(RED, WHITE) "stackcheck_init: %08X は既にリスト中にある\n" VT_RST, entry);
+                osSyncPrintf(VT_COL(RED, WHITE) "StackCheck_Init: 0x%08X is alreaedy listed\n" VT_RST, entry);
                 return;
             }
             iter = iter->next;
@@ -68,7 +68,7 @@ void StackCheck_Cleanup(StackEntry* entry) {
         }
     }
     if (inconsistency) {
-        osSyncPrintf(VT_COL(RED, WHITE) "stackcheck_cleanup: %08X リスト不整合です\n" VT_RST, entry);
+        osSyncPrintf(VT_COL(RED, WHITE) "StackCheck_Cleanup: 0x%08X does not conform to list\n" VT_RST, entry);
     }
 }
 

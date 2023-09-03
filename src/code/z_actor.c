@@ -94,7 +94,7 @@ void ActorShadow_DrawFoot(PlayState* play, Light* light, MtxF* arg2, s32 arg3, f
     Matrix_RotateY(sp58, MTXMODE_APPLY);
     Matrix_Scale(arg5, 1.0f, arg5 * arg6, MTXMODE_APPLY);
 
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_actor.c", 1687), G_MTX_MODELVIEW | G_MTX_LOAD);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_actor.c", __LINE__), G_MTX_MODELVIEW | G_MTX_LOAD);
     gSPDisplayList(POLY_OPA_DISP++, gFootShadowDL);
 
     CLOSE_DISPS(play->state.gfxCtx, "../z_actor.c", 1693);
@@ -377,7 +377,7 @@ void func_8002C124(TargetContext* targetCtx, PlayState* play) {
                         Matrix_RotateZ(M_PI / 2, MTXMODE_APPLY);
                         Matrix_Push();
                         Matrix_Translate(entry->unk_0C, entry->unk_0C, 0.0f, MTXMODE_APPLY);
-                        gSPMatrix(OVERLAY_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_actor.c", 2116),
+                        gSPMatrix(OVERLAY_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_actor.c", __LINE__),
                                   G_MTX_MODELVIEW | G_MTX_LOAD);
                         gSPDisplayList(OVERLAY_DISP++, gZTargetLockOnTriangleDL);
                         Matrix_Pop();
@@ -404,7 +404,7 @@ void func_8002C124(TargetContext* targetCtx, PlayState* play) {
         Matrix_Scale((iREG(27) + 35) / 1000.0f, (iREG(28) + 60) / 1000.0f, (iREG(29) + 50) / 1000.0f, MTXMODE_APPLY);
 
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, naviColor->inner.r, naviColor->inner.g, naviColor->inner.b, 255);
-        gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_actor.c", 2153),
+        gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_actor.c", __LINE__),
                   G_MTX_MODELVIEW | G_MTX_LOAD);
         gSPDisplayList(POLY_XLU_DISP++, gZTargetArrowDL);
     }
@@ -679,7 +679,7 @@ void TitleCard_InitPlaceName(PlayState* play, TitleCardContext* titleCtx, void* 
     u32 size = loadedScene->titleFile.vromEnd - loadedScene->titleFile.vromStart;
 
     if ((size != 0) && (size <= 0x3000)) {
-        DmaMgr_RequestSyncDebug(texture, loadedScene->titleFile.vromStart, size, "../z_actor.c", 2765);
+        DmaMgr_RequestSyncDebug(texture, loadedScene->titleFile.vromStart, size, "../z_actor.c", __LINE__);
     }
 
     titleCtx->texture = texture;
@@ -837,7 +837,7 @@ void Actor_Destroy(Actor* actor, PlayState* play) {
         name = overlayEntry->name != NULL ? overlayEntry->name : "";
 
         // "No Actor class destruct [%s]"
-        osSyncPrintf("Ａｃｔｏｒクラス デストラクトがありません [%s]\n" VT_RST, name);
+        osSyncPrintf("actor->destroy is NULL! [%s]\n" VT_RST, name);
     }
 }
 
@@ -1345,7 +1345,7 @@ Gfx* func_8002E830(Vec3f* object, Vec3f* eye, Vec3f* lightDir, GraphicsContext* 
     *hilite = Graph_Alloc(gfxCtx, sizeof(Hilite));
 
     if (R_HREG_MODE == HREG_MODE_PRINT_HILITE_INFO) {
-        osSyncPrintf("z_actor.c 3529 eye=[%f(%f) %f %f] object=[%f %f %f] light_direction=[%f %f %f]\n", correctedEyeX,
+        osSyncPrintf("z_actor.c 3529 eye=[%f(%f) %f %f] object=[%f %f %f] lightDir=[%f %f %f]\n", correctedEyeX,
                      eye->x, eye->y, eye->z, object->x, object->y, object->z, lightDir->x, lightDir->y, lightDir->z);
     }
 
@@ -1394,7 +1394,7 @@ void func_8002EBCC(Actor* actor, PlayState* play, s32 flag) {
     lightDir.z = play->envCtx.dirLight1.params.dir.z;
 
     if (R_HREG_MODE == HREG_MODE_PRINT_HILITE_INFO) {
-        osSyncPrintf("z_actor.c 3637 game_play->view.eye=[%f(%f) %f %f]\n", play->view.eye.x, play->view.eye.y,
+        osSyncPrintf("z_actor.c 3637 play->view.eye=[%f(%f) %f %f]\n", play->view.eye.x, play->view.eye.y,
                      play->view.eye.z);
     }
 
@@ -1987,14 +1987,14 @@ void Actor_DrawFaroresWindPointer(PlayState* play) {
             gDPSetEnvColor(POLY_XLU_DISP++, 100, 200, 0, 255);
 
             Matrix_RotateZ(BINANG_TO_RAD_ALT2((play->gameplayFrames * 1500) & 0xFFFF), MTXMODE_APPLY);
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_actor.c", 5458),
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_actor.c", __LINE__),
                       G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
             gSPDisplayList(POLY_XLU_DISP++, gEffFlash1DL);
 
             Matrix_Pop();
             Matrix_RotateZ(BINANG_TO_RAD_ALT2(~((play->gameplayFrames * 1200) & 0xFFFF)), MTXMODE_APPLY);
 
-            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_actor.c", 5463),
+            gSPMatrix(POLY_XLU_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_actor.c", __LINE__),
                       G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
             gSPDisplayList(POLY_XLU_DISP++, gEffFlash1DL);
         }
@@ -2096,7 +2096,7 @@ void Actor_UpdateAll(PlayState* play, ActorContext* actorCtx) {
 
     if (0) {
         // This ASSERT is optimized out but it exists due to its presence in rodata
-        ASSERT(gMaxActorId == ACTOR_ID_MAX, "MaxProfile == ACTOR_DLF_MAX", "../z_actor.c", UNK_LINE);
+        ASSERT(gMaxActorId == ACTOR_ID_MAX, "gMaxActorId == ACTOR_ID_MAX", "../z_actor.c", UNK_LINE);
     }
 
     sp74 = NULL;
@@ -2236,10 +2236,10 @@ void Actor_FaultPrint(Actor* actor, char* command) {
     overlayEntry = actor->overlayEntry;
     name = overlayEntry->name != NULL ? overlayEntry->name : "";
 
-    osSyncPrintf("アクターの名前(%08X:%s)\n", actor, name); // "Actor name (%08X:%s)"
+    osSyncPrintf("Actor name(%08X:%s)\n", actor, name); // "Actor name (%08X:%s)"
 
     if (command != NULL) {
-        osSyncPrintf("コメント:%s\n", command); // "Command:%s"
+        osSyncPrintf("Command:%s\n", command); // "Command:%s"
     }
 
     FaultDrawer_SetCursor(48, 24);
@@ -2361,7 +2361,7 @@ void Actor_DrawLensActors(PlayState* play, s32 numInvisibleActors, Actor** invis
 
     OPEN_DISPS(gfxCtx, "../z_actor.c", 6197);
 
-    gDPNoOpString(POLY_OPA_DISP++, "魔法のメガネ START", 0); // "Magic lens START"
+    gDPNoOpString(POLY_OPA_DISP++, "Magic lens START", 0); // "Magic lens START"
 
     gDPPipeSync(POLY_XLU_DISP++);
 
@@ -2402,22 +2402,22 @@ void Actor_DrawLensActors(PlayState* play, s32 numInvisibleActors, Actor** invis
     Actor_DrawLensOverlay(gfxCtx);
 
     // "Magic lens invisible Actor display START"
-    gDPNoOpString(POLY_OPA_DISP++, "魔法のメガネ 見えないＡcｔｏｒ表示 START", numInvisibleActors);
+    gDPNoOpString(POLY_OPA_DISP++, "magic lens invisible actor display START", numInvisibleActors);
 
     invisibleActor = &invisibleActors[0];
     for (i = 0; i < numInvisibleActors; i++) {
         // "Magic lens invisible Actor display"
-        gDPNoOpString(POLY_OPA_DISP++, "魔法のメガネ 見えないＡcｔｏｒ表示", i);
+        gDPNoOpString(POLY_OPA_DISP++, "magic lens invisible actor display", i);
         Actor_Draw(play, *(invisibleActor++));
     }
 
     // "Magic lens invisible Actor display END"
-    gDPNoOpString(POLY_OPA_DISP++, "魔法のメガネ 見えないＡcｔｏｒ表示 END", numInvisibleActors);
+    gDPNoOpString(POLY_OPA_DISP++, "magic lens invisible actor display END", numInvisibleActors);
 
     if (play->roomCtx.curRoom.lensMode != LENS_MODE_HIDE_ACTORS) {
         // Draw the lens overlay to the color frame buffer
 
-        gDPNoOpString(POLY_OPA_DISP++, "青い眼鏡(外側)", 0); // "Blue spectacles (exterior)"
+        gDPNoOpString(POLY_OPA_DISP++, "Blue lens (exterior)", 0); // "Blue spectacles (exterior)"
 
         gDPPipeSync(POLY_XLU_DISP++);
 
@@ -2430,10 +2430,10 @@ void Actor_DrawLensActors(PlayState* play, s32 numInvisibleActors, Actor** invis
 
         Actor_DrawLensOverlay(gfxCtx);
 
-        gDPNoOpString(POLY_OPA_DISP++, "青い眼鏡(外側)", 1); // "Blue spectacles (exterior)"
+        gDPNoOpString(POLY_OPA_DISP++, "Blue lens(exterior)", 1); // "Blue spectacles (exterior)"
     }
 
-    gDPNoOpString(POLY_OPA_DISP++, "魔法のメガネ END", 0); // "Magic lens END"
+    gDPNoOpString(POLY_OPA_DISP++, "Magic lens END", 0); // "Magic lens END"
 
     CLOSE_DISPS(gfxCtx, "../z_actor.c", 6284);
 }
@@ -2510,7 +2510,7 @@ void func_800315AC(PlayState* play, ActorContext* actorCtx) {
                         ((play->roomCtx.curRoom.lensMode == LENS_MODE_HIDE_ACTORS) || play->actorCtx.lensActive ||
                          (actor->room != play->roomCtx.curRoom.num))) {
                         ASSERT(invisibleActorCounter < INVISIBLE_ACTOR_MAX,
-                               "invisible_actor_counter < INVISIBLE_ACTOR_MAX", "../z_actor.c", 6464);
+                               "invisibleActorCounter < INVISIBLE_ACTOR_MAX", "../z_actor.c", 6464);
                         invisibleActors[invisibleActorCounter] = actor;
                         invisibleActorCounter++;
                     } else {
@@ -2638,11 +2638,11 @@ void func_80031C3C(ActorContext* actorCtx, PlayState* play) {
     }
 
     if (HREG(20) != 0) {
-        osSyncPrintf("絶対魔法領域解放\n"); // "Absolute magic field deallocation"
+        osSyncPrintf("Absolute magic field deallocation\n"); // "Absolute magic field deallocation"
     }
 
     if (actorCtx->absoluteSpace != NULL) {
-        ZeldaArena_FreeDebug(actorCtx->absoluteSpace, "../z_actor.c", 6731);
+        ZeldaArena_FreeDebug(actorCtx->absoluteSpace, "../z_actor.c", __LINE__);
         actorCtx->absoluteSpace = NULL;
     }
 
@@ -2710,31 +2710,31 @@ void Actor_FreeOverlay(ActorOverlay* actorOverlay) {
 
     if (actorOverlay->numLoaded == 0) {
         if (HREG(20) != 0) {
-            osSyncPrintf("アクタークライアントが０になりました\n"); // "Actor client is now 0"
+            osSyncPrintf("Actor client is now 0\n"); // "Actor client is now 0"
         }
 
         if (actorOverlay->loadedRamAddr != NULL) {
             if (actorOverlay->allocType & ACTOROVL_ALLOC_PERSISTENT) {
                 if (HREG(20) != 0) {
-                    osSyncPrintf("オーバーレイ解放しません\n"); // "Overlay will not be deallocated"
+                    osSyncPrintf("Overlay will not be deallocated\n"); // "Overlay will not be deallocated"
                 }
             } else if (actorOverlay->allocType & ACTOROVL_ALLOC_ABSOLUTE) {
                 if (HREG(20) != 0) {
                     // "Absolute magic field reserved, so deallocation will not occur"
-                    osSyncPrintf("絶対魔法領域確保なので解放しません\n");
+                    osSyncPrintf("Absolute magic field reserved, so deallocation will not occur\n");
                 }
                 actorOverlay->loadedRamAddr = NULL;
             } else {
                 if (HREG(20) != 0) {
-                    osSyncPrintf("オーバーレイ解放します\n"); // "Overlay deallocated"
+                    osSyncPrintf("Overlay deallocated\n"); // "Overlay deallocated"
                 }
-                ZeldaArena_FreeDebug(actorOverlay->loadedRamAddr, "../z_actor.c", 6834);
+                ZeldaArena_FreeDebug(actorOverlay->loadedRamAddr, "../z_actor.c", __LINE__);
                 actorOverlay->loadedRamAddr = NULL;
             }
         }
     } else if (HREG(20) != 0) {
         // "%d of actor client remains"
-        osSyncPrintf("アクタークライアントはあと %d 残っています\n", actorOverlay->numLoaded);
+        osSyncPrintf("%d of actor client remains\n", actorOverlay->numLoaded);
     }
 
     osSyncPrintf(VT_RST);
@@ -2752,25 +2752,25 @@ Actor* Actor_Spawn(ActorContext* actorCtx, PlayState* play, s16 actorId, f32 pos
     u32 overlaySize;
 
     overlayEntry = &gActorOverlayTable[actorId];
-    ASSERT(actorId < ACTOR_ID_MAX, "profile < ACTOR_DLF_MAX", "../z_actor.c", 6883);
+    ASSERT(actorId < ACTOR_ID_MAX, "actorId < ACTOR_ID_MAX", "../z_actor.c", 6883);
 
     name = overlayEntry->name != NULL ? overlayEntry->name : "";
     overlaySize = (uintptr_t)overlayEntry->vramEnd - (uintptr_t)overlayEntry->vramStart;
 
     if (HREG(20) != 0) {
         // "Actor class addition [%d:%s]"
-        osSyncPrintf("アクタークラス追加 [%d:%s]\n", actorId, name);
+        osSyncPrintf("Actor class addition [%d:%s]\n", actorId, name);
     }
 
     if (actorCtx->total > ACTOR_NUMBER_MAX) {
         // "Ａｃｔｏｒ set number exceeded"
-        osSyncPrintf(VT_COL(YELLOW, BLACK) "Ａｃｔｏｒセット数オーバー\n" VT_RST);
+        osSyncPrintf(VT_COL(YELLOW, BLACK) "Actor set number exceeded\n" VT_RST);
         return NULL;
     }
 
     if (overlayEntry->vramStart == NULL) {
         if (HREG(20) != 0) {
-            osSyncPrintf("オーバーレイではありません\n"); // "Not an overlay"
+            osSyncPrintf("Not an overlay\n"); // "Not an overlay"
         }
 
         actorInit = overlayEntry->initInfo;
@@ -2781,16 +2781,16 @@ Actor* Actor_Spawn(ActorContext* actorCtx, PlayState* play, s16 actorId, f32 pos
             }
         } else {
             if (overlayEntry->allocType & ACTOROVL_ALLOC_ABSOLUTE) {
-                ASSERT(overlaySize <= ACTOROVL_ABSOLUTE_SPACE_SIZE, "actor_segsize <= AM_FIELD_SIZE", "../z_actor.c",
+                ASSERT(overlaySize <= ACTOROVL_ABSOLUTE_SPACE_SIZE, "overlaySize <= ACTOROVL_ABSOLUTE_SPACE_SIZE", "../z_actor.c",
                        6934);
 
                 if (actorCtx->absoluteSpace == NULL) {
                     // "AMF: absolute magic field"
                     actorCtx->absoluteSpace =
-                        ZeldaArena_MallocRDebug(ACTOROVL_ABSOLUTE_SPACE_SIZE, "AMF:絶対魔法領域", 0);
+                        ZeldaArena_MallocRDebug(ACTOROVL_ABSOLUTE_SPACE_SIZE, "AMF: absolute magic field", __LINE__);
                     if (HREG(20) != 0) {
                         // "Absolute magic field reservation - %d bytes reserved"
-                        osSyncPrintf("絶対魔法領域確保 %d バイト確保\n", ACTOROVL_ABSOLUTE_SPACE_SIZE);
+                        osSyncPrintf("Absolute magic field reservation %d bytes reserved\n", ACTOROVL_ABSOLUTE_SPACE_SIZE);
                     }
                 }
 
@@ -2803,7 +2803,7 @@ Actor* Actor_Spawn(ActorContext* actorCtx, PlayState* play, s16 actorId, f32 pos
 
             if (overlayEntry->loadedRamAddr == NULL) {
                 // "Cannot reserve actor program memory"
-                osSyncPrintf(VT_COL(RED, WHITE) "Ａｃｔｏｒプログラムメモリが確保できません\n" VT_RST);
+                osSyncPrintf(VT_COL(RED, WHITE) "Cannot reserve actor program memory\n" VT_RST);
                 return NULL;
             }
 
@@ -2833,7 +2833,7 @@ Actor* Actor_Spawn(ActorContext* actorCtx, PlayState* play, s16 actorId, f32 pos
     if ((objBankIndex < 0) ||
         ((actorInit->category == ACTORCAT_ENEMY) && Flags_GetClear(play, play->roomCtx.curRoom.num))) {
         // "No data bank!! <data bank＝%d> (profilep->bank=%d)"
-        osSyncPrintf(VT_COL(RED, WHITE) "データバンク無し！！<データバンク＝%d>(profilep->bank=%d)\n" VT_RST,
+        osSyncPrintf(VT_COL(RED, WHITE) "No data bank!! <objBankIndex=%d>(actorInit->objectId=%d)\n" VT_RST,
                      objBankIndex, actorInit->objectId);
         Actor_FreeOverlay(overlayEntry);
         return NULL;
@@ -2843,19 +2843,19 @@ Actor* Actor_Spawn(ActorContext* actorCtx, PlayState* play, s16 actorId, f32 pos
 
     if (actor == NULL) {
         // "Actor class cannot be reserved! %s <size＝%d bytes>"
-        osSyncPrintf(VT_COL(RED, WHITE) "Ａｃｔｏｒクラス確保できません！ %s <サイズ＝%dバイト>\n", VT_RST, name,
+        osSyncPrintf(VT_COL(RED, WHITE) "Actor class cannot be reserved! %s <size＝%d bytes>\n", VT_RST, name,
                      actorInit->instanceSize);
         Actor_FreeOverlay(overlayEntry);
         return NULL;
     }
 
-    ASSERT(overlayEntry->numLoaded < 255, "actor_dlftbl->clients < 255", "../z_actor.c", 7031);
+    ASSERT(overlayEntry->numLoaded < 255, "overlayEntry->numLoaded < 255", "../z_actor.c", 7031);
 
     overlayEntry->numLoaded++;
 
     if (HREG(20) != 0) {
         // "Actor client No. %d"
-        osSyncPrintf("アクタークライアントは %d 個目です\n", overlayEntry->numLoaded);
+        osSyncPrintf("Actor client No. %d\n", overlayEntry->numLoaded);
     }
 
     Lib_MemSet((u8*)actor, actorInit->instanceSize, 0);
@@ -2955,7 +2955,7 @@ Actor* Actor_Delete(ActorContext* actorCtx, Actor* actor, PlayState* play) {
     name = overlayEntry->name != NULL ? overlayEntry->name : "";
 
     if (HREG(20) != 0) {
-        osSyncPrintf("アクタークラス削除 [%s]\n", name); // "Actor class deleted [%s]"
+        osSyncPrintf("Actor class deleted [%s]\n", name); // "Actor class deleted [%s]"
     }
 
     if ((player != NULL) && (actor == player->unk_664)) {
@@ -2980,15 +2980,15 @@ Actor* Actor_Delete(ActorContext* actorCtx, Actor* actor, PlayState* play) {
 
     newHead = Actor_RemoveFromCategory(play, actorCtx, actor);
 
-    ZeldaArena_FreeDebug(actor, "../z_actor.c", 7242);
+    ZeldaArena_FreeDebug(actor, "../z_actor.c", __LINE__);
 
     if (overlayEntry->vramStart == NULL) {
         if (HREG(20) != 0) {
-            osSyncPrintf("オーバーレイではありません\n"); // "Not an overlay"
+            osSyncPrintf("Not an overlay\n"); // "Not an overlay"
         }
     } else {
-        ASSERT(overlayEntry->loadedRamAddr != NULL, "actor_dlftbl->allocp != NULL", "../z_actor.c", 7251);
-        ASSERT(overlayEntry->numLoaded > 0, "actor_dlftbl->clients > 0", "../z_actor.c", 7252);
+        ASSERT(overlayEntry->loadedRamAddr != NULL, "overlayEntry->loadedRamAddr != NULL", "../z_actor.c", 7251);
+        ASSERT(overlayEntry->numLoaded > 0, "overlayEntry->numLoaded > 0", "../z_actor.c", 7252);
         overlayEntry->numLoaded--;
         Actor_FreeOverlay(overlayEntry);
     }
@@ -3158,15 +3158,15 @@ void BodyBreak_Alloc(BodyBreak* bodyBreak, s32 count, PlayState* play) {
     u32 objectIdsSize;
 
     matricesSize = (count + 1) * sizeof(*bodyBreak->matrices);
-    bodyBreak->matrices = ZeldaArena_MallocDebug(matricesSize, "../z_actor.c", 7540);
+    bodyBreak->matrices = ZeldaArena_MallocDebug(matricesSize, "../z_actor.c", __LINE__);
 
     if (bodyBreak->matrices != NULL) {
         dListsSize = (count + 1) * sizeof(*bodyBreak->dLists);
-        bodyBreak->dLists = ZeldaArena_MallocDebug(dListsSize, "../z_actor.c", 7543);
+        bodyBreak->dLists = ZeldaArena_MallocDebug(dListsSize, "../z_actor.c", __LINE__);
 
         if (bodyBreak->dLists != NULL) {
             objectIdsSize = (count + 1) * sizeof(*bodyBreak->objectIds);
-            bodyBreak->objectIds = ZeldaArena_MallocDebug(objectIdsSize, "../z_actor.c", 7546);
+            bodyBreak->objectIds = ZeldaArena_MallocDebug(objectIdsSize, "../z_actor.c", __LINE__);
 
             if (bodyBreak->objectIds != NULL) {
                 Lib_MemSet((u8*)bodyBreak->matrices, matricesSize, 0);
@@ -3179,15 +3179,15 @@ void BodyBreak_Alloc(BodyBreak* bodyBreak, s32 count, PlayState* play) {
     }
 
     if (bodyBreak->matrices != NULL) {
-        ZeldaArena_FreeDebug(bodyBreak->matrices, "../z_actor.c", 7558);
+        ZeldaArena_FreeDebug(bodyBreak->matrices, "../z_actor.c", __LINE__);
     }
 
     if (bodyBreak->dLists != NULL) {
-        ZeldaArena_FreeDebug(bodyBreak->dLists, "../z_actor.c", 7561);
+        ZeldaArena_FreeDebug(bodyBreak->dLists, "../z_actor.c", __LINE__);
     }
 
     if (bodyBreak->objectIds != NULL) {
-        ZeldaArena_FreeDebug(bodyBreak->objectIds, "../z_actor.c", 7564);
+        ZeldaArena_FreeDebug(bodyBreak->objectIds, "../z_actor.c", __LINE__);
     }
 }
 
@@ -3254,9 +3254,9 @@ s32 BodyBreak_SpawnParts(Actor* actor, BodyBreak* bodyBreak, PlayState* play, s1
 
     bodyBreak->val = BODYBREAK_STATUS_FINISHED;
 
-    ZeldaArena_FreeDebug(bodyBreak->matrices, "../z_actor.c", 7678);
-    ZeldaArena_FreeDebug(bodyBreak->dLists, "../z_actor.c", 7679);
-    ZeldaArena_FreeDebug(bodyBreak->objectIds, "../z_actor.c", 7680);
+    ZeldaArena_FreeDebug(bodyBreak->matrices, "../z_actor.c", __LINE__);
+    ZeldaArena_FreeDebug(bodyBreak->dLists, "../z_actor.c", __LINE__);
+    ZeldaArena_FreeDebug(bodyBreak->objectIds, "../z_actor.c", __LINE__);
 
     return true;
 }
@@ -3587,7 +3587,7 @@ void func_80033C30(Vec3f* arg0, Vec3f* arg1, u8 alpha, PlayState* play) {
 
     Matrix_Scale(arg1->x, 1.0f, arg1->z, MTXMODE_APPLY);
 
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_actor.c", 8149), G_MTX_MODELVIEW | G_MTX_LOAD);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_actor.c", __LINE__), G_MTX_MODELVIEW | G_MTX_LOAD);
     gSPDisplayList(POLY_OPA_DISP++, gCircleShadowDL);
 
     CLOSE_DISPS(play->state.gfxCtx, "../z_actor.c", 8155);
@@ -3675,7 +3675,7 @@ void Actor_DrawDoorLock(PlayState* play, s32 frame, s32 type) {
             Matrix_Scale(entry->chainsScale, entry->chainsScale, entry->chainsScale, MTXMODE_APPLY);
         }
 
-        gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_actor.c", 8299),
+        gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_actor.c", __LINE__),
                   G_MTX_MODELVIEW | G_MTX_LOAD);
         gSPDisplayList(POLY_OPA_DISP++, entry->chainDL);
 
@@ -3691,7 +3691,7 @@ void Actor_DrawDoorLock(PlayState* play, s32 frame, s32 type) {
     Matrix_Put(&baseMtxF);
     Matrix_Scale(frame * 0.1f, frame * 0.1f, frame * 0.1f, MTXMODE_APPLY);
 
-    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_actor.c", 8314), G_MTX_MODELVIEW | G_MTX_LOAD);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_NewMtx(play->state.gfxCtx, "../z_actor.c", __LINE__), G_MTX_MODELVIEW | G_MTX_LOAD);
     gSPDisplayList(POLY_OPA_DISP++, entry->lockDL);
 
     CLOSE_DISPS(play->state.gfxCtx, "../z_actor.c", 8319);

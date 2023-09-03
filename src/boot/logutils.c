@@ -80,20 +80,20 @@ void LogUtils_CheckBoundary(const char* name, s32 value, s32 unk, const char* fi
     u32 mask = (unk - 1);
 
     if (value & mask) {
-        osSyncPrintf(VT_COL(RED, WHITE) "%s %d:%s(%08X) は バウンダリ(%d)違反です\n" VT_RST, file, line, name, value,
+        osSyncPrintf(VT_COL(RED, WHITE) "%s %d:%s(%08X) violates boundary (%d)\n" VT_RST, file, line, name, value,
                      unk);
     }
 }
 
 void LogUtils_CheckNullPointer(const char* exp, void* ptr, const char* file, s32 line) {
     if (ptr == NULL) {
-        osSyncPrintf(VT_COL(RED, WHITE) "%s %d:%s は はヌルポインタです\n" VT_RST, file, line, exp);
+        osSyncPrintf(VT_COL(RED, WHITE) "%s %d:%s is a null pointer\n" VT_RST, file, line, exp);
     }
 }
 
 void LogUtils_CheckValidPointer(const char* exp, void* ptr, const char* file, s32 line) {
     if (ptr == NULL || (u32)ptr < 0x80000000 || (0x80000000 + osMemSize) <= (u32)ptr) {
-        osSyncPrintf(VT_COL(RED, WHITE) "%s %d:ポインタ %s(%08X) が異常です\n" VT_RST, file, line, exp, ptr);
+        osSyncPrintf(VT_COL(RED, WHITE) "%s %d:pointer %s(%08X) is invalid\n" VT_RST, file, line, exp, ptr);
     }
 }
 
