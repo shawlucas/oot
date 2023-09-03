@@ -1,4 +1,4 @@
- #include "global.h"
+#include "global.h"
 #include "message_data_static.h"
 #include "terminal.h"
 #include "assets/textures/parameter_static/parameter_static.h"
@@ -25,7 +25,7 @@ s16 sHasSunsSong = false;
 
 s16 sMessageHasSetSfx = false;
 
-u16 sOcarinaSongBitFlags = 0; // ocarina bit flags
+u16 sOcarinaSongBitFlags = 0; // ocarina bit flags 
 
 MessageTableEntry sNesMessageEntryTable[] = {
 #define DEFINE_MESSAGE(textId, type, yPos, nesMessage, gerMessage, fraMessage) \
