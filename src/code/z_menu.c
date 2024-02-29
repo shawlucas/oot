@@ -33,7 +33,7 @@ void ZeldaMenu_AddItem(const char* name, s32 x, s32 y, s32 numElements) {
     gZeldaMenu->items[numElements - 1]->y = y;
     zeldaMenuSize++;
 }
-
+    
 void ZeldaMenu_Draw(PlayState* play) {
     GfxPrint* printer;
     s32 i;
