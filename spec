@@ -437,6 +437,7 @@ beginseg
     include "$(BUILD_DIR)/src/code/sys_rumble.o"
     include "$(BUILD_DIR)/src/code/code_800D31A0.o"
     include "$(BUILD_DIR)/src/code/irqmgr.o"
+    include "$(BUILD_DIR)/src/code/z_menu.o"
 #if OOT_DEBUG
     include "$(BUILD_DIR)/src/code/debug_malloc.o"
 #endif

@@ -1,6 +1,8 @@
 #include "global.h"
 #include "quake.h"
 #include "terminal.h"
+#include "z64menu.h"
+#include "alloca.h"
 
 void* gDebugCutsceneScript = NULL;
 UNK_TYPE D_8012D1F4 = 0; // unused
@@ -186,6 +188,8 @@ void Play_Destroy(GameState* thisx) {
 
     SREG(91) = 0;
     R_PAUSE_BG_PRERENDER_STATE = PAUSE_BG_PRERENDER_OFF;
+
+    ZeldaMenu_Destroy();
 
     PreRender_Destroy(&this->pauseBgPreRender);
     Effect_DeleteAll(this);
@@ -459,6 +463,8 @@ void Play_Init(GameState* thisx) {
         // Presumably the ROM was larger at a previous point in development when this debug feature was used.
         DmaMgr_DmaRomToRam(0x03FEB000, gDebugCutsceneScript, sizeof(sDebugCutsceneScriptBuf));
     }
+
+    ZeldaMenu_Init();
 }
 
 void Play_Update(PlayState* this) {
@@ -1315,6 +1321,8 @@ Play_Draw_skip:
     }
 
     Camera_Finish(GET_ACTIVE_CAM(this));
+
+    ZeldaMenu_Draw(this);
 
     CLOSE_DISPS(gfxCtx, "../z_play.c", 4508);
 }
