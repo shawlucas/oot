@@ -1044,6 +1044,7 @@ skip:
     PLAY_LOG(3816);
     Environment_Update(this, &this->envCtx, &this->lightCtx, &this->pauseCtx, &this->msgCtx, &this->gameOverCtx,
                        this->state.gfxCtx);
+    ZeldaMenu_Update(gZeldaMenu, this);
 }
 
 void Play_DrawOverlayElements(PlayState* this) {
