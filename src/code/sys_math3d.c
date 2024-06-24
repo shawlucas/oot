@@ -130,8 +130,8 @@ void Math3D_LineClosestToPoint(InfiniteLine* line, Vec3f* pos, Vec3f* closestPoi
     if (IS_ZERO(dirVectorLengthSq)) {
         PRINTF(VT_COL(YELLOW, BLACK));
         // "Math3D_lineVsPosSuisenCross(): No straight line length"
-        PRINTF("Math3D_lineVsPosSuisenCross():直線の長さがありません\n");
-        PRINTF("cross = pos を返します。\n"); // "Returns cross = pos."
+        PRINTF("Math3D_LineClosestToPoint(): No straight line length\n");
+        PRINTF("Returns cross = pos\n"); // "Returns cross = pos."
         PRINTF(VT_RST);
         Math_Vec3f_Copy(closestPoint, pos);
         //! @bug Missing early return
@@ -933,7 +933,7 @@ f32 Math3D_UDistPlaneToPos(f32 nx, f32 ny, f32 nz, f32 originDist, Vec3f* p) {
     if (OOT_DEBUG && IS_ZERO(sqrtf(SQ(nx) + SQ(ny) + SQ(nz)))) {
         PRINTF(VT_COL(YELLOW, BLACK));
         // "Math3DLengthPlaneAndPos(): Normal size is near zero %f %f %f"
-        PRINTF("Math3DLengthPlaneAndPos():法線size がゼロ近いです%f %f %f\n", nx, ny, nz);
+        PRINTF("Math3D_UDistPlaneToPos(): Normal size is near zero %f %f %f\n", nx, ny, nz);
         PRINTF(VT_RST);
         return 0.0f;
     }
@@ -951,7 +951,7 @@ f32 Math3D_DistPlaneToPos(f32 nx, f32 ny, f32 nz, f32 originDist, Vec3f* p) {
     if (IS_ZERO(normMagnitude)) {
         PRINTF(VT_COL(YELLOW, BLACK));
         // "Math3DSignedLengthPlaneAndPos(): Normal size is close to zero %f %f %f"
-        PRINTF("Math3DSignedLengthPlaneAndPos():法線size がゼロ近いです%f %f %f\n", nx, ny, nz);
+        PRINTF("Math3D_DistPlaneToPos(): Normal size is close to zero %f %f %f\n", nx, ny, nz);
         PRINTF(VT_RST);
         return 0.0f;
     }

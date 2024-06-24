@@ -1,6 +1,7 @@
 #include "global.h"
 #include "quake.h"
 #include "terminal.h"
+#include "z_menu.h"
 
 #if OOT_DEBUG
 void* gDebugCutsceneScript = NULL;
@@ -67,7 +68,7 @@ s32 Play_CheckViewpoint(PlayState* this, s16 viewpoint) {
  * to toggle the camera into a "browsing item selection" setting.
  */
 void Play_SetShopBrowsingViewpoint(PlayState* this) {
-    PRINTF("Game_play_shop_pr_vr_switch_set()\n");
+    PRINTF("Play_SetShopBrowsingViewpoint()\n");
 
     if (R_SCENE_CAM_TYPE == SCENE_CAM_TYPE_FIXED_SHOP_VIEWPOINT) {
         this->viewpoint = VIEWPOINT_PIVOT;
@@ -193,6 +194,7 @@ void Play_Destroy(GameState* thisx) {
     SREG(91) = 0;
     R_PAUSE_BG_PRERENDER_STATE = PAUSE_BG_PRERENDER_OFF;
 
+    gMenu->destroy(gMenu, this);
     PreRender_Destroy(&this->pauseBgPreRender);
     Effect_DeleteAll(this);
     EffectSs_ClearAll(this);
@@ -343,15 +345,15 @@ void Play_Init(GameState* thisx) {
         this, gEntranceTable[((void)0, gSaveContext.save.entranceIndex) + ((void)0, gSaveContext.sceneLayer)].sceneId,
         gEntranceTable[((void)0, gSaveContext.save.entranceIndex) + ((void)0, gSaveContext.sceneLayer)].spawn);
 
-    PRINTF("\nSCENE_NO=%d COUNTER=%d\n", ((void)0, gSaveContext.save.entranceIndex), gSaveContext.sceneLayer);
+    PRINTF("\nENTRANCE INDEX=%d SCENE LAYER=%d\n", ((void)0, gSaveContext.save.entranceIndex), gSaveContext.sceneLayer);
 
     // When entering Gerudo Valley in the credits, trigger the GC emulator to play the ending movie.
     // The emulator constantly checks whether PC is 0x81000000, so this works even though it's not a valid address.
     if ((gEntranceTable[((void)0, gSaveContext.save.entranceIndex)].sceneId == SCENE_GERUDO_VALLEY) &&
         gSaveContext.sceneLayer == 6) {
-        PRINTF("エンディングはじまるよー\n"); // "The ending starts"
+        PRINTF("The ending starts\n"); // "The ending starts"
         ((void (*)(void))0x81000000)();
-        PRINTF("出戻り？\n"); // "Return?"
+        PRINTF("Return?\n"); // "Return?"
     }
 
     Cutscene_HandleEntranceTriggers(this);
@@ -462,13 +464,20 @@ void Play_Init(GameState* thisx) {
         static u64 sDebugCutsceneScriptBuf[0xA00];
 
         gDebugCutsceneScript = sDebugCutsceneScriptBuf;
-        PRINTF("\nkawauso_data=[%x]", gDebugCutsceneScript);
+        PRINTF("\ngDebugCutsceneScript=[%x]", gDebugCutsceneScript);
 
         // This hardcoded ROM address extends past the end of the ROM file.
         // Presumably the ROM was larger at a previous point in development when this debug feature was used.
         DmaMgr_DmaRomToRam(0x03FEB000, gDebugCutsceneScript, sizeof(sDebugCutsceneScriptBuf));
     }
 #endif
+
+    Menu_Create();
+    
+    gMenu->init = Menu_Init;
+    gMenu->destroy = Menu_Destroy;
+    gMenu->update = Menu_Update;
+    gMenu->draw = Menu_Draw;
 }
 
 void Play_Update(PlayState* this) {
@@ -487,7 +496,7 @@ void Play_Update(PlayState* this) {
         s32 pad2;
 
         R_PRINT_OBJECT_TABLE_TRIGGER = 0;
-        PRINTF("object_exchange_rom_address %u\n", gObjectTableSize);
+        PRINTF("gObjectTableSize %u\n", gObjectTableSize);
         PRINTF("RomStart RomEnd   Size\n");
 
         for (i = 0; i < gObjectTableSize; i++) {
@@ -522,7 +531,7 @@ void Play_Update(PlayState* this) {
             switch (gTransitionTileState) {
                 case TRANS_TILE_PROCESS:
                     if (TransitionTile_Init(&gTransitionTile, 10, 7) == NULL) {
-                        PRINTF("fbdemo_init呼出し失敗！\n"); // "fbdemo_init call failed!"
+                        PRINTF("TransitionTile_Init call failed!\n"); // "fbdemo_init call failed!"
                         gTransitionTileState = TRANS_TILE_OFF;
                     } else {
                         gTransitionTile.zBuffer = (u16*)gZBuffer;
@@ -556,10 +565,10 @@ void Play_Update(PlayState* this) {
                         if (!(gEntranceTable[this->nextEntranceIndex + sceneLayer].field &
                               ENTRANCE_INFO_CONTINUE_BGM_FLAG)) {
                             // "Sound initialized. 111"
-                            PRINTF("\n\n\nサウンドイニシャル来ました。111");
+                            PRINTF("\n\n\nSound initialized. 111");
                             if ((this->transitionType < TRANS_TYPE_MAX) && !Environment_IsForcedSequenceDisabled()) {
                                 // "Sound initialized. 222"
-                                PRINTF("\n\n\nサウンドイニシャル来ました。222");
+                                PRINTF("\n\n\nSound intiialized. 222");
                                 func_800F6964(0x14);
                                 gSaveContext.seqId = (u8)NA_BGM_DISABLED;
                                 gSaveContext.natureAmbienceId = NATURE_ID_DISABLED;
@@ -961,10 +970,10 @@ void Play_Update(PlayState* this) {
                 if (CHECK_BTN_ALL(input[0].press.button, BTN_CUP)) {
                     if (IS_PAUSED(&this->pauseCtx)) {
                         // "Changing viewpoint is prohibited due to the kaleidoscope"
-                        PRINTF(VT_FGCOL(CYAN) "カレイドスコープ中につき視点変更を禁止しております\n" VT_RST);
+                        PRINTF(VT_FGCOL(CYAN) "Changing viewpoint is prohibited due to the kaleidoscope\n" VT_RST);
                     } else if (Player_InCsMode(this)) {
                         // "Changing viewpoint is prohibited during the cutscene"
-                        PRINTF(VT_FGCOL(CYAN) "デモ中につき視点変更を禁止しております\n" VT_RST);
+                        PRINTF(VT_FGCOL(CYAN) "Changing viewpoint is prohibited during the cutscene\n" VT_RST);
                     } else if (R_SCENE_CAM_TYPE == SCENE_CAM_TYPE_FIXED_SHOP_VIEWPOINT) {
                         Audio_PlaySfxGeneral(NA_SE_SY_ERROR, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale,
                                              &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
@@ -1042,6 +1051,21 @@ skip:
     PLAY_LOG(3816);
     Environment_Update(this, &this->envCtx, &this->lightCtx, &this->pauseCtx, &this->msgCtx, &this->gameOverCtx,
                        this->state.gfxCtx);
+
+    if (CHECK_BTN_ANY(input->press.button, BTN_R | BTN_L)) {
+        if (!gMenuActive) {
+            gMenuActive = 1;
+            gMenu->init(gMenu, this);
+        } else {
+            gMenuActive = 0;
+            goto end;
+        }
+    }
+    
+    gMenu->update(gMenu, this);
+
+    end:
+        ;
 }
 
 void Play_DrawOverlayElements(PlayState* this) {
@@ -1325,6 +1349,8 @@ Play_Draw_skip:
     }
 
     Camera_Finish(GET_ACTIVE_CAM(this));
+
+    gMenu->draw(gMenu, this);
 
     CLOSE_DISPS(gfxCtx, "../z_play.c", 4508);
 }

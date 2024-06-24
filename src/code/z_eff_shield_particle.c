@@ -19,7 +19,7 @@ void EffectShieldParticle_Init(void* thisx, void* initParamsx) {
         this->numElements = initParams->numElements;
         if (this->numElements > ARRAY_COUNT(this->elements)) {
             PRINTF(VT_FGCOL(RED));
-            PRINTF("EffectShieldParticle_ct():パーティクル数がオーバしてます。\n");
+            PRINTF("EffectShieldParticle_Init(): particle count exceeded.\n");
             PRINTF(VT_RST);
             return;
         }

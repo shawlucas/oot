@@ -66,7 +66,7 @@ vs32 sSchedDebugPrintfEnabled = false;
  * Set the current framebuffer to the swapbuffer pointed to by the provided cfb
  */
 void Sched_SwapFrameBufferImpl(CfbInfo* cfbInfo) {
-    LOG_UTILS_CHECK_VALID_POINTER("cfbinfo->swapbuffer", cfbInfo->swapBuffer, "../sched.c", 340);
+    LOG_UTILS_CHECK_VALID_POINTER("cfbInfo->swapBuffer", cfbInfo->swapBuffer, "../sched.c", 340);
 
     if (cfbInfo->swapBuffer != NULL) {
         // Register the swapbuffer to display on next VI
@@ -174,7 +174,7 @@ void Sched_QueueTask(Scheduler* sc, OSScTask* task) {
 
     if (type == M_AUDTASK) {
         // "You have entered an audio task"
-        SCHED_DEBUG_PRINTF("オーディオタスクをエントリしました\n");
+        SCHED_DEBUG_PRINTF("Audio task has been entered\n");
 
         // Add to audio queue
         if (sc->audioListTail != NULL) {
@@ -189,7 +189,7 @@ void Sched_QueueTask(Scheduler* sc, OSScTask* task) {
     } else {
 
         // "Entered graph task"
-        SCHED_DEBUG_PRINTF("グラフタスクをエントリしました\n");
+        SCHED_DEBUG_PRINTF("Entered graph task\n");
 
         // Add to graphics queue
         if (sc->gfxListTail != NULL) {
@@ -229,14 +229,14 @@ OSScTask* Sched_GfxTaskFramebufferValid(Scheduler* sc, OSScTask* task) {
 
     if (sc->pendingSwapBuf1 != NULL) {
         if (0) {
-            ASSERT(sc->pendingSwapBuf1 != NULL, "sc->pending_swapbuffer1", "../sched.c", UNK_LINE);
+            ASSERT(sc->pendingSwapBuf1 != NULL, "sc->pendingSwapBuf1", "../sched.c", UNK_LINE);
         }
         return NULL;
     }
 
     if (sc->pendingSwapBuf2 != NULL) {
         if (0) {
-            ASSERT(sc->pendingSwapBuf2 != NULL, "sc->pending_swapbuffer2", "../sched.c", UNK_LINE);
+            ASSERT(sc->pendingSwapBuf2 != NULL, "sc->pendingSwapBuf2", "../sched.c", UNK_LINE);
         }
         return NULL;
     }
@@ -464,7 +464,7 @@ void Sched_HandleNotification(Scheduler* sc) {
 }
 
 void Sched_HandleRetrace(Scheduler* sc) {
-    SCHED_DEBUG_PRINTF("%08d:scHandleRetrace %08x\n", (u32)OS_CYCLES_TO_USEC(osGetTime()), osViGetCurrentFramebuffer());
+    SCHED_DEBUG_PRINTF("%08d:Sched_HandleRetrace %08x\n", (u32)OS_CYCLES_TO_USEC(osGetTime()), osViGetCurrentFramebuffer());
 
     ViConfig_UpdateBlack();
     sc->retraceCount++;
@@ -593,7 +593,7 @@ void Sched_HandleRDPDone(Scheduler* sc) {
  * Original name: osScKickEntryMsg
  */
 void Sched_Notify(Scheduler* sc) {
-    SCHED_DEBUG_PRINTF("osScKickEntryMsg\n");
+    SCHED_DEBUG_PRINTF("Sched_Notify\n");
 
     osSendMesg(&sc->interruptQueue, (OSMesg)NOTIFY_MSG, OS_MESG_BLOCK);
 }
@@ -604,7 +604,7 @@ void Sched_ThreadEntry(void* arg) {
 
     while (true) {
         // "%08d: standby"
-        SCHED_DEBUG_PRINTF("%08d:待機中\n", (u32)OS_CYCLES_TO_USEC(osGetTime()));
+        SCHED_DEBUG_PRINTF("%08d:standby\n", (u32)OS_CYCLES_TO_USEC(osGetTime()));
 
         // Await interrupt messages, either from the OS, IrqMgr, or another thread
         osRecvMesg(&sc->interruptQueue, &msg, OS_MESG_BLOCK);

@@ -24,34 +24,34 @@ f32 gViConfigYScale = 1.0;
 void Main_ThreadEntry(void* arg) {
     OSTime time;
 
-    PRINTF("mainx 実行開始\n");
+    PRINTF("Main_ThreadEntry execution start\n");
     DmaMgr_Init();
-    PRINTF("codeセグメントロード中...");
+    PRINTF("code segment loading...");
     time = osGetTime();
     DMA_REQUEST_SYNC(_codeSegmentStart, (uintptr_t)_codeSegmentRomStart, _codeSegmentRomEnd - _codeSegmentRomStart,
                      "../idle.c", 238);
     time -= osGetTime();
-    PRINTF("\rcodeセグメントロード中...完了\n");
-    PRINTF("転送時間 %6.3f\n");
+    PRINTF("\rcode segment loading...complete\n");
+    PRINTF("transfer time %6.3f\n");
     bzero(_codeSegmentBssStart, _codeSegmentBssEnd - _codeSegmentBssStart);
-    PRINTF("codeセグメントBSSクリア完了\n");
+    PRINTF("code segment BSS clear complete \n");
     Main(arg);
     PRINTF("mainx 実行終了\n");
 }
 
 void Idle_ThreadEntry(void* arg) {
-    PRINTF("アイドルスレッド(idleproc)実行開始\n");
-    PRINTF("作製者    : %s\n", gBuildTeam);
-    PRINTF("作成日時  : %s\n", gBuildDate);
+    PRINTF("idle thread (idleproc) execution start\n");
+    PRINTF("creator    : %s\n", gBuildTeam);
+    PRINTF("creation date  : %s\n", gBuildDate);
     PRINTF("MAKEOPTION: %s\n", gBuildMakeOption);
     PRINTF(VT_FGCOL(GREEN));
-    PRINTF("ＲＡＭサイズは %d キロバイトです(osMemSize/osGetMemSize)\n", (s32)osMemSize / 1024);
-    PRINTF("_bootSegmentEnd(%08x) 以降のＲＡＭ領域はクリアされました(boot)\n", _bootSegmentEnd);
-    PRINTF("Ｚバッファのサイズは %d キロバイトです\n", 0x96);
-    PRINTF("ダイナミックバッファのサイズは %d キロバイトです\n", 0x92);
-    PRINTF("ＦＩＦＯバッファのサイズは %d キロバイトです\n", 0x60);
-    PRINTF("ＹＩＥＬＤバッファのサイズは %d キロバイトです\n", 3);
-    PRINTF("オーディオヒープのサイズは %d キロバイトです\n",
+    PRINTF("ＲＡＭ size is %d kilobytes (osMemSize/osGetMemSize)\n", (s32)osMemSize / 1024);
+    PRINTF("_bootSegmentEnd(%08x) and above RAM area was cleared (boot)\n", _bootSegmentEnd);
+    PRINTF("Z buffer size is %d kilobytes\n", 0x96);
+    PRINTF("dynamic buffer size is %d kilobytes\n", 0x92);
+    PRINTF("ＦＩＦＯ buffer size is %d kilobytes\n", 0x60);
+    PRINTF("ＹＩＥＬＤ buffer size is %d kilobytes\n", 3);
+    PRINTF("audio heap size is %d kilobytes\n",
            ((intptr_t)&gAudioHeap[ARRAY_COUNT(gAudioHeap)] - (intptr_t)gAudioHeap) / 1024);
     PRINTF(VT_RST);
 

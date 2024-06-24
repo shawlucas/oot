@@ -65,7 +65,7 @@ void Moji_DrawChar(GraphicsContext* gfxCtx, char c) {
     OPEN_DISPS(gfxCtx, "../z_moji.c", 86);
 
     if ((uintptr_t)gMojiFontTLUTs & 0xF) {
-        PRINTF("moji_tlut --> %X\n", gMojiFontTLUTs);
+        PRINTF("gMojiFontTLUTs --> %X\n", gMojiFontTLUTs);
     }
 
     if (sCurTLUTIndex != GET_CHAR_TLUT_INDEX(c)) {

@@ -20,13 +20,13 @@ void Locale_Init(void) {
             break;
         default:
             PRINTF(VT_COL(RED, WHITE));
-            PRINTF("z_locale_init: 日本用かアメリカ用か判別できません\n");
-            LogUtils_HungupThread("../z_locale.c", 118);
+            PRINTF("Locale_Init: cannot distinguish whether region is Japanese or American\n");
+            LogUtils_HungupThread("../z_locale.c", __LINE__);
             PRINTF(VT_RST);
             break;
     }
 
-    PRINTF("z_locale_init:日本用かアメリカ用か３コンで判断させる\n");
+    PRINTF("Locale_Init:distinguish whether region is Japanese or American using controller 3\n");
 }
 
 void Locale_ResetRegion(void) {

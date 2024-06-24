@@ -173,6 +173,23 @@ extern struct GraphicsContext* __gfxCtx;
 
 // __gfxCtx shouldn't be used directly.
 // Use the DISP macros defined above when writing to display buffers.
+
+#if NON_MATCHING
+
+#define OPEN_DISPS(gfxCtx, file, line) \
+    {                                  \
+        GraphicsContext* __gfxCtx;     \
+        Gfx* dispRefs[4];              \
+        __gfxCtx = gfxCtx;             \
+        (void)__gfxCtx;                \
+        Graph_OpenDisps(dispRefs, gfxCtx, file, __LINE__)
+
+#define CLOSE_DISPS(gfxCtx, file, line)                 \
+        Graph_CloseDisps(dispRefs, gfxCtx, file, __LINE__); \
+    }                                                   \
+    (void)0
+
+#else
 #define OPEN_DISPS(gfxCtx, file, line) \
     {                                  \
         GraphicsContext* __gfxCtx;     \
@@ -185,6 +202,10 @@ extern struct GraphicsContext* __gfxCtx;
         Graph_CloseDisps(dispRefs, gfxCtx, file, line); \
     }                                                   \
     (void)0
+
+#endif
+
+#if NON_MATCHING
 
 #define GRAPH_ALLOC(gfxCtx, size) Graph_Alloc(gfxCtx, size)
 #define MATRIX_TO_MTX(gfxCtx, file, line) Matrix_ToMtx(gfxCtx, file, line)
@@ -206,6 +227,30 @@ extern struct GraphicsContext* __gfxCtx;
 #define LOG_UTILS_CHECK_VALID_POINTER(exp, ptr, file, line) LogUtils_CheckValidPointer(exp, ptr, file, line)
 #define HUNGUP_AND_CRASH(file, line) Fault_AddHungupAndCrash(file, line)
 #define GAME_ALLOC_MALLOC(alloc, size, file, line) GameAlloc_MallocDebug(alloc, size, file, line)
+
+#else
+
+#define GRAPH_ALLOC(gfxCtx, size) Graph_Alloc(gfxCtx, size)
+#define MATRIX_TO_MTX(gfxCtx, file, line) Matrix_ToMtx(gfxCtx, file, __LINE__)
+#define MATRIX_NEW(gfxCtx, file, line) Matrix_NewMtx(gfxCtx, file, __LINE__)
+#define MATRIX_CHECK_FLOATS(mtx, file, line) Matrix_CheckFloats(mtx, file, __LINE__)
+#define DMA_REQUEST_SYNC(ram, vrom, size, file, line) DmaMgr_RequestSyncDebug(ram, vrom, size, file, __LINE__)
+#define DMA_REQUEST_ASYNC(req, ram, vrom, size, unk5, queue, msg, file, line) DmaMgr_RequestAsyncDebug(req, ram, vrom, size, unk5, queue, msg, file, __LINE__)
+#define GAME_STATE_ALLOC(gameState, size, file, line) GameState_Alloc(gameState, size, file, __LINE__)
+#define DEBUG_ARENA_MALLOC(size, file, line) DebugArena_MallocDebug(size, file, __LINE__)
+#define DEBUG_ARENA_MALLOC_R(size, file, line) DebugArena_MallocRDebug(size, file, __LINE__)
+#define DEBUG_ARENA_FREE(size, file, line) DebugArena_FreeDebug(size, file, __LINE__)
+#define SYSTEM_ARENA_MALLOC(size, file, line) SystemArena_MallocDebug(size, file, __LINE__)
+#define SYSTEM_ARENA_MALLOC_R(size, file, line) SystemArena_MallocRDebug(size, file, __LINE__)
+#define SYSTEM_ARENA_FREE(size, file, line) SystemArena_FreeDebug(size, file, __LINE__)
+#define ZELDA_ARENA_MALLOC(size, file, line) ZeldaArena_MallocDebug(size, file, __LINE__)
+#define ZELDA_ARENA_MALLOC_R(size, file, line) ZeldaArena_MallocRDebug(size, file, __LINE__)
+#define ZELDA_ARENA_FREE(size, file, line) ZeldaArena_FreeDebug(size, file, __LINE__)
+#define LOG_UTILS_CHECK_NULL_POINTER(exp, ptr, file, line) LogUtils_CheckNullPointer(exp, ptr, file, __LINE__)
+#define LOG_UTILS_CHECK_VALID_POINTER(exp, ptr, file, line) LogUtils_CheckValidPointer(exp, ptr, file, __LINE__)
+#define HUNGUP_AND_CRASH(file, line) Fault_AddHungupAndCrash(file, __LINE__)
+#define GAME_ALLOC_MALLOC(alloc, size, file, line) GameAlloc_MallocDebug(alloc, size, file, __LINE__)
+#endif
 
 #else
 

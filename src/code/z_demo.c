@@ -200,7 +200,7 @@ void Cutscene_UpdateScripted(PlayState* play, CutsceneContext* csCtx) {
     }
 
     if ((gSaveContext.cutsceneTrigger != 0) && (csCtx->state == CS_STATE_IDLE)) {
-        PRINTF("\nデモ開始要求 発令！"); // "Cutscene start request announcement!"
+        PRINTF("\nCutscene start request announcement！"); // "Cutscene start request announcement!"
         gSaveContext.save.cutsceneIndex = 0xFFFD;
         gSaveContext.cutsceneTrigger = 1;
     }
@@ -575,7 +575,7 @@ void CutsceneCmd_Destination(PlayState* play, CutsceneContext* csCtx, CsCmdDesti
         Audio_SetCutsceneFlag(0);
         gSaveContext.cutsceneTransitionControl = 1;
 
-        PRINTF("\n分岐先指定！！=[%d]番", cmd->destination); // "Future fork designation=No. [%d]"
+        PRINTF("\nFuture fork destination= No. [%d]", cmd->destination); // "Future fork designation=No. [%d]"
 
         // `forceRisingButtonAlphas` has a secondary purpose, which is to signal to the title screen actor
         // that it should display immediately. This occurs when a title screen cutscene that is not the main
@@ -2252,7 +2252,7 @@ void CutsceneHandler_StopScript(PlayState* play, CutsceneContext* csCtx) {
             csCtx->actorCues[i] = NULL;
         }
 
-        PRINTF("\n\n\n\n\nやっぱりここかいな"); // "Right here, huh"
+        PRINTF("\n\n\n\n\nRight here, huh"); // "Right here, huh"
 
         gSaveContext.save.cutsceneIndex = 0;
         gSaveContext.gameMode = GAMEMODE_NORMAL;
@@ -2377,7 +2377,7 @@ void Cutscene_HandleEntranceTriggers(PlayState* play) {
 }
 
 void Cutscene_HandleConditionalTriggers(PlayState* play) {
-    PRINTF("\ngame_info.mode=[%d] restart_flag", ((void)0, gSaveContext.respawnFlag));
+    PRINTF("\ngame_info.mode=[%d] respawnFlag", ((void)0, gSaveContext.respawnFlag));
 
     if ((gSaveContext.gameMode == GAMEMODE_NORMAL) && (gSaveContext.respawnFlag <= 0) &&
         (gSaveContext.save.cutsceneIndex < 0xFFF0)) {

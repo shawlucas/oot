@@ -262,25 +262,25 @@ s32 Room_DecodeJpeg(void* data) {
     OSTime time;
 
     if (*(u32*)data == JPEG_MARKER) {
-        PRINTF("JPEGデータを展開します\n");        // "Expanding jpeg data"
-        PRINTF("JPEGデータアドレス %08x\n", data); // "Jpeg data address %08x"
+        PRINTF("Expanding JPEG data\n");        // "Expanding jpeg data"
+        PRINTF("JPEG data address %08x\n", data); // "Jpeg data address %08x"
         // "Work buffer address (Z buffer) %08x"
-        PRINTF("ワークバッファアドレス（Ｚバッファ）%08x\n", gZBuffer);
+        PRINTF("Work buffer address (Z buffer)%08x\n", gZBuffer);
 
         time = osGetTime();
         if (!Jpeg_Decode(data, gZBuffer, gGfxSPTaskOutputBuffer, sizeof(gGfxSPTaskOutputBuffer))) {
             time = osGetTime() - time;
 
             // "Success... I think. time = %6.3f ms"
-            PRINTF("成功…だと思う。 time = %6.3f ms \n", OS_CYCLES_TO_USEC(time) / 1000.0f);
+            PRINTF("Success... I think. time = %6.3f ms \n", OS_CYCLES_TO_USEC(time) / 1000.0f);
             // "Writing back to original address from work buffer."
-            PRINTF("ワークバッファから元のアドレスに書き戻します。\n");
+            PRINTF("Writing back to original address from work buffer\n");
             // "If the original buffer size isn't at least 150kB, it will be out of control."
-            PRINTF("元のバッファのサイズが150キロバイト無いと暴走するでしょう。\n");
+            PRINTF("If the original buffer size is not 150 kilobytes, it will run out of control.\n");
 
             bcopy(gZBuffer, data, sizeof(u16[SCREEN_HEIGHT][SCREEN_WIDTH]));
         } else {
-            PRINTF("失敗！なんで〜\n"); // "Failure! Why is it 〜"
+            PRINTF("Why did it fail?\n"); // "Failure! Why is it 〜"
         }
     }
 
@@ -440,8 +440,8 @@ RoomShapeImageMultiBgEntry* Room_GetImageMultiBgEntry(RoomShapeImageMulti* roomS
     }
 
     // "z_room.c: Data consistent with camera id does not exist camid=%d"
-    PRINTF(VT_COL(RED, WHITE) "z_room.c:カメラＩＤに一致するデータが存在しません camid=%d\n" VT_RST, bgCamIndex);
-    LogUtils_HungupThread("../z_room.c", 726);
+    PRINTF(VT_COL(RED, WHITE) "z_room.c: Data consistent with camera id does not exist camid=%d\n" VT_RST, bgCamIndex);
+    LogUtils_HungupThread("../z_room.c", __LINE__);
 
     return NULL;
 }
@@ -558,7 +558,7 @@ u32 func_80096FE8(PlayState* play, RoomContext* roomCtx) {
         RomFile* roomList = play->roomList;
         TransitionActorEntry* transitionActor = &play->transiActorCtx.list[0];
 
-        LOG_NUM("game_play->room_rom_address.num", play->numRooms, "../z_room.c", 912);
+        LOG_NUM("play->numRooms", play->numRooms, "../z_room.c", __LINE__);
 
         for (j = 0; j < play->transiActorCtx.numActors; j++) {
             frontRoom = transitionActor->sides[0].room;
@@ -578,13 +578,13 @@ u32 func_80096FE8(PlayState* play, RoomContext* roomCtx) {
 
     PRINTF(VT_FGCOL(YELLOW));
     // "Room buffer size=%08x(%5.1fK)"
-    PRINTF("部屋バッファサイズ=%08x(%5.1fK)\n", maxRoomSize, maxRoomSize / 1024.0f);
+    PRINTF("Room buffer size=%08x(%5.1fK)\n", maxRoomSize, maxRoomSize / 1024.0f);
     roomCtx->bufPtrs[0] = GAME_STATE_ALLOC(&play->state, maxRoomSize, "../z_room.c", 946);
     // "Room buffer initial pointer=%08x"
-    PRINTF("部屋バッファ開始ポインタ=%08x\n", roomCtx->bufPtrs[0]);
+    PRINTF("Room buffer initial pointer=%08x\n", roomCtx->bufPtrs[0]);
     roomCtx->bufPtrs[1] = (void*)((uintptr_t)roomCtx->bufPtrs[0] + maxRoomSize);
     // "Room buffer end pointer=%08x"
-    PRINTF("部屋バッファ終了ポインタ=%08x\n", roomCtx->bufPtrs[1]);
+    PRINTF("Room buffer end pointer=%08x\n", roomCtx->bufPtrs[1]);
     PRINTF(VT_RST);
     roomCtx->unk_30 = 0;
     roomCtx->status = 0;

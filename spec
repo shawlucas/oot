@@ -408,6 +408,7 @@ beginseg
     include "$(BUILD_DIR)/src/code/z_fbdemo_wipe1.o"
     include "$(BUILD_DIR)/src/code/z_fbdemo_circle.o"
     include "$(BUILD_DIR)/src/code/z_fbdemo_fade.o"
+    include "$(BUILD_DIR)/src/code/z_menu.o"
     include "$(BUILD_DIR)/src/code/shrink_window.o"
 #if OOT_DEBUG
     include "$(BUILD_DIR)/src/code/db_camera.o"

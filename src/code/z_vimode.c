@@ -2,25 +2,25 @@
 #include "ultra64/viint.h"
 
 void ViMode_LogPrint(OSViMode* osViMode) {
-    LOG_ADDRESS("osvimodep", osViMode, "../z_vimode.c", 87);
-    LOG_HEX32("osvimodep->comRegs.ctrl", osViMode->comRegs.ctrl, "../z_vimode.c", 88);
-    LOG_HEX32("osvimodep->comRegs.width", osViMode->comRegs.width, "../z_vimode.c", 89);
-    LOG_HEX32("osvimodep->comRegs.burst", osViMode->comRegs.burst, "../z_vimode.c", 90);
-    LOG_HEX32("osvimodep->comRegs.vSync", osViMode->comRegs.vSync, "../z_vimode.c", 91);
-    LOG_HEX32("osvimodep->comRegs.hSync", osViMode->comRegs.hSync, "../z_vimode.c", 92);
-    LOG_HEX32("osvimodep->comRegs.leap", osViMode->comRegs.leap, "../z_vimode.c", 93);
-    LOG_HEX32("osvimodep->comRegs.hStart", osViMode->comRegs.hStart, "../z_vimode.c", 94);
-    LOG_HEX32("osvimodep->comRegs.xScale", osViMode->comRegs.xScale, "../z_vimode.c", 95);
-    LOG_HEX32("osvimodep->fldRegs[0].vStart", osViMode->fldRegs[0].vStart, "../z_vimode.c", 96);
-    LOG_HEX32("osvimodep->fldRegs[0].vBurst", osViMode->fldRegs[0].vBurst, "../z_vimode.c", 97);
-    LOG_HEX32("osvimodep->fldRegs[0].origin", osViMode->fldRegs[0].origin, "../z_vimode.c", 98);
-    LOG_HEX32("osvimodep->fldRegs[0].yScale", osViMode->fldRegs[0].yScale, "../z_vimode.c", 99);
-    LOG_HEX32("osvimodep->fldRegs[0].vIntr", osViMode->fldRegs[0].vIntr, "../z_vimode.c", 100);
-    LOG_HEX32("osvimodep->fldRegs[1].vStart", osViMode->fldRegs[1].vStart, "../z_vimode.c", 101);
-    LOG_HEX32("osvimodep->fldRegs[1].vBurst", osViMode->fldRegs[1].vBurst, "../z_vimode.c", 102);
-    LOG_HEX32("osvimodep->fldRegs[1].origin", osViMode->fldRegs[1].origin, "../z_vimode.c", 103);
-    LOG_HEX32("osvimodep->fldRegs[1].yScale", osViMode->fldRegs[1].yScale, "../z_vimode.c", 104);
-    LOG_HEX32("osvimodep->fldRegs[1].vIntr", osViMode->fldRegs[1].vIntr, "../z_vimode.c", 105);
+    LOG_ADDRESS("osViMode", osViMode, "../z_vimode.c", 87);
+    LOG_HEX32("osViMode->comRegs.ctrl", osViMode->comRegs.ctrl, "../z_vimode.c", 88);
+    LOG_HEX32("osViMode->comRegs.width", osViMode->comRegs.width, "../z_vimode.c", 89);
+    LOG_HEX32("osViMode->comRegs.burst", osViMode->comRegs.burst, "../z_vimode.c", 90);
+    LOG_HEX32("osViMode->comRegs.vSync", osViMode->comRegs.vSync, "../z_vimode.c", 91);
+    LOG_HEX32("osViMode->comRegs.hSync", osViMode->comRegs.hSync, "../z_vimode.c", 92);
+    LOG_HEX32("osViMode->comRegs.leap", osViMode->comRegs.leap, "../z_vimode.c", 93);
+    LOG_HEX32("osViMode->comRegs.hStart", osViMode->comRegs.hStart, "../z_vimode.c", 94);
+    LOG_HEX32("osViMode->comRegs.xScale", osViMode->comRegs.xScale, "../z_vimode.c", 95);
+    LOG_HEX32("osViMode->fldRegs[0].vStart", osViMode->fldRegs[0].vStart, "../z_vimode.c", 96);
+    LOG_HEX32("osViMode->fldRegs[0].vBurst", osViMode->fldRegs[0].vBurst, "../z_vimode.c", 97);
+    LOG_HEX32("osViMode->fldRegs[0].origin", osViMode->fldRegs[0].origin, "../z_vimode.c", 98);
+    LOG_HEX32("osViMode->fldRegs[0].yScale", osViMode->fldRegs[0].yScale, "../z_vimode.c", 99);
+    LOG_HEX32("osViMode->fldRegs[0].vIntr", osViMode->fldRegs[0].vIntr, "../z_vimode.c", 100);
+    LOG_HEX32("osViMode->fldRegs[1].vStart", osViMode->fldRegs[1].vStart, "../z_vimode.c", 101);
+    LOG_HEX32("osViMode->fldRegs[1].vBurst", osViMode->fldRegs[1].vBurst, "../z_vimode.c", 102);
+    LOG_HEX32("osViMode->fldRegs[1].origin", osViMode->fldRegs[1].origin, "../z_vimode.c", 103);
+    LOG_HEX32("osViMode->fldRegs[1].yScale", osViMode->fldRegs[1].yScale, "../z_vimode.c", 104);
+    LOG_HEX32("osViMode->fldRegs[1].vIntr", osViMode->fldRegs[1].vIntr, "../z_vimode.c", 105);
 }
 
 /**
@@ -187,7 +187,7 @@ void ViMode_Save(ViMode* viMode) {
 
         switch (SREG(59)) {
             case 1:
-                PRINTF("osViModePalLan1\n");
+                PRINTF("osViModealLan1\n");
                 ViMode_LogPrint(&osViModePalLan1);
                 break;
             case 2:

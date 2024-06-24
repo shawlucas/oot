@@ -21,14 +21,14 @@ void KaleidoScopeCall_LoadPlayer(void) {
     if (gKaleidoMgrCurOvl != playerActorOvl) {
         if (gKaleidoMgrCurOvl != NULL) {
             PRINTF(VT_FGCOL(GREEN));
-            PRINTF("カレイド領域 強制排除\n"); // "Kaleido area forced exclusion"
+            PRINTF("Kaleido area forced exclusion\n"); // "Kaleido area forced exclusion"
             PRINTF(VT_RST);
 
             KaleidoManager_ClearOvl(gKaleidoMgrCurOvl);
         }
 
         PRINTF(VT_FGCOL(GREEN));
-        PRINTF("プレイヤーアクター搬入\n"); // "Player actor import"
+        PRINTF("Player actor import\n"); // "Player actor import"
         PRINTF(VT_RST);
 
         KaleidoManager_LoadOvl(playerActorOvl);

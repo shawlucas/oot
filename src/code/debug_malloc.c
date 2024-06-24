@@ -13,13 +13,13 @@ void DebugArena_CheckPointer(void* ptr, u32 size, const char* name, const char* 
     if (ptr == NULL) {
         if (gDebugArenaLogSeverity >= LOG_SEVERITY_ERROR) {
             // "%s: %u bytes %s failed\n"
-            PRINTF("%s: %u バイトの%sに失敗しました\n", name, size, action);
+            PRINTF("%s: %u bytes %s failed\n", name, size, action);
             __osDisplayArena(&sDebugArena);
             return;
         }
     } else if (gDebugArenaLogSeverity >= LOG_SEVERITY_VERBOSE) {
         // "%s: %u bytes %s succeeded\n"
-        PRINTF("%s: %u バイトの%sに成功しました\n", name, size, action);
+        PRINTF("%s: %u bytes %s succeeded\n", name, size, action);
     }
 }
 
@@ -31,7 +31,7 @@ void DebugArena_CheckPointer(void* ptr, u32 size, const char* name, const char* 
 void* DebugArena_Malloc(u32 size) {
     void* ptr = __osMalloc(&sDebugArena, size);
 
-    DEBUG_ARENA_CHECK_POINTER(ptr, size, "debug_malloc", "確保"); // "Secure"
+    DEBUG_ARENA_CHECK_POINTER(ptr, size, "DebugArena_Malloc", "Secure"); // "Secure"
     return ptr;
 }
 
@@ -39,7 +39,7 @@ void* DebugArena_Malloc(u32 size) {
 void* DebugArena_MallocDebug(u32 size, const char* file, int line) {
     void* ptr = __osMallocDebug(&sDebugArena, size, file, line);
 
-    DEBUG_ARENA_CHECK_POINTER(ptr, size, "debug_malloc_DEBUG", "確保"); // "Secure"
+    DEBUG_ARENA_CHECK_POINTER(ptr, size, "DebugArena_MallocDebug", "Secure"); // "Secure"
     return ptr;
 }
 #endif
@@ -47,7 +47,7 @@ void* DebugArena_MallocDebug(u32 size, const char* file, int line) {
 void* DebugArena_MallocR(u32 size) {
     void* ptr = __osMallocR(&sDebugArena, size);
 
-    DEBUG_ARENA_CHECK_POINTER(ptr, size, "debug_malloc_r", "確保"); // "Secure"
+    DEBUG_ARENA_CHECK_POINTER(ptr, size, "DebugArena_MallocR", "Secure"); // "Secure"
     return ptr;
 }
 
@@ -55,21 +55,21 @@ void* DebugArena_MallocR(u32 size) {
 void* DebugArena_MallocRDebug(u32 size, const char* file, int line) {
     void* ptr = __osMallocRDebug(&sDebugArena, size, file, line);
 
-    DEBUG_ARENA_CHECK_POINTER(ptr, size, "debug_malloc_r_DEBUG", "確保"); // "Secure"
+    DEBUG_ARENA_CHECK_POINTER(ptr, size, "DebugArena_MallocRDebug", "Secure"); // "Secure"
     return ptr;
 }
 #endif
 
 void* DebugArena_Realloc(void* ptr, u32 newSize) {
     ptr = __osRealloc(&sDebugArena, ptr, newSize);
-    DEBUG_ARENA_CHECK_POINTER(ptr, newSize, "debug_realloc", "再確保"); // "Re-securing"
+    DEBUG_ARENA_CHECK_POINTER(ptr, newSize, "DebugArena_Realloc", "Re-securing"); // "Re-securing"
     return ptr;
 }
 
 #if OOT_DEBUG
 void* DebugArena_ReallocDebug(void* ptr, u32 newSize, const char* file, int line) {
     ptr = __osReallocDebug(&sDebugArena, ptr, newSize, file, line);
-    DEBUG_ARENA_CHECK_POINTER(ptr, newSize, "debug_realloc_DEBUG", "再確保"); // "Re-securing"
+    DEBUG_ARENA_CHECK_POINTER(ptr, newSize, "DebugArena_ReallocDebug", "Re-securing"); // "Re-securing"
     return ptr;
 }
 #endif
@@ -93,14 +93,14 @@ void* DebugArena_Calloc(u32 num, u32 size) {
         bzero(ret, n);
     }
 
-    DEBUG_ARENA_CHECK_POINTER(ret, n, "debug_calloc", "確保");
+    DEBUG_ARENA_CHECK_POINTER(ret, n, "DebugArena_Calloc", "Secure");
     return ret;
 }
 
 #if OOT_DEBUG
 void DebugArena_Display(void) {
     // "Zelda heap display" ("Zelda" should probably have been changed to "Debug")
-    PRINTF("ゼルダヒープ表示\n");
+    PRINTF("Debug heap display\n");
     __osDisplayArena(&sDebugArena);
 }
 #endif

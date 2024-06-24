@@ -63,7 +63,7 @@ void Overlay_Relocate(void* allocatedRamAddr, OverlayRelocationSection* ovlReloc
     s32 pad;
 
     if (gOverlayLogSeverity >= 3) {
-        PRINTF("DoRelocation(%08x, %08x, %08x)\n", allocatedRamAddr, ovlRelocs, vramStart);
+        PRINTF("Overlay_Relocate(%08x, %08x, %08x)\n", allocatedRamAddr, ovlRelocs, vramStart);
         PRINTF("text=%08x, data=%08x, rodata=%08x, bss=%08x\n", ovlRelocs->textSize, ovlRelocs->dataSize,
                ovlRelocs->rodataSize, ovlRelocs->bssSize);
     }

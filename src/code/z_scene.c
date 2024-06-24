@@ -23,7 +23,7 @@ s32 Object_SpawnPersistent(ObjectContext* objectCtx, s16 objectId) {
 
     PRINTF("OBJECT[%d] SIZE %fK SEG=%x\n", objectId, size / 1024.0f, objectCtx->slots[objectCtx->numEntries].segment);
 
-    PRINTF("num=%d adrs=%x end=%x\n", objectCtx->numEntries,
+    PRINTF("numEntries=%d adrs=%x spaceEnd=%x\n", objectCtx->numEntries,
            (uintptr_t)objectCtx->slots[objectCtx->numEntries].segment + size, objectCtx->spaceEnd);
 
     ASSERT(((objectCtx->numEntries < ARRAY_COUNT(objectCtx->slots)) &&
@@ -78,7 +78,7 @@ void Object_InitContext(PlayState* play, ObjectContext* objectCtx) {
 
     PRINTF(VT_FGCOL(GREEN));
     // "Object exchange bank data %8.3fKB"
-    PRINTF("オブジェクト入れ替えバンク情報 %8.3fKB\n", spaceSize / 1024.0f);
+    PRINTF("Object exchange bank data %8.3fKB\n", spaceSize / 1024.0f);
     PRINTF(VT_RST);
 
     objectCtx->spaceStart = objectCtx->slots[0].segment =
@@ -166,7 +166,7 @@ void* func_800982FC(ObjectContext* objectCtx, s32 slot, s16 objectId) {
     ASSERT(nextPtr < objectCtx->spaceEnd, "nextptr < this->endSegment", "../z_scene.c", 381);
 
     // "Object exchange free size=%08x"
-    PRINTF("オブジェクト入れ替え空きサイズ=%08x\n", (uintptr_t)objectCtx->spaceEnd - (uintptr_t)nextPtr);
+    PRINTF("Object exchange free size=%08x\n", (uintptr_t)objectCtx->spaceEnd - (uintptr_t)nextPtr);
 
     return nextPtr;
 }
@@ -175,7 +175,7 @@ s32 Scene_ExecuteCommands(PlayState* play, SceneCmd* sceneCmd) {
     while (true) {
         u32 cmdCode = sceneCmd->base.code;
 
-        PRINTF("*** Scene_Word = { code=%d, data1=%02x, data2=%04x } ***\n", cmdCode, sceneCmd->base.data1,
+        PRINTF("*** cmdCode = { cmdCode=%d, data1=%02x, data2=%04x } ***\n", cmdCode, sceneCmd->base.data1,
                sceneCmd->base.data2);
 
         if (cmdCode == SCENE_CMD_ID_END) {
@@ -186,7 +186,7 @@ s32 Scene_ExecuteCommands(PlayState* play, SceneCmd* sceneCmd) {
             gSceneCmdHandlers[cmdCode](play, sceneCmd);
         } else {
             PRINTF(VT_FGCOL(RED));
-            PRINTF("code の値が異常です\n"); // "code variable is abnormal"
+            PRINTF("code variable is abnormal\n"); // "code variable is abnormal"
             PRINTF(VT_RST);
         }
 
@@ -422,9 +422,9 @@ BAD_RETURN(s32) Scene_CommandEchoSettings(PlayState* play, SceneCmd* cmd) {
 }
 
 BAD_RETURN(s32) Scene_CommandAlternateHeaderList(PlayState* play, SceneCmd* cmd) {
-    PRINTF("\n[ZU]sceneset age    =[%X]", ((void)0, gSaveContext.save.linkAge));
-    PRINTF("\n[ZU]sceneset time   =[%X]", ((void)0, gSaveContext.save.cutsceneIndex));
-    PRINTF("\n[ZU]sceneset counter=[%X]", ((void)0, gSaveContext.sceneLayer));
+    PRINTF("\n[ZU]sceneset linkAge       =[%X]", ((void)0, gSaveContext.save.linkAge));
+    PRINTF("\n[ZU]sceneset cutsceneIndex =[%X]", ((void)0, gSaveContext.save.cutsceneIndex));
+    PRINTF("\n[ZU]sceneset sceneLyaer    =[%X]", ((void)0, gSaveContext.sceneLayer));
 
     if (gSaveContext.sceneLayer != 0) {
         SceneCmd* altHeader = ((SceneCmd**)SEGMENTED_TO_VIRTUAL(cmd->altHeaders.data))[gSaveContext.sceneLayer - 1];
@@ -434,7 +434,7 @@ BAD_RETURN(s32) Scene_CommandAlternateHeaderList(PlayState* play, SceneCmd* cmd)
             (cmd + 1)->base.code = SCENE_CMD_ID_END;
         } else {
             // "Coughh! There is no specified dataaaaa!"
-            PRINTF("\nげぼはっ！ 指定されたデータがないでええっす！");
+            PRINTF("\nThere is no specific dataaaaaa!");
 
             if (gSaveContext.sceneLayer == SCENE_LAYER_ADULT_NIGHT) {
                 // Due to the condition above, this is equivalent to accessing altHeaders[SCENE_LAYER_ADULT_DAY - 1]
@@ -443,7 +443,7 @@ BAD_RETURN(s32) Scene_CommandAlternateHeaderList(PlayState* play, SceneCmd* cmd)
                         .data))[(gSaveContext.sceneLayer - SCENE_LAYER_ADULT_NIGHT) + SCENE_LAYER_ADULT_DAY - 1];
 
                 // "Using adult day data there!"
-                PRINTF("\nそこで、大人の昼データを使用するでええっす！！");
+                PRINTF("\nUsing adult day data there!");
 
                 if (altHeader != NULL) {
                     Scene_ExecuteCommands(play, SEGMENTED_TO_VIRTUAL(altHeader));
@@ -455,7 +455,7 @@ BAD_RETURN(s32) Scene_CommandAlternateHeaderList(PlayState* play, SceneCmd* cmd)
 }
 
 BAD_RETURN(s32) Scene_CommandCutsceneData(PlayState* play, SceneCmd* cmd) {
-    PRINTF("\ngame_play->demo_play.data=[%x]", play->csCtx.script);
+    PRINTF("\nplay->csCtx.script=[%x]", play->csCtx.script);
     play->csCtx.script = SEGMENTED_TO_VIRTUAL(cmd->cutsceneData.data);
 }
 
@@ -473,7 +473,7 @@ BAD_RETURN(s32) Scene_CommandMiscSettings(PlayState* play, SceneCmd* cmd) {
         ((play->sceneId >= SCENE_MARKET_ENTRANCE_DAY) && (play->sceneId <= SCENE_TEMPLE_OF_TIME_EXTERIOR_RUINS))) {
         if (gSaveContext.save.cutsceneIndex < 0xFFF0) {
             gSaveContext.save.info.worldMapAreaData |= gBitFlags[((void)0, gSaveContext.worldMapArea)];
-            PRINTF("０００  ａｒｅａ＿ａｒｒｉｖａｌ＝%x (%d)\n", gSaveContext.save.info.worldMapAreaData,
+            PRINTF("０００  worldMapAreaData=%x (%d)\n", gSaveContext.save.info.worldMapAreaData,
                    ((void)0, gSaveContext.worldMapArea));
         }
     }

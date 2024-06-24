@@ -14,7 +14,7 @@ KaleidoMgrOverlay* gKaleidoMgrCurOvl = NULL;
 u8 gBossMarkState = 0;
 
 void KaleidoManager_LoadOvl(KaleidoMgrOverlay* ovl) {
-    LOG_UTILS_CHECK_NULL_POINTER("KaleidoArea_allocp", sKaleidoAreaPtr, "../z_kaleido_manager.c", 99);
+    LOG_UTILS_CHECK_NULL_POINTER("KaleidoManager_LoadOvl", sKaleidoAreaPtr, "../z_kaleido_manager.c", 99);
 
     ovl->loadedRamAddr = sKaleidoAreaPtr;
     Overlay_Load(ovl->file.vromStart, ovl->file.vromEnd, ovl->vramStart, ovl->vramEnd, ovl->loadedRamAddr);
@@ -51,7 +51,7 @@ void KaleidoManager_Init(PlayState* play) {
     }
 
     PRINTF(VT_FGCOL(GREEN));
-    PRINTF("KaleidoArea の最大サイズは %d バイトを確保します\n", largestSize);
+    PRINTF("Allocate %d bytes for the maximum size of the KaleidoArea\n", largestSize);
     PRINTF(VT_RST);
 
     sKaleidoAreaPtr = GAME_STATE_ALLOC(&play->state, largestSize, "../z_kaleido_manager.c", 150);
@@ -91,7 +91,7 @@ void* KaleidoManager_GetRamAddr(void* vram) {
             //! @bug Probably missing iter++ here
         }
 
-        PRINTF("異常\n"); // "Abnormal"
+        PRINTF("Abnormal\n"); // "Abnormal"
         return NULL;
     }
 

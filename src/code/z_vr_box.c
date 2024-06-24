@@ -1022,7 +1022,7 @@ void Skybox_Init(GameState* state, SkyboxContext* skyboxCtx, s16 skyboxId) {
     // DMA required assets based on skybox id
     Skybox_Setup((PlayState*)state, skyboxCtx, skyboxId);
     PRINTF("\n\n\n＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊\n\n\n"
-           "ＴＹＰＥ＝%d"
+           "SKYBOX ID =%d"
            "\n\n\n＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊\n\n\n",
            skyboxId);
 

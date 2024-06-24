@@ -81,13 +81,13 @@ void LogUtils_CheckBoundary(const char* name, s32 value, s32 unk, const char* fi
     u32 mask = (unk - 1);
 
     if (value & mask) {
-        PRINTF(VT_COL(RED, WHITE) "%s %d:%s(%08x) は バウンダリ(%d)違反です\n" VT_RST, file, line, name, value, unk);
+        PRINTF(VT_COL(RED, WHITE) "%s %d:%s(%08x) violates boundary(%d)\n" VT_RST, file, line, name, value, unk);
     }
 }
 
 void LogUtils_CheckNullPointer(const char* exp, void* ptr, const char* file, int line) {
     if (ptr == NULL) {
-        PRINTF(VT_COL(RED, WHITE) "%s %d:%s は はヌルポインタです\n" VT_RST, file, line, exp);
+        PRINTF(VT_COL(RED, WHITE) "%s %d:%s is a null pointer\n" VT_RST, file, line, exp);
     }
 }
 

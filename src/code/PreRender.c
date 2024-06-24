@@ -54,9 +54,9 @@ void PreRender_CopyImage(PreRender* this, Gfx** gfxP, void* img, void* imgDst) {
     s32 nRows;
 
     LOG_UTILS_CHECK_NULL_POINTER("this", this, "../PreRender.c", 215);
-    LOG_UTILS_CHECK_NULL_POINTER("glistpp", gfxP, "../PreRender.c", 216);
+    LOG_UTILS_CHECK_NULL_POINTER("gfxP", gfxP, "../PreRender.c", 216);
     gfx = *gfxP;
-    LOG_UTILS_CHECK_NULL_POINTER("glistp", gfx, "../PreRender.c", 218);
+    LOG_UTILS_CHECK_NULL_POINTER("gfx", gfx, "../PreRender.c", 218);
 
     gDPPipeSync(gfx++);
     // Configure the cycle type to COPY mode, disable blending
